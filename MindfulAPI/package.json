@@ -1,0 +1,26 @@
+{
+  "name": "mindfulapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "alchemy-sdk": "^2.2.1",
+    "browserify-fs": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.3",
+    "googleapis": "^103.0.0",
+    "moment": "^2.29.4",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.4",
+    "sleep-promise": "^9.1.0",
+    "winston": "^3.8.1",
+    "winston-daily-rotate-file": "^4.7.1"
+  }
+}
