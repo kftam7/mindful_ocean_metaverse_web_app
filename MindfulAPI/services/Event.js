@@ -79,7 +79,7 @@ async function updateEvent(id, eventRecord){
 
 
   if (result.affectedRows) {
-    message = 'Event updated successfully';
+    message = 'Record updated successfully';
   }
 
   return {message};

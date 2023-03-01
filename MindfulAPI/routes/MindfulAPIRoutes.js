@@ -5,6 +5,7 @@ const NFT = require('../services/Nft');
 const Artwork = require('../services/Artwork');
 const User = require('../services/User');
 const Language = require('../services/Language');
+const AppVersion = require('../services/AppVersion');
 const logger = require("../logger");
 
 /* GET event */
@@ -84,5 +85,37 @@ router.put('/language/:lang', async function(req, res, next) {
   }
 });
 
+/* GET AppVersion */
+router.get('/appversion/:version', async function(req, res, next) {
+  try {
+    res.json(await AppVersion.getAppVersion(req.params.version));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* POST AppVersion */
+router.post('/appversion', async function(req, res, next) {
+  try {
+    res.json(await AppVersion.createAppVersion(req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* PUT event */
+router.put('/appversion/:version', async function(req, res, next) {  
+  try {
+    res.json(await AppVersion.updateAppVersion(req.params.version, req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while updating programming language`, err.message);
+    next(err);
+  }
+});
 
 module.exports = router;
