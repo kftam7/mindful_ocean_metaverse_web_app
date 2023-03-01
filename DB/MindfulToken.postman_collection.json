@@ -1,0 +1,718 @@
+{
+	"info": {
+		"_postman_id": "8edcf9a9-c7bb-4a68-907f-ad4c7d2d54a4",
+		"name": "MindfulToken",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23541331"
+	},
+	"item": [
+		{
+			"name": "GET event Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/event",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"event"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						},
+						{
+							"key": "startTime",
+							"value": "2022-10-01 00:00:00",
+							"disabled": true
+						},
+						{
+							"key": "endTime",
+							"value": "2022-12-03 00:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST event Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n     \"title\":\"eventB\",\n     \"paragraphText\":\"eventB description\",\n     \"image\":\"http://www.abc.com/b.png\",\n     \"hyperlink\":\"http://www.abc.com/eventB.html\",\n     \"timerDescription\":\"timerDescriptionB\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  },\n  {\n     \"title\":\"eventC\",\n     \"paragraphText\":\"eventC description\",\n     \"image\":\"http://www.abc.com/c.png\",\n     \"hyperlink\":\"http://www.abc.com/eventC.html\",\n     \"timerDescription\":\"timerDescriptionC\",\n     \"startTime\":\"2023-06-09 09:00:10\",\n     \"endTime\":\"2023-10-09 09:00:10\"\n  },\n  {\n     \"title\":\"eventD\",\n     \"paragraphText\":\"eventD description\",\n     \"image\":\"http://www.abc.com/d.png\",\n     \"hyperlink\":\"http://www.abc.com/eventD.html\",\n     \"timerDescription\":\"timerDescriptionD\",\n     \"startTime\":\"2024-06-09 09:00:10\",\n     \"endTime\":\"2024-10-09 09:00:10\"\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/event",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT event Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/event/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"event",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET NFT Request (MintPass)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/nft/mintPass/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"nft",
+						"mintPass",
+						"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET NFT Request (MindfulToken)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/nft/mindfulToken/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"nft",
+						"mindfulToken",
+						"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET NFT Total Request (MintPass)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/nfttotal/mintPass",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"nfttotal",
+						"mintPass"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET NFT Total Request (MindfulToken)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/nfttotal/mindfulToken",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"nfttotal",
+						"mindfulToken"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Language Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/language/EN",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"language",
+						"EN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Language Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/language/EN",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"language",
+						"EN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET appversion Request (all)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/appversion/all",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"appversion",
+						"all"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						},
+						{
+							"key": "startTime",
+							"value": "2022-10-01 00:00:00",
+							"disabled": true
+						},
+						{
+							"key": "endTime",
+							"value": "2022-12-03 00:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET appversion Request (latest)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/appversion/latest",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"appversion",
+						"latest"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						},
+						{
+							"key": "startTime",
+							"value": "2022-10-01 00:00:00",
+							"disabled": true
+						},
+						{
+							"key": "endTime",
+							"value": "2022-12-03 00:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET appversion Request (particular version)",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/appversion/0.0.2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"appversion",
+						"0.0.2"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "eventA",
+							"disabled": true
+						},
+						{
+							"key": "startTime",
+							"value": "2022-10-01 00:00:00",
+							"disabled": true
+						},
+						{
+							"key": "endTime",
+							"value": "2022-12-03 00:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST appversion Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n     \"versionNo\":\"0.0.4\",\n     \"versionName\":\"4th version\",\n     \"releaseDate\":\"2023-05-17 01:01:01\",\n     \"expireDate\":\"2023-06-17 02:02:02\",\n     \"Description\":\"4th\"\n  },\n  {\n     \"versionNo\":\"0.0.5\",\n     \"versionName\":\"5th version\",\n     \"releaseDate\":\"2023-06-17 03:03:03\",\n     \"expireDate\":\"2023-07-17 04:04:04\",\n     \"Description\":\"5th\"\n  },\n  {\n     \"versionNo\":\"0.0.6\",\n     \"versionName\":\"6th version\",\n     \"releaseDate\":\"2023-08-17 05:05:05\",\n     \"expireDate\":\"2023-09-17 06:06:06\",\n     \"Description\":\"6th\"\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/appversion",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"appversion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT appversion Request",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "RU%ru9VD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mindful",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n     \"versionName\":\"6th edited version\",\n     \"releaseDate\":\"2024-01-01 00:00:00\",\n     \"expireDate\":\"2025-01-01 00:00:00\",\n     \"description\":\"edited version testing\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/appversion/0.0.6",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"appversion",
+						"0.0.6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
