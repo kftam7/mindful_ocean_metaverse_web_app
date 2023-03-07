@@ -10,10 +10,11 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get Event */
 async function getUser(appleId){
 
+  var sql = "SELECT json_object('userId',a.userId , 'appleId',a.`appleId`, 'walletAddress', a.`walletAddress`, 'personInfo', a.`personInfo`, 'createTime', a.`createTime`, 'updateTime', a.`updateTime` , 'personalwebsite', (SELECT CAST(CONCAT('[', GROUP_CONCAT( JSON_OBJECT('websiteId', b.websiteId, 'URL', b.`URL`, 'description', b.`description`)),']') AS JSON) from personalWebsite b WHERE a.userId = b.userId), 'joinedEvent' ,(SELECT CAST(CONCAT('[', GROUP_CONCAT(JSON_OBJECT('joinedEventId' ,c.joinedEventId, 'eventId', c.eventId, 'title', d.`title`)), ']') AS JSON) FROM joinedEvent c, event d WHERE a.userId = c.userId AND c.eventId = d.eventId)) AS result FROM user a WHERE a.appleId = \"" + appleId + "\";";
+
     if (appleId){
       var rows = await db.query(
-        `SELECT * FROM user WHERE appleId = ? ORDER by userId ASC;`, [appleId]
-        //`SELECT * FROM user ORDER by userId ASC;`
+        sql
       );
     }else{
       var rows = await db.query(
@@ -21,11 +22,17 @@ async function getUser(appleId){
       );      
     }
 
-  const data = helper.emptyOrRows(rows);
+  //const data = helper.emptyOrRows(rows);
+  const tmpData = helper.emptyOrRows(rows);
+  data = tmpData[0].result;
+  //console.log(data[0].result);
+  //const data2 = data[0].result;
+  //console.log(data2);
   const meta = "1";
 
   return {
     data,
+    //data[0].result,
     meta
   }
 }
