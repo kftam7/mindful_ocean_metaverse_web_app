@@ -84,13 +84,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/user/we@apple.com",
+							"raw": "{{baseUrl}}/user/me@apple.com",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
-								"we@apple.com"
+								"me@apple.com"
 							],
 							"query": [
 								{
@@ -1098,7 +1098,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"userId\":\"4\",\n     \"name\":\"artworktest1\",\n     \"URL\":\"http://artworktest1\",\n     \"description\":\"test1\"\n  },\n  {\n     \"userId\":\"5\",\n     \"name\":\"artworktest2\",\n     \"URL\":\"http://artworktest2\",\n     \"description\":\"test2\"\n  },\n  {\n     \"userId\":\"6\",\n     \"name\":\"artworktest3\",\n     \"URL\":\"http://artworktest3\",\n     \"description\":\"test3\"\n  }\n]",
+							"raw": "[\n  {\n     \"userId\":\"13\",\n     \"name\":\"artworktest1\",\n     \"URL\":\"http://artworktest1\",\n     \"description\":\"test1\"\n  }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1603,6 +1603,92 @@
 							"path": [
 								"personalwebsite",
 								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "S3 Media",
+			"item": [
+				{
+					"name": "PUT file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/Users/edwardtam/Downloads/sample3.png"
+							}
+						},
+						"url": {
+							"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample3.png",
+							"protocol": "https",
+							"host": [
+								"b5uu4aqly2",
+								"execute-api",
+								"ap-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"v1",
+								"mindfulocean",
+								"sample3.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample2.png",
+							"protocol": "https",
+							"host": [
+								"b5uu4aqly2",
+								"execute-api",
+								"ap-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"v1",
+								"mindfulocean",
+								"sample2.png"
 							]
 						}
 					},

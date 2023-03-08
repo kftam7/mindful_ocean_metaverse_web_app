@@ -32,8 +32,10 @@ async function getArtwork(appleId){
 /* create Artwork */
 async function createArtwork(artworkRecord){
 
+/*
   // construct the SQL statement
-  var sql = 'INSERT INTO artwork (userId, name, URL, description) VALUES ';
+  var sql = 'INSERT INTO artwork (userId, name, URL, description) VALUES ' + '("' + artworkRecord[0].userId + '", "' + artworkRecord[0].name + '", "' + artworkRecord[0].URL + '", "' + artworkRecord[0].description + '"),';;
+
 
   for (var i =0; i < artworkRecord.length; i++){
 
@@ -51,9 +53,30 @@ async function createArtwork(artworkRecord){
     sql
   );
 
+  // get the artworkId created
+  const artworkId = await db.query(
+    `SELECT LAST_INSERT_ID() AS artworkId;`
+  );
+  console.log(artworkId);
+*/
+
+  var rows = await db.query(
+    `INSERT INTO artwork (userId, name, URL, description) VALUES (?, ?, ?, ?)`, [artworkRecord[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].description]
+  );
+
+  var queryResult = await db.query(
+    `SELECT artworkId FROM artwork WHERE userId = ? AND name = ?`, [artworkRecord[0].userId, artworkRecord[0].name]
+  );
+
+  console.log(queryResult[0].artworkId);
+
   // will return SQL error if fails, otherwise return the following succesful msg
+  /*
   let message = 'Records added susccessfully';
   return {message};
+  */
+  const artworkId = queryResult[0].artworkId;
+  return {artworkId};
   
 }
 
