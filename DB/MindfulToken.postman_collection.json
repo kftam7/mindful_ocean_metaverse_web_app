@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "8edcf9a9-c7bb-4a68-907f-ad4c7d2d54a4",
 		"name": "MindfulToken",
+		"description": "## Mindful Ocean RESTful API Collection\n\nThis collection contains sample requests made by mobile and web for Mindful Ocean services. They are divided into the following sections:\n\n- User\n- Event\n- NFT\n- Language\n- App Version\n- Artwork\n- Joined Event\n- Personal Website\n- S3 Media\n    \n\nThe details are described in the following sections.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23541331"
 	},
@@ -36,32 +37,67 @@
 							],
 							"path": [
 								"user"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get information of ALL users\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET user Request (ALL)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1306"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"51a-LSf9JYomBv94J4ur4YvzuRc4OlM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 10:41:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"userId\": 1,\n            \"appleId\": \"me@apple.com\",\n            \"walletAddress\": \"0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005\",\n            \"personInfo\": \"User me for testing\",\n            \"createTime\": \"2022-11-30T16:00:00.000Z\",\n            \"updateTime\": \"2022-12-31T16:00:00.000Z\"\n        },\n        {\n            \"userId\": 2,\n            \"appleId\": \"you@apple.com\",\n            \"walletAddress\": \"0xC8a729C23c4304597ec10894A374fdD44Da5bA9a\",\n            \"personInfo\": \"free text for editing\",\n            \"createTime\": \"2023-01-02T02:00:00.000Z\",\n            \"updateTime\": \"2023-01-30T17:00:00.000Z\"\n        },\n        {\n            \"userId\": 3,\n            \"appleId\": \"we@apple.com\",\n            \"walletAddress\": \"0x1BC91e17a84D65d750aB671Fc1D2038a42A69948\",\n            \"personInfo\": \"say something about you\",\n            \"createTime\": \"2023-02-27T16:00:00.000Z\",\n            \"updateTime\": \"2023-03-19T16:00:00.000Z\"\n        },\n        {\n            \"userId\": 4,\n            \"appleId\": \"xx@xx.com\",\n            \"walletAddress\": \"0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd\",\n            \"personInfo\": \"This is a modified msg\",\n            \"createTime\": \"2024-05-16T17:01:01.000Z\",\n            \"updateTime\": \"2025-06-16T18:02:02.000Z\"\n        },\n        {\n            \"userId\": 5,\n            \"appleId\": \"yy@yy.com\",\n            \"walletAddress\": \"0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E\",\n            \"personInfo\": \"This is a about him\",\n            \"createTime\": \"2020-05-16T17:01:01.000Z\",\n            \"updateTime\": \"2021-06-16T18:02:02.000Z\"\n        },\n        {\n            \"userId\": 6,\n            \"appleId\": \"zz@zz.com\",\n            \"walletAddress\": \"0xef4cF75b222c45C89D315Ba1781C85E81D0F2832\",\n            \"personInfo\": \"This is a about her\",\n            \"createTime\": \"2022-05-16T17:01:01.000Z\",\n            \"updateTime\": \"2023-06-16T18:02:02.000Z\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "GET user Request (applieId)",
@@ -84,39 +120,83 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/user/me@apple.com",
+							"raw": "{{baseUrl}}/user/{appleId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
-								"me@apple.com"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
+								"{appleId}"
 							]
-						}
+						},
+						"description": "### API endpoint to get information of one particular user using Apple ID\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET user Request (applieId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user/me@apple.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"me@apple.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 07:44:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.52 (Ubuntu)"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin,Accept-Encoding"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ba-KadkjEraXG7nccB3s0e+fieZGzs-gzip\""
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"userId\": 1,\n        \"appleId\": \"me@apple.com\",\n        \"createTime\": \"2022-12-01 00:00:00.000000\",\n        \"personInfo\": \"User me for testing\",\n        \"updateTime\": \"2023-01-01 00:00:00.000000\",\n        \"joinedEvent\": [\n            {\n                \"title\": \"eventD\",\n                \"eventId\": 1,\n                \"joinedEventId\": 1\n            },\n            {\n                \"title\": \"eventK\",\n                \"eventId\": 2,\n                \"joinedEventId\": 2\n            },\n            {\n                \"title\": \"eventC\",\n                \"eventId\": 3,\n                \"joinedEventId\": 3\n            }\n        ],\n        \"walletAddress\": \"0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005\",\n        \"personalwebsite\": [\n            {\n                \"URL\": \"https://abc.com\",\n                \"websiteId\": 1,\n                \"description\": \"desc1\"\n            },\n            {\n                \"URL\": \"https://def.com\",\n                \"websiteId\": 2,\n                \"description\": \"desc2\"\n            },\n            {\n                \"URL\": \"https://ghi.com\",\n                \"websiteId\": 3,\n                \"description\": \"desc3\"\n            },\n            {\n                \"URL\": \"https://modified.com\",\n                \"websiteId\": 9,\n                \"description\": \"personalwebsite modify testing\"\n            }\n        ]\n    },\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "POST user Request",
@@ -151,7 +231,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"appleId\":\"xx@xx.com\",\n     \"walletAddress\":\"0x6Bf589b61ceF72080A620660F0cD2b442174f2Cf\",\n     \"personInfo\":\"This is a about me\",\n     \"createTime\":\"2018-05-17 01:01:01\",\n     \"updateTime\":\"2019-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"yy@yy.com\",\n     \"walletAddress\":\"0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E\",\n     \"personInfo\":\"This is a about him\",\n     \"createTime\":\"2020-05-17 01:01:01\",\n     \"updateTime\":\"2021-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"zz@zz.com\",\n     \"walletAddress\":\"0xef4cF75b222c45C89D315Ba1781C85E81D0F2832\",\n     \"personInfo\":\"This is a about her\",\n     \"createTime\":\"2022-05-17 01:01:01\",\n     \"updateTime\":\"2023-06-17 02:02:02\"\n  }\n]",
+							"raw": "[\n  {\n     \"appleId\":\"11@xx.com\",\n     \"walletAddress\":\"0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01\",\n     \"personInfo\":\"This is a about me\",\n     \"createTime\":\"2018-05-17 01:01:01\",\n     \"updateTime\":\"2019-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"22@yy.com\",\n     \"walletAddress\":\"0xC8a729C23c4304597ec10894A374fdD44Da5bA92\",\n     \"personInfo\":\"This is a about him\",\n     \"createTime\":\"2020-05-17 01:01:01\",\n     \"updateTime\":\"2021-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"33@zz.com\",\n     \"walletAddress\":\"0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683\",\n     \"personInfo\":\"This is a about her\",\n     \"createTime\":\"2022-05-17 01:01:01\",\n     \"updateTime\":\"2023-06-17 02:02:02\"\n  }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,9 +246,86 @@
 							"path": [
 								"user"
 							]
-						}
+						},
+						"description": "### API endpoint to create new users\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "POST user Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"appleId\":\"11@xx.com\",\n     \"walletAddress\":\"0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01\",\n     \"personInfo\":\"This is a about me\",\n     \"createTime\":\"2018-05-17 01:01:01\",\n     \"updateTime\":\"2019-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"22@yy.com\",\n     \"walletAddress\":\"0xC8a729C23c4304597ec10894A374fdD44Da5bA92\",\n     \"personInfo\":\"This is a about him\",\n     \"createTime\":\"2020-05-17 01:01:01\",\n     \"updateTime\":\"2021-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"33@zz.com\",\n     \"walletAddress\":\"0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683\",\n     \"personInfo\":\"This is a about her\",\n     \"createTime\":\"2022-05-17 01:01:01\",\n     \"updateTime\":\"2023-06-17 02:02:02\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-2S3h6R04UE8TKYUpB6W99D4VMqs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 10:45:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT user Request",
@@ -211,19 +368,98 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/user/xx@xx.com",
+							"raw": "{{baseUrl}}/user/{appleId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
-								"xx@xx.com"
+								"{appleId}"
 							]
-						}
+						},
+						"description": "### API endpoint to modify existing users using appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT user Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"walletAddress\":\"0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd\",\n    \"personInfo\":\"This is a modified msg\",\n    \"createTime\":\"2024-05-17 01:01:01\",\n    \"updateTime\":\"2025-06-17 02:02:02\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/xx@xx.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"xx@xx.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 10:48:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage user information"
 		},
 		{
 			"name": "event",
@@ -255,32 +491,89 @@
 							],
 							"path": [
 								"event"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get all event information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET event Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/event",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"event"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										},
+										{
+											"key": "startTime",
+											"value": "2022-10-01 00:00:00",
+											"disabled": true
+										},
+										{
+											"key": "endTime",
+											"value": "2022-12-03 00:00:00",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2652"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a5c-4MGcXSM+FirhpMf8uasdHZ+3oeg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:18:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"eventId\": 1,\n            \"title\": \"eventD\",\n            \"paragraphText\": \"eventD description\",\n            \"image\": \"http://www.abc.com/a.png\",\n            \"hyperlink\": \"http://www.abc.com/eventD.html\",\n            \"timerDescription\": \"timerDescriptionD\",\n            \"startTime\": \"2022-06-09T01:00:10.000Z\",\n            \"endTime\": \"2022-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 2,\n            \"title\": \"eventK\",\n            \"paragraphText\": \"eventK description\",\n            \"image\": \"http://www.abc.com/b.png\",\n            \"hyperlink\": \"http://www.abc.com/eventK.html\",\n            \"timerDescription\": \"timerDescriptionK\",\n            \"startTime\": \"2022-06-09T01:00:10.000Z\",\n            \"endTime\": \"2022-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 3,\n            \"title\": \"eventC\",\n            \"paragraphText\": \"eventC description\",\n            \"image\": \"http://www.abc.com/c.png\",\n            \"hyperlink\": \"http://www.abc.com/eventC.html\",\n            \"timerDescription\": \"timerDescriptionC\",\n            \"startTime\": \"2023-06-09T01:00:10.000Z\",\n            \"endTime\": \"2023-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 4,\n            \"title\": \"eventA\",\n            \"paragraphText\": \"eventD description\",\n            \"image\": \"http://www.abc.com/d.png\",\n            \"hyperlink\": \"http://www.abc.com/eventD.html\",\n            \"timerDescription\": \"timerDescriptionD\",\n            \"startTime\": \"2024-06-09T01:00:10.000Z\",\n            \"endTime\": \"2024-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 5,\n            \"title\": \"eventB\",\n            \"paragraphText\": \"eventB description\",\n            \"image\": \"http://www.abc.com/b.png\",\n            \"hyperlink\": \"http://www.abc.com/eventB.html\",\n            \"timerDescription\": \"timerDescriptionB\",\n            \"startTime\": \"2022-06-09T01:00:10.000Z\",\n            \"endTime\": \"2022-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 6,\n            \"title\": \"eventE\",\n            \"paragraphText\": \"eventC description\",\n            \"image\": \"http://www.abc.com/c.png\",\n            \"hyperlink\": \"http://www.abc.com/eventC.html\",\n            \"timerDescription\": \"timerDescriptionC\",\n            \"startTime\": \"2023-06-09T01:00:10.000Z\",\n            \"endTime\": \"2023-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 7,\n            \"title\": \"eventF\",\n            \"paragraphText\": \"eventD description\",\n            \"image\": \"http://www.abc.com/d.png\",\n            \"hyperlink\": \"http://www.abc.com/eventD.html\",\n            \"timerDescription\": \"timerDescriptionD\",\n            \"startTime\": \"2024-06-09T01:00:10.000Z\",\n            \"endTime\": \"2024-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 8,\n            \"title\": \"eventG\",\n            \"paragraphText\": \"eventB description\",\n            \"image\": \"http://www.abc.com/b.png\",\n            \"hyperlink\": \"http://www.abc.com/eventB.html\",\n            \"timerDescription\": \"timerDescriptionB\",\n            \"startTime\": \"2022-06-09T01:00:10.000Z\",\n            \"endTime\": \"2022-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 9,\n            \"title\": \"eventH\",\n            \"paragraphText\": \"eventC description\",\n            \"image\": \"http://www.abc.com/c.png\",\n            \"hyperlink\": \"http://www.abc.com/eventC.html\",\n            \"timerDescription\": \"timerDescriptionC\",\n            \"startTime\": \"2023-06-09T01:00:10.000Z\",\n            \"endTime\": \"2023-10-09T01:00:10.000Z\"\n        },\n        {\n            \"eventId\": 10,\n            \"title\": \"eventI\",\n            \"paragraphText\": \"eventD description\",\n            \"image\": \"http://www.abc.com/d.png\",\n            \"hyperlink\": \"http://www.abc.com/eventD.html\",\n            \"timerDescription\": \"timerDescriptionD\",\n            \"startTime\": \"2024-06-09T01:00:10.000Z\",\n            \"endTime\": \"2024-10-09T01:00:10.000Z\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "POST event Request",
@@ -330,9 +623,86 @@
 							"path": [
 								"event"
 							]
-						}
+						},
+						"description": "### API endpoint to create events\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "POST event Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"title\":\"eventB\",\n     \"paragraphText\":\"eventB description\",\n     \"image\":\"http://www.abc.com/b.png\",\n     \"hyperlink\":\"http://www.abc.com/eventB.html\",\n     \"timerDescription\":\"timerDescriptionB\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  },\n  {\n     \"title\":\"eventC\",\n     \"paragraphText\":\"eventC description\",\n     \"image\":\"http://www.abc.com/c.png\",\n     \"hyperlink\":\"http://www.abc.com/eventC.html\",\n     \"timerDescription\":\"timerDescriptionC\",\n     \"startTime\":\"2023-06-09 09:00:10\",\n     \"endTime\":\"2023-10-09 09:00:10\"\n  },\n  {\n     \"title\":\"eventD\",\n     \"paragraphText\":\"eventD description\",\n     \"image\":\"http://www.abc.com/d.png\",\n     \"hyperlink\":\"http://www.abc.com/eventD.html\",\n     \"timerDescription\":\"timerDescriptionD\",\n     \"startTime\":\"2024-06-09 09:00:10\",\n     \"endTime\":\"2024-10-09 09:00:10\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/event",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"event"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43-XnsQxFaLp8gcXjtxaTL+QKD5ACs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:19:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Duplicate entry 'eventB' for key 'event.title_UNIQUE'\"\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT event Request",
@@ -383,11 +753,90 @@
 								"event",
 								"2"
 							]
-						}
+						},
+						"description": "### API endpoint to modify event\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT event Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/event/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"event",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:20:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage event information"
 		},
 		{
 			"name": "NFT",
@@ -421,22 +870,69 @@
 								"nft",
 								"mintPass",
 								"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
-							],
-							"query": [
+							]
+						},
+						"description": "### API endpoint to get the information of MintPass NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT Request (MintPass)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/nft/mintPass/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nft",
+										"mintPass",
+										"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
+									"key": "X-Powered-By",
+									"value": "Express"
 								},
 								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7b-oB7a1wONNVEnJ4kvhWUnmvJuP70\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:24:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
 								}
-							]
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"tokenId\": \"1\",\n            \"tokenUriRaw\": \"ipfs://bafyreiesbkaa4bphh3pb2qemhlupb7si457gjz4octoubqulnvejdugq34/metadata.json\"\n        }\n    ]\n}"
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "GET NFT Request (MindfulToken)",
@@ -480,9 +976,68 @@
 									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "### API endpoint to get information of MindulToken NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET NFT Request (MindfulToken)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/nft/mindfulToken/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nft",
+										"mindfulToken",
+										"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b-EFAlOux7Kcr/ZEgGkn2r+oFAbu4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:32:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": []\n}"
+						}
+					]
 				},
 				{
 					"name": "GET NFT Total Request (MindfulToken)",
@@ -525,9 +1080,67 @@
 									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "### API endpoint to get the total no. of Mindful Token NFT's minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET NFT Total Request (MindfulToken)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/nfttotal/mindfulToken",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nfttotal",
+										"mindfulToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b-HnfD/3TGbTRQlZhqmuNbjk8+eaw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:34:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 0\n}"
+						}
+					]
 				},
 				{
 					"name": "GET NFT Total Request (MintPass)",
@@ -570,17 +1183,76 @@
 									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "### API endpoint to get the total no. of MintPass NFT's minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET NFT Total Request (MintPass)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/nfttotal/mintPass",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nfttotal",
+										"mintPass"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b-nJuhjWDAJb2rLiWPkNTTkjKToYM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:34:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 2\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to get NFT information"
 		},
 		{
 			"name": "language",
 			"item": [
 				{
-					"name": "PUT language Request",
+					"name": "GET language Request",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -619,9 +1291,78 @@
 								"language",
 								"EN"
 							]
-						}
+						},
+						"description": "### API endpoint to get language json file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET language Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/language/EN",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"language",
+										"EN"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"104-E9RrOIuYWz/ukzGdXIBkQuYGsvQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:37:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"languageContent\": {\n        \"title\": \"eventK\",\n        \"paragraphText\": \"eventK description\",\n        \"image\": \"http://www.abc.com/k.png\",\n        \"hyperlink\": \"http://www.abc.com/eventK.html\",\n        \"timerDescription\": \"timerDescriptionK\",\n        \"startTime\": \"2022-06-09 09:00:10\",\n        \"endTime\": \"2022-10-09 09:00:10\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT language Request",
@@ -672,11 +1413,90 @@
 								"language",
 								"EN"
 							]
-						}
+						},
+						"description": "### API endpoint to update language json file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT language Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/language/EN",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"language",
+										"EN"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "13"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d-omrXeIgYnMXWlzu4GORfRIYoxcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:38:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage language file"
 		},
 		{
 			"name": "appversion",
@@ -709,32 +1529,68 @@
 							"path": [
 								"appversion",
 								"all"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get all app version information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET appversion Request (all)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/appversion/all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion",
+										"all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1065"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"429-uJsZ/KtGBLkmeKPpH3ayP5E9Dxw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:39:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"versionId\": 7,\n            \"versionNo\": \"0.0.6\",\n            \"versionName\": \"6th edited version\",\n            \"releaseDate\": \"2023-12-31T16:00:00.000Z\",\n            \"expireDate\": \"2024-12-31T16:00:00.000Z\",\n            \"description\": \"edited version testing\"\n        },\n        {\n            \"versionId\": 6,\n            \"versionNo\": \"0.0.5\",\n            \"versionName\": \"5th version\",\n            \"releaseDate\": \"2023-06-16T19:03:03.000Z\",\n            \"expireDate\": \"2023-07-16T20:04:04.000Z\",\n            \"description\": \"5th\"\n        },\n        {\n            \"versionId\": 5,\n            \"versionNo\": \"0.0.4\",\n            \"versionName\": \"4th version\",\n            \"releaseDate\": \"2023-05-16T17:01:01.000Z\",\n            \"expireDate\": \"2023-06-16T18:02:02.000Z\",\n            \"description\": \"4th\"\n        },\n        {\n            \"versionId\": 2,\n            \"versionNo\": \"0.0.3\",\n            \"versionName\": \"MVP version\",\n            \"releaseDate\": \"2023-03-31T16:00:00.000Z\",\n            \"expireDate\": \"2023-04-29T16:00:00.000Z\",\n            \"description\": \"3rd version\"\n        },\n        {\n            \"versionId\": 4,\n            \"versionNo\": \"0.0.2\",\n            \"versionName\": \"2nd version\",\n            \"releaseDate\": \"2023-03-01T16:00:00.000Z\",\n            \"expireDate\": \"2023-03-31T16:00:00.000Z\",\n            \"description\": \"2nd version\"\n        },\n        {\n            \"versionId\": 1,\n            \"versionNo\": \"0.0.1\",\n            \"versionName\": \"initial version\",\n            \"releaseDate\": \"2023-02-16T16:00:00.000Z\",\n            \"expireDate\": \"2023-03-09T16:00:00.000Z\",\n            \"description\": \"1st version\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "GET appversion Request (latest)",
@@ -787,9 +1643,67 @@
 									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "### API endpoint to get the latest app version info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET appversion Request (latest)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/appversion/latest",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion",
+										"latest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "194"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c2-LdSuqOzuhSv8fXwcTa0wrqt/NNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:40:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"versionId\": 4,\n            \"versionNo\": \"0.0.2\",\n            \"versionName\": \"2nd version\",\n            \"releaseDate\": \"2023-03-01T16:00:00.000Z\",\n            \"expireDate\": \"2023-03-31T16:00:00.000Z\",\n            \"description\": \"2nd version\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "GET appversion Request (particular version)",
@@ -812,39 +1726,75 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/appversion/0.0.2",
+							"raw": "{{baseUrl}}/appversion/{versionNo}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"appversion",
-								"0.0.2"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
+								"{versionNo}"
 							]
-						}
+						},
+						"description": "### API endpoint to get app version information of a specified version\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET appversion Request (particular version)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/appversion/0.0.2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion",
+										"0.0.2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "194"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c2-LdSuqOzuhSv8fXwcTa0wrqt/NNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:41:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"versionId\": 4,\n            \"versionNo\": \"0.0.2\",\n            \"versionName\": \"2nd version\",\n            \"releaseDate\": \"2023-03-01T16:00:00.000Z\",\n            \"expireDate\": \"2023-03-31T16:00:00.000Z\",\n            \"description\": \"2nd version\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "POST appversion Request",
@@ -879,7 +1829,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"versionNo\":\"0.0.4\",\n     \"versionName\":\"4th version\",\n     \"releaseDate\":\"2023-05-17 01:01:01\",\n     \"expireDate\":\"2023-06-17 02:02:02\",\n     \"Description\":\"4th\"\n  },\n  {\n     \"versionNo\":\"0.0.5\",\n     \"versionName\":\"5th version\",\n     \"releaseDate\":\"2023-06-17 03:03:03\",\n     \"expireDate\":\"2023-07-17 04:04:04\",\n     \"Description\":\"5th\"\n  },\n  {\n     \"versionNo\":\"0.0.6\",\n     \"versionName\":\"6th version\",\n     \"releaseDate\":\"2023-08-17 05:05:05\",\n     \"expireDate\":\"2023-09-17 06:06:06\",\n     \"Description\":\"6th\"\n  }\n]",
+							"raw": "[\n  {\n     \"versionNo\":\"0.0.12\",\n     \"versionName\":\"12th version\",\n     \"releaseDate\":\"2023-05-17 01:01:01\",\n     \"expireDate\":\"2023-06-17 02:02:02\",\n     \"Description\":\"12th\"\n  },\n  {\n     \"versionNo\":\"0.0.13\",\n     \"versionName\":\"13th version\",\n     \"releaseDate\":\"2023-06-17 03:03:03\",\n     \"expireDate\":\"2023-07-17 04:04:04\",\n     \"Description\":\"13th\"\n  },\n  {\n     \"versionNo\":\"0.0.14\",\n     \"versionName\":\"14th version\",\n     \"releaseDate\":\"2023-08-17 05:05:05\",\n     \"expireDate\":\"2023-09-17 06:06:06\",\n     \"Description\":\"14th\"\n  }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -894,9 +1844,86 @@
 							"path": [
 								"appversion"
 							]
-						}
+						},
+						"description": "### API endpoint create new app version info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "POST appversion Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"versionNo\":\"0.0.12\",\n     \"versionName\":\"12th version\",\n     \"releaseDate\":\"2023-05-17 01:01:01\",\n     \"expireDate\":\"2023-06-17 02:02:02\",\n     \"Description\":\"12th\"\n  },\n  {\n     \"versionNo\":\"0.0.13\",\n     \"versionName\":\"13th version\",\n     \"releaseDate\":\"2023-06-17 03:03:03\",\n     \"expireDate\":\"2023-07-17 04:04:04\",\n     \"Description\":\"13th\"\n  },\n  {\n     \"versionNo\":\"0.0.14\",\n     \"versionName\":\"14th version\",\n     \"releaseDate\":\"2023-08-17 05:05:05\",\n     \"expireDate\":\"2023-09-17 06:06:06\",\n     \"Description\":\"14th\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appversion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-2S3h6R04UE8TKYUpB6W99D4VMqs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:44:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT appversion Request",
@@ -939,19 +1966,98 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/appversion/0.0.6",
+							"raw": "{{baseUrl}}/appversion/{versionNo}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"appversion",
-								"0.0.6"
+								"{versionNo}"
 							]
-						}
+						},
+						"description": "### API endpoint to update the info of a specified app version\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT appversion Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"versionName\":\"6th edited version\",\n     \"releaseDate\":\"2024-01-01 00:00:00\",\n     \"expireDate\":\"2025-01-01 00:00:00\",\n     \"description\":\"edited version testing\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appversion/0.0.6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion",
+										"0.0.6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:45:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage application version information"
 		},
 		{
 			"name": "Artwork",
@@ -983,32 +2089,67 @@
 							],
 							"path": [
 								"artwork"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET artwork Request (all)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/artwork",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1008"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f0-orO9znjMZW2U1TbLYBJ7DXm8ykw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:00:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"artworkId\": 1,\n            \"name\": \"artwork1\",\n            \"URL\": \"https://abc.com/jfk.png\",\n            \"description\": \"png file\"\n        },\n        {\n            \"artworkId\": 2,\n            \"name\": \"artwork2\",\n            \"URL\": \"https://xyz.com/1.html\",\n            \"description\": \"html text\"\n        },\n        {\n            \"artworkId\": 3,\n            \"name\": \"artwork3\",\n            \"URL\": \"https://111.com/a.gif\",\n            \"description\": \"gif animation\"\n        },\n        {\n            \"artworkId\": 4,\n            \"name\": \"artworkA\",\n            \"URL\": \"https://222.com/321.avi\",\n            \"description\": \"movie file\"\n        },\n        {\n            \"artworkId\": 5,\n            \"name\": \"artworkB\",\n            \"URL\": \"https://333.com/sound.mp4\",\n            \"description\": \"sound track\"\n        },\n        {\n            \"artworkId\": 6,\n            \"name\": \"artworkwhatisthis\",\n            \"URL\": \"https://kkk.com/blablabla.gif\",\n            \"description\": \"gif picture\"\n        },\n        {\n            \"artworkId\": 7,\n            \"name\": \"artworktest1\",\n            \"URL\": \"http://artworktest1\",\n            \"description\": \"test1\"\n        },\n        {\n            \"artworkId\": 8,\n            \"name\": \"artworktest2\",\n            \"URL\": \"http://artworktest2\",\n            \"description\": \"test2\"\n        },\n        {\n            \"artworkId\": 9,\n            \"name\": \"artwork modified\",\n            \"URL\": \"https://modified.com\",\n            \"description\": \"artwork modify testing\"\n        },\n        {\n            \"artworkId\": 12,\n            \"name\": \"ds\",\n            \"URL\": \"df\",\n            \"description\": null\n        },\n        {\n            \"artworkId\": 26,\n            \"name\": \"ds2\",\n            \"URL\": \"fsdfds\",\n            \"description\": \"sdfdsf\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "GET artwork Request (appleId)",
@@ -1031,39 +2172,75 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/artwork/we@apple.com",
+							"raw": "{{baseUrl}}/artwork/{appleId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"artwork",
-								"we@apple.com"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
+								"{appleId}"
 							]
-						}
+						},
+						"description": "### API endpoint to get artwork information by appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET artwork Request (appleId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/artwork/we@apple.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork",
+										"we@apple.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "257"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"101-tqE5scEg8EKXevJ+8ubTaYX7hLc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:02:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"artworkId\": 6,\n            \"name\": \"artworkwhatisthis\",\n            \"URL\": \"https://kkk.com/blablabla.gif\",\n            \"description\": \"gif picture\"\n        },\n        {\n            \"artworkId\": 12,\n            \"name\": \"ds\",\n            \"URL\": \"df\",\n            \"description\": null\n        },\n        {\n            \"artworkId\": 26,\n            \"name\": \"ds2\",\n            \"URL\": \"fsdfds\",\n            \"description\": \"sdfdsf\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "POST artwork Request",
@@ -1113,9 +2290,86 @@
 							"path": [
 								"artwork"
 							]
-						}
+						},
+						"description": "### API endpoint to create artwork information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code\n\nThe return value is the new artworkId created"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "POST artwork Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"userId\":\"14\",\n     \"name\":\"artworktest14\",\n     \"URL\":\"http://artworktest14\",\n     \"description\":\"test1\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-GggyjIg1Rzkb0HN+wlvi+x45IjE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:03:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"artworkId\": 35\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT artwork Request",
@@ -1158,19 +2412,98 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/artwork/9",
+							"raw": "{{baseUrl}}/artwork/{artworkId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"artwork",
-								"9"
+								"{artworkId}"
 							]
-						}
+						},
+						"description": "### API endpoint to update the artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT artwork Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"userId\":\"1\",\n     \"name\":\"artwork modified\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"artwork modify testing\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork/9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:05:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage artwork information"
 		},
 		{
 			"name": "JoinedEvent",
@@ -1202,32 +2535,67 @@
 							],
 							"path": [
 								"joinedevent"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get all joined event information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET joinedevent Request (all)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/joinedevent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"joinedevent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "540"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21c-e2epYmbGCXoFkvUrbw44CJeBjyw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:06:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"joinedEventId\": 1,\n            \"userId\": 1,\n            \"eventId\": 1\n        },\n        {\n            \"joinedEventId\": 2,\n            \"userId\": 1,\n            \"eventId\": 2\n        },\n        {\n            \"joinedEventId\": 3,\n            \"userId\": 1,\n            \"eventId\": 3\n        },\n        {\n            \"joinedEventId\": 4,\n            \"userId\": 2,\n            \"eventId\": 4\n        },\n        {\n            \"joinedEventId\": 5,\n            \"userId\": 2,\n            \"eventId\": 5\n        },\n        {\n            \"joinedEventId\": 6,\n            \"userId\": 2,\n            \"eventId\": 6\n        },\n        {\n            \"joinedEventId\": 10,\n            \"userId\": 4,\n            \"eventId\": 6\n        },\n        {\n            \"joinedEventId\": 7,\n            \"userId\": 3,\n            \"eventId\": 7\n        },\n        {\n            \"joinedEventId\": 11,\n            \"userId\": 5,\n            \"eventId\": 7\n        },\n        {\n            \"joinedEventId\": 8,\n            \"userId\": 3,\n            \"eventId\": 8\n        },\n        {\n            \"joinedEventId\": 12,\n            \"userId\": 5,\n            \"eventId\": 8\n        },\n        {\n            \"joinedEventId\": 9,\n            \"userId\": 3,\n            \"eventId\": 9\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "GET joinedevent Request (appleId)",
@@ -1250,39 +2618,75 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/joinedevent/we@apple.com",
+							"raw": "{{baseUrl}}/joinedevent/{appleId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"joinedevent",
-								"we@apple.com"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
+								"{appleId}"
 							]
-						}
+						},
+						"description": "### API endpoint to get joinedevent information of specified appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET joinedevent Request (appleId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/joinedevent/we@apple.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"joinedevent",
+										"we@apple.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-P+RXAjkQbtDpcuoBCSzRsNvEphI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:07:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"eventId\": 7\n        },\n        {\n            \"eventId\": 8\n        },\n        {\n            \"eventId\": 9\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "POST joinedevent Request",
@@ -1317,7 +2721,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"userId\":\"4\",\n     \"eventId\":\"6\"\n  },\n  {\n     \"userId\":\"5\",\n     \"eventId\":\"7\"\n  },\n  {\n     \"userId\":\"6\",\n     \"eventId\":\"8\"\n  }\n]",
+							"raw": "[\n    {\n        \"userId\": 9,\n        \"eventId\": 1\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 2\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 3\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1332,9 +2736,86 @@
 							"path": [
 								"joinedevent"
 							]
-						}
+						},
+						"description": "### API endpoint to create joinedevent information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "POST joinedevent Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"userId\": 9,\n        \"eventId\": 1\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 2\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 3\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/joinedevent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"joinedevent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-2S3h6R04UE8TKYUpB6W99D4VMqs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:22:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT joinedevent Request",
@@ -1369,7 +2850,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n     \"userId\":\"1\",\n     \"name\":\"artwork modified\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"artwork modify testing\"\n  }",
+							"raw": "{\n    \"userId\": 1,\n    \"eventId\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1377,19 +2858,98 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/artwork/9",
+							"raw": "{{baseUrl}}/joinedevent/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"artwork",
-								"9"
+								"joinedevent",
+								"1"
 							]
-						}
+						},
+						"description": "### API endpoint to update joinedevent info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT joinedevent Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": 1,\n    \"eventId\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/joinedevent/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"joinedevent",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:25:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage which user join which events"
 		},
 		{
 			"name": "PersonalWebsite",
@@ -1421,32 +2981,67 @@
 							],
 							"path": [
 								"personalwebsite"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get all personal website information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET PersonWebiste Request (all)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1222"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c6-vsMXqhC4oSAVgx4uKqsvQVdzSCM\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:10:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"appleId\": \"me@apple.com\",\n            \"websiteId\": 1,\n            \"userId\": 1,\n            \"URL\": \"https://abc.com\",\n            \"description\": \"desc1\"\n        },\n        {\n            \"appleId\": \"me@apple.com\",\n            \"websiteId\": 2,\n            \"userId\": 1,\n            \"URL\": \"https://def.com\",\n            \"description\": \"desc2\"\n        },\n        {\n            \"appleId\": \"me@apple.com\",\n            \"websiteId\": 3,\n            \"userId\": 1,\n            \"URL\": \"https://ghi.com\",\n            \"description\": \"desc3\"\n        },\n        {\n            \"appleId\": \"you@apple.com\",\n            \"websiteId\": 4,\n            \"userId\": 2,\n            \"URL\": \"https://123.com\",\n            \"description\": \"show1\"\n        },\n        {\n            \"appleId\": \"you@apple.com\",\n            \"websiteId\": 5,\n            \"userId\": 2,\n            \"URL\": \"https://456.com\",\n            \"description\": \"show2\"\n        },\n        {\n            \"appleId\": \"you@apple.com\",\n            \"websiteId\": 6,\n            \"userId\": 2,\n            \"URL\": \"https://789.com\",\n            \"description\": \"show3\"\n        },\n        {\n            \"appleId\": \"we@apple.com\",\n            \"websiteId\": 7,\n            \"userId\": 3,\n            \"URL\": \"https://111.com\",\n            \"description\": \"detail1\"\n        },\n        {\n            \"appleId\": \"we@apple.com\",\n            \"websiteId\": 8,\n            \"userId\": 3,\n            \"URL\": \"https://222.com\",\n            \"description\": \"detail2\"\n        },\n        {\n            \"appleId\": \"me@apple.com\",\n            \"websiteId\": 9,\n            \"userId\": 1,\n            \"URL\": \"https://modified.com\",\n            \"description\": \"personalwebsite modify testing\"\n        },\n        {\n            \"appleId\": \"xx@xx.com\",\n            \"websiteId\": 10,\n            \"userId\": 4,\n            \"URL\": \"https://1.com\",\n            \"description\": \"new 1\"\n        },\n        {\n            \"appleId\": \"yy@yy.com\",\n            \"websiteId\": 11,\n            \"userId\": 5,\n            \"URL\": \"https://2.com\",\n            \"description\": \"new 2\"\n        },\n        {\n            \"appleId\": \"yy@yy.com\",\n            \"websiteId\": 12,\n            \"userId\": 5,\n            \"URL\": \"https://3.com\",\n            \"description\": \"new 3\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "GET PersonalWebsite Request (appleId)",
@@ -1476,32 +3071,68 @@
 							"path": [
 								"personalwebsite",
 								"we@apple.com"
-							],
-							"query": [
-								{
-									"key": "eventId",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "title",
-									"value": "eventA",
-									"disabled": true
-								},
-								{
-									"key": "startTime",
-									"value": "2022-10-01 00:00:00",
-									"disabled": true
-								},
-								{
-									"key": "endTime",
-									"value": "2022-12-03 00:00:00",
-									"disabled": true
-								}
 							]
-						}
+						},
+						"description": "### API endpoint to get website information of a specified appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GET PersonalWebsite Request (appleId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/we@apple.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"we@apple.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "149"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"95-aaiJf0ma1BpQexxWxbM9xc+Mv2s\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:12:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"websiteId\": 7,\n            \"URL\": \"https://111.com\",\n            \"description\": \"detail1\"\n        },\n        {\n            \"websiteId\": 8,\n            \"URL\": \"https://222.com\",\n            \"description\": \"detail2\"\n        }\n    ],\n    \"meta\": \"1\"\n}"
+						}
+					]
 				},
 				{
 					"name": "POST PersonalWebsite Request",
@@ -1551,9 +3182,86 @@
 							"path": [
 								"personalwebsite"
 							]
-						}
+						},
+						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "POST PersonalWebsite Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"userId\":\"4\",\n     \"URL\":\"https://1.com\",\n     \"description\": \"new 1\"\n  },\n  {\n     \"userId\":\"5\",\n     \"URL\":\"https://2.com\",\n     \"description\": \"new 2\"\n  },\n  {\n     \"userId\":\"6\",\n     \"URL\":\"https://3.com\",\n     \"description\": \"new 3\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-2S3h6R04UE8TKYUpB6W99D4VMqs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:13:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
+						}
+					]
 				},
 				{
 					"name": "PUT PersonalWebsite Request",
@@ -1596,19 +3304,98 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/personalwebsite/9",
+							"raw": "{{baseUrl}}/personalwebsite/{websiteId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"personalwebsite",
-								"9"
+								"{websiteId}"
 							]
-						}
+						},
+						"description": "### API endpoint to update personal website information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT PersonalWebsite Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"userId\":\"1\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:13:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+						}
+					]
 				}
-			]
+			],
+			"description": "## This section is to manage website information entered by users"
 		},
 		{
 			"name": "S3 Media",
@@ -1648,9 +3435,81 @@
 								"mindfulocean",
 								"sample3.png"
 							]
-						}
+						},
+						"description": "### API endpoint to upload image file to S3\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "PUT file",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "/Users/edwardtam/Downloads/sample3.png"
+									}
+								},
+								"url": {
+									"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample3.png",
+									"protocol": "https",
+									"host": [
+										"b5uu4aqly2",
+										"execute-api",
+										"ap-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"v1",
+										"mindfulocean",
+										"sample3.png"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:16:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "cc6485b0-69f2-4a84-9782-a198667ef0c5"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "BuR6KG_6HUYF7ig="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-640f3040-7a15f099247b902e07ddb11f"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "GET file",
@@ -1690,11 +3549,13 @@
 								"mindfulocean",
 								"sample2.png"
 							]
-						}
+						},
+						"description": "### API endpoint to download image file from S3\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "## This section is to upload/download image artwork files"
 		}
 	]
 }
