@@ -1,11 +1,11 @@
-const CONTRACT_ADDRESS = "0x80941fF016590446587A74F024A9434b950B2baA"
+const CONTRACT_ADDRESS = "0x1fba8BD1a5037B34347463A6938a829212a90c1b"
 const META_DATA_URL = "ipfs://bafyreiesbkaa4bphh3pb2qemhlupb7si457gjz4octoubqulnvejdugq34/metadata.json"
 
 async function mintNFT(contractAddress, metaDataURL) {
    const ExampleNFT = await ethers.getContractFactory("ExampleNFT")
    const [owner] = await ethers.getSigners()
    //await ExampleNFT.attach(contractAddress).mintNFT(owner.address, metaDataURL)
-   await ExampleNFT.attach(contractAddress).mintNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", metaDataURL)
+   await ExampleNFT.attach(contractAddress).mintNFT("0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9", metaDataURL)
    console.log("NFT minted to: ", owner.address)
 }
 
