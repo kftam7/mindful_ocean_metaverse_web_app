@@ -48,11 +48,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/user",
+									"raw": "http://127.0.0.1:3001/mindfulapi/user",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "3001",
 									"path": [
+										"mindfulapi",
 										"user"
 									]
 								}
