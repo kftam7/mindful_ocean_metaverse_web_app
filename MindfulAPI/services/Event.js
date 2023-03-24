@@ -41,15 +41,15 @@ async function getEvent(eventId, title, startTime, endTime){
 async function createEvent(eventRecord){
 
   // construct the SQL statement
-  var sql = 'INSERT INTO event (title, paragraphText, image, hyperlink, timerDescription, startTime, endTime) VALUES ';
+  var sql = 'INSERT INTO event (title, paragraphText, image, hyperlink, timerDescription, startTime, endTime, isActive) VALUES ';
 
   for (var i =0; i < eventRecord.length; i++){
 
     // combine into 1 single SQL
     if (i == (eventRecord.length-1)){
-      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '");';
+      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '", ' + eventRecord[i].isActive  + ');';
     }else{
-      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '"),';
+      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '", ' + eventRecord[i].isActive  + '),';
     }
 
   }
@@ -69,7 +69,7 @@ async function createEvent(eventRecord){
 /* update Event */
 async function updateEvent(id, eventRecord){
 
-  sql = 'UPDATE event SET title= "' + eventRecord.title + '", paragraphText = "' + eventRecord.paragraphText + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '" WHERE eventId = ' + id + ';';
+  sql = 'UPDATE event SET title= "' + eventRecord.title + '", paragraphText = "' + eventRecord.paragraphText + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '", isActive = ' + eventRecord.isActive + ' WHERE eventId = ' + id + ';';
 
   //console.log(sql);
   

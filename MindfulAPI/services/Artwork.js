@@ -12,11 +12,11 @@ async function getArtwork(appleId){
 
     if (appleId){
         var rows = await db.query(
-        `SELECT a.artworkId, a.name, a.URL, a.description FROM artwork a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.description FROM artwork a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
       );
     }else{
         var rows = await db.query(
-        `SELECT a.artworkId, a.name, a.URL, a.description FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
+        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.description FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
       );
     }
   
