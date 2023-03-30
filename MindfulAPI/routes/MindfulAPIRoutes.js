@@ -8,6 +8,7 @@ const Language = require('../services/Language');
 const AppVersion = require('../services/AppVersion');
 const JoinedEvent = require('../services/JoinedEvent');
 const PersonalWebsite = require('../services/PersonalWebsite');
+const Credential = require('../services/Credential');
 const logger = require("../logger");
 
 
@@ -301,6 +302,18 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while updating programming language`, err.message);
+    next(err);
+  }
+});
+
+
+/* GET credential */
+router.get('/credential/:login/:credential', async function(req, res, next) {
+  try {
+    res.json(await Credential.getCrendential(req.params.login,req.params.credential, req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
