@@ -8,6 +8,69 @@
 	},
 	"item": [
 		{
+			"name": "Credential",
+			"item": [
+				{
+					"name": "GET credential Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/credential/{name}/{credential}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"credential",
+								"{name}",
+								"{credential}"
+							]
+						},
+						"description": "### API endpoint to get information of ALL users\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET credential Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/credential/admin/c93ccd78b2076528346216b3b2f701e6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"credential",
+										"admin",
+										"c93ccd78b2076528346216b3b2f701e6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "user",
 			"item": [
 				{
@@ -48,18 +111,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:3001/mindfulapi/user",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/user/",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{baseUrl}}"
 									],
-									"port": "3001",
 									"path": [
-										"mindfulapi",
-										"user"
+										"user",
+										""
 									]
 								}
 							},
@@ -274,7 +332,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"appleId\":\"11@xx.com\",\n     \"walletAddress\":\"0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01\",\n     \"personInfo\":\"This is a about me\",\n     \"createTime\":\"2018-05-17 01:01:01\",\n     \"updateTime\":\"2019-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"22@yy.com\",\n     \"walletAddress\":\"0xC8a729C23c4304597ec10894A374fdD44Da5bA92\",\n     \"personInfo\":\"This is a about him\",\n     \"createTime\":\"2020-05-17 01:01:01\",\n     \"updateTime\":\"2021-06-17 02:02:02\"\n  },\n  {\n     \"appleId\":\"33@zz.com\",\n     \"walletAddress\":\"0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683\",\n     \"personInfo\":\"This is a about her\",\n     \"createTime\":\"2022-05-17 01:01:01\",\n     \"updateTime\":\"2023-06-17 02:02:02\"\n  }\n]",
+									"raw": "[\n  {\n     \"appleId\":\"123@xx.com\",\n     \"walletAddress\":\"0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01\",\n     \"personInfo\":\"This is a about me\",\n     \"createTime\":\"2018-05-17 01:01:01\",\n     \"updateTime\":\"2019-06-17 02:02:02\",\n     \"isActive\": 1\n  },\n  {\n     \"appleId\":\"456@yy.com\",\n     \"walletAddress\":\"0xC8a729C23c4304597ec10894A374fdD44Da5bA92\",\n     \"personInfo\":\"This is a about him\",\n     \"createTime\":\"2020-05-17 01:01:01\",\n     \"updateTime\":\"2021-06-17 02:02:02\",\n     \"isActive\": 0\n  },\n  {\n     \"appleId\":\"789@zz.com\",\n     \"walletAddress\":\"0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683\",\n     \"personInfo\":\"This is a about her\",\n     \"createTime\":\"2022-05-17 01:01:01\",\n     \"updateTime\":\"2023-06-17 02:02:02\",\n     \"isActive\": 1\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -651,7 +709,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"title\":\"eventB\",\n     \"paragraphText\":\"eventB description\",\n     \"image\":\"http://www.abc.com/b.png\",\n     \"hyperlink\":\"http://www.abc.com/eventB.html\",\n     \"timerDescription\":\"timerDescriptionB\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  },\n  {\n     \"title\":\"eventC\",\n     \"paragraphText\":\"eventC description\",\n     \"image\":\"http://www.abc.com/c.png\",\n     \"hyperlink\":\"http://www.abc.com/eventC.html\",\n     \"timerDescription\":\"timerDescriptionC\",\n     \"startTime\":\"2023-06-09 09:00:10\",\n     \"endTime\":\"2023-10-09 09:00:10\"\n  },\n  {\n     \"title\":\"eventD\",\n     \"paragraphText\":\"eventD description\",\n     \"image\":\"http://www.abc.com/d.png\",\n     \"hyperlink\":\"http://www.abc.com/eventD.html\",\n     \"timerDescription\":\"timerDescriptionD\",\n     \"startTime\":\"2024-06-09 09:00:10\",\n     \"endTime\":\"2024-10-09 09:00:10\"\n  }\n]",
+									"raw": "[\n  {\n     \"title\":\"eventKK\",\n     \"paragraphText\":\"eventB description\",\n     \"image\":\"http://www.abc.com/b.png\",\n     \"hyperlink\":\"http://www.abc.com/eventB.html\",\n     \"timerDescription\":\"timerDescriptionB\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 1\n  },\n  {\n     \"title\":\"eventLL\",\n     \"paragraphText\":\"eventC description\",\n     \"image\":\"http://www.abc.com/c.png\",\n     \"hyperlink\":\"http://www.abc.com/eventC.html\",\n     \"timerDescription\":\"timerDescriptionC\",\n     \"startTime\":\"2023-06-09 09:00:10\",\n     \"endTime\":\"2023-10-09 09:00:10\",\n      \"isActive\": 1\n  },\n  {\n     \"title\":\"eventMM\",\n     \"paragraphText\":\"eventD description\",\n     \"image\":\"http://www.abc.com/d.png\",\n     \"hyperlink\":\"http://www.abc.com/eventD.html\",\n     \"timerDescription\":\"timerDescriptionD\",\n     \"startTime\":\"2024-06-09 09:00:10\",\n     \"endTime\":\"2024-10-09 09:00:10\",\n      \"isActive\": 0\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -751,13 +809,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/event/2",
+							"raw": "{{baseUrl}}/event/{eventId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"event",
-								"2"
+								"{eventId}"
 							]
 						},
 						"description": "### API endpoint to modify event\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
@@ -781,7 +839,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+									"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 0\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1289,13 +1347,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/language/EN",
+							"raw": "{{baseUrl}}/language/{Language}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"language",
-								"EN"
+								"{Language}"
 							]
 						},
 						"description": "### API endpoint to get language json file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
@@ -1411,13 +1469,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/language/EN",
+							"raw": "{{baseUrl}}/language/{Language}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"language",
-								"EN"
+								"{Language}"
 							]
 						},
 						"description": "### API endpoint to update language json file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"

@@ -29,10 +29,11 @@ CREATE TABLE `appVersion` (
   `releaseDate` datetime NOT NULL COMMENT 'Release Date of this version',
   `expireDate` datetime NOT NULL COMMENT 'Expire Date of this version',
   `description` varchar(500) DEFAULT NULL COMMENT 'Description of the version release',
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`versionId`),
   UNIQUE KEY `versionNo_UNIQUE` (`versionNo`),
   UNIQUE KEY `versionName_UNIQUE` (`versionName`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,7 @@ CREATE TABLE `appVersion` (
 
 LOCK TABLES `appVersion` WRITE;
 /*!40000 ALTER TABLE `appVersion` DISABLE KEYS */;
-INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version'),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version'),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version'),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th'),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th'),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2025-01-01 00:00:00','edited version testing'),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined'),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined'),(19,'0.0.14','14th version','2023-08-17 05:05:05','2023-09-17 06:06:06','undefined');
+INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version',1),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version',1),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version',1),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th',1),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th',1),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2025-01-01 00:00:00','edited version testing',1),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined',1),(19,'0.0.14','14th version','2023-08-17 05:05:05','2023-09-17 06:06:06','undefined',1);
 /*!40000 ALTER TABLE `appVersion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,6 +75,35 @@ INSERT INTO `artwork` VALUES (1,1,'undefined','undefined','undefined'),(2,1,'art
 UNLOCK TABLES;
 
 --
+-- Table structure for table `CMSUser`
+--
+
+DROP TABLE IF EXISTS `CMSUser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CMSUser` (
+  `CMSUserId` int NOT NULL AUTO_INCREMENT COMMENT 'ID for credential',
+  `name` varchar(100) NOT NULL,
+  `credential` varchar(100) NOT NULL COMMENT 'User password in md5',
+  `isAdmin` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'If the account is administrator',
+  `isActive` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'If the account is active',
+  PRIMARY KEY (`CMSUserId`),
+  UNIQUE KEY `CMSUserId_UNIQUE` (`CMSUserId`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CMSUser`
+--
+
+LOCK TABLES `CMSUser` WRITE;
+/*!40000 ALTER TABLE `CMSUser` DISABLE KEYS */;
+INSERT INTO `CMSUser` VALUES (1,'admin','c93ccd78b2076528346216b3b2f701e6',1,1);
+/*!40000 ALTER TABLE `CMSUser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `event`
 --
 
@@ -89,6 +119,7 @@ CREATE TABLE `event` (
   `timerDescription` varchar(2000) DEFAULT NULL COMMENT 'Description of the timer',
   `startTime` datetime NOT NULL,
   `endTime` datetime NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`eventId`),
   UNIQUE KEY `title_UNIQUE` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -100,7 +131,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'eventD','eventD description','http://www.abc.com/a.png','http://www.abc.com/eventD.html','timerDescriptionD','2022-06-09 09:00:10','2022-10-09 09:00:10'),(2,'eventK','eventK description','http://www.abc.com/b.png','http://www.abc.com/eventK.html','timerDescriptionK','2022-06-09 09:00:10','2022-10-09 09:00:10'),(3,'eventC','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10'),(4,'eventA','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10'),(5,'eventB','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10'),(6,'eventE','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10'),(7,'eventF','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10'),(8,'eventG','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10'),(9,'eventH','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10'),(10,'eventI','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10');
+INSERT INTO `event` VALUES (1,'eventD','eventD description','http://www.abc.com/a.png','http://www.abc.com/eventD.html','timerDescriptionD','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(2,'eventK','eventK description','http://www.abc.com/b.png','http://www.abc.com/eventK.html','timerDescriptionK','2022-06-09 09:00:10','2022-10-09 09:00:10',0),(3,'eventC','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(4,'eventA','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(5,'eventB','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(6,'eventE','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(7,'eventF','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(8,'eventG','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(9,'eventH','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(10,'eventI','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,10 +200,11 @@ CREATE TABLE `user` (
   `personInfo` varchar(1000) DEFAULT NULL,
   `createTime` datetime NOT NULL COMMENT 'Record create time',
   `updateTime` datetime NOT NULL COMMENT 'Record update time',
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`userId`),
   UNIQUE KEY `twitterId_UNIQUE` (`appleId`),
   UNIQUE KEY `walletAddress_UNIQUE` (`walletAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +213,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'me@apple.com','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-01-01 00:00:00'),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00'),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00'),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02'),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02'),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02'),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02'),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02'),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02');
+INSERT INTO `user` VALUES (1,'me@apple.com','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-01-01 00:00:00',1),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00',1),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00',1),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02',0),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(28,'123@xx.com','0x1ecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(29,'456@yy.com','0x28a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',0),(30,'789@zz.com','0x371DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -194,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-24 12:08:35
+-- Dump completed on 2023-04-03  0:26:32
