@@ -7,7 +7,7 @@ export default function request(url, option) {
         "headers": {
             "content-type": "application/json",
             "accept": "application/json",
-            "Authorization": "Basic Z3RhcGk6VmN2UU8wQkM=",
+            "Authorization": "Basic bWluZGZ1bDpSVSVydTlWRA==",
         },
     };
     const newOptions = { ...defaultOptions, ...options };
