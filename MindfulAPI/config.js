@@ -2,8 +2,8 @@ const config = {
   db: {
     /* don't expose password or any sensitive info, done only for demo */
     host: "127.0.0.1",
-    user: "mindful",
-    password: "RU%ru9VD",
+    user: "root",
+    password: "root",
     database: "mindful",
   },
   logConfig: {

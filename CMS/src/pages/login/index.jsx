@@ -206,7 +206,7 @@ const Login = (props) => {
 
   const onFinish = (values) => {
     console.log('Success:', values);
-    credential(values.username)
+    credential(values)
     .then(response => response.json())
     .then(response => {
       if (response.credential === md5(values.password)) {
