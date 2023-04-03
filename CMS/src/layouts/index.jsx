@@ -14,69 +14,49 @@ const BaseLayout=({children}) => {
     const [collapsed, setCollapsed] = useState(false);
     const [showSideBar, setShowSideBar] = useState(true);
     const location = useLocation();
-    const menuItems = getIsAdmin() === '1' ? [
+    const menuItems = [
         {
-            key: '/user',
+            key: '/home',
             icon: '',
-            label: 'User',
+            label: 'home',
         },
-        {
-            key: '/event',
-            icon: '',
-            label: 'Event',
-        },
-        {
-            key: '/artwork',
-            icon: '',
-            label: 'Artwork',
-        },
-        {
-            key: '/appversion',
-            icon: '',
-            label: 'App Version',
-        },
-        {
-            key: '/language',
-            icon: '',
-            label: 'Language',
-        },
-        {
-            key: '/logout',
-            icon: '',
-            label: 'Logout',
-        },
-    ]:[
-            {
-            key: '/user',
-            icon: '',
-            label: 'User',
-        },
-        {
-            key: '/event',
-            icon: '',
-            label: 'Event',
-        },
-        {
-            key: '/artwork',
-            icon: '',
-            label: 'Artwork',
-        },
-        {
-            key: '/appversion',
-            icon: '',
-            label: 'App Version',
-        },
-        {
-            key: '/language',
-            icon: '',
-            label: 'Language',
-        },
+        // {
+        //     key: '/user',
+        //     icon: '',
+        //     label: 'User',
+        // },
+        // {
+        //     key: '/event',
+        //     icon: '',
+        //     label: 'Event',
+        // },
+        // {
+        //     key: '/artwork',
+        //     icon: '',
+        //     label: 'Artwork',
+        // },
+        // {
+        //     key: '/appversion',
+        //     icon: '',
+        //     label: 'App Version',
+        // },
+        // {
+        //     key: '/language',
+        //     icon: '',
+        //     label: 'Language',
+        // },
         {
             key: '/logout',
             icon: '',
             label: 'Logout',
         },
     ];
+
+    useEffect(() => {
+        if(!getUserSession()){
+            navigate("/login");
+        }
+    },[getUserSession()]);
 
     useEffect(() => {
         setSelectedKeys(location.pathname);
@@ -90,7 +70,7 @@ const BaseLayout=({children}) => {
         }
         
         const arrayEmailContent = location.pathname.split('/');
-        if(arrayEmailContent[1] === 'users' && arrayEmailContent[2] === 'contentDetail'){
+        if(arrayEmailContent[1] === 'login'){
             setShowSideBar(false);
         };
         // const isInclude = menuItems.some((item) => {
@@ -106,6 +86,11 @@ const BaseLayout=({children}) => {
     };
 
     const handleMenu = (e) => {
+        const isAdmin = getIsAdmin();
+        if(!isAdmin){
+            navigate("/login");
+        }
+
         navigate(e.key);
         setSelectedKeys(e.key);
     }

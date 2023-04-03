@@ -1,7 +1,7 @@
 import request from '../utils/request';
 
-export async function credential(params) {
+export async function credential(username, password) {
     return request(
-        `/mindfulapi/credential/${params.username}/${params.password}`
+        `/mindfulapi/credential/${username}/${password}`
     )
 };

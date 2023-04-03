@@ -8,8 +8,8 @@ const cors = require("cors");
 // require authorization header
 app.use((req, res, next) => {
   const auth = {
-    login: 'root',
-    password: 'root'
+    login: 'mindful',
+    password: 'RU%ru9VD'
   }
   const [, b64auth = ''] = (req.headers.authorization || '').split(' ')
   const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
@@ -37,12 +37,11 @@ app.use(
 
 // CORS only for local host
 var corsOptions = {
-  origin: '*',
-  //origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002' ,'*'],
+  //origin: 'http://127.0.0.1:3000',
+  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-//app.use(cors(corsOptions))
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
