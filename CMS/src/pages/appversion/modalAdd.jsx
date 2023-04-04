@@ -49,10 +49,10 @@ const Appversion = (props) => {
         }
     };
 
-    // 自定义规则：检查输入字符是否超过最大长度50
+    // 自定义规则：检查输入字符是否超过最大长度500
     const validateInputLengthDescription = (rule, value, callback) => {
-        if (value && value.length > 50) {
-            callback('alphanumeric max 50 characters');
+        if (value && value.length > 500) {
+            callback('alphanumeric max 500 characters');
         } else {
             callback();
         }
@@ -242,7 +242,7 @@ const Appversion = (props) => {
                     rules={formItemRules.description}
                 >
                     <TextArea
-                        rows={2}
+                        rows={4}
                         allowClear
                         placeholder='description'
                     />
