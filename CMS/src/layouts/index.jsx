@@ -20,31 +20,31 @@ const BaseLayout=({children}) => {
             icon: '',
             label: 'home',
         },
-        // {
-        //     key: '/user',
-        //     icon: '',
-        //     label: 'User',
-        // },
-        // {
-        //     key: '/event',
-        //     icon: '',
-        //     label: 'Event',
-        // },
-        // {
-        //     key: '/artwork',
-        //     icon: '',
-        //     label: 'Artwork',
-        // },
-        // {
-        //     key: '/appversion',
-        //     icon: '',
-        //     label: 'App Version',
-        // },
-        // {
-        //     key: '/language',
-        //     icon: '',
-        //     label: 'Language',
-        // },
+        {
+            key: '/user',
+            icon: '',
+            label: 'User',
+        },
+        {
+            key: '/event',
+            icon: '',
+            label: 'Event',
+        },
+        {
+            key: '/artwork',
+            icon: '',
+            label: 'Artwork',
+        },
+        {
+            key: '/appversion',
+            icon: '',
+            label: 'App Version',
+        },
+        {
+            key: '/language',
+            icon: '',
+            label: 'Language',
+        },
         {
             key: '/logout',
             icon: '',

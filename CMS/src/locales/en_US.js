@@ -16,6 +16,14 @@ export default {
     'button.ok': 'Ok',
     // 取消
     'button.cancel': 'Cancel',
+    // 编辑
+    'button.edit': 'Edit',
+    // 删除
+    'button.delete': 'Delete',
+    // 禁用
+    'button.disable': 'Disable',
+    // 启用
+    'button.enable': 'Enable',
 
     // login页面 title
     'login.title': 'Mindful Ocean CMS',

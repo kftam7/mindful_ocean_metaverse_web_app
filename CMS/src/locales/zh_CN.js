@@ -13,9 +13,17 @@ export default {
     // 新增
     'button.add': '新增',
     // 确认
-    'button.ok': 'Ok',
+    'button.ok': '确认',
     // 取消
-    'button.cancel': 'Cancel',
+    'button.cancel': '取消',
+    // 编辑
+    'button.edit': '编辑',
+    // 删除
+    'button.delete': '删除',
+    // 禁用
+    'button.disable': '禁用',
+    // 启用
+    'button.enable': '启用',
 
     // login页面 title
     'login.title': '绿色令牌空投工具',
