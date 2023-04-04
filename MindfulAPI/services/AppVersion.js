@@ -37,18 +37,20 @@ async function getAppVersion(version){
 async function createAppVersion(appVersionRecord){
 
   // construct the SQL statement
-  var sql = 'INSERT INTO appVersion (versionNo, versionName, releaseDate, expireDate, description) VALUES ';
+  var sql = 'INSERT INTO appVersion (versionNo, versionName, releaseDate, expireDate, description, isActive) VALUES ';
 
   for (var i =0; i < appVersionRecord.length; i++){
 
     // combine into 1 single SQL
     if (i == (appVersionRecord.length-1)){
-      sql = sql + '("' + appVersionRecord[i].versionNo + '", "' + appVersionRecord[i].versionName + '", "' + appVersionRecord[i].releaseDate + '", "' + appVersionRecord[i].expireDate + '", "' + appVersionRecord[i].description + '");';
+      sql = sql + '("' + appVersionRecord[i].versionNo + '", "' + appVersionRecord[i].versionName + '", "' + appVersionRecord[i].releaseDate + '", "' + appVersionRecord[i].expireDate + '", "' + appVersionRecord[i].description + '", ' + appVersionRecord[i].isActive + ');';
     }else{
-      sql = sql + '("' + appVersionRecord[i].versionNo + '", "' + appVersionRecord[i].versionName + '", "' + appVersionRecord[i].releaseDate + '", "' + appVersionRecord[i].expireDate + '", "' + appVersionRecord[i].description + '"),';
+      sql = sql + '("' + appVersionRecord[i].versionNo + '", "' + appVersionRecord[i].versionName + '", "' + appVersionRecord[i].releaseDate + '", "' + appVersionRecord[i].expireDate + '", "' + appVersionRecord[i].description + '", ' + appVersionRecord[i].isActive + '),';
     }
 
   }
+  
+  console.log(sql);
 
   // update results on DB
   const result = await db.query(
@@ -64,7 +66,7 @@ async function createAppVersion(appVersionRecord){
 /* update Event */
 async function updateAppVersion(version, appVersionRecord){
 
-  sql = 'UPDATE appVersion SET versionName = "' + appVersionRecord.versionName + '", releaseDate = "' + appVersionRecord.releaseDate + '", expireDate = "' + appVersionRecord.expireDate + '", description = "' + appVersionRecord.description  + '" WHERE versionNo = "' + version + '";';
+  sql = 'UPDATE appVersion SET versionName = "' + appVersionRecord.versionName + '", releaseDate = "' + appVersionRecord.releaseDate + '", expireDate = "' + appVersionRecord.expireDate + '", description = "' + appVersionRecord.description+ '", isActive = "' + appVersionRecord.isActive  + '" WHERE versionNo = "' + version + '";';
 
   console.log(sql);
   
