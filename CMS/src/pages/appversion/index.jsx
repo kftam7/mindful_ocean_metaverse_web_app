@@ -46,7 +46,7 @@ const Appversion = (props) => {
     // table pagination total
     const [total, setTotal] = useState(0);
     // table versionId 默认降序
-    const [sortedInfo, setSortedInfo] = useState({});
+    const [sortedInfo, setSortedInfo] = useState({ order: 'descend', columnKey: 'versionId' });
     // 数据刷新
     const [count, setCount] = useState(0);
     // modal visiable
@@ -54,7 +54,7 @@ const Appversion = (props) => {
     // modal visiable
     const [modalAddType, setModalAddType] = useState('add');
     // modal data
-    const [modalData, setModalData] = useState({});
+    const [modalData, setModalData] = useState();
 
     const columns = [
         {
@@ -175,7 +175,7 @@ const Appversion = (props) => {
             render: (text, record, index) => {
                 return <Space>
                     <Button type="primary" onClick={() => {handleEdit(record)}}>{language["button.edit"]}</Button>
-                    <Button type="primary" onClick={() => {handleDEable(record)}}>{record.isActive === 0 ? language["button.disable"] : language["button.enable"]}</Button>
+                    <Button type="primary" onClick={() => {handleDEable(record)}}>{record.isActive === 1 ? language["button.disable"] : language["button.enable"]}</Button>
                 </Space>
             }
         },

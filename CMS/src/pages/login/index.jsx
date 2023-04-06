@@ -27,10 +27,10 @@ const Login = (props) => {
     .then(response => {
       console.log(response)
       if (response.data && response.data[0].isAdmin  === 1) {
-        setUserSession(response.meta);
+        setUserSession(values.username);
         setIsAdmin(response.data[0].isAdmin);
         // setCredentialID(response.credentialID);
-        navigate('/home')
+        navigate('/user')
       } else {
         notification["error"]({
           message: language["notification.error.message"],

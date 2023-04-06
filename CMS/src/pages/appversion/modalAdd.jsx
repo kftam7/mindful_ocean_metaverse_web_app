@@ -23,7 +23,8 @@ const Appversion = (props) => {
     useEffect(() => {
         form.setFieldsValue({
             releaseDate: '',
-            expireDate: ''
+            expireDate: '',
+            isActive: '1'
         });
         if(modalType === 'add') return;
 
@@ -184,6 +185,9 @@ const Appversion = (props) => {
                 }}
                 wrapperCol={{
                     span: 24,
+                }}
+                initialValues={{
+                    isActive: '1'
                 }}
             >
                 <Form.Item

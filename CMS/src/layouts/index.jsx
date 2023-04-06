@@ -16,11 +16,6 @@ const BaseLayout=({children}) => {
     const location = useLocation();
     const menuItems = [
         {
-            key: '/home',
-            icon: '',
-            label: 'home',
-        },
-        {
             key: '/user',
             icon: '',
             label: 'User',

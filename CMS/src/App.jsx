@@ -8,7 +8,7 @@ import {Navigate} from 'react-router-dom';
 import { getUserSession } from "./utils/utils";
 
 import Login from './pages/login';
-import Homepage from './pages/home';
+// import Homepage from './pages/home';
 //import Cryptopage from './pages/crypto';
 import Logout from './pages/logout';
 //import Emailpage from "./pages/email";
@@ -20,7 +20,7 @@ import NotFound from './pages/notfound';
 
 import Appversion from "./pages/appversion";
 //import Statuspage from "./pages/status";
-//import Userspage from "./pages/users";
+import Userspage from "./pages/users";
 //import UsersContentDetailpage from "./pages/users/contentDetail";
 
 import local from "./utils/local.json";
@@ -59,7 +59,8 @@ function App(){
             <BaseLayout>
                 <Routes >
                   <Route path ='/login' element={<Login language={language} />} />
-                  <Route path ='/home' element={<Homepage language={language} />} />
+                  {/* <Route path ='/home' element={<Homepage language={language} />} /> */}
+                  <Route path ='/user' element={<Userspage language={language} />} />
                   <Route path ='/appversion' element={<Appversion language={language} />} />
                   <Route path ='/logout' element={
                     <RequireAuth>
