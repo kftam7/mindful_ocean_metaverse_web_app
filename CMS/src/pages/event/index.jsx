@@ -20,6 +20,8 @@ const Event = (props) => {
     const language = props.language;
 
     const [form] = Form.useForm();
+    // table loading
+    const [loading, setLoading] = useState(false);
     // 控制select 显示或者隐藏
     const [isShowSelect, setIsShowSelect] = useState(false);
     // 控制form 显示或者隐藏
@@ -228,6 +230,7 @@ const Event = (props) => {
     });
 
     useEffect(() => {
+        setLoading(true);
         getEventList()
         .then(response => response.json())
         .then(response => {
@@ -253,6 +256,7 @@ const Event = (props) => {
             setTotal(data.length);
             setColumnsSource(columns);
             setColumnsChanged(columns);
+            setLoading(false);
         })
         .catch(err => {
             console.log(err);
@@ -718,6 +722,7 @@ const Event = (props) => {
                             triggerAsc: language["cryptoLog.Table.locale.triggerAsc"],
                             triggerDesc: language["cryptoLog.Table.locale.triggerDesc"]
                         }}
+                        loading={loading}
                     />
                 
                 </Col>

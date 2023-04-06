@@ -34,6 +34,17 @@ const getCredentialID = () => {
     return sessionStorage.getItem("credentialID");
 };
 
+const timeFormat = (tiemstamp) => {
+  var date = new Date(tiemstamp);
+  const Y = date.getFullYear();
+  const M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1);
+  const D = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  const hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+  const mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+  const ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+  return Y + "-" + M + "-" + D + " " + hh + ":" + mm + ":" + ss;
+};
+
 const md5 = (string) => {
   function md5_RotateLeft(lValue, iShiftBits) {
     return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits));
@@ -315,6 +326,7 @@ export {
     getIsAdmin,
     setCredentialID,
     getCredentialID,
+    timeFormat,
     md5,
     urlEncode,
     urlDecode

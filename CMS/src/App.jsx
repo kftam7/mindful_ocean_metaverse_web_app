@@ -20,6 +20,7 @@ import NotFound from './pages/notfound';
 
 import Appversion from "./pages/appversion";
 import Event from "./pages/event";
+import Artwork from "./pages/artwork";
 //import Statuspage from "./pages/status";
 import Userspage from "./pages/users";
 //import UsersContentDetailpage from "./pages/users/contentDetail";
@@ -62,8 +63,9 @@ function App(){
                   <Route path ='/login' element={<Login language={language} />} />
                   {/* <Route path ='/home' element={<Homepage language={language} />} /> */}
                   <Route path ='/user' element={<Userspage language={language} />} />
-                  <Route path ='/appversion' element={<Appversion language={language} />} />
                   <Route path ='/event' element={<Event language={language} />} />
+                  <Route path ='/artwork' element={<Artwork language={language} />} />
+                  <Route path ='/appversion' element={<Appversion language={language} />} />
                   <Route path ='/logout' element={
                     <RequireAuth>
                       <Logout language={language} />
