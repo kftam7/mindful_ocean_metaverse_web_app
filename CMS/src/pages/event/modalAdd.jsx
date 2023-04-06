@@ -80,6 +80,18 @@ const ModalAdd = (props) => {
             callback();
         }
     };
+
+    // 自定义校验规则函数
+    const validateEndTime = (rule, value, callback) => {
+        const { getFieldValue } = form;
+        const startTime = getFieldValue('startTime');
+        const endTime = value;
+        if (startTime && endTime && startTime > endTime) {
+          callback('The end time cannot be earlier than the start time');
+        } else {
+          callback();
+        }
+      }
     
     // 定义验证规则
     const formItemRules = {
@@ -106,7 +118,10 @@ const ModalAdd = (props) => {
             { validator: validateInputLength3 }
         ],
         startTime: [{ required: true, message: 'Please select startTime!' }],
-        endTime: [{ required: true, message: 'Please select endTime!' }],
+        endTime: [
+            { required: true, message: 'Please select endTime!' },
+            { validator: validateEndTime }
+        ],
         isActive: [{ required: true, message: 'Please select isActive!' }],
     };
 

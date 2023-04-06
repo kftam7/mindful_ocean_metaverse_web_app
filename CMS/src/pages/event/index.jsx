@@ -47,7 +47,7 @@ const Event = (props) => {
     // table pagination total
     const [total, setTotal] = useState(0);
     // table versionId 默认降序
-    const [sortedInfo, setSortedInfo] = useState({ order: 'descend', columnKey: 'title' });
+    const [sortedInfo, setSortedInfo] = useState({ order: 'descend', columnKey: 'eventId' });
     // 数据刷新
     const [count, setCount] = useState(0);
     // modal visiable
@@ -58,6 +58,23 @@ const Event = (props) => {
     const [modalData, setModalData] = useState();
 
     const columns = [
+        {
+            title: 'eventId',
+            dataIndex: 'eventId',
+            key: 'eventId',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a["eventId"] - b["eventId"],
+            sortOrder: sortedInfo.columnKey === 'eventId' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
         {
             title: 'title',
             dataIndex: 'title',
@@ -104,10 +121,10 @@ const Event = (props) => {
             dataIndex: 'image',
             key: 'image',
             ellipsis: true,
-            width: 100,
+            width: 120,
             render: (text, record, index) => {
                 if (String(text) !== 'null' && String(text).length > 0) {
-                    return <img src={text} />;
+                    return <img src={text} width='100' height='100' />;
                 } else {
                     return "-";
                 }
@@ -195,6 +212,7 @@ const Event = (props) => {
     ];
 
     const selectDefaultValue = [
+        'eventId',
         'title',
         'paragraphText',
         'image',
@@ -217,7 +235,7 @@ const Event = (props) => {
             response.data.forEach((item, key) => {
                 data.push({
                     id: key+1,
-                    eventId: item["eventId"],
+                    eventId: String(item["eventId"]),
                     title: item["title"],
                     paragraphText: item["paragraphText"],
                     image: item["image"],
