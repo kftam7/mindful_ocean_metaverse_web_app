@@ -69,7 +69,7 @@ async function createEvent(eventRecord){
 /* update Event */
 async function updateEvent(id, eventRecord){
 
-  sql = 'UPDATE event SET title= "' + eventRecord.title + '", paragraphText = "' + eventRecord.paragraphText + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '", isActive = ' + eventRecord.isActive + ' WHERE eventId = ' + id + ';';
+  sql = 'UPDATE event SET title= "' + eventRecord.title + '", paragraphText = "' + eventRecord.paragraphText + '", image = "' + eventRecord.image + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '", isActive = ' + eventRecord.isActive + ' WHERE eventId = ' + id + ';';
 
   //console.log(sql);
   
