@@ -559,7 +559,7 @@ const Event = (props) => {
         <>
             <Row gutter={[16, 32]}>
                 <Col span={24}>
-                    <div style={{textAlign: 'center',fontSize: '28px',fontWeight: 'bold'}}>App Event Management</div>
+                    <div style={{textAlign: 'center',fontSize: '28px',fontWeight: 'bold'}}>Event Management</div>
                 </Col>
                 <Col span={24} className="cryptoLog-outterBox">
                     <Row justify="space-between">
