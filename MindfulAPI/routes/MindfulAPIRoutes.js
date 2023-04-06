@@ -119,7 +119,7 @@ router.get('/nfttotal/:type', async function(req, res, next) {
 
 ////////////////// Language File
 /* GET language file */
-router.get('/language/:lang', async function(req, res, next) {
+router.get('/language', async function(req, res, next) {
   try {
     res.json(await Language.getLang(req.params.lang));
   } catch (err) {

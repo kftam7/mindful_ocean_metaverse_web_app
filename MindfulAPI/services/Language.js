@@ -1,51 +1,28 @@
-//const db = require('../db');
-//const helper = require('../helper');
-//const config = require('../config');
 const path = require('path');
-//const moment = require('moment');
-//const sleep = require('sleep-promise');
 const logger = require("../logger");
-//const fileSystem = require("browserify-fs");
 const fs = require('fs');
 const moment = require('moment');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 
 /* get Langauge */
-async function getLang(lang){
+async function getLang(){
 
+  langFileEN = process.env.locale_path + "/" + process.env.locale_en;
+  langFileCN = process.env.locale_path + "/" + process.env.locale_cn;
+  langFileTW = process.env.locale_path + "/" + process.env.locale_tw;
 
-  if (lang == "EN"){
-    langFile = process.env.locale_path + "/" + process.env.locale_en;
-  }else if (lang == "CN"){
-    langFile = process.env.locale_path + "/" + process.env.locale_cn;
-  }else if (lang == "TW"){
-    langFile = process.env.locale_path + "/" + process.env.locale_tw;
-  }
-
-/*
-  //console.log(langFile);
-  fileSystem.readFile("../langauge_file/locale_en.json", (err, data) => {
-  if(err) {
-   console.log("File reading failed", err)
-   //return
-  }
-    console.log("File data:", data)
-  })
-*/
-
-  let rawdata = fs.readFileSync(langFile);
-  let languageContent = JSON.parse(rawdata);
-  //console.log(langaugeContent);
-
-  //import data from '../langauge_file/locale_en.json' assert { type: 'JSON' };
-  //import data from '../langauge_file/locale_en.json';
-  //const data = helper.emptyOrRows(rows);
-  //const meta = "1";
+  let rawdataEN = fs.readFileSync(langFileEN);
+  let languageContentEN = JSON.parse(rawdataEN);
+  let rawdataCN = fs.readFileSync(langFileCN);
+  let languageContentCN = JSON.parse(rawdataCN);
+  let rawdataTW = fs.readFileSync(langFileTW);
+  let languageContentTW = JSON.parse(rawdataTW);
 
   return {
-    //data,
-    languageContent
+    languageContentEN,
+    languageContentCN,
+    languageContentTW
   }
 }
 
@@ -53,8 +30,6 @@ async function getLang(lang){
 async function updateLang(lang, langRecord){
 
   now = moment().format("YYYYMMDDHHmmss");
-  //var jsonContent = JSON.stringify(langRecord);
-
 
   if (lang == "EN"){
     oldPath = process.env.locale_path + "/" + process.env.locale_en;
@@ -67,14 +42,8 @@ async function updateLang(lang, langRecord){
     newPath = process.env.locale_path + "/" + process.env.locale_tw + "." + now;
   }
 
-  //console.log(oldPath);
-  //console.log(newPath);
-  //console.log(langRecord);
-
   fs.renameSync(oldPath, newPath);
 
-  //console.log(oldPath);
-  
   fs.writeFile(oldPath, JSON.stringify(langRecord), (error) => {
     if (error){
       console.log("An error occured while writing JSON Object to File.");
@@ -92,8 +61,4 @@ async function updateLang(lang, langRecord){
 module.exports = {
   getLang,
   updateLang
-  /*
-  createEvent,
-  updateEvent
-  */
 };
