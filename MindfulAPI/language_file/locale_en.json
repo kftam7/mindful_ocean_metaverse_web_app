@@ -1,1 +1,6 @@
-{"LANG":"EN","title":"eventK2","paragraphText":"eventK description","image":"http://www.abc.com/k.png","hyperlink":"http://www.abc.com/eventK.html","timerDescription":"timerDescriptionK","startTime":"2022-06-09 09:00:10","endTime":"2022-10-09 09:00:10"}
+{
+    "main.sidebar.project": "Project",
+    "main.sidebar.title": "Name of the project.",
+    "main.statusbar.status_empty": "Empty! No entries added yet.",
+    "main.statusbar.status_ok": "Ok."
+}

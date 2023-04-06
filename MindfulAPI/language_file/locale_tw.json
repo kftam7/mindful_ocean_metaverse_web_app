@@ -1,1 +1,6 @@
-{"LANG":"EN","title":"eventK2","paragraphText":"eventK description","image":"http://www.abc.com/k.png","hyperlink":"http://www.abc.com/eventK.html","timerDescription":"timerDescriptionK","startTime":"2022-06-09 09:00:10","endTime":"2022-10-09 09:00:10"}
+{
+    "main.sidebar.project": "項目",
+    "main.sidebar.title": "項目名稱。",
+    "main.statusbar.status_empty": "空！還沒有添加條目。",
+    "main.statusbar.status_ok": "好的。"
+}
