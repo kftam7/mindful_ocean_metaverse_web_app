@@ -1376,13 +1376,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/language/EN",
+									"raw": "{{baseUrl}}/language",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"language",
-										"EN"
+										"language"
 									]
 								}
 							},
@@ -1482,7 +1481,7 @@
 					},
 					"response": [
 						{
-							"name": "PUT language Request",
+							"name": "PUT language Request (EN)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -1499,7 +1498,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+									"raw": "  {\n     \"LANG\":\"EN\",\n     \"title\":\"eventK2\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1514,6 +1513,158 @@
 									"path": [
 										"language",
 										"EN"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "13"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d-omrXeIgYnMXWlzu4GORfRIYoxcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:38:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1\n}"
+						},
+						{
+							"name": "PUT language Request (CN)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"LANG\":\"EN\",\n     \"title\":\"eventK2\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/language/CN",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"language",
+										"CN"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "13"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d-omrXeIgYnMXWlzu4GORfRIYoxcE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:38:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": 1\n}"
+						},
+						{
+							"name": "PUT language Request (TW)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"LANG\":\"EN\",\n     \"title\":\"eventK2\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/language/TW",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"language",
+										"TW"
 									]
 								}
 							},
@@ -1986,6 +2137,81 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
+						},
+						{
+							"name": "POST appversion Request (Single)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n{\"versionNo\":\"2\",\"versionName\":\"2\",\"releaseDate\":\"2023-04-04T08:02:06.883Z\",\"expireDate\":\"2023-04-04T08:02:14.850Z\",\"Description\":\"1\",\"isActive\":\"1\"}\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appversion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-2S3h6R04UE8TKYUpB6W99D4VMqs\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:44:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
 						}
 					]
 				},
@@ -2060,7 +2286,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"versionName\":\"6th edited version\",\n     \"releaseDate\":\"2024-01-01 00:00:00\",\n     \"expireDate\":\"2025-01-01 00:00:00\",\n     \"description\":\"edited version testing\"\n  }",
+									"raw": "  {\n     \"versionName\":\"6th edited version\",\n     \"releaseDate\":\"2024-01-01 00:00:00\",\n     \"expireDate\":\"2025-01-01 00:00:00\",\n     \"description\":\"edited version testing\",\n     \"isActive\": 0\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
