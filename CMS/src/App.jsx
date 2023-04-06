@@ -19,6 +19,7 @@ import Logout from './pages/logout';
 import NotFound from './pages/notfound';
 
 import Appversion from "./pages/appversion";
+import Event from "./pages/event";
 //import Statuspage from "./pages/status";
 import Userspage from "./pages/users";
 //import UsersContentDetailpage from "./pages/users/contentDetail";
@@ -62,6 +63,7 @@ function App(){
                   {/* <Route path ='/home' element={<Homepage language={language} />} /> */}
                   <Route path ='/user' element={<Userspage language={language} />} />
                   <Route path ='/appversion' element={<Appversion language={language} />} />
+                  <Route path ='/event' element={<Event language={language} />} />
                   <Route path ='/logout' element={
                     <RequireAuth>
                       <Logout language={language} />
