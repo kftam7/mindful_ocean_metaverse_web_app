@@ -1,50 +1,20 @@
 import request from '../utils/request';
 
-export async function getTableList() {
+export async function getUserList() {
     return request(
-        `/gtapi/credential`
+        `/mindfulapi/user`
     )
 };
 
-export async function getEmailTemplatesApi(credentialID) {
+export async function getUserDetail(appleId) {
     return request(
-        `/gtapi/emailtemplatelookup/${credentialID}`
+        `/mindfulapi/user/${appleId}`
     )
 };
 
-export async function getEmailtemplate() {
+export async function editUser(appleId, params) {
     return request(
-        `/gtapi/emailtemplate`
-    )
-};
-
-export async function getUserDetail(name) {
-    return request(
-        `/gtapi/credential/${name}`
-    )
-};
-
-export async function addCredential(params) {
-    return request(
-        `/gtapi/credential/${params.name}`, {
-            method: 'POST',
-            body: JSON.stringify(params)
-        }
-    )
-};
-
-export async function editCredential(id, params) {
-    return request(
-        `/gtapi/credential/${params.name}`, {
-            method: "PUT",
-            body: JSON.stringify(params)
-        }
-    )
-};
-
-export async function editEmailtemplatelookup(id, params) {
-    return request(
-        `/gtapi/emailtemplatelookup/${id}`, {
+        `/mindfulapi/user/${appleId}`, {
             method: "PUT",
             body: JSON.stringify(params)
         }

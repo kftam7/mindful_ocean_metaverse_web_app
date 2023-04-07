@@ -1,17 +1,15 @@
-import React, { useEffect, useState, } from "react";
-import { Form, Input, Table, Select, Row, Col, Button, notification, DatePicker, Pagination, Space } from 'antd';
-import { DownOutlined, UpOutlined, } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect, useState, } from "react";
+import { Form, Input, Table, Select, Row, Col, Button, notification, DatePicker, Pagination, Space, Collapse } from 'antd';
+import { DownOutlined, UpOutlined  } from '@ant-design/icons';
 import './index.css';
 
-import { getIsAdmin, getUserSession } from "../../utils/utils";
+import { getIsAdmin } from "../../utils/utils";
 
-import { getEventList, editEvent } from "../../services/event";
-
-import ModalAdd from "./modalAdd";
+import { getUserList, getUserDetail, editUser } from "../../services/users";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
+const { Panel } = Collapse;
 
 const User = (props) => {
 
@@ -49,24 +47,20 @@ const User = (props) => {
     // table pagination total
     const [total, setTotal] = useState(0);
     // table versionId 默认降序
-    const [sortedInfo, setSortedInfo] = useState({ order: 'descend', columnKey: 'eventId' });
+    const [sortedInfo, setSortedInfo] = useState({ order: 'descend', columnKey: 'userId' });
     // 数据刷新
     const [count, setCount] = useState(0);
-    // modal visiable
-    const [modalAddVisiable, setModalAddVisiable] = useState(false);
-    // modal visiable
-    const [modalAddType, setModalAddType] = useState('add');
-    // modal data
-    const [modalData, setModalData] = useState();
+    // 展开行数据
+    const [dataRow, setDataRow] = useState({});
 
     const columns = [
         {
-            title: 'eventId',
-            dataIndex: 'eventId',
-            key: 'eventId',
+            title: 'userId',
+            dataIndex: 'userId',
+            key: 'userId',
             defaultSortOrder: 'descend',
-            sorter: (a, b) => a["eventId"] - b["eventId"],
-            sortOrder: sortedInfo.columnKey === 'eventId' ? sortedInfo.order : null,
+            sorter: (a, b) => a["userId"] - b["userId"],
+            sortOrder: sortedInfo.columnKey === 'userId' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -78,16 +72,16 @@ const User = (props) => {
             }
         },
         {
-            title: 'title',
-            dataIndex: 'title',
-            key: 'title',
+            title: 'appleId',
+            dataIndex: 'appleId',
+            key: 'appleId',
             defaultSortOrder: 'descend',
             sorter: (a, b) => {
-                if (a['title']) {
-                    return a['title'].localeCompare(b['title']);
+                if (a['appleId']) {
+                    return a['appleId'].localeCompare(b['appleId']);
                 }
             },
-            sortOrder: sortedInfo.columnKey === 'title' ? sortedInfo.order : null,
+            sortOrder: sortedInfo.columnKey === 'appleId' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -99,15 +93,15 @@ const User = (props) => {
             }
         },
         {
-            title: 'paragraphText',
-            dataIndex: 'paragraphText',
-            key: 'paragraphText',
+            title: 'walletAddress',
+            dataIndex: 'walletAddress',
+            key: 'walletAddress',
             sorter: (a, b) => {
-                if (a['paragraphText']) {
-                    return a['paragraphText'].localeCompare(b['paragraphText']);
+                if (a['walletAddress']) {
+                    return a['walletAddress'].localeCompare(b['walletAddress']);
                 }
             },
-            sortOrder: sortedInfo.columnKey === 'paragraphText' ? sortedInfo.order : null,
+            sortOrder: sortedInfo.columnKey === 'walletAddress' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -119,43 +113,15 @@ const User = (props) => {
             }
         },
         {
-            title: 'image',
-            dataIndex: 'image',
-            key: 'image',
-            ellipsis: true,
-            width: 120,
-            render: (text, record, index) => {
-                if (String(text) !== 'null' && String(text).length > 0) {
-                    return <img src={text} width='100' height='100' />;
-                } else {
-                    return "-";
-                }
-            }
-        },
-        {
-            title: 'hyperlink',
-            dataIndex: 'hyperlink',
-            key: 'hyperlink',
-            ellipsis: true,
-            width: 150,
-            render: (text, record, index) => {
-                if (String(text) !== 'null' && String(text).length > 0) {
-                    return <Link to={text} target='_blank'>{text}</Link>;
-                } else {
-                    return "-";
-                }
-            }
-        },
-        {
-            title: 'timerDescription',
-            dataIndex: 'timerDescription',
-            key: 'timerDescription',
+            title: 'personInfo',
+            dataIndex: 'personInfo',
+            key: 'personInfo',
             sorter: (a, b) => {
-                if (a['timerDescription']) {
-                    return a['timerDescription'].localeCompare(b['timerDescription']);
+                if (a['personInfo']) {
+                    return a['personInfo'].localeCompare(b['personInfo']);
                 }
             },
-            sortOrder: sortedInfo.columnKey === 'timerDescription' ? sortedInfo.order : null,
+            sortOrder: sortedInfo.columnKey === 'personInfo' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -167,11 +133,11 @@ const User = (props) => {
             }
         },
         {
-            title: 'startTime',
-            dataIndex: 'startTime',
-            key: 'startTime',
-            sorter: (a, b) =>  new Date(a['startTime']).getTime() - new Date(b['startTime']).getTime(),
-            sortOrder: sortedInfo.columnKey === 'startTime' ? sortedInfo.order : null,
+            title: 'createTime',
+            dataIndex: 'createTime',
+            key: 'createTime',
+            sorter: (a, b) =>  new Date(a['createTime']).getTime() - new Date(b['createTime']).getTime(),
+            sortOrder: sortedInfo.columnKey === 'createTime' ? sortedInfo.order : null,
             ellipsis: true,
             width: 200,
             render: (text, record, index) => {
@@ -183,11 +149,11 @@ const User = (props) => {
             }
         },
         {
-            title: 'endTime',
-            dataIndex: 'endTime',
-            key: 'endTime',
-            sorter: (a, b) =>  new Date(a['endTime']).getTime() - new Date(b['endTime']).getTime(),
-            sortOrder: sortedInfo.columnKey === 'endTime' ? sortedInfo.order : null,
+            title: 'updateTime',
+            dataIndex: 'updateTime',
+            key: 'updateTime',
+            sorter: (a, b) =>  new Date(a['updateTime']).getTime() - new Date(b['updateTime']).getTime(),
+            sortOrder: sortedInfo.columnKey === 'updateTime' ? sortedInfo.order : null,
             ellipsis: true,
             width: 200,
             render: (text, record, index) => {
@@ -206,22 +172,107 @@ const User = (props) => {
             width: 160,
             render: (text, record, index) => {
                 return <Space>
-                    <Button type="primary" onClick={() => {handleEdit(record)}}>{language["button.edit"]}</Button>
                     <Button type="primary" onClick={() => {handleDEable(record)}}>{record.isActive === 1 ? language["button.disable"] : language["button.enable"]}</Button>
                 </Space>
             }
         },
     ];
+    const onExpand = (expanded, record) => {
+        if(expanded){
+            // console.log(record)
+            getUserDetail(record.appleId)
+            .then(response => response.json())
+            .then(response => {
+                setDataRow(response.data)
+            })
+            .catch(err => {
+                console.log(err);
+                // notification["error"]({
+                //     message: language["cryptoLog.crypto[GET].api.error"],
+                //     description: err.toString()
+                // });
+            })
+        }
+    };
+
+    const expandedRowRender = useCallback((record) => {
+        if(!dataRow.appleId) return ''
+        return <Row gutter={[10, 0]}>
+            <Col xs={24}>
+                <Form.Item
+                    label="appleId"
+                    name="appleId"
+                >
+                    {dataRow.appleId}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="artwork"
+                    name="artwork"
+                >
+                    {dataRow.artwork}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="joinedEvent"
+                    name="joinedEvent"
+                >
+                    {dataRow.joinedEvent}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="personInfo"
+                    name="personInfo"
+                >
+                    {dataRow.personInfo}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="personalWebsite"
+                    name="personalWebsite"
+                >
+                    {dataRow.personalWebsite}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="walletAddress"
+                    name="walletAddress"
+                >
+                    {dataRow.walletAddress}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="createTime"
+                    name="createTime"
+                >
+                    {dataRow.createTime}
+                </Form.Item>
+            </Col>
+            <Col xs={24}>
+                <Form.Item
+                    label="updateTime"
+                    name="updateTime"
+                >
+                    {dataRow.updateTime}
+                </Form.Item>
+            </Col>
+        </Row>;
+    },[dataRow]);
+
 
     const selectDefaultValue = [
-        'eventId',
-        'title',
-        'paragraphText',
-        'image',
-        'hyperlink',
-        'timerDescription',
-        'startTime',
-        'endTime',
+        'userId',
+        'appleId',
+        'walletAddress',
+        'personInfo',
+        'createTime',
+        'updateTime',
         'Action'
     ];
 
@@ -231,21 +282,19 @@ const User = (props) => {
 
     useEffect(() => {
         setLoading(true);
-        getEventList()
+        getUserList()
         .then(response => response.json())
         .then(response => {
             let data = [];
             response.data.forEach((item, key) => {
                 data.push({
                     id: key+1,
-                    eventId: String(item["eventId"]),
-                    title: item["title"],
-                    paragraphText: item["paragraphText"],
-                    image: item["image"],
-                    hyperlink: item["hyperlink"],
-                    timerDescription: item["timerDescription"],
-                    startTime: item["startTime"] ? timeFormat(new Date(item["startTime"]).getTime()) : '-',
-                    endTime: item["endTime"] ? timeFormat(new Date(item["endTime"]).getTime()) : '-',
+                    userId: String(item["userId"]),
+                    appleId: item["appleId"],
+                    walletAddress: item["walletAddress"],
+                    personInfo: item["personInfo"],
+                    createTime: item["createTime"] ? timeFormat(new Date(item["createTime"]).getTime()) : '-',
+                    updateTime: item["updateTime"] ? timeFormat(new Date(item["updateTime"]).getTime()) : '-',
                     isActive: item["isActive"]
                 });
             });
@@ -266,6 +315,13 @@ const User = (props) => {
             // });
         })
     },[count]);
+
+    const handleExpand = (record) => {
+        const isExpanded = expandRows.includes(record.key);
+        setExpandRows(isExpanded
+          ? expandRows.filter((key) => key !== record.key)
+          : [...expandRows, record.key]);
+    };
 
     const timeFormat = (tiemstamp) => {
         var date = new Date(tiemstamp);
@@ -402,10 +458,10 @@ const User = (props) => {
             if (formValuesObj[key] !== undefined && formValuesObj[key] !== "") {
                 if (changedDataArray.length > 0) {
                     changedDataArray.forEach((item) => {
-                        if (key === "title" ||
-                            key === "paragraphText" ||
-                            key === "hyperlink" ||
-                            key === "timerDescription"
+                        if (key === "userId" ||
+                            key === "appleId" ||
+                            key === "walletAddress" ||
+                            key === "personInfo"
                         ) {
                             if (item[key].indexOf(formValuesObj[key]) !== -1) {
                                 item.used = true;
@@ -413,8 +469,8 @@ const User = (props) => {
                                 item.used = false;
                             }
                         }
-                        if (key === "startTime" ||
-                            key === "endTime"
+                        if (key === "createTime" ||
+                            key === "updateTime"
                         ) {
                             if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
                             new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
@@ -426,18 +482,18 @@ const User = (props) => {
                     });
                 } else {
                     dataSource.forEach((item) => {{
-                        if (key === "title" ||
-                            key === "paragraphText" ||
-                            key === "hyperlink" ||
-                            key === "timerDescription"
+                        if (key === "userId" ||
+                            key === "appleId" ||
+                            key === "walletAddress" ||
+                            key === "personInfo"
                         ) {
                             if (item[key].indexOf(formValuesObj[key]) !== -1) {
                                 item.used = true;
                                 changedDataArray.push(item);
                             }
                         }
-                        if (key === "startTime" ||
-                            key === "endTime"
+                        if (key === "createTime" ||
+                            key === "updateTime"
                         ) {
                             if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
                                 new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
@@ -523,40 +579,30 @@ const User = (props) => {
         setColumnsChanged(hubArray);
     };
 
-    // 添加 
-    const handleAdd = () => {
-        setModalAddVisiable(true);
-        setModalAddType('add');
-    };
-
-    // 编辑 
-    const handleEdit = (record) => {
-        setModalData(record)
-        setModalAddVisiable(true);
-        setModalAddType('edit');
-    };
-
     // 禁用，启动
     const handleDEable = (record) => {
+        setLoading(true);
         const params = {            
-            title: record.title,
-            paragraphText: record.paragraphText,
-            image: record.image,
-            hyperlink: record.hyperlink,
-            timerDescription: record.timerDescription,
-            startTime: record.startTime,
-            endTime: record.endTime,
+            userId: record.userId,
+            appleId: record.appleId,
+            walletAddress: record.walletAddress,
+            personInfo: record.personInfo,
+            createTime: record.createTime,
+            updateTime: record.updateTime,
             isActive: record.isActive === 0 ? 1 : 0
         };
-        editEvent(record.eventId, params)
+        editUser(record.appleId, params)
         .then(response => response.json())
         .then(response => {
             if(response.message === 'Record updated successfully'){
+                setLoading(false);
+                setCount(count + 1);
                 modalAddOk();
                 notification["success"]({
                     message: response.message
                 });
             }else{
+                setLoading(false);
                 notification["error"]({
                     message: response.message
                 });
@@ -565,19 +611,6 @@ const User = (props) => {
         .catch(err => {
             console.log(err);
         })
-    };
-
-    // modal ok
-    const modalAddOk = () => {
-        setCount(count + 1);
-        setModalAddVisiable(false);
-        setModalData({});
-    };
-
-    // modal cancel
-    const modalAddCancel = () => {
-        setModalAddVisiable(false);
-        setModalData({});
     };
 
     return (
@@ -635,48 +668,48 @@ const User = (props) => {
                             <Row gutter={[32, 0]}>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="title"
-                                        name="title"
+                                        label="userId"
+                                        name="userId"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="paragraphText"
-                                        name="paragraphText"
+                                        label="appleId"
+                                        name="appleId"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="hyperlink"
-                                        name="hyperlink"
+                                        label="walletAddress"
+                                        name="walletAddress"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="timerDescription"
-                                        name="timerDescription"
+                                        label="personInfo"
+                                        name="personInfo"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="startTime"
-                                        name="startTime"
+                                        label="createTime"
+                                        name="createTime"
                                     >
                                         <RangePicker style={{ width: '100%', }} />
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="endTime"
-                                        name="endTime"
+                                        label="updateTime"
+                                        name="updateTime"
                                     >
                                         <RangePicker style={{ width: '100%', }} />
                                     </Form.Item>
@@ -699,7 +732,6 @@ const User = (props) => {
                     }
                 </Col>
                 <Col span={24}>
-                    <Button type="primary" onClick={() => {handleAdd()}} style={{ marginBottom: 10, }}>{language["button.add"]}</Button>
                     <Table
                         dataSource={dataSourceChanged}
                         columns={columnsChanged}
@@ -725,6 +757,10 @@ const User = (props) => {
                             triggerAsc: language["cryptoLog.Table.locale.triggerAsc"],
                             triggerDesc: language["cryptoLog.Table.locale.triggerDesc"]
                         }}
+                        expandable={{
+                            expandedRowRender: (record) => expandedRowRender(record),
+                            onExpand:(expanded, record) => onExpand(expanded, record)
+                        }}
                         loading={loading}
                     />
                 
@@ -748,14 +784,6 @@ const User = (props) => {
                     </Row>
                 </Col>
             </Row>
-            <ModalAdd
-                language={language}
-                visible={modalAddVisiable}
-                modalType={modalAddType}
-                modalData={modalData}
-                handleOk={modalAddOk}
-                handleCancel={modalAddCancel}
-            />
         </>
   );
 }
