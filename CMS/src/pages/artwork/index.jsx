@@ -290,8 +290,11 @@ const Artwork = (props) => {
             titleCsv = "",
             csvData = "";
         for (const item of exportTitle) {
-            row += '"' + item.title + '",';
+            row += '"' + item.title + '"|';
         }
+        
+        row = row.substring(0, row.length - 1);
+
         titleCsv += row;
         csvData += row + "\r\n"; // 添加换行符号
         for (const item of exportData ) {
@@ -347,7 +350,8 @@ const Artwork = (props) => {
             if (formValuesObj[key] !== undefined && formValuesObj[key] !== "") {
                 if (changedDataArray.length > 0) {
                     changedDataArray.forEach((item) => {
-                        if (key === "name" ||
+                        if (key === "artworkId" ||
+                            key === "name" ||
                             key === "userId" ||
                             key === "appleId" ||
                             key === "URL" ||
@@ -372,7 +376,8 @@ const Artwork = (props) => {
                     });
                 } else {
                     dataSource.forEach((item) => {{
-                        if (key === "name" ||
+                        if (key === "artworkId" ||
+                            key === "name" ||
                             key === "userId" ||
                             key === "appleId" ||
                             key === "URL" ||
@@ -551,6 +556,14 @@ const Artwork = (props) => {
                             <Row gutter={[32, 0]}>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
+                                        label="artworkId"
+                                        name="artworkId"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
                                         label="name"
                                         name="name"
                                     >
@@ -607,7 +620,7 @@ const Artwork = (props) => {
                     }
                 </Col>
                 <Col span={24}>
-                    <Button type="primary" onClick={() => {handleAdd()}} style={{ marginBottom: 10, }}>{language["button.add"]}</Button>
+                    {/* <Button type="primary" onClick={() => {handleAdd()}} style={{ marginBottom: 10, }}>{language["button.add"]}</Button> */}
                     <Table
                         dataSource={dataSourceChanged}
                         columns={columnsChanged}

@@ -25,10 +25,10 @@ const ModalAdd = (props) => {
             
     },[modalType, modalData])
 
-    // 自定义规则：检查输入字符是否超过最大长度 500
+    // 自定义规则：检查输入字符是否超过最大长度 5000
     const validateInputLength1 = (rule, value, callback) => {
-        if (value && value.length > 500) {
-            callback('alphanumeric max 500 characters');
+        if (value && value.length > 5000) {
+            callback('alphanumeric max 5000 characters');
         } else {
             callback();
         }
@@ -40,6 +40,8 @@ const ModalAdd = (props) => {
             callback('The URL must start with http:// or https://');
         } else if (!/(^(http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test(value)) {
             callback('Please enter a valid URL!');
+        }else if (value && value.length > 500) {
+            callback('alphanumeric max 500 characters');
         } else {
             callback();
         }
@@ -167,6 +169,7 @@ const ModalAdd = (props) => {
                     <Input
                         placeholder='name'
                         allowClear
+                        disabled={modalType === "edit" ? true : false}
                     />
                 </Form.Item>
                 <Form.Item
@@ -177,6 +180,7 @@ const ModalAdd = (props) => {
                     <Input
                         placeholder='userId'
                         allowClear
+                        disabled={modalType === "edit" ? true : false}
                     />
                 </Form.Item>
                 {modalType === "edit" ?

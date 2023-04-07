@@ -342,8 +342,11 @@ const User = (props) => {
             titleCsv = "",
             csvData = "";
         for (const item of exportTitle) {
-            row += '"' + item.title + '",';
+            row += '"' + item.title + '"|';
         }
+        
+        row = row.substring(0, row.length - 1);
+        
         titleCsv += row;
         csvData += row + "\r\n"; // 添加换行符号
         for (const item of exportData ) {
