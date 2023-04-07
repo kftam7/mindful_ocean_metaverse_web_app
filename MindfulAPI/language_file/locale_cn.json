@@ -1,6 +1,1 @@
-{
-    "main.sidebar.project": "项目",
-    "main.sidebar.title": "项目名称。",
-    "main.statusbar.status_empty": "空！还没有添加条目。",
-    "main.statusbar.status_ok": "好的。"
-}
+{"variable":"variable","content":"main.sidebar.project"}

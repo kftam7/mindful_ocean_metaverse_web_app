@@ -34,6 +34,38 @@ const getCredentialID = () => {
     return sessionStorage.getItem("credentialID");
 };
 
+/*
+  对象转数组
+  variable: key
+  content: value
+*/
+const objectToArray = (obj) => {
+  return Object.entries(obj).map(([variable, content]) => ({ variable, content }));
+}
+
+/*
+  数组转对象
+  key: variable
+  value: content
+*/
+const arrayToJson = (arr) => {
+  return arr.reduce((obj, { variable, content }) => ({ ...obj, [variable]: content }), {});
+}
+
+const hasDuplicateVariable = (variable, arr) => {
+  const variables = new Set();
+  for (const obj of arr) {
+    if (obj.variable === variable) {
+      return true;
+    }
+    if (variables.has(obj.variable)) {
+      return true;
+    }
+    variables.add(obj.variable);
+  }
+  return false;
+}
+
 const timeFormat = (tiemstamp) => {
   var date = new Date(tiemstamp);
   const Y = date.getFullYear();
@@ -326,6 +358,9 @@ export {
     getIsAdmin,
     setCredentialID,
     getCredentialID,
+    objectToArray,
+    arrayToJson,
+    hasDuplicateVariable,
     timeFormat,
     md5,
     urlEncode,

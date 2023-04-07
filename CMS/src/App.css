@@ -144,3 +144,32 @@
 .row-disable {
     color: #A8A8A8;
 }
+
+.tabs_style .ant-tabs-nav{
+  margin-bottom: 0;
+}
+
+.tabs_style.ant-tabs-top > .ant-tabs-nav::before{
+  border: 0;
+}
+
+.tabs_style .ant-tabs-ink-bar{
+  display: none;
+}
+
+.tabs_style .ant-tabs-tab{
+  background: #efefef;
+  padding: 12px 20px;
+}
+
+.tabs_style .ant-tabs-tab.ant-tabs-tab-active{
+  background: #005d6c;
+}
+
+.tabs_style .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: #fff;
+}
+
+.box_line{
+  border: 1px solid #eee;
+}
