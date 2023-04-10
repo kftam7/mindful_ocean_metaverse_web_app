@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, } from "react";
 import { Form, Input, Table, Select, Row, Col, Button, notification, DatePicker, Pagination, Space, Collapse } from 'antd';
 import { DownOutlined, UpOutlined  } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 import './index.css';
 
 import { getIsAdmin } from "../../utils/utils";
@@ -52,6 +53,7 @@ const User = (props) => {
     const [count, setCount] = useState(0);
     // 展开行数据
     const [dataRow, setDataRow] = useState({});
+    const [expandedRowKeys, setExpandedRowKeys] = useState([]);
 
     const columns = [
         {
@@ -177,8 +179,10 @@ const User = (props) => {
             }
         },
     ];
-    const onExpand = (expanded, record) => {
-        if(expanded){
+
+    const handleExpand = (expanded, record) => {
+        if (expanded) {
+          setExpandedRowKeys([record.id]);          
             // console.log(record)
             getUserDetail(record.appleId)
             .then(response => response.json())
@@ -192,75 +196,103 @@ const User = (props) => {
                 //     description: err.toString()
                 // });
             })
+        } else {
+          setExpandedRowKeys([]);
         }
     };
 
     const expandedRowRender = useCallback((record) => {
-        if(!dataRow.appleId) return ''
-        return <Row gutter={[10, 0]}>
+        if(!dataRow.appleId) return '';
+        const columnsArtwork = [
+            {
+                title: 'artworkId',
+                dataIndex: 'artworkId',
+                key: 'artworkId',
+            },
+            {
+                title: 'name',
+                dataIndex: 'name',
+                key: 'name',
+            },
+            {
+                title: 'URL',
+                dataIndex: 'URL',
+                key: 'URL',
+                render: (text, record, index) => {
+                    if (String(text) !== 'null' && String(text).length > 0) {
+                        return <Link to={text} target='_blank'>{text}</Link>;
+                    } else {
+                        return "-";
+                    }
+                }
+            },
+            {
+                title: 'description',
+                dataIndex: 'description',
+                key: 'description',
+            }
+        ];
+        const columnsJoinedEvent = [
+            {
+                title: 'eventId',
+                dataIndex: 'eventId',
+                key: 'eventId',
+            },
+            {
+                title: 'title',
+                dataIndex: 'title',
+                key: 'title',
+            }
+        ];
+        const columnsPersonalWebsite = [
+            {
+                title: 'URL',
+                dataIndex: 'URL',
+                key: 'URL',
+                render: (text, record, index) => {
+                    if (String(text) !== 'null' && String(text).length > 0) {
+                        return <Link to={text} target='_blank'>{text}</Link>;
+                    } else {
+                        return "-";
+                    }
+                }
+            },
+            {
+                title: 'description',
+                dataIndex: 'description',
+                key: 'description',
+            },
+        ];
+        return <Row>
             <Col xs={24}>
-                <Form.Item
-                    label="appleId"
-                    name="appleId"
-                >
-                    {dataRow.appleId}
-                </Form.Item>
+                <div className="title2">Artwork</div>
+                {dataRow.artwork && dataRow.artwork.length ? 
+                    <Table
+                        columns={columnsArtwork}
+                        dataSource={dataRow.artwork}
+                        pagination={false}
+                    />
+                : '-'}
             </Col>
             <Col xs={24}>
-                <Form.Item
-                    label="artwork"
-                    name="artwork"
-                >
-                    {dataRow.artwork}
-                </Form.Item>
+                <div className="title2">Joined Event</div>
+                {dataRow.joinedEvent && dataRow.joinedEvent.length ? 
+                    <Table
+                        columns={columnsJoinedEvent}
+                        dataSource={dataRow.joinedEvent}
+                        pagination={false}
+                    />
+                : '-'}
             </Col>
             <Col xs={24}>
-                <Form.Item
-                    label="joinedEvent"
-                    name="joinedEvent"
-                >
-                    {dataRow.joinedEvent}
-                </Form.Item>
-            </Col>
-            <Col xs={24}>
-                <Form.Item
-                    label="personInfo"
-                    name="personInfo"
-                >
-                    {dataRow.personInfo}
-                </Form.Item>
-            </Col>
-            <Col xs={24}>
-                <Form.Item
-                    label="personalWebsite"
-                    name="personalWebsite"
-                >
-                    {dataRow.personalWebsite}
-                </Form.Item>
-            </Col>
-            <Col xs={24}>
-                <Form.Item
-                    label="walletAddress"
-                    name="walletAddress"
-                >
-                    {dataRow.walletAddress}
-                </Form.Item>
-            </Col>
-            <Col xs={24}>
-                <Form.Item
-                    label="createTime"
-                    name="createTime"
-                >
-                    {dataRow.createTime}
-                </Form.Item>
-            </Col>
-            <Col xs={24}>
-                <Form.Item
-                    label="updateTime"
-                    name="updateTime"
-                >
-                    {dataRow.updateTime}
-                </Form.Item>
+                <div className="title2">Personal Website</div>
+                {dataRow.personalWebsite && dataRow.personalWebsite.length ? 
+                    <Table
+                        columns={columnsPersonalWebsite}
+                        dataSource={dataRow.personalWebsite}
+                        pagination={false}
+                    />
+                : '-'}
             </Col>
         </Row>;
     },[dataRow]);
@@ -316,13 +348,6 @@ const User = (props) => {
         })
     },[count]);
 
-    const handleExpand = (record) => {
-        const isExpanded = expandRows.includes(record.key);
-        setExpandRows(isExpanded
-          ? expandRows.filter((key) => key !== record.key)
-          : [...expandRows, record.key]);
-    };
-
     const timeFormat = (tiemstamp) => {
         var date = new Date(tiemstamp);
         const Y = date.getFullYear();
@@ -371,7 +396,7 @@ const User = (props) => {
     const handleExport = () => {
         if (selectedRowKeys.length < 1) {
            // 没有选择 导出全部
-           jsonToExcelConvertor(columnsChanged, dataSourceChanged, "event");
+           jsonToExcelConvertor(columnsChanged, dataSourceChanged, "user");
         } else {
             if (!isExporting) {
                 const selectedRowArray = [];
@@ -383,7 +408,7 @@ const User = (props) => {
                         }
                     });
                 });
-                jsonToExcelConvertor(columnsChanged, selectedRowArray, "event");
+                jsonToExcelConvertor(columnsChanged, selectedRowArray, "user");
             } else {
                 notification["error"]({
                     message: language["notification.error.message"],
@@ -758,8 +783,10 @@ const User = (props) => {
                             triggerDesc: language["cryptoLog.Table.locale.triggerDesc"]
                         }}
                         expandable={{
+                            expandedRowKeys,
+                            onExpand: handleExpand,
+                            rowExpandable: () => true,
                             expandedRowRender: (record) => expandedRowRender(record),
-                            onExpand:(expanded, record) => onExpand(expanded, record)
                         }}
                         loading={loading}
                     />

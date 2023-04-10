@@ -207,7 +207,7 @@ const Language = (props) => {
     const handleExport = () => {
         if (selectedRowKeys.length < 1) {
            // 没有选择 导出全部
-           jsonToExcelConvertor(columnsChanged, dataSourceChanged, "artwork");
+           jsonToExcelConvertor(columnsChanged, dataSourceChanged, "language");
         } else {
             if (!isExporting) {
                 const selectedRowArray = [];
@@ -219,7 +219,7 @@ const Language = (props) => {
                         }
                     });
                 });
-                jsonToExcelConvertor(columnsChanged, selectedRowArray, "artwork");
+                jsonToExcelConvertor(columnsChanged, selectedRowArray, "language");
             } else {
                 notification["error"]({
                     message: language["notification.error.message"],
@@ -587,7 +587,14 @@ const Language = (props) => {
                     }
                 </Col>
                 <Col span={24}>
-                    <Tabs className="tabs_style" defaultActiveKey="1" items={tabsItems} tabBarGutter='0' onChange={onChangeTabs} />
+                    {/* <Tabs className="tabs_style" defaultActiveKey="1" items={tabsItems} tabBarGutter='0' onChange={onChangeTabs} /> */}
+                    <div className="tabs_custom">
+                        {tabsItems.map((item, key) => {
+                                return <div className={languageTab === item.key ? "tabs_item active" : 'tabs_item'} key={key} onClick={() => onChangeTabs(item.key)}>{item.label}</div>
+                            }
+                        )}
+                        
+                    </div>
                     <div className="box_line">
                         <Row>
                             <Col span={24} style={{padding: '10px'}}>
