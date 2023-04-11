@@ -9,7 +9,9 @@ const AppVersion = require('../services/AppVersion');
 const JoinedEvent = require('../services/JoinedEvent');
 const PersonalWebsite = require('../services/PersonalWebsite');
 const Credential = require('../services/Credential');
+const AppleCallback = require('../services/AppleCallback');
 const logger = require("../logger");
+const bodyParser = require('body-parser');
 
 
 ////////////////// User
@@ -311,6 +313,17 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
 router.get('/credential/:login/:credential', async function(req, res, next) {
   try {
     res.json(await Credential.getCrendential(req.params.login,req.params.credential, req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* GET credential */
+router.post('/applecallback', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
+  try {
+    res.json(await AppleCallback.callback(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);
