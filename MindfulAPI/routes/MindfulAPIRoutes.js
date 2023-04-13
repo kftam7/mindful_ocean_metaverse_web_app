@@ -9,7 +9,7 @@ const AppVersion = require('../services/AppVersion');
 const JoinedEvent = require('../services/JoinedEvent');
 const PersonalWebsite = require('../services/PersonalWebsite');
 const Credential = require('../services/Credential');
-const AppleCallback = require('../services/AppleCallback');
+const AppleAuth = require('../services/AppleAuth');
 const logger = require("../logger");
 const bodyParser = require('body-parser');
 
@@ -308,7 +308,6 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
   }
 });
 
-
 /* GET credential */
 router.get('/credential/:login/:credential', async function(req, res, next) {
   try {
@@ -320,10 +319,44 @@ router.get('/credential/:login/:credential', async function(req, res, next) {
   }
 });
 
-/* GET credential */
-router.post('/applecallback', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
+/* GET Apple Login */
+router.get('/applelogin', async function(req, res, next) {
   try {
-    res.json(await AppleCallback.callback(req.body));
+    res.send(await AppleAuth.login());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* POST Apple Auth */
+router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
+  try {
+    res.json(await AppleAuth.auth(req));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+
+/* GET Apple Token */
+router.get('/appletoken', async function(req, res, next) {
+  try {
+    res.send(await AppleAuth.token());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* GET Apple Refresh */
+router.get('/applerefresh', async function(req, res, next) {
+  try {
+    res.json(await AppleAuth.refresh(req));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);
