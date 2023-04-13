@@ -46,12 +46,13 @@ async function auth(req){
 }
 
 async function token(){
-	return(auth._tokenGenerator.generate());
+	return(authInstance._tokenGenerator.generate());
 }
 
 async function refresh(req){
+		console.log(req.query.refreshToken);
     try {
-        const accessToken = await auth.refreshToken(req.query.refreshToken);
+        const accessToken = await authInstance.refreshToken(req.query.refreshToken);
         return(accessToken);
     } catch (ex) {
         console.error(ex);
