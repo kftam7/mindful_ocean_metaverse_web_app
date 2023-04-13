@@ -30,8 +30,8 @@ async function auth(req){
         user.id = idToken.sub;
 
         if (idToken.email) user.email = idToken.email;
-        if (body.user) {
-            const { name } = JSON.parse(body.user);
+        if (req.body.user) {
+            const { name } = JSON.parse(req.body.user);
             user.name = name;
         }
 

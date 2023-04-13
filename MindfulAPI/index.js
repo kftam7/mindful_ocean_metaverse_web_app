@@ -6,6 +6,7 @@ const logger = require("./logger");
 const cors = require("cors");
 
 // require authorization header
+/*
 app.use((req, res, next) => {
   const auth = {
     login: 'mindful',
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
   const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
   //skip checking for OPTIONS call
+
   if( req.method === "OPTIONS"){
     return next()
   }
@@ -24,7 +26,10 @@ app.use((req, res, next) => {
   logger.log('error', 'API Authentication Failed.');
   res.set('WWW-Authenticate', 'Basic realm="401"')
   res.status(401).send('Authentication required.')
+
+  return next()
 })
+*/
 
 app.use(express.json({limit: '50mb'}));
 
