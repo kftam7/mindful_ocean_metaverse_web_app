@@ -1,0 +1,7 @@
+{
+    "client_id": "com.AnimocaBrands.Mindful-Ocean-Dev-Siwa",
+    "team_id": "DPHF2M37GJ",
+    "key_id": "8Y456M46UL",
+    "redirect_uri": "https://api-staging.mindfultoken.org/mindfulapi/appleauth",
+    "scope": "name email"
+}

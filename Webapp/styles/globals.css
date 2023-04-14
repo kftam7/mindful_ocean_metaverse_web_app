@@ -3,6 +3,7 @@
   --hovered-color: #096775;
   --shadow-color: #e6e7d6;
   --shadow-color-light: white;
+  --disabled-color: #bababa;
 }
 html,
 body {

@@ -5605,6 +5605,11 @@ raw-body@2.4.3:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-apple-sign-in@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-apple-sign-in/-/react-apple-sign-in-0.1.0.tgz#e905b56218b4eaea85e13244f07dfd6d53331c73"
+  integrity sha512-HAPe6I6BZ4XUotJuo/5dkcm4rFcF1Hrln1+yc/Z8z53AUwFQGLQAj1A8Vh9WNz5ZbzLp+wqTMrpiFgfTNhJccA==
+
 react-bootstrap@^2.0.3:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.2.1.tgz#2a6ad0931e9367882ec3fc88a70ed0b8ace90b26"

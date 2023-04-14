@@ -1,16 +1,38 @@
+import axios from 'axios';
 import Image from 'next/image';
-import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col } from 'react-bootstrap';
+import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col, Modal } from 'react-bootstrap';
 import styles from '../styles/Nav.module.css';
 import homeStyles from '../styles/Home.module.css';
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
 
+import { applelogin, appleauth } from '../pages/api/appleId';
+
+// apple id login
+// import config from '../config/config.json';
+// console.log(config)
+
 const NavBar = () => {
+  const apiPort = process.env.API_PORT || '/';
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // apple id
+  const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
+  // useEffect(async () => {
+  //   const res = await axios.post(`${apiPort}/mindfulapi/appleauth`, { code: '' });
+  //   console.log(res)
+  // }, []);
+
+  useEffect(async () => {
+    const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
+    console.log(res)
+    setAppleIdLoginBtn(res.data);
+  }, []);
 
   useEffect(async() => {
     await dispatch(getAccount());
@@ -24,6 +46,26 @@ const NavBar = () => {
   const connect = async() => {
     await dispatch(grabAccount());
     await dispatch(grabBalance());
+  }
+
+  const signInOpenModal = () => {
+    setIsModalVisible(true);
+  }
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+  }
+
+  const signInWithApple = async () => {
+    AppleID.auth.signIn();
+  }
+
+  const handleAppleLogin = async () => {
+    const res = await axios.get(`http://localhost:3001/mindfulapi/applelogin`)
+    console.log(res)
+  }
+
+  const handleAppleSignOut = async () => {
   }
   
 //didn't work
@@ -72,7 +114,10 @@ const NavBar = () => {
               </Dropdown.Menu>
           </Dropdown>
       </Col>
-      <Col lg={4} className='mt-1 ms-2'>
+      <Col lg={3} xl={4} className='mt-1 me-1'>
+        <Button onClick={signInOpenModal} className={styles.dropdownBtn}>Sign In</Button> 
+      </Col>
+      {/* <Col lg={4} className='mt-1 ms-2'>
           {(account) ?
               <Dropdown className="">
                   <Dropdown.Toggle className={styles.dropdownBtn} id="connect">
@@ -85,7 +130,30 @@ const NavBar = () => {
               </Dropdown> :
               <Button onClick={connect} className={homeStyles.btn} style={{borderRadius: '15px'}}><Image src="/metamask.png" width="15px" height="15px" alt="metamask icon" />&nbsp;Connect wallet</Button> 
           }  
-      </Col>
+      </Col> */}
+      <Modal
+        show={isModalVisible}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+            <Modal.Title>Sign In</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Row className='mb-12'>
+                <Col xs={12}>
+                    <Button className={styles.signInBtn}>Connect Wallet</Button>
+                </Col>
+                <Col xs={12}>
+                    <Button className={styles.signInBtn} onClick={handleAppleLogin}>
+                      <div dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></div>
+                    </Button>
+                </Col>
+                <Col xs={12}>
+                    <Button className={styles.signInBtn2}>View My Profile</Button>
+                </Col>
+            </Row>
+        </Modal.Body>
+      </Modal>
     </Nav>
     </Navbar.Collapse>
     </Container>
