@@ -12,6 +12,8 @@ const Credential = require('../services/Credential');
 const AppleAuth = require('../services/AppleAuth');
 const logger = require("../logger");
 const bodyParser = require('body-parser');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 
 ////////////////// User
@@ -333,7 +335,10 @@ router.get('/applelogin', async function(req, res, next) {
 /* POST Apple Auth */
 router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
   try {
-    res.json(await AppleAuth.auth(req));
+    //res.json(await AppleAuth.auth(req));
+    const token = JSON.stringify((await AppleAuth.auth(req)));
+    console.log(token);
+    res.redirect(process.env.redirect_address);
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);

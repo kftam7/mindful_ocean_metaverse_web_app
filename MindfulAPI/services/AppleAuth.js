@@ -1,8 +1,6 @@
 const db = require('../db');
 const helper = require('../helper');
 const path = require('path');
-//const moment = require('moment');
-//const sleep = require('sleep-promise');
 const logger = require("../logger");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
@@ -20,9 +18,8 @@ async function login(){
 
 async function auth(req){
 
-		//let auth = new AppleAuth(config, fs.readFileSync(process.env.PRIVATE_KEY_FILE_PATH, 'text'));
     try {
-        //console.log( Date().toString() + "GET /auth");
+
         const response = await authInstance.accessToken(req.body.code);
         const idToken = jwt.decode(response.id_token);
 
@@ -36,12 +33,11 @@ async function auth(req){
         }
 
         //res.json(user);
-        return(user);
+        const body = JSON.stringify(req.body);
+        return(body);
 
     } catch (ex) {
         console.error(ex);
-        //res.send("An error occurred!");
-        //return("An error occurred!");
     }
 }
 
