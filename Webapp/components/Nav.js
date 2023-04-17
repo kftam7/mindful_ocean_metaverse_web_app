@@ -8,11 +8,26 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
 
-import { applelogin, appleauth } from '../pages/api/appleId';
-
 // apple id login
 // import config from '../config/config.json';
 // console.log(config)
+
+// Web3Modal
+import useWeb3Modal, { Web3Button } from '@web3modal/react';
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Web3Modal } from '@web3modal/react'
+import { configureChains, createClient, WagmiConfig } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+const chains = [arbitrum, mainnet, polygon]
+const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
+
+const { provider } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  provider
+})
+const ethereumClient = new EthereumClient(wagmiClient, chains)
 
 const NavBar = () => {
   const apiPort = process.env.API_PORT || '/';
@@ -34,14 +49,14 @@ const NavBar = () => {
     setAppleIdLoginBtn(res.data);
   }, []);
 
-  useEffect(async() => {
-    await dispatch(getAccount());
-    await dispatch(getBalance());
-    window.ethereum.on("accountsChanged", (accounts) => {
-        dispatch(getAccount());
-        dispatch(getBalance());
-      });
-  },[dispatch])
+  // useEffect(async() => {
+  //   await dispatch(getAccount());
+  //   await dispatch(getBalance());
+  //   window.ethereum.on("accountsChanged", (accounts) => {
+  //       dispatch(getAccount());
+  //       dispatch(getBalance());
+  //     });
+  // },[dispatch])
 
   const connect = async() => {
     await dispatch(grabAccount());
@@ -142,6 +157,7 @@ const NavBar = () => {
             <Row className='mb-12'>
                 <Col xs={12}>
                     <Button className={styles.signInBtn}>Connect Wallet</Button>
+                    {/* <Web3Button /> */}
                 </Col>
                 <Col xs={12}>
                     <Button className={styles.signInBtn} onClick={handleAppleLogin}>
@@ -161,4 +177,16 @@ const NavBar = () => {
     )
 }
 
-export default NavBar;
+function App() {
+  return (
+    <>
+      <WagmiConfig client={wagmiClient}>
+          <NavBar />
+      </WagmiConfig>
+
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+    </>
+  )
+}
+
+export default App;
