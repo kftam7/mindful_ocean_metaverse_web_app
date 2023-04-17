@@ -2,7 +2,6 @@ import axios from 'axios';
 import Image from 'next/image';
 import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col, Modal } from 'react-bootstrap';
 import styles from '../styles/Nav.module.css';
-import homeStyles from '../styles/Home.module.css';
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,10 +12,10 @@ import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } f
 // console.log(config)
 
 // Web3Modal
-import useWeb3Modal, { Web3Button } from '@web3modal/react';
+import { Web3Button, useWeb3Modal } from '@web3modal/react';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
-import { configureChains, createClient, WagmiConfig } from 'wagmi'
+import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 const chains = [arbitrum, mainnet, polygon]
 const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
@@ -42,6 +41,31 @@ const NavBar = () => {
   //   const res = await axios.post(`${apiPort}/mindfulapi/appleauth`, { code: '' });
   //   console.log(res)
   // }, []);
+
+  // Web3Modal
+  const [loading, setLoading] = useState(false);
+  const { open } = useWeb3Modal();
+  const { isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+  const label = isConnected ? "Disconnect Wallet" : "Connect Wallet";
+
+  useEffect(async () => {
+    console.log('Connect Wallet:', isConnected)
+  }, [isConnected]);
+
+  const onOpen = async () => {
+    setLoading(true);
+    await open();
+    setLoading(false);
+  }
+
+  const connectWallet = () => {
+    if (isConnected) {
+      disconnect();
+    } else {
+      onOpen();
+    }
+  }
 
   useEffect(async () => {
     const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
@@ -83,10 +107,10 @@ const NavBar = () => {
   const handleAppleSignOut = async () => {
   }
   
-//didn't work
-  const disconnect = async() => {
-    dispatch(disconnectAccount());
-  }
+  //didn't work
+  // const disconnect = async() => {
+  //   dispatch(disconnectAccount());
+  // }
     return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`p-3 ${styles.bg}`}>
     <Container fluid className={styles.container}>
@@ -156,7 +180,7 @@ const NavBar = () => {
         <Modal.Body>
             <Row className='mb-12'>
                 <Col xs={12}>
-                    <Button className={styles.signInBtn}>Connect Wallet</Button>
+                    <Button className={styles.signInBtn} onClick={connectWallet}  disabled={loading}>{loading ? "Loading..." : label}</Button>
                     {/* <Web3Button /> */}
                 </Col>
                 <Col xs={12}>
@@ -184,7 +208,13 @@ function App() {
           <NavBar />
       </WagmiConfig>
 
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        themeVariables={{
+          '--w3m-z-index': '9999'
+        }}
+      />
     </>
   )
 }
