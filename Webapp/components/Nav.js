@@ -8,11 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
 
 // apple id login
-// import config from '../config/config.json';
-// console.log(config)
+import { parse } from 'url';
+import { useRouter } from 'next/router';
 
 // Web3Modal
-import { Web3Button, useWeb3Modal } from '@web3modal/react';
+import { useWeb3Modal } from '@web3modal/react';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
@@ -35,16 +35,55 @@ const NavBar = () => {
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
-  // useEffect(async () => {
-  //   const res = await axios.post(`${apiPort}/mindfulapi/appleauth`, { code: '' });
-  //   console.log(res)
-  // }, []);
+  const router = useRouter();
+  const currentUrl = router.asPath;
+  const { query } = parse(currentUrl, true);
+  const [isAppleIdLogin, setIsAppleIdLogin] = useState(false);
+  useEffect(() => {
+    const access_token = sessionStorage.getItem("access_token");
+    setIsAppleIdLogin(false);
+    if(!access_token){
+      setIsAppleIdLogin(false);
+      if(!query.access_token) return;
+      getQuery();
+    }else{
+      setIsAppleIdLogin(true);
+      if(!query.access_token) return;
+      getQuery();
+    }
+  }, []);
+  
+  const getQuery = () => {
+    sessionStorage.setItem("access_token", query.access_token);
+    sessionStorage.setItem("expires_in", query.expires_in);
+    sessionStorage.setItem("id_token", query.id_token);
+    sessionStorage.setItem("refresh_token", query.refresh_token);
+    setIsAppleIdLogin(true);
+  }
+
+  const signInOpenModal = () => {
+    setIsModalVisible(true);
+  }
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+  }
+
+  const handleAppleSignOut = () => {
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("expires_in");
+    sessionStorage.removeItem("id_token");
+    sessionStorage.removeItem("refresh_token");
+    router.push('/');
+    setIsAppleIdLogin(false);
+  }
 
   // Web3Modal
-  const [loading, setLoading] = useState(false);
+  const [loadingWallet, setLoadingWallet] = useState(false);
   const { open } = useWeb3Modal();
   const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
@@ -60,9 +99,9 @@ const NavBar = () => {
   }, [isConnected]);
 
   const onOpen = async () => {
-    setLoading(true);
+    setLoadingWallet(true);
     await open();
-    setLoading(false);
+    setLoadingWallet(false);
   }
 
   const connectWallet = () => {
@@ -85,7 +124,6 @@ const NavBar = () => {
 
   useEffect(async () => {
     const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
-    console.log(res)
     setAppleIdLoginBtn(res.data);
   }, []);
 
@@ -98,30 +136,10 @@ const NavBar = () => {
   //     });
   // },[dispatch])
 
-  const connect = async() => {
-    await dispatch(grabAccount());
-    await dispatch(grabBalance());
-  }
-
-  const signInOpenModal = () => {
-    setIsModalVisible(true);
-  }
-
-  const handleClose = () => {
-    setIsModalVisible(false);
-  }
-
-  const signInWithApple = async () => {
-    AppleID.auth.signIn();
-  }
-
-  const handleAppleLogin = async () => {
-    const res = await axios.get(`http://localhost:3001/mindfulapi/applelogin`)
-    console.log(res)
-  }
-
-  const handleAppleSignOut = async () => {
-  }
+  // const connect = async() => {
+  //   await dispatch(grabAccount());
+  //   await dispatch(grabBalance());
+  // }
   
   //didn't work
   // const disconnect = async() => {
@@ -196,13 +214,17 @@ const NavBar = () => {
         <Modal.Body>
             <Row className='mb-12'>
                 <Col xs={12}>
-                    <Button className={styles.signInBtn} onClick={connectWallet}  disabled={loading}>{loading ? "Loading..." : label}</Button>
+                    <Button className={styles.signInBtn} onClick={connectWallet}  disabled={loadingWallet}>{loadingWallet ? "Loading..." : label}</Button>
                     {/* <Web3Button /> */}
                 </Col>
                 <Col xs={12}>
-                    <Button className={styles.signInBtn} onClick={handleAppleLogin}>
+                  {isAppleIdLogin ? 
+                      <Button className={styles.signInBtn} onClick={handleAppleSignOut}>Sign out Apple</Button>
+                    : 
+                    <Button className={styles.signInBtn}>
                       <div dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></div>
                     </Button>
+                  }
                 </Col>
                 <Col xs={12}>
                     <Button className={styles.signInBtn2}>View My Profile</Button>
