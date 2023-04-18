@@ -17,6 +17,7 @@ import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { Web3Provider } from "@ethersproject/providers";
 const chains = [arbitrum, mainnet, polygon]
 const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
 
@@ -51,6 +52,11 @@ const NavBar = () => {
 
   useEffect(async () => {
     console.log('Connect Wallet:', isConnected)
+    if(!isConnected){
+      sessionStorage.removeItem("walletAddress");
+      return;
+    }
+    handleGetWalletInfo();
   }, [isConnected]);
 
   const onOpen = async () => {
@@ -66,6 +72,16 @@ const NavBar = () => {
       onOpen();
     }
   }
+
+  // 获取钱包地址信息并记录在 session 中
+  const [walletAddress, setWalletAddress] = useState(null);
+  const handleGetWalletInfo = async () => {
+    const provider = new Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    setWalletAddress(address);
+    sessionStorage.setItem("walletAddress", address);
+  };
 
   useEffect(async () => {
     const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
