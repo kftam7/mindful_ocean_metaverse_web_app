@@ -30,30 +30,42 @@ async function getPersonalWebsite(appleId){
 }
 
 /* create PersonalWebsite */
-async function createPersonalWebsite(personalWebsiteRecord){
+async function createPersonalWebsite(appleId, personalWebsiteRecord){
 
-  // construct the SQL statement
-  var sql = 'INSERT INTO personalWebsite (userId, URL, description) VALUES ';
+  // get the userId
+  var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + appleId + '"'; 
 
-  for (var i =0; i < personalWebsiteRecord.length; i++){
-
-    // combine into 1 single SQL
-    if (i == (personalWebsiteRecord.length-1)){
-      sql = sql + '("' + personalWebsiteRecord[i].userId + '", "' + personalWebsiteRecord[i].URL + '", "' + personalWebsiteRecord[i].description + '");';
-    }else{
-      sql = sql + '("' + personalWebsiteRecord[i].userId + '", "' + personalWebsiteRecord[i].URL + '", "' + personalWebsiteRecord[i].description + '"),';
-    }
-
-  }
-
-  // update results on DB
-  const result = await db.query(
-    sql
+  const userIdResult = await db.query(
+    sqlUserId
   );
 
-  // will return SQL error if fails, otherwise return the following succesful msg
-  let message = 'Records added susccessfully';
-  return {message};
+  if (!userIdResult.length){
+    let message = 'appleId doesn\'t exist';
+    return {message};
+  }else{
+    // construct the SQL statement
+    var sql = 'INSERT INTO personalWebsite (userId, URL, description) VALUES ';
+
+    for (var i =0; i < personalWebsiteRecord.length; i++){
+
+      // combine into 1 single SQL
+      if (i == (personalWebsiteRecord.length-1)){
+        sql = sql + '("' + userIdResult[0].userId + '", "' + personalWebsiteRecord[i].URL + '", "' + personalWebsiteRecord[i].description + '");';
+      }else{
+        sql = sql + '("' + userIdResult[0].userId + '", "' + personalWebsiteRecord[i].URL + '", "' + personalWebsiteRecord[i].description + '"),';
+      }
+
+    }
+
+    // update results on DB
+    const result = await db.query(
+      sql
+    );
+
+    // will return SQL error if fails, otherwise return the following succesful msg
+    let message = 'Records added susccessfully';
+    return {message};
+  }
   
 }
 

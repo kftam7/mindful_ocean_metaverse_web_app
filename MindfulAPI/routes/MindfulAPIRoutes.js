@@ -289,9 +289,9 @@ router.get('/personalwebsite/:appleId', async function(req, res, next) {
 });
 
 /* POST PersonalWebsite */
-router.post('/personalwebsite', async function(req, res, next) {
+router.post('/personalwebsite/:appleId', async function(req, res, next) {
   try {
-    res.json(await PersonalWebsite.createPersonalWebsite(req.body));
+    res.json(await PersonalWebsite.createPersonalWebsite(req.params.appleId, req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while creating programming language`, err.message);
