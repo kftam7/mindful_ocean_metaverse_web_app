@@ -6,6 +6,7 @@ const logger = require("./logger");
 const cors = require("cors");
 
 // require authorization header
+/*
 app.use((req, res, next) => {
   const auth = {
     login: 'mindful',
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
   res.set('WWW-Authenticate', 'Basic realm="401"')
   res.status(401).send('Authentication required.')
 })
+*/
 
 app.use(express.json({limit: '50mb'}));
 

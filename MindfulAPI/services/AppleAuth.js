@@ -23,17 +23,28 @@ async function auth(req){
         const response = await authInstance.accessToken(req.body.code);
         const idToken = jwt.decode(response.id_token);
 
+	    //console.log("body: ", req.body);
+	    //console.log("idToken: ", idToken);
+	    //console.log("response: ", response);
         const user = {};
         user.id = idToken.sub;
 
-        if (idToken.email) user.email = idToken.email;
+	let body = "?access_token=" + response.access_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
+
+        if (idToken.email) {
+		user.email = idToken.email;
+		body = body + "&email=" + user.email;
+	}
         if (req.body.user) {
             const { name } = JSON.parse(req.body.user);
             user.name = name;
+	    body = body + "&name=" + user.name;	
         }
 
         //res.json(user);
-        const body = JSON.stringify(req.body);
+        //const body = JSON.stringify(req.body);
+	//const body = JSON.stringify(idToken);
+	//const body = "?access_token=" + response.access_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
         return(body);
 
     } catch (ex) {
@@ -46,7 +57,6 @@ async function token(){
 }
 
 async function refresh(req){
-		console.log(req.query.refreshToken);
     try {
         const accessToken = await authInstance.refreshToken(req.query.refreshToken);
         return(accessToken);

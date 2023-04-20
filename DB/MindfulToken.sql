@@ -33,7 +33,7 @@ CREATE TABLE `appVersion` (
   PRIMARY KEY (`versionId`),
   UNIQUE KEY `versionNo_UNIQUE` (`versionNo`),
   UNIQUE KEY `versionName_UNIQUE` (`versionName`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `appVersion` (
 
 LOCK TABLES `appVersion` WRITE;
 /*!40000 ALTER TABLE `appVersion` DISABLE KEYS */;
-INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version',1),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version',1),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version',1),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th',1),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th',1),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2025-01-01 00:00:00','edited version testing',1),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined',1),(19,'0.0.14','14th version','2023-08-17 05:05:05','2023-09-17 06:06:06','undefined',1);
+INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version',1),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version',1),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version',1),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th',1),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th',1),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2025-01-01 00:00:00','edited version testing',0),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined',1),(19,'0.0.14','98th version','2023-08-17 05:05:09','2023-09-02 07:06:06','something here',1),(31,'0.0.99','99th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(33,'1','1','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(36,'0.0009','9thth','2023-04-06 02:25:23','2023-04-27 02:25:27','tests9',0);
 /*!40000 ALTER TABLE `appVersion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `artwork` (
 
 LOCK TABLES `artwork` WRITE;
 /*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,1,'undefined','undefined','undefined'),(2,1,'artwork2','https://xyz.com/1.html','html text'),(3,1,'artwork3','https://111.com/a.gif','gif animation'),(4,2,'artworkA','https://222.com/321.avi','movie file'),(5,2,'artworkB','https://333.com/sound.mp4','sound track'),(6,3,'artworkwhatisthis','https://kkk.com/blablabla.gif','gif picture'),(7,4,'artworktest1','http://artworktest1','test1'),(8,5,'artworktest2','http://artworktest2','test2'),(9,1,'artwork modified','https://modified.com','artwork modify testing'),(12,3,'ds','df',NULL),(26,3,'ds2','fsdfds','sdfdsf'),(27,9,'artworktest1','http://artworktest1','test1'),(29,10,'artworktest1','http://artworktest1','test1'),(31,11,'artworktest1','http://artworktest1','test1'),(32,12,'artworktest1','http://artworktest1','test1'),(33,13,'artworktest1','http://artworktest1','test1'),(35,14,'artworktest14','http://artworktest14','test1');
+INSERT INTO `artwork` VALUES (1,1,'undefined','undefined','undefined'),(2,1,'artwork2','https://xyz.com/1.html','html text'),(3,1,'artwork3','https://111.com/a.gif','gif animation'),(4,2,'artworkA','https://222.com/321.avi','movie file'),(5,2,'artworkB','https://333.com/sound.mp4','sound track'),(6,3,'artworkwhatisthis','https://kkk.com/blablabla.gif','gif picture'),(7,4,'artworktest1','http://artworktest1','test1'),(8,5,'artworktest2','http://artworktest2','test2'),(9,1,'artwork modified','https://modified.com','artwork modify testing'),(12,3,'ds','df',NULL),(26,3,'ds2','https://www.baidu.com','sdfdsf'),(27,9,'artworktest1','http://artworktest1','test1'),(29,10,'artworktest1','http://artworktest1','test1'),(31,11,'artworktest1','http://artworktest1','test1'),(32,12,'artworktest1','http://artworktest1','test1'),(33,13,'artworktest1','http://artworktest1','test1'),(35,14,'artworktest14','http://artworktest14','test1');
 /*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `event` (
   `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`eventId`),
   UNIQUE KEY `title_UNIQUE` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'eventD','eventD description','http://www.abc.com/a.png','http://www.abc.com/eventD.html','timerDescriptionD','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(2,'eventK','eventK description','http://www.abc.com/b.png','http://www.abc.com/eventK.html','timerDescriptionK','2022-06-09 09:00:10','2022-10-09 09:00:10',0),(3,'eventC','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(4,'eventA','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(5,'eventB','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(6,'eventE','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(7,'eventF','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(8,'eventG','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(9,'eventH','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(10,'eventI','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1);
+INSERT INTO `event` VALUES (1,'eventD','eventD description','http://www.abc.com/a.png','http://www.abc.com/eventD.html','timerDescriptionD','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(2,'eventK','eventK description','http://www.abc.com/b.png','http://www.abc.com/eventK.html','timerDescriptionK','2022-06-09 09:00:10','2022-10-09 09:00:10',0),(3,'eventC','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(4,'eventA','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(5,'eventB','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(6,'eventE','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(7,'eventF','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(8,'eventG','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(9,'eventH','eventC description','http://127.0.0.1:3000/GettyImages-1300384940-2000-a5979552a66f4fc7b67aeb35110fea8d%20copy.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(10,'eventI','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(12,'event99','abc','http://111.com','http://222.com','def','2023-04-01 12:02:47','2022-09-01 12:01:26',1);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +195,7 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `userId` int NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
-  `appleId` varchar(45) NOT NULL COMMENT 'Apple ID',
+  `appleId` varchar(50) NOT NULL COMMENT 'Apple ID',
   `walletAddress` varchar(45) DEFAULT NULL COMMENT 'Crypto wallet address',
   `personInfo` varchar(1000) DEFAULT NULL,
   `createTime` datetime NOT NULL COMMENT 'Record create time',
@@ -213,7 +213,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'me@apple.com','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-01-01 00:00:00',1),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00',1),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00',1),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02',0),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(28,'123@xx.com','0x1ecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(29,'456@yy.com','0x28a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',0),(30,'789@zz.com','0x371DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1);
+INSERT INTO `user` VALUES (1,'001463.3be803433a0542a0b0d6862a62285371.0627','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-01-01 00:00:00',1),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00',1),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00',1),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02',0),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(28,'123@xx.com','0x1ecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(29,'456@yy.com','0x28a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',0),(30,'789@zz.com','0x371DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -226,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-03  0:26:32
+-- Dump completed on 2023-04-20 15:30:27

@@ -26,8 +26,11 @@ async function getNFT(type, address){
   }
 
   const alchemy = new Alchemy(settings);
-  const data = [];
+  let data = [];
+  let dataMintPass = [{"tokenId": "12345678", "description": "This is MintPass 1", "peronsalInfo": "Personal Information 1", "artistAppleId": "AppleID1", "eventId": "1", "URL": "https://123.abc.com"}, {"tokenId": "99998888", "description": "This is MintPass 2", "peronsalInfo": "Personal Information 2", "artistAppleId": "AppleID2", "eventId": "2", "URL": "https://456.abc.com"}, {"tokenId": "11112222", "description": "This is MintPass 3", "peronsalInfo": "Personal Information 3", "artistAppleId": "AppleID3", "eventId": "3", "URL": "https://789.abc.com"}];
+  let dataMindfulToken = [{"tokenId": "20230420", "description": "This is MindfulToken 1", "peronsalInfo": "Personal Information 4", "artistAppleId": "AppleID4", "eventId": "4", "URL": "https://777.xyz.com"}, {"tokenId": "20230421", "description": "This is MindfulToken 2", "peronsalInfo": "Personal Information 5", "artistAppleId": "AppleID5", "eventId": "5", "URL": "https://888.xyz.com"}, {"tokenId": "20230422", "description": "This is MindfulToken 3", "peronsalInfo": "Personal Information 6", "artistAppleId": "AppleID6", "eventId": "6", "URL": "https://999.xyz.com"}];
 
+/*
   for await (const nft of alchemy.nft.getNftsForOwnerIterator(address, {
     // Omit the NFT metadata for smaller payloads.
     omitMetadata: false
@@ -35,24 +38,19 @@ async function getNFT(type, address){
     if(`${nft.contract.address}` == contractAddress.toLowerCase()){
 
       data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`});
-      /*
-      console.log(`${nft.contract.address}`);
-      console.log(`${nft.contract.openSea}`);
-      console.log(`${nft.contract.tokenType}`);
-      console.log(`${nft.contract.name}`);
-      console.log(`${nft.contract.symbol}`);
-      console.log(`${nft.contract.totalSupply}`);
-      console.log(`${nft.tokenId}`);
-      console.log(`${nft.title}`);
-      console.log(`${nft.tokenUri.gateway}`);
-      console.log(`${nft.tokenUri.raw}`);
-      */
-      
     }
   }
 
+*/
+
+  if(type == "mintPass"){
+    data = dataMintPass;
+  }else{
+    data = dataMindfulToken;
+  }
+
   //const data = helper.emptyOrRows(rows);
-  const meta = "1";
+  //const meta = "1";
 
   return {
     data
