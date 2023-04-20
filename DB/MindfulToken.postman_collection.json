@@ -202,63 +202,20 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/user/me@apple.com",
+									"raw": "{{baseUrl}}/user/001463.3be803433a0542a0b0d6862a62285371.0627",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"user",
-										"me@apple.com"
+										"001463.3be803433a0542a0b0d6862a62285371.0627"
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 07:44:05 GMT"
-								},
-								{
-									"key": "Server",
-									"value": "Apache/2.4.52 (Ubuntu)"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin,Accept-Encoding"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"2ba-KadkjEraXG7nccB3s0e+fieZGzs-gzip\""
-								},
-								{
-									"key": "Content-Encoding",
-									"value": "gzip"
-								},
-								{
-									"key": "Content-Length",
-									"value": "329"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5, max=100"
-								},
-								{
-									"key": "Connection",
-									"value": "Keep-Alive"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"userId\": 1,\n        \"appleId\": \"me@apple.com\",\n        \"createTime\": \"2022-12-01 00:00:00.000000\",\n        \"personInfo\": \"User me for testing\",\n        \"updateTime\": \"2023-01-01 00:00:00.000000\",\n        \"joinedEvent\": [\n            {\n                \"title\": \"eventD\",\n                \"eventId\": 1,\n                \"joinedEventId\": 1\n            },\n            {\n                \"title\": \"eventK\",\n                \"eventId\": 2,\n                \"joinedEventId\": 2\n            },\n            {\n                \"title\": \"eventC\",\n                \"eventId\": 3,\n                \"joinedEventId\": 3\n            }\n        ],\n        \"walletAddress\": \"0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005\",\n        \"personalwebsite\": [\n            {\n                \"URL\": \"https://abc.com\",\n                \"websiteId\": 1,\n                \"description\": \"desc1\"\n            },\n            {\n                \"URL\": \"https://def.com\",\n                \"websiteId\": 2,\n                \"description\": \"desc2\"\n            },\n            {\n                \"URL\": \"https://ghi.com\",\n                \"websiteId\": 3,\n                \"description\": \"desc3\"\n            },\n            {\n                \"URL\": \"https://modified.com\",\n                \"websiteId\": 9,\n                \"description\": \"personalwebsite modify testing\"\n            }\n        ]\n    },\n    \"meta\": \"1\"\n}"
+							"body": null
 						}
 					]
 				},
@@ -926,14 +883,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/nft/mintPass/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+							"raw": "{{baseUrl}}/nft/mintPass/{walletaddress}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"nft",
 								"mintPass",
-								"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+								"{walletaddress}"
 							]
 						},
 						"description": "### API endpoint to get the information of MintPass NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
@@ -1019,14 +976,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/nft/mindfulToken/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+							"raw": "{{baseUrl}}/nft/mindfulToken/{walletaddress}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"nft",
 								"mindfulToken",
-								"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+								"{walletaddress}"
 							],
 							"query": [
 								{
@@ -3354,13 +3311,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/personalwebsite/we@apple.com",
+							"raw": "{{baseUrl}}/personalwebsite/{appleId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"personalwebsite",
-								"we@apple.com"
+								"{appleId}"
 							]
 						},
 						"description": "### API endpoint to get website information of a specified appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
@@ -3457,7 +3414,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"userId\":\"4\",\n     \"URL\":\"https://1.com\",\n     \"description\": \"new 1\"\n  },\n  {\n     \"userId\":\"5\",\n     \"URL\":\"https://2.com\",\n     \"description\": \"new 2\"\n  },\n  {\n     \"userId\":\"6\",\n     \"URL\":\"https://3.com\",\n     \"description\": \"new 3\"\n  }\n]",
+							"raw": "[\n  {\n     \"URL\":\"https://1.com\",\n     \"description\": \"new 1\"\n  },\n  {\n     \"URL\":\"https://2.com\",\n     \"description\": \"new 2\"\n  },\n  {\n     \"URL\":\"https://3.com\",\n     \"description\": \"new 3\"\n  }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3465,12 +3422,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/personalwebsite",
+							"raw": "{{baseUrl}}/personalwebsite/{appleId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"personalwebsite"
+								"personalwebsite",
+								"{appleId}"
 							]
 						},
 						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
@@ -3494,7 +3452,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"userId\":\"4\",\n     \"URL\":\"https://1.com\",\n     \"description\": \"new 1\"\n  },\n  {\n     \"userId\":\"5\",\n     \"URL\":\"https://2.com\",\n     \"description\": \"new 2\"\n  },\n  {\n     \"userId\":\"6\",\n     \"URL\":\"https://3.com\",\n     \"description\": \"new 3\"\n  }\n]",
+									"raw": "[\n  {\n     \"URL\":\"https://77.com\",\n     \"description\": \"new 77\"\n  },\n  {\n     \"URL\":\"https://88.com\",\n     \"description\": \"new 88\"\n  },\n  {\n     \"URL\":\"https://99.com\",\n     \"description\": \"new 99\"\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3502,54 +3460,20 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/personalwebsite",
+									"raw": "{{baseUrl}}/personalwebsite/001463.3be803433a0542a0b0d6862a62285371.0627",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"personalwebsite"
+										"personalwebsite",
+										"001463.3be803433a0542a0b0d6862a62285371.0627"
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "41"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"29-2S3h6R04UE8TKYUpB6W99D4VMqs\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 14:13:02 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"message\": \"Records added susccessfully\"\n}"
+							"body": null
 						}
 					]
 				},
