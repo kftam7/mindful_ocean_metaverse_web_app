@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
 
+import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
+
 // apple id login
 import { parse } from 'url';
 import { useRouter } from 'next/router';
@@ -39,29 +41,38 @@ const NavBar = () => {
 
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
+  const [appleId, setAppleId] = useState('');
+  const [email, setEmail] = useState('');
   const router = useRouter();
   const currentUrl = router.asPath;
   const { query } = parse(currentUrl, true);
   const [isAppleIdLogin, setIsAppleIdLogin] = useState(false);
   useEffect(() => {
-    const access_token = sessionStorage.getItem("access_token");
+    const appleId = sessionStorage.getItem("appleId");
     setIsAppleIdLogin(false);
-    if(!access_token){
+    if(!appleId){
       setIsAppleIdLogin(false);
-      if(!query.access_token) return;
+      if(!query.appleId) return;
       getQuery();
     }else{
       setIsAppleIdLogin(true);
-      if(!query.access_token) return;
+      const email = sessionStorage.getItem("email");
+      setAppleId(appleId);
+      setEmail(email);
+      if(!query.appleId) return;
       getQuery();
     }
   }, []);
   
   const getQuery = () => {
+    console.log(query)
+    setAppleId(query.appleId);
+    setEmail(query.email);
     sessionStorage.setItem("access_token", query.access_token);
     sessionStorage.setItem("expires_in", query.expires_in);
-    sessionStorage.setItem("id_token", query.id_token);
+    sessionStorage.setItem("email", query.email);
     sessionStorage.setItem("refresh_token", query.refresh_token);
+    sessionStorage.setItem("appleId", query.appleId);
     setIsAppleIdLogin(true);
   }
 
@@ -76,8 +87,9 @@ const NavBar = () => {
   const handleAppleSignOut = () => {
     sessionStorage.removeItem("access_token");
     sessionStorage.removeItem("expires_in");
-    sessionStorage.removeItem("id_token");
+    sessionStorage.removeItem("email");
     sessionStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("appleId");
     router.push('/');
     setIsAppleIdLogin(false);
   }
@@ -87,7 +99,6 @@ const NavBar = () => {
   const { open } = useWeb3Modal();
   const { isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  const label = isConnected ? "Disconnect Wallet" : "Connect Wallet";
 
   useEffect(async () => {
     console.log('Connect Wallet:', isConnected)
@@ -213,21 +224,37 @@ const NavBar = () => {
         </Modal.Header>
         <Modal.Body>
             <Row className='mb-12'>
-                <Col xs={12}>
-                    <Button className={styles.signInBtn} onClick={connectWallet}  disabled={loadingWallet}>{loadingWallet ? "Loading..." : label}</Button>
-                    {/* <Web3Button /> */}
+                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
+                  {isConnected ? 
+                    <>
+                      <div>Wallet Contect</div> 
+                      <Button className={styles.signInBtn2} onClick={connectWallet}>
+                        <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
+                        <TextOverflowTips text={walletAddress} />
+                      </Button>
+                    </>
+                    : 
+                    <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet}>{loadingWallet ? "Loading..." : 'Connect Wallet'}</Button>
+                  }
+                  {/* <Web3Button /> */}
                 </Col>
-                <Col xs={12}>
+                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                   {isAppleIdLogin ? 
-                      <Button className={styles.signInBtn} onClick={handleAppleSignOut}>Sign out Apple</Button>
+                      <>
+                        <div>Apple</div>
+                        <Button className={styles.signInBtn2} onClick={handleAppleSignOut}>
+                          <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
+                          <TextOverflowTips text={appleId} />
+                        </Button>
+                      </>
                     : 
                     <Button className={styles.signInBtn}>
                       <div dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></div>
                     </Button>
                   }
                 </Col>
-                <Col xs={12}>
-                    <Button className={styles.signInBtn2}>View My Profile</Button>
+                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
+                    <Button href="/userProfile" className={!isConnected || !isAppleIdLogin ? styles.signInBtnDisabled : styles.signInBtn} disabled={!isConnected || !isAppleIdLogin}>View My Profile</Button>
                 </Col>
             </Row>
         </Modal.Body>

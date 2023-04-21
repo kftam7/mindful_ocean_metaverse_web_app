@@ -30,7 +30,7 @@
     background-color: var(--primary-text-color);
     width:100%;
     border-radius:15px;
-    margin: 10px 0;
+    margin: 10px 0 20px 0;
 }
 
 .signInBtn a{
@@ -52,28 +52,48 @@
     border-color: var(--hovered-color) !important;
 }
 
-.signInBtn2 {
+.signInBtnDisabled{
     font-size: 20px;
     font-weight: bold;
-    border-color: var(--disabled-color);
-    background-color: var(--disabled-color);
+    width:100%;
+    border-radius:15px;
+    margin: 10px 0 20px 0;
+    background-color: var(--disabled-color) !important;
+    border-color: var(--shadow-color) !important;
+}
+
+.signInBtn2 {
+    color: var(--primary-text-color);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    border-color: var(--hovered-color);
+    background-color: var(--shadow-color-light);
     width:100%;
     border-radius:15px;
     margin: 10px 0;
+    display: flex;
+    align-items: center;
 }
 
 .signInBtn2:hover {
-    background-color: var(--disabled-color);
-    border-color: var(--disabled-color);
+    color: var(--primary-text-color);
+    background-color: var(--shadow-color-light);
+    border-color: var(--hovered-color);
 }
 .signInBtn2:focus {
-    background-color: var(--disabled-color) !important;
-    border-color: var(--disabled-color) !important;
+    color: var(--primary-text-color);
+    background-color: var(--shadow-color-light);
+    border-color: var(--hovered-color);
 }
 
 .signInBtn2:active {
-    background-color: var(--disabled-color) !important;
-    border-color: var(--disabled-color) !important;
+    color: var(--primary-text-color);
+    background-color: var(--shadow-color-light);
+    border-color: var(--hovered-color);
+}
+
+.signInBtn2 .txt{
 }
 
 .signInBtn3 {

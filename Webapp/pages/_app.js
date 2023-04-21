@@ -2,6 +2,7 @@ import { SessionProvider } from 'next-auth/react';
 import { wrapper, store } from "../store/store";
 import { Provider } from "react-redux";
 import '../styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 /*
   SSRProvider and Web3ReactProvider moved to respective layout since they don't work here
