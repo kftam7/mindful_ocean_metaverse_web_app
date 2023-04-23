@@ -163,6 +163,259 @@ option {
   justify-content: center;
 }
 
+/* 珍珠 */
+.animation_panel{
+  display: block;
+  width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.pearl {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, 0);
+}
+
+.pearl.active {
+  animation: pearlRise 4s ease 2s forwards;
+}
+
+.pearl .glow {
+  position: relative;
+}
+
+.pearl .pearl_img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+}
+
+.pearl .pearl_img img{
+  width: 22px;
+  height: 22px;
+  animation: rotate 3s linear infinite;
+  transform-origin: center center;
+}
+
+.pearl .pearl_sparkle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+
+.pearl .pearl_sparkle img{
+  animation: rotate 15s linear infinite;
+  transform-origin: center center; /* 设置旋转中心为元素的中心点 */
+}
+
+.pearl .sparkle_cover{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  opacity: 0;
+}
+
+.pearl .sparkle_cover.active{
+  animation: fadeIn 2s ease-in-out 6s forwards;
+}
+
+@keyframes pearlRise {
+  0% {
+    opacity: 0;
+    top: 300px;
+  }
+  100% {
+    opacity: 1;
+    top: 170px;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 数字滑动 */
+.box-number {
+  /* 背景颜色：绿色 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: rgb(36, 35, 35);
+  height: 100px;
+}
+
+.list-wrap {
+  color: #005C6B;
+  background-color: #FDF0E7;
+  height: 3rem;
+  width: 3rem;
+  text-align: center;
+  overflow: hidden;
+  margin: 0.2rem;
+  border-radius: 8px;
+}
+
+.roll div {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
+.roll_1 {
+  animation: roll_1 2s forwards;
+}
+
+.roll_2 {
+  animation: roll_2 2s forwards;
+}
+
+.roll_3 {
+  animation: roll_3 2s forwards;
+}
+
+.roll_4 {
+  animation: roll_4 2s forwards;
+}
+
+.roll_5 {
+  animation: roll_5 2s forwards;
+}
+
+.roll_6 {
+  animation: roll_6 2s forwards;
+}
+
+.roll_7 {
+  animation: roll_7 2s forwards;
+}
+
+.roll_8 {
+  animation: roll_8 2s forwards;
+}
+
+.roll_9 {
+  animation: roll_9 2s forwards;
+}
+
+.roll_10 {
+  animation: roll_10 2s forwards;
+}
+
+@keyframes roll_1 {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-3rem);
+  }
+}
+
+@keyframes roll_2 {
+  0% {
+    transform: translateY(-3rem);
+  }
+  100% {
+    transform: translateY(-6rem);
+  }
+}
+
+@keyframes roll_3 {
+  0% {
+    transform: translateY(-6rem);
+  }
+  100% {
+    transform: translateY(-9rem);
+  }
+}
+
+@keyframes roll_4 {
+  0% {
+    transform: translateY(-9rem);
+  }
+  100% {
+    transform: translateY(-12rem);
+  }
+}
+
+@keyframes roll_5 {
+  0% {
+    transform: translateY(-12rem);
+  }
+  100% {
+    transform: translateY(-15rem);
+  }
+}
+
+@keyframes roll_6 {
+  0% {
+    transform: translateY(-15rem);
+  }
+  100% {
+    transform: translateY(-18rem);
+  }
+}
+
+@keyframes roll_7 {
+  0% {
+    transform: translateY(-18rem);
+  }
+  100% {
+    transform: translateY(-21rem);
+  }
+}
+
+@keyframes roll_8 {
+  0% {
+    transform: translateY(-21rem);
+  }
+  100% {
+    transform: translateY(-24rem);
+  }
+}
+
+@keyframes roll_9 {
+  0% {
+    transform: translateY(-24rem);
+  }
+  100% {
+    transform: translateY(-27rem);
+  }
+}
+
+@keyframes roll_10 {
+  0% {
+    transform: translateY(-27rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
 @media only screen and (max-width: 1200px) {
   model-viewer  {
     height: 15rem;
@@ -172,6 +425,14 @@ option {
 @media only screen and (max-width: 768px) {
   model-viewer  {
     height: 16rem;
+  }
+  
+  .animation_panel{
+    width: 100%;
+  }
+  
+  .animation_panel img{
+    width: 100%;
   }
 } 
 /* @media only screen and (max-width: 992px) {
