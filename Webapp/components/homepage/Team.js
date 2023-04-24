@@ -4,7 +4,9 @@ import styles from '../../styles/Team.module.css';
 const Team = () => {
     return (
       <div className={styles.team} >
-          <h3 className={styles.title}>Our team</h3>
+        <Row className={styles.title}>
+            <h3>Our team</h3>
+        </Row>
           <Container>
           <Row className={styles.teamRow}>
             <Col xs={12} md={6} lg={3}>

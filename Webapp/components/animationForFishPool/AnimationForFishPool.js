@@ -18,8 +18,8 @@ const AnimationForFishPool = () => {
       const {data: { total }} = res;
       if(total === 0) return;
       // // 更新 value 的值
-      setInits((pre) => pre+1);
-      // setInits(total);
+      // setInits((pre) => pre+1);
+      setInits(total);
 
     } catch (error) {
       console.error('Failed to fetch value from API:', error);

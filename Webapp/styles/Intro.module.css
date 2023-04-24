@@ -4,9 +4,9 @@
 }
 
 .introText{
+    padding: 0 3rem;
     position: absolute;
     top: 40vh;
-    left: 3%;
 }
 
 .bgpart3 {
@@ -57,8 +57,8 @@
     }
 
     .introText{
+        padding: 0 1rem;
         top: 30vh;
-        left: 3%;
     }
 
     .bgpart4 {

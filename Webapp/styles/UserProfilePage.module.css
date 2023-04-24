@@ -24,7 +24,7 @@
 }
 
 .card_txt1{
-    font-size: 16px;
+    font-size: 1.2rem;
     font-weight: bold;
     color: var(--primary-text-color);
     display: block;
@@ -143,5 +143,14 @@
 }
 
 @media only screen and (max-width: 600px) {
-
+    .card_item h4{
+        font-size: 1rem;
+        margin-top: 2px;
+    }
+    .card_txt1{
+        font-size: 1rem;
+    }
+    .card_item{
+        padding: 0.8rem 0;
+    }
 }

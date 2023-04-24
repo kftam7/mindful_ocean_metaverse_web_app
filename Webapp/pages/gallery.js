@@ -11,8 +11,8 @@ import GalleryModel from '../components/homepage/GalleryModel';
 const GalleryPage = () => {
   return(
     <Container className='mt-5 mb-5' style={{}}>
-      <Row className='ms-5' ><Link href="/">&larr; Return to homepage</Link></Row>
-      <Row className='mt-5 ms-5'>
+      <Row className='' ><Link href="/">&larr; Return to homepage</Link></Row>
+      <Row className='mt-5'>
           <Col sm={12} md={6}>
             <h5>Gallery</h5>
             <p>Artworks by our community</p>
@@ -30,7 +30,7 @@ const GalleryPage = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col sm={6} md={6}>
+              <Col sm={6} md={6} className={styles.searchByCreator}>
               <Form>
                 <InputGroup style={{width:'100%'}}>
                     <FormControl id="search by name" placeholder="Search by creator" style={{border: '1px solid #005D6C', borderRadius: '15px'}} />

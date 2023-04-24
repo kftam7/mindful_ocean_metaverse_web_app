@@ -8,7 +8,7 @@ const Mintpass = () => {
         <>
             <AnimationForFishPool />
             <div className={styles.mintpassRow} id="mintpass">
-                <Row style={{marginLeft: '3rem'}}>
+                <Row className={styles.title}>
                 <h3>Mint Pass</h3>
                 <p className="mt-1">Submit artworks created by the Mindful Ocean app to collect Mint Pass. With a Mint Pass, you will be able to redeem your own artwork NFT when they are ready to be minted.</p>
                 </Row>

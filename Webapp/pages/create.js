@@ -15,7 +15,7 @@ function CreatePage() {
 
     return(
         <Container className={styles.createPage}>
-            <Row className='ms-5' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; Return to homepage</h6></Link></Row>
+            <Row className='' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; Return to homepage</h6></Link></Row>
             <Row className='mt-5 mb-3 text-center d-flex justify-content-center'>
                 <h6>Create and color your own version of fish!</h6>
                 <a href='/whale.png' target="_blank" className={`${styles.downloadBtn}`} download>
@@ -23,7 +23,7 @@ function CreatePage() {
                 </a>
             </Row>
             <Row>
-                <div className={styles.card} style={{width: '50%', marginLeft: 'auto', marginRight: 'auto'}} >
+                <div className={styles.card} style={{ marginLeft: 'auto', marginRight: 'auto'}} >
                     <section className="attribution">
                         <p>upload your artwork (no bigger than 1MB) to preview it on 3D model!</p>
                     </section> 

@@ -1,6 +1,4 @@
 .submitPage {
-  margin-top: 2rem;
-  margin-left: 5rem;
   font-size: .8rem;
   font-family: Monospace;
 }
@@ -11,7 +9,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 30%;
+  width: 33%;
   height: 50px;
   padding: 3px;
 }
@@ -39,6 +37,10 @@
   color: #fff;
   position: absolute;
   z-index: 2;
+}
+
+.content i{
+  margin-right: 8px;
 }
 
 .arrow {
@@ -83,8 +85,13 @@
 }
 
 .disactiveBtn {
+  font-size: 1.3rem;
   background-color: var(--primary-text-color) !important;
   border-radius: 10px;
+}
+
+.nextBtn{
+  font-size: 1.3rem;
 }
 
 .scrollBox {
@@ -169,4 +176,47 @@ border-radius: 15px;
 font-weight: 800;
 font-size: 1.5rem;
 transform: translateX(-16%);
+}
+
+@media only screen and (max-width: 992px) {
+  .item {
+    font-size: 1rem;
+  }
+
+  .content i{
+    margin-right: 5px;
+  }
+
+  .disactiveBtn {
+    font-size: 1rem;
+  }
+
+  .nextBtn{
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .item {
+    font-size: 0.8rem;
+  }
+
+  .content{
+    padding: 0 30px;
+  }
+
+  .itemActive .content{
+    padding: 0 50px;
+  }
+
+  .itemActive .content span{
+  }
+
+  .disactiveBtn {
+    font-size: 0.8rem;
+  }
+
+  .nextBtn{
+    font-size: 0.8rem;
+  }
 }

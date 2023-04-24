@@ -175,6 +175,7 @@ option {
   width: 100px;
   height: 100px;
   position: absolute;
+  top: 65%;
   left: 50%;
   opacity: 0;
   transform: translate(-50%, 0);
@@ -197,8 +198,6 @@ option {
 }
 
 .pearl .pearl_img img{
-  width: 22px;
-  height: 22px;
   animation: rotate 3s linear infinite;
   transform-origin: center center;
 }
@@ -232,11 +231,11 @@ option {
 @keyframes pearlRise {
   0% {
     opacity: 0;
-    top: 300px;
+    top: 65%;
   }
   100% {
     opacity: 1;
-    top: 170px;
+    top: 35%;
   }
 }
 
@@ -433,6 +432,16 @@ option {
   
   .animation_panel img{
     width: 100%;
+  }
+  
+  /* 珍珠 */
+  .pearl {
+    width: 30%;
+    height: auto;
+  }
+
+  .pearl .pearl_img{
+    width: 8%;
   }
 } 
 /* @media only screen and (max-width: 992px) {

@@ -165,7 +165,7 @@ const UserProfilePage = () => {
   };
 
   return(
-    <Container className='mt-5 mb-5' style={{}}>
+    <Container className='mt-5 mb-5'>
       <ToastContainer />
       {loading ?
         <div className="overly">
@@ -173,8 +173,8 @@ const UserProfilePage = () => {
         </div>
         : ''
       }
-      <Row className='ms-5' ><Link href="/">&larr; Return to homepage</Link></Row>
-      <Row className='mt-5 ms-5'>
+      <Row><Link href="/">&larr; Return to homepage</Link></Row>
+      <Row className='mt-5'>
           <Col sm={12} md={12}>
             <h5>User Profile</h5>
           </Col>

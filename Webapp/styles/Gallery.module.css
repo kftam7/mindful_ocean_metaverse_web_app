@@ -6,15 +6,16 @@
 .title {
     /* the position of the whole section */
     margin-top: 15vh;
-    margin-left: 3rem;
+    padding: 0 3rem;
 }
 
 .galleryRow{
     margin-top: 3rem;
+    padding: 0 1rem;
 }
 
 .card {
-    width:20vw;
+    width: 320px;
     margin-left: auto; 
     margin-right: auto;
     margin-top: 1rem;
@@ -80,19 +81,37 @@
 .GalleryPageImages {
     width: 25%;
     position: absolute;
-    top: 45%;
-    right:10%
+    top: 42%;
+    right: 18%;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .GalleryPageImages {
+        width: 30%;
+        top: 41%;
+        right: 12%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .card {
+        width: 100%;
+    }
+    
+    .GalleryPageImages {
+        right: 30px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .card {
-        width: 15rem;
+        width: 100%;
     }
 
     .GalleryPageImages {
-        width: 40%;
-        top: 50%;
-        right:0
+        width: 30%;
+        top: 175px;
+        right: 22px;
     }
 }
 
@@ -110,7 +129,7 @@
     }
 
     .card {
-        width: 16rem;
+        width: 100%;
     }
 
     .btnRow {
@@ -119,8 +138,8 @@
 
     .GalleryPageImages {
         width: 30%;
-        top: 50%;
-        right:0
+        top: 182px;
+        right: 22px;
     }
 } 
 
@@ -136,6 +155,22 @@
     .GalleryPageImages {
         width: 20%;
         top: 50%;
-        right:22%
+        right:22%;
+    }
+
+    .title {
+        padding: 0 1rem;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .searchByCreator{
+        margin-top: 1rem;
+    }
+
+    .GalleryPageImages {
+        width: 20%;
+        top: 210px;
+        right: 30px;
     }
 }
