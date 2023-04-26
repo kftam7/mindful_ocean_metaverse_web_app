@@ -67,7 +67,7 @@ async function refresh(req){
 }
 
 module.exports = {
-	login,
+  login,
   auth,
   token,
   refresh

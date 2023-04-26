@@ -10,10 +10,23 @@ const JoinedEvent = require('../services/JoinedEvent');
 const PersonalWebsite = require('../services/PersonalWebsite');
 const Credential = require('../services/Credential');
 const AppleAuth = require('../services/AppleAuth');
+const SignIn = require('../services/SignIn');
 const logger = require("../logger");
 const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+////////////////// Sign In
+/* POST SignIn */
+router.post('/signin/:appleId', async function(req, res, next) {
+  try {
+    res.json(await SignIn.signin(req));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
 
 
 ////////////////// User
@@ -179,7 +192,7 @@ router.put('/appversion/:version', async function(req, res, next) {
 });
 
 ////////////////// Artwork
-/* GET AppVersion */
+/* GET Artwork */
 router.get('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.getArtwork());
@@ -200,7 +213,7 @@ router.get('/artwork/:appleId', async function(req, res, next) {
   }
 });
 
-/* POST AppVersion */
+/* POST Artwork */
 router.post('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.createArtwork(req.body));
@@ -211,7 +224,7 @@ router.post('/artwork', async function(req, res, next) {
   }
 });
 
-/* PUT AppVersion */
+/* PUT Artwork */
 router.put('/artwork/:artworkId', async function(req, res, next) {  
   try {
     res.json(await Artwork.updateArtwork(req.params.artworkId, req.body));
@@ -310,6 +323,7 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
   }
 });
 
+////////////////// Credential
 /* GET credential */
 router.get('/credential/:login/:credential', async function(req, res, next) {
   try {
@@ -321,6 +335,7 @@ router.get('/credential/:login/:credential', async function(req, res, next) {
   }
 });
 
+////////////////// Apple Login
 /* GET Apple Login */
 router.get('/applelogin', async function(req, res, next) {
   try {
