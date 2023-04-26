@@ -11,12 +11,12 @@ const AppModal = ({show, setShow}) => {
         <Modal.Body>
         <Image src="/icon.png" alt="icon" fluid />
         <Row className='mb-3'>
-        <Col xs={6} className="d-flex justify-content-center">
+        <Col xs={12} className="d-flex justify-content-center">
             <Button href="/mobileapp" className={styles.appBtn} style={{backgroundImage:"url('apple_store.png')"}}></Button>
         </Col>
-        <Col xs={6} className="d-flex justify-content-center">
+        {/* <Col xs={6} className="d-flex justify-content-center">
             <Button href="/mobileapp" className={styles.appBtn} style={{backgroundImage:"url('google_play_store.png')"}}></Button>
-        </Col>
+        </Col> */}
         </Row>
         </Modal.Body>
   </Modal>

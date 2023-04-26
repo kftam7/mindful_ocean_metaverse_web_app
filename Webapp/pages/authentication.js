@@ -1,7 +1,7 @@
 import { signIn, signOut, getSession } from 'next-auth/react';
 import { getAccount, grabAccount, disconnectAccount, postUser } from '../store/actions';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Link from 'next/link';
 import styles from '../styles/SubmitPage.module.css';
@@ -10,19 +10,33 @@ import {Row, Col, Image, OverlayTrigger, Button, Tooltip, Container} from 'react
 export default function AuthPage({ session }) {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [appleId, setAppleId] = useState('');
 
-  useEffect(async() => {
-    await dispatch(getAccount());
-  },[dispatch])
+  // useEffect(async() => {
+  //   await dispatch(getAccount());
+  // },[dispatch])
 
-  const connect = async() => {
-    await dispatch(grabAccount());
-    await dispatch(postUser());
-  }
+  // const connect = async() => {
+  //   await dispatch(grabAccount());
+  //   await dispatch(postUser());
+  // }
   
-//didn't work
-  const disconnect = async() => {
-    dispatch(disconnectAccount());
+  // //didn't work
+  // const disconnect = async() => {
+  //   dispatch(disconnectAccount());
+  // }
+
+  const connectWallet = async() => {
+  }
+
+  const disconnectWallet = async() => {
+  }
+
+  const connectApple = async() => {
+  }
+
+  const disconnectApple = async() => {
   }
 
   return(
@@ -49,7 +63,7 @@ export default function AuthPage({ session }) {
             </Col>
         </Row>
 
-        <Row className="mt-5 mb-5">
+        {/* <Row className="mt-5 mb-5">
             <h5 className="mt-1">1. Connect Social</h5>
             {
               session &&
@@ -92,44 +106,88 @@ export default function AuthPage({ session }) {
               </Col>
             </Row>
           </Row>
-          <hr />
-          <Row className='mt-5'>
-            <h5>2. Connect Wallet</h5>
-            {(account) ?
+          <hr /> */}
+          
+          <Row className='mt-5 mb-5'>
+            <h5>1. Connect Wallet</h5>
+            {(walletAddress) ?
             <Row>
-              <Col xs={6}>
+              <Col xs={12} md={6}>
                   <Button size="lg" className={styles.disactiveBtn}>
                     <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
-                    <span style={{ fontWeight:'800'}}>&nbsp;Wallet Connected&nbsp;</span>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Wallet Connected</span>
                   </Button>
               </Col>
-              <Col xs={6} className='d-flex justify-content-center'>
+              <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
                 <OverlayTrigger overlay={<Tooltip>Disconnect</Tooltip>}>
-                      <Button className={styles.activeBtn} onClick={disconnect}>
+                      <Button className={styles.activeBtn} onClick={disconnectWallet}>
                       <i className="fa-solid fa-xmark"></i>
-                      <span style={{ fontWeight:'800'}}>&nbsp;{account.slice(0,5).concat('...').concat(account.slice(-4))}</span>
+                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{account.slice(0,5).concat('...').concat(account.slice(-4))}</span>
                       </Button>
                 </OverlayTrigger>
               </Col>
             </Row>
             : 
             <Row className="mt-1">
-              <Col xs={6}>
-                <Button size="lg" className={styles.disactiveBtn} onClick={connect}>
-                    <Image src="/metamask.png" width="15px" height="15px" alt="metamask icon" />
-                    <span style={{ fontWeight:'800'}}>&nbsp;Connect Wallet&nbsp;</span>
+              <Col xs={12} md={6}>
+                <Button size="lg" className={styles.disactiveBtn} onClick={connectWallet}>
+                    <Image src="/metamask.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Connect Wallet</span>
                 </Button>
               </Col>
-              <Col xs={6}>
-                  <h5 className="mt-2" style={{color: "grey", textAlign: "center"}}>&nbsp;&nbsp;&nbsp;Wallet not connected</h5>
+              <Col xs={12} md={6}>
+                  <h5 className="mt-2" style={{color: "grey", textAlign: "center"}}>Wallet not connected</h5>
                 </Col>
             </Row>
             }
           </Row>
+          
+          <hr />
+
+          <Row className='mt-5'>
+            <h5>2. Connect Social</h5>
+            {(appleId) ?
+            <Row>
+              <Col xs={12} md={6}>
+                  <Button size="lg" className={styles.disactiveBtn}>
+                    <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Apple Connected</span>
+                  </Button>
+              </Col>
+              <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
+                <OverlayTrigger overlay={<Tooltip>Disconnect</Tooltip>}>
+                      <Button className={styles.activeBtn} onClick={disconnectApple}>
+                      <i className="fa-solid fa-xmark"></i>
+                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{account.slice(0,5).concat('...').concat(account.slice(-4))}</span>
+                      </Button>
+                </OverlayTrigger>
+              </Col>
+            </Row>
+            : 
+            <Row className="mt-1">
+              <Col xs={12} md={6}>
+                <Button size="lg" className={styles.disactiveBtn} onClick={connectApple}>
+                    <Image src="/apple_white.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Sign in with Apple</span>
+                </Button>
+              </Col>
+              <Col xs={12} md={6}>
+                  <h5 className="mt-2" style={{color: "grey", textAlign: "center"}}>Apple not connected</h5>
+                </Col>
+            </Row>
+            }
+            <Row className='mt-3'>
+              <Col xs={12}>
+                <OverlayTrigger overlay={<Tooltip>You will need to access images created from Mindful Ocean app which saved under your Apple ID</Tooltip>}>
+                  <h6 style={{textDecoration: "underline"}}>Why should I link my Apple account?</h6>
+                </OverlayTrigger>
+              </Col>
+            </Row>
+          </Row>
 
           <Row className='justify-content-md-center mt-5'>
             <Col xs={12}>
-              {session && account ?
+              {account ?
               <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>Next&nbsp;&rarr;</Button>
               :
               <Button size="lg" variant="secondary" className={styles.nextBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} disabled>Next&nbsp;&rarr;</Button>

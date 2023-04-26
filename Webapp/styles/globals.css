@@ -61,6 +61,24 @@ label {
   border: none !important;
 }
 
+label.form_label{
+  height: auto !important;
+}
+
+.form_Check{
+  float: left;
+  margin-right: 8px;
+}
+
+.form-check-input:checked{
+  background-color: var(--primary-text-color);
+}
+
+.btn-primary.disabled, .btn-primary:disabled{
+  background-color: var(--disabled-color);
+  border-color: var(--disabled-color);
+}
+
 select {
   padding: 3px;
   cursor: pointer;
@@ -474,3 +492,21 @@ option {
     top: 4rem !important;
   }
 }  */
+
+.connect_code{
+  justify-content: right !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .connect_code{
+    display: block !important;
+    justify-content: left !important;
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .connect_code button{
+    width: 100%;
+  }
+}

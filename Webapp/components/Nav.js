@@ -38,7 +38,7 @@ const NavBar = () => {
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-
+console.log(account)
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
   const [appleId, setAppleId] = useState('');
@@ -104,6 +104,7 @@ const NavBar = () => {
     console.log('Connect Wallet:', isConnected)
     if(!isConnected){
       sessionStorage.removeItem("walletAddress");
+      dispatch(disconnectAccount());
       return;
     }
     handleGetWalletInfo();

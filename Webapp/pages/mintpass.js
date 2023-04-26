@@ -8,7 +8,7 @@ import Router from 'next/router';
 import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
 import styles from '../styles/SubmitPage.module.css';
-import { Row, Col, Image, Button } from 'react-bootstrap';
+import { Row, Col, Image, Button, Container } from 'react-bootstrap';
 
 import axios from 'axios';
 import fs from 'fs';
@@ -18,7 +18,7 @@ export default function Mintpass({ session,user }) {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const mintpassContract = useSelector((state) => state.contractState);
-  const username = user.name;
+  const username = user?.name;
   const endpoint = 'https://api.nft.storage'; // the default
   const token = process.env.IPFS_TOKEN;
   const assets = './assets';
@@ -50,6 +50,10 @@ export default function Mintpass({ session,user }) {
   //if mint success, duplicate & remove the image, update mint status and ID to DB
   //can fetch the tokenId here?
   async function mint() {
+    Router.push({
+      pathname: '/mintedPage',
+    });
+    return;
     await mintpassContract.methods.mintMPass(1).send({ from: account })
     .once('confirmation', async function(confirmationNumber, receipt){ //if use "on('"confirmation") here, it will be triggered repeatedly
 
@@ -87,13 +91,14 @@ export default function Mintpass({ session,user }) {
       await axios.put(
       '/api/users',
         { 
-          email: session.user.email, 
+          email: session?.user?.email, 
           tokenId: tokenId,
           index: window.localStorage.index 
         }
       )
   }
   return(
+    <Container className='mt-5 mb-5'>
       <div className={styles.submitPage}>
         {/* <Button onClick={update}>Update</Button> */}
         <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; Return to homepage</h6></Link></Row>
@@ -102,35 +107,41 @@ export default function Mintpass({ session,user }) {
           <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
               <Col xs={4} className={styles.item}>
                   <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>&nbsp;1. Authentication</div>
+                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>1. Authentication</span></div>
                   <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
               </Col>
               <Col xs={4} className={styles.item}>
                   <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>&nbsp;2. Submission</div>
+                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>2. Submission</span></div>
                   <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
               </Col>
               <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
                   <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-regular fa-circle"></i>&nbsp;3. Get Mintpass</div>
+                  <div className={styles.content}><i className="fa-regular fa-circle"></i><span>3. Get Mintpass</span></div>
                   <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
               </Col>
           </Row>
-          <Row className='d-flex justify-content-center mt-5'>
-              <Image src="/mintPass_lower.gif" alt="mintpass" style={{width: "30%", transform: "translateX(-16%)", borderRadius: "30px"}} fluid/>
-          </Row>
-          <Row className='d-flex justify-content-center mt-3'>
-              <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mint}>Get Mint Pass</Button>
-          </Row>
-          <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>
-              <p className="m-0" style={{transform: "translateX(-6%)"}}>Free mint! A small gas fee of about 0.005</p>
-              { account ?
-                <p style={{transform: "translateX(-6%)"}}><span style={{textDecoration:"underline"}}>MATIC</span> will be charged from the wallet {account.slice(0,5).concat('...').concat(account.slice(-4))}</p> 
-                :
-                <p>Please check the wallet connection!</p>
-              }
-          </Row>
+
+          <div className={styles.mintpassContent}>
+            <Row className='d-flex justify-content-center mt-5'>
+              <div className={styles.mintpassImg}>
+                <Image src="/mintPass_lower.gif" alt="mintpass"/>
+              </div>
+            </Row>
+            <Row className='d-flex justify-content-center mt-3'>
+              <Col>
+                <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mint}>Get Mint Pass</Button>
+              </Col>
+            </Row>
+            <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>
+                <p className="m-0">
+                  A small gas fee will be charged.<br />
+                  <span style={{textDecoration:"underline", cursor: 'pointer'}}>More details</span>
+                </p>
+            </Row>
+          </div>
       </div>
+    </Container>
   )
 }
 
@@ -152,6 +163,10 @@ export async function getServerSideProps(context) {
         session,
         user
       }
+    }
+  }
+  return {
+    props: {
     }
   }
 }
