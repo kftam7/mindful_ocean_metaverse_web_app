@@ -478,6 +478,23 @@
 							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "## This section is to manage user information"
@@ -2437,13 +2454,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/artwork/we@apple.com",
+									"raw": "{{baseUrl}}/artwork/001463.3be803433a0542a0b0d6862a62285371.0627",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"artwork",
-										"we@apple.com"
+										"001463.3be803433a0542a0b0d6862a62285371.0627"
 									]
 								}
 							},
@@ -2522,7 +2539,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"userId\":\"13\",\n     \"name\":\"artworktest1\",\n     \"URL\":\"http://artworktest1\",\n     \"description\":\"test1\"\n  }\n]",
+							"raw": "[\n  {\n     \"userId\":\"1\",\n     \"name\":\"artworktest1\",\n     \"URL\":\"http://artworktest1\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2559,7 +2576,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"userId\":\"14\",\n     \"name\":\"artworktest14\",\n     \"URL\":\"http://artworktest14\",\n     \"description\":\"test1\"\n  }\n]",
+									"raw": "[\n  {\n     \"userId\":\"1\",\n     \"name\":\"artworktest1\",\n     \"URL\":\"http://artworktest1\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2576,45 +2593,10 @@
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "16"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"10-GggyjIg1Rzkb0HN+wlvi+x45IjE\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 14:03:28 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"artworkId\": 35\n}"
+							"body": null
 						}
 					]
 				},
@@ -2651,7 +2633,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n     \"userId\":\"1\",\n     \"name\":\"artwork modified\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"artwork modify testing\"\n  }",
+							"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest1\",\n   \"URL\":\"http://artworktest1\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2689,7 +2671,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"userId\":\"1\",\n     \"name\":\"artwork modified\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"artwork modify testing\"\n  }",
+									"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest1changed\",\n   \"URL\":\"http://artworktest1/changed\",\n   \"description\":\"desctest1changed\",\n   \"extraInfo\":\"extratest1changed\",\n   \"createTime\":\"2023-01-01 00:00:00\",\n   \"updateTime\":\"2026-12-31 00:00:00\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2697,55 +2679,20 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/artwork/9",
+									"raw": "{{baseUrl}}/artwork/36",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"artwork",
-										"9"
+										"36"
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "41"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 14:05:13 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
+							"body": null
 						}
 					]
 				}
@@ -4143,12 +4090,18 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/applerefresh",
+									"raw": "{{baseUrl}}/applerefresh?refreshToken=r0a7af40a57e649a9b0a8afe55629f8e6.0.szyu.HkwtKg3lPWsej1kyjvPEhg",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"applerefresh"
+									],
+									"query": [
+										{
+											"key": "refreshToken",
+											"value": "r0a7af40a57e649a9b0a8afe55629f8e6.0.szyu.HkwtKg3lPWsej1kyjvPEhg"
+										}
 									]
 								}
 							},
@@ -4160,6 +4113,37 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Sign In",
+			"item": [
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/signin/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signin",
+								"{appleId}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APP",
+			"item": []
+		},
+		{
+			"name": "Admin",
+			"item": []
 		}
 	]
 }

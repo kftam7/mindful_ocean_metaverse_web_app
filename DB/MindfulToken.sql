@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.30, for macos12 (x86_64)
 --
--- Host: 127.0.0.1    Database: mindful
+-- Host: 127.0.0.1    Database: gtapi
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
@@ -16,206 +16,194 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `appVersion`
+-- Table structure for table `airdropCampaign`
 --
 
-DROP TABLE IF EXISTS `appVersion`;
+DROP TABLE IF EXISTS `airdropCampaign`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `appVersion` (
-  `versionId` int NOT NULL AUTO_INCREMENT COMMENT 'Primary key',
-  `versionNo` varchar(45) NOT NULL COMMENT 'Version No. (e.g. 1.0.1)',
-  `versionName` varchar(45) NOT NULL COMMENT 'Name of the Version',
-  `releaseDate` datetime NOT NULL COMMENT 'Release Date of this version',
-  `expireDate` datetime NOT NULL COMMENT 'Expire Date of this version',
-  `description` varchar(500) DEFAULT NULL COMMENT 'Description of the version release',
-  `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`versionId`),
-  UNIQUE KEY `versionNo_UNIQUE` (`versionNo`),
-  UNIQUE KEY `versionName_UNIQUE` (`versionName`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `airdropCampaign` (
+  `campaignID` int NOT NULL AUTO_INCREMENT COMMENT 'ID of the Campaign',
+  `campaignName` varchar(200) NOT NULL COMMENT 'Name of the Campaign',
+  `contractAddress` varchar(45) NOT NULL COMMENT 'Contract address of the campaign',
+  `startTime` datetime NOT NULL COMMENT 'Start time of the campaign',
+  `endTime` datetime NOT NULL COMMENT 'endTime of the Campaign',
+  `description` varchar(1000) NOT NULL COMMENT 'Description of the campaign',
+  `whiteListURL` varchar(1000) DEFAULT NULL COMMENT 'URL of Whitelist in .json format',
+  `merkleRoot` varchar(100) NOT NULL COMMENT 'Merkle Root ',
+  PRIMARY KEY (`campaignID`),
+  UNIQUE KEY `campaignID_UNIQUE` (`campaignID`),
+  UNIQUE KEY `campaignName_UNIQUE` (`campaignName`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `appVersion`
+-- Table structure for table `airdropList`
 --
 
-LOCK TABLES `appVersion` WRITE;
-/*!40000 ALTER TABLE `appVersion` DISABLE KEYS */;
-INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version',1),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version',1),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version',1),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th',1),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th',1),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2025-01-01 00:00:00','edited version testing',0),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined',1),(19,'0.0.14','98th version','2023-08-17 05:05:09','2023-09-02 07:06:06','something here',1),(31,'0.0.99','99th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(33,'1','1','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(36,'0.0009','9thth','2023-04-06 02:25:23','2023-04-27 02:25:27','tests9',0);
-/*!40000 ALTER TABLE `appVersion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `artwork`
---
-
-DROP TABLE IF EXISTS `artwork`;
+DROP TABLE IF EXISTS `airdropList`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `artwork` (
-  `artworkId` int NOT NULL AUTO_INCREMENT COMMENT 'Artwork ID',
-  `userId` int NOT NULL,
-  `name` varchar(100) DEFAULT NULL COMMENT 'Name of the artwork',
-  `URL` varchar(500) NOT NULL COMMENT 'URL of the upload artwork',
-  `description` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`artworkId`),
-  UNIQUE KEY `UNIQUE` (`userId`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `airdropList` (
+  `listID` int NOT NULL AUTO_INCREMENT COMMENT 'List ID',
+  `campaignID` int NOT NULL COMMENT 'Campaign ID (from table airdropCampaign)',
+  `walletID` varchar(45) NOT NULL COMMENT 'Wallet ID of the receipient',
+  `noToken` decimal(30,18) NOT NULL COMMENT 'No. Of token to receive (18 decimals)',
+  `claimTime` datetime DEFAULT NULL COMMENT 'Time to claim the token',
+  `txnHash` varchar(70) DEFAULT NULL COMMENT 'Hash of the blockchain transaction',
+  PRIMARY KEY (`listID`),
+  UNIQUE KEY `listID_UNIQUE` (`listID`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `artwork`
+-- Table structure for table `credential`
 --
 
-LOCK TABLES `artwork` WRITE;
-/*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,1,'undefined','undefined','undefined'),(2,1,'artwork2','https://xyz.com/1.html','html text'),(3,1,'artwork3','https://111.com/a.gif','gif animation'),(4,2,'artworkA','https://222.com/321.avi','movie file'),(5,2,'artworkB','https://333.com/sound.mp4','sound track'),(6,3,'artworkwhatisthis','https://kkk.com/blablabla.gif','gif picture'),(7,4,'artworktest1','http://artworktest1','test1'),(8,5,'artworktest2','http://artworktest2','test2'),(9,1,'artwork modified','https://modified.com','artwork modify testing'),(12,3,'ds','df',NULL),(26,3,'ds2','https://www.baidu.com','sdfdsf'),(27,9,'artworktest1','http://artworktest1','test1'),(29,10,'artworktest1','http://artworktest1','test1'),(31,11,'artworktest1','http://artworktest1','test1'),(32,12,'artworktest1','http://artworktest1','test1'),(33,13,'artworktest1','http://artworktest1','test1'),(35,14,'artworktest14','http://artworktest14','test1');
-/*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `CMSUser`
---
-
-DROP TABLE IF EXISTS `CMSUser`;
+DROP TABLE IF EXISTS `credential`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `CMSUser` (
-  `CMSUserId` int NOT NULL AUTO_INCREMENT COMMENT 'ID for credential',
+CREATE TABLE `credential` (
+  `credentialID` int NOT NULL AUTO_INCREMENT COMMENT 'ID for credential',
   `name` varchar(100) NOT NULL,
   `credential` varchar(100) NOT NULL COMMENT 'User password in md5',
   `isAdmin` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'If the account is administrator',
   `isActive` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'If the account is active',
-  PRIMARY KEY (`CMSUserId`),
-  UNIQUE KEY `CMSUserId_UNIQUE` (`CMSUserId`),
+  PRIMARY KEY (`credentialID`),
+  UNIQUE KEY `credentialID_UNIQUE` (`credentialID`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `CMSUser`
+-- Table structure for table `crypto`
 --
 
-LOCK TABLES `CMSUser` WRITE;
-/*!40000 ALTER TABLE `CMSUser` DISABLE KEYS */;
-INSERT INTO `CMSUser` VALUES (1,'admin','c93ccd78b2076528346216b3b2f701e6',1,1);
-/*!40000 ALTER TABLE `CMSUser` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `event`
---
-
-DROP TABLE IF EXISTS `event`;
+DROP TABLE IF EXISTS `crypto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `event` (
-  `eventId` int NOT NULL AUTO_INCREMENT COMMENT 'Event ID',
-  `title` varchar(500) NOT NULL COMMENT 'Title of the event',
-  `paragraphText` varchar(2000) NOT NULL COMMENT 'Paragraph text of the event',
-  `image` varchar(200) DEFAULT NULL COMMENT 'URL of the event image',
-  `hyperlink` varchar(200) DEFAULT NULL COMMENT 'Hyperlink providing more description of the event',
-  `timerDescription` varchar(2000) DEFAULT NULL COMMENT 'Description of the timer',
-  `startTime` datetime NOT NULL,
-  `endTime` datetime NOT NULL,
-  `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`eventId`),
-  UNIQUE KEY `title_UNIQUE` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `crypto` (
+  `cryptoId` int NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
+  `user` varchar(45) NOT NULL COMMENT 'Account login name',
+  `sendTime` datetime NOT NULL COMMENT 'Time when batch was sent',
+  `chain` varchar(10) NOT NULL COMMENT 'BNB Smart Chain (BNB)/Polygon',
+  `tokenAddress` varchar(45) NOT NULL COMMENT 'GT token address',
+  `walletAddress` varchar(45) NOT NULL COMMENT 'Wallet address of the recipient',
+  `tokenNo` int NOT NULL COMMENT 'No. of token sent to the address',
+  `gasPrice` int NOT NULL COMMENT 'Gas Price',
+  `gasLimit` int NOT NULL COMMENT 'Gas Limit',
+  `note` varchar(1000) DEFAULT NULL COMMENT 'Notes specified on the input',
+  `txnHash` varchar(80) DEFAULT NULL COMMENT 'Used by URL link to blockchain explorer where details of transaction can be found',
+  `success` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1-success, 0-fail',
+  PRIMARY KEY (`cryptoId`)
+) ENGINE=InnoDB AUTO_INCREMENT=1509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `event`
+-- Table structure for table `email`
 --
 
-LOCK TABLES `event` WRITE;
-/*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'eventD','eventD description','http://www.abc.com/a.png','http://www.abc.com/eventD.html','timerDescriptionD','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(2,'eventK','eventK description','http://www.abc.com/b.png','http://www.abc.com/eventK.html','timerDescriptionK','2022-06-09 09:00:10','2022-10-09 09:00:10',0),(3,'eventC','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(4,'eventA','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(5,'eventB','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(6,'eventE','eventC description','http://www.abc.com/c.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(7,'eventF','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(8,'eventG','eventB description','http://www.abc.com/b.png','http://www.abc.com/eventB.html','timerDescriptionB','2022-06-09 09:00:10','2022-10-09 09:00:10',1),(9,'eventH','eventC description','http://127.0.0.1:3000/GettyImages-1300384940-2000-a5979552a66f4fc7b67aeb35110fea8d%20copy.png','http://www.abc.com/eventC.html','timerDescriptionC','2023-06-09 09:00:10','2023-10-09 09:00:10',1),(10,'eventI','eventD description','http://www.abc.com/d.png','http://www.abc.com/eventD.html','timerDescriptionD','2024-06-09 09:00:10','2024-10-09 09:00:10',1),(12,'event99','abc','http://111.com','http://222.com','def','2023-04-01 12:02:47','2022-09-01 12:01:26',1);
-/*!40000 ALTER TABLE `event` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `joinedEvent`
---
-
-DROP TABLE IF EXISTS `joinedEvent`;
+DROP TABLE IF EXISTS `email`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `joinedEvent` (
-  `joinedEventId` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
-  `eventId` int NOT NULL,
-  PRIMARY KEY (`joinedEventId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `email` (
+  `emailID` int NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
+  `user` varchar(45) NOT NULL COMMENT 'Account login name',
+  `sendTime` datetime NOT NULL COMMENT 'Time when batch was sent',
+  `chain` varchar(10) NOT NULL COMMENT 'BNB Smart Chain (BNB)/Polygon',
+  `tokenAddress` varchar(45) NOT NULL COMMENT 'GT token address',
+  `emailTemplateID` int NOT NULL,
+  `emailAddress` varchar(100) NOT NULL COMMENT 'Email Address',
+  `tokenNo` int NOT NULL COMMENT 'No. of token sent to the address',
+  `expiry` datetime NOT NULL COMMENT 'Expiry Date of the key date & time in GMT',
+  `KYC` tinyint(1) NOT NULL COMMENT 'Know your customer needed (i.e. 0 or 1)',
+  `KYCResult` tinyint(1) DEFAULT NULL COMMENT '1 - approved: KYC application has been approved\n0 - rejected: Operator has rejected one or more attributes, User can resubmit\n2 - incomplete: Blockpass verifications pending\n3 - waiting: Operator''s review pending\n4 - inreview: In review by Operator\n5 - blocked : Operator has blocked the profile, User cannot resubmit',
+  `KYCResultUpdateTime` datetime DEFAULT NULL COMMENT 'Last Time when KYC Result is updated from BlockPass',
+  `uniqueKey` varchar(45) NOT NULL COMMENT 'Unique key on the email, embed in the URL. Will\\rbecome invalid once user clicks the link',
+  `sendStatus` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Email sending status (0 – Failed, 1 – Passed)',
+  `linkClicked` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 – user hasn’t clicked the link yet\\\\r1 – user has clicked the link already',
+  `whenClicked` datetime DEFAULT NULL COMMENT 'Time when user clicked the link',
+  `walletAddress` varchar(45) DEFAULT NULL COMMENT 'Wallet address captured',
+  `tokenSent` int DEFAULT '0' COMMENT 'No. of token sent to this wallet address',
+  `note` varchar(1000) DEFAULT NULL COMMENT 'Notes specified on the input',
+  PRIMARY KEY (`emailID`),
+  UNIQUE KEY `emailID_UNIQUE` (`emailID`),
+  UNIQUE KEY `UniqueKey_UNIQUE` (`uniqueKey`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `joinedEvent`
+-- Table structure for table `emailFromAddress`
 --
 
-LOCK TABLES `joinedEvent` WRITE;
-/*!40000 ALTER TABLE `joinedEvent` DISABLE KEYS */;
-INSERT INTO `joinedEvent` VALUES (1,1,2),(2,1,2),(3,1,3),(4,2,4),(5,2,5),(6,2,6),(7,3,7),(8,3,8),(9,3,9),(10,4,6),(11,5,7),(12,5,8),(13,9,1),(14,9,2),(15,9,3);
-/*!40000 ALTER TABLE `joinedEvent` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `personalWebsite`
---
-
-DROP TABLE IF EXISTS `personalWebsite`;
+DROP TABLE IF EXISTS `emailFromAddress`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `personalWebsite` (
-  `websiteId` int NOT NULL AUTO_INCREMENT COMMENT 'Website ID',
-  `userId` int NOT NULL,
-  `URL` varchar(500) NOT NULL COMMENT 'URL of the website',
-  `description` varchar(500) DEFAULT NULL COMMENT 'Description of the website',
-  PRIMARY KEY (`websiteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `emailFromAddress` (
+  `addressID` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL COMMENT 'Email address',
+  `clientID` varchar(100) NOT NULL COMMENT 'Client ID',
+  `clientSecret` varchar(100) NOT NULL COMMENT 'Client Secret',
+  `redirectURI` varchar(100) NOT NULL COMMENT 'Redirect URI',
+  `refreshToken` varchar(500) NOT NULL COMMENT 'Refresh Token',
+  `isActive` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'If address is Active',
+  PRIMARY KEY (`addressID`),
+  UNIQUE KEY `addressID_UNIQUE` (`addressID`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `personalWebsite`
+-- Table structure for table `emailTemplate`
 --
 
-LOCK TABLES `personalWebsite` WRITE;
-/*!40000 ALTER TABLE `personalWebsite` DISABLE KEYS */;
-INSERT INTO `personalWebsite` VALUES (1,1,'https://abc.com','desc1'),(2,1,'https://def.com','desc2'),(3,1,'https://ghi.com','desc3'),(4,2,'https://123.com','show1'),(5,2,'https://456.com','show2'),(6,2,'https://789.com','show3'),(7,3,'https://111.com','detail1'),(8,3,'https://222.com','detail2'),(9,1,'https://modified.com','personalwebsite modify testing'),(10,4,'https://1.com','new 1'),(11,5,'https://2.com','new 2'),(12,5,'https://3.com','new 3'),(13,4,'https://1.com','new 1'),(14,5,'https://2.com','new 2'),(15,6,'https://3.com','new 3');
-/*!40000 ALTER TABLE `personalWebsite` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `emailTemplate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `userId` int NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
-  `appleId` varchar(50) NOT NULL COMMENT 'Apple ID',
-  `walletAddress` varchar(45) DEFAULT NULL COMMENT 'Crypto wallet address',
-  `personInfo` varchar(1000) DEFAULT NULL,
-  `createTime` datetime NOT NULL COMMENT 'Record create time',
-  `updateTime` datetime NOT NULL COMMENT 'Record update time',
-  `isActive` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `twitterId_UNIQUE` (`appleId`),
-  UNIQUE KEY `walletAddress_UNIQUE` (`walletAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `emailTemplate` (
+  `emailTemplateID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL COMMENT 'Name of the template',
+  `addressID` int NOT NULL COMMENT 'The from address of the email template',
+  `subjectBSC` varchar(100) DEFAULT NULL COMMENT 'Email subject for BSC',
+  `subjectPolygon` varchar(100) DEFAULT NULL COMMENT 'Email subject for Polygon',
+  `contentBSC` text COMMENT 'Content of the email template for BSC',
+  `contentPolygon` text COMMENT 'Content of the email template for Polygon',
+  `isActive` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'If the template is active',
+  PRIMARY KEY (`emailTemplateID`),
+  UNIQUE KEY `name_UNIQUE` (`name`),
+  UNIQUE KEY `emailTemplateID_UNIQUE` (`emailTemplateID`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Table structure for table `emailTemplateLookup`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'001463.3be803433a0542a0b0d6862a62285371.0627','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-01-01 00:00:00',1),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00',1),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00',1),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02',0),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1),(28,'123@xx.com','0x1ecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1),(29,'456@yy.com','0x28a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',0),(30,'789@zz.com','0x371DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `emailTemplateLookup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emailTemplateLookup` (
+  `lookupID` int NOT NULL AUTO_INCREMENT COMMENT 'Record ID',
+  `credentialID` int NOT NULL COMMENT 'ID for credential',
+  `emailTemplateID` int NOT NULL COMMENT 'ID for email Template',
+  PRIMARY KEY (`lookupID`),
+  UNIQUE KEY `lookupID_UNIQUE` (`lookupID`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lastExecute`
+--
+
+DROP TABLE IF EXISTS `lastExecute`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lastExecute` (
+  `process` varchar(50) NOT NULL,
+  `lastExecTime` datetime NOT NULL COMMENT 'Record the last execution time of the scheduled job',
+  PRIMARY KEY (`process`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -226,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-20 15:30:27
+-- Dump completed on 2023-03-27 15:26:31
