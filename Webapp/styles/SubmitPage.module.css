@@ -91,6 +91,10 @@
   border-radius: 10px;
 }
 
+.disactiveBtn a:hover{
+  color: #fff;
+}
+
 .nextBtn{
   font-size: 1.3rem;
 }

@@ -6,16 +6,33 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from 'next/link';
 import styles from '../styles/SubmitPage.module.css';
 import {Row, Col, Image, OverlayTrigger, Button, Tooltip, Container} from 'react-bootstrap';
+import axios from 'axios';
 
-export default function AuthPage({ session }) {
+// Web3Modal
+import { useWeb3Modal } from '@web3modal/react';
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { Web3Modal } from '@web3modal/react'
+import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
+import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { Web3Provider } from "@ethersproject/providers";
+const chains = [arbitrum, mainnet, polygon]
+const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
+
+const { provider } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  provider
+})
+const ethereumClient = new EthereumClient(wagmiClient, chains)
+
+const AuthPage = ({ session }) => {
+  const apiPort = process.env.API_PORT || '/';
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const [walletAddress, setWalletAddress] = useState('');
-  const [appleId, setAppleId] = useState('');
-
-  // useEffect(async() => {
-  //   await dispatch(getAccount());
-  // },[dispatch])
+  const [appleId, setAppleId] = useState('2132131');
+  const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
 
   // const connect = async() => {
   //   await dispatch(grabAccount());
@@ -27,16 +44,71 @@ export default function AuthPage({ session }) {
   //   dispatch(disconnectAccount());
   // }
 
-  const connectWallet = async() => {
+  // Web3Modal
+  const { open } = useWeb3Modal();
+  const { isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+  
+  useEffect(async () => {
+    if(!isConnected){
+      sessionStorage.removeItem("walletAddress");
+      setWalletAddress('');
+      return;
+    }
+    handleGetWalletInfo();
+  }, [isConnected]);
+
+  const onOpen = async () => {
+    await open();
   }
 
-  const disconnectWallet = async() => {
+  const connectWallet = async() => {
+    if (isConnected) {
+      disconnect();
+    } else {
+      onOpen();
+    }
   }
+
+  // 获取钱包地址信息并记录在 session 中
+  const handleGetWalletInfo = async () => {
+    const provider = new Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    setWalletAddress(address);
+    sessionStorage.setItem("walletAddress", address);
+  };
+
+  useEffect(async () => {
+    const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
+    setAppleIdLoginBtn(res.data);
+  }, []);
+
+  // apple id  
+  useEffect(async () => {
+    const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
+    setAppleIdLoginBtn(res.data);
+  }, []);
+
+  useEffect(() => {
+    const appleId = sessionStorage.getItem("appleId");
+    if(!appleId){
+      setAppleId('');
+    }else{
+      setAppleId(appleId);
+    }
+  }, []);
 
   const connectApple = async() => {
   }
 
   const disconnectApple = async() => {
+    setAppleId('');
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("expires_in");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("appleId");
   }
 
   return(
@@ -120,9 +192,9 @@ export default function AuthPage({ session }) {
               </Col>
               <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
                 <OverlayTrigger overlay={<Tooltip>Disconnect</Tooltip>}>
-                      <Button className={styles.activeBtn} onClick={disconnectWallet}>
+                      <Button className={styles.activeBtn} onClick={connectWallet}>
                       <i className="fa-solid fa-xmark"></i>
-                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{account.slice(0,5).concat('...').concat(account.slice(-4))}</span>
+                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{walletAddress.slice(0,5).concat('...').concat(walletAddress.slice(-4))}</span>
                       </Button>
                 </OverlayTrigger>
               </Col>
@@ -136,7 +208,7 @@ export default function AuthPage({ session }) {
                 </Button>
               </Col>
               <Col xs={12} md={6}>
-                  <h5 className="mt-2" style={{color: "grey", textAlign: "center"}}>Wallet not connected</h5>
+                  <h5 className="mt-2 connect_txt">Wallet not connected</h5>
                 </Col>
             </Row>
             }
@@ -158,7 +230,7 @@ export default function AuthPage({ session }) {
                 <OverlayTrigger overlay={<Tooltip>Disconnect</Tooltip>}>
                       <Button className={styles.activeBtn} onClick={disconnectApple}>
                       <i className="fa-solid fa-xmark"></i>
-                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{account.slice(0,5).concat('...').concat(account.slice(-4))}</span>
+                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{appleId.slice(0,5).concat('...').concat(appleId.slice(-4))}</span>
                       </Button>
                 </OverlayTrigger>
               </Col>
@@ -168,26 +240,30 @@ export default function AuthPage({ session }) {
               <Col xs={12} md={6}>
                 <Button size="lg" className={styles.disactiveBtn} onClick={connectApple}>
                     <Image src="/apple_white.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Sign in with Apple</span>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>
+                      <span dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></span>
+                    </span>
                 </Button>
               </Col>
               <Col xs={12} md={6}>
-                  <h5 className="mt-2" style={{color: "grey", textAlign: "center"}}>Apple not connected</h5>
+                  <h5 className="mt-2 connect_txt">Apple not connected</h5>
                 </Col>
             </Row>
             }
             <Row className='mt-3'>
               <Col xs={12}>
+                <span style={{ display: 'inline-block' }}>
                 <OverlayTrigger overlay={<Tooltip>You will need to access images created from Mindful Ocean app which saved under your Apple ID</Tooltip>}>
                   <h6 style={{textDecoration: "underline"}}>Why should I link my Apple account?</h6>
                 </OverlayTrigger>
+                </span>
               </Col>
             </Row>
           </Row>
 
           <Row className='justify-content-md-center mt-5'>
             <Col xs={12}>
-              {account ?
+              {walletAddress && appleId ?
               <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>Next&nbsp;&rarr;</Button>
               :
               <Button size="lg" variant="secondary" className={styles.nextBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} disabled>Next&nbsp;&rarr;</Button>
@@ -198,6 +274,26 @@ export default function AuthPage({ session }) {
     </Container>
   )
 }
+
+function App() {
+  return (
+    <>
+      <WagmiConfig client={wagmiClient}>
+          <AuthPage />
+      </WagmiConfig>
+
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        themeVariables={{
+          '--w3m-z-index': '9999'
+        }}
+      />
+    </>
+  )
+}
+
+export default App;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);

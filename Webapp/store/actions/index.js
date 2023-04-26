@@ -1,6 +1,7 @@
 import { FETCH_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT} from "./types";
 import { fetchAccount, connectAccount, disconnect, fetchBalance, connectForBalance, fetchContract } from "../web3Connections";
 import axios from 'axios';
+const apiPort = process.env.API_PORT || '/';
 
 //fetch data here, if fetch from server-side, use axios
 export const getAccount = () => async (dispatch) => {
@@ -95,7 +96,7 @@ export const fetchMintpassContract = () => async (dispatch) => {
 
 export const postUser = () => async (dispatch) => {
   const account = await fetchAccount();
-  const res = await axios.post('/api/users/', { 
+  const res = await axios.post(`${apiPort}/mindfulapi/users/`, { 
     wallet: account
   })
     try {

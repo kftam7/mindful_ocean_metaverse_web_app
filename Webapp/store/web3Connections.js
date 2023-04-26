@@ -10,7 +10,7 @@ const getWeb3Modal = async() => {
     walletconnect: {
         package: WalletConnectProvider,
         options: {
-          infuraId: "78e38e6a5a0e4fdd8708de1596ddcbb1",
+          infuraId: "b66462653b390b41e66f8f03e25cfa0a",
           rpc: {
               1: "https://mainnet.mycustomnode.com",
               137: "https://polygon-rpc.com",

@@ -497,11 +497,20 @@ option {
   justify-content: right !important;
 }
 
+.connect_txt{
+  color: gray;
+  text-align: right;
+}
+
 @media only screen and (max-width: 768px) {
   .connect_code{
     display: block !important;
     justify-content: left !important;
     margin-top: 10px;
+  }
+
+  .connect_txt{
+    text-align: center;
   }
 }
 
