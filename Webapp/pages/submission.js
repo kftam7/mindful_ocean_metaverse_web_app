@@ -6,11 +6,13 @@ import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
 import styles from '../styles/SubmitPage.module.css';
 import { Row, Col, Image, Container, Button, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
+import { sortByFieldAsc, sortByFieldDesc } from '../utils/utils';
 
 import axios from 'axios';
 import AppModal from '../components/submission/AppModal';
 import SubmitModal from '../components/submission/SubmitModal';
 import EditModal from '../components/submission/EditModal';
+
 //just pass the setShow and setConShow as props to children components
 export default function SubmitPage({ session, user }) {
   const apiPort = process.env.API_PORT || '/';
@@ -28,7 +30,7 @@ export default function SubmitPage({ session, user }) {
   const mintTime = new Date(user?.submissionTime);
 
   const [disabled, setDisabled] = useState(true);
-  const [dataArtworks, setArtworks] = useState([]);
+  const [dataArtworks, setDataArtworks] = useState([]);
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -37,25 +39,25 @@ export default function SubmitPage({ session, user }) {
     const res = await axios.get(`${apiPort}/mindfulapi/artwork/${appleId}`);
     if(res.status === 200){
       const { data: { data } } = res;
-      console.log(data)
-      setArtworks(data);
+      setDataArtworks(sortByFieldDesc(data, 'updateTime'));
+      ;
     }
   },[])
   
   useEffect(() => {
     if(!dataArtworks.length) return setDisabled(true);
-    setDisabled(false)
-  },[dataArtworks])
+    setDisabled(false);
+  },[dataArtworks]);
 
   const handleShow = () => setShow(true);
   const handleSubmitShow = () => setSubmitShow(true);
   const handleEditShow = () => setEditShow(true);
 
-  let imageSelected;
-  if(typeof window !== "undefined") {
-    console.log(window.localStorage.index + " " + window.localStorage.canvas)
-    imageSelected =  window.localStorage.canvas;
-  }
+  // let imageSelected;
+  // if(typeof window !== "undefined") {
+  //   console.log(window.localStorage.index + " " + window.localStorage.canvas)
+  //   imageSelected =  window.localStorage.canvas;
+  // }
 
   function refreshPage(){ 
     window.location.reload(); 
@@ -63,10 +65,12 @@ export default function SubmitPage({ session, user }) {
 
   function sortOldest() {
     setNewest(false);
+    sortByFieldAsc(dataArtworks, 'updateTime');
   }
 
   function sortNewest() {
     setNewest(true);
+    sortByFieldDesc(dataArtworks, 'updateTime');
   }
 
   async function selectImage(image, index) {
@@ -79,23 +83,23 @@ export default function SubmitPage({ session, user }) {
     // const mintTime = new Date("06/09/2022 14:00:00"); //for testing only
     const waitingTime = 4 * 3600000;//users wait for 4 hours
     const interval = setInterval(() => {
-    const now = new Date();
-    const difference = waitingTime - (now.getTime() - mintTime.getTime());
-    //in millisec
-    const h = Math.floor(
-      (difference % (1000 * 60 * 60 *24)) / (1000 * 60 * 60)
-    );
-    setHours(h);
+      const now = new Date();
+      const difference = waitingTime - (now.getTime() - mintTime.getTime());
+      //in millisec
+      const h = Math.floor(
+        (difference % (1000 * 60 * 60 *24)) / (1000 * 60 * 60)
+      );
+      setHours(h);
 
-    const m = Math.floor(
-      (difference % (1000 * 60 * 60)) / (1000 * 60)
-    );
-    setMins(m);
+      const m = Math.floor(
+        (difference % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      setMins(m);
 
-    const s = Math.floor(
-      (difference % (1000 * 60)) / 1000
-    );
-    setSecs(s);
+      const s = Math.floor(
+        (difference % (1000 * 60)) / 1000
+      );
+      setSecs(s);
     }, 1000);
 
     return () => 
@@ -146,22 +150,26 @@ export default function SubmitPage({ session, user }) {
                 <Col xs={10}>
                   <div className={styles.submitTile}>Browse your artworks: </div>
                 </Col>
-                {/* <Col xs={2}>
-                  {
-                    newest ? 
-                    <OverlayTrigger overlay={<Tooltip id="">Sort: Oldest</Tooltip>}>
-                      <span className="d-inline-block">
-                      <Button variant="light" className={styles.sortBtn} onClick={sortOldest}><i className="fa-solid fa-arrow-down-short-wide"></i></Button>
-                      </span>
-                    </OverlayTrigger>
-                  :
-                    <OverlayTrigger overlay={<Tooltip id="">Sort: Newest</Tooltip>}>
-                      <span className="d-inline-block">
-                      <Button variant="light" className={styles.sortBtn} onClick={sortNewest}><i className="fa-solid fa-arrow-down-wide-short"></i></Button>
-                      </span>
-                    </OverlayTrigger>
-                  }  
-                </Col> */}
+                
+                {!disabled ?
+                  <Col xs={2}>
+                    {
+                      newest ? 
+                        <OverlayTrigger overlay={<Tooltip id="">Sort: Oldest</Tooltip>}>
+                          <span className="d-inline-block">
+                          <Button variant="light" className={styles.sortBtn} onClick={sortOldest}><i className="fa-solid fa-arrow-down-short-wide"></i></Button>
+                          </span>
+                        </OverlayTrigger>
+                      :
+                        <OverlayTrigger overlay={<Tooltip id="">Sort: Newest</Tooltip>}>
+                          <span className="d-inline-block">
+                          <Button variant="light" className={styles.sortBtn} onClick={sortNewest}><i className="fa-solid fa-arrow-down-wide-short"></i></Button>
+                          </span>
+                        </OverlayTrigger>
+                    }  
+                  </Col>
+                  : ''
+                }
               </Row>
 
               {disabled ?
@@ -173,86 +181,35 @@ export default function SubmitPage({ session, user }) {
                   </h4>
                   <p className={styles.submitTxt1}>Download <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean</span> to create and submit artwork, or</p>
                   <Link href="/authentication" passHref><span style={{textDecoration: "underline", cursor: "pointer"}}>Switch to a different account</span></Link>
-                  <Col>
-                    <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;Refresh</Button>
-                  </Col>
                 </Row>
               :
               <>
-                {/* <div className={`text-center mt-1 mb-0 ${styles.bounce}`}>
-                  <Link href="/submission#0" passHref><i className="fa-solid fa-caret-up" style={{ color: "grey",fontSize: "2rem", cursor: "pointer"}}></i></Link>
-                </div>  */}
-                { newest ?
-                //sort by newest: cause the "map" still loop from 0
-                  <div className={`mt-1 ${styles.scrollBox}`}>
-                      { 
-                      dataArtworks.map((item, key) => (
-                        <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
-                          <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
-                            <Form.Check.Input
-                              name="imageGroup1"
-                              type="radio"
-                              id={`imageGroup${key}`}
-                              className={styles.imageRadio}
-                              // onChange={selectImage(image)} doesn't work
-                              // onChange={() => selectImage(dataArtworks[dataArtworks.length - dataArtworks.indexOf(key) - 1], dataArtworks.length - dataArtworks.indexOf(key) - 1)}
-                            />
-                            <Image src={item.URL} style={{cursor: "pointer", position: "relative"}} fluid />
-                            {/* <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
-                              <i className="fa-solid fa-trash-can"></i>
-                            </Button> */}
-                          </Form.Check.Label>
-                        </Form.Check>
-
-                        // <Form.Check key={`newest${images.indexOf(image)}`} className={styles.images} style={{position: "relative"}}>
-                        //   <Form.Check.Label htmlFor={`imageGroup${image}`}>
-                        //         <Form.Check.Input
-                        //           name="imageGroup1"
-                        //           type="radio"
-                        //           id={`imageGroup${image}`}
-                        //           className={styles.imageRadio}
-                        //           // onChange={selectImage(image)} doesn't work
-                        //           onChange={() => selectImage(images[images.length - images.indexOf(image) - 1], images.length - images.indexOf(image) - 1)}
-                        //       />
-                        //     <Image src={images[images.length - images.indexOf(image) - 1]} alt="submitted images" key={images.indexOf(image)} id={images.indexOf(image)} style={{cursor: "pointer", position: "relative"}} fluid />
-                        //     <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
-                        //           <i className="fa-solid fa-trash-can"></i>
-                        //       </Button>
-                        //   </Form.Check.Label>
-                        // </Form.Check>
-                      ))
-                      }                      
-                    </div>       
-                    : 
-                    //sort by oldest
-                    <Row className={`mt-1 ${styles.scrollBox}`}>
-                  { 
-                    images.map(image => (
-                      <Form.Check key={`oldest${images.indexOf(image)}`} className={styles.images} style={{position: "relative"}}>
-                        <Form.Check.Label htmlFor={`imageGroup${image}`}>
-                              <Form.Check.Input
-                                name="imageGroup1"
-                                type="radio"
-                                id={`imageGroup${image}`}
-                                className={styles.imageRadio}
-                                onChange={() => selectImage(image, images.indexOf(image))} 
-                            />
-                            <Image src={image} alt="submitted images" className={styles.inputLabel} id={images.indexOf(image)} style={{cursor: "pointer"}} fluid />
-                            <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
-                                <i className="fa-solid fa-trash-can"></i>
-                            </Button>
+                <div className={`mt-1 ${styles.scrollBox}`}>
+                  {dataArtworks.map((item, key) => (
+                      <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
+                        <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
+                          <Form.Check.Input
+                            name="imageGroup1"
+                            type="radio"
+                            id={`imageGroup${key}`}
+                            className={styles.imageRadio}
+                            // onChange={selectImage(image)} doesn't work
+                            // onChange={() => selectImage(dataArtworks[dataArtworks.length - dataArtworks.indexOf(key) - 1], dataArtworks.length - dataArtworks.indexOf(key) - 1)}
+                          />
+                          <Image src={item.URL} style={{cursor: "pointer", position: "relative"}} fluid />
+                          {/* <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
+                            <i className="fa-solid fa-trash-can"></i>
+                          </Button> */}
                         </Form.Check.Label>
                       </Form.Check>
                     ))
-                  }                      
-                  </Row> 
-                } 
-                {/* <div className={`mb-1 mt-0 text-center ${styles.bounce}`}>
-                    <Link href={"/submission#4"}><i className="fa-solid fa-sort-down" style={{ color: "grey",fontSize: "2rem", cursor: "pointer"}}></i></Link>
-                </div> */}
-                {/* <p>Create more in <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean app</span></p>   */}
+                  }
+                </div>
+
+                <p>Create more in <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean app</span></p>
               </>     
               }
+              <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;Refresh</Button>
             </Col>
           
             <Col xs={12} md={6} className="mt-5">
@@ -273,11 +230,6 @@ export default function SubmitPage({ session, user }) {
                   <Col>
                     <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={disabled}>Edit Info</Button>
                     <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={disabled}>Submit &rarr;</Button>
-                    {/* {
-                      (!mintAllow) || !images || imageSelected === "" ?
-                      <Button variant="secondary" onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled>Submit &rarr;</Button> :
-                      <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`}>Submit &rarr;</Button>
-                    } */}
                   </Col>
                 </Row>
 

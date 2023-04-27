@@ -100,8 +100,8 @@
 }
 
 .scrollBox {
-height:60vh;
-overflow-y: scroll;
+  max-height:60vh;
+  overflow-y: auto;
 }
 
 .bounce {
