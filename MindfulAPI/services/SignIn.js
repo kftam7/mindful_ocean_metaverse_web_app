@@ -9,28 +9,48 @@ const config = fs.readFileSync('./appleConfig.json');
 const AppleAuth = require('apple-auth');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-
-let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_8Y456M46UL.p8').toString(), 'text');
+const crypto = require('crypto')
 
 async function signin(req){
 
+
+    //console.log(req.headers.time_stamp);
+    //console.log(req.headers.secret);
+    //console.log(req.params.appleId);
+    //console.log(req.body.name.firstName);
+    //console.log(req.body.name.lastName);
+    //console.log(req.body.email);
+    console.log(req.body.code);
+    //console.log(req.body.refresh_token);
+
+/*
+
     // Outside time tolerance 
+    const current_time = Math.floor(Date.now() / 1000);
     if ((current_time - req.headers.time_stamp) > process.env.tolerance){
         return("Exceed time limit");
     }
+
     // Secret is wrong
-    if (!(md5(req.params.appleId+req.headers.time_stamp) == req.headers.secret)){
+    const secret = crypto.createHash('md5').update(req.params.appleId+req.headers.time_stamp).digest("hex");
+    console.log("secret: ", secret);
+    if (!(secret === req.headers.secret)){
         return("secret is wrong");
     }
+*/
 
     let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_8Y456M46UL.p8').toString(), 'text');
-    const response = await authInstance.accessToken(req.body.authorization_code);
-    const idToken = jwt.decode(response.id_token);
+    const response = await authInstance.accessToken(req.body.code);
+    console.log("response", response);
+    //const idToken = jwt.decode(response.id_token);
 
+/*
     // appleId is wrong
-    if (!(idToken.sub == req.params.appleId)){
+    if (!(idToken.sub === req.params.appleId)){
         return("appleId doesn't match");
     }
+*/
+    /*
     // refresh token is wrong
     if (!(response.refresh_token == req.body.refresh_token)){
         return("refresh token doesn't match");
@@ -59,6 +79,7 @@ async function signin(req){
 
     }
     return {message};
+    */
 
 }
 
