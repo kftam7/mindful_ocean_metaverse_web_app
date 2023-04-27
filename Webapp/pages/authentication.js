@@ -31,18 +31,26 @@ const AuthPage = ({ session }) => {
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const [walletAddress, setWalletAddress] = useState('');
-  const [appleId, setAppleId] = useState('2132131');
+  const [appleId, setAppleId] = useState('');
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
+  
+  useEffect(async () => {
+    await dispatch(getAccount())
+  }, [dispatch]);
+  
+  useEffect(() => {
+    console.log(account)
+  }, [account]);
 
-  // const connect = async() => {
-  //   await dispatch(grabAccount());
-  //   await dispatch(postUser());
-  // }
+  const connect = async () => {
+    await dispatch(grabAccount());
+    // await dispatch(postUser());
+  }
   
   // //didn't work
-  // const disconnect = async() => {
-  //   dispatch(disconnectAccount());
-  // }
+  const disconnectWallet = () => {
+    dispatch(disconnectAccount());
+  }
 
   // Web3Modal
   const { open } = useWeb3Modal();
@@ -79,11 +87,6 @@ const AuthPage = ({ session }) => {
     sessionStorage.setItem("walletAddress", address);
   };
 
-  useEffect(async () => {
-    const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
-    setAppleIdLoginBtn(res.data);
-  }, []);
-
   // apple id  
   useEffect(async () => {
     const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
@@ -113,6 +116,8 @@ const AuthPage = ({ session }) => {
 
   return(
     <Container className='mt-5 mb-5' style={{}}>
+      {/* <Button onClick={connect}>connect</Button>
+      <Button onClick={disconnectWallet}>disconnect Wallet</Button> */}
       <div className={styles.submitPage}>
           <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; Return to homepage</h6></Link></Row>
           <Row className="mt-4"><h4>Submit Artwork</h4></Row>

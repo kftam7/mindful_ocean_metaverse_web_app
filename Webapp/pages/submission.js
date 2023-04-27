@@ -12,7 +12,8 @@ import AppModal from '../components/submission/AppModal';
 import SubmitModal from '../components/submission/SubmitModal';
 import EditModal from '../components/submission/EditModal';
 //just pass the setShow and setConShow as props to children components
-export default function SubmitPage({ session,user }) {
+export default function SubmitPage({ session, user }) {
+  const apiPort = process.env.API_PORT || '/';
   const [show, setShow] = useState(false);
   const [submitShow, setSubmitShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
@@ -25,11 +26,26 @@ export default function SubmitPage({ session,user }) {
   const images = user?.images;
   const mintAllow = user?.allowSubmission;
   const mintTime = new Date(user?.submissionTime);
+
+  const [disabled, setDisabled] = useState(true);
+  const [dataArtworks, setArtworks] = useState([]);
+  
+  useEffect(async () => {
+    const appleId = sessionStorage.getItem("appleId");
+    if(!appleId) return;
+    // artwork
+    const res = await axios.get(`${apiPort}/mindfulapi/artwork/${appleId}`);
+    if(res.status === 200){
+      const { data: { data } } = res;
+      console.log(data)
+      setArtworks(data);
+    }
+  },[])
   
   useEffect(() => {
-    
-  },[])
-  //the default order is by newest 
+    if(!dataArtworks.length) return setDisabled(true);
+    setDisabled(false)
+  },[dataArtworks])
 
   const handleShow = () => setShow(true);
   const handleSubmitShow = () => setSubmitShow(true);
@@ -58,6 +74,7 @@ export default function SubmitPage({ session,user }) {
       localStorage.index = index;
       location.reload();
   }
+
   function startCountDown() {
     // const mintTime = new Date("06/09/2022 14:00:00"); //for testing only
     const waitingTime = 4 * 3600000;//users wait for 4 hours
@@ -123,13 +140,13 @@ export default function SubmitPage({ session,user }) {
           </Row>
 
           <div className={styles.submitContent}>
-          <Row>
+          <Row className="gx-5">
             <Col xs={12} md={6}>
               <Row>
                 <Col xs={10}>
                   <div className={styles.submitTile}>Browse your artworks: </div>
                 </Col>
-                <Col xs={2}>
+                {/* <Col xs={2}>
                   {
                     newest ? 
                     <OverlayTrigger overlay={<Tooltip id="">Sort: Oldest</Tooltip>}>
@@ -144,10 +161,10 @@ export default function SubmitPage({ session,user }) {
                       </span>
                     </OverlayTrigger>
                   }  
-                </Col> 
+                </Col> */}
               </Row>
 
-              {!images ?
+              {disabled ?
                 <Row  className={styles.submitLeft}>
                   <p className={styles.submitTxt1}>No artwork is created in this account</p>
                   <h4 className={styles.submitAccount}>
@@ -156,36 +173,56 @@ export default function SubmitPage({ session,user }) {
                   </h4>
                   <p className={styles.submitTxt1}>Download <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean</span> to create and submit artwork, or</p>
                   <Link href="/authentication" passHref><span style={{textDecoration: "underline", cursor: "pointer"}}>Switch to a different account</span></Link>
+                  <Col>
+                    <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;Refresh</Button>
+                  </Col>
                 </Row>
               :
               <>
-                <div className={`text-center mt-1 mb-0 ${styles.bounce}`}>
+                {/* <div className={`text-center mt-1 mb-0 ${styles.bounce}`}>
                   <Link href="/submission#0" passHref><i className="fa-solid fa-caret-up" style={{ color: "grey",fontSize: "2rem", cursor: "pointer"}}></i></Link>
-                </div> 
+                </div>  */}
                 { newest ?
                 //sort by newest: cause the "map" still loop from 0
-                  <Row className={`mt-1 ${styles.scrollBox}`}>
+                  <div className={`mt-1 ${styles.scrollBox}`}>
                       { 
-                      images.map(image => (
-                        <Form.Check key={`newest${images.indexOf(image)}`} className={styles.images} style={{position: "relative"}}>
-                        <Form.Check.Label htmlFor={`imageGroup${image}`}>
-                              <Form.Check.Input
-                                name="imageGroup1"
-                                type="radio"
-                                id={`imageGroup${image}`}
-                                className={styles.imageRadio}
-                                // onChange={selectImage(image)} doesn't work
-                                onChange={() => selectImage(images[images.length - images.indexOf(image) - 1], images.length - images.indexOf(image) - 1)}
+                      dataArtworks.map((item, key) => (
+                        <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
+                          <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
+                            <Form.Check.Input
+                              name="imageGroup1"
+                              type="radio"
+                              id={`imageGroup${key}`}
+                              className={styles.imageRadio}
+                              // onChange={selectImage(image)} doesn't work
+                              // onChange={() => selectImage(dataArtworks[dataArtworks.length - dataArtworks.indexOf(key) - 1], dataArtworks.length - dataArtworks.indexOf(key) - 1)}
                             />
-                          <Image src={images[images.length - images.indexOf(image) - 1]} alt="submitted images" key={images.indexOf(image)} id={images.indexOf(image)} style={{cursor: "pointer", position: "relative"}} fluid />
-                          <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
-                                <i className="fa-solid fa-trash-can"></i>
-                            </Button>
-                        </Form.Check.Label>
-                      </Form.Check>
+                            <Image src={item.URL} style={{cursor: "pointer", position: "relative"}} fluid />
+                            {/* <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
+                              <i className="fa-solid fa-trash-can"></i>
+                            </Button> */}
+                          </Form.Check.Label>
+                        </Form.Check>
+
+                        // <Form.Check key={`newest${images.indexOf(image)}`} className={styles.images} style={{position: "relative"}}>
+                        //   <Form.Check.Label htmlFor={`imageGroup${image}`}>
+                        //         <Form.Check.Input
+                        //           name="imageGroup1"
+                        //           type="radio"
+                        //           id={`imageGroup${image}`}
+                        //           className={styles.imageRadio}
+                        //           // onChange={selectImage(image)} doesn't work
+                        //           onChange={() => selectImage(images[images.length - images.indexOf(image) - 1], images.length - images.indexOf(image) - 1)}
+                        //       />
+                        //     <Image src={images[images.length - images.indexOf(image) - 1]} alt="submitted images" key={images.indexOf(image)} id={images.indexOf(image)} style={{cursor: "pointer", position: "relative"}} fluid />
+                        //     <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
+                        //           <i className="fa-solid fa-trash-can"></i>
+                        //       </Button>
+                        //   </Form.Check.Label>
+                        // </Form.Check>
                       ))
                       }                      
-                    </Row>       
+                    </div>       
                     : 
                     //sort by oldest
                     <Row className={`mt-1 ${styles.scrollBox}`}>
@@ -210,17 +247,12 @@ export default function SubmitPage({ session,user }) {
                   }                      
                   </Row> 
                 } 
-                <div className={`mb-1 mt-0 text-center ${styles.bounce}`}>
+                {/* <div className={`mb-1 mt-0 text-center ${styles.bounce}`}>
                     <Link href={"/submission#4"}><i className="fa-solid fa-sort-down" style={{ color: "grey",fontSize: "2rem", cursor: "pointer"}}></i></Link>
-                </div>
-              <p>Create more in <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean app</span></p>  
+                </div> */}
+                {/* <p>Create more in <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean app</span></p>   */}
               </>     
               }
-              <Row className='mt-3'>
-                <Col>
-                  <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;Refresh</Button>
-                </Col>
-              </Row>
             </Col>
           
             <Col xs={12} md={6} className="mt-5">
@@ -234,21 +266,22 @@ export default function SubmitPage({ session,user }) {
                   camera-controls
                   auto-rotate autoplay ar
                   ar-modes="webxr scene-viewer quick-look"
-                  style={{height: '40vh'}}
+                  style={{height: '40vh', backgroundColor: disabled ? '#aaa' : ''}}
                 >
                 </model-viewer>
                 <Row className='d-flex justify-content-center mt-5'>
                   <Col>
-                    <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`}>Edit Info</Button>
-                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`}>Submit &rarr;</Button>
+                    <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={disabled}>Edit Info</Button>
+                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={disabled}>Submit &rarr;</Button>
                     {/* {
                       (!mintAllow) || !images || imageSelected === "" ?
                       <Button variant="secondary" onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled>Submit &rarr;</Button> :
                       <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`}>Submit &rarr;</Button>
                     } */}
                   </Col>
-                </Row>     
-                  {
+                </Row>
+
+                  {/* {
                     (!mintAllow) ?
                     <Row className='mt-5 text-center'>
                         <h6>Please try again later in: </h6>
@@ -281,7 +314,8 @@ export default function SubmitPage({ session,user }) {
                   </Row>
                   : 
                   <></>
-                  }             
+                  } */}
+                        
               </Col>
 
             </Row>

@@ -12,8 +12,6 @@ const SubmitModal = ({submitShow,setSubmitShow }) => {
   const [confirmShow, setConfirmShow] = useState(false);
 
   useEffect(() => {
-    console.log(checkbox1)
-    console.log(checkbox2)
     if(!checkbox1 || !checkbox2) return setDisabled(true);
     setDisabled(false);
   },[checkbox1, checkbox2]);

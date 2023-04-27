@@ -1,11 +1,13 @@
-import { FETCH_ACCOUNT } from "../actions/types";
+import { FETCH_ACCOUNT, UPDATE_ACCOUNT } from "../actions/types";
 
 //if you want multiple reducer you can add another reducer here and exported to combineReducer
 const initialState = null;
 const accountReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ACCOUNT:
-      return action.payload || state 
+      return action.payload || state;
+    case UPDATE_ACCOUNT:
+      return action.payload;
     default:
       return state;
   }

@@ -65,6 +65,15 @@ label.form_label{
   height: auto !important;
 }
 
+label.label_image{
+  height: auto !important;
+}
+
+.form_check_img{
+  padding: 0 5px;
+  margin: 20px 0;
+}
+
 .form_Check{
   float: left;
   margin-right: 8px;

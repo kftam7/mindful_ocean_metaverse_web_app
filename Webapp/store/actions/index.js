@@ -1,4 +1,4 @@
-import { FETCH_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT} from "./types";
+import { FETCH_ACCOUNT, UPDATE_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT} from "./types";
 import { fetchAccount, connectAccount, disconnect, fetchBalance, connectForBalance, fetchContract } from "../web3Connections";
 import axios from 'axios';
 const apiPort = process.env.API_PORT || '/';
@@ -32,7 +32,7 @@ export const disconnectAccount = () => async (dispatch) => {
   const account = await disconnect();
   try {
     dispatch({
-      type: FETCH_ACCOUNT,
+      type: UPDATE_ACCOUNT,
       payload: account,
     });
   } catch (err) {
