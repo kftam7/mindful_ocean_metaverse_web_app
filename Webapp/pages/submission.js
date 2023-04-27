@@ -30,6 +30,7 @@ export default function SubmitPage({ session, user }) {
   const mintTime = new Date(user?.submissionTime);
 
   const [disabled, setDisabled] = useState(true);
+  const [image, setImage] = useState('');
   const [dataArtworks, setDataArtworks] = useState([]);
   
   useEffect(async () => {
@@ -40,7 +41,6 @@ export default function SubmitPage({ session, user }) {
     if(res.status === 200){
       const { data: { data } } = res;
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));
-      ;
     }
   },[])
   
@@ -52,13 +52,6 @@ export default function SubmitPage({ session, user }) {
   const handleShow = () => setShow(true);
   const handleSubmitShow = () => setSubmitShow(true);
   const handleEditShow = () => setEditShow(true);
-
-  // let imageSelected;
-  // if(typeof window !== "undefined") {
-  //   console.log(window.localStorage.index + " " + window.localStorage.canvas)
-  //   imageSelected =  window.localStorage.canvas;
-  // }
-
   function refreshPage(){ 
     window.location.reload(); 
   }
@@ -66,18 +59,35 @@ export default function SubmitPage({ session, user }) {
   function sortOldest() {
     setNewest(false);
     sortByFieldAsc(dataArtworks, 'updateTime');
+    setImage('');
   }
 
   function sortNewest() {
     setNewest(true);
     sortByFieldDesc(dataArtworks, 'updateTime');
+    setImage('');
   }
 
-  async function selectImage(image, index) {
-      localStorage.canvas = image;
-      localStorage.index = index;
-      location.reload();
+  function selectImage(image) {
+    setImage(image);
   }
+
+  useEffect(() => {
+    if(!image) return;
+    const modelViewer = document.getElementById('previewModel');
+    modelViewer.addEventListener("load", () => {
+      let material = modelViewer.model.materials[0];
+      let newTexture = async (imageSource) => {
+        return await modelViewer.createTexture(imageSource)
+      }
+      let initTexture = async (attr, channel, imageSource) => {
+        const texture = await newTexture(imageSource);
+        material[attr][channel].setTexture(texture);
+      }
+      let source = image;
+      initTexture('pbrMetallicRoughness', 'baseColorTexture', source)            
+    });
+  },[image]);
 
   function startCountDown() {
     // const mintTime = new Date("06/09/2022 14:00:00"); //for testing only
@@ -119,6 +129,7 @@ export default function SubmitPage({ session, user }) {
         }
       )
   }
+
   return(
     <Container className='mt-5 mb-5'>
       <div className={styles.submitPage}>
@@ -186,20 +197,17 @@ export default function SubmitPage({ session, user }) {
               <>
                 <div className={`mt-1 ${styles.scrollBox}`}>
                   {dataArtworks.map((item, key) => (
-                      <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
+                      <Form.Check className='form_check_img' style={{position: "relative"}}>
                         <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
                           <Form.Check.Input
+                            key={newest}
                             name="imageGroup1"
                             type="radio"
                             id={`imageGroup${key}`}
                             className={styles.imageRadio}
-                            // onChange={selectImage(image)} doesn't work
-                            // onChange={() => selectImage(dataArtworks[dataArtworks.length - dataArtworks.indexOf(key) - 1], dataArtworks.length - dataArtworks.indexOf(key) - 1)}
+                            onChange={() => selectImage(item.URL)}
                           />
                           <Image src={item.URL} style={{cursor: "pointer", position: "relative"}} fluid />
-                          {/* <Button variant="light" size="lg" style={{position: "absolute",top: "0",right: "0",zIndex: "10", color: "#005D6C", backgroundColor:"rgba(250,250,250,.6)"}}>
-                            <i className="fa-solid fa-trash-can"></i>
-                          </Button> */}
                         </Form.Check.Label>
                       </Form.Check>
                     ))
@@ -215,6 +223,7 @@ export default function SubmitPage({ session, user }) {
             <Col xs={12} md={6} className="mt-5">
                 <model-viewer
                   id="previewModel"
+                  key={image}
                   src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone.glb?v=1636271548450"
                   ios-src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone-tex.usdz?v=1636599386704"
                   poster=""

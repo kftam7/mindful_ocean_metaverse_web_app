@@ -44,8 +44,8 @@ const GalleryPage = () => {
         {
             data.map((d, i) => (
               <Col xs={6} md={4} key={i} style={{position:'relative'}}>
-                <GalleryModel metadata={d.metadata} image={d.image} index={data.indexOf(d)} />
-                <Image src={d.image} className={styles.GalleryPageImages} />
+                <GalleryModel metadata={d.metadata} image='./pic1.jpg' index={data.indexOf(d)} />
+                <Image src='./pic1.jpg' className={styles.GalleryPageImages} />
               </Col>
             ))
           }    
