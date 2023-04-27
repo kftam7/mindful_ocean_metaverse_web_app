@@ -23,6 +23,8 @@ async function auth(req){
         const response = await authInstance.accessToken(req.body.code);
         const idToken = jwt.decode(response.id_token);
 
+	    console.log("code: ", req.body.code);
+	    console.log("refresh_token: ", response.refresh_token);
 	    //console.log("body: ", req.body);
 	    //console.log("idToken: ", idToken);
 	    //console.log("response: ", response);
@@ -67,7 +69,7 @@ async function refresh(req){
 }
 
 module.exports = {
-  login,
+	login,
   auth,
   token,
   refresh

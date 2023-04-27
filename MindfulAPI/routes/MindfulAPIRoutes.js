@@ -113,9 +113,9 @@ router.put('/event/:id', async function(req, res, next) {
 
 ////////////////// NFT
 /* GET NFT Details */
-router.get('/nft/:type/:address', async function(req, res, next) {  
+router.get('/nft/:type/:idtype/:id', async function(req, res, next) {  
   try {
-    res.json(await NFT.getNFT(req.params.type, req.params.address));
+    res.json(await NFT.getNFT(req.params.type, req.params.idtype, req.params.id));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while updating programming language`, err.message);
@@ -192,7 +192,7 @@ router.put('/appversion/:version', async function(req, res, next) {
 });
 
 ////////////////// Artwork
-/* GET Artwork */
+/* GET AppVersion */
 router.get('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.getArtwork());
@@ -213,7 +213,7 @@ router.get('/artwork/:appleId', async function(req, res, next) {
   }
 });
 
-/* POST Artwork */
+/* POST AppVersion */
 router.post('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.createArtwork(req.body));
@@ -224,7 +224,7 @@ router.post('/artwork', async function(req, res, next) {
   }
 });
 
-/* PUT Artwork */
+/* PUT AppVersion */
 router.put('/artwork/:artworkId', async function(req, res, next) {  
   try {
     res.json(await Artwork.updateArtwork(req.params.artworkId, req.body));
@@ -302,9 +302,9 @@ router.get('/personalwebsite/:appleId', async function(req, res, next) {
 });
 
 /* POST PersonalWebsite */
-router.post('/personalwebsite/:appleId', async function(req, res, next) {
+router.post('/personalwebsite', async function(req, res, next) {
   try {
-    res.json(await PersonalWebsite.createPersonalWebsite(req.params.appleId, req.body));
+    res.json(await PersonalWebsite.createPersonalWebsite(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while creating programming language`, err.message);
@@ -323,7 +323,6 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
   }
 });
 
-////////////////// Credential
 /* GET credential */
 router.get('/credential/:login/:credential', async function(req, res, next) {
   try {
@@ -335,7 +334,6 @@ router.get('/credential/:login/:credential', async function(req, res, next) {
   }
 });
 
-////////////////// Apple Login
 /* GET Apple Login */
 router.get('/applelogin', async function(req, res, next) {
   try {
@@ -351,16 +349,21 @@ router.get('/applelogin', async function(req, res, next) {
 router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
   try {
     //res.json(await AppleAuth.auth(req));
-    const token = JSON.stringify((await AppleAuth.auth(req)));
-    console.log(token);
-    res.redirect(process.env.redirect_address);
+    //const token = JSON.stringify((await AppleAuth.auth(req)));
+    //console.log(token);
+    //res.redirect(process.env.redirect_address);
+    //res.redirect(307, process.env.redirect_address);
+    //const param = "?state=1234&code=1243&id_token=1234";
+     const param = await AppleAuth.auth(req);
+     console.log(param);
+     res.redirect(process.env.redirect_address + param);
+
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
-
 
 /* GET Apple Token */
 router.get('/appletoken', async function(req, res, next) {
