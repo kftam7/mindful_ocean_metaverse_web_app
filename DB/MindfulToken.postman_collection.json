@@ -50,11 +50,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/credential/admin/c93ccd78b2076528346216b3b2f701e6",
+									"raw": "http://127.0.0.1:3001/mindfulapi/credential/admin/c93ccd78b2076528346216b3b2f701e6",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "3001",
 									"path": [
+										"mindfulapi",
 										"credential",
 										"admin",
 										"c93ccd78b2076528346216b3b2f701e6"
@@ -540,11 +546,17 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/event",
+									"raw": "http://127.0.0.1:3001/mindfulapi/event",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "3001",
 									"path": [
+										"mindfulapi",
 										"event"
 									],
 									"query": [
@@ -691,11 +703,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/event",
+									"raw": "http://127.0.0.1:3001/mindfulapi/event",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "3001",
 									"path": [
+										"mindfulapi",
 										"event"
 									]
 								}
@@ -821,11 +839,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/event/2",
+									"raw": "http://127.0.0.1:3001/mindfulapi/event/2",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "3001",
 									"path": [
+										"mindfulapi",
 										"event",
 										"2"
 									]
@@ -880,7 +904,7 @@
 			"name": "NFT",
 			"item": [
 				{
-					"name": "GET NFT Request (MintPass)",
+					"name": "GET NFT by walletaddress Request (MintPass)",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -900,13 +924,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/nft/mintPass/{walletaddress}",
+							"raw": "{{baseUrl}}/nft/mintPass/walletaddress/{walletaddress}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"nft",
 								"mintPass",
+								"walletaddress",
 								"{walletaddress}"
 							]
 						},
@@ -914,66 +939,32 @@
 					},
 					"response": [
 						{
-							"name": "GET NFT Request (MintPass)",
+							"name": "GET NFT by walletaddress Request (MintPass)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x41db300E0507F4f35C8648271B4450b29fC7eD53",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"nft",
 										"mintPass",
-										"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+										"walletaddress",
+										"0x41db300E0507F4f35C8648271B4450b29fC7eD53"
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "123"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"7b-oB7a1wONNVEnJ4kvhWUnmvJuP70\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 12:24:59 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"data\": [\n        {\n            \"tokenId\": \"1\",\n            \"tokenUriRaw\": \"ipfs://bafyreiesbkaa4bphh3pb2qemhlupb7si457gjz4octoubqulnvejdugq34/metadata.json\"\n        }\n    ]\n}"
+							"body": null
 						}
 					]
 				},
 				{
-					"name": "GET NFT Request (MindfulToken)",
+					"name": "GET NFT by appleId Request (MintPass)",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -993,13 +984,74 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/nft/mindfulToken/{walletaddress}",
+							"raw": "{{baseUrl}}/nft/mintPass/appleid/{appleid}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nft",
+								"mintPass",
+								"appleid",
+								"{appleid}"
+							]
+						},
+						"description": "### API endpoint to get the information of MintPass NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT by appleId Request (MintPass)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/nft/mintPass/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nft",
+										"mintPass",
+										"appleid",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET NFT by walletaddress Request (MindfulToken)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/{walletaddress}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"nft",
 								"mindfulToken",
+								"walletaddress",
 								"{walletaddress}"
 							],
 							"query": [
@@ -1019,66 +1071,44 @@
 					},
 					"response": [
 						{
-							"name": "GET NFT Request (MindfulToken)",
+							"name": "GET NFT by walletaddress Request (MindfulToken)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mindfulToken/0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9",
+									"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/0x41db300E0507F4f35C8648271B4450b29fC7eD53",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"nft",
 										"mindfulToken",
-										"0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9"
+										"walletaddress",
+										"0x41db300E0507F4f35C8648271B4450b29fC7eD53"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										}
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "11"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"b-EFAlOux7Kcr/ZEgGkn2r+oFAbu4\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 12:32:26 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"data\": []\n}"
+							"body": null
 						}
 					]
 				},
 				{
-					"name": "GET NFT Total Request (MindfulToken)",
+					"name": "GET NFT by appleId Request (MindfulToken)",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -1098,13 +1128,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/nfttotal/mindfulToken",
+							"raw": "{{baseUrl}}/nft/mindfulToken/appleid/{appleid}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"nfttotal",
-								"mindfulToken"
+								"nft",
+								"mindfulToken",
+								"appleid",
+								"{appleid}"
 							],
 							"query": [
 								{
@@ -1119,64 +1151,43 @@
 								}
 							]
 						},
-						"description": "### API endpoint to get the total no. of Mindful Token NFT's minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to get information of MindulToken NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
-							"name": "GET NFT Total Request (MindfulToken)",
+							"name": "GET NFT by appleId Request (MindfulToken)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/nfttotal/mindfulToken",
+									"raw": "{{baseUrl}}/nft/mindfulToken/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"nfttotal",
-										"mindfulToken"
+										"nft",
+										"mindfulToken",
+										"appleid",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										}
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "11"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"b-HnfD/3TGbTRQlZhqmuNbjk8+eaw\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 12:34:17 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": "{\n    \"total\": 0\n}"
+							"body": null
 						}
 					]
 				},
@@ -1280,6 +1291,115 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"total\": 2\n}"
+						}
+					]
+				},
+				{
+					"name": "GET NFT Total Request (MindfulToken)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/nfttotal/mindfulToken",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nfttotal",
+								"mindfulToken"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "eventA",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get the total no. of Mindful Token NFT's minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT Total Request (MindfulToken)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:3001/mindfulapi/nfttotal/mindfulToken",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "3001",
+									"path": [
+										"mindfulapi",
+										"nfttotal",
+										"mindfulToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b-HnfD/3TGbTRQlZhqmuNbjk8+eaw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 12:34:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"total\": 0\n}"
 						}
 					]
 				}
@@ -4121,7 +4241,27 @@
 					"name": "Sign In",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "1682467352",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "333cda1abb4cce187a62be7cd0b798ff",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Jacqueline\",\n\t\t\"lastName\":\"Wan\"\n\t},\n\t\"email\": \"fcnfqf9zrz@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4b8cef572ba849e79c983cc0f7aa9af7.0.szyu.fr4tLaWl7qPHFiFjqgwXsA\",\n\t\"code\": \"c619484b311e44540ad24dd908c521d3f.0.rzyu.lJBHDmV5JpHKTkN4sXc9Hg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{baseUrl}}/signin/{appleId}",
 							"host": [
@@ -4133,7 +4273,55 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Sign In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "1682467352",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "333cda1abb4cce187a62be7cd0b798ff",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Jacqueline\",\n\t\t\"lastName\":\"Wan\"\n\t},\n\t\"email\": \"fcnfqf9zrz@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4b8cef572ba849e79c983cc0f7aa9af7.0.szyu.fr4tLaWl7qPHFiFjqgwXsA\",\n\t\"code\": \"c619484b311e44540ad24dd908c521d3f.0.rzyu.lJBHDmV5JpHKTkN4sXc9Hg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/signin/001463.3be803433a0542a0b0d6862a62285371.0627",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"signin",
+										"001463.3be803433a0542a0b0d6862a62285371.0627"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			]
 		},
