@@ -4,15 +4,15 @@ const path = require('path');
 const logger = require("../logger");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
-const fs = require('fs');
-const config = fs.readFileSync('./appleConfig.json');
-const AppleAuth = require('apple-auth');
-const bodyParser = require('body-parser');
+//const fs = require('fs');
+//const config = fs.readFileSync('./appleConfig.json');
+//const AppleAuth = require('apple-auth');
+//const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto')
+const crypto = require('crypto');
+const moment = require('moment');
 
 async function signin(req){
-
 
     //console.log(req.headers.time_stamp);
     //console.log(req.headers.secret);
@@ -20,10 +20,8 @@ async function signin(req){
     //console.log(req.body.name.firstName);
     //console.log(req.body.name.lastName);
     //console.log(req.body.email);
-    console.log(req.body.code);
+    //console.log(req.body.code);
     //console.log(req.body.refresh_token);
-
-/*
 
     // Outside time tolerance 
     const current_time = Math.floor(Date.now() / 1000);
@@ -37,49 +35,51 @@ async function signin(req){
     if (!(secret === req.headers.secret)){
         return("secret is wrong");
     }
-*/
 
-    let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_8Y456M46UL.p8').toString(), 'text');
-    const response = await authInstance.accessToken(req.body.code);
-    console.log("response", response);
-    //const idToken = jwt.decode(response.id_token);
+    //let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_8Y456M46UL.p8').toString(), 'text');
+    //const response = await authInstance.accessToken(req.body.code);
+    //console.log("response", response);
+    //console.log("idToken: ", idToken);
 
-/*
     // appleId is wrong
+    const idToken = jwt.decode(req.body.id_token);
     if (!(idToken.sub === req.params.appleId)){
         return("appleId doesn't match");
     }
-*/
-    /*
-    // refresh token is wrong
-    if (!(response.refresh_token == req.body.refresh_token)){
-        return("refresh token doesn't match");
-    }
 
+    // refresh token is wrong
+    //if (!(response.refresh_token == req.body.refresh_token)){
+    //    return("refresh token doesn't match");
+    //}
+
+    // check if user already exist
     var sqlCheck = 'SELECT COUNT(*) AS if_exist FROM user WHERE appleId = "' + req.params.appleId +'"';
     const resultCheck = await db.query(
         sqlCheck
     );
 
+    const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
     // if appleId already exist
-    if (resultCheck.if_exist){
-        var sqlUpdate = 'UPDATE user SET firstName = "' + req.body.name.firstname + '", lastName = "' + req.body.name.lastname + '", refreshToken = "' + req.body.refresh_token + '", updateTime = "' + current_time + ' WHERE appleId = "' + req.params.appleId + '";';
+    if (resultCheck[0].if_exist){
+        var sqlUpdate = 'UPDATE user SET firstName = "' + req.body.name.firstName + '", lastName = "' + req.body.name.lastName + '", refreshToken = "' + req.body.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + req.params.appleId + '";';
+        console.log(sqlUpdate);
         const resultUpdate = await db.query(
             sqlUpdate
         );
         let message = 'Record updated successfully';
-
+        return {message};
+        
     // if appleId doesn't exist
     }else{
-        var sqlCreate = 'INSERT INTO user (appleId, firstName, lastName, refreshToken, createTime, updateTime, isActive) VALUES ("' + req.params.appleId + '", "' + req.body.name.firstname + '", "' + req.body.name.lastname + '", "' + req.body.refresh_token + '", "' + current_time + '", "' + current_time + '", "' + '", 1)';
+        var sqlCreate = 'INSERT INTO user (appleId, firstName, lastName, email, refreshToken, createTime, updateTime, isActive) VALUES ("' + req.params.appleId + '", "' + req.body.name.firstName + '", "' + req.body.name.lastName + '", "' + req.body.email + '", "' + req.body.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';
+        console.log(sqlCreate);
         const resultCreate = await db.query(
             sqlCreate
         );
         let message = 'Record created successfully';
-
+        return {message};
     }
-    return {message};
-    */
 
 }
 
