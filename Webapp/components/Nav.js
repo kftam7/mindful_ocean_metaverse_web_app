@@ -173,6 +173,7 @@ const NavBar = () => {
         <Nav.Link href="#gallery" className={styles.navlink}>Gallery</Nav.Link>
         <Nav.Link href="#mobileapp" className={styles.navlink}>Create</Nav.Link>
         <Nav.Link href="#mintpass" className={styles.navlink}>Mintpass</Nav.Link>
+        <Nav.Link href="#Redeem" className={styles.navlink}>Redeem</Nav.Link>
         <Nav.Link href="#donate" className={styles.navlink}>Donate</Nav.Link>
         <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>Mindful Token</Nav.Link>
     </Nav>

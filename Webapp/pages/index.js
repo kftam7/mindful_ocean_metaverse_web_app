@@ -9,6 +9,7 @@ import Draw from '../components/homepage/Draw';
 import Redeem from '../components/homepage/Redeem';
 import Team from '../components/homepage/Team';
 import Mintpass from '../components/homepage/Mintpass';
+import Redeem1 from '../components/homepage/Redeem1';
 
 export default function Home() {
   return(
@@ -18,6 +19,7 @@ export default function Home() {
       <Gallery />
       <Draw />
       <Mintpass />
+      <Redeem1 />
       <Donate />
       <Redeem />
       <Team />

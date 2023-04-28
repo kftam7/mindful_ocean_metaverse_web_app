@@ -16,7 +16,7 @@ import axios from 'axios';
 const UserProfilePage = () => {
   const apiPort = process.env.API_PORT || '/';
   const [loading, setLoading] = useState(false);
-  const [walletAddres, setWalletAddres] = useState();
+  const [walletAddress, setWalletAddress] = useState();
   const [appleId, setAppleId] = useState();
   const [email, setEmail] = useState('');
   const [activeIndex, setActiveIndex] = useState(null); // 控制展开的面板索引
@@ -35,7 +35,7 @@ const UserProfilePage = () => {
   });
 
   useEffect(() => {
-    setWalletAddres(getWalletAddress());
+    setWalletAddress(getWalletAddress());
     setAppleId(getAppleId());
     setEmail(getEmail());
   }, []);
@@ -60,18 +60,18 @@ const UserProfilePage = () => {
   }, [appleId]);
 
   useEffect(async () => {
-    if(!walletAddres) return;
+    if(!walletAddress) return;
     setLoading(true)
 
     // Owned NFTs
-    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/nft/mindfulToken/${walletAddres}`);
+    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/nft/mindfulToken/${walletAddress}`);
     if(dataOwnedNFTs.status === 200){
       const { data: { data } } = dataOwnedNFTs;
       // console.log('Owned NFTs', dataOwnedNFTs)
       setDataOwnedNFTs(data);
     }
     // Owned Mintpass
-    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/nft/mintPass/${walletAddres}`);
+    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/nft/mintPass/${walletAddress}`);
     if(dataOwnedMintpass.status === 200){
       const { data: { data } } = dataOwnedMintpass;
       // console.log('Owned Mintpass', dataOwnedMintpass)
@@ -79,7 +79,7 @@ const UserProfilePage = () => {
     }
 
     setLoading(false)
-  }, [walletAddres]);
+  }, [walletAddress]);
 
   const resetForm = () => {
     const data = {
@@ -186,7 +186,7 @@ const UserProfilePage = () => {
                     <h4>Wallet Connect</h4>
                   </div>
                   <div className={styles.card_txt1}>
-                    <TextOverflowTips text={walletAddres} />
+                    <TextOverflowTips text={walletAddress} />
                   </div>
               </div>
               </Card.Body>

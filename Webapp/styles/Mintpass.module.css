@@ -20,6 +20,13 @@
     border-radius: 15px;
 }
 
+.btnDefault {
+    max-width: 35%;
+    height: 3rem;
+    margin-top: 1rem;
+    border-radius: 15px;
+}
+
 @media only screen and (max-width: 600px) {
     .title {
         padding: 0 1rem;

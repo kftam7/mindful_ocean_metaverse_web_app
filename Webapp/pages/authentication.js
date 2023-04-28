@@ -267,7 +267,7 @@ const AuthPage = ({ session }) => {
           </Row>
 
           <Row className='justify-content-md-center mt-5'>
-            <Col xs={12}>
+            <Col xs={12} className='text-center'>
               {walletAddress && appleId ?
               <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>Next&nbsp;&rarr;</Button>
               :
