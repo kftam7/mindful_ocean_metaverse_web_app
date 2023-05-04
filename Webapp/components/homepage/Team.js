@@ -1,11 +1,14 @@
 import { Row, Col, Image, Container, Card } from 'react-bootstrap';
 import styles from '../../styles/Team.module.css';
+import { useTranslation } from '../../i18n';
 
 const Team = () => {
+  const { t, locale } = useTranslation();
+
     return (
       <div className={styles.team} >
         <Row className={styles.title}>
-            <h3>Our team</h3>
+            <h3>{t('main.text.ourTeam')}</h3>
         </Row>
           <Container>
           <Row className={styles.teamRow}>

@@ -6,14 +6,17 @@ import styles from '../../styles/Gallery.module.css';
 
 import { data } from '../../data/data'
 import GalleryModel from './GalleryModel';
+import { useTranslation } from '../../i18n';
 
 //gallery section at home page, currently models are hardcoded
 const Gallery = () => {
+  const { t, locale } = useTranslation();
+
     return(
         <div className={styles.gallery} id="gallery">
             <Row className={styles.title}>
-              <h3>Gallery</h3>
-              <p className="mt-1">Artworks by our community</p>
+              <h3>{t('main.text.gallery')}</h3>
+              <p className="mt-1">{t('main.text.mindfulOcean')}</p>
             </Row>
             <Row className={styles.galleryRow}>
               <Col style={{position:'relative'}}>
@@ -31,7 +34,7 @@ const Gallery = () => {
               </Col>
             </Row>
             <Row className={styles.btnRow}>
-              <Button href="/gallery" className={`${styles.btn} ${homeStyles.btn}`}>View more &rarr;</Button>
+              <Button href="/gallery" className={`${styles.btn} ${homeStyles.btn}`}>{t('button.viewMore')} &rarr;</Button>
             </Row>
             <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
             <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />

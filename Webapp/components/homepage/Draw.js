@@ -1,12 +1,15 @@
 import { Row, Image, Button, Col, Container } from 'react-bootstrap';
 import styles from '../../styles/Draw.module.css';
+import { useTranslation } from '../../i18n';
 
 const Draw = () => {
+  const { t, locale } = useTranslation();
+
     return (
       <div className={styles.draw} id="mobileapp" >
         <Row className={styles.title}>
-          <h3>Create</h3>
-          <p className="mt-1">Download Mindful Ocean at App Store to create your own version of fish.</p>
+          <h3>{t('main.text.create')}</h3>
+          <p className="mt-1">{t('main.text.downloadMindfulOcean')}</p>
         </Row>
         <Row className={styles.bgRow}>      
           <Image className={styles.bgpart13} src="/measuredBoxes/13.png" alt="ocean13" />

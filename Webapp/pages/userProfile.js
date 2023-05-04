@@ -12,8 +12,10 @@ import UserProfileModel from '../components/userProfile/UserProfileModal';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import { getWalletAddress, getAppleId, getEmail } from '../utils/utils';
 import axios from 'axios';
+import { useTranslation } from '../i18n';
 
 const UserProfilePage = () => {
+  const { t, locale } = useTranslation();
   const apiPort = process.env.API_PORT || '/';
   const [loading, setLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState();
@@ -173,17 +175,17 @@ const UserProfilePage = () => {
         </div>
         : ''
       }
-      <Row><Link href="/">&larr; Return to homepage</Link></Row>
+      <Row className='' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
       <Row className='mt-5'>
           <Col sm={12} md={12}>
-            <h5>User Profile</h5>
+            <h5>{t('page.userProfile.userProfile')}</h5>
           </Col>
           <Col sm={12} md={12} style={{ marginTop: '2rem' }}>
             <Card style={{ border: 'none' }}>
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Wallet Connect</h4>
+                    <h4>{t('main.text.walletConnect')}</h4>
                   </div>
                   <div className={styles.card_txt1}>
                     <TextOverflowTips text={walletAddress} />
@@ -195,7 +197,7 @@ const UserProfilePage = () => {
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Apple ID</h4>
+                    <h4>{t('main.text.appleID')}</h4>
                   </div>
                   <div className={styles.card_txt1}>
                     <TextOverflowTips text={appleId} />
@@ -207,11 +209,11 @@ const UserProfilePage = () => {
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Personal Website</h4>
+                    <h4>{t('page.userProfile.personalWebsite')}</h4>
                   </div>
                   <div>
                     {activeIndex !== 3 ?
-                      <span className={styles.card_txt2}>Add new</span>
+                      <span className={styles.card_txt2}>{t('button.addNew')}</span>
                       : ''
                     }
                     <Button
@@ -232,7 +234,7 @@ const UserProfilePage = () => {
                   
                   <Form onSubmit={savePersonalWebsite}>
                     <Form.Group className="align-items-center form_group" controlId="URL">
-                      <Form.Label className={styles.form_label}>Website URL</Form.Label>
+                      <Form.Label className={styles.form_label}>{t('page.userProfile.websiteURL')}</Form.Label>
                       <Form.Control
                         className={styles.form_control}
                         type="text"
@@ -247,7 +249,7 @@ const UserProfilePage = () => {
                         className={styles.form_feedback}
                         type="invalid"
                       >
-                        Website URL cannot be empty
+                        {t('error.info.websiteURLCannotBeEmpty')}
                       </Form.Control.Feedback>
                     </Form.Group>
                     <div style={{ clear: 'both', paddingTop: '20px' }}>
@@ -259,11 +261,11 @@ const UserProfilePage = () => {
                           >
                             <span className={styles.switch_handle}></span>
                           </span>
-                          Automatically fill this in when submiting artwork.
+                          {t('page.userProfile.automaticallyFill')}
                         </Col>
                         <Col xs={12} md={6} style={{ textAlign: 'right'}}>                      
                           <Button variant="primary" type="button" className={styles.btn_save} onClick={savePersonalWebsite}>
-                            Save
+                            {t('button.save')}
                           </Button>
                         </Col>
                       </Row>
@@ -278,10 +280,10 @@ const UserProfilePage = () => {
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Submitted Artworks</h4>
+                    <h4>{t('page.userProfile.submittedArtworks')}</h4>
                   </div>
                   <div>
-                    <span className={styles.card_txt2}>View all ({dataArtwork.length})</span>
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataArtwork.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"
@@ -301,8 +303,8 @@ const UserProfilePage = () => {
                       {
                         dataArtwork.map((item, key) => (
                           <Col xs={6} sm={4} md={3} lg={2} key={key}>
-                            <div className={styles.image_item} onClick={() => handleModal('Artwork information', item, false)}>
-                              <div className={styles.item_cover}>View Details</div>
+                            <div className={styles.image_item} onClick={() => handleModal(t('page.userProfile.artworkInformation'), item, false)}>
+                              <div className={styles.item_cover}>{t('page.userProfile.viewDetails')}</div>
                               <Image src={item.URL} className={styles.item_images} />
                             </div>
                           </Col>
@@ -317,10 +319,10 @@ const UserProfilePage = () => {
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Owned NFTs</h4>
+                    <h4>{t('page.userProfile.ownedNFTs')}</h4>
                   </div>
                   <div>
-                    <span className={styles.card_txt2}>View all ({dataOwnedNFTs.length})</span>
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataOwnedNFTs.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"
@@ -341,8 +343,8 @@ const UserProfilePage = () => {
                         dataOwnedNFTs.map((item, key) => (
                           <Col xs={6} sm={4} md={3} lg={2} key={key}>
                             {/* <Image src={d.image} className={styles.GalleryPageImages} /> */}
-                            <div className={styles.image_item} onClick={() => handleModal('NFT information', item, true)}>
-                              <div className={styles.item_cover}>View Details</div>
+                            <div className={styles.image_item} onClick={() => handleModal(t('page.userProfile.nFTInformation'), item, true)}>
+                              <div className={styles.item_cover}>{t('page.userProfile.viewDetails')}</div>
                               <Image src={item.URL} className={styles.item_images} />
                             </div>
                           </Col>
@@ -357,10 +359,10 @@ const UserProfilePage = () => {
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Owned Mintpass</h4>
+                    <h4>{t('page.userProfile.ownedMintpass')}</h4>
                   </div>
                   <div>
-                    <span className={styles.card_txt2}>View all ({dataOwnedMintpass.length})</span>
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataOwnedMintpass.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"
@@ -387,10 +389,10 @@ const UserProfilePage = () => {
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h4>Joined Event</h4>
+                    <h4>{t('page.userProfile.joinedEvent')}</h4>
                   </div>
                   <div>
-                    <span className={styles.card_txt2}>View all ({dataJoinedEvent.length})</span>
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataJoinedEvent.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"

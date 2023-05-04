@@ -12,9 +12,12 @@ import axios from 'axios';
 import AppModal from '../components/submission/AppModal';
 import SubmitModal from '../components/submission/SubmitModal';
 import EditModal from '../components/submission/EditModal';
+import { useTranslation } from '../i18n';
+
 
 //just pass the setShow and setConShow as props to children components
 export default function SubmitPage({ session, user }) {
+  const { t } = useTranslation();
   const apiPort = process.env.API_PORT || '/';
   const [show, setShow] = useState(false);
   const [submitShow, setSubmitShow] = useState(false);
@@ -133,23 +136,23 @@ export default function SubmitPage({ session, user }) {
   return(
     <Container className='mt-5 mb-5'>
       <div className={styles.submitPage}>
-          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; Return to homepage</h6></Link></Row>
-          <Row className="mt-4"><h4>Submit Artwork</h4></Row>
+          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+          <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
           <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>1. Authentication</span></div>
+              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.mintpass.authentication')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>2. Submission</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.submission')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>3. Get Mintpass</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
           </Row>
@@ -159,20 +162,20 @@ export default function SubmitPage({ session, user }) {
             <Col xs={12} md={6}>
               <Row>
                 <Col xs={10}>
-                  <div className={styles.submitTile}>Browse your artworks: </div>
+                  <div className={styles.submitTile}>{t('page.mintpass.submission.browseYourArtworks')}: </div>
                 </Col>
                 
                 {!disabled ?
                   <Col xs={2}>
                     {
                       newest ? 
-                        <OverlayTrigger overlay={<Tooltip id="">Sort: Oldest</Tooltip>}>
+                        <OverlayTrigger overlay={<Tooltip id="">{t('page.mintpass.submission.sortOldest')}</Tooltip>}>
                           <span className="d-inline-block">
                           <Button variant="light" className={styles.sortBtn} onClick={sortOldest}><i className="fa-solid fa-arrow-down-short-wide"></i></Button>
                           </span>
                         </OverlayTrigger>
                       :
-                        <OverlayTrigger overlay={<Tooltip id="">Sort: Newest</Tooltip>}>
+                        <OverlayTrigger overlay={<Tooltip id="">{t('page.mintpass.submission.sortNewest')}</Tooltip>}>
                           <span className="d-inline-block">
                           <Button variant="light" className={styles.sortBtn} onClick={sortNewest}><i className="fa-solid fa-arrow-down-wide-short"></i></Button>
                           </span>
@@ -185,13 +188,13 @@ export default function SubmitPage({ session, user }) {
 
               {disabled ?
                 <Row  className={styles.submitLeft}>
-                  <p className={styles.submitTxt1}>No artwork is created in this account</p>
+                  <p className={styles.submitTxt1}>{t('page.mintpass.submission.noArtworkIsCreatedInThisAccount')}</p>
                   <h4 className={styles.submitAccount}>
                     <Image src="/apple.png" width="30px" />
-                    <span>Apple_Account</span>
+                    <span>{t('page.mintpass.submission.appleAccount')}</span>
                   </h4>
-                  <p className={styles.submitTxt1}>Download <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean</span> to create and submit artwork, or</p>
-                  <Link href="/authentication" passHref><span style={{textDecoration: "underline", cursor: "pointer"}}>Switch to a different account</span></Link>
+                  <p className={styles.submitTxt1}>{t('page.mintpass.submission.download')} <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>{t('main.text.mindfulOcean')}</span> {t('page.mintpass.submission.toCreateAndSubmitArtworkOr')}</p>
+                  <Link href="/authentication" passHref><span style={{textDecoration: "underline", cursor: "pointer"}}>{t('page.mintpass.submission.switchToADifferentAccount')}</span></Link>
                 </Row>
               :
               <>
@@ -214,10 +217,10 @@ export default function SubmitPage({ session, user }) {
                   }
                 </div>
 
-                <p>Create more in <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>Mindful Ocean app</span></p>
+                <p>{t('page.mintpass.submission.createMoreIn')} <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>{t('page.mintpass.submission.mindfulOceanApp')}</span></p>
               </>     
               }
-              <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;Refresh</Button>
+              <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;{t('button.refresh')}</Button>
             </Col>
           
             <Col xs={12} md={6} className="mt-5">
@@ -237,8 +240,8 @@ export default function SubmitPage({ session, user }) {
                 </model-viewer>
                 <Row className='d-flex justify-content-center mt-5'>
                   <Col>
-                    <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={disabled}>Edit Info</Button>
-                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={disabled}>Submit &rarr;</Button>
+                    <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={disabled}>{t('button.editInfo')}</Button>
+                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={disabled}>{t('button.submit')} &rarr;</Button>
                   </Col>
                 </Row>
 

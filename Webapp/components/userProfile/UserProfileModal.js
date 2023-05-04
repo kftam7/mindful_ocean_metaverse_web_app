@@ -1,6 +1,8 @@
 import { Container, Modal, Button, Row, Col, Image } from 'react-bootstrap';
+import { useTranslation } from '../../i18n';
 
 function UserProfileModal(props) {
+  const { t, locale } = useTranslation();
   const { modal } = props;
 
   return (
@@ -17,23 +19,23 @@ function UserProfileModal(props) {
               <div className='modal_indent inner'><Image src={modal?.URL} className='modalImage' /></div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>Description:</div>
+                <div className='modal_title'>{t('main.text.description')}:</div>
                 <div className='modal_indent'>{modal?.description}</div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>Personal lnformation:</div>
+                <div className='modal_title'>{t('page.redeem.personalInformation')}:</div>
                 <div className='modal_indent'>{modal?.peronsalInfo}</div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>Artist Apple ID:</div>
+                <div className='modal_title'>{t('page.redeem.artistAppleID')}:</div>
                 <div className='modal_indent'>{modal?.artistAppleId}</div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>Event ID:</div>
+                <div className='modal_title'>{t('page.redeem.eventID')}:</div>
                 <div className='modal_indent'>{modal?.eventId}</div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>Mintpass lD:</div>
+                <div className='modal_title'>{t('page.redeem.mintpassID')}:</div>
                 <div className='modal_indent'>{modal?.mintpassld}</div>
             </Col>
           </Row>

@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { Row, Image } from 'react-bootstrap';
 import styles from '../../styles/Head.module.css';
+import { useTranslation } from '../../i18n';
 
 const Head = () => {
+    const { t, locale } = useTranslation();
+
     return (
         <Row className={styles.head}>
             <Image className={styles.bgpart1} src="/measuredBoxes/1.png" alt="ocean1" />
@@ -10,8 +14,8 @@ const Head = () => {
             </div>   
             <div className={styles.upperBg}>
                 <div className={styles.textbox}>
-                    <h2 className={`text-center ${styles.glowingText}`}>Mindful Ocean</h2>
-                    <h4 className={`text-center ${styles.glowingText}`}>The very first community-driven NFT project</h4>
+                    <h2 className={`text-center ${styles.glowingText}`}>{t('main.text.mindfulOcean')}</h2>
+                    <h4 className={`text-center ${styles.glowingText}`}>{t('main.text.theVeryFirstCommunityDrivenNFTProject')}</h4>
                 </div>
             </div>
         </Row>

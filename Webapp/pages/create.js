@@ -5,8 +5,11 @@ import styles from '../styles/CreatePage.module.css';
 import homeStyles from '../styles/Home.module.css';
 import Layout from '../components/SubpageLayout';
 import DragDrop from '../components/DragDrop';
+import { useTranslation } from '../i18n';
+
 
 function CreatePage() {
+    const { t } = useTranslation();
     var canvas = "";
     //cause when render from frontend, there is no browser
     if(typeof window !== "undefined") {
@@ -15,17 +18,17 @@ function CreatePage() {
 
     return(
         <Container className={styles.createPage}>
-            <Row className='' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; Return to homepage</h6></Link></Row>
+            <Row className='' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
             <Row className='mt-5 mb-3 text-center d-flex justify-content-center'>
-                <h6>Create and color your own version of fish!</h6>
+                <h6>{t('page.create.createAndColor')}</h6>
                 <a href='/whale.png' target="_blank" className={`${styles.downloadBtn}`} download>
-                    <h5 className={styles.downBtnText} >Download template <Image src="/downloadIcon.png" style={{width: '10%'}} /></h5>
+                    <h5 className={styles.downBtnText} >{t('page.create.downloadTemplate')} <Image src="/downloadIcon.png" style={{width: '10%'}} /></h5>
                 </a>
             </Row>
             <Row>
                 <div className={styles.card} style={{ marginLeft: 'auto', marginRight: 'auto'}} >
                     <section className="attribution">
-                        <p>upload your artwork (no bigger than 1MB) to preview it on 3D model!</p>
+                        <p>{t('page.create.uploadYourArtwork')}</p>
                     </section> 
                     <model-viewer
                         id="previewModel"
@@ -43,11 +46,10 @@ function CreatePage() {
                 </div>
             </Row>
             <Row className='text-center d-flex justify-content-center mt-4'>
-                <h6>If you are happy with the result, you may go to our mobile app to</h6>
-                <h6>create and proceed here to submit the artwork and redeem the mintpass.</h6>
+                <h6>{t('page.create.ifYouAreHappyWithTheResult')}</h6>
             </Row>
             <Row className='d-flex justify-content-center mt-5'>
-                <Button href='/authentication' className={`${homeStyles.btn} ${styles.overlayBtn}`} style={{fontWeight: '800', fontSize: '1.5rem'}}>Submit &rarr;</Button>
+                <Button href='/authentication' className={`${homeStyles.btn} ${styles.overlayBtn}`} style={{fontWeight: '800', fontSize: '1.5rem'}}>{t('button.submit')} &rarr;</Button>
             </Row>
             {/* <Col>
             <Image src={`${canvas}`} id="previewImg" fluid="true" />

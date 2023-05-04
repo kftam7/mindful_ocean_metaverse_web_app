@@ -13,8 +13,10 @@ import { Row, Col, Image, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 import fs from 'fs';
 import { NFTStorage, File } from 'nft.storage';
+import { useTranslation } from '../i18n';
 
 export default function Mintpass({ session,user }) {
+  const { t, locale } = useTranslation();
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const mintpassContract = useSelector((state) => state.contractState);
@@ -101,23 +103,23 @@ export default function Mintpass({ session,user }) {
     <Container className='mt-5 mb-5'>
       <div className={styles.submitPage}>
         {/* <Button onClick={update}>Update</Button> */}
-        <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; Return to homepage</h6></Link></Row>
-        <Row className="mt-4"><h4>Submit Artwork</h4></Row>
+        <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+        <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
           <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
               <Col xs={4} className={styles.item}>
                   <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>1. Authentication</span></div>
+                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.mintpass.authentication')}</span></div>
                   <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
               </Col>
               <Col xs={4} className={styles.item}>
                   <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>2. Submission</span></div>
+                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.mintpass.submission')}</span></div>
                   <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
               </Col>
               <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
                   <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-regular fa-circle"></i><span>3. Get Mintpass</span></div>
+                  <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
                   <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
               </Col>
           </Row>
@@ -130,13 +132,13 @@ export default function Mintpass({ session,user }) {
             </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Col>
-                <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mint}>Get Mint Pass</Button>
+                <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mint}>{t('button.getMintPass')}</Button>
               </Col>
             </Row>
             <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>
                 <p className="m-0">
-                  A small gas fee will be charged.<br />
-                  <span style={{textDecoration:"underline", cursor: 'pointer'}}>More details</span>
+                  {t('page.mintpass.aSmallGasFeeWillBeCharged')}<br />
+                  <span style={{textDecoration:"underline", cursor: 'pointer'}}>{t('page.mintpass.moreDetails')}</span>
                 </p>
             </Row>
           </div>

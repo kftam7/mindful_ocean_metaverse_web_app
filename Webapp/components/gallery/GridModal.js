@@ -1,7 +1,10 @@
 import { Container, Modal, Button, Row, Col, Image } from 'react-bootstrap';
 import { useEffect } from 'react';
+import { useTranslation } from '../../i18n';
 
 function GridModel(props) {
+  const { t, locale } = useTranslation();
+
   //useEffect check if the model html node exists then load the image
   useEffect(() => {
     const modelViewerTexture = document.getElementById('modelModal');
@@ -55,7 +58,7 @@ function GridModel(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={props.onHide}>{t('button.close')}</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -1,12 +1,15 @@
 import { Row, Col, Button, Modal, Image } from 'react-bootstrap';
 import styles from '../../styles/SubmitPage.module.css';
+import { useTranslation } from '../../i18n';
 
 const AppModal = ({show, setShow}) => {
- const handleClose = () => setShow(false);
+    const { t, locale } = useTranslation();
+    const handleClose = () => setShow(false);
+
  return(
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-        <Modal.Title>Mindful Ocean app</Modal.Title>
+        <Modal.Title>{t('page.mintpass.submission.mindfulOceanApp')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Image src="/icon.png" alt="icon" fluid />

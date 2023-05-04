@@ -3,8 +3,10 @@ import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import homeStyles from '../../styles/Home.module.css';
 import styles from '../../styles/SubmitPage.module.css';
 import axios from 'axios';
+import { useTranslation } from '../../i18n';
 
 const EditModal = ({editShow,setEditShow }) => {
+  const { t, locale } = useTranslation();
     const handleEditClose = () => {
       setEditShow(false);
       resetForm();
@@ -63,14 +65,14 @@ const EditModal = ({editShow,setEditShow }) => {
     return (
         <Modal show={editShow} onHide={handleEditClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Information</Modal.Title>
+          <Modal.Title>{t('page.mintpass.submission.editInformation')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Row className='mb-3'>
-          <p>Supplementary information for the selected artworkThis will be shown in XXX.</p>
+          <p>{t('page.mintpass.submission.supplementaryInformation')}</p>
           <Form onSubmit={savePersonalWebsite}>
             <Form.Group className="align-items-center form_group" controlId="description">
-              <Form.Label className='form_label'>Description:</Form.Label>
+              <Form.Label className='form_label'>{t('main.text.description')}:</Form.Label>
               <Form.Control
                 className={styles.form_control}
                 type="text"
@@ -85,11 +87,11 @@ const EditModal = ({editShow,setEditShow }) => {
                 className={styles.form_feedback}
                 type="invalid"
               >
-                Description cannot be empty
+                {t('error.info.descriptionCannotBeEmpty')}
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="align-items-center form_group" controlId="personal_information">
-              <Form.Label className='form_label'>Personal Information:</Form.Label>
+              <Form.Label className='form_label'>{t('page.mintpass.submission.personalInformation')}:</Form.Label>
               <Form.Control
                 className={styles.form_control}
                 type="text"
@@ -104,13 +106,13 @@ const EditModal = ({editShow,setEditShow }) => {
                 className={styles.form_feedback}
                 type="invalid"
               >
-                Personal Information cannot be empty
+                {t('error.info.personalInformationCannotBeEmpty')}
               </Form.Control.Feedback>
             </Form.Group>
           </Form>
         </Row>
         <Row className='d-flex justify-content-center'>
-          <Button className={`${homeStyles.btn} ${styles.confirmBtn}`} style={{fontWeight: '800'}} onClick={savePersonalWebsite}>Save</Button>
+          <Button className={`${homeStyles.btn} ${styles.confirmBtn}`} style={{fontWeight: '800'}} onClick={savePersonalWebsite}>{t('button.save')}</Button>
         </Row>
         </Modal.Body>
       </Modal>

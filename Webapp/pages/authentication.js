@@ -7,6 +7,7 @@ import Link from 'next/link';
 import styles from '../styles/SubmitPage.module.css';
 import {Row, Col, Image, OverlayTrigger, Button, Tooltip, Container} from 'react-bootstrap';
 import axios from 'axios';
+import { useTranslation } from '../i18n';
 
 // Web3Modal
 import { useWeb3Modal } from '@web3modal/react';
@@ -33,6 +34,7 @@ const AuthPage = ({ session }) => {
   const [walletAddress, setWalletAddress] = useState('');
   const [appleId, setAppleId] = useState('');
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
+  const { t } = useTranslation();
   
   useEffect(async () => {
     await dispatch(getAccount())
@@ -119,23 +121,23 @@ const AuthPage = ({ session }) => {
       {/* <Button onClick={connect}>connect</Button>
       <Button onClick={disconnectWallet}>disconnect Wallet</Button> */}
       <div className={styles.submitPage}>
-          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; Return to homepage</h6></Link></Row>
-          <Row className="mt-4"><h4>Submit Artwork</h4></Row>
+          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+          <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
           <Row className='mt-4' style={{ fontWeight:'800'}} >
             <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>1. Authentication</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.authentication')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>2. Submission</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.submission')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>3. Get Mintpass</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
         </Row>
@@ -186,17 +188,17 @@ const AuthPage = ({ session }) => {
           <hr /> */}
           
           <Row className='mt-5 mb-5'>
-            <h5>1. Connect Wallet</h5>
+            <h5>1. {t('main.text.connectWallet')}</h5>
             {(walletAddress) ?
             <Row>
               <Col xs={12} md={6}>
                   <Button size="lg" className={styles.disactiveBtn}>
                     <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Wallet Connected</span>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.walletConnected')}</span>
                   </Button>
               </Col>
               <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
-                <OverlayTrigger overlay={<Tooltip>Disconnect</Tooltip>}>
+                <OverlayTrigger overlay={<Tooltip>{t('main.text.disconnect')}</Tooltip>}>
                       <Button className={styles.activeBtn} onClick={connectWallet}>
                       <i className="fa-solid fa-xmark"></i>
                       <span style={{ fontWeight:'800', marginLeft: '8px'}}>{walletAddress.slice(0,5).concat('...').concat(walletAddress.slice(-4))}</span>
@@ -209,11 +211,11 @@ const AuthPage = ({ session }) => {
               <Col xs={12} md={6}>
                 <Button size="lg" className={styles.disactiveBtn} onClick={connectWallet}>
                     <Image src="/metamask.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Connect Wallet</span>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.connectWallet')}</span>
                 </Button>
               </Col>
               <Col xs={12} md={6}>
-                  <h5 className="mt-2 connect_txt">Wallet not connected</h5>
+                  <h5 className="mt-2 connect_txt">{t('main.text.walletNotConnected')}</h5>
                 </Col>
             </Row>
             }
@@ -222,17 +224,17 @@ const AuthPage = ({ session }) => {
           <hr />
 
           <Row className='mt-5'>
-            <h5>2. Connect Social</h5>
+            <h5>2. {t('main.text.connectSocial')}</h5>
             {(appleId) ?
             <Row>
               <Col xs={12} md={6}>
                   <Button size="lg" className={styles.disactiveBtn}>
                     <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>Apple Connected</span>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.appleConnected')}</span>
                   </Button>
               </Col>
               <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
-                <OverlayTrigger overlay={<Tooltip>Disconnect</Tooltip>}>
+                <OverlayTrigger overlay={<Tooltip>{t('main.text.disconnect')}</Tooltip>}>
                       <Button className={styles.activeBtn} onClick={disconnectApple}>
                       <i className="fa-solid fa-xmark"></i>
                       <span style={{ fontWeight:'800', marginLeft: '8px'}}>{appleId.slice(0,5).concat('...').concat(appleId.slice(-4))}</span>
@@ -251,15 +253,15 @@ const AuthPage = ({ session }) => {
                 </Button>
               </Col>
               <Col xs={12} md={6}>
-                  <h5 className="mt-2 connect_txt">Apple not connected</h5>
+                  <h5 className="mt-2 connect_txt">{t('main.text.appleNotConnected')}</h5>
                 </Col>
             </Row>
             }
             <Row className='mt-3'>
               <Col xs={12}>
                 <span style={{ display: 'inline-block' }}>
-                <OverlayTrigger overlay={<Tooltip>You will need to access images created from Mindful Ocean app which saved under your Apple ID</Tooltip>}>
-                  <h6 style={{textDecoration: "underline"}}>Why should I link my Apple account?</h6>
+                <OverlayTrigger overlay={<Tooltip>{t('page.mintpass.youWillNeedToAccessImages')}</Tooltip>}>
+                  <h6 style={{textDecoration: "underline"}}>{t('page.mintpass.whyShouldILinkMyAppleAccount')}</h6>
                 </OverlayTrigger>
                 </span>
               </Col>
@@ -269,9 +271,9 @@ const AuthPage = ({ session }) => {
           <Row className='justify-content-md-center mt-5'>
             <Col xs={12} className='text-center'>
               {walletAddress && appleId ?
-              <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>Next&nbsp;&rarr;</Button>
+              <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>{t('button.next')}&nbsp;&rarr;</Button>
               :
-              <Button size="lg" variant="secondary" className={styles.nextBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} disabled>Next&nbsp;&rarr;</Button>
+              <Button size="lg" variant="secondary" className={styles.nextBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} disabled>{t('button.next')}&nbsp;&rarr;</Button>
               }
             </Col>
           </Row>

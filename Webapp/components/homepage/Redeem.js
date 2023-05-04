@@ -1,12 +1,15 @@
 import { Row, Image, Container } from 'react-bootstrap';
 import styles from '../../styles/Redeem.module.css';
+import { useTranslation } from '../../i18n';
 
 const Redeem = () => {
+    const { t, locale } = useTranslation();
+
     return (
         <div className={styles.redeem} id="mindfultoken">
            <Row className={styles.title} >
-                <h3>Redeem</h3>
-                <p className='mt-1'>Redeem your Mindful Token after submitting your coloring artworks! With the Token you can vote for the next NGO and fish theme for the coming event!</p>         
+                <h3>{t('main.text.redeem')}</h3>
+                <p className='mt-1'>{t('main.text.redeemYourMindfulToken')}</p>         
                 <picture>
                     <source srcSet="verticalRedeem.png" media="(max-width: 600px)" />
                     <Image className={styles.redeemImg} src="redeem.png" alt="redeem" fluid='true' lazy="true" />

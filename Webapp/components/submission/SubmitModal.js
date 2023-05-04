@@ -4,8 +4,10 @@ import homeStyles from '../../styles/Home.module.css';
 import styles from '../../styles/SubmitPage.module.css';
 import ConfirmModal from './ConfirmModal';
 import axios from 'axios';
+import { useTranslation } from '../../i18n';
 
 const SubmitModal = ({submitShow,setSubmitShow }) => {
+  const { t, locale } = useTranslation();
   const [checkbox1, setCheckbox1] = useState(false);
   const [checkbox2, setCheckbox2] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -41,11 +43,11 @@ const SubmitModal = ({submitShow,setSubmitShow }) => {
     <>
       <Modal show={submitShow} onHide={handleConfirmClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Submit</Modal.Title>
+          <Modal.Title>{t('button.submit')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Row className='mb-3'>
-          <p>Read the <span style={{textDecoration: "underline"}}>Disclaimer</span> here</p>
+          <p>{t('page.mintpass.submission.readTheDisclaimerHere')}</p>
           <Form>
             <Form.Group className="align-items-center form_group" controlId="checkbox1">
               <Form.Check
@@ -56,7 +58,7 @@ const SubmitModal = ({submitShow,setSubmitShow }) => {
                 value={checkbox1}
                 onChange={handleChange}
               />
-              <Form.Label className='form_label'>I own the copyright of the submitted artwork</Form.Label>
+              <Form.Label className='form_label'>{t('page.mintpass.submission.iOwnTheCopyright')}</Form.Label>
             </Form.Group>
             <Form.Group className="align-items-center form_group" controlId="checkbox2">
               <Form.Check
@@ -67,7 +69,7 @@ const SubmitModal = ({submitShow,setSubmitShow }) => {
                 value={checkbox2}
                 onChange={handleChange}
               />
-              <Form.Label className='form_label'>There is no inappropriate content in my artwork</Form.Label>
+              <Form.Label className='form_label'>{t('page.mintpass.submission.thereIsNoInappropriateContentInMyArtwork')}</Form.Label>
             </Form.Group>
           </Form>
         </Row>
@@ -78,7 +80,7 @@ const SubmitModal = ({submitShow,setSubmitShow }) => {
               setConfirmShow(true);
               resetForm();
             }}
-          >Continue</Button>
+          >{t('button.continue')}</Button>
         </Row>
         </Modal.Body>
       </Modal>

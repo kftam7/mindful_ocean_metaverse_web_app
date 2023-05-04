@@ -7,9 +7,11 @@ import { Row, Col, Form, Container, Button } from 'react-bootstrap';
 
 import axios from 'axios';
 import AppModal from '../components/redeem/AppModal';
+import { useTranslation } from '../i18n';
 
 //just pass the setShow and setConShow as props to children components
 export default function RedeemStep2({ session, user }) {
+  const { t, locale } = useTranslation();
   const apiPort = process.env.API_PORT || '/';
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
@@ -50,23 +52,23 @@ export default function RedeemStep2({ session, user }) {
   return(
     <Container className='mt-5 mb-5'>
       <div className={styles.submitPage}>
-          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; Return to homepage</h6></Link></Row>
-          <Row className="mt-4"><h4>Redeem Artworks</h4></Row>
+          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+          <Row className="mt-4"><h4>{t('page.redeem.redeemArtworks')}</h4></Row>
 
           <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>1. Authentication</span></div>
+              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.redeem.authentication')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>2. Select Mint Pass</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.selectMintPass')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>3. Complete</span></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.complete')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
           </Row>
@@ -75,7 +77,7 @@ export default function RedeemStep2({ session, user }) {
             <div className={styles.submitContent}>
               <Row className="gx-5">
                 <Col xs={12}>
-                  <div className={styles.submitTile}>Browse your Mintpass: </div>
+                  <div className={styles.submitTile}>{t('page.redeem.browseYourMintpass')}: </div>
                   <div className={styles.submitTxt3}>
                     <Row className="gx-5">
                       <Col xs={12} sm={8} md={6}>
@@ -91,34 +93,34 @@ export default function RedeemStep2({ session, user }) {
                   </div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile}>Information:</div>
-                  <div className={styles.submitTxt3}>The below information were created when the artwork was first submitted. They will be shown in XXX</div>
+                  <div className={styles.submitTile}>{t('page.redeem.information')}:</div>
+                  <div className={styles.submitTxt3}>{t('page.redeem.theBelowInformation')}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>Description:</div>
+                  <div className={styles.submitTile2}>{t('main.text.description')}:</div>
                   <div className={styles.submitTxt2}>{obj.description}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>Personal Information:</div>
+                  <div className={styles.submitTile2}>{t('page.redeem.personalInformation')}:</div>
                   <div className={styles.submitTxt2}>{obj.peronsalInfo}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>Artist Apple ID:</div>
+                  <div className={styles.submitTile2}>{t('page.redeem.artistAppleID')}:</div>
                   <div className={styles.submitTxt2}>{obj.artistAppleId}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>Event ID:</div>
+                  <div className={styles.submitTile2}>{t('page.redeem.eventID')}:</div>
                   <div className={styles.submitTxt2}>{obj.eventId}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>Mintpass ID:</div>
+                  <div className={styles.submitTile2}>{t('page.redeem.mintpassID')}:</div>
                   <div className={styles.submitTxt2}>{obj.tokenId}</div>
                 </Col>
               </Row>
               <Row className='justify-content-md-center mt-5'>
                 <Col xs={12}>
                   <div className='text-center'>
-                    <Button href='/redeem_step3' size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>Burn</Button>
+                    <Button href='/redeem_step3' size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>{t('button.burn')}</Button>
                   </div>
                 </Col>
               </Row>

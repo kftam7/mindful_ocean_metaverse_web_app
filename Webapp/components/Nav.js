@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Image from 'next/image';
-import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col, Modal } from 'react-bootstrap';
+import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col, Modal, Link } from 'react-bootstrap';
 import styles from '../styles/Nav.module.css';
+import { useTranslation } from '../i18n';
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,13 +32,12 @@ const wagmiClient = createClient({
 })
 const ethereumClient = new EthereumClient(wagmiClient, chains)
 
-const NavBar = () => {
+const NavBar = ({onLocaleChange}) => {
   const apiPort = process.env.API_PORT || '/';
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
   
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
@@ -154,7 +154,30 @@ const NavBar = () => {
   // const disconnect = async() => {
   //   dispatch(disconnectAccount());
   // }
-    return (
+
+  const { t, locale } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(locale);
+  const [lang, setLang] = useState('');
+  const changeLanguage = (newLocale) => {
+    setSelectedLanguage(newLocale);
+    localStorage.setItem('lang', newLocale);
+    onLocaleChange(newLocale);
+    // router.reload();
+  };
+
+  useEffect(() => {
+    if(locale === 'en'){
+      setLang(t('lang.en'))
+    }
+    if(locale === 'ch'){
+      setLang(t('lang.ch'))
+    }
+    if(locale === 'tw'){
+      setLang(t('lang.tw'))
+    }
+  },[locale])
+
+  return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`p-3 ${styles.bg}`}>
     <Container fluid className={styles.container}>
     <Navbar.Brand href="/">
@@ -168,37 +191,39 @@ const NavBar = () => {
     </Navbar.Brand>       
     <Navbar.Toggle aria-controls='responsive-navbar-nav' />
     <Navbar.Collapse id='responsive-navbar-nav'>
+      
     <Nav className="me-auto">
-        <Nav.Link href="#about" className={styles.navlink}>About</Nav.Link>
-        <Nav.Link href="#gallery" className={styles.navlink}>Gallery</Nav.Link>
-        <Nav.Link href="#mobileapp" className={styles.navlink}>Create</Nav.Link>
-        <Nav.Link href="#mintpass" className={styles.navlink}>Mintpass</Nav.Link>
-        <Nav.Link href="#Redeem" className={styles.navlink}>Redeem</Nav.Link>
-        <Nav.Link href="#donate" className={styles.navlink}>Donate</Nav.Link>
-        <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>Mindful Token</Nav.Link>
+        <Nav.Link href="#about" className={styles.navlink}>{t('nav.about')}</Nav.Link>
+        <Nav.Link href="#gallery" className={styles.navlink}>{t('nav.gallery')}</Nav.Link>
+        <Nav.Link href="#mobileapp" className={styles.navlink}>{t('nav.create')}</Nav.Link>
+        <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
+        <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
+        <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link>
+        <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link>
     </Nav>
     <Nav>
       <Col lg={3} xl={4} className='mt-1 me-1'>
           <Form>
               <InputGroup className="">
                   <InputGroup.Text style={{color: '#005D6C', border: '1px solid #005D6C', backgroundColor: 'none'}} id="subscribe" type="submit"><i className="far fa-envelope"></i></InputGroup.Text>
-                  <FormControl id="subscribe" placeholder="Subscribe here" style={{border: '1px solid #005D6C'}} />
+                  <FormControl id="subscribe" placeholder={t('input.placeholder.email')} style={{border: '1px solid #005D6C'}} />
               </InputGroup>
           </Form>
       </Col>
       <Col lg={3} xl={4} className='mt-1 me-1'>
           <Dropdown className="">
               <Dropdown.Toggle className={styles.dropdownBtn} id="language">
-                  ENG&nbsp;&nbsp;&nbsp;
+                  {lang}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                  <Dropdown.Item href="#/lg-1">ENG</Dropdown.Item>
-                  <Dropdown.Item href="#/lg-2">CN</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeLanguage('en')}>{t('lang.en')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeLanguage('ch')}>{t('lang.ch')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeLanguage('tw')}>{t('lang.tw')}</Dropdown.Item>
               </Dropdown.Menu>
           </Dropdown>
       </Col>
       <Col lg={3} xl={4} className='mt-1 me-1'>
-        <Button onClick={signInOpenModal} className={styles.dropdownBtn}>Sign In</Button> 
+        <Button onClick={signInOpenModal} className={styles.dropdownBtn}>{t('button.signIn')}</Button> 
       </Col>
       {/* <Col lg={4} className='mt-1 ms-2'>
           {(account) ?
@@ -219,14 +244,14 @@ const NavBar = () => {
         onHide={handleClose}
       >
         <Modal.Header closeButton>
-            <Modal.Title>Sign In</Modal.Title>
+            <Modal.Title>{t('main.text.signIn')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Row className='mb-12'>
                 <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                   {isConnected ? 
                     <>
-                      <div>Wallet Contect</div> 
+                      <div>{t('main.text.walletContect')}</div> 
                       <Button className={styles.signInBtn2} onClick={connectWallet}>
                         <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
                         <TextOverflowTips text={walletAddress} />
@@ -240,7 +265,7 @@ const NavBar = () => {
                 <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                   {isAppleIdLogin ? 
                       <>
-                        <div>Apple</div>
+                        <div>{t('main.text.apple')}</div>
                         <Button className={styles.signInBtn2} onClick={handleAppleSignOut}>
                           <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
                           <TextOverflowTips text={appleId} />
@@ -253,7 +278,7 @@ const NavBar = () => {
                   }
                 </Col>
                 <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
-                    <Button href="/userProfile" className={!isConnected || !isAppleIdLogin ? styles.signInBtnDisabled : styles.signInBtn} disabled={!isConnected || !isAppleIdLogin}>View My Profile</Button>
+                    <Button href="/userProfile" className={!isConnected || !isAppleIdLogin ? styles.signInBtnDisabled : styles.signInBtn} disabled={!isConnected || !isAppleIdLogin}>{t('button.viewMyProfile')}</Button>
                 </Col>
             </Row>
         </Modal.Body>
@@ -265,11 +290,11 @@ const NavBar = () => {
     )
 }
 
-function App() {
+function App({onLocaleChange}) {
   return (
     <>
       <WagmiConfig client={wagmiClient}>
-          <NavBar />
+          <NavBar onLocaleChange={onLocaleChange} />
       </WagmiConfig>
 
       <Web3Modal

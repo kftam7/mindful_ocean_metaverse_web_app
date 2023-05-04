@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import homeStyles from '../styles/Home.module.css';
 import Layout from '../components/IndexPageLayout';
 import Head from '../components/homepage/Head';
@@ -11,7 +12,9 @@ import Team from '../components/homepage/Team';
 import Mintpass from '../components/homepage/Mintpass';
 import Redeem1 from '../components/homepage/Redeem1';
 
-export default function Home() {
+export default function Home(props) {
+  const { lang } = props;
+
   return(
     <div className={homeStyles.main}>
       <Head />
@@ -30,7 +33,7 @@ export default function Home() {
 //per-page layout
 Home.getLayout = function getLayout(page) {
   return (
-    <Layout>
+    <Layout myFunction={Home}>
       {page}
     </Layout>
   )
