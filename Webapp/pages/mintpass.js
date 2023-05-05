@@ -52,16 +52,15 @@ export default function Mintpass({ session,user }) {
   //if mint success, duplicate & remove the image, update mint status and ID to DB
   //can fetch the tokenId here?
   async function mint() {
-    Router.push({
-      pathname: '/mintedPage',
-    });
-    return;
-    await mintpassContract.methods.mintMPass(1).send({ from: account })
+    console.log(mintpassContract)
+    await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.baidu.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 10).send({ from: account })
     .once('confirmation', async function(confirmationNumber, receipt){ //if use "on('"confirmation") here, it will be triggered repeatedly
 
     })
     .then(async function(){
+      console.log('success')
       await generateMeta();
+      return;
       Router.push({
         pathname: '/mintedPage',
       });
