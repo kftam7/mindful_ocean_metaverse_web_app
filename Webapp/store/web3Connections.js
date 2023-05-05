@@ -4,6 +4,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 // import abi from "../abi.json";
 import abi from "../utils/mintpass.json";
+//import abi from "../utils/mintpassnew.json";
 
 //start a connection to the web3 provider positively
 const getWeb3Modal = async() => {
@@ -160,7 +161,8 @@ export const switchNetwork = async() => {
 export const fetchContract = async() => {
   const web3 = await fetchWeb3();
   // const contract = "0xD27713a2b92F4aeCA566cB9e601092F9174DE6ca";
-  const contract = "0x3976432bE199E87E0DBFF1bEc7B7503684C7416b";
+  //const contract = "0x3976432bE199E87E0DBFF1bEc7B7503684C7416b";
+  const contract = "0x0e9B0E0e71e1F18875CBD88Fe5aC12De0edf78a7";
   const mintpassContract = await new web3.eth.Contract(abi, contract);
   return mintpassContract;
 }
