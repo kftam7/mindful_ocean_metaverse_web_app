@@ -4,7 +4,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 // import abi from "../abi.json";
 import abi from "../utils/mintpass.json";
-//import abi from "../utils/mintpassnew.json";
+import abiNFT from "../utils/mindfulNFT.json";
 
 //start a connection to the web3 provider positively
 const getWeb3Modal = async() => {
@@ -166,6 +166,13 @@ export const fetchContract = async() => {
   const contractMindfulNFT = "0x73d9cd5b3f6bf370bb3ea9a28b8011de112f7e49";
   const mintpassContract = await new web3.eth.Contract(abi, contract);
   return mintpassContract;
+}
+
+export const fetchContractNFT = async() => {
+  const web3 = await fetchWeb3();
+  const contractNFT = "0x73d9cd5b3f6bf370bb3ea9a28b8011de112f7e49";
+  const mintpassContractNFT = await new web3.eth.Contract(abiNFT, contractNFT);
+  return mintpassContractNFT;
 }
 
 //deactivate() will call wallet's close() function,but metamask doesn't have that

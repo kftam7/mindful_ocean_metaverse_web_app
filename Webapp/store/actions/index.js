@@ -1,5 +1,5 @@
-import { FETCH_ACCOUNT, UPDATE_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT} from "./types";
-import { fetchAccount, connectAccount, disconnect, fetchBalance, connectForBalance, fetchContract } from "../web3Connections";
+import { FETCH_ACCOUNT, UPDATE_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT, FETCH_CONTRACT_NFT} from "./types";
+import { fetchAccount, connectAccount, disconnect, fetchBalance, connectForBalance, fetchContract, fetchContractNFT } from "../web3Connections";
 import axios from 'axios';
 const apiPort = process.env.API_PORT || '/';
 
@@ -74,7 +74,20 @@ export const fetchMintpassContract = () => async (dispatch) => {
   } catch (err) {
       console.log(err)
   }
-}
+};
+
+
+export const fetchMintpassContractNFT = () => async (dispatch) => {
+  const contract = await fetchContractNFT();
+  try {
+    dispatch({
+      type: FETCH_CONTRACT_NFT,
+      payload: contract,
+    });
+  } catch (err) {
+      console.log(err)
+  }
+};
 // export const fetchUser = () => async (dispatch) => {
 //   const account = await fetchAccount();
 //   const res = await axios.get('/api/users/', { 

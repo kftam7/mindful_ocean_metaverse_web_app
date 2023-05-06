@@ -68,6 +68,11 @@ export default function RedeemStep2({ session, user }) {
             </Col>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.burnMinpPass')}</span></div>
+              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+            </Col>
+            <Col xs={4} className={styles.item}>
+              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
               <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.complete')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>

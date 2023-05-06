@@ -79,7 +79,8 @@
     "page.redeem.redeemArtworks": "Redeem Artworks",
     "page.redeem.authentication": "1. Authentication",
     "page.redeem.selectMintPass": "2. Select Mint Pass",
-    "page.redeem.complete": "3. Complete",
+    "page.redeem.burnMinpPass": "3. Burn MinpPass",
+    "page.redeem.complete": "4. Complete",
     "page.redeem.browseYourMintpass": "Browse your Mintpass",
     "page.redeem.information": "Information",
     "page.redeem.theBelowInformation": "The below information were created when the artwork was first submitted. They will be shown in XXX",
@@ -133,5 +134,6 @@
     "button.getMintPass": "Get Mint Pass",
     "button.burn": "Burn",
     "button.addNew": "Add new",
-    "button.close": "Close"
+    "button.close": "Close",
+    "button.mintMindfulNFT": "Mint Mindful NFT"
 }
