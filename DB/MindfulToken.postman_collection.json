@@ -50,17 +50,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:3001/mindfulapi/credential/admin/c93ccd78b2076528346216b3b2f701e6",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/credential/admin/c93ccd78b2076528346216b3b2f701e6",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{baseUrl}}"
 									],
-									"port": "3001",
 									"path": [
-										"mindfulapi",
 										"credential",
 										"admin",
 										"c93ccd78b2076528346216b3b2f701e6"
@@ -546,17 +540,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:3001/mindfulapi/event",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/event",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{baseUrl}}"
 									],
-									"port": "3001",
 									"path": [
-										"mindfulapi",
 										"event"
 									],
 									"query": [
@@ -703,17 +691,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:3001/mindfulapi/event",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/event",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{baseUrl}}"
 									],
-									"port": "3001",
 									"path": [
-										"mindfulapi",
 										"event"
 									]
 								}
@@ -839,17 +821,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:3001/mindfulapi/event/2",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/event/2",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{baseUrl}}"
 									],
-									"port": "3001",
 									"path": [
-										"mindfulapi",
 										"event",
 										"2"
 									]
@@ -1345,17 +1321,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:3001/mindfulapi/nfttotal/mindfulToken",
-									"protocol": "http",
+									"raw": "{{baseUrl}}/nfttotal/mindfulToken",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{baseUrl}}"
 									],
-									"port": "3001",
 									"path": [
-										"mindfulapi",
 										"nfttotal",
 										"mindfulToken"
 									]
@@ -2791,7 +2761,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest1changed\",\n   \"URL\":\"http://artworktest1/changed\",\n   \"description\":\"desctest1changed\",\n   \"extraInfo\":\"extratest1changed\",\n   \"createTime\":\"2023-01-01 00:00:00\",\n   \"updateTime\":\"2026-12-31 00:00:00\"\n}",
+									"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest1changed\",\n   \"URL\":\"http://artworktest1/changed\",\n   \"type\": \"fish\",\n   \"description\":\"desctest1changed\",\n   \"extraInfo\":\"extratest1changed\",\n   \"createTime\":\"2023-01-01 00:00:00\",\n   \"updateTime\":\"2026-12-31 00:00:00\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2799,13 +2769,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/artwork/36",
+									"raw": "{{baseUrl}}/artwork/37",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"artwork",
-										"36"
+										"37"
 									]
 								}
 							},
@@ -4281,12 +4251,12 @@
 								"header": [
 									{
 										"key": "time_stamp",
-										"value": "1682467352",
+										"value": "1682606070",
 										"type": "text"
 									},
 									{
 										"key": "secret",
-										"value": "333cda1abb4cce187a62be7cd0b798ff",
+										"value": "98445145ed71b0d80307ece93b8fbc5c",
 										"type": "text"
 									},
 									{
@@ -4298,7 +4268,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Jacqueline\",\n\t\t\"lastName\":\"Wan\"\n\t},\n\t\"email\": \"fcnfqf9zrz@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4b8cef572ba849e79c983cc0f7aa9af7.0.szyu.fr4tLaWl7qPHFiFjqgwXsA\",\n\t\"code\": \"c619484b311e44540ad24dd908c521d3f.0.rzyu.lJBHDmV5JpHKTkN4sXc9Hg\"\n}",
+									"raw": "{\n    \"name\": {\n        \"firstName\": \"Edward\",\n        \"lastName\": \"Tam\"\n    },\n    \"email\": \"vyj8xydrdq@privaterelay.appleid.com\",\n    \"refresh_token\": \"r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw\",\n    \"id_token\": \"eyJraWQiOiJXNldjT0tCIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkFuaW1vY2FCcmFuZHMuTWluZGZ1bC1PY2Vhbi1EZXYtU2l3YSIsImV4cCI6MTY4MTgwNTMyNywiaWF0IjoxNjgxNzE4OTI3LCJzdWIiOiIwMDE5NTMuODM3ODk3ZTI5YjQzNGViZDgxYjNjOWYxM2VmYjdiZDMuMDgwOCIsImNfaGFzaCI6IjlMbWItSGtUWFR3TjQwQUR5VExFLXciLCJlbWFpbCI6InZ5ajh4eWRyZHFAcHJpdmF0ZXJlbGF5LmFwcGxlaWQuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiaXNfcHJpdmF0ZV9lbWFpbCI6InRydWUiLCJhdXRoX3RpbWUiOjE2ODE3MTg5MjcsIm5vbmNlX3N1cHBvcnRlZCI6dHJ1ZX0.CmyQspfK3ctc4W77ljgOe8MNbMPGnqEIOnB5_G-FH8a15ItprdozgNhlzJ5oyOMuBCGct0S4f2rngF6X7RnN2XBvBah2BdIp18iBZDxO9MRVypdu7XUzN0M_xKibv__4g-Q_K7BBORg6c_FLsfzwxPiXhfGCpmUzfb-Sh3eZB8kpUivi5hTywbRxhr9Zm7sFKEBfcT3sbuxP9fRB2bNf7PCj0RyZSeX7Qf8YZgaJY2zzflG5ZA56-eqVFS790EFakOe4d2_pnpu_S3ORUvA0kClko-pgqoh41hSOZBIQbi-kmCLeK7sRkdd5-Bzu9nMFLsa5lYi0Av9trUL4OEeEYg\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4306,13 +4276,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/signin/001463.3be803433a0542a0b0d6862a62285371.0627",
+									"raw": "{{baseUrl}}/signin/001953.837897e29b434ebd81b3c9f13efb7bd3.0808",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"signin",
-										"001463.3be803433a0542a0b0d6862a62285371.0627"
+										"001953.837897e29b434ebd81b3c9f13efb7bd3.0808"
 									]
 								}
 							},

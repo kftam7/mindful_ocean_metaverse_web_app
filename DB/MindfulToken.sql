@@ -58,13 +58,14 @@ CREATE TABLE `artwork` (
   `userId` int NOT NULL,
   `name` varchar(100) DEFAULT NULL COMMENT 'Name of the artwork',
   `URL` varchar(500) NOT NULL COMMENT 'URL of the upload artwork',
+  `type` varchar(50) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `extraInfo` varchar(500) DEFAULT NULL,
   `createTime` datetime NOT NULL DEFAULT '2020-01-01 00:00:00',
   `updateTime` datetime NOT NULL DEFAULT '2020-01-01 00:00:00',
   PRIMARY KEY (`artworkId`),
   UNIQUE KEY `UNIQUE` (`userId`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +74,7 @@ CREATE TABLE `artwork` (
 
 LOCK TABLES `artwork` WRITE;
 /*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,1,'undefined','undefined','undefined',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(2,1,'artwork2','https://xyz.com/1.html','html text',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(3,1,'artwork3','https://111.com/a.gif','gif animation',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(4,2,'artworkA','https://222.com/321.avi','movie file',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(5,2,'artworkB','https://333.com/sound.mp4','sound track',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(6,3,'artworkwhatisthis','https://kkk.com/blablabla.gif','gif picture',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(7,4,'artworktest1','http://artworktest1','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(8,5,'artworktest2','http://artworktest2','test2',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(9,1,'artwork modified','https://modified.com','artwork modify testing',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(12,3,'ds','df',NULL,NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(26,3,'ds2','https://www.baidu.com','sdfdsf',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(27,9,'artworktest1','http://artworktest1','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(29,10,'artworktest1','http://artworktest1','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(31,11,'artworktest1','http://artworktest1','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(32,12,'artworktest1','http://artworktest1','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(33,13,'artworktest1','http://artworktest1','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(35,14,'artworktest14','http://artworktest14','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(36,1,'artworktest1changed','http://artworktest1/changed','desctest1changed','extratest1changed','2023-01-01 00:00:00','2026-12-31 00:00:00');
+INSERT INTO `artwork` VALUES (1,1,'undefined','undefined','fish','undefined',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(2,1,'artwork2','https://xyz.com/1.html','whale','html text',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(3,1,'artwork3','https://111.com/a.gif','dolphin','gif animation',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(4,2,'artworkA','https://222.com/321.avi','fish','movie file',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(5,2,'artworkB','https://333.com/sound.mp4','fish','sound track',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(6,3,'artworkwhatisthis','https://kkk.com/blablabla.gif','fish','gif picture',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(7,4,'artworktest1','http://artworktest1','fish','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(8,5,'artworktest2','http://artworktest2','whale','test2',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(9,1,'artwork modified','https://modified.com','whale','artwork modify testing',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(12,3,'ds','df','whale',NULL,NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(26,3,'ds2','https://www.baidu.com','whale','sdfdsf',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(27,9,'artworktest1','http://artworktest1','whale','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(29,10,'artworktest1','http://artworktest1','dolphin','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(31,11,'artworktest1','http://artworktest1','dolphin','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(32,12,'artworktest1','http://artworktest1','dolphin','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(33,13,'artworktest1','http://artworktest1','dolphin','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(35,14,'artworktest14','http://artworktest14','dolphin','test1',NULL,'2020-01-01 00:00:00','2020-01-01 00:00:00'),(36,1,'artworktest1changed','http://artworktest1/changed','dolphin','desctest1changed','extratest1changed','2023-01-01 00:00:00','2026-12-31 00:00:00'),(37,1,'artworktest37changed','http://artworktest1/changed','fish','desctest1changed','extratest1changed','2023-01-01 00:00:00','2026-12-31 00:00:00');
 /*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,12 +208,12 @@ CREATE TABLE `user` (
   `firstName` varchar(100) DEFAULT NULL,
   `lastName` varchar(100) DEFAULT NULL,
   `email` varchar(320) DEFAULT NULL,
-  `refreshToken` varchar(45) DEFAULT NULL,
+  `refreshToken` varchar(80) DEFAULT NULL,
   `validToken` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`userId`),
   UNIQUE KEY `twitterId_UNIQUE` (`appleId`),
   UNIQUE KEY `walletAddress_UNIQUE` (`walletAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +222,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'001463.3be803433a0542a0b0d6862a62285371.0627','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-01-01 00:00:00',1,NULL,NULL,NULL,NULL,1),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00',1,NULL,NULL,NULL,NULL,1),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00',1,NULL,NULL,NULL,NULL,1),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02',0,NULL,NULL,NULL,NULL,1),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(28,'123@xx.com','0x1ecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(29,'456@yy.com','0x28a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',0,NULL,NULL,NULL,NULL,1),(30,'789@zz.com','0x371DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1);
+INSERT INTO `user` VALUES (1,'000984.272ea5bb414443a9b8f4c82b0dc5956e.1613','0x46Ac9Ec2759e2C3A73e9e4624D284F810d3c4005','User me for testing','2022-12-01 00:00:00','2023-04-27 23:01:34',1,'Jacqueline','Wan',NULL,'r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw',1),(2,'you@apple.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA9a','free text for editing','2023-01-02 10:00:00','2023-01-31 01:00:00',1,NULL,NULL,NULL,NULL,1),(3,'we@apple.com','0x1BC91e17a84D65d750aB671Fc1D2038a42A69948','say something about you','2023-02-28 00:00:00','2023-03-20 00:00:00',1,NULL,NULL,NULL,NULL,1),(4,'xx@xx.com','0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd','This is a modified msg','2024-05-17 01:01:01','2025-06-17 02:02:02',0,NULL,NULL,NULL,NULL,1),(5,'yy@yy.com','0x54B6Acc64bf7A7cf7450a2C3025c29dC71974c1E','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(6,'zz@zz.com','0xef4cF75b222c45C89D315Ba1781C85E81D0F2832','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(19,'11@xx.com','0xbecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(20,'22@yy.com','0xC8a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(21,'33@zz.com','0x971DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(28,'123@xx.com','0x1ecA25F68fa00ed5e86B7F00ADa2A06254f47C01','This is a about me','2018-05-17 01:01:01','2019-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(29,'456@yy.com','0x28a729C23c4304597ec10894A374fdD44Da5bA92','This is a about him','2020-05-17 01:01:01','2021-06-17 02:02:02',0,NULL,NULL,NULL,NULL,1),(30,'789@zz.com','0x371DBc24d5D230eBd3D9EB7D7E2Ba9a9d7Ba8683','This is a about her','2022-05-17 01:01:01','2023-06-17 02:02:02',1,NULL,NULL,NULL,NULL,1),(32,'001953.837897e29b434ebd81b3c9f13efb7bd3.0808',NULL,NULL,'2023-04-27 23:25:23','2023-04-27 23:26:04',1,'Edward','Tam','vyj8xydrdq@privaterelay.appleid.com','r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -234,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-26 18:00:20
+-- Dump completed on 2023-05-08  0:40:29

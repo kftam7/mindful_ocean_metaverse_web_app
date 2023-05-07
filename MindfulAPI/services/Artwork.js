@@ -12,11 +12,11 @@ async function getArtwork(appleId){
 
     if (appleId){
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.description, a.extraInfo, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
       );
     }else{
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.description, a.extraInfo, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
+        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
       );
     }
   
@@ -61,7 +61,7 @@ async function createArtwork(artworkRecord){
 */
 
   var rows = await db.query(
-    `INSERT INTO artwork (userId, name, URL, description, extraInfo, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?)`, [artworkRecord[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime]
+    `INSERT INTO artwork (userId, name, URL, type, description, extraInfo, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [artworkRecord[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime]
   );
 
   var queryResult = await db.query(
@@ -83,7 +83,7 @@ async function createArtwork(artworkRecord){
 /* update Artwork */
 async function updateArtwork(artworkId, artworkRecord){
 
-  sql = 'UPDATE artwork SET userId = "' + artworkRecord.userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '" WHERE artworkId = "' + artworkId + '";';
+  sql = 'UPDATE artwork SET userId = "' + artworkRecord.userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", type = "' + artworkRecord.type + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '" WHERE artworkId = "' + artworkId + '";';
 
   console.log(sql);
   
