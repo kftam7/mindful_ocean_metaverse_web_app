@@ -40,6 +40,13 @@
     "main.text.description": "Description",
     "main.text.walletConnect": "Wallet Connect",
     "main.text.appleID": "Apple ID",
+    "main.text.submitThroughComputer": "Submit through computer",
+    "main.text.loginFromYourComputerForABetterExperience": "Login from your computer\n for a better experience.",
+    "main.text.noMintpassregistered": "No Mintpass registered",
+    "main.text.walletAddress": "Wallet Address",
+    "main.text.howToGetAMintpass": "How to get a Mintpass?",
+    "main.text.joinTheNextEvent": "Join the next event in Mindful Ocean App.\nNext event starting on 5 May 2023.",
+    "main.text.orPurchaseDirectlyOnOpenseaNow": "Or purchase directly on Opensea now.",
 
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
@@ -144,5 +151,6 @@
     "button.burn": "Burn",
     "button.addNew": "Add new",
     "button.close": "Close",
-    "button.mintMindfulNFT": "Mint Mindful NFT"
+    "button.mintMindfulNFT": "Mint Mindful NFT",
+    "button.changeAccount": "Change account"
 }

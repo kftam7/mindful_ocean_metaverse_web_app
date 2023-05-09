@@ -40,6 +40,13 @@
     "main.text.description": "说明",
     "main.text.walletConnect": "钱包连接",
     "main.text.appleID": "苹果ID",
+    "main.text.submitThroughComputer": "通过计算机提交",
+    "main.text.loginFromYourComputerForABetterExperience": "从您的计算机登录\n以获得更好的体验.",
+    "main.text.noMintpassregistered": "未注册Mintpass",
+    "main.text.walletAddress": "钱包地址",
+    "main.text.howToGetAMintpass": "如何获得Mintpass?",
+    "main.text.joinTheNextEvent": "加入Minded Ocean应用程序中的下一个活动。下一次活动将于2023年5月5日开始。",
+    "main.text.orPurchaseDirectlyOnOpenseaNow": "或者现在直接在Opensea上购买。",
 
     "page.create.createAndColor": "创建并为自己版本的鱼上色",
     "page.create.downloadTemplate": "下载模板",
@@ -144,5 +151,6 @@
     "button.burn": "燃烧",
     "button.addNew": "添加新内容",
     "button.close": "关闭",
-    "button.mintMindfulNFT": "Mint Mindful NFT"
+    "button.mintMindfulNFT": "Mint Mindful NFT",
+    "button.changeAccount": "更改帐户"
 }

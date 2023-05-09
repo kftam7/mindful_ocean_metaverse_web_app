@@ -1,11 +1,26 @@
+import { useState } from "react";
 import { Row, Col, Button, Image, Container } from 'react-bootstrap';
 import homeStyles from '../../styles/Home.module.css';
 import styles from '../../styles/Mintpass.module.css';
 import AnimationForFishPool from '../../components/animationForFishPool/AnimationForFishPool';
 import { useTranslation } from '../../i18n';
+import Router from 'next/router';
+import ModalIsMobile from '../../components/modalIsMobile/ModalIsMobile';
 
 const Mintpass = () => {
     const { t, locale } = useTranslation();
+    const [show, setShow] = useState(false);
+
+    const determine = () => {
+        const isMobile = /Mobile/.test(navigator.userAgent);
+        if(isMobile){
+            setShow(true);
+        }else{
+            Router.push({
+              pathname: '/authentication',
+            });
+        }
+    };
 
     return (
         <>
@@ -19,9 +34,10 @@ const Mintpass = () => {
                     <Image className="" src="/mintpassSec.png" fluid='true' alt="mint pass" />
                 </Row>
                 <Row className='d-flex justify-content-center'>
-                    <Button href='/authentication' className={`${homeStyles.btn} ${styles.overlayBtn}`} style={{fontWeight: '800', fontSize: '1.5rem'}}>{t('button.submit')} &rarr;</Button>
+                    <Button onClick={determine} className={`${homeStyles.btn} ${styles.overlayBtn}`} style={{fontWeight: '800', fontSize: '1.5rem'}}>{t('button.submit')} &rarr;</Button>
                 </Row>
             </div>
+            <ModalIsMobile setShow={setShow} show={show} />
         </>
     )
 }
