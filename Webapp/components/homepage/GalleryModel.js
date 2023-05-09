@@ -5,31 +5,26 @@ import axios from 'axios';
 
 import GridModal from '../gallery/GridModal';
 
-const GalleryModel = (props) => {
+const GalleryModel = props => {
+    const {metadata, image, index} = props;
     const [modalShow, setModalShow] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const [nft,setNft] = useState();
 
     useEffect(() => {
-        loadNFT();
-    },[]);
-
-    async function loadNFT() {
-        const metadata = await axios.get(`${props.metadata}`);
         let nft = {
-            texture:metadata.data.image,
-            name:metadata.data.name,
-            author:metadata.data.author,
-            description:metadata.data.description
+            texture:metadata.URL,
+            name:metadata.name,
+            author:metadata.extraInfo,
+            description:metadata.description
         }
         setNft(nft);
         setLoaded(true); 
         load3DModel();
-        //the elements will be created after render, so the above shouldn't be called in rendering
-    }
+    },[metadata]);
 
     async function load3DModel() {
-      const modelViewer = document.getElementById(`model${props.index}`);
+      const modelViewer = document.getElementById(`model${index}`);
       modelViewer?.addEventListener("load", () => {
       
         let material = modelViewer.model.materials[0];
@@ -40,7 +35,7 @@ const GalleryModel = (props) => {
           const texture = await newTexture(imageSource);
           material[attr][channel].setTexture(texture);
         }
-        let source = props.image;
+        let source = image;
         initTexture('pbrMetallicRoughness', 'baseColorTexture', source)            
     });
   
@@ -55,7 +50,7 @@ const GalleryModel = (props) => {
         <Card className={styles.card} onClick={() => setModalShow(true)}>
             {/* src is the 3D model, poster is the texture */}
             <model-viewer 
-                id={`model${props.index}`}
+                id={`model${index}`}
                 src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone.glb?v=1636271548450"
                 ios-src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone-tex.usdz?v=1636599386704"
                 poster="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Funnamed.png?v=1636256018924"
@@ -73,7 +68,7 @@ const GalleryModel = (props) => {
                 </Card.Text>
             </Card.Body>
         </Card>
-        <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={nft.texture} title={nft.name} text={`by ${nft.author}`} />
+        <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={image} title={nft.name} text={`by ${nft.author}`} />
         </>
     )
 }
