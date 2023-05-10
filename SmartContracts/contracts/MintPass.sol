@@ -10,6 +10,8 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol"; // IERC20 interface
 
 contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981, DefaultOperatorFilterer {
     
@@ -17,8 +19,9 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     Counters.Counter private _tokenIdCounter;
     using ECDSA for bytes32;
     address private systemAddress;
+    using SafeMath for uint256;
 
-    // constructor takes the systemAddress for signature verification and mintPass contract address for checking burn status
+    // constructor takes the systemAddress for signature verification
     constructor(address _systemAddress) ERC721("MintPass", "MPASS") {
         systemAddress = _systemAddress;
     }
@@ -33,33 +36,26 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
         _unpause();
     }
 
-    //check if signature is valid
-    function isValidSignature(bytes32 hash, bytes memory signature) internal view returns (bool isValid) {
-        bytes32 signedHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
-        return signedHash.recover(signature) == systemAddress;
-    }
-
-    //check if data is valid
-    function isDataValid(uint256 timestamp, bytes memory signature) public view {
-        // Build the hash and check the sig
-        // We only accept sigs from the system
-        bytes32 msgHash = keccak256(abi.encodePacked(msg.sender, timestamp));
-        require(
-            isValidSignature(msgHash, signature),          
-            "Invalid signature"
-        );
+    // recover Signer from hash & signature
+    function recoverSigner(bytes32 hash, bytes memory signature) public pure returns (address) {
+        bytes32 messageDigest = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
+        return ECDSA.recover(messageDigest, signature);
     }
 
     // mint Metaverse NFT
-    function mintMintPass(address recipient, string memory uri, address royaltFeeReceiver, uint96 fee) public payable returns(uint256){
-        
-        // set the mint price
-        require(msg.value >= 10, "Not enough ETH sent; check price!"); 
+    function mintMintPass(address recipient, string memory uri, address royaltFeeReceiver, uint96 fee, bytes32 hash, bytes memory signature) public payable returns(uint256){
 
+        // check signature
+        require(recoverSigner(hash, signature) == systemAddress, "Signature Failed");
+
+        //define mint price
+        require(msg.value >= 100000000000000, "Not enough MATIC sent; check price!"); 
+        payable(address(0x1f6A403347fd2d335d14Dc3f1AEb21D9192cF166)).transfer(100000000000000);
+
+
+        // set tokeID & recipient        
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-
-        // set tokeID & recipient
         _safeMint(recipient, tokenId);
 
         // set metadata
@@ -73,11 +69,9 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
 
 
     // The following functions are overrides required by Solidity.
-
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
         whenNotPaused
-        //override(ERC721, ERC721Enumerable)
         override(ERC721)
     {
         super._beforeTokenTransfer(from, to, tokenId, batchSize);
@@ -99,7 +93,6 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        //override(ERC721, ERC721Enumerable, ERC2981)
         override(ERC721, ERC2981)
         returns (bool)
     {

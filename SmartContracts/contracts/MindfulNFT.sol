@@ -18,7 +18,6 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
     using ECDSA for bytes32;
     address private systemAddress;
     IERC721 private mintPass;
-    address constant public burnAddress = 0x0000000000000000000000000000000000000000;
 
     // constructor takes the systemAddress for signature verification and mintPass contract address for checking burn status
     constructor(address _systemAddress, IERC721 _mintPass) ERC721("MindfulNFT", "MINDFUL") {
@@ -36,31 +35,31 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
         _unpause();
     }
 
-    //check if signature is valid
-    function isValidSignature(bytes32 hash, bytes memory signature) internal view returns (bool isValid) {
-        bytes32 signedHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
-        return signedHash.recover(signature) == systemAddress;
+    function recoverSigner(bytes32 hash, bytes memory signature) public pure returns (address) {
+        bytes32 messageDigest = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
+        return ECDSA.recover(messageDigest, signature);
     }
 
-    //check if data is valid
-    function isDataValid(uint256 timestamp, bytes memory signature) public view {
-        // Build the hash and check the sig
-        // We only accept sigs from the system
-        bytes32 msgHash = keccak256(abi.encodePacked(msg.sender, timestamp));
-        require(
-            isValidSignature(msgHash, signature),          
-            "Invalid signature"
-        );
-    }
 
     // mint Metaverse NFT
-    function mintMindfulNFT(address recipient, string memory uri, address royaltFeeReceiver, uint96 fee, uint256 mintPassId) public payable returns(uint256){
-        
-        // set the mint price
-        require(msg.value >= 10, "Not enough ETH sent; check price!"); 
+    function mintMindfulNFT(address recipient, string memory uri, address royaltFeeReceiver, uint96 fee, uint256 mintPassId, bytes32 hash, bytes memory signature) public returns(uint256){      
+
+        bool isBurned = false;
+        address NFTOwner;
+
+        // check signature
+        require(recoverSigner(hash, signature) == systemAddress, "Signature Failed");
 
         // check if MintPass is burned
-        require(mintPass.ownerOf(mintPassId) == burnAddress, "Not allowed");
+        try mintPass.ownerOf(mintPassId) returns (address result) {
+            NFTOwner = result;
+            isBurned = false;
+        } catch Error(string memory /*reason*/) {
+            isBurned = true;
+        } catch (bytes memory /*lowLevelData*/) {
+            isBurned = true;
+        }
+        require(isBurned, "MintPass not burned");
 
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
@@ -79,7 +78,6 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
 
 
     // The following functions are overrides required by Solidity.
-
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
         whenNotPaused
