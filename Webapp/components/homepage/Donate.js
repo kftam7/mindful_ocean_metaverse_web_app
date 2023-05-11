@@ -1,9 +1,7 @@
 import { Row, Image, Container } from 'react-bootstrap';
 import styles from '../../styles/Donate.module.css';
-import { useTranslation } from '../../i18n';
 
-const Donate = () => {
-    const { t, locale } = useTranslation();
+const Donate = ({t}) => {
 
     return (
         <div className={styles.donate} id="donate">

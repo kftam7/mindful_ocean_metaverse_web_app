@@ -3,12 +3,10 @@ import { Row, Col, Button, Image, Container } from 'react-bootstrap';
 import homeStyles from '../../styles/Home.module.css';
 import styles from '../../styles/Mintpass.module.css';
 import AnimationForFishPool from '../../components/animationForFishPool/AnimationForFishPool';
-import { useTranslation } from '../../i18n';
 import Router from 'next/router';
 import ModalIsMobile from '../../components/modalIsMobile/ModalIsMobile';
 
-const Mintpass = () => {
-    const { t, locale } = useTranslation();
+const Mintpass = ({t}) => {
     const [show, setShow] = useState(false);
 
     const determine = () => {

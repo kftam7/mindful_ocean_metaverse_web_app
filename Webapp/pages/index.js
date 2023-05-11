@@ -11,21 +11,22 @@ import Redeem from '../components/homepage/Redeem';
 import Team from '../components/homepage/Team';
 import Mintpass from '../components/homepage/Mintpass';
 import Redeem1 from '../components/homepage/Redeem1';
+import { useTranslation } from '../i18n';
 
-export default function Home(props) {
-  const { lang } = props;
+export default function Home() {
+  const { t, locale } = useTranslation();
 
   return(
     <div className={homeStyles.main}>
-      <Head />
-      <Intro />
-      <Gallery />
-      <Draw />
-      <Mintpass />
-      <Redeem1 />
-      <Donate />
-      <Redeem />
-      <Team />
+      <Head t={t} />
+      <Intro t={t} />
+      <Gallery t={t} />
+      <Draw t={t} />
+      <Mintpass t={t} />
+      <Redeem1 t={t} />
+      <Donate t={t} />
+      <Redeem t={t} />
+      <Team t={t} />
     </div>
   )
 }
@@ -33,7 +34,7 @@ export default function Home(props) {
 //per-page layout
 Home.getLayout = function getLayout(page) {
   return (
-    <Layout myFunction={Home}>
+    <Layout>
       {page}
     </Layout>
   )

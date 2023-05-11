@@ -1,9 +1,7 @@
 import { Row, Image, Button, Col, Container } from 'react-bootstrap';
 import styles from '../../styles/Draw.module.css';
-import { useTranslation } from '../../i18n';
 
-const Draw = () => {
-  const { t, locale } = useTranslation();
+const Draw = ({t}) => {
 
     return (
       <div className={styles.draw} id="mobileapp" >

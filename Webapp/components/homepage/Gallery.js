@@ -6,11 +6,9 @@ import styles from '../../styles/Gallery.module.css';
 
 import { data } from '../../data/data'
 import GalleryModel from './GalleryModel';
-import { useTranslation } from '../../i18n';
 
 //gallery section at home page, currently models are hardcoded
-const Gallery = () => {
-  const { t, locale } = useTranslation();
+const Gallery = ({t}) => {
 
     return(
         <div className={styles.gallery} id="gallery">

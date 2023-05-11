@@ -1,9 +1,7 @@
 import { Row, Col, Image, Container, Card } from 'react-bootstrap';
 import styles from '../../styles/Team.module.css';
-import { useTranslation } from '../../i18n';
 
-const Team = () => {
-  const { t, locale } = useTranslation();
+const Team = ({t}) => {
 
     return (
       <div className={styles.team} >

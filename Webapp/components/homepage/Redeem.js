@@ -1,9 +1,7 @@
 import { Row, Image, Container } from 'react-bootstrap';
 import styles from '../../styles/Redeem.module.css';
-import { useTranslation } from '../../i18n';
 
-const Redeem = () => {
-    const { t, locale } = useTranslation();
+const Redeem = ({t}) => {
 
     return (
         <div className={styles.redeem} id="mindfultoken">

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import en from './public/locales/en.json';
 import ch from './public/locales/ch.json';
 import tw from './public/locales/tw.json';
@@ -12,13 +11,12 @@ export const languageNames = {
 };
 
 export function useTranslation() {
-  const router = useRouter();
   let locale;
 
   if (typeof window !== 'undefined') {
-    locale = localStorage.getItem('lang') || router.locale || defaultLocale;
+    locale = localStorage.getItem('lang') || defaultLocale;
   } else {
-    locale = router.locale || defaultLocale;
+    locale = defaultLocale;
   }
 
   const messages = {

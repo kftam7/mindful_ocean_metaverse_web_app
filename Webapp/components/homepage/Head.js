@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { Row, Image } from 'react-bootstrap';
 import styles from '../../styles/Head.module.css';
-import { useTranslation } from '../../i18n';
 
-const Head = () => {
-    const { t, locale } = useTranslation();
+const Head = ({t}) => {
 
     return (
         <Row className={styles.head}>

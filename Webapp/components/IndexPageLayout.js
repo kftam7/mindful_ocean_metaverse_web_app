@@ -7,12 +7,11 @@ import {SSRProvider} from '@react-aria/ssr';
 
 // when call Layout, the parent can pass any "children" element as a prop
 //this page has Nav and footer, cited by homepage
-const Layout = ({children, myFunction}) => {
+const Layout = ({children}) => {
     const [locale, setLocale] = useState('');
 
     const changeLocale = (newLocale) => {
         setLocale(newLocale);
-        myFunction({lang: newLocale})
     };
 
     return (

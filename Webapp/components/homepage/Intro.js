@@ -1,10 +1,8 @@
 import { Row, Col, Button, Image, Container } from 'react-bootstrap';
 import styles from '../../styles/Intro.module.css';
 import homeStyles from '../../styles/Home.module.css';
-import { useTranslation } from '../../i18n';
 
-const Intro = () => {
-  const { t, locale } = useTranslation();
+const Intro = ({t}) => {
 
     return (
         <div className={styles.intro} id="about"> 
