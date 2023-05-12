@@ -68,8 +68,7 @@ async function createUser(userRecord){
 /* update Event */
 async function updateUser(appleId, userRecord){
 
-  sql = 'UPDATE user SET walletAddress = "' + userRecord.walletAddress + '", personInfo = "' + userRecord.personInfo + '", createTime = "' + userRecord.createTime + '", updateTime = "' + userRecord.updateTime + '", isActive = ' + userRecord.isActive + ' WHERE appleId = "' + appleId + '";';
-  
+  sql = 'UPDATE user SET walletAddress = "' + userRecord.walletAddress + '", personInfo = "' + userRecord.personInfo + '", createTime = "' + userRecord.createTime + '", updateTime = "' + userRecord.updateTime + '", isActive = ' + userRecord.isActive + ', firstName = "' + userRecord.firstName + '", lastName = "' + userRecord.lastName + '", email = "' + userRecord.email + '", refreshToken = "' + userRecord.refreshToken + '", validToken = ' + userRecord.validToken + ' WHERE appleId = "' + appleId + '";';
   const result = await db.query(
     sql
   );

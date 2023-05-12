@@ -1,13 +1,63 @@
+const db = require('./db');
+const helper = require('./helper');
 const express = require("express");
 const app = express();
 const port = 3001;
 const MindfulAPIRouter = require("./routes/MindfulAPIRoutes");
+const MindfulAPIAppRouter = require("./routes/MindfulAPIAppRoutes");
+const MindfulAPIAdminRouter = require("./routes/MindfulAPIAdminRoutes");
 const logger = require("./logger");
 const cors = require("cors");
+const path = require('path');
+const crypto = require('crypto');
+const moment = require('moment');
 
-// require authorization header
-/*
-app.use((req, res, next) => {
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+// API authentication
+app.use(async(req, res, next) => {
+
+  // check authentication for app (mobile+desktop)
+  if (req.url.startsWith("/mindfulapi/app")){
+
+    // if time stamp is within range
+    const current_time = Math.floor(Date.now() / 1000);
+    if ((current_time - req.headers.time_stamp) > process.env.tolerance){
+        logger.log('error', 'API Authentication Failed: Timestamp expired');
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Timestamp expired')
+        return;
+    }
+
+    // if secret is correct
+    const secret = crypto.createHash('md5').update(req.headers.appleid+req.headers.time_stamp).digest("hex");
+    if (!(secret === req.headers.secret)){
+        logger.log('error', 'API Authentication Failed: Wrong secret');
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Wrong secret')
+        return;
+    }
+
+    // if refresh token is valid (only needed for non signin calls)
+    if (!req.url.startsWith("/mindfulapi/app/signin")){
+      var sql = 'SELECT refreshToken, validToken FROM user WHERE appleId = "' + req.headers.appleid + '"';
+      const result = await db.query(
+          sql
+      );
+      if (!result[0].validToken){
+        logger.log('error', 'API Authentication Failed: Invalid Token');
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Invalid Token')
+        return;
+      }
+    }
+    
+  // check authentication for admin
+  }else if (req.url.startsWith("/mindfulapi/admin")){
+    //console.log("no");
+  }
+  /* 
   const auth = {
     login: 'mindful',
     password: 'RU%ru9VD'
@@ -27,9 +77,10 @@ app.use((req, res, next) => {
   res.set('WWW-Authenticate', 'Basic realm="401"')
   res.status(401).send('Authentication required.')
 
+  */
   return next()
 })
-*/
+
 
 app.use(express.json({limit: '50mb'}));
 
@@ -52,7 +103,9 @@ app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
 
-app.use("/mindfulapi", MindfulAPIRouter);
+//app.use("/mindfulapi", MindfulAPIRouter);
+app.use("/mindfulapi/app", MindfulAPIAppRouter);
+app.use("/mindfulapi/admin", MindfulAPIAdminRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
@@ -62,6 +115,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({ message: err.message });
   return;
 });
+
 
 app.listen(port, () => {
   logger.log('info', 'MindfulAPI start listening at %s', port);

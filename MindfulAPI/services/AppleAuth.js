@@ -31,7 +31,7 @@ async function auth(req){
         const user = {};
         user.id = idToken.sub;
 
-	let body = "?access_token=" + response.access_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
+	let body = "?access_token=" + response.access_token + "&id_token=" + response.id_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
 
         if (idToken.email) {
 		user.email = idToken.email;
