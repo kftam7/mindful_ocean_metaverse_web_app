@@ -41,7 +41,7 @@ app.use(async(req, res, next) => {
 
     // if refresh token is valid (only needed for non signin calls)
     if (!req.url.startsWith("/mindfulapi/app/signin")){
-      var sql = 'SELECT refreshToken, validToken FROM user WHERE appleId = "' + req.headers.appleid + '"';
+      var sql = 'SELECT refreshToken, validToken FROM user WHERE appleId = "' + req.headers.appleid + '"';  
       const result = await db.query(
           sql
       );

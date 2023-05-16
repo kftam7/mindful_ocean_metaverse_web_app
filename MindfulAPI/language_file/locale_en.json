@@ -1,1 +1,6 @@
-{"main.sidebar.title":"Name of the project.","main.statusbar.status_empty":"Empty! No entries added yet.","main.statusbar.status_ok":"Ok."}
+{
+     "main.sidebar.project": "Project",
+     "main.sidebar.title": "Project title.",
+     "main.statusbar.status_empty": "Empty! No entries have been added yet.",
+     "main.statusbar.status_ok": "OK."
+}
