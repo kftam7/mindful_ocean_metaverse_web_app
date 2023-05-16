@@ -78,6 +78,7 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     }
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    //function _burn(uint256 tokenId) external override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
 

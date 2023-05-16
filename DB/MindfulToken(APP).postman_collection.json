@@ -1,0 +1,2171 @@
+{
+	"info": {
+		"_postman_id": "451cb9fd-9136-4a29-8026-7a9c9234119d",
+		"name": "MindfulToken(APP)",
+		"description": "# Mindful Ocean API called by mobile and web applications\n\nExcept for \"signin\" & \"s3media\" API calls, need to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)  \nrefreshToken - refresh token returned after apple sign in",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23541331"
+	},
+	"item": [
+		{
+			"name": "signin",
+			"item": [
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Edward\",\n\t\t\"lastName\":\"Tam\"\n\t},\n\t\"email\": \"s8rrdfmfrc@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4e3ea17bac8b499783e5b118fee36f72.0.srzxs.l6s9ZLm91C2MhLuMkoICZQ\",\n\t\"id_token\": \"eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkFuaW1vY2FCcmFuZHMuTWluZGZ1bC1PY2Vhbi1EZXYtU2l3YSIsImV4cCI6MTY4Mzk5MTk1NywiaWF0IjoxNjgzOTA1NTU3LCJzdWIiOiIwMDE5NzIuNGQzZjMxNTQ1Y2M3NGYwOWFjZDBhNjc5OTU2OWE5NWUuMDMzMyIsImF0X2hhc2giOiJrcl9xeXowclVtcjdZSDZHSUJZWHNnIiwiZW1haWwiOiJzOHJyZGZtZnJjQHByaXZhdGVyZWxheS5hcHBsZWlkLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImlzX3ByaXZhdGVfZW1haWwiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjgzOTA1NTU2LCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.InkIhDTOvOMbiAwoGzTYR2Du-1utnvIV4cGQrrgG6x79HEYqKBKJAVX6v2Xsag9kabE9bGiu2d6MWPH_teCP-Y4amprXwmGOVv5A8G_rjl7DzVFKhOyUSWQ2qUWoiK0G7ac03e3Gc9vSRqxqdqRpUvK7zZcxw_S4n9DB9MXtw8HZaFYUQbehkGv_6Mclh45ML2ZWHES6KrXtMmyI2AmxeQMjenhaiL9fxV0_CMvjj4wO-b7aRxw0-un0aiOo_Sv34epJHKnTgxjoPDtSBFRpnIwh6f5Jb_9vHrcTR-G6YDhouWBXeeUva8Czvb6cYNarVd9jH7CWPES48GVIgAIUXA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signin/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signin",
+								"{appleId}"
+							]
+						},
+						"description": "call this API whenever user performs Apple sign in"
+					},
+					"response": [
+						{
+							"name": "Sign In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Edward\",\n\t\t\"lastName\":\"Tam\"\n\t},\n\t\"email\": \"s8rrdfmfrc@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4e3ea17bac8b499783e5b118fee36f72.0.srzxs.l6s9ZLm91C2MhLuMkoICZQ\",\n\t\"id_token\": \"eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkFuaW1vY2FCcmFuZHMuTWluZGZ1bC1PY2Vhbi1EZXYtU2l3YSIsImV4cCI6MTY4Mzk5MTk1NywiaWF0IjoxNjgzOTA1NTU3LCJzdWIiOiIwMDE5NzIuNGQzZjMxNTQ1Y2M3NGYwOWFjZDBhNjc5OTU2OWE5NWUuMDMzMyIsImF0X2hhc2giOiJrcl9xeXowclVtcjdZSDZHSUJZWHNnIiwiZW1haWwiOiJzOHJyZGZtZnJjQHByaXZhdGVyZWxheS5hcHBsZWlkLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImlzX3ByaXZhdGVfZW1haWwiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjgzOTA1NTU2LCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.InkIhDTOvOMbiAwoGzTYR2Du-1utnvIV4cGQrrgG6x79HEYqKBKJAVX6v2Xsag9kabE9bGiu2d6MWPH_teCP-Y4amprXwmGOVv5A8G_rjl7DzVFKhOyUSWQ2qUWoiK0G7ac03e3Gc9vSRqxqdqRpUvK7zZcxw_S4n9DB9MXtw8HZaFYUQbehkGv_6Mclh45ML2ZWHES6KrXtMmyI2AmxeQMjenhaiL9fxV0_CMvjj4wO-b7aRxw0-un0aiOo_Sv34epJHKnTgxjoPDtSBFRpnIwh6f5Jb_9vHrcTR-G6YDhouWBXeeUva8Czvb6cYNarVd9jH7CWPES48GVIgAIUXA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/signin/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"signin",
+										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## User sign in application\n\nNeed to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)"
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "GET user Request (applieId)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get information of one particular user using Apple ID\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET user Request (applieId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"user",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT user Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"walletAddress\":\"0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fd\",\n    \"personInfo\":\"This is a modified msg\",\n    \"createTime\":\"2024-05-17 01:01:01\",\n    \"updateTime\":\"2025-06-17 02:02:02\",\n    \"isActive\": 1,\n    \"firstName\": \"Edward\",\n    \"lastName\": \"Tam\",\n    \"email\": \"edwardt@animocabrands.com\",\n    \"refreshToken\": \"abc\",\n    \"validToken\": 1\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to modify existing users using appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT user Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"walletAddress\":\"0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fl\",\n    \"personInfo\":\"This is a modified msg\",\n    \"createTime\":\"2024-05-17 01:01:01\",\n    \"updateTime\":\"2025-06-17 02:02:02\",\n    \"isActive\": 1,\n    \"firstName\": \"Edward\",\n    \"lastName\": \"Tam\",\n    \"email\": \"edwardt@animocabrands.com\",\n    \"refreshToken\": \"abc\",\n    \"validToken\": 1\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"user",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## add/modify/inactivate user data"
+		},
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "GET event Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/event",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"event"
+							]
+						},
+						"description": "### API endpoint to get all event information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET event Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/event",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"event"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## add/modify/inactivate event data"
+		},
+		{
+			"name": "NFT",
+			"item": [
+				{
+					"name": "GET NFT by appleId Request (MintPass)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nft/mintPass/appleid/{appleid}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nft",
+								"mintPass",
+								"appleid",
+								"{appleid}"
+							]
+						},
+						"description": "### API endpoint to get the information of MintPass NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT by appleId Request (MintPass)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nft/mintPass/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"nft",
+										"mintPass",
+										"appleid",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET NFT by appleId Request (MindfulToken)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nft/mindfulToken/appleid/{appleid}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nft",
+								"mindfulToken",
+								"appleid",
+								"{appleid}"
+							],
+							"query": [
+								{
+									"key": "eventIdtime_stamp",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "eventA",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get information of MindulToken NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT by appleId Request (MindfulToken)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nft/mindfulToken/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"nft",
+										"mindfulToken",
+										"appleid",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									],
+									"query": [
+										{
+											"key": "eventIdtime_stamp",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET NFT Total Request (MintPass)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nfttotal/mintPass",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nfttotal",
+								"mintPass"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "eventA",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get the total no. of MintPass NFT's minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT Total Request (MintPass)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nfttotal/mintPass",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"nfttotal",
+										"mintPass"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET NFT Total Request (MindfulToken)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nfttotal/mindfulToken",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nfttotal",
+								"mindfulToken"
+							],
+							"query": [
+								{
+									"key": "eventId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "eventA",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get the total no. of Mindful Token NFT's minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT Total Request (MindfulToken)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nfttotal/mindfulToken",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"nfttotal",
+										"mindfulToken"
+									],
+									"query": [
+										{
+											"key": "eventId",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## get MintPass & MindfulNFT NFT data"
+		},
+		{
+			"name": "appversion",
+			"item": [
+				{
+					"name": "GET appversion Request (latest)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appversion/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appversion",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "time_stamp",
+									"value": "1683865565",
+									"disabled": true
+								},
+								{
+									"key": "secret",
+									"value": "d6b2d347109f72aff68ddd9de9daf6dc",
+									"disabled": true
+								},
+								{
+									"key": "refresh_token",
+									"value": "r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw",
+									"disabled": true
+								},
+								{
+									"key": "appleId",
+									"value": "000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get the latest app version info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET appversion Request (latest)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/appversion/latest",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"appversion",
+										"latest"
+									],
+									"query": [
+										{
+											"key": "time_stamp",
+											"value": "1683865565",
+											"disabled": true
+										},
+										{
+											"key": "secret",
+											"value": "d6b2d347109f72aff68ddd9de9daf6dc",
+											"disabled": true
+										},
+										{
+											"key": "refresh_token",
+											"value": "r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw",
+											"disabled": true
+										},
+										{
+											"key": "appleId",
+											"value": "000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET appversion Request (particular version)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentDate}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appversion/{versionNo}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appversion",
+								"{versionNo}"
+							]
+						},
+						"description": "### API endpoint to get app version information of a specified version\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET appversion Request (particular version)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/appversion/0.0.2",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"appversion",
+										"0.0.2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## get mobile app version information",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "artwork",
+			"item": [
+				{
+					"name": "GET artwork Request (all)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/artwork",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork"
+							]
+						},
+						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET artwork Request (all)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"artwork"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET artwork Request (appleId)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/artwork/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get artwork information by appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET artwork Request (appleId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"artwork",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST artwork Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n     \"userId\":\"1\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/artwork",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork"
+							]
+						},
+						"description": "### API endpoint to create artwork information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code\n\nThe return value is the new artworkId created"
+					},
+					"response": [
+						{
+							"name": "POST artwork Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"userId\":\"1\",\n     \"name\":\"artworktest78\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"artwork"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT artwork Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/artwork/{artworkId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork",
+								"{artworkId}"
+							]
+						},
+						"description": "### API endpoint to update the artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT artwork Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest97\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork/47",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"artwork",
+										"47"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## add/modify/inactive artwork data"
+		},
+		{
+			"name": "joinedevent",
+			"item": [
+				{
+					"name": "GET joinedevent Request (appleId)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/joinedevent/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"joinedevent",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get joinedevent information of specified appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET joinedevent Request (appleId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/joinedevent/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"joinedevent",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST joinedevent Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"userId\": 9,\n        \"eventId\": 1\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 2\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 3\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/joinedevent",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"joinedevent"
+							]
+						},
+						"description": "### API endpoint to create joinedevent information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "POST joinedevent Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"userId\": 9,\n        \"eventId\": 1\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 2\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 3\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/joinedevent",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"joinedevent"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT joinedevent Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"eventId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/joinedevent/{joinedEventId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"joinedevent",
+								"{joinedEventId}"
+							]
+						},
+						"description": "### API endpoint to update joinedevent info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT joinedevent Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": 3,\n    \"eventId\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/joinedevent/2",
+									"protocol": "https",
+									"host": [
+										"api-staging",
+										"mindfultoken",
+										"org"
+									],
+									"path": [
+										"mindfulapi",
+										"app",
+										"joinedevent",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## add/modify joined event information"
+		},
+		{
+			"name": "s3media",
+			"item": [
+				{
+					"name": "PUT file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/Users/edwardtam/Downloads/sample3.png"
+							}
+						},
+						"url": {
+							"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample3.png",
+							"protocol": "https",
+							"host": [
+								"b5uu4aqly2",
+								"execute-api",
+								"ap-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"v1",
+								"mindfulocean",
+								"sample3.png"
+							]
+						},
+						"description": "### API endpoint to upload image file to S3\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT file",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "/Users/edwardtam/Downloads/sample3.png"
+									}
+								},
+								"url": {
+									"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample3.png",
+									"protocol": "https",
+									"host": [
+										"b5uu4aqly2",
+										"execute-api",
+										"ap-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"v1",
+										"mindfulocean",
+										"sample3.png"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 13 Mar 2023 14:16:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "x-amzn-RequestId",
+									"value": "cc6485b0-69f2-4a84-9782-a198667ef0c5"
+								},
+								{
+									"key": "x-amz-apigw-id",
+									"value": "BuR6KG_6HUYF7ig="
+								},
+								{
+									"key": "X-Amzn-Trace-Id",
+									"value": "Root=1-640f3040-7a15f099247b902e07ddb11f"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample2.png",
+							"protocol": "https",
+							"host": [
+								"b5uu4aqly2",
+								"execute-api",
+								"ap-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"v1",
+								"mindfulocean",
+								"sample2.png"
+							]
+						},
+						"description": "### API endpoint to download image file from S3\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET file",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": ""
+									}
+								},
+								"url": {
+									"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample2.png",
+									"protocol": "https",
+									"host": [
+										"b5uu4aqly2",
+										"execute-api",
+										"ap-east-1",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"v1",
+										"mindfulocean",
+										"sample2.png"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## upload/download images for AWS S3 stoage"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const Apple_Id = \"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613\";",
+					"const Refresh_Token = \"r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw\";",
+					"const Current_time = Math.floor(Date.now() / 1000);",
+					"var hash = CryptoJS.MD5(Apple_Id+Current_time).toString();;",
+					"",
+					"pm.globals.set(\"appleId\", Apple_Id);",
+					"pm.globals.set(\"currentTime\", Current_time);",
+					"pm.globals.set(\"secret\", hash);",
+					"pm.globals.set(\"refreshToken\", Refresh_Token);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

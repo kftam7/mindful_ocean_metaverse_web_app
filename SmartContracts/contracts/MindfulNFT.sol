@@ -76,27 +76,6 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
         return tokenId;
     }
 
-    //mint & burn
-    function mintBurnNFT(address recipient, string memory uri, address royaltFeeReceiver, uint96 fee, uint256 mintPassId, bytes32 hash, bytes memory signature) public returns(uint256){
-        
-        bool burnSuccess = false;
-
-        // check signature
-        require(recoverSigner(hash, signature) == systemAddress, "Signature Failed");
-
-        // burn mintPass
-        try mintPass.burn(mintPassId) {
-            burnSuccess = true;
-        } catch Error(string memory /*reason*/) {
-            burnSuccess = false;
-        } catch (bytes memory /*lowLevelData*/) {
-            burnSuccess = false;
-        }
-
-        return burnSuccess;
-    }
-
-
     // The following functions are overrides required by Solidity.
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
