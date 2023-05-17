@@ -46,7 +46,7 @@ const UserProfilePage = () => {
     if(!appleId) return;
     setLoading(true)
     
-    const res = await axios.get(`${apiPort}/mindfulapi/user/${appleId}`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`);
     if(res.status === 200){
       const { data: { data: { artwork, joinedEvent } } } = res
       // Submitted Artworks
@@ -66,14 +66,14 @@ const UserProfilePage = () => {
     setLoading(true)
 
     // Owned NFTs
-    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/nft/mindfulToken/${walletAddress}`);
+    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/app/nft/mindfulToken/${walletAddress}`);
     if(dataOwnedNFTs.status === 200){
       const { data: { data } } = dataOwnedNFTs;
       // console.log('Owned NFTs', dataOwnedNFTs)
       setDataOwnedNFTs(data);
     }
     // Owned Mintpass
-    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/nft/mintPass/${walletAddress}`);
+    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/${walletAddress}`);
     if(dataOwnedMintpass.status === 200){
       const { data: { data } } = dataOwnedMintpass;
       // console.log('Owned Mintpass', dataOwnedMintpass)
@@ -137,7 +137,7 @@ const UserProfilePage = () => {
 
     // console.log(params)
     // return
-    await axios.post(`${apiPort}/mindfulapi/personalwebsite/${appleId}`, params)
+    await axios.post(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, params)
     .then(res => {
       if(res.status === 200){
         const {data: {message}} = res;

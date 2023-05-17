@@ -22,7 +22,7 @@ export default function RedeemStep2({ session, user }) {
     const appleId = sessionStorage.getItem("appleId");
     if(!appleId) return;
     // artwork
-    const res = await axios.get(`${apiPort}/mindfulapi/nft/mintPass/appleid/${appleId}`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleid/${appleId}`);
     if(res.status === 200){
       const { data: { data } } = res;
       // console.log(data);

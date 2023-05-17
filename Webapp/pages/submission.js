@@ -40,7 +40,7 @@ export default function SubmitPage({ session, user }) {
     const appleId = sessionStorage.getItem("appleId");
     if(!appleId) return;
     // artwork
-    const res = await axios.get(`${apiPort}/mindfulapi/artwork/${appleId}`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`);
     if(res.status === 200){
       const { data: { data } } = res;
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));

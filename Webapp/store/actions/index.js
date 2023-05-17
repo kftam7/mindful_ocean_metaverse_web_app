@@ -109,7 +109,7 @@ export const fetchMintpassContractNFT = () => async (dispatch) => {
 
 export const postUser = () => async (dispatch) => {
   const account = await fetchAccount();
-  const res = await axios.post(`${apiPort}/mindfulapi/users/`, { 
+  const res = await axios.post(`${apiPort}/mindfulapi/app/users/`, { 
     wallet: account
   })
     try {

@@ -9,6 +9,7 @@ import { data } from '../data/data';
 import GalleryModel from '../components/homepage/GalleryModel';
 import { useTranslation } from '../i18n';
 import { useEffect, useState } from 'react';
+import { getAppleId, getRefreshToken, md5 } from '../utils/utils';
 import axios from 'axios';
 
 const GalleryPage = () => {
@@ -32,7 +33,17 @@ const GalleryPage = () => {
 
   // 初始化数据
   useEffect(async () => {
-    const des = await axios.get(`${apiPort}/mindfulapi/artwork`);
+    const appleid = getAppleId();
+    if(!appleid) return;
+    const refresh_token = getRefreshToken();
+    const time_stamp = Math.floor(Date.now() / 1000);
+    const headers = {
+      appleid,
+      refresh_token,
+      time_stamp,
+      secret: md5(appleid + time_stamp)
+    }
+    const des = await axios.get(`${apiPort}/mindfulapi/app/artwork`, {headers});
     if(des.status === 200){
       const { data: { data } } = des;
       console.log(data)

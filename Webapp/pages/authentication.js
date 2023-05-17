@@ -91,7 +91,7 @@ const AuthPage = ({ session }) => {
 
   // apple id  
   useEffect(async () => {
-    const res = await axios.get(`${apiPort}/mindfulapi/applelogin`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/applelogin`);
     setAppleIdLoginBtn(res.data);
   }, []);
 
