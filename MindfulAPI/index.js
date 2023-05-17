@@ -18,6 +18,11 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 // API authentication
 app.use(async(req, res, next) => {
 
+  // skip for appleauth call (will remove when Apple update on their side)
+  if(req.url.startsWith("/mindfulapi/appleauth")){
+          return next()
+  }
+
   // check authentication for app (mobile+desktop)
   if (req.url.startsWith("/mindfulapi/app")){
 
@@ -106,9 +111,9 @@ app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
 
-//app.use("/mindfulapi", MindfulAPIRouter);
 app.use("/mindfulapi/app", MindfulAPIAppRouter);
 app.use("/mindfulapi/admin", MindfulAPIAdminRouter);
+app.use("/mindfulapi", MindfulAPIRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
