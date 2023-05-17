@@ -323,6 +323,7 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
   }
 });
 
+////////////////// Credential
 /* GET credential */
 router.get('/credential/:login/:credential', async function(req, res, next) {
   try {
@@ -334,6 +335,7 @@ router.get('/credential/:login/:credential', async function(req, res, next) {
   }
 });
 
+////////////////// Apple Login
 /* GET Apple Login */
 router.get('/applelogin', async function(req, res, next) {
   try {
