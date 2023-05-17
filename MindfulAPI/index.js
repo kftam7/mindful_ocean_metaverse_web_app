@@ -12,8 +12,24 @@ const path = require('path');
 const crypto = require('crypto');
 const moment = require('moment');
 
-
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+app.use(express.json({limit: '50mb'}));
+
+app.use(
+  express.urlencoded({
+    limit: '50mb',
+    extended: true,
+  })
+);
+
+// CORS only for local host
+var corsOptions = {
+  //origin: 'http://127.0.0.1:3000',
+  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions))
 
 // API authentication
 app.use(async(req, res, next) => {
@@ -89,27 +105,11 @@ app.use(async(req, res, next) => {
   return next()
 })
 
-
-app.use(express.json({limit: '50mb'}));
-
-app.use(
-  express.urlencoded({
-    limit: '50mb',
-    extended: true,
-  })
-);
-
-// CORS only for local host
-var corsOptions = {
-  //origin: 'http://127.0.0.1:3000',
-  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-app.use(cors(corsOptions))
-
+/*
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
+*/
 
 app.use("/mindfulapi/app", MindfulAPIAppRouter);
 app.use("/mindfulapi/admin", MindfulAPIAdminRouter);
