@@ -3,7 +3,7 @@
 const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
 const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
 //const PRIVATE_KEY = "35322f3d9f56cf2f84592411ffacb71cf8d39ef3c7918a0358d4aebfec562989";
-const CONTRACT_ADDRESS = "0x60C53752a081a15A9944e574781061980c2B64bf";
+const CONTRACT_ADDRESS = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
 
 const contract = require("../artifacts/contracts/MintPass.sol/MintPassNFT.json");
 
@@ -41,7 +41,7 @@ async function main() {
 
 	// mint the mintPass
     console.log("Minting MintPass...");
-    const tx = await MintPassNFTContract.mintMintPass("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "10", messageHash, signature, {value: 100000000000000});
+    const tx = await MintPassNFTContract.mintMintPass("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", messageHash, signature, {value: 100000000000000});
     await tx.wait();
 
 }

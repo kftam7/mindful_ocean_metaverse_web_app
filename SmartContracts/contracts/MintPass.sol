@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol"; // IERC20 interface
 
 contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981, DefaultOperatorFilterer {
-    
+//contract MintPassNFT is ERC721, Pausable, Ownable, ERC721Burnable, ERC2981, DefaultOperatorFilterer {    
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     using ECDSA for bytes32;
@@ -48,7 +48,7 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
         // check signature
         require(recoverSigner(hash, signature) == systemAddress, "Signature Failed");
 
-        //define mint price
+        //define mint price and tranfer to the defined wallet
         require(msg.value >= 100000000000000, "Not enough MATIC sent; check price!"); 
         payable(address(0x1f6A403347fd2d335d14Dc3f1AEb21D9192cF166)).transfer(100000000000000);
 
@@ -67,7 +67,6 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
         return tokenId;
     }
 
-
     // The following functions are overrides required by Solidity.
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
@@ -76,6 +75,7 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     {
         super._beforeTokenTransfer(from, to, tokenId, batchSize);
     }
+
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
     //function _burn(uint256 tokenId) external override(ERC721, ERC721URIStorage) {

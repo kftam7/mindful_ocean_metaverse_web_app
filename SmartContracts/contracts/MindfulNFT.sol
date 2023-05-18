@@ -11,18 +11,31 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
+/*
+interface burnApproveMintPass{
+  //function approve(address operator, uint256 tokenId) external;
+  function burn(uint256 tokenId) external;
+}
+*/
+
 contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981, DefaultOperatorFilterer {
     
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     using ECDSA for bytes32;
     address private systemAddress;
+    //address private mintPassContractAddress;
     IERC721 private mintPass;
+    //IERC721 private NftContract;
 
     // constructor takes the systemAddress for signature verification and mintPass contract address for checking burn status
     constructor(address _systemAddress, IERC721 _mintPass) ERC721("MindfulNFT", "MINDFUL") {
+    //constructor(address _systemAddress, address _mintPassContractAddress) ERC721("MindfulNFT", "MINDFUL") {
         systemAddress = _systemAddress;
         mintPass = _mintPass;
+        //mintPassContractAddress = _mintPassContractAddress;
+        //NftContract = IERC721(_mintPassContractAddress);
+        //NftContract = IERC721(0x3EA34d31a669F6657331c0E041756a740717f35d);
     }
 
     // pause minting action
@@ -45,18 +58,61 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
     function mintMindfulNFT(address recipient, string memory uri, address royaltFeeReceiver, uint96 fee, uint256 mintPassId, bytes32 hash, bytes memory signature) public returns(uint256){      
 
         bool isBurned = false;
+        //bool isApproved = false;
         address NFTOwner;
 
         // check signature
         require(recoverSigner(hash, signature) == systemAddress, "Signature Failed");
 
+        // create mintPass instance
+        //burnApproveMintPass mintPassContract = burnApproveMintPass(mintPassContractAddress);
+        
+        /*
+        // set approval
+        try mintPassContract.approve(address(this), mintPassId) {
+            isApproved = true;
+        } catch Error(string memory) {
+            isApproved = false;
+        } catch (bytes memory) {
+            isApproved = false;
+        }
+        require(isApproved, "Approval Failed");
+        */
+
+
+        /*
+        // set approval
+        //try NftContract.approve(address(this), mintPassId) {
+        try NftContract.setApprovalForAll(address(this), true){
+            isApproved = true;
+        } catch Error(string memory) {
+            isApproved = false;
+        } catch (bytes memory) {
+            isApproved = false;
+        }
+        require(isApproved, "Approval Failed"); 
+        */   
+
+        /*
+        // burn mintPass NFT
+        try mintPassContract.burn(mintPassId) {
+            isBurned = true;
+        } catch Error(string memory) {
+            isBurned = false;
+        } catch (bytes memory) {
+            isBurned = false;
+        }
+        require(isBurned, "MintPass not burned");
+        */
+
         // check if MintPass is burned
         try mintPass.ownerOf(mintPassId) returns (address result) {
+        //try mintPass.burn(mintPassId){
             NFTOwner = result;
             isBurned = false;
-        } catch Error(string memory /*reason*/) {
+        } catch Error(string memory) {
             isBurned = true;
-        } catch (bytes memory /*lowLevelData*/) {
+        } catch (bytes memory) {
             isBurned = true;
         }
         require(isBurned, "MintPass not burned");
