@@ -13,7 +13,7 @@ import AppModal from '../components/submission/AppModal';
 import SubmitModal from '../components/submission/SubmitModal';
 import EditModal from '../components/submission/EditModal';
 import { useTranslation } from '../i18n';
-
+import { getHeaders } from '../utils/utils';
 
 //just pass the setShow and setConShow as props to children components
 export default function SubmitPage({ session, user }) {
@@ -40,7 +40,7 @@ export default function SubmitPage({ session, user }) {
     const appleId = sessionStorage.getItem("appleId");
     if(!appleId) return;
     // artwork
-    const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
       const { data: { data } } = res;
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));

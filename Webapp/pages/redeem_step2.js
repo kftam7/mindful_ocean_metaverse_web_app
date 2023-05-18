@@ -8,6 +8,7 @@ import { Row, Col, Form, Container, Button } from 'react-bootstrap';
 import axios from 'axios';
 import AppModal from '../components/redeem/AppModal';
 import { useTranslation } from '../i18n';
+import { getHeaders } from '../utils/utils';
 
 //just pass the setShow and setConShow as props to children components
 export default function RedeemStep2({ session, user }) {
@@ -22,7 +23,7 @@ export default function RedeemStep2({ session, user }) {
     const appleId = sessionStorage.getItem("appleId");
     if(!appleId) return;
     // artwork
-    const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleid/${appleId}`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleid/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
       const { data: { data } } = res;
       // console.log(data);

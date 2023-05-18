@@ -10,7 +10,7 @@ import Layout from '../components/SubpageLayout';
 import { data } from '../data/data';
 import UserProfileModel from '../components/userProfile/UserProfileModal';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
-import { getWalletAddress, getAppleId, getEmail } from '../utils/utils';
+import { getWalletAddress, getAppleId, getEmail, getHeaders } from '../utils/utils';
 import axios from 'axios';
 import { useTranslation } from '../i18n';
 
@@ -46,7 +46,8 @@ const UserProfilePage = () => {
     if(!appleId) return;
     setLoading(true)
     
-    const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`, {headers: getHeaders()});
+    console.log(res)
     if(res.status === 200){
       const { data: { data: { artwork, joinedEvent } } } = res
       // Submitted Artworks
@@ -62,18 +63,19 @@ const UserProfilePage = () => {
   }, [appleId]);
 
   useEffect(async () => {
+    if(!appleId) return;
     if(!walletAddress) return;
     setLoading(true)
 
     // Owned NFTs
-    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/app/nft/mindfulToken/${walletAddress}`);
+    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/app/nft/mindfulToken/walletaddress/${walletAddress}`, {headers: getHeaders()});
     if(dataOwnedNFTs.status === 200){
       const { data: { data } } = dataOwnedNFTs;
       // console.log('Owned NFTs', dataOwnedNFTs)
       setDataOwnedNFTs(data);
     }
     // Owned Mintpass
-    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/${walletAddress}`);
+    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/walletaddress/${walletAddress}`, {headers: getHeaders()});
     if(dataOwnedMintpass.status === 200){
       const { data: { data } } = dataOwnedMintpass;
       // console.log('Owned Mintpass', dataOwnedMintpass)
@@ -81,7 +83,7 @@ const UserProfilePage = () => {
     }
 
     setLoading(false)
-  }, [walletAddress]);
+  }, [walletAddress, appleId]);
 
   const resetForm = () => {
     const data = {
@@ -137,7 +139,7 @@ const UserProfilePage = () => {
 
     // console.log(params)
     // return
-    await axios.post(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, params)
+    await axios.post(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, params, {headers: getHeaders()})
     .then(res => {
       if(res.status === 200){
         const {data: {message}} = res;

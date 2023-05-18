@@ -14,6 +14,19 @@ const getRefreshToken = () => {
   return sessionStorage.getItem("refresh_token");
 };
 
+const getHeaders = () => {
+  const appleid = getAppleId();
+  const refresh_token = getRefreshToken();
+  const time_stamp = Math.floor(Date.now() / 1000);
+  const secret = md5(appleid + time_stamp);
+  return {
+    appleid,
+    refresh_token,
+    time_stamp,
+    secret
+  }
+};
+
 // 字段升序排序
 const sortByFieldAsc = (data, field) => {
   return data.sort((a, b) => {
@@ -221,6 +234,7 @@ export {
   getAppleId,
   getEmail,
   getRefreshToken,
+  getHeaders,
   sortByFieldAsc,
   sortByFieldDesc,
   md5
