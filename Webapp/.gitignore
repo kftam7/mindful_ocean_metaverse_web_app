@@ -37,3 +37,14 @@ yarn-error.log*
 
 # config files
 next.config.js
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
+

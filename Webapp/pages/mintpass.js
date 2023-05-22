@@ -14,6 +14,7 @@ import axios from 'axios';
 import fs from 'fs';
 import { NFTStorage, File } from 'nft.storage';
 import { useTranslation } from '../i18n';
+import {ethers, BigNumber}  from 'ethers';
 
 export default function Mintpass({ session,user }) {
   const { t, locale } = useTranslation();
@@ -52,23 +53,71 @@ export default function Mintpass({ session,user }) {
   //if mint success, duplicate & remove the image, update mint status and ID to DB
   //can fetch the tokenId here?
   async function mint() {
-    console.log(mintpassContract)
-    await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.baidu.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 10).send({ from: account })
-    .once('confirmation', async function(confirmationNumber, receipt){ //if use "on('"confirmation") here, it will be triggered repeatedly
-
-    })
-    .then(async function(){
-      console.log('success')
-      await generateMeta();
-      return;
-      Router.push({
-        pathname: '/mintedPage',
-      });
+    try{
+      const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
+      const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
+      //const PRIVATE_KEY = "35322f3d9f56cf2f84592411ffacb71cf8d39ef3c7918a0358d4aebfec562989";
+      const CONTRACT_ADDRESS = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
+      // const CONTRACT_ADDRESS = account;
+  
+      const contract = require("../artifacts/contracts/MintPass.sol/MintPassNFT.json");
+  
+      // provider - Alchemy
+      const netObj = {
+          name: 'maticmum',
+          chainId: 80001  // hardwired bullshit
+      }
+      const alchemyProvider = new ethers.providers.AlchemyProvider(netObj, API_KEY);
+  
+      // signer
+      const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
+  
+      // contract instance
+      const MintPassNFTContract = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);
+  
+      // construct the message to sign
+      let message = "Hello World " + Date.now();
+      console.log("Message: ", message);
+  
+      // Compute hash of the message
+      let messageHash = ethers.utils.id(message);
+      console.log("Message Hash: ", messageHash);
+  
+      // Sign the hashed message
+      let messageBytes = ethers.utils.arrayify(messageHash);
+      let signature = await signer.signMessage(messageBytes);
+      console.log("Signature: ", signature);
+  
+      // read the contract name
+      const name = await MintPassNFTContract.name();    
+      console.log("The contract name is: " + name); 
+  
+      // mint the mintPass
+      console.log("Minting MintPass...");
+      
+      // const tx = await MintPassNFTContract.mintMintPass("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", messageHash, signature, {value: 100000000000000});
+      // await tx.wait();
+      // console.log(tx)
+      // return;
+  
+      const res = await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account })
+      console.log(res)
+      // .then(async function(){
+      //   console.log('success')
+      //   await generateMeta();
+      //   return;
+      //   Router.push({
+      //     pathname: '/mintedPage',
+      //   });
+      // }
+      // )
+      // const tokenId = await fetchTokenId();
+      // await duplicate(tokenId);
+      // await update(tokenId);
     }
-    )
-    const tokenId = await fetchTokenId();
-    await duplicate(tokenId);
-    await update(tokenId);
+    catch(err){
+      console.log('error', err)
+    }
   }
 
   async function fetchTokenId() {
