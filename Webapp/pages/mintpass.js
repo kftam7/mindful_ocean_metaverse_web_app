@@ -60,7 +60,8 @@ export default function Mintpass({ session,user }) {
       const CONTRACT_ADDRESS = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
       // const CONTRACT_ADDRESS = account;
   
-      const contract = require("../artifacts/contracts/MintPass.sol/MintPassNFT.json");
+      //const contract = require("../artifacts/contracts/MintPass.sol/MintPassNFT.json");
+      const contract = require("../utils/MintPassNFT.json");
   
       // provider - Alchemy
       const netObj = {
@@ -100,7 +101,7 @@ export default function Mintpass({ session,user }) {
       // console.log(tx)
       // return;
   
-      const res = await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account })
+      const res = await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
       console.log(res)
       // .then(async function(){
       //   console.log('success')
