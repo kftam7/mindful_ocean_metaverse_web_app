@@ -241,7 +241,7 @@ export default function SubmitPage({ session, user }) {
                 <Row className='d-flex justify-content-center mt-5'>
                   <Col>
                     <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={disabled}>{t('button.editInfo')}</Button>
-                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={disabled}>{t('button.submit')} &rarr;</Button>
+                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={!disabled}>{t('button.submit')} &rarr;</Button>
                   </Col>
                 </Row>
 

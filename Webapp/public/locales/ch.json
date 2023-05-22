@@ -96,7 +96,7 @@
     "page.redeem.authentication": "1. 身份验证",
     "page.redeem.selectMintPass": "2. 选择Mint Pass",
     "page.redeem.burnMinpPass": "3. 燃烧 MinpPass",
-    "page.redeem.complete": "4. 完成",
+    "page.redeem.complete": "3. 完成",
     "page.redeem.browseYourMintpass": "浏览您的Mintpass",
     "page.redeem.information": "信息",
     "page.redeem.theBelowInformation": "以下信息是在艺术品首次提交时创建的。它们将在XXX中显示",

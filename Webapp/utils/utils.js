@@ -1,3 +1,64 @@
+import {ethers, BigNumber}  from 'ethers';
+
+const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
+const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
+const CONTRACT_ADDRESS = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
+// const contract = require("../artifacts/contracts/MindfulNFT.sol/MindfulNFT.json");
+const contract_MintPassNFT = require("../utils/MintPassNFT.json");
+const contract_MindfulNFT = require("../utils/MindfulNFT.json");
+// provider - Alchemy
+const netObj = {
+    name: 'maticmum',
+    chainId: 80001  // hardwired bullshit
+}
+
+const getMessageHash = (type) => {
+  const alchemyProvider = new ethers.providers.AlchemyProvider(netObj, API_KEY);
+  
+  // signer
+  const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
+  
+  // contract instance
+  const MindfulNFTContract = new ethers.Contract(
+    CONTRACT_ADDRESS,
+    type === 'MintPassNFT' ? contract_MintPassNFT.abi : contract_MindfulNFT.abi,
+    signer
+  );
+  // construct the message to sign
+  let message = "Hello World " + Date.now();
+  console.log("Message: ", message);
+  
+  // Compute hash of the message
+  let messageHash = ethers.utils.id(message);
+  console.log("Message Hash: ", messageHash);
+
+  return messageHash
+}
+
+const getSignature = async (type) => {
+  const alchemyProvider = new ethers.providers.AlchemyProvider(netObj, API_KEY);
+  
+  // signer
+  const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
+  
+  // contract instance
+  const MindfulNFTContract = new ethers.Contract(
+    CONTRACT_ADDRESS,
+    type === 'MintPassNFT' ? contract_MintPassNFT.abi : contract_MindfulNFT.abi,
+    signer
+  );
+  
+  // Sign the hashed message
+  let messageBytes = ethers.utils.arrayify(getMessageHash());
+  let signature = await signer.signMessage(messageBytes);
+  console.log("Signature: ", signature);
+  
+  const name = await MindfulNFTContract.name();    
+  console.log("The name is: " + name); 
+
+  return signature
+}
+
 const getWalletAddress = () => {
   return sessionStorage.getItem("walletAddress");
 };
@@ -230,6 +291,8 @@ const md5 = (string) => {
 }
 
 export {
+  getMessageHash,
+  getSignature,
   getWalletAddress,
   getAppleId,
   getEmail,

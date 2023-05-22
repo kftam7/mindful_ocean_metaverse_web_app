@@ -5,7 +5,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 // import abi from "../abi.json";
 import abi from "../utils/mintpass.json";
 import MintPassNFT from "../utils/MintPassNFT.json";
-import abiNFT from "../utils/mindfulNFT.json";
+import mintMindfulNFT from "../utils/MindfulNFT.json";
 
 //start a connection to the web3 provider positively
 const getWeb3Modal = async() => {
@@ -161,10 +161,6 @@ export const switchNetwork = async() => {
 
 export const fetchContract = async() => {
   const web3 = await fetchWeb3();
-  console.log(web3)
-  // const contract = "0xD27713a2b92F4aeCA566cB9e601092F9174DE6ca";
-  //const contract = "0x3976432bE199E87E0DBFF1bEc7B7503684C7416b";
-  // const contract = "0x0e9B0E0e71e1F18875CBD88Fe5aC12De0edf78a7";
   const contract = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
   const mintpassContract = await new web3.eth.Contract(MintPassNFT.abi, contract);
   return mintpassContract;
@@ -172,8 +168,8 @@ export const fetchContract = async() => {
 
 export const fetchContractNFT = async() => {
   const web3 = await fetchWeb3();
-  const contractNFT = "0x73d9cd5b3f6bf370bb3ea9a28b8011de112f7e49";
-  const mintpassContractNFT = await new web3.eth.Contract(abiNFT, contractNFT);
+  const contract = "0x15afD68E18dAEF2CEA7A3a7Ee52B8BAb779F0D20";
+  const mintpassContractNFT = await new web3.eth.Contract(mintMindfulNFT.abi, contract);
   return mintpassContractNFT;
 }
 

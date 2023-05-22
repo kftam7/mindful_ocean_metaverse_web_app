@@ -15,6 +15,7 @@ import fs from 'fs';
 import { NFTStorage, File } from 'nft.storage';
 import { useTranslation } from '../i18n';
 import {ethers, BigNumber}  from 'ethers';
+import {getMessageHash, getSignature} from '../utils/utils';
 
 export default function Mintpass({ session,user }) {
   const { t, locale } = useTranslation();
@@ -56,7 +57,6 @@ export default function Mintpass({ session,user }) {
     try{
       const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
       const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
-      //const PRIVATE_KEY = "35322f3d9f56cf2f84592411ffacb71cf8d39ef3c7918a0358d4aebfec562989";
       const CONTRACT_ADDRESS = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
       // const CONTRACT_ADDRESS = account;
   
@@ -92,26 +92,23 @@ export default function Mintpass({ session,user }) {
       // read the contract name
       const name = await MintPassNFTContract.name();    
       console.log("The contract name is: " + name); 
-  
+
+      // const messageHash2 = getMessageHash('MintPassNFT')
+      // const signature2 = await getSignature('MintPassNFT').then(res => {
+      //   return res;
+      // })
+
       // mint the mintPass
       console.log("Minting MintPass...");
-      
-      // const tx = await MintPassNFTContract.mintMintPass("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", messageHash, signature, {value: 100000000000000});
-      // await tx.wait();
-      // console.log(tx)
-      // return;
   
-      const res = await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
-      console.log(res)
-      // .then(async function(){
-      //   console.log('success')
-      //   await generateMeta();
-      //   return;
-      //   Router.push({
-      //     pathname: '/mintedPage',
-      //   });
-      // }
-      // )
+      await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
+      .then(async function(){
+        console.log('success')
+        // await generateMeta();
+        Router.push({
+          pathname: '/mintedPage',
+        });
+      })
       // const tokenId = await fetchTokenId();
       // await duplicate(tokenId);
       // await update(tokenId);

@@ -21,19 +21,21 @@ export default function RedeemStep3() {
     },[dispatch])
 
     async function mint() {
-      console.log(mintpassNFTContract)
-      await mintpassNFTContract.methods.mintMindfulNFT('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.baidu.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 10, 1).send({ from: account })
-      .once('confirmation', async function(confirmationNumber, receipt){ //if use "on('"confirmation") here, it will be triggered repeatedly
-  
-      })
-      .then(async function(){
-        console.log('success')
-        return;
         Router.push({
           pathname: '/redeem_step4',
         });
-      }
-      )
+        return;
+        await mintpassNFTContract.methods.mintMindfulNFT('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.baidu.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 10, 1).send({ from: account })
+        .once('confirmation', async function(confirmationNumber, receipt){ //if use "on('"confirmation") here, it will be triggered repeatedly
+    
+        })
+        .then(async function(){
+            console.log('success')
+            return;
+            Router.push({
+            pathname: '/redeem_step4',
+            });
+        })
     }
 
     return(

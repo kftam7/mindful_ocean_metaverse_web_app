@@ -9,15 +9,23 @@ import axios from 'axios';
 import AppModal from '../components/redeem/AppModal';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
+import { getAccount, fetchMintpassContractNFT } from '../store/actions';
+import { useDispatch, useSelector } from "react-redux";
+import Router from 'next/router';
+import {ethers, BigNumber}  from 'ethers';
+import {getMessageHash, getSignature} from '../utils/utils';
 
 //just pass the setShow and setConShow as props to children components
-export default function RedeemStep2({ session, user }) {
+export default function RedeemStep2() {
   const { t, locale } = useTranslation();
   const apiPort = process.env.API_PORT || '/';
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [obj, setObj] = useState({});
   const [selectedOption, setSelectedOption] = useState("");
+  const dispatch = useDispatch();
+  const account = useSelector((state) => state.accountState);
+  const mintpassNFTContract = useSelector((state) => state.contractNFTState);
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -49,6 +57,66 @@ export default function RedeemStep2({ session, user }) {
   const optionMintpass = data.map((item, key) => {
     return <option key={key} value={item.tokenId}>Mintpass {item.tokenId}</option>
   });
+  
+  useEffect(async() => {
+    await dispatch(getAccount());
+    await dispatch(fetchMintpassContractNFT());
+  },[dispatch])
+
+  async function mint() {
+    try{
+      const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
+      const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
+      const CONTRACT_ADDRESS = "0x15afD68E18dAEF2CEA7A3a7Ee52B8BAb779F0D20";
+      const contract = require("../utils/MindfulNFT.json");
+
+      // provider - Alchemy
+      const netObj = {
+          name: 'maticmum',
+          chainId: 80001  // hardwired bullshit
+      }
+      const alchemyProvider = new ethers.providers.AlchemyProvider(netObj, API_KEY);
+
+      // signer
+      const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
+
+      // contract instance
+      const MindfulNFTContract = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);
+
+      // construct the message to sign
+      let message = "Hello World " + Date.now();
+      console.log("Message: ", message);
+      
+      // Compute hash of the message
+      let messageHash = ethers.utils.id(message);
+      console.log("Message Hash: ", messageHash);
+      
+      // Sign the hashed message
+      let messageBytes = ethers.utils.arrayify(messageHash);
+      let signature = await signer.signMessage(messageBytes);
+      console.log("Signature: ", signature);
+      
+      const name = await MindfulNFTContract.name();    
+      console.log("The name is: " + name); 
+      
+      // const messageHash = getMessageHash('MindfulNFT')
+      // const signature = await getSignature('MindfulNFT').then(res => {
+      //   return res;
+      // })
+      // mint the MindfulNFT
+      console.log("Minting MindfulNFT...");
+      await mintpassNFTContract.methods.mintMindfulNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", 1, messageHash, signature).send({ from: account })
+      .then(async function(){
+          console.log('success')
+          Router.push({
+            pathname: '/redeem_step4',
+          });
+      })
+    }
+    catch(err){
+      console.log('error', err)
+    }
+  }
 
   return(
     <Container className='mt-5 mb-5'>
@@ -65,11 +133,6 @@ export default function RedeemStep2({ session, user }) {
             <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
               <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.selectMintPass')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
-            <Col xs={4} className={styles.item}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.burnMinpPass')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={styles.item}>
@@ -126,7 +189,7 @@ export default function RedeemStep2({ session, user }) {
               <Row className='justify-content-md-center mt-5'>
                 <Col xs={12}>
                   <div className='text-center'>
-                    <Button href='/redeem_step3' size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>{t('button.burn')}</Button>
+                    <Button size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} onClick={mint}>{t('button.burn')}</Button>
                   </div>
                 </Col>
               </Row>

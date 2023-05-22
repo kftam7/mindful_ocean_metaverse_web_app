@@ -27,11 +27,6 @@ export default function RedeemStep4() {
                     </Col>
                     <Col xs={4} className={`${styles.item} ${styles.itemDisable}`}>
                         <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                        <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.redeem.burnMinpPass')}</span></div>
-                        <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-                    </Col>
-                    <Col xs={4} className={`${styles.item} ${styles.itemDisable}`}>
-                        <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
                         <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.redeem.complete')}</span></div>
                         <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
                     </Col>
