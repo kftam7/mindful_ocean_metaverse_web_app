@@ -13,7 +13,7 @@ import { getAccount, fetchMintpassContractNFT } from '../store/actions';
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import {ethers, BigNumber}  from 'ethers';
-import {getMessageHash, getSignature} from '../utils/utils';
+import {getMessageHashSignature} from '../utils/utils';
 
 //just pass the setShow and setConShow as props to children components
 export default function RedeemStep2() {
@@ -65,44 +65,10 @@ export default function RedeemStep2() {
 
   async function mint() {
     try{
-      const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
-      const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
-      const CONTRACT_ADDRESS = "0x15afD68E18dAEF2CEA7A3a7Ee52B8BAb779F0D20";
       const contract = require("../utils/MindfulNFT.json");
-
-      // provider - Alchemy
-      const netObj = {
-          name: 'maticmum',
-          chainId: 80001  // hardwired bullshit
-      }
-      const alchemyProvider = new ethers.providers.AlchemyProvider(netObj, API_KEY);
-
-      // signer
-      const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);
-
-      // contract instance
-      const MindfulNFTContract = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);
-
-      // construct the message to sign
-      let message = "Hello World " + Date.now();
-      console.log("Message: ", message);
-      
-      // Compute hash of the message
-      let messageHash = ethers.utils.id(message);
-      console.log("Message Hash: ", messageHash);
-      
-      // Sign the hashed message
-      let messageBytes = ethers.utils.arrayify(messageHash);
-      let signature = await signer.signMessage(messageBytes);
-      console.log("Signature: ", signature);
-      
-      const name = await MindfulNFTContract.name();    
-      console.log("The name is: " + name); 
-      
-      // const messageHash = getMessageHash('MindfulNFT')
-      // const signature = await getSignature('MindfulNFT').then(res => {
-      //   return res;
-      // })
+      const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
+        return res;
+      })
       // mint the MindfulNFT
       console.log("Minting MindfulNFT...");
       await mintpassNFTContract.methods.mintMindfulNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", 1, messageHash, signature).send({ from: account })
