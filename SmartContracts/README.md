@@ -45,5 +45,4 @@ npx hardhat verify --network polytestnet 0x6374A256974F04F126bB7af07d390D8786e35
 - Interacting with smart contract
 
 npx hardhat run scripts/mintMintPass.js --network polytestnet
-npx hardhat run scripts/burnMintPass.js --network polytestnet
 npx hardhat run scripts/mintMindfulNFT.js --network polytestnet
