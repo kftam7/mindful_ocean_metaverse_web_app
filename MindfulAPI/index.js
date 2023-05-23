@@ -34,6 +34,11 @@ app.use(cors(corsOptions))
 // API authentication
 app.use(async(req, res, next) => {
 
+  //skip checking for OPTIONS call
+  if( req.method === "OPTIONS"){
+    return next()
+  }
+
   // skip for appleauth call (will remove when Apple update on their side)
   if(req.url.startsWith("/mindfulapi/appleauth")){
           return next()
@@ -79,29 +84,43 @@ app.use(async(req, res, next) => {
 
   // check authentication for admin
   }else if (req.url.startsWith("/mindfulapi/admin")){
-    //console.log("no");
-  }
-  /* 
-  const auth = {
-    login: 'mindful',
-    password: 'RU%ru9VD'
-  }
-  const [, b64auth = ''] = (req.headers.authorization || '').split(' ')
-  const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
 
-  //skip checking for OPTIONS call
+    // if time stamp is within range
+    const current_time = Math.floor(Date.now() / 1000);
+    if ((current_time - req.headers.time_stamp) > process.env.tolerance){
+        logger.log('error', 'API Authentication Failed: Timestamp expired');
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Timestamp expired')
+        return;
+    }
 
-  if( req.method === "OPTIONS"){
-    return next()
-  }
-  if (login && password && login === auth.login && password === auth.password) {
-    return next()
-  }
-  logger.log('error', 'API Authentication Failed.');
-  res.set('WWW-Authenticate', 'Basic realm="401"')
-  res.status(401).send('Authentication required.')
+    // if secret is correct
+    const secret = crypto.createHash('md5').update(process.env.api_header_secret+req.headers.time_stamp).digest("hex");
+    //console.log("process.env.api_header_secret: ", process.env.api_header_secret);
+    //console.log("req.headers.time_stamp: ", req.headers.time_stamp);
+    if (!(secret === req.headers.secret)){
+        logger.log('error', 'API Authentication Failed: Wrong secret');
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Wrong secret')
+        return;
+    }
 
-  */
+    // check username & password
+    const auth = {
+      login: process.env.api_admin_user,
+      password: process.env.api_admin_passwd
+    }
+    const [, b64auth = ''] = (req.headers.authorization || '').split(' ')
+    const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
+    if (!(login && password && login === auth.login && password === auth.password)) {
+      logger.log('error', 'API Authentication Failed: Wrong username/password');
+      res.set('WWW-Authenticate', 'Basic realm="401"')
+      res.status(401).send('Authentication required: Wrong username/password')
+      return;
+    }
+
+  }
+
   return next()
 })
 
@@ -113,7 +132,7 @@ app.get("/", (req, res) => {
 
 app.use("/mindfulapi/app", MindfulAPIAppRouter);
 app.use("/mindfulapi/admin", MindfulAPIAdminRouter);
-app.use("/mindfulapi", MindfulAPIRouter);
+//app.use("/mindfulapi", MindfulAPIRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

@@ -18,6 +18,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 ////////////////// Sign In
 /* POST SignIn */
+/*
 router.post('/signin/:appleId', async function(req, res, next) {
   try {
     res.json(await SignIn.signin(req));
@@ -27,6 +28,7 @@ router.post('/signin/:appleId', async function(req, res, next) {
     next(err);
   }
 });
+*/
 
 
 ////////////////// User
@@ -54,6 +56,7 @@ router.get('/user/:appleId', async function(req, res, next) {
 
 
 /* POST user */
+/*
 router.post('/user', async function(req, res, next) {
   try {
     res.json(await User.createUser(req.body));
@@ -63,7 +66,7 @@ router.post('/user', async function(req, res, next) {
     next(err);
   }
 });
-
+*/
 
 /* PUT user */
 router.put('/user/:appleId', async function(req, res, next) {  
@@ -192,7 +195,7 @@ router.put('/appversion/:version', async function(req, res, next) {
 });
 
 ////////////////// Artwork
-/* GET AppVersion */
+/* GET Artwork */
 router.get('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.getArtwork());
@@ -213,7 +216,8 @@ router.get('/artwork/:appleId', async function(req, res, next) {
   }
 });
 
-/* POST AppVersion */
+/* POST Artwork */
+/*
 router.post('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.createArtwork(req.body));
@@ -223,8 +227,9 @@ router.post('/artwork', async function(req, res, next) {
     next(err);
   }
 });
+*/
 
-/* PUT AppVersion */
+/* PUT Artwork */
 router.put('/artwork/:artworkId', async function(req, res, next) {  
   try {
     res.json(await Artwork.updateArtwork(req.params.artworkId, req.body));
@@ -302,6 +307,7 @@ router.get('/personalwebsite/:appleId', async function(req, res, next) {
 });
 
 /* POST PersonalWebsite */
+/*
 router.post('/personalwebsite', async function(req, res, next) {
   try {
     res.json(await PersonalWebsite.createPersonalWebsite(req.body));
@@ -311,6 +317,7 @@ router.post('/personalwebsite', async function(req, res, next) {
     next(err);
   }
 });
+*/
 
 /* PUT PersonalWebsite */
 router.put('/personalwebsite/:websiteId', async function(req, res, next) {  
@@ -335,6 +342,7 @@ router.get('/credential/:login/:credential', async function(req, res, next) {
 });
 
 /* GET Apple Login */
+/*
 router.get('/applelogin', async function(req, res, next) {
   try {
     res.send(await AppleAuth.login());
@@ -344,8 +352,9 @@ router.get('/applelogin', async function(req, res, next) {
     next(err);
   }
 });
-
+*/
 /* POST Apple Auth */
+/*
 router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
   try {
     //res.json(await AppleAuth.auth(req));
@@ -364,8 +373,9 @@ router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async func
     next(err);
   }
 });
-
+*/
 /* GET Apple Token */
+/*
 router.get('/appletoken', async function(req, res, next) {
   try {
     res.send(await AppleAuth.token());
@@ -375,8 +385,10 @@ router.get('/appletoken', async function(req, res, next) {
     next(err);
   }
 });
+*/
 
 /* GET Apple Refresh */
+/*
 router.get('/applerefresh', async function(req, res, next) {
   try {
     res.json(await AppleAuth.refresh(req));
@@ -386,5 +398,5 @@ router.get('/applerefresh', async function(req, res, next) {
     next(err);
   }
 });
-
+*/
 module.exports = router;

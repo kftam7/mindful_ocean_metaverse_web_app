@@ -45,7 +45,6 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
   }else{
     // construct the SQL statement
     var sql = 'INSERT INTO personalWebsite (userId, URL, description) VALUES ';
-
     for (var i =0; i < personalWebsiteRecord.length; i++){
 
       // combine into 1 single SQL
@@ -73,8 +72,6 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
 async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
 
   sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
-
-  console.log(sql);
   
   const result = await db.query(
     sql
