@@ -6,7 +6,6 @@ import { getAppleId, getHeaders } from '../../utils/utils';
 const AnimationForFishPool = () => {
   const apiPort = process.env.API_PORT || '/';
   const [inits, setInits] = useState(0);
-  const [initsNew, setInitsNew] = useState(0);
   const [listAll, setListAll] = useState([[0], [0], [0], [0], [0], [0]]);
   const [animationActive, setAnimationActive] = useState(false);
   const [coverActive, setCoverActive] = useState(false);
@@ -28,8 +27,8 @@ const AnimationForFishPool = () => {
   };  
 
   useEffect(() => {
-    const appleid = getAppleId();
-    if(!appleid) return;
+    // const appleid = getAppleId();
+    // if(!appleid) return;
     // 每30秒更新一次接口数据
     const intervalId = setInterval(() => {
       fetchValue();
@@ -44,12 +43,13 @@ const AnimationForFishPool = () => {
   }, []);
 
   useEffect(() => {
-    setAnimationActive(true);
-    setCoverActive(true);
     let prev = addZero(inits, 5);
     let next = addZero(inits, 5);
-    setInits(inits);
     getData(prev, next);
+    if(!inits) return;
+    setInits(inits);
+    setAnimationActive(true);
+    setCoverActive(true);
   },[inits]);
 
   const addZero = (num, n) => {
