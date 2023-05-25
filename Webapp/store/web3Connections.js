@@ -5,7 +5,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 // import abi from "../abi.json";
 import abi from "../utils/mintpass.json";
 import MintPassNFT from "../utils/MintPassNFT.json";
-import mintMindfulNFT from "../utils/MindfulNFT.json";
+import mintMindfulNFT from "../utils/mindfulNFT.json";
 
 //start a connection to the web3 provider positively
 const getWeb3Modal = async() => {
