@@ -21,65 +21,69 @@ async function auth(req){
 
     try {
 
+        const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
         const response = await authInstance.accessToken(req.body.code);
         const idToken = jwt.decode(response.id_token);
-
-	    console.log("code: ", req.body.code);
-	    console.log("refresh_token: ", response.refresh_token);
-	    //console.log("body: ", req.body);
-	    //console.log("idToken: ", idToken);
-	    //console.log("response: ", response);
         const user = {};
+        var ifEmailExist = 0;
+        var ifNameExist = 0;
+
         user.id = idToken.sub;
 
-	    let body = "?access_token=" + response.access_token + "&id_token=" + response.id_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
+        let body = "?access_token=" + response.access_token + "&id_token=" + response.id_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
 
         if (idToken.email) {
-		  user.email = idToken.email;
-		  body = body + "&email=" + user.email;
+            user.email = idToken.email;
+            body = body + "&email=" + user.email;
+            ifEmailExist = 1;
 	    }
 
         if (req.body.user) {
             const { name } = JSON.parse(req.body.user);
             user.name = name;
-	        body = body + "&name=" + user.name;	
+	        body = body + "&firstName=" + user.name.firstName + "&lastName=" + user.name.lastName;
+            ifNameExist = 1;
         }
 
-    // update database
-    // check if user already exist
-    var sqlCheck = 'SELECT COUNT(*) AS if_exist FROM user WHERE appleId = "' + user.id +'"';
-    const resultCheck = await db.query(
-        sqlCheck
-    );
+        // construct the insert and update SQL
+        if (ifEmailExist && ifNameExist){
+            var sqlCreate = 'INSERT INTO user (appleId, firstName, lastName, email, refreshToken, createTime, updateTime, isActive) VALUES ("' + user.id + '", "' + user.name.firstName + '", "' + user.name.lastName + '", "' + user.email + '", "' + response.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';;
+            var sqlUpdate = 'UPDATE user SET firstName = "' + user.name.firstName + '", lastName = "' + user.name.lastName + '", email = "' + user.email + '", refreshToken = "' + response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
+        }else if (ifEmailExist && !ifNameExist) {
+            var sqlCreate = 'INSERT INTO user (appleId, email, refreshToken, createTime, updateTime, isActive) VALUES ("' + user.id + '", "' + user.email + '", "' + response.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';;
+            var sqlUpdate = 'UPDATE user SET email = "' + user.email + '", refreshToken = "' + response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
+        }else if (!ifEmailExist && ifNameExist){
+            var sqlCreate = 'INSERT INTO user (appleId, firstName, lastName, refreshToken, createTime, updateTime, isActive) VALUES ("' + user.id + '", "' + user.name.firstName + '", "' + user.name.lastName + '", "' + response.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';;
+            var sqlUpdate = 'UPDATE user SET firstName = "' + user.name.firstName + '", lastName = "' + user.name.lastName + '", refreshToken = "' + response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
+        }else{
+            var sqlCreate = 'INSERT INTO user (appleId, refreshToken, createTime, updateTime, isActive) VALUES ("' + user.id + '", "' + response.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';;
+            var sqlUpdate = 'UPDATE user SET refreshToken = "' + response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
+        }
 
-    const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+console.log("body: ", body);
+console.log("sqlCreate: ", sqlCreate);
+console.log("sqlUpdate: ", sqlUpdate);
 
-    // if appleId already exist
-    if (resultCheck[0].if_exist){
-        //var sqlUpdate = 'UPDATE user SET firstName = "' + user.name.firstName + '", lastName = "' + user.name.lastName + '", refreshToken = "' + response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
-        var sqlUpdate = 'UPDATE user SET refreshToken = "'+ response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
-        console.log(sqlUpdate);
-        const resultUpdate = await db.query(
-            sqlUpdate
+        // update database
+        // check if user already exist
+        let sqlCheck = 'SELECT COUNT(*) AS if_exist FROM user WHERE appleId = "' + user.id +'"';
+        const resultCheck = await db.query(
+            sqlCheck
         );
-        let message = 'Record updated successfully';
-        return {message};
-        
-    // if appleId doesn't exist
-    }else{
-        var sqlCreate = 'INSERT INTO user (appleId, firstName, lastName, email, refreshToken, createTime, updateTime, isActive) VALUES ("' + user.id + '", "' + user.name.firstName + '", "' + user.name.lastName + '", "' + user.email + '", "' + response.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';
-        console.log(sqlCreate);
-        const resultCreate = await db.query(
-            sqlCreate
-        );
-        let message = 'Record created successfully';
-        return {message};
-    }
 
-        //res.json(user);
-        //const body = JSON.stringify(req.body);
-	//const body = JSON.stringify(idToken);
-	//const body = "?access_token=" + response.access_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
+        // if appleId already exist
+        if (resultCheck[0].if_exist){
+            const resultUpdate = await db.query(
+                sqlUpdate
+            );
+            console.log("Record updated successfully");
+        // if appleId doesn't exist
+        }else{
+            const resultCreate = await db.query(
+                sqlCreate
+            );
+            console.log("Record created successfully")
+        }
         return(body);
 
     } catch (ex) {
@@ -102,8 +106,9 @@ async function refresh(req){
 }
 
 module.exports = {
-	login,
-  auth,
-  token,
-  refresh
+    login,
+    auth,
+    token,
+    refresh
 };
+

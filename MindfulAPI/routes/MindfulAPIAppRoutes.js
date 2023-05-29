@@ -357,7 +357,7 @@ router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async func
     //res.redirect(307, process.env.redirect_address);
     //const param = "?state=1234&code=1243&id_token=1234";
      const param = await AppleAuth.auth(req);
-     console.log(param);
+     //console.log(param);
      res.redirect(process.env.redirect_address + param);
 
   } catch (err) {
