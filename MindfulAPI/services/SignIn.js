@@ -69,7 +69,6 @@ async function signin(req){
         return("appleId doesn't match");
     }  
 
-
     // check if user already exist
     var sqlCheck = 'SELECT COUNT(*) AS if_exist FROM user WHERE appleId = "' + req.params.appleId +'"';
     const resultCheck = await db.query(
