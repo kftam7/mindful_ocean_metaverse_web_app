@@ -73,6 +73,10 @@ const getHeaders = () => {
   }
 };
 
+const getPathname = () => {
+  return sessionStorage.getItem("pathname");
+};
+
 // 字段升序排序
 const sortByFieldAsc = (data, field) => {
   return data.sort((a, b) => {
@@ -282,6 +286,7 @@ export {
   getEmail,
   getRefreshToken,
   getHeaders,
+  getPathname,
   sortByFieldAsc,
   sortByFieldDesc,
   md5

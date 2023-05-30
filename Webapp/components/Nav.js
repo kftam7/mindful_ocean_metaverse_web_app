@@ -7,7 +7,7 @@ import { useTranslation } from '../i18n';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
-
+import { getPathname } from '../utils/utils';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 
 // apple id login
@@ -47,6 +47,14 @@ const NavBar = ({onLocaleChange}) => {
   const currentUrl = router.asPath;
   const { query } = parse(currentUrl, true);
   const [isAppleIdLogin, setIsAppleIdLogin] = useState(false);
+
+  useEffect(() => {
+    const pathname = getPathname();
+    if(!pathname) return;
+    window.location.href= pathname;
+    sessionStorage.removeItem("pathname");
+  }, []);
+
   useEffect(() => {
     const appleId = sessionStorage.getItem("appleId");
     setIsAppleIdLogin(false);

@@ -104,7 +104,9 @@ const RedeemStep1 = ({ session }) => {
     }
   }, []);
 
-  const connectApple = async() => {
+  const connectApple = () => {
+    const pathname = window.location.pathname;
+    sessionStorage.setItem("pathname", pathname);
   }
 
   const disconnectApple = async() => {
