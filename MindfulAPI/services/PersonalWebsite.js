@@ -44,17 +44,8 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
     return {message};
   }else{
     // construct the SQL statement
-    var sql = 'INSERT INTO personalWebsite (userId, URL, description) VALUES ';
-    for (var i =0; i < personalWebsiteRecord.length; i++){
-
-      // combine into 1 single SQL
-      if (i == (personalWebsiteRecord.length-1)){
-        sql = sql + '("' + userIdResult[0].userId + '", "' + personalWebsiteRecord[i].URL + '", "' + personalWebsiteRecord[i].description + '");';
-      }else{
-        sql = sql + '("' + userIdResult[0].userId + '", "' + personalWebsiteRecord[i].URL + '", "' + personalWebsiteRecord[i].description + '"),';
-      }
-
-    }
+    var sql = 'INSERT INTO personalWebsite (userId, URL, description) VALUES ("' + userIdResult[0].userId + '", "' + personalWebsiteRecord.URL + '", "' + personalWebsiteRecord.description + '");';
+    console.log(sql);
 
     // update results on DB
     const result = await db.query(
@@ -71,7 +62,8 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
 /* update PersonalWebsite */
 async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
 
-  sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
+  //sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
+  sql = 'UPDATE personalWebsite SET URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
   
   const result = await db.query(
     sql
