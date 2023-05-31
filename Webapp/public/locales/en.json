@@ -112,7 +112,6 @@
     "page.userProfile.userProfile": "User Profile",
     "page.userProfile.personalWebsite": "Personal Website",
     "page.userProfile.websiteURL": "Website URL",
-    "page.userProfile.description": "Description",
     "page.userProfile.automaticallyFill": "Automatically fill this in when submiting artwork.",
     "page.userProfile.submittedArtworks": "Submitted Artworks",
     "page.userProfile.ownedNFTs": "Owned NFTs",
@@ -122,7 +121,6 @@
     "page.userProfile.artworkInformation": "Artwork information",
     "page.userProfile.nFTInformation": "NFT information",
     "page.userProfile.viewDetails": "View Details",
-    "page.userProfile.viewNFTOnOpensea": "View NFT on Opensea",
 
     "footer.nav.whitePaper": "White Paper",
     "footer.nav.privatePolicy": "Private Policy",
@@ -154,6 +152,5 @@
     "button.addNew": "Add new",
     "button.close": "Close",
     "button.mintMindfulNFT": "Mint Mindful NFT",
-    "button.changeAccount": "Change account",
-    "button.edit": "Edit"
+    "button.changeAccount": "Change account"
 }
