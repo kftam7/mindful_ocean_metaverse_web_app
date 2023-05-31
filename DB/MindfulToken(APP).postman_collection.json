@@ -8,6 +8,402 @@
 	},
 	"item": [
 		{
+			"name": "Apple ID Login",
+			"item": [
+				{
+					"name": "GET Apple Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/applelogin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"applelogin"
+							]
+						},
+						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET Apple Login",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/applelogin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"applelogin"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST Apple Auth",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appleauth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appleauth"
+							]
+						},
+						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "POST Apple Auth",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appleauth",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appleauth"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET Apple Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appletoken",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appletoken"
+							]
+						},
+						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET Apple Token",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appletoken",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appletoken"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET Apple Refresh",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/applerefresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"applerefresh"
+							]
+						},
+						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET Apple Refresh",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/applerefresh?refreshToken=r0a7af40a57e649a9b0a8afe55629f8e6.0.szyu.HkwtKg3lPWsej1kyjvPEhg",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"applerefresh"
+									],
+									"query": [
+										{
+											"key": "refreshToken",
+											"value": "r0a7af40a57e649a9b0a8afe55629f8e6.0.szyu.HkwtKg3lPWsej1kyjvPEhg"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "signin",
 			"item": [
 				{
@@ -84,16 +480,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/signin/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/signin/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"signin",
 										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
 									]
@@ -193,16 +584,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"user",
 										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
 									]
@@ -322,16 +708,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"user",
 										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
 									]
@@ -418,16 +799,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/event",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/event",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"event"
 									]
 								}
@@ -516,16 +892,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nft/mintPass/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/nft/mintPass/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"nft",
 										"mintPass",
 										"appleid",
@@ -623,16 +994,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nft/mindfulToken/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/nft/mindfulToken/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"nft",
 										"mindfulToken",
 										"appleid",
@@ -740,16 +1106,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nfttotal/mintPass",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/nfttotal/mintPass",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"nfttotal",
 										"mintPass"
 									],
@@ -855,16 +1216,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/nfttotal/mindfulToken",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/nfttotal/mindfulToken",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"nfttotal",
 										"mindfulToken"
 									],
@@ -986,16 +1342,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/appversion/latest",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/appversion/latest",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"appversion",
 										"latest"
 									],
@@ -1099,16 +1450,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/appversion/0.0.2",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/appversion/0.0.2",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"appversion",
 										"0.0.2"
 									]
@@ -1215,16 +1561,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/artwork",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"artwork"
 									]
 								}
@@ -1305,16 +1646,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/artwork/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"artwork",
 										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
 									]
@@ -1433,16 +1769,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/artwork",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"artwork"
 									]
 								}
@@ -1561,16 +1892,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/artwork/47",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/artwork/47",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"artwork",
 										"47"
 									]
@@ -1585,6 +1911,382 @@
 				}
 			],
 			"description": "## add/modify/inactive artwork data"
+		},
+		{
+			"name": "PersonalWebsite",
+			"item": [
+				{
+					"name": "GET PersonalWebsite Request (appleId)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/personalwebsite/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"personalwebsite",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get website information of a specified appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET PersonalWebsite Request (appleId)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST PersonalWebsite Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/personalwebsite/{{appleId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"personalwebsite",
+								"{{appleId}}"
+							]
+						},
+						"description": "### API endpoint to update personal website information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "POST PersonalWebsite Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"URL\":\"https://modifiedactive.com\",\n     \"description\":\"personalwebsite modify testing\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT PersonalWebsite Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "RU%ru9VD",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mindful",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\",\n     \"isActive\": 1\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/personalwebsite/{websiteId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"personalwebsite",
+								"{websiteId}"
+							]
+						},
+						"description": "### API endpoint to update personal website information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT PersonalWebsite Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"URL\":\"https://abc.com\",\n     \"description\":\"personalwebsite modify testing\",\n     \"isActive\": 0\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/19",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"19"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## This section is to manage website information entered by users"
 		},
 		{
 			"name": "joinedevent",
@@ -1658,16 +2360,11 @@
 									}
 								],
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/joinedevent/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/joinedevent/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"joinedevent",
 										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
 									]
@@ -1786,16 +2483,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/joinedevent",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/joinedevent",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"joinedevent"
 									]
 								}
@@ -1914,16 +2606,11 @@
 									}
 								},
 								"url": {
-									"raw": "https://api-staging.mindfultoken.org/mindfulapi/app/joinedevent/2",
-									"protocol": "https",
+									"raw": "{{baseUrl}}/joinedevent/2",
 									"host": [
-										"api-staging",
-										"mindfultoken",
-										"org"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"mindfulapi",
-										"app",
 										"joinedevent",
 										"2"
 									]

@@ -12,11 +12,11 @@ async function getPersonalWebsite(appleId){
 
     if (appleId){
         var rows = await db.query(
-        `SELECT a.websiteId, a.URL, a.description FROM personalWebsite a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by websiteId ASC;`, [appleId]
+        `SELECT a.websiteId, a.URL, a.description FROM personalWebsite a, user b WHERE a.userId=b.userId AND a.isActive =1 AND b.appleId = ? ORDER by websiteId ASC;`, [appleId]
       );
     }else{
         var rows = await db.query(
-        `SELECT b.appleId , a.websiteId, a.userId, a.URL, a.description FROM personalWebsite a, user b WHERE a.userId=b.userId ORDER by websiteId ASC;`
+        `SELECT b.appleId , a.websiteId, a.userId, a.URL, a.description, a.isActive FROM personalWebsite a, user b WHERE a.userId=b.userId ORDER by websiteId ASC;`
       );
     }
   
@@ -44,7 +44,7 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
     return {message};
   }else{
     // construct the SQL statement
-    var sql = 'INSERT INTO personalWebsite (userId, URL, description) VALUES ("' + userIdResult[0].userId + '", "' + personalWebsiteRecord.URL + '", "' + personalWebsiteRecord.description + '");';
+    var sql = 'INSERT INTO personalWebsite (userId, URL, description, isActive) VALUES ("' + userIdResult[0].userId + '", "' + personalWebsiteRecord.URL + '", "' + personalWebsiteRecord.description + '", 1);' ;
     console.log(sql);
 
     // update results on DB
@@ -63,7 +63,7 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
 async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
 
   //sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
-  sql = 'UPDATE personalWebsite SET URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
+  sql = 'UPDATE personalWebsite SET URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '", isActive = "' + personalWebsiteRecord.isActive + '" WHERE websiteId = "' + websiteId + '";';
   
   const result = await db.query(
     sql

@@ -3165,7 +3165,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n     \"userId\":\"1\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\"\n  }",
+							"raw": "  {\n     \"userId\":\"1\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\",\n     \"isActive\": 1\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3213,7 +3213,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"userId\":\"1\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\"\n  }",
+									"raw": "  {\n     \"userId\":\"1\",\n     \"URL\":\"https://modified.com\",\n     \"description\":\"personalwebsite modify testing\",\n     \"isActive\": 1\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
