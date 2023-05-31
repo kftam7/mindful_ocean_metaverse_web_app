@@ -31,6 +31,7 @@ const GalleryPage = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [extraInfo, setExtraInfo] = useState('');
+  const [reShuffle, setReShuffle] = useState(0);
 
   // 初始化数据
   useEffect(async () => {
@@ -39,7 +40,6 @@ const GalleryPage = () => {
     const des = await axios.get(`${apiPort}/mindfulapi/app/artwork`, {headers: getHeaders()});
     if(des.status === 200){
       const { data: { data } } = des;
-      console.log(data)
       setDataSource(data);
       setDataArtwork(data);
       setTotalCount(data.length)
@@ -74,7 +74,7 @@ const GalleryPage = () => {
       end = totalCount
     }
     getData(start, end);
-  }, [dataArtwork, activePage, isSort]);
+  }, [dataArtwork, activePage, isSort, reShuffle]);
 
   // 获取当前页数据
   const getData = (start, end) => {
@@ -200,6 +200,16 @@ const GalleryPage = () => {
     setTypeText(type === 'fish' ? t('page.gallery.butterflyFish') : t('page.gallery.whale'));
   };
 
+  const randomsort = () => {
+    return Math.random()>.5 ? -1 : 1;
+}
+
+  const shuffle = () => {
+    const dataShuffle = dataArtwork.sort(randomsort);
+    setReShuffle(reShuffle + 1);
+    setDataArtwork(dataShuffle);
+  };
+
   const changeName = (e) => {
     setName(e.target.value);
   };
@@ -321,11 +331,15 @@ const GalleryPage = () => {
                 <Pagination.Last onClick={handleLastPage} />
               </Pagination>
             </Col>
-          </Row> : ''
+          </Row>
+           : ''
         }
-        <Row className={styles.btnRow}>
-              <Button href="/gallery" className={`${styles.btn} ${homeStyles.btn}`}>{t('button.shuffle')}</Button>
-        </Row>
+        {dataResult.length && dataResult.length !== 1 ?
+          <Row className={styles.btnRow}>
+              <Button onClick={shuffle} className={`${styles.btn} ${homeStyles.btn}`}>{t('button.shuffle')}</Button>
+          </Row>
+           : ''
+        }
         <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
         <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
     </Container>
