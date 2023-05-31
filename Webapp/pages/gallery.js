@@ -1,4 +1,5 @@
 import {Row, Col, Form,InputGroup,FormControl, Button, Image, Container, Dropdown, Pagination} from 'react-bootstrap';
+import { FaTimes } from 'react-icons/fa';
 import Script from 'next/script';
 import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
@@ -130,7 +131,6 @@ const GalleryPage = () => {
       });
     }
     
-    console.log(result)
     setDataArtwork(result);
     setActivePage(1);
 
@@ -204,12 +204,24 @@ const GalleryPage = () => {
     setName(e.target.value);
   };
 
+  const handleClearName = (e) => {
+    setName('');
+  };
+
   const changeDescription = (e) => {
     setDescription(e.target.value);
   };
 
+  const handleClearDescription = (e) => {
+    setDescription('');
+  };
+
   const changeExtralnfo = (e) => {
     setExtraInfo(e.target.value);
+  };
+
+  const handleClearExtralnfo = (e) => {
+    setExtraInfo('');
   };
 
   return(
@@ -252,21 +264,36 @@ const GalleryPage = () => {
               <Col md={12} lg={4}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeName}>
-                      <FormControl id="search by name" placeholder={t('page.gallery.searchByName')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} />
+                      <FormControl placeholder={t('page.gallery.searchByName')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={name} />
+                      {name && (
+                        <div class="inputClear" onClick={handleClearName}>
+                          <FaTimes />
+                        </div>
+                      )}
                   </InputGroup>
                 </Form>
               </Col>
               <Col md={12} lg={4}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeDescription}>
-                      <FormControl id="search by description" placeholder={t('page.gallery.searchByDescription')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} />
+                      <FormControl placeholder={t('page.gallery.searchByDescription')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={description} />
+                      {description && (
+                        <div class="inputClear" onClick={handleClearDescription}>
+                          <FaTimes />
+                        </div>
+                      )}
                   </InputGroup>
                 </Form>
               </Col>
               <Col md={12} lg={4}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeExtralnfo}>
-                      <FormControl id="search by extralnfo" placeholder={t('page.gallery.searchByExtralnfo')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} />
+                      <FormControl placeholder={t('page.gallery.searchByExtralnfo')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={extraInfo} />
+                      {extraInfo && (
+                        <div class="inputClear" onClick={handleClearExtralnfo}>
+                          <FaTimes />
+                        </div>
+                      )}
                   </InputGroup>
                 </Form>
               </Col>

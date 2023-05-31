@@ -43,7 +43,7 @@ function UserProfileModal(props) {
       </Modal.Body>
       {modal?.isShare ? 
         <Modal.Footer>
-          <div style={{ flex: '1', textAlign: 'center' }}><a href='' target='_blank'>View NFT on Opensea <Image src="/share.gif" /></a></div>
+          <div style={{ flex: '1', textAlign: 'center' }}><a href='' target='_blank'>{t('page.userProfile.viewNFTOnOpensea')} <Image src="/share.gif" /></a></div>
         </Modal.Footer>
         : ''
       }

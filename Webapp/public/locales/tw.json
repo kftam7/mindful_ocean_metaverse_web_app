@@ -112,6 +112,7 @@
     "page.userProfile.userProfile": "用户配置文件",
     "page.userProfile.personalWebsite": "个人网站",
     "page.userProfile.websiteURL": "网站URL",
+    "page.userProfile.description": "描述",
     "page.userProfile.automaticallyFill": "提交作品时自动填写。",
     "page.userProfile.submittedArtworks": "已提交的艺术品",
     "page.userProfile.ownedNFTs": "拥有的NFT",
@@ -121,6 +122,7 @@
     "page.userProfile.artworkInformation": "艺术品信息",
     "page.userProfile.nFTInformation": "NFT信息",
     "page.userProfile.viewDetails": "查看详细信息",
+    "page.userProfile.viewNFTOnOpensea": "View NFT on Opensea",
 
     "footer.nav.whitePaper": "白皮书",
     "footer.nav.privatePolicy": "私人政策",
@@ -152,5 +154,6 @@
     "button.addNew": "添加新内容",
     "button.close": "关闭",
     "button.mintMindfulNFT": "Mint Mindful NFT",
-    "button.changeAccount": "更改帐户"
+    "button.changeAccount": "更改帐户",
+    "button.edit": "编辑"
 }

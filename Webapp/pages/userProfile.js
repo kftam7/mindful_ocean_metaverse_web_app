@@ -9,6 +9,7 @@ import styles from '../styles/UserProfilePage.module.css';
 import Layout from '../components/SubpageLayout';
 import { data } from '../data/data';
 import UserProfileModel from '../components/userProfile/UserProfileModal';
+import EditPersonalWebsiteModel from '../components/userProfile/EditPersonalWebsiteModel';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import { getWalletAddress, getAppleId, getEmail, getHeaders } from '../utils/utils';
 import axios from 'axios';
@@ -24,17 +25,24 @@ const UserProfilePage = () => {
   const [activeIndex, setActiveIndex] = useState(null); // 控制展开的面板索引
   const [isChecked, setIsChecked] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [modalEditShow, setModalEditShow] = useState(false);
+  const [dataPersonalwebsite, setDataPersonalwebsite] = useState([]); // personalwebsite
   const [dataArtwork, setDataArtwork] = useState([]); // Submitted Artworks
   const [dataJoinedEvent, setDataJoinedEvent] = useState([]); // Joined Event
   const [dataOwnedNFTs, setDataOwnedNFTs] = useState([]); // Owned NFTs
   const [dataOwnedMintpass, setDataOwnedMintpass] = useState([]); // Owned Mintpass
   const [modalData, setModalData] = useState();
+  const [modalDataEdit, setModalDataEdit] = useState();
   const [formData, setFormData] = useState({
-    URL: ''
+    URL: '',
+    description: ''
   });
   const [formErrors, setFormErrors] = useState({
-    URL: false
+    URL: false,
+    description: false
   });
+  const [isAddPersonalwebsite, setIsAddPersonalwebsite] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setWalletAddress(getWalletAddress());
@@ -44,28 +52,35 @@ const UserProfilePage = () => {
 
   useEffect(async () => {
     if(!appleId) return;
-    setLoading(true)
+    setLoading(true);
     
+    const res = await axios.get(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, {headers: getHeaders()});
+    if(res.status === 200){
+      const { data: { data } } = res;
+      setDataPersonalwebsite(data);
+      setLoading(false);
+    }
+  }, [appleId, count]);
+
+  useEffect(async () => {
+    if(!appleId) return;
     const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`, {headers: getHeaders()});
-    console.log(res)
     if(res.status === 200){
       const { data: { data: { artwork, joinedEvent } } } = res
       // Submitted Artworks
       // console.log('Submitted Artworks', artwork)
-      setDataArtwork(artwork);
+      setDataArtwork(artwork || []);
       
       // Joined Event
       // console.log('Joined Event', joinedEvent)
-      setDataJoinedEvent(joinedEvent);
+      setDataJoinedEvent(joinedEvent || []);
     }
-
-    setLoading(false)
   }, [appleId]);
 
   useEffect(async () => {
     if(!appleId) return;
     if(!walletAddress) return;
-    setLoading(true)
+    setLoading(true);
 
     // Owned NFTs
     const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/app/nft/mindfulToken/walletaddress/${walletAddress}`, {headers: getHeaders()});
@@ -82,29 +97,26 @@ const UserProfilePage = () => {
       setDataOwnedMintpass(data);
     }
 
-    setLoading(false)
+    setLoading(false);
   }, [walletAddress, appleId]);
 
   const resetForm = () => {
     const data = {
-      URL: ''
+      URL: '',
+      description: ''
     }
     setFormData(data);
     const dataError = {
-      URL: false
+      URL: false,
+      description: false
     }
     setFormErrors(dataError);
   };
 
   const handleToggle = async (index) => {
     setActiveIndex(index === activeIndex ? null : index); // 切换展开的面板索引
-    if(index === 3){
-      if(index === activeIndex){
-        resetForm();
-      }
-    }else{
-      resetForm();
-    }
+    resetForm();
+    setIsAddPersonalwebsite(false);
   };
 
   const handleSwitchChange = () => {
@@ -124,18 +136,19 @@ const UserProfilePage = () => {
   const savePersonalWebsite = async (event) => {
     event.preventDefault();
     // 从 formData 对象中获取表单的值
-    const { URL } = formData;
+    const { URL, description } = formData;
     const newFormErrors = {
       URL: !URL,
+      description: !description
     };
     setFormErrors(newFormErrors);
 
-    if(!URL) return;
+    if(!URL || !description) return;
 
-    const params = [{
+    const params = {
       URL,
-      description: ''
-    }];
+      description,
+    };
 
     // console.log(params)
     // return
@@ -150,6 +163,7 @@ const UserProfilePage = () => {
           hideProgressBar: true,
         });
         resetForm();
+        setCount(count + 1);
       }
     })
     .catch(err => {
@@ -166,6 +180,24 @@ const UserProfilePage = () => {
     }
     setModalData(data)
     setModalShow(true)
+  };
+
+  const addPersonalwebsite = () => {
+    setIsAddPersonalwebsite(!isAddPersonalwebsite);
+  };
+
+  const handleEdit = (data) => {
+    setModalEditShow(true);
+    setModalDataEdit(data);
+  };
+
+  const modalEditSuccess = () => {
+    setModalEditShow(false);
+    setCount(count + 1);
+  };
+
+  const modalEditClose = () => {
+    setModalEditShow(false);
   };
 
   return(
@@ -214,18 +246,15 @@ const UserProfilePage = () => {
                     <h4>{t('page.userProfile.personalWebsite')}</h4>
                   </div>
                   <div>
-                    {activeIndex !== 3 ?
-                      <span className={styles.card_txt2}>{t('button.addNew')}</span>
-                      : ''
-                    }
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataPersonalwebsite.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"
                       onClick={() => handleToggle(3)}
-                      aria-controls="collapseExample3"
+                      aria-controls="collapseExample4"
                       aria-expanded={activeIndex === 3}
                     >
-                      {activeIndex === 3 ? <FaTimes /> : <FaPlus />}
+                      {activeIndex === 3 ? <FaChevronUp /> : <FaChevronDown />}
                     </Button>
                   </div>
               </div>
@@ -233,47 +262,85 @@ const UserProfilePage = () => {
               <Collapse in={activeIndex === 3}>
                 <div id="collapseExample3">
                   <Card.Body className={styles.card_body}>
-                  
-                  <Form onSubmit={savePersonalWebsite}>
-                    <Form.Group className="align-items-center form_group" controlId="URL">
-                      <Form.Label className={styles.form_label}>{t('page.userProfile.websiteURL')}</Form.Label>
-                      <Form.Control
-                        className={styles.form_control}
-                        type="text"
-                        placeholder=""
-                        name="URL"
-                        value={formData.URL}
-                        isInvalid={formErrors.URL}
-                        onChange={handleChange}
-                        required
-                      />
-                      <Form.Control.Feedback
-                        className={styles.form_feedback}
-                        type="invalid"
-                      >
-                        {t('error.info.websiteURLCannotBeEmpty')}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <div style={{ clear: 'both', paddingTop: '20px' }}>
-                      <Row>
-                        <Col xs={12} md={6}>
-                          <span
-                            className={isChecked ? `${styles.custom_switch} ${styles.active}` : styles.custom_switch}
-                            onClick={handleSwitchChange}
-                          >
-                            <span className={styles.switch_handle}></span>
-                          </span>
-                          {t('page.userProfile.automaticallyFill')}
-                        </Col>
-                        <Col xs={12} md={6} style={{ textAlign: 'right'}}>                      
-                          <Button variant="primary" type="button" className={styles.btn_save} onClick={savePersonalWebsite}>
-                            {t('button.save')}
-                          </Button>
-                        </Col>
+                    {dataPersonalwebsite.map((item, index) => {
+                      return <Row key={index} style={{marginBottom: '10px'}}>
+                        <Col xs={12} sm={4}>URL:{item.URL}</Col>
+                        <Col xs={12} sm={4}>Description:{item.description}</Col>
+                        <Col xs={12} sm={4} style={{textAlign: 'right'}}><Button className={styles.btn_save} size="sm" onClick={() => handleEdit(item)}>{t("button.edit")}</Button></Col>
                       </Row>
+                    })}
+                    <div style={{textAlign: 'right'}}>
+                      <span className={styles.card_txt2}>{t('button.addNew')}</span>
+                      <Button
+                        className={styles.card_btn}
+                        variant="link"
+                        onClick={addPersonalwebsite}
+                      >
+                        {isAddPersonalwebsite ? <FaTimes /> : <FaPlus />}
+                      </Button>
                     </div>
-                  </Form>
-
+                    {isAddPersonalwebsite ?                   
+                      <Form onSubmit={savePersonalWebsite}>
+                        <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="URL">
+                          <Form.Label className={styles.form_label}>{t('page.userProfile.websiteURL')}</Form.Label>
+                          <Form.Control
+                            className={styles.form_control}
+                            type="text"
+                            placeholder=""
+                            name="URL"
+                            value={formData.URL}
+                            isInvalid={formErrors.URL}
+                            onChange={handleChange}
+                            required
+                          />
+                          <Form.Control.Feedback
+                            className={styles.form_feedback}
+                            type="invalid"
+                          >
+                            {t('error.info.websiteURLCannotBeEmpty')}
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="description">
+                          <Form.Label className={styles.form_label}>{t('page.userProfile.description')}</Form.Label>
+                          <Form.Control
+                            className={styles.form_control}
+                            type="text"
+                            as="textarea"
+                            placeholder=""
+                            name="description"
+                            value={formData.description}
+                            isInvalid={formErrors.description}
+                            onChange={handleChange}
+                            required
+                          />
+                          <Form.Control.Feedback
+                            className={styles.form_feedback}
+                            type="invalid"
+                          >
+                            {t('error.info.descriptionCannotBeEmpty')}
+                          </Form.Control.Feedback>
+                        </Form.Group>
+                        <div style={{ clear: 'both', paddingTop: '20px' }}>
+                          <Row>
+                            <Col xs={12} md={6}>
+                              <span
+                                className={isChecked ? `${styles.custom_switch} ${styles.active}` : styles.custom_switch}
+                                onClick={handleSwitchChange}
+                              >
+                                <span className={styles.switch_handle}></span>
+                              </span>
+                              {t('page.userProfile.automaticallyFill')}
+                            </Col>
+                            <Col xs={12} md={6} style={{ textAlign: 'right'}}>                      
+                              <Button variant="primary" type="button" className={styles.btn_save} onClick={savePersonalWebsite}>
+                                {t('button.save')}
+                              </Button>
+                            </Col>
+                          </Row>
+                        </div>
+                      </Form>
+                      : ''
+                    }
                   </Card.Body>
                 </div>
               </Collapse>
@@ -422,6 +489,7 @@ const UserProfilePage = () => {
         <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
         <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
         <UserProfileModel show={modalShow} onHide={() => setModalShow(false)} modal={modalData} />
+        <EditPersonalWebsiteModel show={modalEditShow} onHide={() => modalEditClose()} onOk={modalEditSuccess} modal={modalDataEdit} />
     </Container>
   )
 }
