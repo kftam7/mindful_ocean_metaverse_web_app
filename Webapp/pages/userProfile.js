@@ -189,15 +189,24 @@ const UserProfilePage = () => {
     await axios.post(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, params, {headers: getHeaders()})
     .then(res => {
       if(res.status === 200){
-        const {data: {message}} = res;
-        toast.success(message, {
-          autoClose: 3000,
-          position: 'top-center',
-          className: 'custom-toast-success',
-          hideProgressBar: true,
-        });
-        resetForm();
-        setCount(count + 1);
+        const {data} = res;
+        if(data.message){
+          toast.success(message, {
+            autoClose: 3000,
+            position: 'top-center',
+            className: 'custom-toast-success',
+            hideProgressBar: true,
+          });
+          resetForm();
+          setCount(count + 1);
+        }else{
+          toast.error(data, {
+            autoClose: 3000,
+            position: 'top-center',
+            className: 'custom-toast-success',
+            hideProgressBar: true,
+          });
+        }
       }
     })
     .catch(err => {

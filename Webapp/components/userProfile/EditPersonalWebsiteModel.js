@@ -123,6 +123,14 @@ function UserProfileModal(props) {
         });
         onOk();
         setLoading(false);
+      }else{
+        toast.error(data, {
+          autoClose: 3000,
+          position: 'top-center',
+          className: 'custom-toast-success',
+          hideProgressBar: true,
+        });
+        setLoading(false);
       }
     })
     .catch(err => {
