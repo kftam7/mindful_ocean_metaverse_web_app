@@ -191,7 +191,7 @@ const UserProfilePage = () => {
       if(res.status === 200){
         const {data} = res;
         if(data.message){
-          toast.success(message, {
+          toast.success(data.message, {
             autoClose: 3000,
             position: 'top-center',
             className: 'custom-toast-success',
