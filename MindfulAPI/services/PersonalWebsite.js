@@ -5,7 +5,9 @@ const path = require('path');
 //const moment = require('moment');
 //const sleep = require('sleep-promise');
 const logger = require("../logger");
+const fsPromises = require('fs/promises')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
 
 /* get PersonalWebsite */
 async function getPersonalWebsite(appleId){
@@ -31,6 +33,21 @@ async function getPersonalWebsite(appleId){
 
 /* create PersonalWebsite */
 async function createPersonalWebsite(appleId, personalWebsiteRecord){
+
+  // check URL & description
+  try {
+    //const contents = await fsPromises.readFile("filter/explicit_url", 'utf-8')
+    const contents = await fsPromises.readFile(process.env.BlackListFile, 'utf-8');
+    //console.log(personalWebsiteRecord.URL);
+    if (contents.includes(personalWebsiteRecord.URL)){
+      return ("Error 001: URL contains explicit content");
+    }
+    if (contents.includes(personalWebsiteRecord.description)){
+      return ("Error 002: Description contains explicit content");
+    }
+  } catch (err) {
+    console.error(err)
+  }
 
   // get the userId
   var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + appleId + '"'; 
@@ -61,6 +78,21 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
 
 /* update PersonalWebsite */
 async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
+
+  // check URL & description
+  try {
+    //const contents = await fsPromises.readFile("filter/explicit_url", 'utf-8')
+    const contents = await fsPromises.readFile(process.env.BlackListFile, 'utf-8');
+    //console.log(personalWebsiteRecord.URL);
+    if (contents.includes(personalWebsiteRecord.URL)){
+      return ("Error 001: URL contains explicit content");
+    }
+    if (contents.includes(personalWebsiteRecord.description)){
+      return ("Error 002: Description contains explicit content");
+    }
+  } catch (err) {
+    console.error(err)
+  }
 
   //sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
   sql = 'UPDATE personalWebsite SET URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '", isActive = "' + personalWebsiteRecord.isActive + '" WHERE websiteId = "' + websiteId + '";';
