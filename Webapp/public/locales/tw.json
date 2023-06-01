@@ -112,6 +112,7 @@
     "page.userProfile.userProfile": "用戶配置文件",
     "page.userProfile.personalWebsite": "個人網站",
     "page.userProfile.websiteURL": "網站URL",
+    "page.userProfile.description": "描述",
     "page.userProfile.automaticallyFill": "提交作品時自動填寫。",
     "page.userProfile.submittedArtworks": "已提交的藝術品",
     "page.userProfile.ownedNFTs": "擁有的NFT",
@@ -121,6 +122,8 @@
     "page.userProfile.artworkInformation": "藝術品信息",
     "page.userProfile.nFTInformation": "NFT信息",
     "page.userProfile.viewDetails": "查看詳細信息",
+    "page.userProfile.viewNFTOnOpensea": "View NFT on Opensea",
+    "page.userProfile.URL": "網站URL",
     
     "footer.nav.whitePaper": "白皮書",
     "footer.nav.privatePolicy": "私人政策",
@@ -129,8 +132,10 @@
     "input.placeholder.email": "在此處訂閱",
     
     "error.info.descriptionCannotBeEmpty": "描述不能為空",
+    "error.info.descriptionCannotExceed500Words": "描述不能超过500字",
     "error.info.personalInformationCannotBeEmpty": "個人信息不能為空",
     "error.info.websiteURLCannotBeEmpty": "網站URL不能為空",
+    "error.info.websiteURLIsNotRight": "網站URL不正确",
     
     "button.signIn": "登錄ID",
     "button.viewMyProfile": "查看我的個人資料",
@@ -152,5 +157,7 @@
     "button.addNew": "添加新內容",
     "button.close": "關閉",
     "button.mintMindfulNFT": "Mint Mindful NFT",
-    "button.changeAccount": "更改帳戶"
+    "button.changeAccount": "更改帳戶",
+    "button.edit": "编辑",
+    "button.delete": "删除"
 }

@@ -5,6 +5,7 @@
   --shadow-color-light: white;
   --disabled-color: #bababa;
   --gray-text-color: #999999;
+  --danger-color: #CC3333;
 }
 html,
 body {
@@ -22,6 +23,17 @@ a {
 
 a:hover {
   color: var(--hovered-color);
+}
+
+.btn.btn_danger{
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    padding: 3px 20px;
+    margin-left: 5px;
+}
+
+.btn.btn_danger:hover{
+  opacity: 0.95;
 }
 
 * {

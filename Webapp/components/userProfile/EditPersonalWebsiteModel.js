@@ -14,13 +14,17 @@ function UserProfileModal(props) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     URL: "",
-    description: ""
+    description: "",
+    isActive: false
   });
   
   const [formErrors, setFormErrors] = useState({
     URL: false,
     description: false
   });
+  const [errorUrlType, setErrorUrlType] = useState(1); //1：空值，2：不是正确的连接格式
+  const [errorDescriptionType, setErrorDescriptionType] = useState(1); //1：空值，2：不能超过500字
+  const regURL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
 
   useEffect(() => {
     if(!modal || !show) return;
@@ -38,7 +42,8 @@ function UserProfileModal(props) {
   const resetForm = () => {
     const data = {
       URL: '',
-      description: ''
+      description: '',
+      isActive: false
     }
     setFormData(data);
     const dataError = {
@@ -65,18 +70,43 @@ function UserProfileModal(props) {
   const savePersonalWebsite = async (event) => {
     event.preventDefault();
     // 从 formData 对象中获取表单的值
-    const { URL, description } = formData;
+    const { URL, description, isActive } = formData;
+    let crossURL = true;
+    let crossDescription = true;
+
+    if(!URL){
+      setErrorUrlType(1);
+      crossURL = true;
+    }else if(!regURL.test(URL)){
+      setErrorUrlType(2);
+      crossURL = true;
+    }else{
+      setErrorUrlType(0);
+      crossURL = false;
+    }
+
+    if(!description){
+      setErrorDescriptionType(1);
+      crossDescription = true;
+    }else if(description.length > 500){
+      setErrorDescriptionType(2);
+      crossDescription = true;
+    }else{
+      setErrorDescriptionType(0);
+      crossDescription = false;
+    }
+
     const newFormErrors = {
-      URL: !URL,
-      description: !description
+      URL: crossURL,
+      description: crossDescription      
     };
     setFormErrors(newFormErrors);
-
-    if(!URL || !description) return;
+    if(crossURL || crossDescription) return;
 
     const params = {
       URL,
       description,
+      isActive: 1
     };
 
     setLoading(true);
@@ -126,7 +156,12 @@ function UserProfileModal(props) {
               className={styles.form_feedback}
               type="invalid"
             >
-              {t('error.info.websiteURLCannotBeEmpty')}
+              {errorUrlType === 1 ? 
+                  t('error.info.websiteURLCannotBeEmpty')
+                : (errorUrlType === 2 ? 
+                    t('error.info.websiteURLIsNotRight')
+                  : '')
+              }
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="description">
@@ -146,7 +181,12 @@ function UserProfileModal(props) {
               className={styles.form_feedback}
               type="invalid"
             >
-              {t('error.info.descriptionCannotBeEmpty')}
+              {errorDescriptionType === 1 ? 
+                  t('error.info.descriptionCannotBeEmpty')
+                : (errorDescriptionType === 2 ? 
+                    t('error.info.descriptionCannotExceed500Words')
+                  : '')
+              }
             </Form.Control.Feedback>
           </Form.Group>
           <div style={{ clear: 'both', paddingTop: '20px' }}>

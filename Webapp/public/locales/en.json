@@ -112,6 +112,7 @@
     "page.userProfile.userProfile": "User Profile",
     "page.userProfile.personalWebsite": "Personal Website",
     "page.userProfile.websiteURL": "Website URL",
+    "page.userProfile.description": "Description",
     "page.userProfile.automaticallyFill": "Automatically fill this in when submiting artwork.",
     "page.userProfile.submittedArtworks": "Submitted Artworks",
     "page.userProfile.ownedNFTs": "Owned NFTs",
@@ -121,6 +122,8 @@
     "page.userProfile.artworkInformation": "Artwork information",
     "page.userProfile.nFTInformation": "NFT information",
     "page.userProfile.viewDetails": "View Details",
+    "page.userProfile.viewNFTOnOpensea": "View NFT on Opensea",
+    "page.userProfile.URL": "URL",
 
     "footer.nav.whitePaper": "White Paper",
     "footer.nav.privatePolicy": "Private Policy",
@@ -129,8 +132,10 @@
     "input.placeholder.email": "Subscribe here",
 
     "error.info.descriptionCannotBeEmpty": "Description cannot be empty",
+    "error.info.descriptionCannotExceed500Words": "Description cannot exceed 500 words",
     "error.info.personalInformationCannotBeEmpty": "Personal Information cannot be empty",
     "error.info.websiteURLCannotBeEmpty": "Website URL cannot be empty",
+    "error.info.websiteURLIsNotRight": "Website URL is not Right",
 
     "button.signIn": "Sign ID",
     "button.viewMyProfile": "View My Profile",
@@ -152,5 +157,7 @@
     "button.addNew": "Add new",
     "button.close": "Close",
     "button.mintMindfulNFT": "Mint Mindful NFT",
-    "button.changeAccount": "Change account"
+    "button.changeAccount": "Change account",
+    "button.edit": "Edit",
+    "button.delete": "Delete"
 }

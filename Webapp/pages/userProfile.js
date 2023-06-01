@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {Row, Col, Form, Button, Image, Container, Dropdown,  Collapse, Card} from 'react-bootstrap';
+import {Row, Col, Form, Button, Image, Container, Dropdown,  Collapse, Card, Modal} from 'react-bootstrap';
 import { FaChevronDown, FaChevronUp, FaPlus, FaTimes, FaSpinner } from 'react-icons/fa';
 import { toast, ToastContainer } from "react-toastify";
 import Script from 'next/script';
@@ -26,6 +26,7 @@ const UserProfilePage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [modalEditShow, setModalEditShow] = useState(false);
+  const [modalDeleteShow, setModalDeleteShow] = useState(false);  
   const [dataPersonalwebsite, setDataPersonalwebsite] = useState([]); // personalwebsite
   const [dataArtwork, setDataArtwork] = useState([]); // Submitted Artworks
   const [dataJoinedEvent, setDataJoinedEvent] = useState([]); // Joined Event
@@ -35,14 +36,19 @@ const UserProfilePage = () => {
   const [modalDataEdit, setModalDataEdit] = useState();
   const [formData, setFormData] = useState({
     URL: '',
-    description: ''
+    description: '',
+    isActive: false
   });
   const [formErrors, setFormErrors] = useState({
     URL: false,
     description: false
   });
+  const [errorUrlType, setErrorUrlType] = useState(1); //1：空值，2：不是正确的连接格式
+  const [errorDescriptionType, setErrorDescriptionType] = useState(1); //1：空值，2：不能超过500字
   const [isAddPersonalwebsite, setIsAddPersonalwebsite] = useState(false);
+  const [objArtWork, setObjArtWork] = useState();
   const [count, setCount] = useState(0);
+  const regURL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
 
   useEffect(() => {
     setWalletAddress(getWalletAddress());
@@ -103,9 +109,12 @@ const UserProfilePage = () => {
   const resetForm = () => {
     const data = {
       URL: '',
-      description: ''
+      description: '',
+      isActive: false
     }
     setFormData(data);
+    setIsChecked(false);
+    
     const dataError = {
       URL: false,
       description: false
@@ -136,22 +145,47 @@ const UserProfilePage = () => {
   const savePersonalWebsite = async (event) => {
     event.preventDefault();
     // 从 formData 对象中获取表单的值
-    const { URL, description } = formData;
+    const { URL, description, isActive } = formData;
+    let crossURL = true;
+    let crossDescription = true;
+
+    // URL 规则
+    if(!URL){
+      setErrorUrlType(1);
+      crossURL = true;
+    }else if(!regURL.test(URL)){
+      setErrorUrlType(2);
+      crossURL = true;
+    }else{
+      setErrorUrlType(0);
+      crossURL = false;
+    }
+
+    // description 规则
+    if(!description){
+      setErrorDescriptionType(1);
+      crossDescription = true;
+    }else if(description.length > 500){
+      setErrorDescriptionType(2);
+      crossDescription = true;
+    }else{
+      setErrorDescriptionType(0);
+      crossDescription = false;
+    }
+
     const newFormErrors = {
-      URL: !URL,
-      description: !description
+      URL: crossURL,
+      description: crossDescription
     };
     setFormErrors(newFormErrors);
-
-    if(!URL || !description) return;
-
+    if(crossURL || crossDescription) return;
+    
     const params = {
       URL,
       description,
+      // isActive: isChecked
     };
-
-    // console.log(params)
-    // return
+    
     await axios.post(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, params, {headers: getHeaders()})
     .then(res => {
       if(res.status === 200){
@@ -189,6 +223,34 @@ const UserProfilePage = () => {
   const handleEdit = (data) => {
     setModalEditShow(true);
     setModalDataEdit(data);
+  };
+
+  const handleDeleteConfrim = (data) => {
+    setModalDeleteShow(true);
+    setObjArtWork(data);
+  };
+
+  const handleDelete = async () => {
+    const params = {
+      isActive: 0
+    }
+    await axios.put(`${apiPort}/mindfulapi/app/personalwebsite/${objArtWork.websiteId}`, params, {headers: getHeaders()})
+    .then(res => {
+      const {data} = res;
+      if(data.message){
+        toast.success(data.message, {
+          autoClose: 3000,
+          position: 'top-center',
+          className: 'custom-toast-success',
+          hideProgressBar: true,
+        });
+        setModalDeleteShow(false);
+        setCount(count + 1);
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
   };
 
   const modalEditSuccess = () => {
@@ -264,9 +326,12 @@ const UserProfilePage = () => {
                   <Card.Body className={styles.card_body}>
                     {dataPersonalwebsite.map((item, index) => {
                       return <Row key={index} style={{marginBottom: '10px'}}>
-                        <Col xs={12} sm={4}>URL:{item.URL}</Col>
-                        <Col xs={12} sm={4}>Description:{item.description}</Col>
-                        <Col xs={12} sm={4} style={{textAlign: 'right'}}><Button className={styles.btn_save} size="sm" onClick={() => handleEdit(item)}>{t("button.edit")}</Button></Col>
+                        <Col xs={12} sm={4}>{t("page.userProfile.URL")}:{item.URL}</Col>
+                        <Col xs={12} sm={4}>{t("main.text.description")}:{item.description}</Col>
+                        <Col xs={12} sm={4} style={{textAlign: 'right'}}>
+                          <Button className={styles.btn_save} size="sm" onClick={() => handleEdit(item)}>{t("button.edit")}</Button>
+                          <Button className='btn_danger' size="sm" onClick={() => handleDeleteConfrim(item)}>{t("button.delete")}</Button>
+                        </Col>
                       </Row>
                     })}
                     <div style={{textAlign: 'right'}}>
@@ -297,7 +362,12 @@ const UserProfilePage = () => {
                             className={styles.form_feedback}
                             type="invalid"
                           >
-                            {t('error.info.websiteURLCannotBeEmpty')}
+                            {errorUrlType === 1 ? 
+                                t('error.info.websiteURLCannotBeEmpty')
+                              : (errorUrlType === 2 ? 
+                                  t('error.info.websiteURLIsNotRight')
+                                : '')
+                            }
                           </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="description">
@@ -317,7 +387,12 @@ const UserProfilePage = () => {
                             className={styles.form_feedback}
                             type="invalid"
                           >
-                            {t('error.info.descriptionCannotBeEmpty')}
+                            {errorDescriptionType === 1 ? 
+                                t('error.info.descriptionCannotBeEmpty')
+                              : (errorDescriptionType === 2 ? 
+                                  t('error.info.descriptionCannotExceed500Words')
+                                : '')
+                            }
                           </Form.Control.Feedback>
                         </Form.Group>
                         <div style={{ clear: 'both', paddingTop: '20px' }}>
@@ -490,6 +565,24 @@ const UserProfilePage = () => {
         <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
         <UserProfileModel show={modalShow} onHide={() => setModalShow(false)} modal={modalData} />
         <EditPersonalWebsiteModel show={modalEditShow} onHide={() => modalEditClose()} onOk={modalEditSuccess} modal={modalDataEdit} />
+        <Modal
+          show={modalDeleteShow}
+          onHide={() => setModalDeleteShow(false)}
+          size="md"
+          aria-labelledby="contained-modal-title-vcenter">
+          <Modal.Header closeButton>
+            <Modal.Title>{t("button.delete")}</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <p>{t("page.userProfile.URL")}：{objArtWork?.URL}</p>
+            <p>{t("main.text.description")}：{objArtWork?.description}</p>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleDelete}>{t("button.delete")}</Button>
+          </Modal.Footer>
+        </Modal>
     </Container>
   )
 }
