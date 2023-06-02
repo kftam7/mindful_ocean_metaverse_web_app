@@ -137,6 +137,7 @@
     "error.info.personalInformationCannotBeEmpty": "個人信息不能為空",
     "error.info.websiteURLCannotBeEmpty": "網站URL不能為空",
     "error.info.websiteURLIsNotRight": "網站URL不正确",
+    "error.info.pleaseSignInToAppleIDFirst": "请先登录apple ID",
     
     "button.signIn": "登錄ID",
     "button.viewMyProfile": "查看我的個人資料",

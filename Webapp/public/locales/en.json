@@ -137,6 +137,7 @@
     "error.info.personalInformationCannotBeEmpty": "Personal Information cannot be empty",
     "error.info.websiteURLCannotBeEmpty": "Website URL cannot be empty",
     "error.info.websiteURLIsNotRight": "Website URL is not Right",
+    "error.info.pleaseSignInToAppleIDFirst": "Please sign in to Apple ID first",
 
     "button.signIn": "Sign ID",
     "button.viewMyProfile": "View My Profile",
