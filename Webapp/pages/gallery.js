@@ -94,7 +94,11 @@ const GalleryPage = () => {
     let result = dataSource;
 
     if(type){
-      result= result.filter(item => item.type === type);
+      if(type === 'all'){
+        result= result;
+      }else{
+        result= result.filter(item => item.type === type);
+      }
     }
 
     if(name || description || extraInfo){
@@ -197,7 +201,7 @@ const GalleryPage = () => {
 
   const changeType = (type) => {
     setType(type);
-    setTypeText(type === 'fish' ? t('page.gallery.butterflyFish') : t('page.gallery.whale'));
+    setTypeText(type === 'fish' ? t('page.gallery.butterflyFish') : (type === 'all' ? t('main.text.all') : t('page.gallery.whale')));
   };
 
   const randomsort = () => {
@@ -266,6 +270,7 @@ const GalleryPage = () => {
                   <Dropdown.Menu>
                       <Dropdown.Item onClick={() => changeType('whale')}>{t('page.gallery.whale')}</Dropdown.Item>
                       <Dropdown.Item onClick={() => changeType('fish')}>{t('page.gallery.butterflyFish')}</Dropdown.Item>
+                      <Dropdown.Item onClick={() => changeType('all')}>{t('main.text.all')}</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
@@ -334,7 +339,7 @@ const GalleryPage = () => {
           </Row>
            : ''
         }
-        {dataResult.length && dataResult.length !== 1 ?
+        {dataArtwork.length && dataArtwork.length !== 1 ?
           <Row className={styles.btnRow}>
               <Button onClick={shuffle} className={`${styles.btn} ${homeStyles.btn}`}>{t('button.shuffle')}</Button>
           </Row>
