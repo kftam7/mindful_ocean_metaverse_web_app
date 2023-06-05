@@ -138,6 +138,7 @@
     "error.info.websiteURLCannotBeEmpty": "网站URL不能为空",
     "error.info.websiteURLIsNotRight": "网站URL不正确",
     "error.info.pleaseSignInToAppleIDFirst": "请先登录apple ID",
+    "error.info.pleaseSelectAArtwork": "Please Select a Artwork",
 
     "button.signIn": "登录ID",
     "button.viewMyProfile": "查看我的个人资料",

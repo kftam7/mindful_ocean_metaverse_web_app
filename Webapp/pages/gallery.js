@@ -319,7 +319,7 @@ const GalleryPage = () => {
           {
             dataResult.map((d, i) => (
               <Col xs={6} md={4} key={i} style={{position:'relative'}}>
-                <GalleryModel metadata={d} image={d.URL} index={dataResult.indexOf(d)} />
+                <GalleryModel metadata={d} image='https://sponsors.vuejs.org/images/vuemastery.png' index={dataResult.indexOf(d)} />
                 <Image src={d.URL} className={styles.GalleryPageImages} />
               </Col>
             ))

@@ -138,6 +138,7 @@
     "error.info.websiteURLCannotBeEmpty": "Website URL cannot be empty",
     "error.info.websiteURLIsNotRight": "Website URL is not Right",
     "error.info.pleaseSignInToAppleIDFirst": "Please sign in to Apple ID first",
+    "error.info.pleaseSelectAArtwork": "Please Select a Artwork",
 
     "button.signIn": "Sign ID",
     "button.viewMyProfile": "View My Profile",

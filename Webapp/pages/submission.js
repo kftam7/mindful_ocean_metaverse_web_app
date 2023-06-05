@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import { getSession } from 'next-auth/react';
-
+import { toast, ToastContainer } from "react-toastify";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
@@ -35,6 +35,8 @@ export default function SubmitPage({ session, user }) {
   const [disabled, setDisabled] = useState(true);
   const [image, setImage] = useState('');
   const [dataArtworks, setDataArtworks] = useState([]);
+  const [dataEdit, setDataEdit] = useState();
+  const [count, setCount] = useState(0);
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -44,8 +46,11 @@ export default function SubmitPage({ session, user }) {
     if(res.status === 200){
       const { data: { data } } = res;
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));
+      setNewest(true);
+      setImage('');
+      setDataEdit('')
     }
-  },[])
+  },[count])
   
   useEffect(() => {
     if(!dataArtworks.length) return setDisabled(true);
@@ -54,7 +59,16 @@ export default function SubmitPage({ session, user }) {
 
   const handleShow = () => setShow(true);
   const handleSubmitShow = () => setSubmitShow(true);
-  const handleEditShow = () => setEditShow(true);
+  const handleEditShow = () => {
+    if(!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
+      autoClose: 3000,
+      position: 'top-center',
+      className: 'custom-toast-success',
+      hideProgressBar: true,
+    });
+    setEditShow(true);
+  }
+
   function refreshPage(){ 
     window.location.reload(); 
   }
@@ -63,16 +77,19 @@ export default function SubmitPage({ session, user }) {
     setNewest(false);
     sortByFieldAsc(dataArtworks, 'updateTime');
     setImage('');
+    setDataEdit('')
   }
 
   function sortNewest() {
     setNewest(true);
     sortByFieldDesc(dataArtworks, 'updateTime');
     setImage('');
+    setDataEdit('')
   }
 
-  function selectImage(image) {
-    setImage(image);
+  function selectImage(item) {
+    setImage(item.URL);
+    setDataEdit(item)
   }
 
   useEffect(() => {
@@ -122,6 +139,17 @@ export default function SubmitPage({ session, user }) {
     };
   }
 
+  const editModalSuccess = (msg) => {
+    toast.success(msg, {
+      autoClose: 3000,
+      position: 'top-center',
+      className: 'custom-toast-success',
+      hideProgressBar: true,
+    });
+    setEditShow(false);
+    setCount(count + 1);
+  };
+
   async function allowSubmission() {
     await axios.get(
       `/api/users`,
@@ -135,6 +163,7 @@ export default function SubmitPage({ session, user }) {
 
   return(
     <Container className='mt-5 mb-5'>
+      <ToastContainer />
       <div className={styles.submitPage}>
           <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
           <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
@@ -198,9 +227,9 @@ export default function SubmitPage({ session, user }) {
                 </Row>
               :
               <>
-                <div className={`mt-1 ${styles.scrollBox}`}>
+                <div className={`mt-1 ${styles.scrollBox}`} key={count}>
                   {dataArtworks.map((item, key) => (
-                      <Form.Check className='form_check_img' style={{position: "relative"}}>
+                      <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
                         <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
                           <Form.Check.Input
                             key={newest}
@@ -208,7 +237,7 @@ export default function SubmitPage({ session, user }) {
                             type="radio"
                             id={`imageGroup${key}`}
                             className={styles.imageRadio}
-                            onChange={() => selectImage(item.URL)}
+                            onChange={() => selectImage(item)}
                           />
                           <Image src={item.URL} style={{cursor: "pointer", position: "relative"}} fluid />
                         </Form.Check.Label>
@@ -289,7 +318,7 @@ export default function SubmitPage({ session, user }) {
           {/* submit confirm modal */}
           <SubmitModal setSubmitShow={setSubmitShow} submitShow={submitShow} />
           {/* edit modal */}
-          <EditModal setEditShow={setEditShow} editShow={editShow} />
+          <EditModal setEditShow={setEditShow} editShow={editShow} data={dataEdit} onSuccess={editModalSuccess} />
           <Script type="text/javascript" charset="utf-8" src="/js/createPreview.js" />
           <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
           <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
