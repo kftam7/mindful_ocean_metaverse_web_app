@@ -32,70 +32,68 @@ async function getArtwork(appleId){
 /* create Artwork */
 async function createArtwork(artworkRecord){
 
-/*
-  // construct the SQL statement
-  var sql = 'INSERT INTO artwork (userId, name, URL, description) VALUES ' + '("' + artworkRecord[0].userId + '", "' + artworkRecord[0].name + '", "' + artworkRecord[0].URL + '", "' + artworkRecord[0].description + '"),';;
+  // get the userId
+  var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord[0].appleId + '"'; 
 
+  const userIdResult = await db.query(
+    sqlUserId
+  );
 
-  for (var i =0; i < artworkRecord.length; i++){
+  if (!userIdResult.length){
+    let message = 'appleId doesn\'t exist';
+    return {message};
+  }else{
 
-    // combine into 1 single SQL
-    if (i == (artworkRecord.length-1)){
-      sql = sql + '("' + artworkRecord[i].userId + '", "' + artworkRecord[i].name + '", "' + artworkRecord[i].URL + '", "' + artworkRecord[i].description + '");';
-    }else{
-      sql = sql + '("' + artworkRecord[i].userId + '", "' + artworkRecord[i].name + '", "' + artworkRecord[i].URL + '", "' + artworkRecord[i].description + '"),';
-    }
-
+    var rows = await db.query(
+      `INSERT INTO artwork (userId, name, URL, type, description, extraInfo, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [userIdResult[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime]
+    );
+  
+    var queryResult = await db.query(
+      `SELECT artworkId FROM artwork WHERE userId = ? AND name = ?`, [userIdResult[0].userId, artworkRecord[0].name]
+    );
+  
+    //console.log(queryResult[0].artworkId);
+  
+    // will return SQL error if fails, otherwise return the following succesful msg
+    /*
+    let message = 'Records added susccessfully';
+    return {message};
+    */
+    const artworkId = queryResult[0].artworkId;
+    return {artworkId};
   }
-
-  // update results on DB
-  const result = await db.query(
-    sql
-  );
-
-  // get the artworkId created
-  const artworkId = await db.query(
-    `SELECT LAST_INSERT_ID() AS artworkId;`
-  );
-  console.log(artworkId);
-*/
-
-  var rows = await db.query(
-    `INSERT INTO artwork (userId, name, URL, type, description, extraInfo, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [artworkRecord[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime]
-  );
-
-  var queryResult = await db.query(
-    `SELECT artworkId FROM artwork WHERE userId = ? AND name = ?`, [artworkRecord[0].userId, artworkRecord[0].name]
-  );
-
-  console.log(queryResult[0].artworkId);
-
-  // will return SQL error if fails, otherwise return the following succesful msg
-  /*
-  let message = 'Records added susccessfully';
-  return {message};
-  */
-  const artworkId = queryResult[0].artworkId;
-  return {artworkId};
   
 }
 
 /* update Artwork */
 async function updateArtwork(artworkId, artworkRecord){
 
-  sql = 'UPDATE artwork SET userId = "' + artworkRecord.userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", type = "' + artworkRecord.type + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '" WHERE artworkId = "' + artworkId + '";';
+  // get the userId
+  var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord.appleId + '"'; 
 
-  console.log(sql);
-  
-  const result = await db.query(
-    sql
+  const userIdResult = await db.query(
+    sqlUserId
   );
 
-  if (result.affectedRows) {
-    message = 'Record updated successfully';
-  }
+  if (!userIdResult.length){
+    let message = 'appleId doesn\'t exist';
+    return {message};
+  }else{  
 
-  return {message};
+    sql = 'UPDATE artwork SET userId = "' + userIdResult[0].userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", type = "' + artworkRecord.type + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '" WHERE artworkId = "' + artworkId + '";';
+  
+    console.log(sql);
+    
+    const result = await db.query(
+      sql
+    );
+  
+    if (result.affectedRows) {
+      message = 'Record updated successfully';
+    }
+  
+    return {message};
+  }
   
 }
 
