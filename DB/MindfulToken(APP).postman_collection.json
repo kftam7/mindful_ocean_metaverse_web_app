@@ -1704,6 +1704,428 @@
 						],
 						"body": {
 							"mode": "raw",
+							"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/artwork",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork"
+							]
+						},
+						"description": "### API endpoint to create artwork information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code\n\nThe return value is the new artworkId created"
+					},
+					"response": [
+						{
+							"name": "POST artwork Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktestnew1\",\n     \"URL\":\"https://agiisoft.com/jpeg/sample_artwork.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"destest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2023-06-01 00:00:00\",\n     \"updateTime\":\"2023-06-31 00:00:00\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT artwork Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/artwork/{artworkId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork",
+								"{artworkId}"
+							]
+						},
+						"description": "### API endpoint to update the artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT artwork Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworknew2\",\n   \"URL\":\"http://artworktestnew2\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork/47",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork",
+										"47"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "## add/modify/inactive artwork data"
+		},
+		{
+			"name": "artworkfile",
+			"item": [
+				{
+					"name": "GET artworkfile Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/artworkfile/{filename}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artworkfile",
+								"{filename}"
+							]
+						},
+						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET artworkfile Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/artworkfile/sample_artwork.jpeg",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artworkfile",
+										"sample_artwork.jpeg"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET artworkfile Request (List files)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/artworkfile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artworkfile"
+							]
+						},
+						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET artworkfile Request (List files)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/artworkfile",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artworkfile"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST artwork Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
 							"raw": "[\n  {\n     \"userId\":\"1\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
 							"options": {
 								"raw": {
