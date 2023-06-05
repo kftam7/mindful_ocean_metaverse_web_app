@@ -354,7 +354,7 @@
 					]
 				}
 			],
-			"description": "## A set of API's for Apple ID Login\n\nThere is no need to pass authentication headers"
+			"description": "## API's for Apple ID Login\n\nThere is no need to pass authentication headers"
 		},
 		{
 			"name": "signin",
@@ -399,7 +399,7 @@
 								"{appleId}"
 							]
 						},
-						"description": "### mobile app should call this API whenever user performs Apple sign in"
+						"description": "### Mobile app should call this API whenever user performs Apple sign in"
 					},
 					"response": [
 						{
@@ -1421,7 +1421,7 @@
 					]
 				}
 			],
-			"description": "## get mobile app version information",
+			"description": "## Get mobile app version information",
 			"event": [
 				{
 					"listen": "prerequest",
