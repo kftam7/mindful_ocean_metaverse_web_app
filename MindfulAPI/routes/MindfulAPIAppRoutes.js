@@ -11,6 +11,7 @@ const PersonalWebsite = require('../services/PersonalWebsite');
 const Credential = require('../services/Credential');
 const AppleAuth = require('../services/AppleAuth');
 const SignIn = require('../services/SignIn');
+const ArtworkFile = require('../services/ArtworkFile');
 const logger = require("../logger");
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -385,6 +386,51 @@ router.get('/applerefresh', async function(req, res, next) {
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+////////////////// Artwork Files
+/* Upload Artwork Files */
+router.post('/artworkfile', async function(req, res, next) {
+  try {
+    await ArtworkFile.upload(req, res);
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* GET Artwork Files List */
+router.get('/artworkfile', async function(req, res, next) {
+  try {
+    await ArtworkFile.getListFiles(res);
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* Download Artwork Files */
+router.get('/artworkfile/:filename', async function(req, res, next) {
+  try {
+    await ArtworkFile.download(req, res);
+  } catch (err) {
+    logger.log('error', 'Error while downloading file', err.message);
+    console.error(`Error while downloading file`, err.message);
+    next(err);
+  }
+});
+
+/* DELETE Artwork Files */
+router.delete('/artworkfile/:filename', async function(req, res, next) {
+  try {
+    await ArtworkFile.remove(req, res);
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
     next(err);
   }
 });

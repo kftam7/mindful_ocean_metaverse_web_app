@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "451cb9fd-9136-4a29-8026-7a9c9234119d",
 		"name": "MindfulToken(APP)",
-		"description": "# Mindful Ocean API called by mobile and web applications\n\nExcept for \"signin\" & \"s3media\" API calls, need to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)  \nrefreshToken - refresh token returned after apple sign in",
+		"description": "# Mindful Ocean API's called by mobile and web applications\n\nExcept for \"Apple ID Login\" & \"signin\" API calls, need to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)  \nrefreshToken - refresh token returned after apple sign in",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23541331"
 	},
@@ -17,19 +17,7 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "RU%ru9VD",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "mindful",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -62,7 +50,7 @@
 								"applelogin"
 							]
 						},
-						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to create Apple ID sign in page\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -111,19 +99,7 @@
 					"name": "POST Apple Auth",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "RU%ru9VD",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "mindful",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [
@@ -156,7 +132,7 @@
 								"appleauth"
 							]
 						},
-						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint called by Apple after successful Apple Sign In\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -208,19 +184,7 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "RU%ru9VD",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "mindful",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -253,7 +217,7 @@
 								"appletoken"
 							]
 						},
-						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to check Apple Token\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -305,19 +269,7 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "RU%ru9VD",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "mindful",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -350,7 +302,7 @@
 								"applerefresh"
 							]
 						},
-						"description": "### API endpoint to create personal website info.\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to refresh Apple Tokens\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -401,7 +353,8 @@
 						}
 					]
 				}
-			]
+			],
+			"description": "## API's for Apple ID Login\n\nThere is no need to pass authentication headers"
 		},
 		{
 			"name": "signin",
@@ -446,7 +399,7 @@
 								"{appleId}"
 							]
 						},
-						"description": "call this API whenever user performs Apple sign in"
+						"description": "### Mobile app should call this API whenever user performs Apple sign in"
 					},
 					"response": [
 						{
@@ -726,7 +679,7 @@
 					]
 				}
 			],
-			"description": "## add/modify/inactivate user data"
+			"description": "## add/modify/inactivate/list user data"
 		},
 		{
 			"name": "event",
@@ -816,7 +769,7 @@
 					]
 				}
 			],
-			"description": "## add/modify/inactivate event data"
+			"description": "## add/modify/inactivate/list event data"
 		},
 		{
 			"name": "NFT",
@@ -1468,7 +1421,7 @@
 					]
 				}
 			],
-			"description": "## get mobile app version information",
+			"description": "## Get mobile app version information",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -1910,7 +1863,7 @@
 					]
 				}
 			],
-			"description": "## add/modify/inactive artwork data"
+			"description": "## add/modify/inactive/list artwork data"
 		},
 		{
 			"name": "artworkfile",
@@ -1954,7 +1907,7 @@
 								"{filename}"
 							]
 						},
-						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to download artwork image file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -1984,13 +1937,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/artworkfile/sample_artwork.jpeg",
+									"raw": "{{baseUrl}}/artworkfile/sample.jpeg",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"artworkfile",
-										"sample_artwork.jpeg"
+										"sample.jpeg"
 									]
 								}
 							},
@@ -2039,7 +1992,7 @@
 								"artworkfile"
 							]
 						},
-						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to get all artwork image file info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -2125,24 +2078,25 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "[\n  {\n     \"userId\":\"1\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/edwardtam/Downloads/sample.jpeg"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/artwork",
+							"raw": "{{baseUrl}}/artworkfile",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"artwork"
+								"artworkfile"
 							]
 						},
-						"description": "### API endpoint to create artwork information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code\n\nThe return value is the new artworkId created"
+						"description": "### API endpoint to upload artwork image file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code \n  \n\nThe return value is the new artworkId created"
 					},
 					"response": [
 						{
@@ -2182,21 +2136,22 @@
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "[\n  {\n     \"userId\":\"32\",\n     \"name\":\"artworktest1\",\n     \"URL\":\"https://agiisoft.com/jpeg/sample_artwork.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"destest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2023-06-01 00:00:00\",\n     \"updateTime\":\"2023-06-31 00:00:00\"\n  }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/edwardtam/Downloads/sample.jpeg"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{baseUrl}}/artwork",
+									"raw": "{{baseUrl}}/artworkfile",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"artwork"
+										"artworkfile"
 									]
 								}
 							},
@@ -2213,7 +2168,7 @@
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Accept",
@@ -2246,32 +2201,23 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{baseUrl}}/artwork/{artworkId}",
+							"raw": "{{baseUrl}}/artworkfile/{filename}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"artwork",
-								"{artworkId}"
+								"artworkfile",
+								"{filename}"
 							]
 						},
-						"description": "### API endpoint to update the artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to delete artwork image file\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
 							"name": "PUT artwork Request",
 							"originalRequest": {
-								"method": "PUT",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Accept",
@@ -2304,23 +2250,14 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n   \"userId\":\"1\",\n   \"name\":\"artworktest97\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{baseUrl}}/artwork/47",
+									"raw": "{{baseUrl}}/artworkfile/sample.jpeg",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"artwork",
-										"47"
+										"artworkfile",
+										"sample.jpeg"
 									]
 								}
 							},
@@ -2332,7 +2269,7 @@
 					]
 				}
 			],
-			"description": "## add/modify/inactive artwork data"
+			"description": "## upload/download/delete/list artwork image files"
 		},
 		{
 			"name": "PersonalWebsite",
@@ -2505,7 +2442,7 @@
 								"{{appleId}}"
 							]
 						},
-						"description": "### API endpoint to update personal website information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+						"description": "### API endpoint to create personal website information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
 					},
 					"response": [
 						{
@@ -2708,7 +2645,7 @@
 					]
 				}
 			],
-			"description": "## This section is to manage website information entered by users"
+			"description": "## add/modify/inactive/list website information entered by users"
 		},
 		{
 			"name": "joinedevent",
@@ -3046,10 +2983,10 @@
 					]
 				}
 			],
-			"description": "## add/modify joined event information"
+			"description": "## add/modify/list joined event information"
 		},
 		{
-			"name": "s3media",
+			"name": "s3media (obsolete)",
 			"item": [
 				{
 					"name": "PUT file",
