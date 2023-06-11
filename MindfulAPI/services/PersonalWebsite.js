@@ -33,7 +33,8 @@ async function getPersonalWebsite(appleId){
 
 /* create PersonalWebsite */
 async function createPersonalWebsite(appleId, personalWebsiteRecord){
-
+  
+  /*
   // check URL & description
   try {
     //const contents = await fsPromises.readFile("filter/explicit_url", 'utf-8')
@@ -48,6 +49,7 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
   } catch (err) {
     console.error(err)
   }
+  */
 
   // get the userId
   var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + appleId + '"'; 
@@ -79,6 +81,7 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
 /* update PersonalWebsite */
 async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
 
+  /*
   // check URL & description
   try {
     //const contents = await fsPromises.readFile("filter/explicit_url", 'utf-8')
@@ -93,6 +96,7 @@ async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
   } catch (err) {
     console.error(err)
   }
+  */
 
   //sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
   sql = 'UPDATE personalWebsite SET URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '", isActive = "' + personalWebsiteRecord.isActive + '" WHERE websiteId = "' + websiteId + '";';

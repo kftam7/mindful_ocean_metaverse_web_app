@@ -12,6 +12,7 @@ const Credential = require('../services/Credential');
 const AppleAuth = require('../services/AppleAuth');
 const SignIn = require('../services/SignIn');
 const ArtworkFile = require('../services/ArtworkFile');
+const Wallet = require('../services/Wallet');
 const logger = require("../logger");
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -193,7 +194,7 @@ router.put('/appversion/:version', async function(req, res, next) {
 });
 
 ////////////////// Artwork
-/* GET AppVersion */
+/* GET all Artwork */
 router.get('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.getArtwork());
@@ -204,6 +205,7 @@ router.get('/artwork', async function(req, res, next) {
   }
 });
 
+/* GET Artwork by appleId */
 router.get('/artwork/:appleId', async function(req, res, next) {
   try {
     res.json(await Artwork.getArtwork(req.params.appleId));
@@ -214,7 +216,18 @@ router.get('/artwork/:appleId', async function(req, res, next) {
   }
 });
 
-/* POST AppVersion */
+/* GET Artwork for homepage */
+router.get('/artworkhomepage', async function(req, res, next) {
+  try {
+    res.json(await Artwork.getHomepageArtwork());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* POST Artwork */
 router.post('/artwork', async function(req, res, next) {
   try {
     res.json(await Artwork.createArtwork(req.body));
@@ -225,7 +238,7 @@ router.post('/artwork', async function(req, res, next) {
   }
 });
 
-/* PUT AppVersion */
+/* PUT Artwork */
 router.put('/artwork/:artworkId', async function(req, res, next) {  
   try {
     res.json(await Artwork.updateArtwork(req.params.artworkId, req.body));
@@ -434,5 +447,18 @@ router.delete('/artworkfile/:filename', async function(req, res, next) {
     next(err);
   }
 });
+
+////////////////// Crypto Wallet
+/* Update wallet address */
+router.post('/updatewallet/:appleId/:walletAddress', async function(req, res, next) {
+  try {
+    res.json(await Wallet.updateWallet(req.params.appleId, req.params.walletAddress));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
 
 module.exports = router;

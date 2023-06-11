@@ -44,6 +44,16 @@ app.use(async(req, res, next) => {
           return next()
   }
 
+  // skip for download artworkfile
+  if(req.url.startsWith("/mindfulapi/app/artworkfile")){
+          return next()
+  }
+
+  // skip for getting artwork info for the homepage
+  if(req.url.startsWith("/mindfulapi/app/artworkhomepage")){
+          return next()
+  }
+
   // check authentication for app (mobile+desktop)
   if (req.url.startsWith("/mindfulapi/app")){
 
