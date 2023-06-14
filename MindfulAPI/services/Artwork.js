@@ -6,6 +6,9 @@ const path = require('path');
 //const sleep = require('sleep-promise');
 const logger = require("../logger");
 const validate = require("../utils/validate");
+const fs = require('fs');
+const moment = require('moment');
+const { NFTStorage, File } = require('nft.storage');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 /* get Artwork */
@@ -117,9 +120,62 @@ async function updateArtwork(artworkId, artworkRecord){
   
 }
 
+/* NFT Storage */
+async function nftStorage(artworkId){
+
+  const API_KEY = process.env.NFT_STORAGE_API_KEY;
+  const client = new NFTStorage({ token: API_KEY });
+
+  // read data from artwork table
+  var sqlSelect = 'SELECT name, URL, type, description, extraInfo, nftStorage FROM artwork WHERE artworkId = ' + artworkId; 
+  const resultSelect = await db.query(
+    sqlSelect
+  );
+
+  // if artworkId doesn't exist
+  if (!resultSelect.length){
+    return ("No record found for this artworkId");
+  }
+
+  // if nftStorage exists 
+  if (resultSelect[0].nftStorage){
+    if (resultSelect[0].nftStorage.startsWith("ipfs")){
+      return resultSelect[0].nftStorage;
+    }
+  }
+
+  const url = resultSelect[0].URL;
+  const filename = url.replace(process.env.artworkFileBaseURL, '');
+  const filepath = process.env.filepathPrefix + filename;
+
+  const metadata = await client.store({
+       name: resultSelect[0].name,
+       type: resultSelect[0].type,
+       description: resultSelect[0].description,
+       extraInfo: resultSelect[0].extraInfo,
+       image: new File(
+           [await fs.promises.readFile(filepath)],
+           filename,
+           { type: 'image/jpeg' }
+       ),
+   })
+
+  // update data to artwork table
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  var sqlUpdate = 'UPDATE artwork SET nftStorage = "' + metadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+  //console.log("sqlUpdate: ", sqlUpdate);
+  const resultUpdate = await db.query(
+    sqlUpdate
+  );
+
+  return metadata.url;
+
+}
+
 module.exports = {
   getArtwork,
   getHomepageArtwork,
   createArtwork,
-  updateArtwork
+  updateArtwork,
+  nftStorage
 };

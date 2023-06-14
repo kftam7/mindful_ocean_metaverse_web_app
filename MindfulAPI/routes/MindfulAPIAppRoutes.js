@@ -249,6 +249,17 @@ router.put('/artwork/:artworkId', async function(req, res, next) {
   }
 });
 
+/* POST Artwork Files on NFT Storage*/
+router.post('/nftstorage/:artworkId', async function(req, res, next) {
+  try {
+    res.json(await Artwork.nftStorage(req.params.artworkId));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
 ////////////////// JoinedEvent
 /* GET JoinedEvent */
 router.get('/joinedevent', async function(req, res, next) {
@@ -447,6 +458,7 @@ router.delete('/artworkfile/:filename', async function(req, res, next) {
     next(err);
   }
 });
+
 
 ////////////////// Crypto Wallet
 /* Update wallet address */

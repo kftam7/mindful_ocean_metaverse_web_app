@@ -1,3 +1,5 @@
+const db = require('../db');
+const helper = require('../helper');
 const path = require('path');
 const logger = require("../logger");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
@@ -27,13 +29,37 @@ async function getNFT(type, idtype, id){
     contractAddress = process.env.mintPassContractAddress;
   }
 
-
   if(idtype == "appleid"){
-    //find out all the wallet addresses of this appleId
+    
+    // find out how many walletaddress this appleId has
+    var sql = 'SELECT walletAddress AS walletAddress FROM walletAddress WHERE appleId = "' + id + '";';
+    //console.log("check: ", sql);
+    const result = await db.query(
+        sql
+    );
+
+    // If no walletaddress found for this appleId
+    if (result.length){
+      
+      for (const address of result) {
+        //console.log("address: ", address.walletAddress);
+        
+        for await (const nft of alchemy.nft.getNftsForOwnerIterator(address.walletAddress, {
+          // Omit the NFT metadata for smaller payloads.
+          omitMetadata: false
+        })) {
+          if(`${nft.contract.address}` == contractAddress.toLowerCase()){
+            data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`});
+          }
+        }
+        
+      }
+    }else{
+      return ("No walletAddress found for this appleID");
+    }
 
   }else if(idtype == "walletaddress"){
-    /*
-    for await (const nft of alchemy.nft.getNftsForOwnerIterator(address, {
+    for await (const nft of alchemy.nft.getNftsForOwnerIterator(id, {
       // Omit the NFT metadata for smaller payloads.
       omitMetadata: false
     })) {
@@ -42,21 +68,17 @@ async function getNFT(type, idtype, id){
         data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`});
       }
     }
-    */
   }
 
+  //let dataMintPass = [{"tokenId": "1", "description": "This is MintPass 1", "peronsalInfo": "Personal Information 1", "artistAppleId": "AppleID1", "eventId": "1", "URL": "https://123.abc.com"},{"tokenId": "2", "description": "This is MintPass 2", "peronsalInfo": "Personal Information 2", "artistAppleId": "AppleID2", "eventId": "2", "URL": "https://456.abc.com"},{"tokenId": "3", "description": "This is MintPass 3", "peronsalInfo": "Personal Information 3", "artistAppleId": "AppleID3", "eventId": "3", "URL": "https://789.abc.com"}];
+  //let dataMintPass = [];
+  //let dataMindfulToken = [{"tokenId": "20230420", "description": "This is MindfulToken 1", "peronsalInfo": "Personal Information 4", "artistAppleId": "AppleID4", "eventId": "4", "URL": "https://777.xyz.com"}, {"tokenId": "20230421", "description": "This is MindfulToken 2", "peronsalInfo": "Personal Information 5", "artistAppleId": "AppleID5", "eventId": "5", "URL": "https://888.xyz.com"}, {"tokenId": "20230422", "description": "This is MindfulToken 3", "peronsalInfo": "Personal Information 6", "artistAppleId": "AppleID6", "eventId": "6", "URL": "https://999.xyz.com"}];
 
-  let dataMintPass = [{"tokenId": "12345678", "description": "This is MintPass 1", "peronsalInfo": "Personal Information 1", "artistAppleId": "AppleID1", "eventId": "1", "URL": "https://123.abc.com"}, {"tokenId": "99998888", "description": "This is MintPass 2", "peronsalInfo": "Personal Information 2", "artistAppleId": "AppleID2", "eventId": "2", "URL": "https://456.abc.com"}, {"tokenId": "11112222", "description": "This is MintPass 3", "peronsalInfo": "Personal Information 3", "artistAppleId": "AppleID3", "eventId": "3", "URL": "https://789.abc.com"}];
-  let dataMindfulToken = [{"tokenId": "20230420", "description": "This is MindfulToken 1", "peronsalInfo": "Personal Information 4", "artistAppleId": "AppleID4", "eventId": "4", "URL": "https://777.xyz.com"}, {"tokenId": "20230421", "description": "This is MindfulToken 2", "peronsalInfo": "Personal Information 5", "artistAppleId": "AppleID5", "eventId": "5", "URL": "https://888.xyz.com"}, {"tokenId": "20230422", "description": "This is MindfulToken 3", "peronsalInfo": "Personal Information 6", "artistAppleId": "AppleID6", "eventId": "6", "URL": "https://999.xyz.com"}];
-
-  if(type == "mintPass"){
-    data = dataMintPass;
-  }else{
-    data = dataMindfulToken;
-  }
-
-  //const data = helper.emptyOrRows(rows);
-  //const meta = "1";
+  //if(type == "mintPass"){
+  //  data = dataMintPass;
+  //}else{
+  //  data = dataMindfulToken;
+  //}
 
   return {
     data
@@ -96,6 +118,7 @@ async function getNFTTotal(type){
 
   //const data = helper.emptyOrRows(rows);
   const total = Object.keys(nfts).length;
+  //const total = 11;
 
   return {
     //data,

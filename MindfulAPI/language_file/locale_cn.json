@@ -1,6 +1,1 @@
-{
-    "main.sidebar.project": "项目",
-    "main.sidebar.title": "项目名称。",
-    "main.statusbar.status_empty": "空！还没有添加条目。",
-    "main.statusbar.status_ok": "好的。"
-}
+{"標題":"事件","paragraphText":"事件描述","圖片":"http://www.abc.com/k.png","超鏈接":"http://www.abc.com/eventK.html","timerDescription":"timerDescriptionK","開始時間":"2022-06-09 09:00:10","結束時間":"2022-10-09 09:00:10"}
