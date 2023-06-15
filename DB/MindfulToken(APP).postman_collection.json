@@ -865,6 +865,96 @@
 					]
 				},
 				{
+					"name": "GET NFT by walletAddress Request (MintPass)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nft/mintPass/walletaddress/{walletaddress}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nft",
+								"mintPass",
+								"walletaddress",
+								"{walletaddress}"
+							]
+						},
+						"description": "### API endpoint to get the information of MintPass NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT by walletAddress Request (MintPass)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nft",
+										"mintPass",
+										"walletaddress",
+										"0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
 					"name": "GET NFT by appleId Request (MindfulToken)",
 					"request": {
 						"auth": {
@@ -956,6 +1046,120 @@
 										"mindfulToken",
 										"appleid",
 										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									],
+									"query": [
+										{
+											"key": "eventIdtime_stamp",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "eventA",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET NFT by walletAddress Request (MindfulToken)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/{appleid}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nft",
+								"mindfulToken",
+								"walletaddress",
+								"{appleid}"
+							],
+							"query": [
+								{
+									"key": "eventIdtime_stamp",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "eventA",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get information of MindulToken NFT's of a wallet address\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET NFT by walletAddress Request (MindfulToken)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nft",
+										"mindfulToken",
+										"walletaddress",
+										"0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab"
 									],
 									"query": [
 										{
@@ -1617,6 +1821,98 @@
 					]
 				},
 				{
+					"name": "GET artworkhomepage Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/artworkhomepage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artworkhomepage"
+							]
+						},
+						"description": "### API endpoint to get all artwork info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET artworkhomepage Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/artworkhomepage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artworkhomepage"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
 					"name": "POST artwork Request",
 					"request": {
 						"auth": {
@@ -1714,7 +2010,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktestnew1\",\n     \"URL\":\"https://agiisoft.com/jpeg/sample_artwork.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"destest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2023-06-01 00:00:00\",\n     \"updateTime\":\"2023-06-31 00:00:00\"\n  }\n]",
+									"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktestnew88\",\n     \"URL\":\"https://agiisoft.com/jpeg/sample_artwork.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"destest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2023-06-01 00:00:00\",\n     \"updateTime\":\"2023-06-30 00:00:00\",\n     \"ifHomepage\": 0\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1837,7 +2133,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworknew2\",\n   \"URL\":\"http://artworktestnew2\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworknew7\",\n   \"URL\":\"http://artworktestnew2\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\",\n   \"ifHomepage\": 1\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1845,13 +2141,261 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/artwork/47",
+									"raw": "{{baseUrl}}/artwork/48",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"artwork",
-										"47"
+										"48"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT setMintedArtwork Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/artwork/{artworkId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork",
+								"{artworkId}"
+							]
+						},
+						"description": "### API endpoint to update the artwork as minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT setMintedArtwork Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/setMintedArtwork/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"setMintedArtwork",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST NFT Storage Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nftstorage/{artworkId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nftstorage",
+								"{artworkId}"
+							]
+						},
+						"description": "### API endpoint to create item on IPFS\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code \n  \n\nThe return value is the new artworkId created"
+					},
+					"response": [
+						{
+							"name": "POST NFT Storage Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/nftstorage/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nftstorage",
+										"1"
 									]
 								}
 							},
@@ -1937,13 +2481,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/artworkfile/sample.jpeg",
+									"raw": "{{baseUrl}}/artworkfile/sample_artwork.jpeg",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"artworkfile",
-										"sample.jpeg"
+										"sample_artwork.jpeg"
 									]
 								}
 							},
@@ -3184,6 +3728,119 @@
 				}
 			],
 			"description": "## upload/download images for AWS S3 stoage"
+		},
+		{
+			"name": "wallet",
+			"item": [
+				{
+					"name": "POST updateWallet Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/updatewallet/{{appleId}}}/{{walletAddress}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"updatewallet",
+								"{{appleId}}}",
+								"{{walletAddress}}"
+							]
+						},
+						"description": "### API endpoint to create joinedevent information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "POST updateWallet Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/updatewallet/001953.837897e29b434ebd81b3c9f13efb7bd3.0808/0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"updatewallet",
+										"001953.837897e29b434ebd81b3c9f13efb7bd3.0808",
+										"0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [

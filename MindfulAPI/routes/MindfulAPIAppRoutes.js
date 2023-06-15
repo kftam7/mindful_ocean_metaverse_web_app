@@ -249,6 +249,17 @@ router.put('/artwork/:artworkId', async function(req, res, next) {
   }
 });
 
+/* PUT minted Artwork */
+router.put('/setmintedartwork/:artworkId', async function(req, res, next) {  
+  try {
+    res.json(await Artwork.setMintedArtwork(req.params.artworkId));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while updating programming language`, err.message);
+    next(err);
+  }
+});
+
 /* POST Artwork Files on NFT Storage*/
 router.post('/nftstorage/:artworkId', async function(req, res, next) {
   try {

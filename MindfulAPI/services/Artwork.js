@@ -120,6 +120,34 @@ async function updateArtwork(artworkId, artworkRecord){
   
 }
 
+/* update Artwork */
+async function setMintedArtwork(artworkId){
+
+  // read data from artwork table
+  var sqlSelect = 'SELECT count(*) AS count FROM artwork WHERE artworkId = ' + artworkId; 
+  const resultSelect = await db.query(
+    sqlSelect
+  );
+
+  // if artworkId doesn't exist
+  if (resultSelect[0].count == 0){
+    return ("No record found for this artworkId");
+  }
+
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  sql = 'UPDATE artwork SET ifMinted = 1, updateTime = "' + currentTimeSql + '" WHERE artworkId = "' + artworkId + '";';
+  const result = await db.query(
+    sql
+  );
+  
+  if (result.affectedRows) {
+    message = 'Record updated successfully';
+  }
+  
+  return {message};
+  
+}
+
 /* NFT Storage */
 async function nftStorage(artworkId){
 
@@ -177,5 +205,6 @@ module.exports = {
   getHomepageArtwork,
   createArtwork,
   updateArtwork,
+  setMintedArtwork,
   nftStorage
 };
