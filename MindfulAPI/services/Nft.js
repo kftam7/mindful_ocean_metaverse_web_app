@@ -4,6 +4,7 @@ const path = require('path');
 const logger = require("../logger");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const { Alchemy, Network } = require('alchemy-sdk');
+const axios = require('axios');
 
 /* get NFT */
 async function getNFT(type, idtype, id){
@@ -19,13 +20,10 @@ async function getNFT(type, idtype, id){
   // NFT contract address
   contractAddress = "";
   if (type == "mintPass"){
-    //console.log("choice: 1");
     contractAddress = process.env.mintPassContractAddress;
   }else if (type == "mindfulToken"){
-    //console.log("choice: 2");
     contractAddress = process.env.mindfulTokenContractAddress;
   }else{
-    //console.log("choice: 3");
     contractAddress = process.env.mintPassContractAddress;
   }
 
@@ -33,12 +31,11 @@ async function getNFT(type, idtype, id){
     
     // find out how many walletaddress this appleId has
     var sql = 'SELECT walletAddress AS walletAddress FROM walletAddress WHERE appleId = "' + id + '";';
-    //console.log("check: ", sql);
     const result = await db.query(
         sql
     );
 
-    // If no walletaddress found for this appleId
+    // If walletaddress found for this appleId
     if (result.length){
       
       for (const address of result) {
@@ -49,11 +46,34 @@ async function getNFT(type, idtype, id){
           omitMetadata: false
         })) {
           if(`${nft.contract.address}` == contractAddress.toLowerCase()){
-            data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`});
+            // get the NFT info from the URI
+            const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
+            const options = {
+              'proxy': {
+                'protocol': 'http',
+                'host': '127.0.0.1',
+                'port': 7890
+              },
+              'method': 'GET',
+              'url': nftURL,
+              'headers': {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive'
+              }
+            };
+
+            try {
+              const result = await axios(options);
+              data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+            }catch (e) {
+              return "Issue with NFT URI";
+            }
+
           }
-        }
-        
+        }        
       }
+    // If no walletaddress found for this appleId
     }else{
       return ("No walletAddress found for this appleID");
     }
@@ -65,7 +85,30 @@ async function getNFT(type, idtype, id){
     })) {
       if(`${nft.contract.address}` == contractAddress.toLowerCase()){
   
-        data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`});
+        // get the NFT info from the URI
+        const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
+        const options = {
+          'proxy': {
+            'protocol': 'http',
+            'host': '127.0.0.1',
+            'port': 7890
+          },
+          'method': 'GET',
+          'url': nftURL,
+          'headers': {
+            'Content-Type': 'application/json',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive'
+          }
+        };
+
+        try {
+          const result = await axios(options);
+          data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+        }catch (e) {
+          return "Issue with NFT URI";
+        }
+
       }
     }
   }
@@ -73,7 +116,6 @@ async function getNFT(type, idtype, id){
   //let dataMintPass = [{"tokenId": "1", "description": "This is MintPass 1", "peronsalInfo": "Personal Information 1", "artistAppleId": "AppleID1", "eventId": "1", "URL": "https://123.abc.com"},{"tokenId": "2", "description": "This is MintPass 2", "peronsalInfo": "Personal Information 2", "artistAppleId": "AppleID2", "eventId": "2", "URL": "https://456.abc.com"},{"tokenId": "3", "description": "This is MintPass 3", "peronsalInfo": "Personal Information 3", "artistAppleId": "AppleID3", "eventId": "3", "URL": "https://789.abc.com"}];
   //let dataMintPass = [];
   //let dataMindfulToken = [{"tokenId": "20230420", "description": "This is MindfulToken 1", "peronsalInfo": "Personal Information 4", "artistAppleId": "AppleID4", "eventId": "4", "URL": "https://777.xyz.com"}, {"tokenId": "20230421", "description": "This is MindfulToken 2", "peronsalInfo": "Personal Information 5", "artistAppleId": "AppleID5", "eventId": "5", "URL": "https://888.xyz.com"}, {"tokenId": "20230422", "description": "This is MindfulToken 3", "peronsalInfo": "Personal Information 6", "artistAppleId": "AppleID6", "eventId": "6", "URL": "https://999.xyz.com"}];
-
   //if(type == "mintPass"){
   //  data = dataMintPass;
   //}else{
