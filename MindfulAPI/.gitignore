@@ -5,3 +5,4 @@ dist-ssr
 *.local
 logs
 language_file/locale_*.json.*
+resources/static/assets/uploads
