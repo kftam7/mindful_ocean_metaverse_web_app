@@ -20,7 +20,7 @@ function GridModel(props) {
       }
         
         let source = props.texture;
-        
+        console.log(source)
         initTexture('pbrMetallicRoughness', 'baseColorTexture', source)      
     });
     }
