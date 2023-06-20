@@ -19,7 +19,6 @@ const GalleryModel = props => {
         }
         setNft(nft);
         setLoaded(true); 
-        // load3DModel();
     },[metadata]);
 
     useEffect(() => {

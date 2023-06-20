@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Row, Button, Card, Col, Container, Image } from 'react-bootstrap';
 import Script from 'next/script';
 import { toast, ToastContainer } from "react-toastify";
@@ -7,10 +8,35 @@ import styles from '../../styles/Gallery.module.css';
 
 import { data } from '../../data/data'
 import GalleryModel from './GalleryModel';
-import { getAppleId } from '../../utils/utils';
+import { getAppleId, getHeaders } from '../../utils/utils';
+import axios from 'axios';
 
 //gallery section at home page, currently models are hardcoded
 const Gallery = ({t}) => {
+  const apiPort = process.env.API_PORT || '/';
+  const [artworkhomepage, setArtworkhomepage] = useState([]);
+
+  // 初始化数据
+  useEffect(async () => {
+    const appleid = getAppleId();
+    if(!appleid) return;
+    const des = await axios.get(`${apiPort}/mindfulapi/app/artworkhomepage`, {headers: getHeaders()});
+    if(des.status === 200){
+      const { data: { data } } = des;
+      let result = data.map(item => {
+        return {
+          metadata: {
+            texture:item.URL,
+            name:item.name,
+            author:item.extraInfo,
+            description:item.description
+          },
+          image: item.URL
+        }
+      });
+      setArtworkhomepage(result);
+    }
+  }, []);
 
   const onCinkToUrl = () => {
     const appleId = getAppleId();
@@ -30,24 +56,32 @@ const Gallery = ({t}) => {
         <h3>{t('main.text.gallery')}</h3>
         <p className="mt-1">{t('main.text.mindfulOcean')}</p>
       </Row>
-      <Row className={styles.galleryRow}>
-        <Col style={{position:'relative'}}>
-          <GalleryModel metadata={data[0].metadata} image={data[0].image} index="0" />
-          <Image className={styles.bgpart6} src="/measuredBoxes/6.png" alt="Ocean6" />
-        </Col>
-        <Col>
-        <GalleryModel metadata={data[1].metadata} image={data[1].image} index="1"/>
-        </Col>
-        <Col style={{position:'relative'}}>
-        <GalleryModel metadata={data[2].metadata} image={data[2].image} index="2" />
-          <div className={styles.imgDiv}>
-            <Image className={styles.bgpart7} src="/measuredBoxes/7.png" alt="Ocean7" />
-          </div>
-        </Col>
-      </Row>
-      <Row className={styles.btnRow}>
-        <Button className={`${styles.btn} ${homeStyles.btn}`} onClick={onCinkToUrl}>{t('button.viewMore')} &rarr;</Button>
-      </Row>
+      {artworkhomepage.length ? 
+        <>
+          <Row className={styles.galleryRow}>            
+            {artworkhomepage.map((item, index) => {
+              return <>
+                  <Col style={{position:'relative'}}>
+                    <GalleryModel metadata={item.metadata} image={item.image} index={index} />
+                    {index === 0 ? 
+                      <Image className={styles.bgpart6} src="/measuredBoxes/6.png" alt="Ocean6" />
+                      : ''
+                    }
+                    {index === 2 ? 
+                      <div className={styles.imgDiv}>
+                        <Image className={styles.bgpart7} src="/measuredBoxes/7.png" alt="Ocean7" />
+                      </div>
+                      : ''
+                    }
+                  </Col>
+                </>
+            })}
+          </Row>
+          <Row className={styles.btnRow}>
+            <Button className={`${styles.btn} ${homeStyles.btn}`} onClick={onCinkToUrl}>{t('button.viewMore')} &rarr;</Button>
+          </Row>
+        </> : ''
+      }
       <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
       <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
     </div>
