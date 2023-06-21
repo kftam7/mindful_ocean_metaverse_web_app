@@ -2,7 +2,7 @@ const db = require('../db');
 const helper = require('../helper');
 const config = require('../config');
 const path = require('path');
-//const moment = require('moment');
+const moment = require('moment');
 //const sleep = require('sleep-promise');
 const logger = require("../logger");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
@@ -66,7 +66,7 @@ async function createUser(userRecord){
   return {message};
 }
 
-/* update Event */
+/* update user */
 async function updateUser(appleId, userRecord){
 
   sql = 'UPDATE user SET walletAddress = "' + userRecord.walletAddress + '", personInfo = "' + userRecord.personInfo + '", createTime = "' + userRecord.createTime + '", updateTime = "' + userRecord.updateTime + '", isActive = ' + userRecord.isActive + ', firstName = "' + userRecord.firstName + '", lastName = "' + userRecord.lastName + '", email = "' + userRecord.email + '", refreshToken = "' + userRecord.refreshToken + '", validToken = ' + userRecord.validToken + ' WHERE appleId = "' + appleId + '";';
@@ -82,9 +82,26 @@ async function updateUser(appleId, userRecord){
 }
 
 
+/* update user personal info */
+async function updateUserPersonalInfo(appleId, userRecord){
+
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
+  sql = 'UPDATE user SET personInfo = "' + userRecord.personInfo + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + appleId + '";';
+  const result = await db.query(
+    sql
+  );
+
+  if (result.affectedRows) {
+    message = 'Record updated successfully';
+  }
+
+  return {message};
+}
 
 module.exports = {
   getUser,
   createUser,
-  updateUser
+  updateUser,
+  updateUserPersonalInfo
 };

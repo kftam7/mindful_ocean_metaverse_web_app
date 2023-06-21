@@ -78,6 +78,16 @@ router.put('/user/:appleId', async function(req, res, next) {
   }
 });
 
+/* PUT user personal info */
+router.put('/userpersonalinfo/:appleId', async function(req, res, next) {  
+  try {
+    res.json(await User.updateUserPersonalInfo(req.params.appleId, req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while updating programming language`, err.message);
+    next(err);
+  }
+});
 
 ////////////////// Event
 /* GET event */
