@@ -9,6 +9,7 @@ const axios = require('axios');
 /* get NFT */
 async function getNFT(type, idtype, id){
 
+/*
   // create Alchemy object
   const settings = {
     apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
@@ -112,15 +113,17 @@ async function getNFT(type, idtype, id){
       }
     }
   }
-
+*/
   //let dataMintPass = [{"tokenId": "1", "description": "This is MintPass 1", "peronsalInfo": "Personal Information 1", "artistAppleId": "AppleID1", "eventId": "1", "URL": "https://123.abc.com"},{"tokenId": "2", "description": "This is MintPass 2", "peronsalInfo": "Personal Information 2", "artistAppleId": "AppleID2", "eventId": "2", "URL": "https://456.abc.com"},{"tokenId": "3", "description": "This is MintPass 3", "peronsalInfo": "Personal Information 3", "artistAppleId": "AppleID3", "eventId": "3", "URL": "https://789.abc.com"}];
   //let dataMintPass = [];
   //let dataMindfulToken = [{"tokenId": "20230420", "description": "This is MindfulToken 1", "peronsalInfo": "Personal Information 4", "artistAppleId": "AppleID4", "eventId": "4", "URL": "https://777.xyz.com"}, {"tokenId": "20230421", "description": "This is MindfulToken 2", "peronsalInfo": "Personal Information 5", "artistAppleId": "AppleID5", "eventId": "5", "URL": "https://888.xyz.com"}, {"tokenId": "20230422", "description": "This is MindfulToken 3", "peronsalInfo": "Personal Information 6", "artistAppleId": "AppleID6", "eventId": "6", "URL": "https://999.xyz.com"}];
-  //if(type == "mintPass"){
-  //  data = dataMintPass;
-  //}else{
-  //  data = dataMindfulToken;
-  //}
+  let dataMintPass = [{"tokenId":"2","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gif picture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"tokenId":"3","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gifpicture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"}];
+  let dataMindfulToken = [{"tokenId":"0","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gif picture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"tokenId":"1","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gif picture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"}]; 
+  if(type == "mintPass"){
+    data = dataMintPass;
+  }else{
+    data = dataMindfulToken;
+  }
 
   return {
     data
