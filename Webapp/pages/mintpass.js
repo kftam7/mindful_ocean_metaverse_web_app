@@ -79,8 +79,7 @@ export default function Mintpass({ session,user }) {
   async function mint(data) {
     try{
       setLoading(true);
-      // const contract = require("../utils/MintPassNFT.json");
-      const contract = require(data);
+      const contract = require("../utils/MintPassNFT.json");
       const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
         return res;
       })
