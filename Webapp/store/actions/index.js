@@ -1,4 +1,4 @@
-import { FETCH_ACCOUNT, UPDATE_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT, FETCH_CONTRACT_NFT} from "./types";
+import { FETCH_ACCOUNT, UPDATE_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT, FETCH_CONTRACT_NFT, FETCH_ARTWORKID} from "./types";
 import { fetchAccount, connectAccount, disconnect, fetchBalance, connectForBalance, fetchContract, fetchContractNFT } from "../web3Connections";
 import axios from 'axios';
 const apiPort = process.env.API_PORT || '/';
@@ -121,3 +121,14 @@ export const postUser = () => async (dispatch) => {
         console.log(err)
     }
 }
+
+export const getArtworkId = () => (dispatch) => {
+  try {
+    dispatch({
+        type: FETCH_ARTWORKID,
+        payload: '',
+    });
+  } catch (err) {
+      console.log(err)
+  }
+};

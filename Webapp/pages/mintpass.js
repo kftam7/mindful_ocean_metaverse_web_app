@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react';
-import { getAccount, fetchMintpassContract } from '../store/actions';
+import { getAccount, fetchMintpassContract, getArtworkId } from '../store/actions';
 import { fetchWeb3 } from '../store/web3Connections';
 
 import { useState, useEffect } from 'react';
@@ -15,20 +15,28 @@ import fs from 'fs';
 import { NFTStorage, File } from 'nft.storage';
 import { useTranslation } from '../i18n';
 import {ethers, BigNumber}  from 'ethers';
-import {getMessageHashSignature} from '../utils/utils';
+import {getMessageHashSignature, getHeaders} from '../utils/utils';
 
 export default function Mintpass({ session,user }) {
   const { t, locale } = useTranslation();
+  const apiPort = process.env.API_PORT || '/';
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const mintpassContract = useSelector((state) => state.contractState);
+  const artworkId = useSelector((state) => state.artworkIdState);
   const username = user?.name;
   const endpoint = 'https://api.nft.storage'; // the default
   const token = process.env.IPFS_TOKEN;
   const assets = './assets';
+
   useEffect(async() => {
     await dispatch(getAccount());
     await dispatch(fetchMintpassContract());
+  },[dispatch])
+
+  useEffect(() => {
+    dispatch(getArtworkId());
   },[dispatch])
 
   //https://nft.storage/docs/how-to/mint-erc-1155/; can think about write mintpass NFT as ERC1155
@@ -53,9 +61,26 @@ export default function Mintpass({ session,user }) {
   } //after getting the metadata url, still need to set URL from smart contract
   //if mint success, duplicate & remove the image, update mint status and ID to DB
   //can fetch the tokenId here?
-  async function mint() {
+
+  const mintFront = async () => {
+    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/${artworkId}`, {}, {headers: getHeaders()})
+    .then(res => {
+      const {status, data} = res;
+      if(status === 200){
+        console.log(data)
+        mint(data);
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  };
+
+  async function mint(data) {
     try{
-      const contract = require("../utils/MintPassNFT.json");
+      setLoading(true);
+      // const contract = require("../utils/MintPassNFT.json");
+      const contract = require(data);
       const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
         return res;
       })
@@ -65,17 +90,32 @@ export default function Mintpass({ session,user }) {
   
       await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
       .then(async function(){
-        console.log('success')
-        // await generateMeta();
+        setMinedArtwork();
+      })
+    }
+    catch(err){
+      setLoading(false);
+      console.log('error', err)
+    }
+  }
+  async function setMinedArtwork() {
+    try{
+      const params = {
+        artworkId,
+      }
+      await axios.put(`${apiPort}/mindfulapi/app/setMinedArtwork/${artworkId}`, params, {headers: getHeaders()})
+      .then(res => {
+        setLoading(false);
         Router.push({
           pathname: '/mintedPage',
         });
       })
-      // const tokenId = await fetchTokenId();
-      // await duplicate(tokenId);
-      // await update(tokenId);
+      .catch(err => {
+        console.log(err)
+      })
     }
     catch(err){
+      setLoading(false);
       console.log('error', err)
     }
   }
@@ -140,7 +180,7 @@ export default function Mintpass({ session,user }) {
             </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Col>
-                <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mint}>{t('button.getMintPass')}</Button>
+                <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mintFront} disabled={loading}>{t('button.getMintPass')}</Button>
               </Col>
             </Row>
             <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>

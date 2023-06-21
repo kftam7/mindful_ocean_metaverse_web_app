@@ -6,7 +6,7 @@ import ConfirmModal from './ConfirmModal';
 import axios from 'axios';
 import { useTranslation } from '../../i18n';
 
-const SubmitModal = ({submitShow,setSubmitShow }) => {
+const SubmitModal = ({submitShow,setSubmitShow, artworkId }) => {
   const { t, locale } = useTranslation();
   const [checkbox1, setCheckbox1] = useState(false);
   const [checkbox2, setCheckbox2] = useState(false);
@@ -85,7 +85,7 @@ const SubmitModal = ({submitShow,setSubmitShow }) => {
         </Modal.Body>
       </Modal>
       {/* confirm modal */}
-      <ConfirmModal setConfirmShow={setConfirmShow} confirmShow={confirmShow} />
+      <ConfirmModal setConfirmShow={setConfirmShow} confirmShow={confirmShow} artworkId={artworkId} />
     </>
   )
 }

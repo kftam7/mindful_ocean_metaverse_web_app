@@ -7,9 +7,10 @@ import Link from 'next/link';
 import styles from '../styles/UserProfilePage.module.css';
 
 import Layout from '../components/SubpageLayout';
-import { data } from '../data/data';
+// import { data } from '../data/data';
 import UserProfileModel from '../components/userProfile/UserProfileModal';
 import EditPersonalWebsiteModel from '../components/userProfile/EditPersonalWebsiteModel';
+import EditPersonalInfoModel from '../components/userProfile/EditPersonalInfoModel';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import { getWalletAddress, getAppleId, getEmail, getHeaders } from '../utils/utils';
 import axios from 'axios';
@@ -26,6 +27,7 @@ const UserProfilePage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [modalEditShow, setModalEditShow] = useState(false);
+  const [modalPersonalInfoEditShow, setModalPersonalInfoEditShow] = useState(false);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);  
   const [dataPersonalwebsite, setDataPersonalwebsite] = useState([]); // personalwebsite
   const [dataArtwork, setDataArtwork] = useState([]); // Submitted Artworks
@@ -48,8 +50,10 @@ const UserProfilePage = () => {
   const [isAddPersonalwebsite, setIsAddPersonalwebsite] = useState(false);
   const [objArtWork, setObjArtWork] = useState();
   const [count, setCount] = useState(0);
+  const [countUser, setCountUser] = useState(0);
   const regURL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
   const [walletAddressList, setWalletAddressList] = useState([]);
+  const [personalInfo, setPersonalInfo] = useState('');
 
   useEffect(() => {
     setWalletAddress(getWalletAddress());
@@ -73,7 +77,7 @@ const UserProfilePage = () => {
     if(!appleId) return;
     const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
-      const { data: { data: { artwork, joinedEvent, walletAddress } } } = res
+      const { data: { data: { artwork, joinedEvent, walletAddress, personInfo } } } = res;
       // Submitted Artworks
       // console.log('Submitted Artworks', artwork)
       setDataArtwork(artwork || []);
@@ -84,8 +88,10 @@ const UserProfilePage = () => {
 
       const wdList = walletAddress.slice(1);
       setWalletAddressList(wdList)
+
+      setPersonalInfo(personInfo)
     }
-  }, [appleId]);
+  }, [appleId, countUser]);
 
   useEffect(async () => {
     if(!appleId) return;
@@ -275,6 +281,19 @@ const UserProfilePage = () => {
     setModalEditShow(false);
   };
 
+  const modalPersonalInfoEditSuccess = () => {
+    setModalPersonalInfoEditShow(false);
+    setCountUser(countUser + 1);
+  };
+
+  const modalPersonalInfoEditClose = () => {
+    setModalPersonalInfoEditShow(false);
+  };
+
+  const handlePersonalInfoEdit = () => {
+    setModalPersonalInfoEditShow(true);
+  };
+
   return(
     <Container className='mt-5 mb-5'>
       <ToastContainer />
@@ -335,6 +354,19 @@ const UserProfilePage = () => {
                   </div>
                   <div className={styles.card_txt1}>
                     <TextOverflowTips text={appleId} />
+                  </div>
+              </div>
+              </Card.Body>
+            </Card>
+            <Card style={{ border: 'none' }}>
+              <Card.Body className={styles.card_item}>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <h4>{t('main.text.personalInfo')}</h4>
+                  </div>
+                  <div className={styles.card_txt1}>
+                    {personalInfo || '-'}
+                    <Button className={styles.btn_save} style={{marginLeft: '10px'}} size="sm" onClick={() => handlePersonalInfoEdit()}>{t("button.edit")}</Button>
                   </div>
               </div>
               </Card.Body>
@@ -603,6 +635,7 @@ const UserProfilePage = () => {
         <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
         <UserProfileModel show={modalShow} onHide={() => setModalShow(false)} modal={modalData} />
         <EditPersonalWebsiteModel show={modalEditShow} onHide={() => modalEditClose()} onOk={modalEditSuccess} modal={modalDataEdit} />
+        <EditPersonalInfoModel show={modalPersonalInfoEditShow} onHide={() => modalPersonalInfoEditClose()} onOk={modalPersonalInfoEditSuccess} personalInfo={personalInfo} />
         <Modal
           show={modalDeleteShow}
           onHide={() => setModalDeleteShow(false)}

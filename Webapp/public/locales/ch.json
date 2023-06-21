@@ -40,6 +40,7 @@
     "main.text.description": "说明",
     "main.text.walletConnect": "钱包连接",
     "main.text.appleID": "苹果ID",
+    "main.text.personalInfo": "个人信息",
     "main.text.submitThroughComputer": "通过计算机提交",
     "main.text.loginFromYourComputerForABetterExperience": "从您的计算机登录\n以获得更好的体验.",
     "main.text.noMintpassregistered": "未注册Mintpass",
@@ -139,6 +140,7 @@
     "error.info.websiteURLIsNotRight": "网站URL不正确",
     "error.info.pleaseSignInToAppleIDFirst": "请先登录apple ID",
     "error.info.pleaseSelectAArtwork": "Please Select a Artwork",
+    "error.info.personalInfoCannotBeEmpty": "Personal Info cannot be empty",
 
     "button.signIn": "登录ID",
     "button.viewMyProfile": "查看我的个人资料",

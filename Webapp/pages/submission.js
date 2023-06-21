@@ -58,7 +58,15 @@ export default function SubmitPage({ session, user }) {
   },[dataArtworks]);
 
   const handleShow = () => setShow(true);
-  const handleSubmitShow = () => setSubmitShow(true);
+  const handleSubmitShow = () => {    
+    if(!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
+      autoClose: 3000,
+      position: 'top-center',
+      className: 'custom-toast-success',
+      hideProgressBar: true,
+    });
+    setSubmitShow(true);
+  }
   const handleEditShow = () => {
     if(!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
       autoClose: 3000,
@@ -316,9 +324,9 @@ export default function SubmitPage({ session, user }) {
           {/* mobile app confirm modal */}
           <AppModal setShow={setShow} show={show} />
           {/* submit confirm modal */}
-          <SubmitModal setSubmitShow={setSubmitShow} submitShow={submitShow} />
+          <SubmitModal setSubmitShow={setSubmitShow} submitShow={submitShow} artworkId={dataEdit?.artworkId} />
           {/* edit modal */}
-          <EditModal setEditShow={setEditShow} editShow={editShow} data={dataEdit} onSuccess={editModalSuccess} />
+          <EditModal key={editShow} setEditShow={setEditShow} editShow={editShow} data={dataEdit} onSuccess={editModalSuccess} />
           <Script type="text/javascript" charset="utf-8" src="/js/createPreview.js" />
           <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
           <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />

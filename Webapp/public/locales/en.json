@@ -40,6 +40,7 @@
     "main.text.description": "Description",
     "main.text.walletConnect": "Wallet Connect",
     "main.text.appleID": "Apple ID",
+    "main.text.personalInfo": "Personal Info",
     "main.text.submitThroughComputer": "Submit through computer",
     "main.text.loginFromYourComputerForABetterExperience": "Login from your computer\n for a better experience.",
     "main.text.noMintpassregistered": "No Mintpass registered",
@@ -139,6 +140,7 @@
     "error.info.websiteURLIsNotRight": "Website URL is not Right",
     "error.info.pleaseSignInToAppleIDFirst": "Please sign in to Apple ID first",
     "error.info.pleaseSelectAArtwork": "Please Select a Artwork",
+    "error.info.personalInfoCannotBeEmpty": "Personal Info cannot be empty",
 
     "button.signIn": "Sign ID",
     "button.viewMyProfile": "View My Profile",

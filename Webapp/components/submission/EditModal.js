@@ -5,6 +5,7 @@ import styles from '../../styles/SubmitPage.module.css';
 import axios from 'axios';
 import { useTranslation } from '../../i18n';
 import { getHeaders, timeFormat } from '../../utils/utils';
+import { toast, ToastContainer } from "react-toastify";
 
 const EditModal = props => {
   const { t, locale } = useTranslation();
@@ -80,6 +81,13 @@ const EditModal = props => {
       if(data.message){
         onSuccess(data.message);
         resetForm();
+      }else{
+        toast.error(data, {
+          autoClose: 3000,
+          position: 'top-center',
+          className: 'custom-toast-success',
+          hideProgressBar: true,
+        });
       }
     })
     .catch(err => {
@@ -89,6 +97,7 @@ const EditModal = props => {
 
   return (
     <Modal show={editShow} onHide={handleEditClose}>
+      <ToastContainer />
       <Modal.Header closeButton>
         <Modal.Title>{t('page.mintpass.submission.editInformation')}</Modal.Title>
       </Modal.Header>
