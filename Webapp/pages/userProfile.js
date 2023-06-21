@@ -49,6 +49,7 @@ const UserProfilePage = () => {
   const [objArtWork, setObjArtWork] = useState();
   const [count, setCount] = useState(0);
   const regURL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
+  const [walletAddressList, setWalletAddressList] = useState([]);
 
   useEffect(() => {
     setWalletAddress(getWalletAddress());
@@ -72,7 +73,7 @@ const UserProfilePage = () => {
     if(!appleId) return;
     const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
-      const { data: { data: { artwork, joinedEvent } } } = res
+      const { data: { data: { artwork, joinedEvent, walletAddress } } } = res
       // Submitted Artworks
       // console.log('Submitted Artworks', artwork)
       setDataArtwork(artwork || []);
@@ -80,6 +81,9 @@ const UserProfilePage = () => {
       // Joined Event
       // console.log('Joined Event', joinedEvent)
       setDataJoinedEvent(joinedEvent || []);
+
+      const wdList = walletAddress.slice(1);
+      setWalletAddressList(wdList)
     }
   }, [appleId]);
 
@@ -294,9 +298,34 @@ const UserProfilePage = () => {
                   </div>
                   <div className={styles.card_txt1}>
                     <TextOverflowTips text={walletAddress} />
+                    {walletAddressList.length ? 
+                      <div style={{textAlign: 'right'}}>
+                        <span className={styles.card_txt2} style={{fontWeight: 'normal'}}>{t('page.userProfile.viewAll')} ({walletAddressList.length})</span>
+                        <Button
+                          className={styles.card_btn}
+                          variant="link"
+                          onClick={() => handleToggle(1)}
+                          aria-controls="collapseExample1"
+                          aria-expanded={activeIndex === 1}
+                        >
+                          {activeIndex === 1 ? <FaChevronUp /> : <FaChevronDown />}
+                        </Button>
+                      </div> : ''
+                    }
                   </div>
               </div>
               </Card.Body>
+              <Collapse in={activeIndex === 1}>
+                <div id="collapseExample1">
+                  <Card.Body className={styles.card_body}>
+                    <Row className='mt-2'>
+                      {walletAddressList.map((item, index) => {
+                        return <Col key={index}>{item.walletAddress}</Col>
+                      })}
+                    </Row>
+                  </Card.Body>
+                </div>
+              </Collapse>
             </Card>
             <Card style={{ border: 'none' }}>
               <Card.Body className={styles.card_item}>

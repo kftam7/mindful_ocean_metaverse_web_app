@@ -7,7 +7,7 @@ import { useTranslation } from '../i18n';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
-import { getPathname } from '../utils/utils';
+import { getPathname, getHeaders } from '../utils/utils';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 
 // apple id login
@@ -71,6 +71,11 @@ const NavBar = ({onLocaleChange}) => {
       getQuery();
     }
   }, []);
+
+  useEffect(() => {
+    if(isModalVisible) return;
+    setLoadingWallet(false);
+  }, [isModalVisible]);
   
   const getQuery = () => {
     setAppleId(query.appleId);
@@ -131,13 +136,21 @@ const NavBar = ({onLocaleChange}) => {
 
   // 获取钱包地址信息并记录在 session 中
   const [walletAddress, setWalletAddress] = useState(null);
+  const [countWD, setCountWD] = useState(0);
   const handleGetWalletInfo = async () => {
     const provider = new Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
+    setCountWD(countWD+1);
   };
+
+  useEffect(async () => {
+    if(countWD < 2) return;
+    if(!appleId || !walletAddress) return;
+    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()});
+  }, [appleId, walletAddress, countWD]);
 
   useEffect(async () => {
     const res = await axios.get(`${apiPort}/mindfulapi/app/applelogin`);

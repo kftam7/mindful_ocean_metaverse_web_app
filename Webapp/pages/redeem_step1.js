@@ -8,6 +8,7 @@ import styles from '../styles/RedeemStep.module.css';
 import {Row, Col, Image, OverlayTrigger, Button, Tooltip, Container} from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from '../i18n';
+import { getHeaders } from '../utils/utils';
 
 // Web3Modal
 import { useWeb3Modal } from '@web3modal/react';
@@ -81,6 +82,7 @@ const RedeemStep1 = ({ session }) => {
   }
 
   // 获取钱包地址信息并记录在 session 中
+  const [countWD, setCountWD] = useState(0);
   const handleGetWalletInfo = async () => {
     const provider = new Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -88,6 +90,12 @@ const RedeemStep1 = ({ session }) => {
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
   };
+
+  useEffect(async () => {
+    if(countWD < 2) return;
+    if(!appleId || !walletAddress) return;
+    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()});
+  }, [appleId, walletAddress, countWD]);
 
   // apple id  
   useEffect(async () => {
