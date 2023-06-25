@@ -18,9 +18,9 @@ const Gallery = ({t}) => {
 
   // 初始化数据
   useEffect(async () => {
-    const appleid = getAppleId();
-    if(!appleid) return;
-    const des = await axios.get(`${apiPort}/mindfulapi/app/artworkhomepage`, {headers: getHeaders()});
+    // const appleid = getAppleId();
+    // if(!appleid) return;
+    const des = await axios.get(`${apiPort}/mindfulapi/app/artworkhomepage`);
     if(des.status === 200){
       const { data: { data } } = des;
       let result = data.map(item => {
