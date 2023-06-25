@@ -197,45 +197,9 @@ const AuthPage = ({ session }) => {
             </Row>
           </Row>
           <hr /> */}
-          
-          <Row className='mt-5 mb-5'>
-            <h5>1. {t('main.text.connectWallet')}</h5>
-            {(walletAddress) ?
-            <Row>
-              <Col xs={12} md={6}>
-                  <Button size="lg" className={styles.disactiveBtn}>
-                    <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.walletConnected')}</span>
-                  </Button>
-              </Col>
-              <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
-                <OverlayTrigger overlay={<Tooltip>{t('main.text.disconnect')}</Tooltip>}>
-                      <Button className={styles.activeBtn} onClick={connectWallet}>
-                      <i className="fa-solid fa-xmark"></i>
-                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{walletAddress.slice(0,5).concat('...').concat(walletAddress.slice(-4))}</span>
-                      </Button>
-                </OverlayTrigger>
-              </Col>
-            </Row>
-            : 
-            <Row className="mt-1">
-              <Col xs={12} md={6}>
-                <Button size="lg" className={styles.disactiveBtn} onClick={connectWallet}>
-                    <Image src="/metamask.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.connectWallet')}</span>
-                </Button>
-              </Col>
-              <Col xs={12} md={6}>
-                  <h5 className="mt-2 connect_txt">{t('main.text.walletNotConnected')}</h5>
-                </Col>
-            </Row>
-            }
-          </Row>
-          
-          <hr />
 
           <Row className='mt-5'>
-            <h5>2. {t('main.text.connectSocial')}</h5>
+            <h5>1. {t('main.text.connectSocial')}</h5>
             {(appleId) ?
             <Row>
               <Col xs={12} md={6}>
@@ -277,6 +241,42 @@ const AuthPage = ({ session }) => {
                 </span>
               </Col>
             </Row>
+          </Row>
+
+          <hr />
+          
+          <Row className='mt-5 mb-5'>
+            <h5>2. {t('main.text.connectWallet')}</h5>
+            {(walletAddress) ?
+            <Row>
+              <Col xs={12} md={6}>
+                  <Button size="lg" className={styles.disactiveBtn}>
+                    <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.walletConnected')}</span>
+                  </Button>
+              </Col>
+              <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
+                <OverlayTrigger overlay={<Tooltip>{t('main.text.disconnect')}</Tooltip>}>
+                      <Button className={styles.activeBtn} onClick={connectWallet}>
+                      <i className="fa-solid fa-xmark"></i>
+                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{walletAddress.slice(0,5).concat('...').concat(walletAddress.slice(-4))}</span>
+                      </Button>
+                </OverlayTrigger>
+              </Col>
+            </Row>
+            : 
+            <Row className="mt-1">
+              <Col xs={12} md={6}>
+                <Button size="lg" className={styles.disactiveBtn} onClick={connectWallet} disabled={!appleId}>
+                    <Image src="/metamask.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
+                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.connectWallet')}</span>
+                </Button>
+              </Col>
+              <Col xs={12} md={6}>
+                  <h5 className="mt-2 connect_txt">{t('main.text.walletNotConnected')}</h5>
+                </Col>
+            </Row>
+            }
           </Row>
 
           <Row className='justify-content-md-center mt-5'>

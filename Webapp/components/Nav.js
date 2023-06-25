@@ -270,20 +270,6 @@ const NavBar = ({onLocaleChange}) => {
         <Modal.Body>
             <Row className='mb-12'>
                 <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
-                  {isConnected ? 
-                    <>
-                      <div>{t('main.text.walletContect')}</div> 
-                      <Button className={styles.signInBtn2} onClick={connectWallet}>
-                        <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
-                        <TextOverflowTips text={walletAddress} />
-                      </Button>
-                    </>
-                    : 
-                    <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet}>{loadingWallet ? "Loading..." : 'Connect Wallet'}</Button>
-                  }
-                  {/* <Web3Button /> */}
-                </Col>
-                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                   {isAppleIdLogin ? 
                       <>
                         <div>{t('main.text.apple')}</div>
@@ -297,6 +283,20 @@ const NavBar = ({onLocaleChange}) => {
                       <div dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></div>
                     </Button>
                   }
+                </Col>
+                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
+                  {isConnected ? 
+                    <>
+                      <div>{t('main.text.walletContect')}</div> 
+                      <Button className={styles.signInBtn2} onClick={connectWallet}>
+                        <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
+                        <TextOverflowTips text={walletAddress} />
+                      </Button>
+                    </>
+                    : 
+                    <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet || !isAppleIdLogin}>{loadingWallet ? "Loading..." : 'Connect Wallet'}</Button>
+                  }
+                  {/* <Web3Button /> */}
                 </Col>
                 <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                     <Button href="/userProfile" className={!isConnected || !isAppleIdLogin ? styles.signInBtnDisabled : styles.signInBtn} disabled={!isConnected || !isAppleIdLogin}>{t('button.viewMyProfile')}</Button>
