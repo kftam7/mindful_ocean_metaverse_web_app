@@ -82,20 +82,22 @@ const RedeemStep1 = ({ session }) => {
   }
 
   // 获取钱包地址信息并记录在 session 中
-  const [countWD, setCountWD] = useState(0);
+  const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const handleGetWalletInfo = async () => {
     const provider = new Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
+    setIsConnectingWallet(true);
   };
 
   useEffect(async () => {
-    if(countWD < 2) return;
     if(!appleId || !walletAddress) return;
+    if(!isConnectingWallet) return;
     await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()});
-  }, [appleId, walletAddress, countWD]);
+    setIsConnectingWallet(false);
+  }, [appleId, walletAddress, isConnectingWallet]);
 
   // apple id  
   useEffect(async () => {
