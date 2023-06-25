@@ -164,5 +164,6 @@
     "button.mintMindfulNFT": "Mint Mindful NFT",
     "button.changeAccount": "Change account",
     "button.edit": "Edit",
-    "button.delete": "Delete"
+    "button.delete": "Delete",
+    "button.add": "Add"
 }

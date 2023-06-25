@@ -164,5 +164,6 @@
     "button.mintMindfulNFT": "Mint Mindful NFT",
     "button.changeAccount": "更改帳戶",
     "button.edit": "编辑",
-    "button.delete": "删除"
+    "button.delete": "删除",
+    "button.add": "添加"
 }

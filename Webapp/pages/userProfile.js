@@ -364,9 +364,11 @@ const UserProfilePage = () => {
                   <div>
                     <h4>{t('main.text.personalInfo')}</h4>
                   </div>
-                  <div className={styles.card_txt1}>
-                    {personalInfo || '-'}
-                    <Button className={styles.btn_save} style={{marginLeft: '10px'}} size="sm" onClick={() => handlePersonalInfoEdit()}>{t("button.edit")}</Button>
+                  <div className={styles.card_txt1} style={{display: 'flex'}}>
+                    <><TextOverflowTips text={personalInfo} /></>
+                    <Button className={styles.btn_save} style={{marginLeft: '10px'}} size="sm" onClick={() => handlePersonalInfoEdit()}>
+                      {personalInfo ? t("button.edit") : t("button.add")}
+                    </Button>
                   </div>
               </div>
               </Card.Body>
