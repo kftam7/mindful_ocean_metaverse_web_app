@@ -1059,7 +1059,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab",
+									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x5248099D624063a83fa37f22f8243A80e56D5138",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1067,7 +1067,7 @@
 										"nft",
 										"mintPass",
 										"walletaddress",
-										"0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab"
+										"0x5248099D624063a83fa37f22f8243A80e56D5138"
 									]
 								}
 							},
@@ -2134,7 +2134,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktestnew88\",\n     \"URL\":\"https://agiisoft.com/jpeg/sample_artwork.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"destest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2023-06-01 00:00:00\",\n     \"updateTime\":\"2023-06-30 00:00:00\",\n     \"ifHomepage\": 0\n  }\n]",
+									"raw": "[\n  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"name\":\"sample-test\",\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"Sample test\",\n     \"extraInfo\":\"Sample test extra\",\n     \"createTime\":\"2023-06-28 00:00:00\",\n     \"updateTime\":\"2023-06-28 00:00:00\",\n     \"ifHomepage\": 0\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2707,7 +2707,7 @@
 					]
 				},
 				{
-					"name": "POST artwork Request",
+					"name": "POST artworkfile Request",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -2768,7 +2768,7 @@
 					},
 					"response": [
 						{
-							"name": "POST artwork Request",
+							"name": "POST artworkfile Request",
 							"originalRequest": {
 								"method": "POST",
 								"header": [

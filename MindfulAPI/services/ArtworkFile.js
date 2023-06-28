@@ -69,13 +69,27 @@ async function download(req, res){
 
     const fileName = req.params.filename;
     const directoryPath = path.resolve(__dirname, '../resources/static/assets/uploads') + '/';
-    res.download(directoryPath + fileName, fileName, (err) => {
+    const fullFileName = directoryPath + fileName;
+    fs.readFile(fullFileName, function(err, data) {
+      if(err) {
+        res.send("Oops! Couldn't find that file.");
+      } else {
+        // set the content type based on the file
+        res.contentType(fileName);
+        res.send(data);
+      }
+      res.end();
+    });
+/*
+    res.download(fullFileName, fileName, (err) => {
         if (err) {
           res.status(500).send({
             message: "Could not download the file. " + err,
           });
         }
     });
+*/
+
 }
 
 // delete artwork file

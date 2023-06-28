@@ -9,7 +9,8 @@ import axios from 'axios';
 import AppModal from '../components/redeem/AppModal';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
-import { getAccount, fetchMintpassContractNFT } from '../store/actions';
+//import { getAccount, fetchMintpassContractNFT } from '../store/actions';
+import { getAccount, fetchMintpassContract } from '../store/actions';
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import {ethers, BigNumber}  from 'ethers';
@@ -25,7 +26,8 @@ export default function RedeemStep2() {
   const [selectedOption, setSelectedOption] = useState("");
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
-  const mintpassNFTContract = useSelector((state) => state.contractNFTState);
+  //const mintpassNFTContract = useSelector((state) => state.contractNFTState);
+  const mintpassContract = useSelector((state) => state.contractState);
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -60,7 +62,7 @@ export default function RedeemStep2() {
   
   useEffect(async() => {
     await dispatch(getAccount());
-    await dispatch(fetchMintpassContractNFT());
+    await dispatch(fetchMintpassContract());
   },[dispatch])
 
   async function mint() {
@@ -71,7 +73,12 @@ export default function RedeemStep2() {
       })
       // mint the MindfulNFT
       console.log("Minting MindfulNFT...");
-      await mintpassNFTContract.methods.mintMindfulNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", 1, messageHash, signature).send({ from: account })
+      console.log(mintpassContract);
+      console.log("tokenID: ", selectedOption);
+      //await mintpassNFTContract.methods.mintMindfulNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", 1, messageHash, signature).send({ from: account })
+      //await mintpassContract.methods.safeTransferFrom['address,address,uint256']("0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab", "0xb5932aCe7504a7158807781e5500FE1A81078880", 7).send({ from: account})
+      //await mintpassContract.methods.balanceOf(account).call({ from: account })
+      await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption).send({ from: account })
       .then(async function(){
           console.log('success')
           Router.push({

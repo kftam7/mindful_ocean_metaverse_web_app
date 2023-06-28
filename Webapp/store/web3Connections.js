@@ -15,11 +15,12 @@ const getWeb3Modal = async() => {
         options: {
           infuraId: "b66462653b390b41e66f8f03e25cfa0a",
           rpc: {
-              1: "https://mainnet.mycustomnode.com",
-              137: "https://polygon-rpc.com",
+              //1: "https://mainnet.mycustomnode.com",
+              //137: "https://polygon-rpc.com",
               80001: 'https://matic-mumbai.chainstacklabs.com',
             },
-          supportedChainIds: [1, 137, 80001]
+          //supportedChainIds: [1, 137, 80001]
+            supportedChainIds: [80001]
         }
     }
   };
@@ -161,14 +162,14 @@ export const switchNetwork = async() => {
 
 export const fetchContract = async() => {
   const web3 = await fetchWeb3();
-  const contract = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
+  const contract = "0xBAB5c7041b51a202373f522d2A0Cb9516bcbEED8";
   const mintpassContract = await new web3.eth.Contract(MintPassNFT.abi, contract);
   return mintpassContract;
 }
 
 export const fetchContractNFT = async() => {
   const web3 = await fetchWeb3();
-  const contract = "0x15afD68E18dAEF2CEA7A3a7Ee52B8BAb779F0D20";
+  const contract = "0xb5932aCe7504a7158807781e5500FE1A81078880";
   const mintpassContractNFT = await new web3.eth.Contract(mintMindfulNFT.abi, contract);
   return mintpassContractNFT;
 }

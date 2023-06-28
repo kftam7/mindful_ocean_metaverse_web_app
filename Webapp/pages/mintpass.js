@@ -86,8 +86,12 @@ export default function Mintpass({ session,user }) {
       // return;
       // mint the mintPass
       console.log("Minting MintPass...");
+      console.log("messageHash: ", messageHash);
+      console.log("signature: ", signature);
+      console.log("data: ", data);
   
-      await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
+      //await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
+      await mintpassContract.methods.mintMintPass(messageHash, signature, data).send({ from: account, value: 100000000000000 })
       .then(async function(){
         setMinedArtwork();
       })
@@ -102,7 +106,7 @@ export default function Mintpass({ session,user }) {
       const params = {
         artworkId,
       }
-      await axios.put(`${apiPort}/mindfulapi/app/setMinedArtwork/${artworkId}`, params, {headers: getHeaders()})
+      await axios.put(`${apiPort}/mindfulapi/app/setMintedArtwork/${artworkId}`, params, {headers: getHeaders()})
       .then(res => {
         setLoading(false);
         Router.push({

@@ -49,6 +49,11 @@ app.use(async(req, res, next) => {
           return next()
   }
 
+  // skip for app version
+  if(req.url.startsWith("/mindfulapi/app/appversion")){
+          return next()
+  }
+
   // skip for getting artwork info for the homepage
   if(req.url.startsWith("/mindfulapi/app/artworkhomepage")){
           return next()

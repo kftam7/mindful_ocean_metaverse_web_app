@@ -14,10 +14,12 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get Artwork */
 async function getArtwork(appleId){
 
+    // calleed by end user, return ifMinted = 0 only
     if (appleId){
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
       );
+    // called by admin, return ifMinted = 0 & 1     
     }else{
         var rows = await db.query(
         `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
