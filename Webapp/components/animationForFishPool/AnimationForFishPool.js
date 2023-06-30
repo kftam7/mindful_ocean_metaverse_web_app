@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
-import { getAppleId, getHeaders } from '../../utils/utils';
 
 const AnimationForFishPool = () => {
   const apiPort = process.env.API_PORT || '/';
@@ -14,7 +13,7 @@ const AnimationForFishPool = () => {
   const fetchValue = async () => {
     try {
       // 发起接口请求，获取接口返回的数字
-      const res = await axios.get(`${apiPort}/mindfulapi/app/nfttotal/mintPass`, {headers: getHeaders()});
+      const res = await axios.get(`${apiPort}/mindfulapi/app/nfttotal/mintPass`);
       const {data: { total }} = res;
       if(total === 0) return;
       // // 更新 value 的值
@@ -27,8 +26,6 @@ const AnimationForFishPool = () => {
   };  
 
   useEffect(() => {
-    // const appleid = getAppleId();
-    // if(!appleid) return;
     // 每30秒更新一次接口数据
     const intervalId = setInterval(() => {
       fetchValue();
