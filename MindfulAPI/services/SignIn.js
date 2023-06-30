@@ -79,11 +79,26 @@ async function signin(req){
 
     // if appleId already exist
     if (resultCheck[0].if_exist){
-        var sqlUpdate = 'UPDATE user SET firstName = "' + req.body.name.firstName + '", lastName = "' + req.body.name.lastName + '", refreshToken = "' + req.body.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + req.params.appleId + '";';
+
+        // need to check if email, firstName, lastName exists
+        var sqlUpdate = 'UPDATE user SET updateTime = "'+ currentTimeSql + '"'; 
+        if (req.body.name.firstName){
+            sqlUpdate = sqlUpdate + ', firstName = "' + req.body.name.firstName + '"';
+        }
+        if (req.body.name.lastName){
+            sqlUpdate = sqlUpdate + ', lastName = "' + req.body.name.lastName + '"';
+        }
+        if (req.body.email){
+            sqlUpdate = sqlUpdate + ', email = "' + req.body.email + '"';
+        }
+        sqlUpdate = sqlUpdate + ' WHERE appleId = "' + req.params.appleId + '";';
+  
         console.log(sqlUpdate);
+
         const resultUpdate = await db.query(
             sqlUpdate
         );
+
         let message = 'Record updated successfully';
         return {message};
         
