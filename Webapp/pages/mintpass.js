@@ -16,6 +16,7 @@ import { NFTStorage, File } from 'nft.storage';
 import { useTranslation } from '../i18n';
 import {ethers, BigNumber}  from 'ethers';
 import {getMessageHashSignature, getHeaders} from '../utils/utils';
+import {FaSpinner } from 'react-icons/fa';
 
 export default function Mintpass({ session,user }) {
   const { t, locale } = useTranslation();
@@ -152,6 +153,12 @@ export default function Mintpass({ session,user }) {
   }
   return(
     <Container className='mt-5 mb-5'>
+      {loading ?
+        <div className="overly">
+          <FaSpinner />
+        </div>
+        : ''
+      }
       <div className={styles.submitPage}>
         {/* <Button onClick={update}>Update</Button> */}
         <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
@@ -183,7 +190,7 @@ export default function Mintpass({ session,user }) {
             </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Col>
-                <Button href='#' className={`${homeStyles.btn} ${styles.mintPassBtn}`} onClick={mintFront} disabled={loading}>{t('button.getMintPass')}</Button>
+                <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={loading}>{t('button.getMintPass')}</Button>
               </Col>
             </Row>
             <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>

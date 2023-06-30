@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import {ethers, BigNumber}  from 'ethers';
 import {getMessageHashSignature} from '../utils/utils';
+import {FaSpinner } from 'react-icons/fa';
 
 //just pass the setShow and setConShow as props to children components
 export default function RedeemStep2() {
@@ -28,11 +29,13 @@ export default function RedeemStep2() {
   const account = useSelector((state) => state.accountState);
   //const mintpassNFTContract = useSelector((state) => state.contractNFTState);
   const mintpassContract = useSelector((state) => state.contractState);
+  const [loading, setLoading] = useState(false);
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
     if(!appleId) return;
     // artwork
+    setLoading(true);
     const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleid/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
       const { data: { data } } = res;
@@ -43,6 +46,7 @@ export default function RedeemStep2() {
       }else{
         setShow(true);
       }
+      setLoading(false);
     }
   },[]);
   
@@ -67,6 +71,7 @@ export default function RedeemStep2() {
 
   async function mint() {
     try{
+      setLoading(true);
       const contract = require("../utils/MindfulNFT.json");
       const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
         return res;
@@ -81,6 +86,7 @@ export default function RedeemStep2() {
       await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption).send({ from: account })
       .then(async function(){
           console.log('success')
+          setLoading(false);
           Router.push({
             pathname: '/redeem_step4',
           });
@@ -88,11 +94,18 @@ export default function RedeemStep2() {
     }
     catch(err){
       console.log('error', err)
+      setLoading(false);
     }
   }
 
   return(
     <Container className='mt-5 mb-5'>
+      {loading ?
+        <div className="overly">
+          <FaSpinner />
+        </div>
+        : ''
+      }
       <div className={styles.submitPage}>
           <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
           <Row className="mt-4"><h4>{t('page.redeem.redeemArtworks')}</h4></Row>
@@ -162,7 +175,7 @@ export default function RedeemStep2() {
               <Row className='justify-content-md-center mt-5'>
                 <Col xs={12}>
                   <div className='text-center'>
-                    <Button size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} onClick={mint}>{t('button.burn')}</Button>
+                    <Button className={`${styles.burneBtn}`} onClick={mint} disabled={loading}>{t('button.burn')}</Button>
                   </div>
                 </Col>
               </Row>

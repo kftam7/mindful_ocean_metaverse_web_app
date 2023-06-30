@@ -95,6 +95,32 @@
   color: #fff;
 }
 
+.burneBtn {
+  width: 220px;
+  height: 3rem;
+  margin: 0 auto;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--shadow-color-light);
+  border-color: var(--primary-text-color);
+  background-color: var(--primary-text-color);
+}
+
+.burneBtn:hover {
+    background-color: var(--hovered-color);
+    border-color: var(--hovered-color);
+}
+.burneBtn:focus {
+    background-color: var(--hovered-color) !important;
+    border-color: var(--hovered-color) !important;
+}
+
+.burneBtn:active {
+    background-color: var(--hovered-color) !important;
+    border-color: var(--hovered-color) !important;
+}
+
 .nextBtn{
   font-size: 1.3rem;
 }

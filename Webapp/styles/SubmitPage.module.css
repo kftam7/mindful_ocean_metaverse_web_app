@@ -252,13 +252,14 @@ background-color: var(--primary-text-color);
     border-color: var(--hovered-color);
 }
 .mintPassBtn:focus {
-    background-color: var(--hovered-color) !important;
-    border-color: var(--hovered-color) !important;
+    background-color: none !important;
+    border-color: none !important;
+    box-shadow: none;
 }
 
 .mintPassBtn:active {
-    background-color: var(--hovered-color) !important;
-    border-color: var(--hovered-color) !important;
+    background-color: none !important;
+    border-color: none !important;
 }
 
 .submitContent{

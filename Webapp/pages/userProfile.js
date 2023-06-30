@@ -538,7 +538,7 @@ const UserProfilePage = () => {
                     <h4>{t('page.userProfile.ownedNFTs')}</h4>
                   </div>
                   <div>
-                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataOwnedNFTs.length})</span>
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataOwnedMintpass.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"
@@ -555,17 +555,9 @@ const UserProfilePage = () => {
                 <div id="collapseExample5">
                   <Card.Body className={styles.card_body}>
                     <Row className='mt-2'>
-                      {
-                        dataOwnedNFTs.map((item, key) => (
-                          <Col xs={6} sm={4} md={3} lg={2} key={key}>
-                            {/* <Image src={d.image} className={styles.GalleryPageImages} /> */}
-                            <div className={styles.image_item} onClick={() => handleModal(t('page.userProfile.nFTInformation'), item, true)}>
-                              <div className={styles.item_cover}>{t('page.userProfile.viewDetails')}</div>
-                              <Image src={item.URL} className={styles.item_images} />
-                            </div>
-                          </Col>
-                        ))
-                      }
+                      {dataOwnedMintpass.map((item, key) => {
+                        return <div key={key} className={styles.list_item}><a href={item.URL} target="_blank">{item.peronsalInfo} <Image src="/share.gif" /></a></div>
+                      })}
                     </Row>
                   </Card.Body>
                 </div>
@@ -578,7 +570,7 @@ const UserProfilePage = () => {
                     <h4>{t('page.userProfile.ownedMintpass')}</h4>
                   </div>
                   <div>
-                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataOwnedMintpass.length})</span>
+                    <span className={styles.card_txt2}>{t('page.userProfile.viewAll')} ({dataOwnedNFTs.length})</span>
                     <Button
                       className={styles.card_btn}
                       variant="link"
@@ -594,9 +586,17 @@ const UserProfilePage = () => {
               <Collapse in={activeIndex === 6}>
                 <div id="collapseExample6">
                   <Card.Body className={styles.card_body}>
-                    {dataOwnedMintpass.map((item, key) => {
-                      return <div key={key} className={styles.list_item}><a href={item.URL} target="_blank">{item.peronsalInfo} <Image src="/share.gif" /></a></div>
-                    })}
+                      {
+                        dataOwnedNFTs.map((item, key) => (
+                          <Col xs={6} sm={4} md={3} lg={2} key={key}>
+                            {/* <Image src={d.image} className={styles.GalleryPageImages} /> */}
+                            <div className={styles.image_item} onClick={() => handleModal(t('page.userProfile.nFTInformation'), item, true)}>
+                              <div className={styles.item_cover}>{t('page.userProfile.viewDetails')}</div>
+                              <Image src={item.URL} className={styles.item_images} />
+                            </div>
+                          </Col>
+                        ))
+                      }
                   </Card.Body>
                 </div>
               </Collapse>
