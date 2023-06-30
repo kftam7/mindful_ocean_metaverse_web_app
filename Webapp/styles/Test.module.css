@@ -1,0 +1,11 @@
+.form_label{
+    height: auto !important;
+    margin-top: 5px;
+}
+
+.form_control{
+}
+
+.form_feedback{
+    clear: both;
+}
