@@ -150,14 +150,15 @@ async function setMintedArtwork(artworkId){
   
 }
 
-/* NFT Storage */
-async function nftStorage(artworkId){
+/* NFT Storage, type=1 for mintpass, type=2 for mindfultoken */
+async function nftStorage(artworkId, type){
 
   const API_KEY = process.env.NFT_STORAGE_API_KEY;
   const client = new NFTStorage({ token: API_KEY });
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   // read data from artwork table
-  var sqlSelect = 'SELECT name, URL, type, description, extraInfo, nftStorage FROM artwork WHERE artworkId = ' + artworkId; 
+  var sqlSelect = 'SELECT name, URL, type, description, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
   const resultSelect = await db.query(
     sqlSelect
   );
@@ -167,6 +168,75 @@ async function nftStorage(artworkId){
     return ("No record found for this artworkId");
   }
 
+  // for mintpas
+  if (type == 1){
+
+    // if value already exists
+    if (resultSelect[0].mintpassStorage){
+      if (resultSelect[0].mintpassStorage.startsWith("ipfs")){
+        return resultSelect[0].mintpassStorage;
+      }
+    }
+
+    const urlMintpass = resultSelect[0].URL;
+    const filenameMintpass = process.env.defaultImage;
+    const filepathMintpass = process.env.filepathPrefix + filenameMintpass;
+
+    const mintpassMetadata = await client.store({
+         name: resultSelect[0].name,
+         type: resultSelect[0].type,
+         description: resultSelect[0].description,
+         extraInfo: resultSelect[0].extraInfo,
+          image: new File(
+            [await fs.promises.readFile(filepathMintpass)],
+            filenameMintpass,
+            { type: 'image/jpg' }
+      ),
+    })
+
+    const sqlUpdateMintpass = 'UPDATE artwork SET mintpassStorage = "' + mintpassMetadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+    const resultUpdateMintpass = await db.query(
+      sqlUpdateMintpass
+    );
+
+    return mintpassMetadata.url;
+
+  // for mindfultoken
+  }else{
+
+    // if value already exists
+    if (resultSelect[0].mindfultokenStorage){
+      if (resultSelect[0].mindfultokenStorage.startsWith("ipfs")){
+        return resultSelect[0].mindfultokenStorage;
+      }
+    }
+
+    const urlMindfultoken = resultSelect[0].URL;
+    const filenameMindfultoken = urlMindfultoken.replace(process.env.artworkFileBaseURL, '');
+    const filepathMindfultoken = process.env.filepathPrefix + filenameMindfultoken;
+
+    const mindfultokenMetadata = await client.store({
+      name: resultSelect[0].name,
+      type: resultSelect[0].type,
+      description: resultSelect[0].description,
+      extraInfo: resultSelect[0].extraInfo,
+      image: new File(
+          [await fs.promises.readFile(filepathMindfultoken)],
+          filenameMindfultoken,
+          { type: 'image/jpeg' }
+      ),
+    })
+
+    const sqlUpdateMindfultoken = 'UPDATE artwork SET mindfultokenStorage = "' + mindfultokenMetadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+    const resultUpdateMindfultoken = await db.query(
+      sqlUpdateMindfultoken
+    );
+
+    return mindfultokenMetadata.url;
+  }
+
+
+/*
   // if nftStorage exists 
   if (resultSelect[0].nftStorage){
     if (resultSelect[0].nftStorage.startsWith("ipfs")){
@@ -178,27 +248,39 @@ async function nftStorage(artworkId){
   const filename = url.replace(process.env.artworkFileBaseURL, '');
   const filepath = process.env.filepathPrefix + filename;
 
-  const metadata = await client.store({
-       name: resultSelect[0].name,
-       type: resultSelect[0].type,
-       description: resultSelect[0].description,
-       extraInfo: resultSelect[0].extraInfo,
-       image: new File(
-           [await fs.promises.readFile(filepath)],
-           filename,
-           { type: 'image/jpeg' }
-       ),
-   })
+  if (type == 1){
+    const mintpassMetadata = await client.store({
+         name: resultSelect[0].name,
+         type: resultSelect[0].type,
+         description: resultSelect[0].description,
+         extraInfo: resultSelect[0].extraInfo,
+    })
+  }else{
+    const mindfultokenMetadata = await client.store({
+      name: resultSelect[0].name,
+      type: resultSelect[0].type,
+      description: resultSelect[0].description,
+      extraInfo: resultSelect[0].extraInfo,
+      image: new File(
+          [await fs.promises.readFile(filepath)],
+          filename,
+          { type: 'image/jpeg' }
+      ),
+    })
+  }
 
   // update data to artwork table
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-  var sqlUpdate = 'UPDATE artwork SET nftStorage = "' + metadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+  if (type == 1){
+    var sqlUpdate = 'UPDATE artwork SET mintpassStorage = "' + metadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+  }else{
+    var sqlUpdate = 'UPDATE artwork SET mindfultokenStorage = "' + metadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+  }
   //console.log("sqlUpdate: ", sqlUpdate);
   const resultUpdate = await db.query(
     sqlUpdate
   );
-
-  return metadata.url;
+*/
 
 }
 

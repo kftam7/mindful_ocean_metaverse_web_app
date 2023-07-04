@@ -270,10 +270,21 @@ router.put('/setmintedartwork/:artworkId', async function(req, res, next) {
   }
 });
 
-/* POST Artwork Files on NFT Storage*/
-router.post('/nftstorage/:artworkId', async function(req, res, next) {
+/* POST Artwork Files on NFT Storage for MintPass */
+router.post('/nftstorage/mintpass/:artworkId', async function(req, res, next) {
   try {
-    res.json(await Artwork.nftStorage(req.params.artworkId));
+    res.json(await Artwork.nftStorage(req.params.artworkId, 1));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* POST Artwork Files on NFT Storage for MindfulToken */
+router.post('/nftstorage/mindfultoken/:artworkId', async function(req, res, next) {
+  try {
+    res.json(await Artwork.nftStorage(req.params.artworkId, 2));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while creating programming language`, err.message);

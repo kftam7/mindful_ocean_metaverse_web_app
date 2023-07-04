@@ -7,8 +7,9 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 async function updateWallet(appleId, walletAddress){
 
-	// check if appleId/walletAddress pair already exist
-    var sqlCheck = 'SELECT COUNT(*) AS if_exist FROM walletAddress WHERE appleId = "' + appleId + '" AND walletAddress = "' + walletAddress + '";';
+	// check if walletAddress already exist
+    //var sqlCheck = 'SELECT COUNT(*) AS if_exist FROM walletAddress WHERE appleId = "' + appleId + '" AND walletAddress = "' + walletAddress + '";';
+    var sqlCheck = 'SELECT appleId FROM walletAddress WHERE walletAddress = "' + walletAddress + '";';
     console.log("check: ", sqlCheck);
     const resultCheck = await db.query(
         sqlCheck
@@ -16,19 +17,27 @@ async function updateWallet(appleId, walletAddress){
 
     const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
-    // if appleId/walletAddress pair already exist
-    if (resultCheck[0].if_exist){
-        var sqlUpdate = 'UPDATE walletAddress SET updateTime = "' + currentTimeSql + '" WHERE appleId = "' + appleId + '" AND walletAddress = "' + walletAddress + '";';
-        console.log("sqlUpdate: ", sqlUpdate);
+    // if walletAddress already exist
+    //if (resultCheck[0].appleId){
+    if (resultCheck.length){
 
-        const resultUpdate = await db.query(
-            sqlUpdate
-        );
+        // if the same appleId is found
+        if(resultCheck[0].appleId == appleId){
+            var sqlUpdate = 'UPDATE walletAddress SET updateTime = "' + currentTimeSql + '" WHERE appleId = "' + appleId + '" AND walletAddress = "' + walletAddress + '";';
+            const resultUpdate = await db.query(
+                sqlUpdate
+            );
+            let message = 'Record updated successfully';
+            return {message};
 
-        let message = 'Record updated successfully';
-        return {message};
+        // if different appleId is found, that wallet address can't be used 
+        }else{
+            //let message = 'Walletaddress already taken by another appleId';
+            //return {message};
+            throw new Error("Walletaddress already taken by another appleId")
+        }
         
-    // if appleId/walletAddress pair doesn't exist
+    // if walletAddress doesn't exist
     }else{
         var sqlCreate = 'INSERT INTO walletAddress (appleId, walletAddress, createTime, updateTime) VALUES ("' + appleId + '", "' + walletAddress + '", "' + currentTimeSql + '", "' + currentTimeSql + '");'
         console.log("sqlCreate: ", sqlCreate);

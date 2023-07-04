@@ -64,7 +64,7 @@ export default function Mintpass({ session,user }) {
   //can fetch the tokenId here?
 
   const mintFront = async () => {
-    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/${artworkId}`, {}, {headers: getHeaders()})
+    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mintpass/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
       const {status, data} = res;
       if(status === 200){
