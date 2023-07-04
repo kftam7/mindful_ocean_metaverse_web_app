@@ -70,9 +70,11 @@ const TestArtwork = () => {
   const handleChangeFile = async (e) => {
     setLoading(true);
     const fileLength = e.target.files.length;
+    //const fileFullPath = e.target.value.replace(/C:\\fakepath\\/i, "http://127.0.0.1:3001/mindfulapi/app/artworkfile/");
     setFormData({
       ...formData,
       uploadYourFile: e.target.value
+      //uploadYourFile: fileFullPath
     })
     setFormErrors({
       ...formErrors,
@@ -202,7 +204,7 @@ const TestArtwork = () => {
       description,
       extraInfo,
       ifHomepage: +ifHomepage,
-      URL: uploadYourFile,
+      URL: uploadYourFile.replace(/C:\\fakepath\\/i, "http://127.0.0.1:3001/mindfulapi/app/artworkfile/"),
       createTime,
       updateTime
     }];

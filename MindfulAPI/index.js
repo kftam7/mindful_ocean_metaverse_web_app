@@ -26,7 +26,7 @@ app.use(
 // CORS only for local host
 var corsOptions = {
   //origin: 'http://127.0.0.1:3000',
-  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://web-staging.mindfultoken.org'],
+  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://web-staging.mindfultoken.org', 'https://mindfulcms.agiisoft.com'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
