@@ -5,6 +5,8 @@ import { Row, Col, Image, Container } from 'react-bootstrap';
 //if this page displayed, duplicated the localStorage image and remove the image in DB
   //may need to clear the localStorage.canvas for side-effects cleaning up
 export default function MintedPage() {
+    
+
     return(
         <Container className='mt-5 mb-5'>
             <div className={styles.submitPage}>
@@ -40,7 +42,7 @@ export default function MintedPage() {
                                     In return.<br />
                                     Mint Pass is now generated in your wallet.
                                 </div>
-                                <p>View Mint Pass on <span style={{textDecoration: "underline"}}><a href="https://testnets.opensea.io/collection/mindfulpass-v2" target="_blank" rel='noreferrer'>Opensea</a></span></p>
+                                <p>View Mint Pass on <span><a href="https://testnets.opensea.io/collection/mindfulpass-v2" style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>Opensea</a> or <a href="/userProfile" style={{textDecoration: "underline"}}>View My Profile</a></span></p>
                                 {/* <p>View Mint Pass on your&nbsp; 
                                     <span style={{textDecoration: "underline"}}><Link href="/dashboard">dashboard</Link></span>
                                     &nbsp;or trade Mint Pass on&nbsp; 
