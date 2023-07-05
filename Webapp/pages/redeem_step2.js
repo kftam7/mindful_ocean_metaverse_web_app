@@ -69,6 +69,18 @@ export default function RedeemStep2() {
     await dispatch(fetchMintpassContract());
   },[dispatch])
 
+  const getIpfs = async () => {
+    // Owned NFTs
+    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${selectedOption}`, {headers: getHeaders()})
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    });
+    // mint();
+  }
+
   async function mint() {
     try{
       setLoading(true);
@@ -175,7 +187,7 @@ export default function RedeemStep2() {
               <Row className='justify-content-md-center mt-5'>
                 <Col xs={12}>
                   <div className='text-center'>
-                    <Button className={`${styles.burneBtn}`} onClick={mint} disabled={loading}>{t('button.burn')}</Button>
+                    <Button className={`${styles.burneBtn}`} onClick={getIpfs} disabled={loading}>{t('button.burn')}</Button>
                   </div>
                 </Col>
               </Row>

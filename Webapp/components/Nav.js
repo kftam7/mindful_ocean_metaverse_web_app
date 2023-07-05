@@ -21,6 +21,7 @@ import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
 import { arbitrum, mainnet, polygon } from 'wagmi/chains'
 import { Web3Provider } from "@ethersproject/providers";
+import ConfirmModal from './submission/ConfirmModal';
 const chains = [arbitrum, mainnet, polygon]
 const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
 
@@ -149,7 +150,19 @@ const NavBar = ({onLocaleChange}) => {
   useEffect(async () => {
     if(!appleId || !walletAddress) return;
     if(!isConnectingWallet) return;
-    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()});
+    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()})
+    .then(res => {
+      console.log(res)
+      if(!res.data.message){
+        if (confirm(res.data)) {
+          window.location.reload();
+        }
+      }
+
+    })
+    .catch(err => {
+      console.log(err)
+    });
     setIsConnectingWallet(false);
   }, [appleId, walletAddress, isConnectingWallet]);
 

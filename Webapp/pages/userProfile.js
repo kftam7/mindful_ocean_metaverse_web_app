@@ -99,14 +99,14 @@ const UserProfilePage = () => {
     setLoading(true);
 
     // Owned NFTs
-    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/app/nft/mindfulToken/walletaddress/${walletAddress}`, {headers: getHeaders()});
+    const dataOwnedNFTs = await axios.get(`${apiPort}/mindfulapi/app/nft/mindfulToken/appleld/${appleId}`, {headers: getHeaders()});
     if(dataOwnedNFTs.status === 200){
       const { data: { data } } = dataOwnedNFTs;
       // console.log('Owned NFTs', dataOwnedNFTs)
       setDataOwnedNFTs(data);
     }
     // Owned Mintpass
-    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/walletaddress/${walletAddress}`, {headers: getHeaders()});
+    const dataOwnedMintpass = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleld/${appleId}`, {headers: getHeaders()});
     if(dataOwnedMintpass.status === 200){
       const { data: { data } } = dataOwnedMintpass;
       // console.log('Owned Mintpass', dataOwnedMintpass)
