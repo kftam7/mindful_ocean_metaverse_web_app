@@ -32,9 +32,9 @@ async function updateWallet(appleId, walletAddress){
 
         // if different appleId is found, that wallet address can't be used 
         }else{
-            //let message = 'Walletaddress already taken by another appleId';
-            //return {message};
-            throw new Error("Walletaddress already taken by another appleId")
+            let message = 'Walletaddress already taken by another appleId';
+            return {message};
+            //throw new Error("Walletaddress already taken by another appleId")
         }
         
     // if walletAddress doesn't exist

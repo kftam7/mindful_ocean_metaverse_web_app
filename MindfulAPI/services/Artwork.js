@@ -187,7 +187,8 @@ async function nftStorage(artworkId, type){
          type: resultSelect[0].type,
          description: resultSelect[0].description,
          extraInfo: resultSelect[0].extraInfo,
-          image: new File(
+         artworkId: artworkId,
+         image: new File(
             [await fs.promises.readFile(filepathMintpass)],
             filenameMintpass,
             { type: 'image/jpg' }
@@ -220,6 +221,7 @@ async function nftStorage(artworkId, type){
       type: resultSelect[0].type,
       description: resultSelect[0].description,
       extraInfo: resultSelect[0].extraInfo,
+      artworkId: artworkId,
       image: new File(
           [await fs.promises.readFile(filepathMindfultoken)],
           filenameMindfultoken,
