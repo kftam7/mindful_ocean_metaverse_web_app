@@ -97,11 +97,14 @@ export default function RedeemStep2() {
       // mint the MindfulNFT
       console.log("Minting MindfulNFT...");
       console.log(mintpassContract);
+      console.log("account: ", account);
       console.log("tokenID: ", selectedOption);
+      console.log("ipfs: ", ipfs);
       //await mintpassNFTContract.methods.mintMindfulNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", 1, messageHash, signature).send({ from: account })
       //await mintpassContract.methods.safeTransferFrom['address,address,uint256']("0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab", "0xb5932aCe7504a7158807781e5500FE1A81078880", 7).send({ from: account})
       //await mintpassContract.methods.balanceOf(account).call({ from: account })
-      await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption, ipfs).send({ from: account })
+      //await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption, ipfs).send({ from: account })
+      await mintpassContract.methods.safeTransferFrom(account, "0xcAe0e11eFe4b16c61dA8d4E05dc1Dd794A37227F", selectedOption).send({ from: account })
       .then(async function(){
           console.log('success')
           setLoading(false);

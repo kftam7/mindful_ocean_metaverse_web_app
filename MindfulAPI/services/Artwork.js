@@ -191,7 +191,7 @@ async function nftStorage(artworkId, type){
          image: new File(
             [await fs.promises.readFile(filepathMintpass)],
             filenameMintpass,
-            { type: 'image/jpg' }
+            { type: 'image/gif' }
       ),
     })
 
