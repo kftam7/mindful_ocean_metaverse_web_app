@@ -97,7 +97,6 @@ const RedeemStep1 = ({ session }) => {
     if(!isConnectingWallet) return;
     await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()})
     .then(res => {
-      console.log(res)
       if(!res.data.message){
         if (confirm(res.data)) {
           window.location.reload();

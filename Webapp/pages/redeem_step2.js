@@ -25,6 +25,7 @@ export default function RedeemStep2() {
   const [data, setData] = useState([]);
   const [obj, setObj] = useState({});
   const [selectedOption, setSelectedOption] = useState("");
+  const [artworkId, setArtworkId] = useState("");
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   //const mintpassNFTContract = useSelector((state) => state.contractNFTState);
@@ -43,6 +44,7 @@ export default function RedeemStep2() {
       if(data.length){
         setData(data);
         setSelectedOption(data[0].tokenId);
+        setArtworkId(data[0].artworkId);
       }else{
         setShow(true);
       }
@@ -57,7 +59,9 @@ export default function RedeemStep2() {
   },[data, selectedOption]);
 
   const handleOptionChange = (event) => {
+    const artworkId = data.find(item => item.tokenId === event.target.value).artworkId;
     setSelectedOption(event.target.value);
+    setArtworkId(artworkId);
   };
 
   const optionMintpass = data.map((item, key) => {
@@ -70,20 +74,22 @@ export default function RedeemStep2() {
   },[dispatch])
 
   const getIpfs = async () => {
-    // Owned NFTs
-    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${selectedOption}`, {headers: getHeaders()})
+    setLoading(true);
+    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
       console.log(res)
+      if(res.status === 200){
+        mint(res.data);
+      }
     })
     .catch(err => {
       console.log(err)
+      setLoading(false);
     });
-    // mint();
   }
 
-  async function mint() {
+  async function mint(ipfs) {
     try{
-      setLoading(true);
       const contract = require("../utils/MindfulNFT.json");
       const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
         return res;
@@ -95,7 +101,7 @@ export default function RedeemStep2() {
       //await mintpassNFTContract.methods.mintMindfulNFT("0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "https://www.google.com", "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab", "100", 1, messageHash, signature).send({ from: account })
       //await mintpassContract.methods.safeTransferFrom['address,address,uint256']("0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab", "0xb5932aCe7504a7158807781e5500FE1A81078880", 7).send({ from: account})
       //await mintpassContract.methods.balanceOf(account).call({ from: account })
-      await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption).send({ from: account })
+      await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption, ipfs).send({ from: account })
       .then(async function(){
           console.log('success')
           setLoading(false);
