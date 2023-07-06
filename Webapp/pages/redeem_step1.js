@@ -99,7 +99,7 @@ const RedeemStep1 = ({ session }) => {
     .then(res => {
       if(!res.data.message){
         if (confirm(res.data)) {
-          window.location.reload();
+          disconnect();
         }
       }
 
