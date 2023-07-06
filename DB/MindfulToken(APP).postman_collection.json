@@ -447,6 +447,52 @@
 							"header": null,
 							"cookie": [],
 							"body": null
+						},
+						{
+							"name": "Sign In Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Edward\",\n\t\t\"lastName\":\"Tam\"\n\t},\n\t\"email\": \"s8rrdfmfrc@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4e3ea17bac8b499783e5b118fee36f72.0.srzxs.l6s9ZLm91C2MhLuMkoICZQ\",\n\t\"id_token\": \"eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkFuaW1vY2FCcmFuZHMuTWluZGZ1bC1PY2Vhbi1EZXYtU2l3YSIsImV4cCI6MTY4Mzk5MTk1NywiaWF0IjoxNjgzOTA1NTU3LCJzdWIiOiIwMDE5NzIuNGQzZjMxNTQ1Y2M3NGYwOWFjZDBhNjc5OTU2OWE5NWUuMDMzMyIsImF0X2hhc2giOiJrcl9xeXowclVtcjdZSDZHSUJZWHNnIiwiZW1haWwiOiJzOHJyZGZtZnJjQHByaXZhdGVyZWxheS5hcHBsZWlkLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImlzX3ByaXZhdGVfZW1haWwiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjgzOTA1NTU2LCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.InkIhDTOvOMbiAwoGzTYR2Du-1utnvIV4cGQrrgG6x79HEYqKBKJAVX6v2Xsag9kabE9bGiu2d6MWPH_teCP-Y4amprXwmGOVv5A8G_rjl7DzVFKhOyUSWQ2qUWoiK0G7ac03e3Gc9vSRqxqdqRpUvK7zZcxw_S4n9DB9MXtw8HZaFYUQbehkGv_6Mclh45ML2ZWHES6KrXtMmyI2AmxeQMjenhaiL9fxV0_CMvjj4wO-b7aRxw0-un0aiOo_Sv34epJHKnTgxjoPDtSBFRpnIwh6f5Jb_9vHrcTR-G6YDhouWBXeeUva8Czvb6cYNarVd9jH7CWPES48GVIgAIUXA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/signin/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"signin",
+										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				}
@@ -969,7 +1015,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"raw": "{{baseUrl}}/nft/mintPass/appleid/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -977,7 +1023,7 @@
 										"nft",
 										"mintPass",
 										"appleid",
-										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
 									]
 								}
 							},
@@ -1161,7 +1207,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mindfulToken/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"raw": "{{baseUrl}}/nft/mindfulToken/appleid/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1169,7 +1215,7 @@
 										"nft",
 										"mindfulToken",
 										"appleid",
-										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
 									],
 									"query": [
 										{
@@ -2407,7 +2453,7 @@
 					]
 				},
 				{
-					"name": "POST NFT Storage Request",
+					"name": "POST NFT Storage MintPass Request",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -2447,7 +2493,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2455,12 +2501,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/nftstorage/{artworkId}",
+							"raw": "{{baseUrl}}/nftstorage/mintpass/{artworkId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"nftstorage",
+								"mintpass",
 								"{artworkId}"
 							]
 						},
@@ -2468,7 +2515,7 @@
 					},
 					"response": [
 						{
-							"name": "POST NFT Storage Request",
+							"name": "POST NFT Storage MintPass Request",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -2513,12 +2560,139 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/nftstorage/1",
+									"raw": "{{baseUrl}}/nftstorage/mintpass/1",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"nftstorage",
+										"mintpass",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "POST NFT Storage MIndfultoken Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/nftstorage/mindfultoken/{artworkId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nftstorage",
+								"mindfultoken",
+								"{artworkId}"
+							]
+						},
+						"description": "### API endpoint to create item on IPFS\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code \n  \n\nThe return value is the new artworkId created"
+					},
+					"response": [
+						{
+							"name": "POST NFT Storage MIndfultoken Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/nftstorage/mindfultoken/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"nftstorage",
+										"mindfultoken",
 										"1"
 									]
 								}
