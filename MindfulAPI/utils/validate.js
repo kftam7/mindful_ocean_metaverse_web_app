@@ -63,7 +63,9 @@ async function validateURL(content){
 
   try {
     const blackList = await fsPromises.readFile(process.env.BlackListFile, 'utf-8');
-    if (blackList.includes(content)){
+    const domain = content.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/im)[1];
+    //console.log("Domain: ", domain);
+    if (blackList.includes(domain)){
       //return ("Error 001: URL contains explicit content");
       return 0;
     }else{
