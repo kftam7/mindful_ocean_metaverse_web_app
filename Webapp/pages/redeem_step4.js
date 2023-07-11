@@ -43,7 +43,7 @@ export default function RedeemStep4() {
                                     {t('page.redeem.inReturn')}
                                 </div>
                                 <div className='mt-5'>
-                                    {t('page.redeem.viewYourNewFishNFTOn')} <a href="https://testnets.opensea.io/collection/mindfulpass-v2" style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.redeem.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a>
+                                    {t('page.redeem.viewYourNewFishNFTOn')} <a href="https://testnets.opensea.io/assets/mumbai/0xf30aaf36a9637cff42933d38b34e39ebeb770261" style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.redeem.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a>
                                 </div>
                                 <div className={styles.mintedTitle}>
                                     {t('page.redeem.plop')}

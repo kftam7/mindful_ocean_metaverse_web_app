@@ -14,6 +14,19 @@ module.exports = {
     }
   },
   etherscan: {
-    apiKey: "IYMSWKVVCMDEKEXUBV4NRXEBN8BZ7GZB4E",
+    //apiKey: "IYMSWKVVCMDEKEXUBV4NRXEBN8BZ7GZB4E",
+    apiKey: {
+      polygonMumbai: "IYMSWKVVCMDEKEXUBV4NRXEBN8BZ7GZB4E"
+    },
+    customChains: [
+      {
+        network: "polygonMumbai",
+        chainId: 80001,
+        urls: {
+          apiURL: "https://api-testnet.polygonscan.com",  // https => http
+          browserURL: "https://mumbai.polygonscan.com/"
+        }
+      }
+    ]
   }
 };

@@ -5,6 +5,7 @@ const path = require('path');
 const moment = require('moment');
 //const sleep = require('sleep-promise');
 const logger = require("../logger");
+const validate = require("../utils/validate");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 /* get Event */
@@ -70,6 +71,20 @@ async function createUser(userRecord){
 /* update user */
 async function updateUser(appleId, userRecord){
 
+  // censor contents (personInfo, firstName, lastName )
+  let validResult = await validate.validateContent(userRecord.personInfo);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(userRecord.firstName);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(userRecord.lastName);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+
   sql = 'UPDATE user SET walletAddress = "' + userRecord.walletAddress + '", personInfo = "' + userRecord.personInfo + '", createTime = "' + userRecord.createTime + '", updateTime = "' + userRecord.updateTime + '", isActive = ' + userRecord.isActive + ', firstName = "' + userRecord.firstName + '", lastName = "' + userRecord.lastName + '", email = "' + userRecord.email + '", refreshToken = "' + userRecord.refreshToken + '", validToken = ' + userRecord.validToken + ' WHERE appleId = "' + appleId + '";';
   const result = await db.query(
     sql
@@ -85,6 +100,12 @@ async function updateUser(appleId, userRecord){
 
 /* update user personal info */
 async function updateUserPersonalInfo(appleId, userRecord){
+
+  // censor contents (personInfo)
+  let validResult = await validate.validateContent(userRecord.personInfo);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
 
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 

@@ -5,6 +5,11 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 async function validateContent(content){
 
+  // check if validateContent is turned on
+  if (process.env.enableValidateContent == "false"){
+    return 1;
+  }
+
   const complete_content = "Does \'" + content + "\' contain dirty language or sensitive content? Yes or No."; 
   const messages_content = [{"role": "user", "content": complete_content}];
   const options = {
@@ -37,9 +42,9 @@ async function validateContent(content){
     let chatgptResult = result.data.choices[0].message.content;
     console.log("Yes or No: ", chatgptResult);
     if (chatgptResult.toLowerCase().includes("yes")){
-      return 1;
-    }else if (chatgptResult.toLowerCase().includes("no")){
       return 0;
+    }else if (chatgptResult.toLowerCase().includes("no")){
+      return 1;
     }else{
       return -1;
     }
@@ -50,6 +55,11 @@ async function validateContent(content){
 }
 
 async function validateURL(content){
+
+  // check if validateContent is turned on
+  if (process.env.enableValidateURL == "false"){
+    return 1;
+  }
 
   try {
     const blackList = await fsPromises.readFile(process.env.BlackListFile, 'utf-8');

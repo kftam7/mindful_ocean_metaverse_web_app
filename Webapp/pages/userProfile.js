@@ -556,7 +556,7 @@ const UserProfilePage = () => {
                   <Card.Body className={styles.card_body}>
                     <Row className='mt-2'>
                       {dataOwnedMintpass.map((item, key) => {
-                        return <div key={key} className={styles.list_item}><a href="https://opensea.io/" target="_blank">{item.name} <Image src="/share.gif" /></a></div>
+                        return <div key={key} className={styles.list_item}><a href={"https://testnets.opensea.io/assets/mumbai/0x627721833e29dacd5ec000fe17f2d46dada19f28/"+item.tokenId} target="_blank">{item.name} <Image src="/share.gif" /></a></div>
                       })}
                     </Row>
                   </Card.Body>

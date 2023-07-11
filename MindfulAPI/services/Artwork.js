@@ -55,13 +55,19 @@ async function getHomepageArtwork(){
 /* create Artwork */
 async function createArtwork(artworkRecord){
 
-  //let output = await validate.validateURL("http://pornhub.net");
-  //console.log("output: ", output);
-
-
-  //let output = await validate.validateContent("你老母");
-  //console.log("output: ", output);
-
+  // censor contents (name, description, extraInfo )
+  let validResult = await validate.validateContent(artworkRecord[0].name);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(artworkRecord[0].description);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(artworkRecord[0].extraInfo);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
 
   // get the userId
   var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord[0].appleId + '"'; 
@@ -92,6 +98,20 @@ async function createArtwork(artworkRecord){
 
 /* update Artwork */
 async function updateArtwork(artworkId, artworkRecord){
+
+  // censor contents (name, description, extraInfo )
+  let validResult = await validate.validateContent(artworkRecord.name);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(artworkRecord.description);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(artworkRecord.extraInfo);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
 
   // get the userId
   var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord.appleId + '"'; 

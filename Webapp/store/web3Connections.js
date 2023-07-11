@@ -162,14 +162,14 @@ export const switchNetwork = async() => {
 
 export const fetchContract = async() => {
   const web3 = await fetchWeb3();
-  const contract = "0x46205F704c7cCb3610A345f06559A9ef563597cE";
+  const contract = "0x627721833E29dAcD5ec000Fe17F2d46dADA19f28";
   const mintpassContract = await new web3.eth.Contract(MintPassNFT.abi, contract);
   return mintpassContract;
 }
 
 export const fetchContractNFT = async() => {
   const web3 = await fetchWeb3();
-  const contract = "0xcAe0e11eFe4b16c61dA8d4E05dc1Dd794A37227F";
+  const contract = "0xF30aaF36A9637CFf42933d38B34E39EBEb770261";
   const mintpassContractNFT = await new web3.eth.Contract(mintMindfulNFT.abi, contract);
   return mintpassContractNFT;
 }

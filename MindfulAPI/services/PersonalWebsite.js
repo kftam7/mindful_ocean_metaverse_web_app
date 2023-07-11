@@ -6,6 +6,7 @@ const path = require('path');
 //const sleep = require('sleep-promise');
 const logger = require("../logger");
 const fsPromises = require('fs/promises')
+const validate = require("../utils/validate");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 
@@ -50,6 +51,16 @@ async function createPersonalWebsite(appleId, personalWebsiteRecord){
     console.error(err)
   }
   */
+
+  // censor contents (URL, description)
+  let validResult = await validate.validateURL(personalWebsiteRecord.URL);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(personalWebsiteRecord.description);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }  
 
   // get the userId
   var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + appleId + '"'; 
@@ -98,6 +109,15 @@ async function updatePersonalWebsite(websiteId, personalWebsiteRecord){
   }
   */
 
+  // censor contents (URL, description)
+  let validResult = await validate.validateURL(personalWebsiteRecord.URL);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }
+  validResult = await validate.validateContent(personalWebsiteRecord.description);
+  if (!validResult) {
+    return ("Input contains explicit contents");
+  }  
   //sql = 'UPDATE personalWebsite SET userId = "' + personalWebsiteRecord.userId + '", URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '" WHERE websiteId = "' + websiteId + '";';
   sql = 'UPDATE personalWebsite SET URL = "' + personalWebsiteRecord.URL + '", description = "' + personalWebsiteRecord.description + '", isActive = "' + personalWebsiteRecord.isActive + '" WHERE websiteId = "' + websiteId + '";';
   
