@@ -18,20 +18,28 @@ import { useRouter } from 'next/router';
 import { useWeb3Modal } from '@web3modal/react';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
-import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
-import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+//import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
+import { configureChains, createConfig, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
+//import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { mainnet, optimism, polygon } from "wagmi/chains"
 import { Web3Provider } from "@ethersproject/providers";
 import ConfirmModal from './submission/ConfirmModal';
-const chains = [arbitrum, mainnet, polygon]
+//const chains = [arbitrum, mainnet, polygon]
+const chains = [mainnet, optimism, polygon]
 const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
 
-const { provider } = configureChains(chains, [w3mProvider({ projectId })])
-const wagmiClient = createClient({
+//const { provider } = configureChains(chains, [w3mProvider({ projectId })])
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
+//const wagmiClient = createClient({
+const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 1, chains }),
-  provider
+  //connectors: w3mConnectors({ projectId, version: 1, chains }),
+  connectors: w3mConnectors({ version: 2, chains, projectId }),
+  //provider
+  publicClient,
 })
-const ethereumClient = new EthereumClient(wagmiClient, chains)
+//const ethereumClient = new EthereumClient(wagmiClient, chains)
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 const NavBar = ({onLocaleChange}) => {
   const apiPort = process.env.API_PORT || '/';
@@ -110,8 +118,11 @@ const NavBar = ({onLocaleChange}) => {
   // Web3Modal
   const [loadingWallet, setLoadingWallet] = useState(false);
   const { open } = useWeb3Modal();
-  const { isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
+  //const { isConnected } = useAccount();
+  const { address, isConnected } = useAccount()
+  const { disconnect } = useDisconnect(); 
+
+  //console.log("walletn address: ", address);
 
   useEffect(async () => {
     if(!isConnected){
@@ -138,9 +149,17 @@ const NavBar = ({onLocaleChange}) => {
   const [walletAddress, setWalletAddress] = useState(null);
   const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const handleGetWalletInfo = async () => {
-    const provider = new Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
+    console.log("ethereumClient: ", ethereumClient);
+    console.log("address: ", address)
+   
+    //const { walletAddress, isConnecting, isDisconnected } = useAccount();
+    //console.log("wallet address: ", walletAddress);
+
+    //const provider = new Web3Provider(window.ethereum);
+    //const instance = await web3Modal.openModal();
+    //const provider = new Web3Provider(instance);
+    //const signer = provider.getSigner();
+    //const address = await signer.getAddress();
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
     setLoadingWallet(false);
@@ -327,7 +346,7 @@ const NavBar = ({onLocaleChange}) => {
 function App({onLocaleChange}) {
   return (
     <>
-      <WagmiConfig client={wagmiClient}>
+      <WagmiConfig config={wagmiConfig}>
           <NavBar onLocaleChange={onLocaleChange} />
       </WagmiConfig>
 

@@ -1,12 +1,13 @@
 //web3 connection functions
 import Web3 from "web3";
 import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+//import WalletConnectProvider from "@walletconnect/web3-provider";
 // import abi from "../abi.json";
 import abi from "../utils/mintpass.json";
 import MintPassNFT from "../utils/MintPassNFT.json";
 import mintMindfulNFT from "../utils/MindfulNFT.json";
 
+/*
 //start a connection to the web3 provider positively
 const getWeb3Modal = async() => {
   const providerOptions = {
@@ -75,6 +76,7 @@ export const connectForBalance = async() => {
     console.log(err);
   }
 }
+*/
 
 //check if web3 connection but not trigger connection positively
 export const fetchWeb3 = async() => {
