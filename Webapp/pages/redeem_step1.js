@@ -318,7 +318,7 @@ function App() {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-          <...other component/> 
+          {/* <...other component/>  */}
           <RedeemStep1 />
       </WagmiConfig>
 

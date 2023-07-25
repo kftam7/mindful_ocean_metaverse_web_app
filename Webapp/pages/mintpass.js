@@ -18,7 +18,11 @@ import {ethers, BigNumber}  from 'ethers';
 import {getMessageHashSignature, getHeaders} from '../utils/utils';
 import {FaSpinner } from 'react-icons/fa';
 
-export default function Mintpass({ session,user }) {
+//智能合约2.0
+import { useContractWrite, useWaitForTransaction } from 'wagmi';
+import { mintpassContractConfig } from '../components/contracts';
+
+function Mintpass({ session,user }) {
   const { t, locale } = useTranslation();
   const apiPort = process.env.API_PORT || '/';
   const [loading, setLoading] = useState(false);
@@ -30,6 +34,31 @@ export default function Mintpass({ session,user }) {
   const endpoint = 'https://api.nft.storage'; // the default
   const token = process.env.IPFS_TOKEN;
   const assets = './assets';
+
+  //智能合约2.0
+  const { write, data, error, isLoading, isError } = useContractWrite({
+    ...mintpassContractConfig,
+    functionName: 'mintMintPass',
+  })
+  const {
+    data: receipt,
+    isLoading: isPending,
+    isSuccess,
+  } = useWaitForTransaction({ hash: data?.hash })
+
+  useEffect(() => {
+    if(!isError) return;
+    if (confirm(error?.shortMessage)) {
+      setLoading(false)
+    }else{
+      setLoading(false)
+    }
+  },[isError])
+
+  useEffect(() => {
+    if(!isSuccess) return;
+    setMinedArtwork();
+  },[isSuccess])
 
   useEffect(async() => {
     await dispatch(getAccount());
@@ -68,7 +97,6 @@ export default function Mintpass({ session,user }) {
     .then(res => {
       const {status, data} = res;
       if(status === 200){
-        console.log(data)
         mint(data);
       }
     })
@@ -77,7 +105,7 @@ export default function Mintpass({ session,user }) {
     })
   };
 
-  async function mint(data) {
+  async function mint(ipfs) {
     try{
       setLoading(true);
       const contract = require("../utils/MintPassNFT.json");
@@ -89,12 +117,17 @@ export default function Mintpass({ session,user }) {
       console.log("Minting MintPass...");
       console.log("messageHash: ", messageHash);
       console.log("signature: ", signature);
-      console.log("data: ", data);
+      console.log("ipfs: ", ipfs);
   
       //await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
-      await mintpassContract.methods.mintMintPass(messageHash, signature, data).send({ from: account, value: 100000000000000 })
-      .then(async function(){
-        setMinedArtwork();
+      // await mintpassContract.methods.mintMintPass(messageHash, signature, ipfs).send({ from: account, value: 100000000000000 })
+      // .then(async function(){
+      //   setMinedArtwork();
+      // })
+
+      await write({
+        args: [messageHash, signature, ipfs],
+        value: "100000000000000",
       })
     }
     catch(err){
@@ -122,34 +155,6 @@ export default function Mintpass({ session,user }) {
       setLoading(false);
       console.log('error', err)
     }
-  }
-
-  async function fetchTokenId() {
-    const balance = await mintpassContract.methods.balanceOf(account).call({ from: account });
-    const tokenId = await mintpassContract.methods.tokenOfOwnerByIndex(account, balance - 1).call({ from: account });
-    return tokenId;
-  }
-
-  async function duplicate(tokenId) {
-    await axios.post(
-      'api/images',
-      {
-        tokenId: tokenId,
-        img: window.localStorage.canvas
-      }
-    )
-  }
-    //search the user according to the email and update mint ID and delete image from the array
-  async function update(tokenId) {
-    //axios.delete can't send params so should use put here
-      await axios.put(
-      '/api/users',
-        { 
-          email: session?.user?.email, 
-          tokenId: tokenId,
-          index: window.localStorage.index 
-        }
-      )
   }
   return(
     <Container className='mt-5 mb-5'>
@@ -204,6 +209,28 @@ export default function Mintpass({ session,user }) {
     </Container>
   )
 }
+
+//智能合约2.0
+import { Web3Modal } from '@web3modal/react';
+import { WagmiConfig } from 'wagmi';
+import { projectId, wagmiConfig, ethereumClient } from './wagmi';
+function App() {
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      <Mintpass />
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        themeVariables={{
+          '--w3m-z-index': '9999'
+        }}
+      />
+    </WagmiConfig>
+  )
+}
+
+export default App;
+// export default Mintpass;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);  
