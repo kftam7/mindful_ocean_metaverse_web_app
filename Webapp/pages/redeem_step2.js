@@ -17,12 +17,16 @@ import {ethers, BigNumber}  from 'ethers';
 import {getMessageHashSignature} from '../utils/utils';
 import {FaSpinner } from 'react-icons/fa';
 
+//智能合约2.0
+import { useContractWrite, useWaitForTransaction } from 'wagmi';
+import { mindfulNFTContractConfig } from '../components/contracts';
+
 //just pass the setShow and setConShow as props to children components
-export default function RedeemStep2() {
+function RedeemStep2() {
   const { t, locale } = useTranslation();
   const apiPort = process.env.API_PORT || '/';
   const [show, setShow] = useState(false);
-  const [data, setData] = useState([]);
+  const [dataList, setDataList] = useState([]);
   const [obj, setObj] = useState({});
   const [selectedOption, setSelectedOption] = useState("");
   const [artworkId, setArtworkId] = useState("");
@@ -31,6 +35,34 @@ export default function RedeemStep2() {
   //const mintpassNFTContract = useSelector((state) => state.contractNFTState);
   const mintpassContract = useSelector((state) => state.contractState);
   const [loading, setLoading] = useState(false);
+
+  //智能合约2.0
+  const { write, data, error, isLoading, isError } = useContractWrite({
+    ...mindfulNFTContractConfig,
+    functionName: 'safeTransferFrom',
+  })
+  const {
+    data: receipt,
+    isLoading: isPending,
+    isSuccess,
+  } = useWaitForTransaction({ hash: data?.hash })
+
+  useEffect(() => {
+    if(!isError) return;
+    if (confirm(error?.shortMessage)) {
+      setLoading(false)
+    }else{
+      setLoading(false)
+    }
+  },[isError])
+
+  useEffect(() => {
+    if(!isSuccess) return;
+    setLoading(false);
+    Router.push({
+      pathname: '/redeem_step4',
+    });
+  },[isSuccess])
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -42,7 +74,7 @@ export default function RedeemStep2() {
       const { data: { data } } = res;
       // console.log(data);
       if(data.length){
-        setData(data);
+        setDataList(data);
         setSelectedOption(data[0].tokenId);
         setArtworkId(data[0].artworkId);
       }else{
@@ -54,17 +86,17 @@ export default function RedeemStep2() {
   
   useEffect(() => {
     if(!selectedOption) return;
-    const result = data.find(item => item.tokenId === selectedOption);
+    const result = dataList.find(item => item.tokenId === selectedOption);
     setObj(result);
-  },[data, selectedOption]);
+  },[dataList, selectedOption]);
 
   const handleOptionChange = (event) => {
-    const artworkId = data.find(item => item.tokenId === event.target.value).artworkId;
+    const artworkId = dataList.find(item => item.tokenId === event.target.value).artworkId;
     setSelectedOption(event.target.value);
     setArtworkId(artworkId);
   };
 
-  const optionMintpass = data.map((item, key) => {
+  const optionMintpass = dataList.map((item, key) => {
     return <option key={key} value={item.tokenId}>Mintpass {item.tokenId}</option>
   });
   
@@ -77,7 +109,6 @@ export default function RedeemStep2() {
     setLoading(true);
     await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
-      console.log(res)
       if(res.status === 200){
         mint(res.data);
       }
@@ -115,13 +146,18 @@ export default function RedeemStep2() {
       //await mintpassContract.methods.safeTransferFrom['address,address,uint256']("0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab", "0xb5932aCe7504a7158807781e5500FE1A81078880", 7).send({ from: account})
       //await mintpassContract.methods.balanceOf(account).call({ from: account })
       //await mintpassContract.methods.safeTransferFrom(account, "0xb5932aCe7504a7158807781e5500FE1A81078880", selectedOption, ipfs).send({ from: account })
-      await mintpassContract.methods.safeTransferFrom(account, "0xF30aaF36A9637CFf42933d38B34E39EBEb770261", selectedOption, ipfsHex).send({ from: account })
-      .then(async function(){
-          console.log('success')
-          setLoading(false);
-          Router.push({
-            pathname: '/redeem_step4',
-          });
+
+      // await mintpassContract.methods.safeTransferFrom(account, "0xF30aaF36A9637CFf42933d38B34E39EBEb770261", selectedOption, ipfsHex).send({ from: account })
+      // .then(async function(){
+      //     console.log('success')
+      //     setLoading(false);
+      //     Router.push({
+      //       pathname: '/redeem_step4',
+      //     });
+      // })
+
+      await write({
+        args: [account, "0xF30aaF36A9637CFf42933d38B34E39EBEb770261", selectedOption, ipfsHex]
       })
     }
     catch(err){
@@ -160,7 +196,7 @@ export default function RedeemStep2() {
             </Col>
           </Row>
 
-          {data.length ? 
+          {dataList.length ? 
             <div className={styles.submitContent}>
               <Row className="gx-5">
                 <Col xs={12}>
@@ -219,6 +255,27 @@ export default function RedeemStep2() {
     </Container>
   )
 }
+
+//智能合约2.0
+import { Web3Modal } from '@web3modal/react';
+import { WagmiConfig } from 'wagmi';
+import { projectId, wagmiConfig, ethereumClient } from './wagmi';
+function App() {
+  return (
+    <WagmiConfig config={wagmiConfig}>
+      <RedeemStep2 />
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        themeVariables={{
+          '--w3m-z-index': '9999'
+        }}
+      />
+    </WagmiConfig>
+  )
+}
+
+export default App;
 
 //getServerSideProps will get static data in building page process from server before the page render
 export async function getServerSideProps(context) {
