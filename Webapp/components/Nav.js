@@ -87,6 +87,7 @@ const NavBar = ({onLocaleChange}) => {
   }, [isModalVisible]);
   
   const getQuery = () => {
+    console.log(query)
     setAppleId(query.appleId);
     setEmail(query.email);
     sessionStorage.setItem("access_token", query.access_token);
@@ -252,7 +253,7 @@ const NavBar = ({onLocaleChange}) => {
         <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
         <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
         <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link>
-        <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link>
+        {/* <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link> */}
     </Nav>
     <Nav>
       <Col lg={3} xl={4} className='mt-1 me-1'>
