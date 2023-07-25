@@ -34,14 +34,14 @@ async function auth(req){
 
         if (idToken.email) {
             user.email = idToken.email;
-            body = body + "&email=" + user.email;
+            //body = body + "&email=" + user.email;
             ifEmailExist = 1;
 	    }
 
         if (req.body.user) {
             const { name } = JSON.parse(req.body.user);
             user.name = name;
-	        body = body + "&firstName=" + user.name.firstName + "&lastName=" + user.name.lastName;
+	        //body = body + "&firstName=" + user.name.firstName + "&lastName=" + user.name.lastName;
             ifNameExist = 1;
         }
 
@@ -60,9 +60,9 @@ async function auth(req){
             var sqlUpdate = 'UPDATE user SET refreshToken = "' + response.refresh_token + '", updateTime = "' + currentTimeSql + '" WHERE appleId = "' + user.id + '";';
         }
 
-console.log("body: ", body);
-console.log("sqlCreate: ", sqlCreate);
-console.log("sqlUpdate: ", sqlUpdate);
+        //console.log("body: ", body);
+        //console.log("sqlCreate: ", sqlCreate);
+        //console.log("sqlUpdate: ", sqlUpdate);
 
         // update database
         // check if user already exist
@@ -84,6 +84,17 @@ console.log("sqlUpdate: ", sqlUpdate);
             );
             console.log("Record created successfully")
         }
+
+        // include email, firstname & lastname in the body
+        let sqlCheckInfo = 'SELECT email, firstName, lastName FROM user WHERE appleId = "' + user.id +'" ';
+        const resultCheckInfo = await db.query(
+            sqlCheckInfo
+        );
+        body = body + "&email=" + resultCheckInfo[0].email;
+        body = body + "&firstName=" + resultCheckInfo[0].firstName + "&lastName=" + resultCheckInfo[0].lastName;
+
+        console.log("body:", body);
+
         return(body);
 
     } catch (ex) {
