@@ -220,17 +220,17 @@ function RedeemStep2() {
                   <div className={styles.submitTxt3}>{t('page.redeem.theBelowInformation')}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('main.text.description')}:</div>
+                  <div className={styles.submitTile2}>{t('main.text.messageAboutSavingOurOcean')}:</div>
                   <div className={styles.submitTxt2}>{obj.description}</div>
                 </Col>
-                <Col xs={12}>
+                {/* <Col xs={12}>
                   <div className={styles.submitTile2}>{t('page.redeem.personalInformation')}:</div>
                   <div className={styles.submitTxt2}>{obj.peronsalInfo}</div>
                 </Col>
                 <Col xs={12}>
                   <div className={styles.submitTile2}>{t('page.redeem.artistAppleID')}:</div>
                   <div className={styles.submitTxt2}>{obj.artistAppleId}</div>
-                </Col>
+                </Col> */}
                 <Col xs={12}>
                   <div className={styles.submitTile2}>{t('page.redeem.eventID')}:</div>
                   <div className={styles.submitTxt2}>{obj.eventId}</div>

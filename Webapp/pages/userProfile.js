@@ -358,7 +358,7 @@ const UserProfilePage = () => {
               </div>
               </Card.Body>
             </Card>
-            <Card style={{ border: 'none' }}>
+            {/* <Card style={{ border: 'none' }}>
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
                   <div>
@@ -491,7 +491,7 @@ const UserProfilePage = () => {
                   </Card.Body>
                 </div>
               </Collapse>
-            </Card>
+            </Card> */}
             <Card style={{ border: 'none' }}>
               <Card.Body className={styles.card_item}>
                 <div className="d-flex justify-content-between">
