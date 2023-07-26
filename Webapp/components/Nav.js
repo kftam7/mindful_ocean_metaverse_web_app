@@ -51,6 +51,7 @@ const NavBar = ({onLocaleChange}) => {
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
   const [appleId, setAppleId] = useState('');
+  const [appleIdName, setAppleIdName] = useState('');
   const [email, setEmail] = useState('');
   const router = useRouter();
   const currentUrl = router.asPath;
@@ -74,7 +75,9 @@ const NavBar = ({onLocaleChange}) => {
     }else{
       setIsAppleIdLogin(true);
       const email = sessionStorage.getItem("email");
+      const appleIdName = sessionStorage.getItem("appleIdName");
       setAppleId(appleId);
+      setAppleIdName(appleIdName);
       setEmail(email);
       if(!query.appleId) return;
       getQuery();
@@ -87,14 +90,15 @@ const NavBar = ({onLocaleChange}) => {
   }, [isModalVisible]);
   
   const getQuery = () => {
-    console.log(query)
     setAppleId(query.appleId);
+    setAppleIdName(query.firstName + ' ' + query.lastName)
     setEmail(query.email);
     sessionStorage.setItem("access_token", query.access_token);
     sessionStorage.setItem("expires_in", query.expires_in);
     sessionStorage.setItem("email", query.email);
     sessionStorage.setItem("refresh_token", query.refresh_token);
     sessionStorage.setItem("appleId", query.appleId);
+    sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
     setIsAppleIdLogin(true);
   }
 
@@ -112,6 +116,7 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("refresh_token");
     sessionStorage.removeItem("appleId");
+    sessionStorage.removeItem("appleIdName");
     router.push('/');
     setIsAppleIdLogin(false);
   }
@@ -308,7 +313,7 @@ const NavBar = ({onLocaleChange}) => {
                         <div>{t('main.text.apple')}</div>
                         <Button className={styles.signInBtn2} onClick={handleAppleSignOut}>
                           <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
-                          <TextOverflowTips text={appleId} />
+                          <TextOverflowTips text={appleIdName} />
                         </Button>
                       </>
                     : 

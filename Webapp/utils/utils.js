@@ -56,6 +56,10 @@ const getAppleId = () => {
   return sessionStorage.getItem("appleId");
 };
 
+const getAppleIdName = () => {
+  return sessionStorage.getItem("appleIdName");
+};
+
 const getEmail = () => {
   return sessionStorage.getItem("email");
 };
@@ -298,6 +302,7 @@ export {
   getMessageHashSignature,
   getWalletAddress,
   getAppleId,
+  getAppleIdName,
   getEmail,
   getRefreshToken,
   getHeaders,

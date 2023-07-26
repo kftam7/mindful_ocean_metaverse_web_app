@@ -12,7 +12,7 @@ import UserProfileModel from '../components/userProfile/UserProfileModal';
 import EditPersonalWebsiteModel from '../components/userProfile/EditPersonalWebsiteModel';
 import EditPersonalInfoModel from '../components/userProfile/EditPersonalInfoModel';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
-import { getWalletAddress, getAppleId, getEmail, getHeaders } from '../utils/utils';
+import { getWalletAddress, getAppleId, getAppleIdName, getEmail, getHeaders } from '../utils/utils';
 import axios from 'axios';
 import { useTranslation } from '../i18n';
 
@@ -22,6 +22,7 @@ const UserProfilePage = () => {
   const [loading, setLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState();
   const [appleId, setAppleId] = useState();
+  const [appleIdName, setAppleIdName] = useState('');
   const [email, setEmail] = useState('');
   const [activeIndex, setActiveIndex] = useState(null); // 控制展开的面板索引
   const [isChecked, setIsChecked] = useState(false);
@@ -58,6 +59,7 @@ const UserProfilePage = () => {
   useEffect(() => {
     setWalletAddress(getWalletAddress());
     setAppleId(getAppleId());
+    setAppleIdName(getAppleIdName());
     setEmail(getEmail());
   }, []);
 
@@ -353,7 +355,7 @@ const UserProfilePage = () => {
                     <h4>{t('main.text.appleID')}</h4>
                   </div>
                   <div className={styles.card_txt1}>
-                    <TextOverflowTips text={appleId} />
+                    <TextOverflowTips text={appleIdName} />
                   </div>
               </div>
               </Card.Body>
