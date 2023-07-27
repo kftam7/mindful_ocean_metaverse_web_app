@@ -721,6 +721,67 @@
 							"header": null,
 							"cookie": [],
 							"body": null
+						},
+						{
+							"name": "PUT user Request (Explicit)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"walletAddress\":\"0xbA87C344Aea90A5ad73b197b34dB2DfBa66398Fl\",\n    \"personInfo\":\"This is a modified msg\",\n    \"createTime\":\"2024-05-17 01:01:01\",\n    \"updateTime\":\"2025-06-17 02:02:02\",\n    \"isActive\": 1,\n    \"firstName\": \"fuck\",\n    \"lastName\": \"Tam\",\n    \"email\": \"edwardt@animocabrands.com\",\n    \"refreshToken\": \"abc\",\n    \"validToken\": 1\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				},
@@ -824,6 +885,67 @@
 								"body": {
 									"mode": "raw",
 									"raw": "  {\n    \"personInfo\":\"This is a modified msg\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/userpersonalinfo/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"userpersonalinfo",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "PUT user personal info Request (Explicit)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"personInfo\":\"fuck you man\"\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1015,7 +1137,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/appleid/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
+									"raw": "{{baseUrl}}/nft/mintPass/appleid/000453.79f8486feb99404f860a9966354c87f3.0841",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1023,7 +1145,7 @@
 										"nft",
 										"mintPass",
 										"appleid",
-										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
+										"000453.79f8486feb99404f860a9966354c87f3.0841"
 									]
 								}
 							},
@@ -2201,6 +2323,66 @@
 							"header": null,
 							"cookie": [],
 							"body": null
+						},
+						{
+							"name": "POST artwork Request (Explicit)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"name\":\"sample-test-explicit\",\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"What the fuck\",\n     \"extraInfo\":\"Sample test extra\",\n     \"createTime\":\"2023-06-28 00:00:00\",\n     \"updateTime\":\"2023-06-28 00:00:00\",\n     \"ifHomepage\": 0\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				},
@@ -2267,6 +2449,67 @@
 					"response": [
 						{
 							"name": "PUT artwork Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworknew7\",\n   \"URL\":\"http://artworktestnew2\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\",\n   \"ifHomepage\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork/48",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork",
+										"48"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "PUT artwork Request (explicit)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [
@@ -3347,6 +3590,67 @@
 							"header": null,
 							"cookie": [],
 							"body": null
+						},
+						{
+							"name": "POST PersonalWebsite Request (Explicit)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"URL\":\"https://modifiedactive.com\",\n     \"description\":\"personalwebsite modify testing\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				},
@@ -3425,6 +3729,67 @@
 					"response": [
 						{
 							"name": "PUT PersonalWebsite Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"URL\":\"https://abc.com\",\n     \"description\":\"personalwebsite modify testing\",\n     \"isActive\": 0\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/personalwebsite/19",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"personalwebsite",
+										"19"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "PUT PersonalWebsite Request (Explicit)",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [

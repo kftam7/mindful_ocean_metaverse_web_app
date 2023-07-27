@@ -533,11 +533,21 @@
 										"key": "secret",
 										"value": "{{secret}}",
 										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"title\":\"event9\",\n     \"paragraphText\":\"eventB description\",\n     \"image\":\"http://www.abc.com/b.png\",\n     \"hyperlink\":\"http://www.abc.com/eventB.html\",\n     \"timerDescription\":\"timerDescriptionB\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 1\n  },\n  {\n     \"title\":\"event8\",\n     \"paragraphText\":\"eventC description\",\n     \"image\":\"http://www.abc.com/c.png\",\n     \"hyperlink\":\"http://www.abc.com/eventC.html\",\n     \"timerDescription\":\"timerDescriptionC\",\n     \"startTime\":\"2023-06-09 09:00:10\",\n     \"endTime\":\"2023-10-09 09:00:10\",\n     \"isActive\": 0\n  },\n  {\n     \"title\":\"event7\",\n     \"paragraphText\":\"eventD description\",\n     \"image\":\"http://www.abc.com/d.png\",\n     \"hyperlink\":\"http://www.abc.com/eventD.html\",\n     \"timerDescription\":\"timerDescriptionD\",\n     \"startTime\":\"2024-06-09 09:00:10\",\n     \"endTime\":\"2024-10-09 09:00:10\",\n     \"isActive\": 1\n  }\n]",
+									"raw": "[\n  {\n     \"title\":\"event11\",\n     \"titleCN\":\"event11简体\",\n     \"titleTW\":\"event11繁体\",\n     \"paragraphText\":\"event11 description\",\n     \"paragraphTextCN\":\"event11 description简体\",\n     \"paragraphTextTW\":\"event11 description繁体\",\n     \"image\":\"http://www.abc.com/b.png\",\n     \"hyperlink\":\"http://www.abc.com/eventB.html\",\n     \"timerDescription\":\"timerDescriptionB\",\n     \"timerDescriptionCN\":\"timerDescriptionB简体\",\n     \"timerDescriptionTW\":\"timerDescriptionB繁体\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 1\n  },\n  {\n     \"title\":\"event12\",\n     \"titleCN\":\"event12简体\",\n     \"titleTW\":\"event12繁体\",\n     \"paragraphText\":\"event12 description\",\n     \"paragraphTextCN\":\"event12 description简体\",\n     \"paragraphTextTW\":\"event12 description繁体\",\n     \"image\":\"http://www.abc.com/c.png\",\n     \"hyperlink\":\"http://www.abc.com/eventC.html\",\n     \"timerDescription\":\"timerDescriptionC\",\n     \"timerDescriptionCN\":\"timerDescriptionC简体\",\n     \"timerDescriptionTW\":\"timerDescriptionC繁体\",\n     \"startTime\":\"2023-06-09 09:00:10\",\n     \"endTime\":\"2023-10-09 09:00:10\",\n     \"isActive\": 0\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -638,82 +648,6 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "  {\n     \"title\":\"eventK\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 0\n  }",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/event/2",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"event",
-										"2"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "41"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"29-hvE45RA5maf98wA3JJX7Gnlcvx4\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 12:20:13 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Record updated successfully\"\n}"
-						},
-						{
-							"name": "PUT event Request",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
 									},
 									{
 										"key": "time_stamp",
@@ -728,7 +662,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"title\":\"event99\",\n     \"paragraphText\":\"eventK description\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 0\n  }",
+									"raw": "  {\n     \"title\":\"event99\",\n     \"titleCN\":\"event99简体\",\n     \"titleTW\":\"event99繁體\",\n     \"paragraphText\":\"eventK description\",\n     \"paragraphTextCN\":\"eventK description简体\",\n     \"paragraphTextTW\":\"eventK description繁體\",\n     \"image\":\"http://www.abc.com/k.png\",\n     \"hyperlink\":\"http://www.abc.com/eventK.html\",\n     \"timerDescription\":\"timerDescriptionK\",\n     \"timerDescriptionCN\":\"timerDescriptionK简体\",\n     \"timerDescriptionTW\":\"timerDescriptionK繁體\",\n     \"startTime\":\"2022-06-09 09:00:10\",\n     \"endTime\":\"2022-10-09 09:00:10\",\n     \"isActive\": 0\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -822,7 +756,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/{walletaddress}",
+									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/000453.79f8486feb99404f860a9966354c87f3.0841",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -830,7 +764,7 @@
 										"nft",
 										"mintPass",
 										"walletaddress",
-										"{walletaddress}"
+										"000453.79f8486feb99404f860a9966354c87f3.0841"
 									]
 								}
 							},
@@ -2822,7 +2756,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n    {\n        \"userId\": 9,\n        \"eventId\": 1\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 2\n    },\n    {\n        \"userId\": 9,\n        \"eventId\": 3\n    }\n]",
+									"raw": "[\n    {\n        \"userId\": 32,\n        \"eventId\": 1\n    },\n    {\n        \"userId\": 32,\n        \"eventId\": 2\n    },\n    {\n        \"userId\": 32,\n        \"eventId\": 3\n    }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
