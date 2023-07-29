@@ -48,11 +48,12 @@ function Mintpass({ session,user }) {
 
   useEffect(() => {
     if(!isError) return;
-    if (confirm(error?.shortMessage)) {
-      setLoading(false)
-    }else{
-      setLoading(false)
-    }
+    if (confirm(error?.shortMessage)){}
+    // if (confirm(error?.shortMessage)) {
+    //   setLoading(false)
+    // }else{
+    //   setLoading(false)
+    // }
   },[isError])
 
   useEffect(() => {
@@ -107,7 +108,6 @@ function Mintpass({ session,user }) {
 
   async function mint(ipfs) {
     try{
-      setLoading(true);
       const contract = require("../utils/MintPassNFT.json");
       const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
         return res;
@@ -131,7 +131,6 @@ function Mintpass({ session,user }) {
       })
     }
     catch(err){
-      setLoading(false);
       console.log('error', err)
     }
   }
@@ -142,7 +141,6 @@ function Mintpass({ session,user }) {
       }
       await axios.put(`${apiPort}/mindfulapi/app/setMintedArtwork/${artworkId}`, params, {headers: getHeaders()})
       .then(res => {
-        setLoading(false);
         Router.push({
           pathname: '/mintedPage',
         });
@@ -152,13 +150,12 @@ function Mintpass({ session,user }) {
       })
     }
     catch(err){
-      setLoading(false);
       console.log('error', err)
     }
   }
   return(
     <Container className='mt-5 mb-5'>
-      {loading ?
+      {isLoading ?
         <div className="overly">
           <FaSpinner />
         </div>
@@ -195,7 +192,7 @@ function Mintpass({ session,user }) {
             </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Col>
-                <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={loading}>{t('button.getMintPass')}</Button>
+                <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={isLoading}>{t('button.getMintPass')}</Button>
               </Col>
             </Row>
             <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>
