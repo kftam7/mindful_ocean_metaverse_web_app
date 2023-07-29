@@ -30,10 +30,16 @@ const ModalAdd = (props) => {
 
         form.setFieldsValue({
             title: modalData.title,
+            titleCN: modalData.titleCN,
+            titleTW: modalData.titleTW,
             paragraphText: modalData.paragraphText,
+            paragraphTextCN: modalData.paragraphTextCN,
+            paragraphTextTW: modalData.paragraphTextTW,
             image: modalData.image,
             hyperlink: modalData.hyperlink,
             timerDescription: modalData.timerDescription,
+            timerDescriptionCN: modalData.timerDescriptionCN,
+            timerDescriptionTW: modalData.timerDescriptionTW,
             startTime: moment(modalData.startTime),
             endTime: moment(modalData.endTime),
             isActive: modalData.isActive
@@ -99,8 +105,24 @@ const ModalAdd = (props) => {
             { required: true, message: 'Please input title!' },
             { validator: validateInputLength2 }
         ],
+        titleCN: [
+            { required: true, message: 'Please input titleCN!' },
+            { validator: validateInputLength2 }
+        ],
+        titleTW: [
+            { required: true, message: 'Please input titleTW!' },
+            { validator: validateInputLength2 }
+        ],
         paragraphText: [
             { required: true, message: 'Please input paragraphText!' },
+            { validator: validateInputLength3 }
+        ],
+        paragraphTextCN: [
+            { required: true, message: 'Please input paragraphTextCN!' },
+            { validator: validateInputLength3 }
+        ],
+        paragraphTextTW: [
+            { required: true, message: 'Please input paragraphTextTW!' },
             { validator: validateInputLength3 }
         ],
         image: [
@@ -115,6 +137,14 @@ const ModalAdd = (props) => {
         ],
         timerDescription: [
             { required: true, message: 'Please input timerDescription!' },
+            { validator: validateInputLength3 }
+        ],
+        timerDescriptionCN: [
+            { required: true, message: 'Please input timerDescriptionCN!' },
+            { validator: validateInputLength3 }
+        ],
+        timerDescriptionTW: [
+            { required: true, message: 'Please input timerDescriptionTW!' },
             { validator: validateInputLength3 }
         ],
         startTime: [{ required: true, message: 'Please select startTime!' }],
@@ -144,10 +174,16 @@ const ModalAdd = (props) => {
             if(modalType === 'add'){
                 const params = [{
                     title: values.title,
+                    titleCN: values.titleCN,
+                    titleTW: values.titleTW,
                     paragraphText: values.paragraphText,
+                    paragraphTextCN: values.paragraphTextCN,
+                    paragraphTextTW: values.paragraphTextTW,
                     image: values.image,
                     hyperlink: values.hyperlink,
                     timerDescription: values.timerDescription,
+                    timerDescriptionCN: values.timerDescriptionCN,
+                    timerDescriptionTW: values.timerDescriptionTW,
                     startTime: startTime,
                     endTime: endTime,
                     isActive: String(values.isActive),
@@ -175,10 +211,16 @@ const ModalAdd = (props) => {
             }else{
                 const params = {
                     title: values.title,
+                    titleCN: values.titleCN,
+                    titleTW: values.titleTW,
                     paragraphText: values.paragraphText,
+                    paragraphTextCN: values.paragraphTextCN,
+                    paragraphTextTW: values.paragraphTextTW,
                     image: values.image,
                     hyperlink: values.hyperlink,
                     timerDescription: values.timerDescription,
+                    timerDescriptionCN: values.timerDescriptionCN,
+                    timerDescriptionTW: values.timerDescriptionTW,
                     startTime: startTime,
                     endTime: endTime,
                     isActive: String(values.isActive),
@@ -253,6 +295,26 @@ const ModalAdd = (props) => {
                     />
                 </Form.Item>
                 <Form.Item
+                    label='titleCN'
+                    name="titleCN"
+                    rules={formItemRules.titleTW}
+                >
+                    <Input
+                        placeholder='titleTW'
+                        allowClear
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='titleTW'
+                    name="titleTW"
+                    rules={formItemRules.titleTW}
+                >
+                    <Input
+                        placeholder='titleCN'
+                        allowClear
+                    />
+                </Form.Item>
+                <Form.Item
                     label='paragraphText'
                     name="paragraphText"
                     rules={formItemRules.paragraphText}
@@ -261,6 +323,28 @@ const ModalAdd = (props) => {
                         rows={4}
                         allowClear
                         placeholder='paragraphText'
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='paragraphTextCN'
+                    name="paragraphTextCN"
+                    rules={formItemRules.paragraphTextCN}
+                >
+                    <TextArea
+                        rows={4}
+                        allowClear
+                        placeholder='paragraphTextCN'
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='paragraphTextTW'
+                    name="paragraphTextTW"
+                    rules={formItemRules.paragraphTextTW}
+                >
+                    <TextArea
+                        rows={4}
+                        allowClear
+                        placeholder='paragraphTextTW'
                     />
                 </Form.Item>
                 <Form.Item
@@ -292,6 +376,28 @@ const ModalAdd = (props) => {
                         rows={4}
                         allowClear
                         placeholder='timerDescription'
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='timerDescriptionCN'
+                    name="timerDescriptionCN"
+                    rules={formItemRules.timerDescriptionCN}
+                >
+                    <TextArea
+                        rows={4}
+                        allowClear
+                        placeholder='timerDescriptionCN'
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='timerDescriptionTW'
+                    name="timerDescriptionTW"
+                    rules={formItemRules.timerDescriptionTW}
+                >
+                    <TextArea
+                        rows={4}
+                        allowClear
+                        placeholder='timerDescriptionTW'
                     />
                 </Form.Item>
                 <Form.Item

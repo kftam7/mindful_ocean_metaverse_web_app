@@ -99,6 +99,48 @@ const Event = (props) => {
             }
         },
         {
+            title: 'titleCN',
+            dataIndex: 'titleCN',
+            key: 'titleCN',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => {
+                if (a['titleCN']) {
+                    return a['titleCN'].localeCompare(b['titleCN']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'titleCN' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'titleTW',
+            dataIndex: 'titleTW',
+            key: 'titleTW',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => {
+                if (a['titleTW']) {
+                    return a['titleTW'].localeCompare(b['titleTW']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'titleTW' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
             title: 'paragraphText',
             dataIndex: 'paragraphText',
             key: 'paragraphText',
@@ -108,6 +150,46 @@ const Event = (props) => {
                 }
             },
             sortOrder: sortedInfo.columnKey === 'paragraphText' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'paragraphTextCN',
+            dataIndex: 'paragraphTextCN',
+            key: 'paragraphTextCN',
+            sorter: (a, b) => {
+                if (a['paragraphTextCN']) {
+                    return a['paragraphTextCN'].localeCompare(b['paragraphTextCN']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'paragraphTextCN' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'paragraphTextTW',
+            dataIndex: 'paragraphTextTW',
+            key: 'paragraphTextTW',
+            sorter: (a, b) => {
+                if (a['paragraphTextTW']) {
+                    return a['paragraphTextTW'].localeCompare(b['paragraphTextTW']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'paragraphTextTW' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -156,6 +238,46 @@ const Event = (props) => {
                 }
             },
             sortOrder: sortedInfo.columnKey === 'timerDescription' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'timerDescriptionCN',
+            dataIndex: 'timerDescriptionCN',
+            key: 'timerDescriptionCN',
+            sorter: (a, b) => {
+                if (a['timerDescriptionCN']) {
+                    return a['timerDescriptionCN'].localeCompare(b['timerDescriptionCN']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'timerDescriptionCN' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'timerDescriptionTW',
+            dataIndex: 'timerDescriptionTW',
+            key: 'timerDescriptionTW',
+            sorter: (a, b) => {
+                if (a['timerDescriptionTW']) {
+                    return a['timerDescriptionTW'].localeCompare(b['timerDescriptionTW']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'timerDescriptionTW' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -216,10 +338,16 @@ const Event = (props) => {
     const selectDefaultValue = [
         'eventId',
         'title',
+        'titleCN',
+        'titleTW',
         'paragraphText',
+        'paragraphTextCN',
+        'paragraphTextTW',
         'image',
         'hyperlink',
         'timerDescription',
+        'timerDescriptionCN',
+        'timerDescriptionTW',
         'startTime',
         'endTime',
         'Action'
@@ -240,10 +368,16 @@ const Event = (props) => {
                     id: key+1,
                     eventId: String(item["eventId"]),
                     title: item["title"],
+                    titleCN: item["titleCN"] ?? '',
+                    titleTW: item["titleTW"] ?? '',
                     paragraphText: item["paragraphText"],
+                    paragraphTextCN: item["paragraphTextCN"] ?? '',
+                    paragraphTextTW: item["paragraphTextTW"] ?? '',
                     image: item["image"],
                     hyperlink: item["hyperlink"],
                     timerDescription: item["timerDescription"],
+                    timerDescriptionCN: item["timerDescriptionCN"] ?? '',
+                    timerDescriptionTW: item["timerDescriptionTW"] ?? '',
                     startTime: item["startTime"] ? timeFormat(new Date(item["startTime"]).getTime()) : '-',
                     endTime: item["endTime"] ? timeFormat(new Date(item["endTime"]).getTime()) : '-',
                     isActive: item["isActive"]
@@ -403,9 +537,15 @@ const Event = (props) => {
                 if (changedDataArray.length > 0) {
                     changedDataArray.forEach((item) => {
                         if (key === "title" ||
+                            key === "titleCN" ||
+                            key === "titleTW" ||
                             key === "paragraphText" ||
+                            key === "paragraphTextCM" ||
+                            key === "paragraphTextTW" ||
                             key === "hyperlink" ||
-                            key === "timerDescription"
+                            key === "timerDescription" ||
+                            key === "timerDescriptionCN" ||
+                            key === "timerDescriptionTW"
                         ) {
                             if (item[key].indexOf(formValuesObj[key]) !== -1) {
                                 item.used = true;
@@ -427,9 +567,15 @@ const Event = (props) => {
                 } else {
                     dataSource.forEach((item) => {{
                         if (key === "title" ||
+                            key === "titleCN" ||
+                            key === "titleTW" ||
                             key === "paragraphText" ||
+                            key === "paragraphTextCN" ||
+                            key === "paragraphTextTW" ||
                             key === "hyperlink" ||
-                            key === "timerDescription"
+                            key === "timerDescription" ||
+                            key === "timerDescriptionCN" ||
+                            key === "timerDescriptionTW"
                         ) {
                             if (item[key].indexOf(formValuesObj[key]) !== -1) {
                                 item.used = true;
@@ -540,10 +686,16 @@ const Event = (props) => {
     const handleDEable = (record) => {
         const params = {            
             title: record.title,
+            titleCN: record.titleCN,
+            titleTW: record.titleTW,
             paragraphText: record.paragraphText,
+            paragraphTextCN: record.paragraphTextCN,
+            paragraphTextTW: record.paragraphTextTW,
             image: record.image,
             hyperlink: record.hyperlink,
             timerDescription: record.timerDescription,
+            timerDescriptionCN: record.timerDescriptionCN,
+            timerDescriptionTW: record.timerDescriptionTW,
             startTime: record.startTime,
             endTime: record.endTime,
             isActive: record.isActive === 0 ? 1 : 0
@@ -643,8 +795,40 @@ const Event = (props) => {
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
+                                        label="titleCN"
+                                        name="titleCN"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="titleTW"
+                                        name="titleTW"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
                                         label="paragraphText"
                                         name="paragraphText"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="paragraphTextCN"
+                                        name="paragraphTextCN"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="paragraphTextTW"
+                                        name="paragraphTextTW"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
@@ -661,6 +845,22 @@ const Event = (props) => {
                                     <Form.Item
                                         label="timerDescription"
                                         name="timerDescription"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="timerDescriptionCN"
+                                        name="timerDescriptionCN"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="timerDescriptionTW"
+                                        name="timerDescriptionTW"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
