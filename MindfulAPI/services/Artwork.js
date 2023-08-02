@@ -298,7 +298,8 @@ async function nftStorage(artworkId, type){
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   // read data from artwork table
-  var sqlSelect = 'SELECT name, URL, type, description, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
+  //var sqlSelect = 'SELECT name, URL, type, description, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
+  var sqlSelect = 'SELECT eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
   const resultSelect = await db.query(
     sqlSelect
   );
@@ -323,10 +324,12 @@ async function nftStorage(artworkId, type){
     const filepathMintpass = process.env.filepathPrefix + filenameMintpass;
 
     const mintpassMetadata = await client.store({
-         name: resultSelect[0].name,
+         name: "MindfulOcean",
+         description: "MintPass",
+         eventId: resultSelect[0].eventId,
          type: resultSelect[0].type,
-         description: resultSelect[0].description,
-         extraInfo: resultSelect[0].extraInfo,
+         artistMessage: resultSelect[0].artistMessage,
+         //extraInfo: resultSelect[0].extraInfo,
          artworkId: artworkId,
          image: new File(
             [await fs.promises.readFile(filepathMintpass)],
@@ -357,9 +360,11 @@ async function nftStorage(artworkId, type){
     const filepathMindfultoken = process.env.filepathPrefix + filenameMindfultoken;
 
     const mindfultokenMetadata = await client.store({
-      name: resultSelect[0].name,
+      name: "MindfulOcean",
+      description: "MindfulToken",
+      eventId: resultSelect[0].eventId,
       type: resultSelect[0].type,
-      description: resultSelect[0].description,
+      artistMessage: resultSelect[0].artistMessage,
       extraInfo: resultSelect[0].extraInfo,
       artworkId: artworkId,
       image: new File(
