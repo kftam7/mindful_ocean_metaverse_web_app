@@ -68,27 +68,7 @@ const Artwork = (props) => {
             sorter: (a, b) => a["artworkId"] - b["artworkId"],
             sortOrder: sortedInfo.columnKey === 'artworkId' ? sortedInfo.order : null,
             ellipsis: true,
-            width: 90,
-            render: (text, record, index) => {
-                if (String(text) !== 'null' && String(text).length > 0) {
-                    return text;
-                } else {
-                    return "-";
-                }
-            }
-        },
-        {
-            title: 'name',
-            dataIndex: 'name',
-            key: 'name',
-            sorter: (a, b) => {
-                if (a['name']) {
-                    return a['name'].localeCompare(b['name']);
-                }
-            },
-            sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
-            ellipsis: true,
-            width: 100,
+            width: 120,
             render: (text, record, index) => {
                 if (String(text) !== 'null' && String(text).length > 0) {
                     return text;
@@ -104,7 +84,7 @@ const Artwork = (props) => {
             sorter: (a, b) => a["userId"] - b["userId"],
             sortOrder: sortedInfo.columnKey === 'userId' ? sortedInfo.order : null,
             ellipsis: true,
-            width: 80,
+            width: 120,
             render: (text, record, index) => {
                 if (String(text) !== 'null' && String(text).length > 0) {
                     return text;
@@ -117,8 +97,28 @@ const Artwork = (props) => {
             title: 'appleId',
             dataIndex: 'appleId',
             key: 'appleId',
-            sorter: (a, b) => a["appleId"] - b["appleId"],
+            sorter: (a, b) => {
+                if (a['appleId']) {
+                    return a['appleId'].localeCompare(b['appleId']);
+                }
+            },
             sortOrder: sortedInfo.columnKey === 'appleId' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'eventId',
+            dataIndex: 'eventId',
+            key: 'eventId',
+            sorter: (a, b) => a["eventId"] - b["eventId"],
+            sortOrder: sortedInfo.columnKey === 'eventId' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -144,17 +144,313 @@ const Artwork = (props) => {
             }
         },
         {
-            title: 'description',
-            dataIndex: 'description',
-            key: 'description',
+            title: 'type',
+            dataIndex: 'type',
+            key: 'type',
             sorter: (a, b) => {
-                if (a['description']) {
-                    return a['description'].localeCompare(b['description']);
+                if (a['type']) {
+                    return a['type'].localeCompare(b['type']);
                 }
             },
-            sortOrder: sortedInfo.columnKey === 'description' ? sortedInfo.order : null,
+            sortOrder: sortedInfo.columnKey === 'type' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'artistMessage',
+            dataIndex: 'artistMessage',
+            key: 'artistMessage',
+            sorter: (a, b) => {
+                if (a['artistMessage']) {
+                    return a['artistMessage'].localeCompare(b['artistMessage']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'artistMessage' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'extraInfo',
+            dataIndex: 'extraInfo',
+            key: 'extraInfo',
+            sorter: (a, b) => {
+                if (a['extraInfo']) {
+                    return a['extraInfo'].localeCompare(b['extraInfo']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'extraInfo' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'mintpassStorage',
+            dataIndex: 'mintpassStorage',
+            key: 'mintpassStorage',
+            sorter: (a, b) => {
+                if (a['mintpassStorage']) {
+                    return a['mintpassStorage'].localeCompare(b['mintpassStorage']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'mintpassStorage' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'mindfultokenStorage',
+            dataIndex: 'mindfultokenStorage',
+            key: 'mindfultokenStorage',
+            sorter: (a, b) => {
+                if (a['mindfultokenStorage']) {
+                    return a['mindfultokenStorage'].localeCompare(b['mindfultokenStorage']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'mindfultokenStorage' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'ifHomepage',
+            dataIndex: 'ifHomepage',
+            key: 'ifHomepage',
+            sorter: (a, b) => a["ifHomepage"] - b["ifHomepage"],
+            sortOrder: sortedInfo.columnKey === 'ifHomepage' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'ifMinted',
+            dataIndex: 'ifMinted',
+            key: 'ifMinted',
+            sorter: (a, b) => a["ifMinted"] - b["ifMinted"],
+            sortOrder: sortedInfo.columnKey === 'ifMinted' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'ifRedeemed',
+            dataIndex: 'ifRedeemed',
+            key: 'ifRedeemed',
+            sorter: (a, b) => a["ifRedeemed"] - b["ifRedeemed"],
+            sortOrder: sortedInfo.columnKey === 'ifRedeemed' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'authenticScarcity',
+            dataIndex: 'authenticScarcity',
+            key: 'authenticScarcity',
+            sorter: (a, b) => {
+                if (a['authenticScarcity']) {
+                    return a['authenticScarcity'].localeCompare(b['authenticScarcity']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'authenticScarcity' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'scarcityRank',
+            dataIndex: 'scarcityRank',
+            key: 'scarcityRank',
+            sorter: (a, b) => {
+                if (a['scarcityRank']) {
+                    return a['scarcityRank'].localeCompare(b['scarcityRank']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'scarcityRank' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'clusterId',
+            dataIndex: 'clusterId',
+            key: 'clusterId',
+            sorter: (a, b) => {
+                if (a['clusterId']) {
+                    return a['clusterId'].localeCompare(b['clusterId']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'clusterId' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'clusterSize',
+            dataIndex: 'clusterSize',
+            key: 'clusterSize',
+            sorter: (a, b) => {
+                if (a['clusterSize']) {
+                    return a['clusterSize'].localeCompare(b['clusterSize']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'clusterSize' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'superClusterId',
+            dataIndex: 'superClusterId',
+            key: 'superClusterId',
+            sorter: (a, b) => {
+                if (a['superClusterId']) {
+                    return a['superClusterId'].localeCompare(b['superClusterId']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'superClusterId' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'superClusterSize',
+            dataIndex: 'superClusterSize',
+            key: 'superClusterSize',
+            sorter: (a, b) => {
+                if (a['superClusterSize']) {
+                    return a['superClusterSize'].localeCompare(b['superClusterSize']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'superClusterSize' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'isActive',
+            dataIndex: 'isActive',
+            key: 'isActive',
+            sorter: (a, b) => a["isActive"] - b["isActive"],
+            sortOrder: sortedInfo.columnKey === 'isActive' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'createTime',
+            dataIndex: 'createTime',
+            key: 'createTime',
+            sorter: (a, b) =>  new Date(a['createTime']).getTime() - new Date(b['createTime']).getTime(),
+            sortOrder: sortedInfo.columnKey === 'createTime' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 200,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'updateTime',
+            dataIndex: 'updateTime',
+            key: 'updateTime',
+            sorter: (a, b) =>  new Date(a['updateTime']).getTime() - new Date(b['updateTime']).getTime(),
+            sortOrder: sortedInfo.columnKey === 'updateTime' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 200,
             render: (text, record, index) => {
                 if (String(text) !== 'null' && String(text).length > 0) {
                     return text;
@@ -172,6 +468,7 @@ const Artwork = (props) => {
             render: (text, record, index) => {
                 return <Space>
                     <Button type="primary" onClick={() => {handleEdit(record)}}>{language["button.edit"]}</Button>
+                    <Button type="primary" onClick={() => {handleDEable(record)}}>{record.isActive === '1' ? language["button.disable"] : language["button.enable"]}</Button>
                 </Space>
             }
         },
@@ -179,11 +476,27 @@ const Artwork = (props) => {
 
     const selectDefaultValue = [
         'artworkId',
-        'name',
         'userId',
         'appleId',
+        'eventId',
         'URL',
-        'description',
+        'type',
+        'artistMessage',
+        'extraInfo',
+        'mintpassStorage',
+        'mindfultokenStorage',
+        'ifHomepage',
+        'ifMinted',
+        'ifRedeemed',
+        'authenticScarcity',
+        'scarcityRank',
+        'clusterId',
+        'clusterSize',
+        'superClusterId',
+        'superClusterSize',
+        'isActive',
+        'createTime',
+        'updateTime',
         'Action'
     ];
 
@@ -201,11 +514,27 @@ const Artwork = (props) => {
                 data.push({
                     id: key+1,
                     artworkId: String(item["artworkId"]),
-                    name: item["name"],
                     userId: String(item["userId"]),
                     appleId: item["appleId"],
+                    eventId: String(item["eventId"]),
                     URL: item["URL"],
-                    description: item["description"] ? item["description"] : ''
+                    type: item["type"],
+                    artistMessage: item["artistMessage"],
+                    extraInfo: item["extraInfo"],
+                    mintpassStorage: item["mintpassStorage"],
+                    mindfultokenStorage: item["mindfultokenStorage"],
+                    ifHomepage: String(item["ifHomepage"]),
+                    ifMinted: String(item["ifMinted"]),
+                    ifRedeemed: String(item["ifRedeemed"]),
+                    authenticScarcity: String(item["authenticScarcity"]),
+                    scarcityRank: String(item["scarcityRank"]),
+                    clusterId: String(item["clusterId"]),
+                    clusterSize: String(item["clusterSize"]),
+                    superClusterId: String(item["superClusterId"]),
+                    superClusterSize: String(item["superClusterSize"]),
+                    isActive: String(item["isActive"]),
+                    createTime: item["createTime"] ? timeFormat(new Date(item["createTime"]).getTime()) : '-',
+                    updateTime: item["updateTime"] ? timeFormat(new Date(item["updateTime"]).getTime()) : '-',
                 });
             });
             console.log(data)
@@ -225,6 +554,17 @@ const Artwork = (props) => {
             // });
         })
     },[count]);
+
+    const timeFormat = (tiemstamp) => {
+        var date = new Date(tiemstamp);
+        const Y = date.getFullYear();
+        const M = (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1);
+        const D = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        const hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        const mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        const ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        return Y + "-" + M + "-" + D + " " + hh + ":" + mm + ":" + ss;
+    };
 
     const onSelectChange = (newSelectedRowKeys) => {
         setSelectedRowKeys(newSelectedRowKeys);
@@ -351,11 +691,25 @@ const Artwork = (props) => {
                 if (changedDataArray.length > 0) {
                     changedDataArray.forEach((item) => {
                         if (key === "artworkId" ||
-                            key === "name" ||
                             key === "userId" ||
                             key === "appleId" ||
-                            key === "URL" ||
-                            key === "description"
+                            key === 'eventId' ||
+                            key === 'URL' ||
+                            key === 'type' ||
+                            key === 'artistMessage' ||
+                            key === 'extraInfo' ||
+                            key === 'mintpassStorage' ||
+                            key === 'mindfultokenStorage' ||
+                            key === 'ifHomepage' ||
+                            key === 'ifMinted' ||
+                            key === 'ifRedeemed' ||
+                            key === 'authenticScarcity' ||
+                            key === 'scarcityRank' ||
+                            key === 'clusterId' ||
+                            key === 'clusterSize' ||
+                            key === 'superClusterId' ||
+                            key === 'superClusterSize' ||
+                            key === 'isActive'
                         ) {
                             if (item[key].indexOf(formValuesObj[key]) !== -1) {
                                 item.used = true;
@@ -363,8 +717,8 @@ const Artwork = (props) => {
                                 item.used = false;
                             }
                         }
-                        if (key === "startTime" ||
-                            key === "endTime"
+                        if (key === "createTime" ||
+                            key === "updateTime"
                         ) {
                             if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
                             new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
@@ -377,19 +731,33 @@ const Artwork = (props) => {
                 } else {
                     dataSource.forEach((item) => {{
                         if (key === "artworkId" ||
-                            key === "name" ||
-                            key === "userId" ||
-                            key === "appleId" ||
-                            key === "URL" ||
-                            key === "description"
+                        key === "userId" ||
+                        key === "appleId" ||
+                        key === 'eventId' ||
+                        key === 'URL' ||
+                        key === 'type' ||
+                        key === 'artistMessage' ||
+                        key === 'extraInfo' ||
+                        key === 'mintpassStorage' ||
+                        key === 'mindfultokenStorage' ||
+                        key === 'ifHomepage' ||
+                        key === 'ifMinted' ||
+                        key === 'ifRedeemed' ||
+                        key === 'authenticScarcity' ||
+                        key === 'scarcityRank' ||
+                        key === 'clusterId' ||
+                        key === 'clusterSize' ||
+                        key === 'superClusterId' ||
+                        key === 'superClusterSize' ||
+                        key === 'isActive'
                         ) {
                             if (item[key].indexOf(formValuesObj[key]) !== -1) {
                                 item.used = true;
                                 changedDataArray.push(item);
                             }
                         }
-                        if (key === "startTime" ||
-                            key === "endTime"
+                        if (key === "createTime" ||
+                            key === "updateTime"
                         ) {
                             if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
                                 new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
@@ -500,6 +868,51 @@ const Artwork = (props) => {
         setModalAddVisiable(false);
         setModalData({});
     };
+    
+    // 禁用，启动
+    const handleDEable = (record) => {
+        const params = {
+            artworkId: record.artworkId,
+            userId: record.userId,
+            appleId: record.appleId,
+            eventId: record.eventId,
+            URL: record.URL,
+            type: record.type,
+            artistMessage: record.artistMessage,
+            extraInfo: record.extraInfo,
+            mintpassStorage: record.mintpassStorage,
+            mindfultokenStorage: record.mindfultokenStorage,
+            ifHomepage: record.ifHomepage,
+            ifMinted: record.ifMinted,
+            ifRedeemed: record.ifRedeemed,
+            authenticScarcity: record.authenticScarcity,
+            scarcityRank: record.scarcityRank,
+            clusterId: record.clusterId,
+            clusterSize: record.clusterSize,
+            superClusterId: record.superClusterId,
+            superClusterSize: record.superClusterSize,
+            isActive: record.isActive === '0' ? '1' : '0',
+            createTime: record.createTime,
+            updateTime: record.updateTime,
+        };
+        editArtwork(record.artworkId, params)
+        .then(response => response.json())
+        .then(response => {
+            if(response.message === 'Record updated successfully'){
+                modalAddOk();
+                notification["success"]({
+                    message: response.message
+                });
+            }else{
+                notification["error"]({
+                    message: response.message
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    };
 
     return (
         <>
@@ -564,14 +977,6 @@ const Artwork = (props) => {
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="name"
-                                        name="name"
-                                    >
-                                        <Input type="text" allowClear={true} />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
-                                    <Form.Item
                                         label="userId"
                                         name="userId"
                                     >
@@ -588,6 +993,14 @@ const Artwork = (props) => {
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
+                                        label="eventId"
+                                        name="eventId"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
                                         label="URL"
                                         name="URL"
                                     >
@@ -596,10 +1009,138 @@ const Artwork = (props) => {
                                 </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
-                                        label="description"
-                                        name="description"
+                                        label="type"
+                                        name="type"
                                     >
                                         <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="artistMessage"
+                                        name="artistMessage"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="extraInfo"
+                                        name="extraInfo"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="mintpassStorage"
+                                        name="mintpassStorage"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="mindfultokenStorage"
+                                        name="mindfultokenStorage"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="ifHomepage"
+                                        name="ifHomepage"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="ifMinted"
+                                        name="ifMinted"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="ifRedeemed"
+                                        name="ifRedeemed"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="authenticScarcity"
+                                        name="authenticScarcity"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="scarcityRank"
+                                        name="scarcityRank"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="clusterId"
+                                        name="clusterId"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="clusterSize"
+                                        name="clusterSize"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="superClusterId"
+                                        name="superClusterId"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="superClusterSize"
+                                        name="superClusterSize"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="isActive"
+                                        name="isActive"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="createTime"
+                                        name="createTime"
+                                    >
+                                        <RangePicker style={{ width: '100%', }} />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="updateTime"
+                                        name="updateTime"
+                                    >
+                                        <RangePicker style={{ width: '100%', }} />
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>

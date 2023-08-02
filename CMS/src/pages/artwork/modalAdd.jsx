@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Modal, notification } from 'antd';
+import { Form, Input, Select, Modal, DatePicker, notification } from 'antd';
+import moment from "moment";
 import './index.css';
 
 import { addArtwork, editArtwork } from "../../services/artwork";
@@ -11,17 +12,41 @@ const ModalAdd = (props) => {
     const [form] = Form.useForm();
     // Modal ok 按钮 loading
     const [isModalLoading, setIsModalLoading] = useState(false);
+    // createTime
+    const [createTime, setCreateTime] = useState('');
+    // setUpdateTime
+    const [updateTime, setUpdateTime] = useState('');
+    const dateFormat = 'YYYY-MM-DD HH:mm:ss';
 
     useEffect(() => {
         if(modalType === 'add') return;
 
         form.setFieldsValue({
-            name: modalData.name,
+            artworkId: modalData.artworkId,
             userId: modalData.userId,
             appleId: modalData.appleId,
+            eventId: modalData.eventId,
             URL: modalData.URL,
-            description: modalData.description
+            type: modalData.type,
+            artistMessage: modalData.artistMessage,
+            extraInfo: modalData.extraInfo,
+            mintpassStorage: modalData.mintpassStorage,
+            mindfultokenStorage: modalData.mindfultokenStorage,
+            ifHomepage: modalData.ifHomepage,
+            ifMinted: modalData.ifMinted,
+            ifRedeemed: modalData.ifRedeemed,
+            authenticScarcity: modalData.authenticScarcity,
+            scarcityRank: modalData.scarcityRank,
+            clusterId: modalData.clusterId,
+            clusterSize: modalData.clusterSize,
+            superClusterId: modalData.superClusterId,
+            superClusterSize: modalData.superClusterSize,
+            isActive: modalData.isActive,
+            createTime: moment(modalData.createTime),
+            updateTime: moment(modalData.updateTime),
         });
+        setCreateTime(modalData.createTime);
+        setUpdateTime(modalData.updateTime);
             
     },[modalType, modalData])
 
@@ -49,17 +74,22 @@ const ModalAdd = (props) => {
     
     // 定义验证规则
     const formItemRules = {
-        name: [{ required: true, message: 'Please input name!' }],
+        artworkId: [{ required: true, message: 'Please input artworkId!' }],
         userId: [{ required: true, message: 'Please input userId!' }],
         appleId: [{ required: true, message: 'Please input appleId!' }],
-        URL: [
-            { required: true, message: 'Please input URL!' },
-            { validator: validateUrl }
-        ],
-        description: [
-            { required: true, message: 'Please input description!' },
-            { validator: validateInputLength1 }
-        ]
+        eventId: [{ required: true, message: 'Please input eventId!' }],
+    };
+
+    // 选中日期后触发 createTime
+    const handleDateChangeStartTime = (date, dateString) => {
+        const formattedDate = moment(dateString).format(dateFormat);
+        setCreateTime(formattedDate)
+    };
+
+    // 选中日期后触发 setUpdateTime
+    const handleDateChangeEndTime = (date, dateString) => {
+        const formattedDate = moment(dateString).format(dateFormat);
+        setUpdateTime(formattedDate)
     };
 
     // 表单通过校验事件
@@ -68,11 +98,28 @@ const ModalAdd = (props) => {
             setIsModalLoading(true);
             if(modalType === 'add'){
                 const params = [{
-                    name: values.name,
+                    artworkId: values.artworkId,
                     userId: values.userId,
-                    // appleId: values.appleId,
+                    appleId: values.appleId,
+                    eventId: values.eventId,
                     URL: values.URL,
-                    description: values.description
+                    type: values.type,
+                    artistMessage: values.artistMessage,
+                    extraInfo: values.extraInfo,
+                    mintpassStorage: values.mintpassStorage,
+                    mindfultokenStorage: values.mindfultokenStorage,
+                    ifHomepage: values.ifHomepage,
+                    ifMinted: values.ifMinted,
+                    ifRedeemed: values.ifRedeemed,
+                    authenticScarcity: values.authenticScarcity,
+                    scarcityRank: values.scarcityRank,
+                    clusterId: values.clusterId,
+                    clusterSize: values.clusterSize,
+                    superClusterId: values.superClusterId,
+                    superClusterSize: values.superClusterSize,
+                    isActive: values.isActive,
+                    createTime: createTime,
+                    updateTime: updateTime,
                 }];
                 addArtwork(params)
                 .then(response => response.json())
@@ -96,11 +143,28 @@ const ModalAdd = (props) => {
                 })
             }else{
                 const params = {
-                    name: values.name,
+                    artworkId: values.artworkId,
                     userId: values.userId,
-                    // appleId: values.appleId,
+                    appleId: values.appleId,
+                    eventId: values.eventId,
                     URL: values.URL,
-                    description: values.description
+                    type: values.type,
+                    artistMessage: values.artistMessage,
+                    extraInfo: values.extraInfo,
+                    mintpassStorage: values.mintpassStorage,
+                    mindfultokenStorage: values.mindfultokenStorage,
+                    ifHomepage: values.ifHomepage,
+                    ifMinted: values.ifMinted,
+                    ifRedeemed: values.ifRedeemed,
+                    authenticScarcity: values.authenticScarcity,
+                    scarcityRank: values.scarcityRank,
+                    clusterId: values.clusterId,
+                    clusterSize: values.clusterSize,
+                    superClusterId: values.superClusterId,
+                    superClusterSize: values.superClusterSize,
+                    isActive: values.isActive,
+                    createTime: createTime,
+                    updateTime: updateTime,
                 };
                 editArtwork(modalData.artworkId, params)
                 .then(response => response.json())
@@ -162,12 +226,12 @@ const ModalAdd = (props) => {
                 }}
             >
                 <Form.Item
-                    label='name'
-                    name="name"
-                    rules={formItemRules.name}
+                    label='artworkId'
+                    name="artworkId"
+                    rules={formItemRules.artworkId}
                 >
                     <Input
-                        placeholder='name'
+                        placeholder='artworkId'
                         allowClear
                         disabled={modalType === "edit" ? true : false}
                     />
@@ -198,6 +262,17 @@ const ModalAdd = (props) => {
                     : ''
                 }
                 <Form.Item
+                    label='eventId'
+                    name="eventId"
+                    rules={formItemRules.eventId}
+                >
+                    <Input
+                        placeholder='eventId'
+                        allowClear
+                        disabled
+                    />
+                </Form.Item>
+                <Form.Item
                     label='URL'
                     name="URL"
                     rules={formItemRules.URL}
@@ -208,14 +283,187 @@ const ModalAdd = (props) => {
                     />
                 </Form.Item>
                 <Form.Item
-                    label='description'
-                    name="description"
-                    rules={formItemRules.description}
+                    label='type'
+                    name="type"
+                    rules={formItemRules.type}
                 >
-                    <TextArea
-                        rows={4}
+                <Input
+                    placeholder='type'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='artistMessage'
+                    name="artistMessage"
+                    rules={formItemRules.type}
+                >
+                <Input
+                    placeholder='artistMessage'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='extraInfo'
+                    name="extraInfo"
+                    rules={formItemRules.extraInfo}
+                >
+                <Input
+                    placeholder='extraInfo'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='mintpassStorage'
+                    name="mintpassStorage"
+                    rules={formItemRules.mintpassStorage}
+                >
+                <Input
+                    placeholder='mintpassStorage'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='mindfultokenStorage'
+                    name="mindfultokenStorage"
+                    rules={formItemRules.mindfultokenStorage}
+                >
+                <Input
+                    placeholder='mindfultokenStorage'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='ifHomepage'
+                    name="ifHomepage"
+                    rules={formItemRules.ifHomepage}
+                >
+                <Input
+                    placeholder='ifHomepage'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='ifMinted'
+                    name="ifMinted"
+                    rules={formItemRules.ifMinted}
+                >
+                <Input
+                    placeholder='ifMinted'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='ifRedeemed'
+                    name="ifRedeemed"
+                    rules={formItemRules.ifRedeemed}
+                >
+                <Input
+                    placeholder='ifRedeemed'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='authenticScarcity'
+                    name="authenticScarcity"
+                    rules={formItemRules.authenticScarcity}
+                >
+                <Input
+                    placeholder='authenticScarcity'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='scarcityRank'
+                    name="scarcityRank"
+                    rules={formItemRules.scarcityRank}
+                >
+                <Input
+                    placeholder='scarcityRank'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='clusterId'
+                    name="clusterId"
+                    rules={formItemRules.clusterId}
+                >
+                <Input
+                    placeholder='clusterId'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='clusterSize'
+                    name="clusterSize"
+                    rules={formItemRules.clusterSize}
+                >
+                <Input
+                    placeholder='clusterSize'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='superClusterId'
+                    name="superClusterId"
+                    rules={formItemRules.superClusterId}
+                >
+                <Input
+                    placeholder='superClusterId'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='superClusterSize'
+                    name="superClusterSize"
+                    rules={formItemRules.superClusterSize}
+                >
+                <Input
+                    placeholder='superClusterSize'
+                    allowClear
+                />
+                </Form.Item>
+                <Form.Item
+                    label='isActive'
+                    name="isActive"
+                    rules={formItemRules.isActive}
+                >
+                    <Select
                         allowClear
-                        placeholder='description'
+                        placeholder='isActive'
+                    >
+                        <Option value="0" key="0">0</Option>
+                        <Option value="1" key="1">1</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    label='createTime'
+                    name="createTime"
+                    rules={formItemRules.createTime}
+                >
+                    <DatePicker
+                        placeholder='createTime'
+                        style={{ width: '100%' }}
+                        allowClear
+                        showTime
+                        format={dateFormat}
+                        onChange={handleDateChangeStartTime}
+                        disabled
+                    />
+                </Form.Item>
+                <Form.Item
+                    label='updateTime'
+                    name="updateTime"
+                    format="YYYY-MM-DD HH:mm:ss"
+                    rules={formItemRules.updateTime}
+                >
+                    <DatePicker
+                        placeholder='updateTime'
+                        style={{ width: '100%' }}
+                        allowClear
+                        showTime
+                        format={dateFormat}
+                        onChange={handleDateChangeEndTime}
+                        disabled
                     />
                 </Form.Item>
             </Form>
