@@ -17,12 +17,14 @@ async function getArtwork(appleId){
     // calleed by end user, return ifMinted = 0 only
     if (appleId){
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        `SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
       );
     // called by admin, return ifMinted = 0 & 1     
     }else{
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
+        `SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
+        //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
       );
     }
   
@@ -40,7 +42,8 @@ async function getHomepageArtwork(){
 
 
   var rows = await db.query(
-    `SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
+    //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
+    `SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
   );
   
   const data = helper.emptyOrRows(rows);
@@ -56,6 +59,7 @@ async function getHomepageArtwork(){
 async function createArtwork(artworkRecord){
 
   // censor contents (name, description, extraInfo )
+  /*
   let validResult = await validate.validateContent(artworkRecord[0].name);
   if (!validResult) {
     return ("Input contains explicit contents");
@@ -67,6 +71,14 @@ async function createArtwork(artworkRecord){
   validResult = await validate.validateContent(artworkRecord[0].extraInfo);
   if (!validResult) {
     return ("Input contains explicit contents");
+  }
+  */
+
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
+  validResult = await validate.validateContent(artworkRecord[0].artistMessage);
+  if (!validResult) {
+    return ("Artist Message contains explicit contents");
   }
 
   // get the userId
@@ -82,15 +94,21 @@ async function createArtwork(artworkRecord){
   }else{
 
     var rows = await db.query(
-      `INSERT INTO artwork (userId, name, URL, type, description, extraInfo, createTime, updateTime, ifHomepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [userIdResult[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime, artworkRecord[0].ifHomepage]
+      //`INSERT INTO artwork (userId, name, URL, type, description, extraInfo, createTime, updateTime, ifHomepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [userIdResult[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime, artworkRecord[0].ifHomepage]
+      `INSERT INTO artwork (userId, eventId, URL, type, artistMessage, ifHomepage, ifMinted, ifRedeemed, isActive, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [userIdResult[0].userId, artworkRecord[0].eventId, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].artistMessage, artworkRecord[0].ifHomepage, artworkRecord[0].ifMinted, artworkRecord[0].ifRedeemed, artworkRecord[0].isActive, currentTimeSql, currentTimeSql]
     );
   
+  /*
     var queryResult = await db.query(
-      `SELECT artworkId FROM artwork WHERE userId = ? AND name = ?`, [userIdResult[0].userId, artworkRecord[0].name]
+      //`SELECT artworkId FROM artwork WHERE userId = ? AND name = ?`, [userIdResult[0].userId, artworkRecord[0].name]
+      `SELECT LAST_INSERT_ID() AS artworkId`
     );
     
-    const artworkId = queryResult[0].artworkId;
+*/
+    //const artworkId = queryResult[0].artworkId;
+    const artworkId = rows.insertId;
     return {artworkId};
+
   }
 
   
@@ -99,6 +117,7 @@ async function createArtwork(artworkRecord){
 /* update Artwork */
 async function updateArtwork(artworkId, artworkRecord){
 
+/*
   // censor contents (name, description, extraInfo )
   let validResult = await validate.validateContent(artworkRecord.name);
   if (!validResult) {
@@ -111,6 +130,14 @@ async function updateArtwork(artworkId, artworkRecord){
   validResult = await validate.validateContent(artworkRecord.extraInfo);
   if (!validResult) {
     return ("Input contains explicit contents");
+  }
+*/
+
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
+  validResult = await validate.validateContent(artworkRecord.artistMessage);
+  if (!validResult) {
+    return ("Artist Message contains explicit contents");
   }
 
   // get the userId
@@ -125,24 +152,89 @@ async function updateArtwork(artworkId, artworkRecord){
     return {message};
   }else{  
 
-    sql = 'UPDATE artwork SET userId = "' + userIdResult[0].userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", type = "' + artworkRecord.type + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '", ifHomepage = ' + artworkRecord.ifHomepage + ' WHERE artworkId = "' + artworkId + '";';
+  //sql = 'UPDATE artwork SET userId = "' + userIdResult[0].userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", type = "' + artworkRecord.type + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '", ifHomepage = ' + artworkRecord.ifHomepage + ' WHERE artworkId = "' + artworkId + '";';
   
+  sql = 'UPDATE artwork SET userId = ' + userIdResult[0].userId;
+
+  if (artworkRecord.eventId){
+    sql = sql + ', eventId = ' + artworkRecord.eventId; 
+  }
+
+  if (artworkRecord.URL){
+    sql = sql + ', URL = "' + artworkRecord.URL + '"'; 
+  }
+
+  if (artworkRecord.type){
+    sql = sql + ', type = "' + artworkRecord.type + '"'; 
+  }
+
+  if (artworkRecord.artistMessage){
+    sql = sql + ', artistMessage = "' + artworkRecord.artistMessage + '"'; 
+  }
+
+  if (artworkRecord.extraInfo){
+    sql = sql + ', extraInfo = "' + artworkRecord.extraInfo + '"'; 
+  }
+
+  if (artworkRecord.ifHomepage){
+    sql = sql + ', ifHomepage = ' + artworkRecord.ifHomepage; 
+  }
+
+  if (artworkRecord.ifMinted){
+    sql = sql + ', ifMinted = ' + artworkRecord.ifMinted; 
+  }
+
+  if (artworkRecord.ifRedeemed){
+    sql = sql + ', ifRedeemed = ' + artworkRecord.ifRedeemed; 
+  }
+
+  if (artworkRecord.authenticScarcity){
+    sql = sql + ', authenticScarcity = ' + artworkRecord.authenticScarcity; 
+  }
+
+  if (artworkRecord.scarcityRank){
+    sql = sql + ', scarcityRank = ' + artworkRecord.scarcityRank; 
+  }
+
+  if (artworkRecord.clusterId){
+    sql = sql + ', clusterId = ' + artworkRecord.clusterId; 
+  }
+
+  if (artworkRecord.clusterSize){
+    sql = sql + ', clusterSize = ' + artworkRecord.clusterSize; 
+  }
+
+  if (artworkRecord.superClusterId){
+    sql = sql + ', superClusterId = ' + artworkRecord.superClusterId; 
+  }
+
+  if (artworkRecord.superClusterSize){
+    sql = sql + ', superClusterSize = ' + artworkRecord.superClusterSize; 
+  }
+
+  if (artworkRecord.isActive){
+    sql = sql + ', isActive = ' + artworkRecord.isActive; 
+  }
+
+  sql = sql + ', updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';'; 
+
     console.log(sql);
     
     const result = await db.query(
       sql
     );
-  
+
+
     if (result.affectedRows) {
       message = 'Record updated successfully';
     }
-  
+    
     return {message};
   }
   
 }
 
-/* update Artwork */
+/* set Minted */
 async function setMintedArtwork(artworkId){
 
   // read data from artwork table
@@ -158,6 +250,34 @@ async function setMintedArtwork(artworkId){
 
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
   sql = 'UPDATE artwork SET ifMinted = 1, updateTime = "' + currentTimeSql + '" WHERE artworkId = "' + artworkId + '";';
+  const result = await db.query(
+    sql
+  );
+  
+  if (result.affectedRows) {
+    message = 'Record updated successfully';
+  }
+  
+  return {message};
+  
+}
+
+/* set Redeemed */
+async function setRedeemedArtwork(artworkId){
+
+  // read data from artwork table
+  var sqlSelect = 'SELECT count(*) AS count FROM artwork WHERE artworkId = ' + artworkId; 
+  const resultSelect = await db.query(
+    sqlSelect
+  );
+
+  // if artworkId doesn't exist
+  if (resultSelect[0].count == 0){
+    return ("No record found for this artworkId");
+  }
+
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  sql = 'UPDATE artwork SET ifRedeemed = 1, updateTime = "' + currentTimeSql + '" WHERE artworkId = "' + artworkId + '";';
   const result = await db.query(
     sql
   );
@@ -312,5 +432,6 @@ module.exports = {
   createArtwork,
   updateArtwork,
   setMintedArtwork,
+  setRedeemedArtwork,
   nftStorage
 };

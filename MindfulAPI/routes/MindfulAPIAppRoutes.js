@@ -270,6 +270,18 @@ router.put('/setmintedartwork/:artworkId', async function(req, res, next) {
   }
 });
 
+/* PUT redeemed Artwork */
+router.put('/setredeemedartwork/:artworkId', async function(req, res, next) {  
+  try {
+    res.json(await Artwork.setRedeemedArtwork(req.params.artworkId));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while updating programming language`, err.message);
+    next(err);
+  }
+});
+
+
 /* POST Artwork Files on NFT Storage for MintPass */
 router.post('/nftstorage/mintpass/:artworkId', async function(req, res, next) {
   try {
