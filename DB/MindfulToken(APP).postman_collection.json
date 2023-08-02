@@ -2302,7 +2302,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"name\":\"sample-test\",\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"Sample test\",\n     \"extraInfo\":\"Sample test extra\",\n     \"createTime\":\"2023-06-28 00:00:00\",\n     \"updateTime\":\"2023-06-28 00:00:00\",\n     \"ifHomepage\": 0\n  }\n]",
+									"raw": "[\n  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 1,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"artistMessage\":\"normal\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 0,\n     \"ifRedeemed\": 0,\n     \"isActive\": 1,\n     \"createTime\":\"2023-06-28 00:00:00\",\n     \"updateTime\":\"2023-06-28 00:00:00\"\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2362,7 +2362,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"name\":\"sample-test-explicit\",\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"description\":\"What the fuck\",\n     \"extraInfo\":\"Sample test extra\",\n     \"createTime\":\"2023-06-28 00:00:00\",\n     \"updateTime\":\"2023-06-28 00:00:00\",\n     \"ifHomepage\": 0\n  }\n]",
+									"raw": "[\n  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 1,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"artistMessage\":\"normal\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 0,\n     \"ifRedeemed\": 0,\n     \"isActive\": 1,\n     \"createTime\":\"2023-06-28 00:00:00\",\n     \"updateTime\":\"2023-06-28 00:00:00\"\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2485,7 +2485,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworknew7\",\n   \"URL\":\"http://artworktestnew2\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\",\n   \"ifHomepage\": 1\n}",
+									"raw": "  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 1,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"artistMessage\":\"normal\",\n     \"extraInfo\": \"extra\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 0,\n     \"ifRedeemed\": 0,\n     \"isActive\": 1,\n     \"authenticScarcity\": 100,\n     \"scarcityRank\": 100,\n     \"clusterId\": 100,\n     \"clusterSize\": 100,\n     \"superClusterId\": 100,\n     \"superClusterSize\": 100\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2546,7 +2546,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworknew7\",\n   \"URL\":\"http://artworktestnew2\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\",\n   \"ifHomepage\": 1\n}",
+									"raw": "  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 1,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"artistMessage\":\"What the fuck\",\n     \"extraInfo\": \"extra\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 0,\n     \"ifRedeemed\": 0,\n     \"isActive\": 0,\n     \"authenticScarcity\": 100,\n     \"scarcityRank\": 100,\n     \"clusterId\": 100,\n     \"clusterSize\": 100,\n     \"superClusterId\": 100,\n     \"superClusterSize\": 100\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2561,6 +2561,67 @@
 									"path": [
 										"artwork",
 										"48"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "PUT artwork Request test",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 1,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"artistMessage\":\"What the fuck\",\n     \"extraInfo\": \"extra\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 0,\n     \"ifRedeemed\": 0\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/artwork/50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artwork",
+										"50"
 									]
 								}
 							},
@@ -2620,12 +2681,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/artwork/{artworkId}",
+							"raw": "{{baseUrl}}/setmintedartwork/{artworkId}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"artwork",
+								"setmintedartwork",
 								"{artworkId}"
 							]
 						},
@@ -2678,12 +2739,136 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/setMintedArtwork/1",
+									"raw": "{{baseUrl}}/setmintedartwork/1",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"setMintedArtwork",
+										"setmintedartwork",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "PUT setRedeemedArtwork Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/setredeemedartwork/{artworkId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"setredeemedartwork",
+								"{artworkId}"
+							]
+						},
+						"description": "### API endpoint to update the artwork as minted\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "PUT setMintedArtwork Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n   \"name\":\"artworktest99\",\n   \"URL\":\"http://artworktest1\",\n   \"type\": \"whale\",\n   \"description\":\"desctest1\",\n   \"extraInfo\":\"extratest1\",\n   \"createTime\":\"2021-01-01 00:00:00\",\n   \"updateTime\":\"2025-12-31 00:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/setredeemedartwork/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"setredeemedartwork",
 										"1"
 									]
 								}
@@ -2795,7 +2980,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n     \"appleId\":\"001953.837897e29b434ebd81b3c9f13efb7bd3.0808\",\n     \"name\":\"artworktest9\",\n     \"URL\":\"http://artworktest1\",\n     \"type\": \"fish\",\n     \"description\":\"desctest1\",\n     \"extraInfo\":\"extratest1\",\n     \"createTime\":\"2021-01-01 00:00:00\",\n     \"updateTime\":\"2025-12-31 00:00:00\"\n  }\n]",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
