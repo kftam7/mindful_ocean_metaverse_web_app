@@ -208,11 +208,14 @@ const User = (props) => {
                 title: 'artworkId',
                 dataIndex: 'artworkId',
                 key: 'artworkId',
+                render: (text) => {
+                    return <Link to='/artwork'>{text}</Link>;
+                }
             },
             {
-                title: 'name',
-                dataIndex: 'name',
-                key: 'name',
+                title: 'eventId',
+                dataIndex: 'eventId',
+                key: 'eventId',
             },
             {
                 title: 'URL',
@@ -227,9 +230,14 @@ const User = (props) => {
                 }
             },
             {
-                title: 'description',
-                dataIndex: 'description',
-                key: 'description',
+                title: 'type',
+                dataIndex: 'type',
+                key: 'type',
+            },
+            {
+                title: 'artistMessage',
+                dataIndex: 'artistMessage',
+                key: 'artistMessage',
             }
         ];
         const columnsJoinedEvent = [
