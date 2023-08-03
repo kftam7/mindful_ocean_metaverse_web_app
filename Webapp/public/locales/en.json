@@ -117,6 +117,7 @@
     "page.userProfile.personalWebsite": "Personal Website",
     "page.userProfile.websiteURL": "Website URL",
     "page.userProfile.description": "Description",
+    "page.userProfile.artistMessage": "artistMessage",
     "page.userProfile.automaticallyFill": "Automatically fill this in when submiting artwork.",
     "page.userProfile.submittedArtworks": "Submitted Artworks",
     "page.userProfile.ownedNFTs": "Mintpass",
@@ -144,6 +145,7 @@
     "input.placeholder.email": "Subscribe here",
 
     "error.info.descriptionCannotBeEmpty": "Description cannot be empty",
+    "error.info.artistMessageCannotBeEmpty": "ArtistMessage cannot be empty",
     "error.info.descriptionCannotExceed500Words": "Description cannot exceed 500 words",
     "error.info.personalInformationCannotBeEmpty": "Personal Information cannot be empty",
     "error.info.websiteURLCannotBeEmpty": "Website URL cannot be empty",

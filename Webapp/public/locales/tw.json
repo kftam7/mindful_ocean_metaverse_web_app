@@ -117,6 +117,7 @@
     "page.userProfile.personalWebsite": "個人網站",
     "page.userProfile.websiteURL": "網站URL",
     "page.userProfile.description": "描述",
+    "page.userProfile.artistMessage": "artistMessage",
     "page.userProfile.automaticallyFill": "提交作品時自動填寫。",
     "page.userProfile.submittedArtworks": "已提交的藝術品",
     "page.userProfile.ownedNFTs": "已擁有的分鐘數",
@@ -144,6 +145,7 @@
     "input.placeholder.email": "在此處訂閱",
     
     "error.info.descriptionCannotBeEmpty": "描述不能為空",
+    "error.info.artistMessageCannotBeEmpty": "ArtistMessage cannot be empty",
     "error.info.descriptionCannotExceed500Words": "描述不能超过500字",
     "error.info.personalInformationCannotBeEmpty": "個人信息不能為空",
     "error.info.websiteURLCannotBeEmpty": "網站URL不能為空",

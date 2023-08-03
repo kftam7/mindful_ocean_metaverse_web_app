@@ -14,19 +14,19 @@ const TestArtwork = () => {
   const [loading, setLoading] = useState(false);
   const [appleId, setAppleId] = useState();
   const [formData, setFormData] = useState({
-    name: '',
-    type: '',
-    description: '',
+    eventId: '',
+    type: 'fish',
+    artistMessage: '',
     extraInfo: '',
-    ifHomepage: '',
+    ifHomepage: '0',
     uploadYourFile: '',
     createTime: '2021-01-01 00:00:00',
     updateTime: '2023-06-15 23:58:42'
   });
   const [formErrors, setFormErrors] = useState({
-    name: false,
+    eventId: false,
     type: false,
-    description: false,
+    artistMessage: false,
     extraInfo: false,
     ifHomepage: false,
     uploadYourFile: false,
@@ -45,11 +45,11 @@ const TestArtwork = () => {
 
   const resetForm = () => {
     const data = {
-      name: '',
-      type: '',
-      description: '',
+      eventId: '',
+      type: 'fish',
+      artistMessage: '',
       extraInfo: '',
-      ifHomepage: '',
+      ifHomepage: '0',
       uploadYourFile: '',
       createTime: '',
       updateTime: ''
@@ -57,9 +57,9 @@ const TestArtwork = () => {
     setFormData(data);
     
     const dataError = {
-      name: false,
+      eventId: false,
       type: false,
-      description: false,
+      artistMessage: false,
       extraInfo: false,
       ifHomepage: false,
       uploadYourFile: false
@@ -128,7 +128,7 @@ const TestArtwork = () => {
   const submitArtwork = async (event) => {
     event.preventDefault();
     // 从 formData 对象中获取表单的值
-    const { name, type, description, extraInfo, ifHomepage, uploadYourFile, createTime, updateTime } = formData;
+    const { eventId, type, artistMessage, extraInfo, ifHomepage, uploadYourFile, createTime, updateTime } = formData;
     let crossName = true;
     let crossType = true;
     let crossDescription = true;
@@ -137,7 +137,7 @@ const TestArtwork = () => {
     let crossUploadYourFile = true;
     
     // name 规则
-    if(!name){
+    if(!eventId){
       setErrorNameType(1);
       crossName = true;
     }else{
@@ -153,7 +153,7 @@ const TestArtwork = () => {
       crossType = false;
     }
 
-    if(!description){
+    if(!artistMessage){
       setErrorDescriptionType(1);
       crossDescription = true;
     }else{
@@ -186,9 +186,9 @@ const TestArtwork = () => {
     }
 
     const newFormErrors = {
-      name: crossName,
+      eventId: crossName,
       type: crossType,
-      description: crossDescription,
+      artistMessage: crossDescription,
       extraInfo: crossExtraInfo,
       ifHomepage: crossIfHomepage,
       uploadYourFile: crossUploadYourFile
@@ -199,9 +199,9 @@ const TestArtwork = () => {
     setLoading(true);
     const params = [{
       appleId,
-      name,
+      eventId,
       type,
-      description,
+      artistMessage,
       extraInfo,
       ifHomepage: +ifHomepage,
       URL: uploadYourFile.replace(/C:\\fakepath\\/i, "http://127.0.0.1:3001/mindfulapi/app/artworkfile/"),
@@ -256,15 +256,15 @@ const TestArtwork = () => {
             disabled
           />
         </Form.Group>
-        <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="name">
-          <Form.Label className={styles.form_label}>name</Form.Label>
+        <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="eventId">
+          <Form.Label className={styles.form_label}>eventId</Form.Label>
           <Form.Control
             className={styles.form_control}
             type="text"
             placeholder=""
-            name="name"
-            value={formData.name}
-            isInvalid={formErrors.name}
+            name="eventId"
+            value={formData.eventId}
+            isInvalid={formErrors.eventId}
             onChange={handleChange}
             required
           />
@@ -273,7 +273,7 @@ const TestArtwork = () => {
             type="invalid"
           >
             {errorNameType === 1 ? 
-                'name can not empty'
+                'eventId can not empty'
               : ''
             }
           </Form.Control.Feedback>
@@ -282,14 +282,18 @@ const TestArtwork = () => {
           <Form.Label className={styles.form_label}>type</Form.Label>
           <Form.Control
             className={styles.form_control}
-            type="text"
+            as="select"
             placeholder=""
             name="type"
             value={formData.type}
             isInvalid={formErrors.type}
             onChange={handleChange}
             required
-          />
+          >
+            <option value='fish'>fish</option>
+            <option value='dolphin'>dolphin</option>
+            <option value='shark'>shark</option>
+          </Form.Control>
           <Form.Control.Feedback
             className={styles.form_feedback}
             type="invalid"
@@ -300,15 +304,15 @@ const TestArtwork = () => {
             }
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="description">
-          <Form.Label className={styles.form_label}>{t('page.userProfile.description')}</Form.Label>
+        <Form.Group className="align-items-center form_group mb-3 clearfix" controlId="artistMessage">
+          <Form.Label className={styles.form_label}>{t('page.userProfile.artistMessage')}</Form.Label>
           <Form.Control
             className={styles.form_control}
             type="text"
             placeholder=""
-            name="description"
-            value={formData.description}
-            isInvalid={formErrors.description}
+            name="artistMessage"
+            value={formData.artistMessage}
+            isInvalid={formErrors.artistMessage}
             onChange={handleChange}
             required
           />
@@ -317,7 +321,7 @@ const TestArtwork = () => {
             type="invalid"
           >
             {errorDescriptionType === 1 ? 
-                t('error.info.descriptionCannotBeEmpty')
+                t('error.info.artistMessageCannotBeEmpty')
               : ''
             }
           </Form.Control.Feedback>
@@ -348,14 +352,17 @@ const TestArtwork = () => {
           <Form.Label className={styles.form_label}>ifHomepage</Form.Label>
           <Form.Control
             className={styles.form_control}
-            type="text"
+            as="select"
             placeholder=""
             name="ifHomepage"
             value={formData.ifHomepage}
             isInvalid={formErrors.ifHomepage}
             onChange={handleChange}
             required
-          />
+          >
+            <option value='0'>0</option>
+            <option value='1'>1</option>
+          </Form.Control>
           <Form.Control.Feedback
             className={styles.form_feedback}
             type="invalid"
