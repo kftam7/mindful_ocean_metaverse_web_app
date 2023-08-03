@@ -15,8 +15,7 @@ const EditModal = props => {
   useEffect(() => {
     if(!data) return;
     setFormData({
-      description: data.description,
-      personal_information: data.extraInfo
+      artistMessage: data.artistMessage
     })
   },[data])
 
@@ -25,12 +24,10 @@ const EditModal = props => {
     resetForm();
   }
   const [formData, setFormData] = useState({
-    description: '',
-    personal_information: ''
+    artistMessage: '',
   });
   const [formErrors, setFormErrors] = useState({
-    description: false,
-    personal_information: false
+    artistMessage: false,
   });
 
   const handleChange = (event) => {
@@ -45,13 +42,11 @@ const EditModal = props => {
 
   const resetForm = () => {
     const data = {
-      description: '',
-      personal_information: ''
+      artistMessage: '',
     }
     setFormData(data);
     const dataError = {
-      description: false,
-      personal_information: false
+      artistMessage: false,
     }
     setFormErrors(dataError);
   };
@@ -59,19 +54,17 @@ const EditModal = props => {
   const savePersonalWebsite = async (event) => {
     event.preventDefault();
     // 从 formData 对象中获取表单的值
-    const { description, personal_information } = formData;
+    const { artistMessage } = formData;
     const newFormErrors = {
-      description: !description,
-      personal_information: !personal_information
+      artistMessage: !artistMessage,
     };
     setFormErrors(newFormErrors);
 
-    if(!description || !personal_information) return;
+    if(!artistMessage) return;
 
     const params = {
       ...data,
-      description,
-      extraInfo: personal_information,
+      artistMessage,
       createTime: timeFormat(new Date(data.createTime)),
       updateTime: timeFormat(new Date())
     };
@@ -105,7 +98,26 @@ const EditModal = props => {
       <Row className='mb-3'>
         <p>{t('page.mintpass.submission.supplementaryInformation')}</p>
         <Form onSubmit={savePersonalWebsite}>
-          <Form.Group className="align-items-center form_group" controlId="description">
+          <Form.Group className="align-items-center form_group" controlId="artistMessage">
+            <Form.Label className='form_label'>{t('main.text.artistMessage')}:</Form.Label>
+            <Form.Control
+              className={styles.form_control}
+              type="text"
+              placeholder=""
+              name="artistMessage"
+              value={formData.artistMessage}
+              isInvalid={formErrors.artistMessage}
+              onChange={handleChange}
+              required
+            />
+            <Form.Control.Feedback
+              className={styles.form_feedback}
+              type="invalid"
+            >
+              {t('error.info.artistMessageCannotBeEmpty')}
+            </Form.Control.Feedback>
+          </Form.Group>
+          {/* <Form.Group className="align-items-center form_group" controlId="description">
             <Form.Label className='form_label'>{t('main.text.description')}:</Form.Label>
             <Form.Control
               className={styles.form_control}
@@ -142,7 +154,7 @@ const EditModal = props => {
             >
               {t('error.info.personalInformationCannotBeEmpty')}
             </Form.Control.Feedback>
-          </Form.Group>
+          </Form.Group> */}
         </Form>
       </Row>
       <Row className='d-flex justify-content-center'>
