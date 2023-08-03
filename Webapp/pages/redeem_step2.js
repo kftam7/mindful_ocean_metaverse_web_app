@@ -210,24 +210,16 @@ function RedeemStep2() {
                   <div className={styles.submitTxt3}>{t('page.redeem.theBelowInformation')}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('main.text.messageAboutSavingOurOcean')}:</div>
-                  <div className={styles.submitTxt2}>{obj.description}</div>
+                  <div className={styles.submitTile2}>{t('page.gallery.type')}:</div>
+                  <div className={styles.submitTxt2}>{obj.type}</div>
                 </Col>
-                {/* <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('page.redeem.personalInformation')}:</div>
-                  <div className={styles.submitTxt2}>{obj.peronsalInfo}</div>
-                </Col>
-                <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('page.redeem.artistAppleID')}:</div>
-                  <div className={styles.submitTxt2}>{obj.artistAppleId}</div>
-                </Col> */}
                 <Col xs={12}>
                   <div className={styles.submitTile2}>{t('page.redeem.eventID')}:</div>
                   <div className={styles.submitTxt2}>{obj.eventId}</div>
                 </Col>
                 <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('page.redeem.mintpassID')}:</div>
-                  <div className={styles.submitTxt2}>{obj.tokenId}</div>
+                  <div className={styles.submitTile2}>{t('main.text.artistMessage')}:</div>
+                  <div className={styles.submitTxt2}>{obj.artistMessage}</div>
                 </Col>
               </Row>
               <Row className='justify-content-md-center mt-5'>
