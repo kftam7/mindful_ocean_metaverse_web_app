@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../styles/RedeemStep.module.css';
-import { Row, Col, Form, Container, Button } from 'react-bootstrap';
+import { Row, Col, Form, Container, Button, Image } from 'react-bootstrap';
 
 import axios from 'axios';
 import AppModal from '../components/redeem/AppModal';
@@ -162,7 +162,7 @@ function RedeemStep2() {
     <Container className='mt-5 mb-5'>
       {isLoading || loading ?
         <div className="overly">
-          <FaSpinner />
+          <Image src="/loading.gif" width="30px" height="30px" />
         </div>
         : ''
       }
