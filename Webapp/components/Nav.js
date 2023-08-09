@@ -310,7 +310,7 @@ const NavBar = ({onLocaleChange}) => {
                 <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                   {isAppleIdLogin ? 
                       <>
-                        <div>{t('main.text.apple')}</div>
+                        <div>{t('main.text.appleID')}</div>
                         <Button className={styles.signInBtn2} onClick={handleAppleSignOut}>
                           <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
                           <TextOverflowTips text={appleIdName} />

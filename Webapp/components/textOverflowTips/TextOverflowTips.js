@@ -14,7 +14,7 @@ const TextWithTooltip = ({ text, divWidth }) => {
   return (
     <div
       ref={textRef}
-      style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", width: '100%', cursor: "default", fontWeight: 'bolder', textAlign: 'right' }}
+      style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", width: '100%', cursor: "default", fontWeight: 'bolder', textAlign: 'left' }}
     >
       {showTooltip ? (
         <OverlayTrigger
