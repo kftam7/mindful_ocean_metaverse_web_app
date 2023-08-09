@@ -62,6 +62,7 @@ function RedeemStep2() {
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
     if(!appleId) return;
+    setLoading(true);
     // artwork
     const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleid/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
@@ -74,6 +75,7 @@ function RedeemStep2() {
       }else{
         setShow(true);
       }
+      setLoading(false);
     }
   },[]);
   
@@ -158,7 +160,7 @@ function RedeemStep2() {
 
   return(
     <Container className='mt-5 mb-5'>
-      {isLoading ?
+      {isLoading || loading ?
         <div className="overly">
           <FaSpinner />
         </div>

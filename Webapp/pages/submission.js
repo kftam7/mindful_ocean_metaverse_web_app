@@ -33,6 +33,7 @@ export default function SubmitPage({ session, user }) {
   const mintTime = new Date(user?.submissionTime);
 
   const [disabled, setDisabled] = useState(true);
+  const [editSubmit, setEditSubmit] = useState(true);
   const [image, setImage] = useState('');
   const [dataArtworks, setDataArtworks] = useState([]);
   const [dataEdit, setDataEdit] = useState();
@@ -47,8 +48,6 @@ export default function SubmitPage({ session, user }) {
       const { data: { data } } = res;
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));
       setNewest(true);
-      setImage('');
-      setDataEdit('')
     }
   },[count])
   
@@ -56,6 +55,11 @@ export default function SubmitPage({ session, user }) {
     if(!dataArtworks.length) return setDisabled(true);
     setDisabled(false);
   },[dataArtworks]);
+  
+  useEffect(() => {
+    if(!image) return setEditSubmit(true);
+    setEditSubmit(false);
+  },[image]);
 
   const handleShow = () => setShow(true);
   const handleSubmitShow = () => {    
@@ -75,6 +79,8 @@ export default function SubmitPage({ session, user }) {
       hideProgressBar: true,
     });
     setEditShow(true);
+    const data = dataArtworks.filter(item => item.artworkId === dataEdit.artworkId);
+    setDataEdit(...data);
   }
 
   function refreshPage(){ 
@@ -240,6 +246,7 @@ export default function SubmitPage({ session, user }) {
                       <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
                         <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
                           <Form.Check.Input
+                            defaultChecked={item.artworkId === dataEdit?.artworkId ? true : false}
                             key={newest}
                             name="imageGroup1"
                             type="radio"
@@ -277,8 +284,8 @@ export default function SubmitPage({ session, user }) {
                 </model-viewer>
                 <Row className='d-flex justify-content-center mt-5'>
                   <Col>
-                    <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={disabled}>{t('button.editInfo')}</Button>
-                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={disabled}>{t('button.submit')} &rarr;</Button>
+                    <Button onClick={handleEditShow} className={` ${styles.submitEditBtn} mb-3`} disabled={editSubmit}>{t('button.editInfo')}</Button>
+                    <Button onClick={handleSubmitShow} className={`${homeStyles.btn} ${styles.submitBtn}`} disabled={editSubmit}>{t('button.submit')} &rarr;</Button>
                   </Col>
                 </Row>
 
