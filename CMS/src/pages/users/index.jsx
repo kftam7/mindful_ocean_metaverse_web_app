@@ -208,8 +208,8 @@ const User = (props) => {
                 title: 'artworkId',
                 dataIndex: 'artworkId',
                 key: 'artworkId',
-                render: (text) => {
-                    return <Link to='/artwork'>{text}</Link>;
+                render: (text, record) => {
+                    return <Link to={`/artwork?artworkId=${record.artworkId}`}>{text}</Link>;
                 }
             },
             {

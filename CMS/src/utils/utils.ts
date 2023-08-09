@@ -348,6 +348,21 @@ function urlDecode(str) {
   return ret;
 }
 
+function getURLQueryParse(url) {
+  url = url.substring(url.indexOf('?') + 1);
+  let arry = url.split('&');
+
+  let params = {};
+
+  arry.forEach(item => {
+    let key = item.substring(0,item.indexOf('='));
+    let val = item.substring(item.indexOf('=') + 1);
+    params[key] = val;
+  });
+
+  return params;
+}
+
 export {
     setUserSession,
     getUserSession,
@@ -364,5 +379,6 @@ export {
     timeFormat,
     md5,
     urlEncode,
-    urlDecode
+    urlDecode,
+    getURLQueryParse
 };

@@ -4,7 +4,7 @@ import { DownOutlined, UpOutlined, } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import './index.css';
 
-import { getIsAdmin, getUserSession } from "../../utils/utils";
+import { getIsAdmin, getURLQueryParse } from "../../utils/utils";
 
 import { getArtworkList, editArtwork } from "../../services/artwork";
 
@@ -58,6 +58,7 @@ const Artwork = (props) => {
     const [modalAddType, setModalAddType] = useState('add');
     // modal data
     const [modalData, setModalData] = useState();
+    const artworkId = getURLQueryParse(window.location.href)?.artworkId;
 
     const columns = [
         {
@@ -678,6 +679,12 @@ const Artwork = (props) => {
         setSelectedRowKeysLength(0);
     }
 
+    useEffect(() => {
+        if(!artworkId && !dataSource.length) return;
+        form.setFieldValue('artworkId', artworkId);
+        handleSearch();
+    },[artworkId, dataSource])
+
     // 搜索
     const handleSearch = () => {
         const undefinedItemArray = [];
@@ -953,12 +960,12 @@ const Artwork = (props) => {
                         <Col>{language["cryptoLog.col.content.SearchCriteria"]}</Col>
                         <Col>
                             {
-                                isShowForm ? <UpOutlined onClick={() => {handleIsShowForm(false)}} /> : <DownOutlined onClick={() => {handleIsShowForm(true)}} />
+                                isShowForm || artworkId ? <UpOutlined onClick={() => {handleIsShowForm(false)}} /> : <DownOutlined onClick={() => {handleIsShowForm(true)}} />
                             }
                         </Col>
                     </Row>
                     {
-                        isShowForm ?
+                        isShowForm || artworkId ?
                         <Form
                             style={{
                                 marginTop: 10,
