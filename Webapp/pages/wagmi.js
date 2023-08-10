@@ -1,8 +1,10 @@
 
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { configureChains, createConfig } from 'wagmi'
-import { mainnet, optimism, polygon } from "wagmi/chains"
-const chains = [mainnet, optimism, polygon]
+//import { mainnet, optimism, polygon } from "wagmi/chains"
+import { polygonMumbai } from 'wagmi/chains'
+//const chains = [mainnet, optimism, polygon]
+const chains = [polygonMumbai]
 const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiConfig = createConfig({

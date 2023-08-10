@@ -13,7 +13,7 @@ const Footer = () => {
                     <Nav.Link href="/testArtwork" style={{color: '#fff', display: 'none'}}>testArtwork</Nav.Link>
                 </Nav>
                 {/* <p className="text-dark mt-2">Copyright © 2021 Dalton Learning Lab Limited. All rights reserved.</p> */}
-                <p className="text-light mt-2">{t('footer.nav.versionNo')}{process.env.NEXT_PUBLIC_VERSION}</p>
+                <p className="text-light mt-2">{t('footer.nav.versionNo')} {process.env.NEXT_PUBLIC_VERSION}</p>
             </Container>
         </Navbar>
     )

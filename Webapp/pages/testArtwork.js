@@ -204,6 +204,9 @@ const TestArtwork = () => {
       artistMessage,
       extraInfo,
       ifHomepage: +ifHomepage,
+      ifMinted: 0,
+      ifRedeemed: 0,
+      isActive: 1,
       URL: uploadYourFile.replace(/C:\\fakepath\\/i, "http://127.0.0.1:3001/mindfulapi/app/artworkfile/"),
       createTime,
       updateTime
