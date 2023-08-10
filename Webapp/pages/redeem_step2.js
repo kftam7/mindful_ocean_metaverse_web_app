@@ -49,7 +49,11 @@ function RedeemStep2() {
 
   useEffect(() => {
     if(!isError) return;
-    if (confirm(error?.shortMessage)){}
+    if (confirm(error?.shortMessage)){
+      setLoading(false);
+    }else{
+      setLoading(false);
+    }
   },[isError])
 
   useEffect(() => {
@@ -101,6 +105,7 @@ function RedeemStep2() {
   },[dispatch])
 
   const getIpfs = async () => {
+    setLoading(true);
     await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
       if(res.status === 200){
