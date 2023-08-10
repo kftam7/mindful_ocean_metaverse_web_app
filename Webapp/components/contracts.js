@@ -207,12 +207,12 @@ export const wagmiContractConfig = {
 } 
 
 export const mintpassContractConfig = {
-    address: '0x6AD18Cf038A8F4F4F34F424d82D4F7198eCe7F36',
+    address: '0x91C25E22e131Ae298d291307116FDB054838dc5C',
     abi: MintPassNFT,
 }
 
 export const mindfulNFTContractConfig = {
-    address: '0xF30aaF36A9637CFf42933d38B34E39EBEb770261',
+    address: '0xF07de37BB25395A5C0031a8c120e11B972c69eEa',
     abi: MindfulNFT,
 }
 

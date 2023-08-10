@@ -19,7 +19,8 @@ import {FaSpinner } from 'react-icons/fa';
 
 //智能合约2.0
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
-import { mindfulNFTContractConfig } from '../components/contracts';
+//import { mindfulNFTContractConfig } from '../components/contracts';
+import { mintpassContractConfig } from '../components/contracts';
 
 //just pass the setShow and setConShow as props to children components
 function RedeemStep2() {
@@ -38,7 +39,7 @@ function RedeemStep2() {
 
   //智能合约2.0
   const { write, data, error, isLoading, isError } = useContractWrite({
-    ...mindfulNFTContractConfig,
+    ...mintpassContractConfig,
     functionName: 'safeTransferFrom',
   })
   const {
@@ -119,16 +120,16 @@ function RedeemStep2() {
 
   async function mint(ipfs) {
     try{
-      const contract = require("../utils/MindfulNFT.json");
-      const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
-        return res;
-      })
+      //const contract = require("../utils/MindfulNFT.json");
+      //const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
+      //  return res;
+      //})
       // mint the MindfulNFT
       console.log("Minting MindfulNFT...");
       console.log(mintpassContract);
       console.log("account: ", account);
       console.log("tokenID: ", selectedOption);
-      console.log("ipfs: ", ipfs);
+      //console.log("ipfs: ", ipfs);
 
       let ipfsHex = '0x';
       let tASCII, Hex;
@@ -155,7 +156,7 @@ function RedeemStep2() {
       // })
 
       await write({
-        args: [account, "0xF30aaF36A9637CFf42933d38B34E39EBEb770261", selectedOption, ipfsHex]
+        args: [account, "0xF07de37BB25395A5C0031a8c120e11B972c69eEa", selectedOption, ipfsHex]
       })
     }
     catch(err){

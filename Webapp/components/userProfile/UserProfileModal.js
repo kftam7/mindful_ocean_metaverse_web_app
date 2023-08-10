@@ -43,7 +43,7 @@ function UserProfileModal(props) {
       </Modal.Body>
       {modal?.isShare ? 
         <Modal.Footer>
-          <div style={{ flex: '1', textAlign: 'center' }}><a href={"https://testnets.opensea.io/assets/mumbai/0xf30aaf36a9637cff42933d38b34e39ebeb770261/"+modal?.tokenId} target='_blank'>{t('page.userProfile.viewNFTOnOpensea')} <Image src="/share.gif" /></a></div>
+          <div style={{ flex: '1', textAlign: 'center' }}><a href={"https://testnets.opensea.io/assets/mumbai/0xF07de37BB25395A5C0031a8c120e11B972c69eEa/"+modal?.tokenId} target='_blank'>{t('page.userProfile.viewNFTOnOpensea')} <Image src="/share.gif" /></a></div>
         </Modal.Footer>
         : ''
       }

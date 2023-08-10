@@ -44,7 +44,7 @@ export default function MintedPage() {
                                     {t('page.mintedPage.inReturn')}<br />
                                     {t('page.mintedPage.mintPassIsNowGeneratedInYourWallet')}
                                 </div>
-                                <p>{t('page.mintedPage.viewMintPassOn')} <span><a href="https://testnets.opensea.io/assets/mumbai/0x627721833e29dacd5ec000fe17f2d46dada19f28" style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.mintedPage.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a></span></p>
+                                <p>{t('page.mintedPage.viewMintPassOn')} <span><a href="https://testnets.opensea.io/assets/mumbai/0x91C25E22e131Ae298d291307116FDB054838dc5C" style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.mintedPage.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a></span></p>
                                 {/* <p>View Mint Pass on your&nbsp; 
                                     <span style={{textDecoration: "underline"}}><Link href="/dashboard">dashboard</Link></span>
                                     &nbsp;or trade Mint Pass on&nbsp; 

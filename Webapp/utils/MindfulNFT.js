@@ -3,18 +3,8 @@ export const mindfulNFT = [
       "inputs": [
         {
           "internalType": "address",
-          "name": "_systemAddress",
+          "name": "_mintPass",
           "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_mintingFeeRecipient",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_mintingFee",
-          "type": "uint256"
         },
         {
           "internalType": "uint96",
@@ -263,19 +253,6 @@ export const mindfulNFT = [
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "uri",
-          "type": "string"
-        }
-      ],
-      "name": "mintMintPass",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
       "inputs": [],
       "name": "name",
       "outputs": [
@@ -286,6 +263,40 @@ export const mindfulNFT = [
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "onERC721Received",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {

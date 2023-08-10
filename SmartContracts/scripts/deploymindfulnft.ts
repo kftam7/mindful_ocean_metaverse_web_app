@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 
 async function main() {
   const ContractFactory = await ethers.getContractFactory("contracts/MindfulNFT.sol:MindfulNFT");
-  const instance = await ContractFactory.deploy("0x627721833E29dAcD5ec000Fe17F2d46dADA19f28", 100);
+  const instance = await ContractFactory.deploy("0x91C25E22e131Ae298d291307116FDB054838dc5C", 100);
   await instance.deployed();
 
   console.log(`Contract deployed to ${instance.address}`);
