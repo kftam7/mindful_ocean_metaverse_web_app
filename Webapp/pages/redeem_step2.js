@@ -233,7 +233,7 @@ function RedeemStep2() {
               <Row className='justify-content-md-center mt-5'>
                 <Col xs={12}>
                   <div className='text-center'>
-                    <Button className={`${styles.burneBtn}`} onClick={getIpfs} disabled={isLoading}>{t('button.burn')}</Button>
+                    <Button className={`${styles.burneBtn}`} onClick={getIpfs} disabled={isLoading || loading}>{t('button.burn')}</Button>
                   </div>
                 </Col>
               </Row>
