@@ -48,12 +48,11 @@ function Mintpass({ session,user }) {
 
   useEffect(() => {
     if(!isError) return;
-    if (confirm(error?.shortMessage)){}
-    // if (confirm(error?.shortMessage)) {
-    //   setLoading(false)
-    // }else{
-    //   setLoading(false)
-    // }
+    if (confirm(error?.shortMessage)) {
+      setLoading(false)
+    }else{
+      setLoading(false)
+    }
   },[isError])
 
   useEffect(() => {
@@ -94,6 +93,7 @@ function Mintpass({ session,user }) {
   //can fetch the tokenId here?
 
   const mintFront = async () => {
+    setLoading(true);
     await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mintpass/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
       const {status, data} = res;
@@ -155,7 +155,7 @@ function Mintpass({ session,user }) {
   }
   return(
     <Container className='mt-5 mb-5'>
-      {isLoading ?
+      {loading || isLoading ?
         <div className="overly">
           <FaSpinner />
         </div>
@@ -192,7 +192,7 @@ function Mintpass({ session,user }) {
             </Row>
             <Row className='d-flex justify-content-center mt-3'>
               <Col>
-                <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={isLoading}>{t('button.getMintPass')}</Button>
+                <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={isLoading || loading}>{t('button.getMintPass')}</Button>
               </Col>
             </Row>
             <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>
