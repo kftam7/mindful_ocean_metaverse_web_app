@@ -157,7 +157,8 @@ function Mintpass({ session,user }) {
     <Container className='mt-5 mb-5'>
       {loading || isLoading ?
         <div className="overly">
-          <FaSpinner />
+          {/* <FaSpinner /> */}
+          <Image src="/loading.gif" width="30px" height="30px" />
         </div>
         : ''
       }
