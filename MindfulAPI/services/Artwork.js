@@ -17,13 +17,14 @@ async function getArtwork(appleId){
     // calleed by end user, return ifMinted = 0 only
     if (appleId){
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        //`SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+        `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
         //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
       );
     // called by admin, return ifMinted = 0 & 1     
     }else{
         var rows = await db.query(
-        `SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
+        `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
         //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
       );
     }
@@ -43,7 +44,7 @@ async function getHomepageArtwork(){
 
   var rows = await db.query(
     //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
-    `SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
+    `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
   );
   
   const data = helper.emptyOrRows(rows);
@@ -156,69 +157,69 @@ async function updateArtwork(artworkId, artworkRecord){
   
   sql = 'UPDATE artwork SET userId = ' + userIdResult[0].userId;
 
-  if (artworkRecord.eventId){
+  if (!(artworkRecord.eventId == null)){
     sql = sql + ', eventId = ' + artworkRecord.eventId; 
   }
 
-  if (artworkRecord.URL){
+  if (!(artworkRecord.URL == null)){
     sql = sql + ', URL = "' + artworkRecord.URL + '"'; 
   }
 
-  if (artworkRecord.type){
+  if (!(artworkRecord.type == null)){
     sql = sql + ', type = "' + artworkRecord.type + '"'; 
   }
 
-  if (artworkRecord.artistMessage){
+  if (!(artworkRecord.artistMessage == null)){
     sql = sql + ', artistMessage = "' + artworkRecord.artistMessage + '"'; 
   }
 
-  if (artworkRecord.extraInfo){
+  if (!(artworkRecord.extraInfo == null)){
     sql = sql + ', extraInfo = "' + artworkRecord.extraInfo + '"'; 
   }
 
-  if (artworkRecord.ifHomepage){
+  if (!(artworkRecord.ifHomepage == null)){
     sql = sql + ', ifHomepage = ' + artworkRecord.ifHomepage; 
   }
 
-  if (artworkRecord.ifMinted){
+  if (!(artworkRecord.ifMinted == null)){
     sql = sql + ', ifMinted = ' + artworkRecord.ifMinted; 
   }
 
-  if (artworkRecord.ifRedeemed){
+  if (!(artworkRecord.ifRedeemed == null)){
     sql = sql + ', ifRedeemed = ' + artworkRecord.ifRedeemed; 
   }
 
-  if (artworkRecord.authenticScarcity){
+  if (!(artworkRecord.authenticScarcity == null)){
     sql = sql + ', authenticScarcity = ' + artworkRecord.authenticScarcity; 
   }
 
-  if (artworkRecord.scarcityRank){
+  if (!(artworkRecord.scarcityRank == null)){
     sql = sql + ', scarcityRank = ' + artworkRecord.scarcityRank; 
   }
 
-  if (artworkRecord.clusterId){
+  if (!(artworkRecord.clusterId == null)){
     sql = sql + ', clusterId = ' + artworkRecord.clusterId; 
   }
 
-  if (artworkRecord.clusterSize){
+  if (!(artworkRecord.clusterSize == null)){
     sql = sql + ', clusterSize = ' + artworkRecord.clusterSize; 
   }
 
-  if (artworkRecord.superClusterId){
+  if (!(artworkRecord.superClusterId == null)){
     sql = sql + ', superClusterId = ' + artworkRecord.superClusterId; 
   }
 
-  if (artworkRecord.superClusterSize){
+  if (!(artworkRecord.superClusterSize == null)){
     sql = sql + ', superClusterSize = ' + artworkRecord.superClusterSize; 
   }
 
-  if (artworkRecord.isActive){
+  if (!(artworkRecord.isActive == null)){
     sql = sql + ', isActive = ' + artworkRecord.isActive; 
   }
 
   sql = sql + ', updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';'; 
 
-    console.log(sql);
+    //console.log(sql);
     
     const result = await db.query(
       sql
@@ -299,7 +300,7 @@ async function nftStorage(artworkId, type){
 
   // read data from artwork table
   //var sqlSelect = 'SELECT name, URL, type, description, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
-  var sqlSelect = 'SELECT eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
+  var sqlSelect = 'SELECT eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId, superClusterSize FROM artwork WHERE artworkId = ' + artworkId; 
   const resultSelect = await db.query(
     sqlSelect
   );
@@ -365,7 +366,13 @@ async function nftStorage(artworkId, type){
       eventId: resultSelect[0].eventId,
       type: resultSelect[0].type,
       artistMessage: resultSelect[0].artistMessage,
-      extraInfo: resultSelect[0].extraInfo,
+      authenticScarcity: resultSelect[0].authenticScarcity,
+      scarcityRank: resultSelect[0].scarcityRank,
+      clusterId: resultSelect[0].clusterId,
+      clusterSize: resultSelect[0].clusterSize,
+      superClusterId: resultSelect[0].superClusterId,
+      superClusterSize: resultSelect[0].superClusterSize,
+      //extraInfo: resultSelect[0].extraInfo,
       artworkId: artworkId,
       image: new File(
           [await fs.promises.readFile(filepathMindfultoken)],

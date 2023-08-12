@@ -723,6 +723,67 @@
 							"body": null
 						},
 						{
+							"name": "PUT user Request (Partial)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\n    \"walletAddress\":\"modified A\",\n    \"personInfo\":\"modified B\",\n    \"isActive\": 0,\n    \"firstName\": \"modified C\",\n    \"lastName\": \"modified D\",\n    \"email\": \"modified E\",\n    \"refreshToken\": \"modified F\",\n    \"validToken\": 0\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
 							"name": "PUT user Request (Explicit)",
 							"originalRequest": {
 								"method": "PUT",
@@ -2607,7 +2668,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 1,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test.jpeg\",\n     \"type\": \"fish\",\n     \"artistMessage\":\"What the fuck\",\n     \"extraInfo\": \"extra\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 0,\n     \"ifRedeemed\": 0\n  }",
+									"raw": "  {\n     \"appleId\":\"001972.4d3f31545cc74f09acd0a6799569a95e.0333\",\n     \"eventId\": 3,\n     \"URL\":\"http://127.0.0.1:3001/mindfulapi/app/artworkfile/sample-test9.jpeg\",\n     \"type\": \"fish2\",\n     \"artistMessage\":\"am ok\",\n     \"extraInfo\": \"extra1\",\n     \"ifHomepage\": 0,\n     \"ifMinted\": 1,\n     \"ifRedeemed\": 0\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3114,14 +3175,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/nftstorage/mindfultoken/2",
+									"raw": "{{baseUrl}}/nftstorage/mindfultoken/1",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"nftstorage",
 										"mindfultoken",
-										"2"
+										"1"
 									]
 								}
 							},

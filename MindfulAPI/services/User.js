@@ -71,6 +71,8 @@ async function createUser(userRecord){
 /* update user */
 async function updateUser(appleId, userRecord){
 
+  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
   // censor contents (personInfo, firstName, lastName )
   let validResult = await validate.validateContent(userRecord.personInfo);
   if (!validResult) {
@@ -85,7 +87,45 @@ async function updateUser(appleId, userRecord){
     return ("Input contains explicit contents");
   }
 
-  sql = 'UPDATE user SET walletAddress = "' + userRecord.walletAddress + '", personInfo = "' + userRecord.personInfo + '", createTime = "' + userRecord.createTime + '", updateTime = "' + userRecord.updateTime + '", isActive = ' + userRecord.isActive + ', firstName = "' + userRecord.firstName + '", lastName = "' + userRecord.lastName + '", email = "' + userRecord.email + '", refreshToken = "' + userRecord.refreshToken + '", validToken = ' + userRecord.validToken + ' WHERE appleId = "' + appleId + '";';
+  //sql = 'UPDATE user SET walletAddress = "' + userRecord.walletAddress + '", personInfo = "' + userRecord.personInfo + '", createTime = "' + userRecord.createTime + '", updateTime = "' + userRecord.updateTime + '", isActive = ' + userRecord.isActive + ', firstName = "' + userRecord.firstName + '", lastName = "' + userRecord.lastName + '", email = "' + userRecord.email + '", refreshToken = "' + userRecord.refreshToken + '", validToken = ' + userRecord.validToken + ' WHERE appleId = "' + appleId + '";';
+
+  sql = 'UPDATE user SET updateTime = "' + currentTimeSql + '"';
+
+  if (!(userRecord.walletAddress == null)){
+    sql = sql + ', walletAddress = "' + userRecord.walletAddress + '"';
+  }
+
+  if (!(userRecord.personInfo == null)){
+    sql = sql + ', personInfo = "' + userRecord.personInfo + '"';
+  }
+
+  if (!(userRecord.isActive == null)){
+    sql = sql + ', isActive = ' + userRecord.isActive;
+  }
+
+  if (!(userRecord.firstName == null)){
+    sql = sql + ', firstName = "' + userRecord.firstName + '"';
+  }
+
+  if (!(userRecord.lastName == null)){
+    sql = sql + ', lastName = "' + userRecord.lastName + '"';
+  }
+
+  if (!(userRecord.email == null)){
+    sql = sql + ', email = "' + userRecord.email + '"';
+  }
+
+  if (!(userRecord.refreshToken == null)){
+    sql = sql + ', refreshToken = "' + userRecord.refreshToken + '"';
+  }
+
+  if (!(userRecord.validToken == null)){
+    sql = sql + ', validToken = ' + userRecord.validToken;
+  }
+
+  sql = sql + ' WHERE appleId = "' + appleId + '";'; 
+
+  //console.log("update sql: ", sql);
   const result = await db.query(
     sql
   );

@@ -76,7 +76,12 @@ async function getNFT(type, idtype, id){
                 //console.log("result: ",  result);
                 //console.log("result: ", result);
                 //data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
-                data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+                if (type == "mintPass"){
+                  data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+                }else if (type == "mindfulToken") {
+                  data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, authenticScarcity: `${result.data.authenticScarcity}`, scarcityRank: `${result.data.scarcityRank}`, clusterId: `${result.data.clusterId}`, clusterSize: `${result.data.clusterSize}`, superClusterId: `${result.data.superClusterId}`, superClusterSize: `${result.data.superClusterSize}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+                }
+                
               }catch (e) {
                 return "Issue with NFT URI";
               }
@@ -121,7 +126,12 @@ async function getNFT(type, idtype, id){
             const result = await axios(options);
             //console.log("result: ", result);
             //data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
-            data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+            if (type == "mintPass"){
+              //data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+              data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+            }else if (type == "mindfulToken") {
+              data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, authenticScarcity: `${result.data.authenticScarcity}`, scarcityRank: `${result.data.scarcityRank}`, clusterId: `${result.data.clusterId}`, clusterSize: `${result.data.clusterSize}`, superClusterId: `${result.data.superClusterId}`, superClusterSize: `${result.data.superClusterSize}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+            }
           }catch (e) {
             return "Issue with NFT URI";
           }
