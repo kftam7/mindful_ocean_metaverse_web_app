@@ -51,8 +51,13 @@ function GridModel(props) {
                     ar-modes="webxr scene-viewer quick-look">
                   </model-viewer>
                   <section className="attribution">
-                    <h5 className='ms-auto'>{props.title}&nbsp;&nbsp;&nbsp;<span style={{fontSize:'.9rem'}}>{props.text}</span></h5>
+                    <h5 className='ms-auto'><span style={{fontSize:'.9rem'}}>{props.t('main.text.by')} {props.info.firstName} {props.info.lastName}</span></h5>
                   </section> 
+                  <div>
+                    <p>{props.t('page.redeem.eventID')}: {props.info.eventId}</p>
+                    <p>{props.t('page.gallery.type')}: {props.info.type}</p>
+                    <p>{props.t('main.text.artistMessage')}: {props.info.artistMessage}</p>
+                  </div>
                 </Col>
             </Row>
           </Container>

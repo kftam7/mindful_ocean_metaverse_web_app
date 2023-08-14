@@ -29,7 +29,12 @@ const Gallery = ({t}) => {
             texture:item.URL,
             name:item.name,
             author:item.extraInfo,
-            description:item.description
+            description:item.description,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            eventId: item.eventId,
+            type: item.type,
+            artistMessage: item.artistMessage
           },
           image: item.URL
         }
@@ -62,7 +67,7 @@ const Gallery = ({t}) => {
             {artworkhomepage.slice(0, 3).map((item, index) => {
               return <>
                   <Col style={{position:'relative'}}>
-                    <GalleryModel metadata={item.metadata} image={item.image} index={index} />
+                    <GalleryModel metadata={item.metadata} image={item.image} index={index} t={t} />
                     {index === 0 ? 
                       <Image className={styles.bgpart6} src="/measuredBoxes/6.png" alt="Ocean6" />
                       : ''

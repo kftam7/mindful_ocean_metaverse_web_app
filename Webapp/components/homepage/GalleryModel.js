@@ -4,7 +4,7 @@ import styles from '../../styles/Gallery.module.css';
 
 import GridModal from '../gallery/GridModal';
 
-const GalleryModel = props => {
+const GalleryModel = (props) => {
     const {metadata, image, index} = props;
     const [modalShow, setModalShow] = useState(false);
     const [loaded, setLoaded] = useState(false);
@@ -62,12 +62,12 @@ const GalleryModel = props => {
                 <Card.Body>
                     <Card.Title>{nft.name}</Card.Title>
                     <Card.Text>
-                    by {nft.author}
-                    <p>{nft.description}</p>
+                        {props.t('main.text.by')} {nft.author}
+                        <span style={{float: 'right'}}>{nft.firstName} {nft.lastName}</span>
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={image} title={nft.name} text={`by ${nft.author}`} />
+            <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={image} title={nft.name} text={`by ${nft.author}`} info={metadata} t={props.t} />
         </>
     )
 }
