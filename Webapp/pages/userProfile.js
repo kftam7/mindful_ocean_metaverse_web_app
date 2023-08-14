@@ -235,7 +235,6 @@ const UserProfilePage = () => {
   };
 
   const handleModal = (title, item, isShare) => {
-    const {description, artistAppleId, peronsalInfo, eventId, mintpassld} = item;
     const data = {
       ...item,
       title,

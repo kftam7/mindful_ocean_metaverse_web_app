@@ -55,6 +55,12 @@
     "main.text.appleIdName": "AppleId Name",
     "main.text.firstName": "First Name",
     "main.text.lastName": "Last Name",
+    "main.text.authenticScarcity": "Authentic Scarcity",
+    "main.text.scarcityRank": "Scarcity Rank",
+    "main.text.clusterID": "Cluster ID",
+    "main.text.clusterSize": "Cluster Size",
+    "main.text.superClusterID": "Super Cluster ID",
+    "main.text.superClusterSize": "Super Cluster Size",
 
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",

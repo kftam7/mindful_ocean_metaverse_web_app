@@ -19,24 +19,40 @@ function UserProfileModal(props) {
               <div className='modal_indent inner'><Image src={modal?.URL} className='modalImage' /></div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>{t('main.text.description')}:</div>
-                <div className='modal_indent'>{modal?.description}</div>
-            </Col>
-            <Col sm={12}>
-                <div className='modal_title'>{t('page.redeem.personalInformation')}:</div>
-                <div className='modal_indent'>{modal?.peronsalInfo}</div>
-            </Col>
-            <Col sm={12}>
-                <div className='modal_title'>{t('page.redeem.artistAppleID')}:</div>
-                <div className='modal_indent'>{modal?.artistAppleId}</div>
+                <div className='modal_title'>{t('main.text.walletAddress')}:</div>
+                <div className='modal_indent'>{modal?.walletAddress}</div>
             </Col>
             <Col sm={12}>
                 <div className='modal_title'>{t('page.redeem.eventID')}:</div>
                 <div className='modal_indent'>{modal?.eventId}</div>
             </Col>
             <Col sm={12}>
-                <div className='modal_title'>{t('page.redeem.mintpassID')}:</div>
-                <div className='modal_indent'>{modal?.mintpassld}</div>
+                <div className='modal_title'>{t('main.text.artistMessage')}:</div>
+                <div className='modal_indent'>{modal?.artistMessage}</div>
+            </Col>
+            <Col sm={12}>
+                <div className='modal_title'>{t('main.text.authenticScarcity')}:</div>
+                <div className='modal_indent'>{modal?.eventId}</div>
+            </Col>
+            <Col sm={12}>
+                <div className='modal_title'>{t('main.text.scarcityRank')}:</div>
+                <div className='modal_indent'>{modal?.scarcityRank}</div>
+            </Col>
+            <Col sm={12}>
+                <div className='modal_title'>{t('main.text.clusterID')}:</div>
+                <div className='modal_indent'>{modal?.clusterId}</div>
+            </Col>
+            <Col sm={12}>
+                <div className='modal_title'>{t('main.text.clusterSize')}:</div>
+                <div className='modal_indent'>{modal?.clusterSize}</div>
+            </Col>
+            <Col sm={12}>
+                <div className='modal_title'>{t('main.text.superClusterID')}:</div>
+                <div className='modal_indent'>{modal?.superClusterId}</div>
+            </Col>
+            <Col sm={12}>
+                <div className='modal_title'>{t('main.text.superClusterSize')}:</div>
+                <div className='modal_indent'>{modal?.superClusterSize}</div>
             </Col>
           </Row>
         </Container>
