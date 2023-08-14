@@ -11,6 +11,7 @@ import Layout from '../components/SubpageLayout';
 import UserProfileModel from '../components/userProfile/UserProfileModal';
 import EditPersonalWebsiteModel from '../components/userProfile/EditPersonalWebsiteModel';
 import EditPersonalInfoModel from '../components/userProfile/EditPersonalInfoModel';
+import EditAppleIdNameModel from '../components/userProfile/EditAppleIdNameModel';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import { getWalletAddress, getAppleId, getAppleIdName, getEmail, getHeaders } from '../utils/utils';
 import axios from 'axios';
@@ -30,6 +31,7 @@ const UserProfilePage = () => {
   const [modalEditShow, setModalEditShow] = useState(false);
   const [modalPersonalInfoEditShow, setModalPersonalInfoEditShow] = useState(false);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);  
+  const [modalEditAppleIdNameShow, setModalEditAppleIdNameShow] = useState(false);  
   const [dataPersonalwebsite, setDataPersonalwebsite] = useState([]); // personalwebsite
   const [dataArtwork, setDataArtwork] = useState([]); // Submitted Artworks
   const [dataJoinedEvent, setDataJoinedEvent] = useState([]); // Joined Event
@@ -37,6 +39,8 @@ const UserProfilePage = () => {
   const [dataOwnedMintpass, setDataOwnedMintpass] = useState([]); // Owned Mintpass
   const [modalData, setModalData] = useState();
   const [modalDataEdit, setModalDataEdit] = useState();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [formData, setFormData] = useState({
     URL: '',
     description: '',
@@ -79,7 +83,7 @@ const UserProfilePage = () => {
     if(!appleId) return;
     const res = await axios.get(`${apiPort}/mindfulapi/app/user/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
-      const { data: { data: { artwork, joinedEvent, walletAddress, personInfo } } } = res;
+      const { data: { data: { firstName, lastName, artwork, joinedEvent, walletAddress, personInfo } } } = res;
       // Submitted Artworks
       // console.log('Submitted Artworks', artwork)
       setDataArtwork(artwork || []);
@@ -92,6 +96,10 @@ const UserProfilePage = () => {
       setWalletAddressList(wdList)
 
       setPersonalInfo(personInfo)
+
+      sessionStorage.setItem("appleIdName", firstName + ' ' + lastName);
+      setFirstName(firstName);
+      setLastName(lastName);
     }
   }, [appleId, countUser]);
 
@@ -296,6 +304,19 @@ const UserProfilePage = () => {
     setModalPersonalInfoEditShow(true);
   };
 
+  const handleEditAppleIdName = () => {
+    setModalEditAppleIdNameShow(true);
+  };
+
+  const modalEditAppleIdNameClose = () => {
+    setModalEditAppleIdNameShow(false);
+  };
+
+  const modalEditAppleIdNameSuccess = () => {
+    setModalEditAppleIdNameShow(false);
+    setCountUser(countUser + 1);
+  };
+
   return(
     <Container className='mt-5 mb-5'>
       <ToastContainer />
@@ -354,8 +375,11 @@ const UserProfilePage = () => {
                   <div>
                     <h4>{t('main.text.appleID')}</h4>
                   </div>
-                  <div className={styles.card_txt1}>
-                    <TextOverflowTips text={appleIdName} />
+                  <div className={styles.card_txt1} style={{display: 'flex'}}>
+                    <><TextOverflowTips text={`${firstName} ${lastName}`} /></>
+                    <Button className={styles.btn_save} style={{marginLeft: '10px'}} size="sm" onClick={() => handleEditAppleIdName()}>
+                      {t("button.edit")}
+                    </Button>
                   </div>
               </div>
               </Card.Body>
@@ -642,6 +666,7 @@ const UserProfilePage = () => {
         <UserProfileModel show={modalShow} onHide={() => setModalShow(false)} modal={modalData} />
         <EditPersonalWebsiteModel show={modalEditShow} onHide={() => modalEditClose()} onOk={modalEditSuccess} modal={modalDataEdit} />
         <EditPersonalInfoModel show={modalPersonalInfoEditShow} onHide={() => modalPersonalInfoEditClose()} onOk={modalPersonalInfoEditSuccess} personalInfo={personalInfo} />
+        <EditAppleIdNameModel firstname={firstName} lastname={lastName} show={modalEditAppleIdNameShow} onHide={() => modalEditAppleIdNameClose()} onOk={() => modalEditAppleIdNameSuccess()} />
         <Modal
           show={modalDeleteShow}
           onHide={() => setModalDeleteShow(false)}

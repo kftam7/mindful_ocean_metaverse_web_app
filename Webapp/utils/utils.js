@@ -60,6 +60,14 @@ const getAppleIdName = () => {
   return sessionStorage.getItem("appleIdName");
 };
 
+const getAppleIdFristName = () => {
+  return sessionStorage.getItem("appleIdFristName");
+};
+
+const getAppleIdLastName = () => {
+  return sessionStorage.getItem("appleIdLastName");
+};
+
 const getEmail = () => {
   return sessionStorage.getItem("email");
 };
@@ -310,5 +318,7 @@ export {
   sortByFieldAsc,
   sortByFieldDesc,
   timeFormat,
-  md5
+  md5,
+  getAppleIdFristName,
+  getAppleIdLastName
 };

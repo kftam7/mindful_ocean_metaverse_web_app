@@ -99,6 +99,8 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.setItem("refresh_token", query.refresh_token);
     sessionStorage.setItem("appleId", query.appleId);
     sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
+    sessionStorage.setItem("appleIdFristName", query.firstName);
+    sessionStorage.setItem("appleIdLastName", query.lastName);
     setIsAppleIdLogin(true);
   }
 
@@ -117,6 +119,8 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.removeItem("refresh_token");
     sessionStorage.removeItem("appleId");
     sessionStorage.removeItem("appleIdName");
+    sessionStorage.removeItem("appleIdFristName");
+    sessionStorage.removeItem("appleIdLastName");
     router.push('/');
     setIsAppleIdLogin(false);
   }

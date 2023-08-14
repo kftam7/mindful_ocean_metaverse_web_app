@@ -52,6 +52,9 @@
     "main.text.all": "All",
     "main.text.artistMessage": "Artist Message",
     "main.text.by": "by",
+    "main.text.appleIdName": "AppleId Name",
+    "main.text.firstName": "First Name",
+    "main.text.lastName": "Last Name",
 
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
@@ -155,6 +158,8 @@
     "error.info.pleaseSignInToAppleIDFirst": "Please sign in to Apple ID first",
     "error.info.pleaseSelectAArtwork": "Please Select a Artwork",
     "error.info.personalInfoCannotBeEmpty": "Personal Info cannot be empty",
+    "error.info.firstNameCannotBeEmpty": "First Name cannot be empty",
+    "error.info.lastNameCannotBeEmpty": "Last Name cannot be empty",
 
     "button.signIn": "Sign ID",
     "button.viewMyProfile": "View My Profile",

@@ -52,6 +52,7 @@
     "main.text.all": "所有",
     "main.text.artistMessage": "Artist Message",
     "main.text.by": "by",
+    "main.text.appleIdName": "AppleId Name",
 
     "page.create.createAndColor": "创建并为自己版本的鱼上色",
     "page.create.downloadTemplate": "下载模板",
@@ -155,6 +156,8 @@
     "error.info.pleaseSignInToAppleIDFirst": "请先登录apple ID",
     "error.info.pleaseSelectAArtwork": "Please Select a Artwork",
     "error.info.personalInfoCannotBeEmpty": "Personal Info cannot be empty",
+    "error.info.firstNameCannotBeEmpty": "First Name cannot be empty",
+    "error.info.lastNameCannotBeEmpty": "Last Name cannot be empty",
 
     "button.signIn": "登录ID",
     "button.viewMyProfile": "查看我的个人资料",
