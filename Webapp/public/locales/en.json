@@ -61,6 +61,9 @@
     "main.text.clusterSize": "Cluster Size",
     "main.text.superClusterID": "Super Cluster ID",
     "main.text.superClusterSize": "Super Cluster Size",
+    "main.text.termsAndConditions": "Terms and Conditions",
+    "main.text.cookies": "Cookies",
+    "main.text.privacyPolices": "Privacy Polices",
 
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
@@ -190,5 +193,9 @@
     "button.changeAccount": "Change account",
     "button.edit": "Edit",
     "button.delete": "Delete",
-    "button.add": "Add"
+    "button.add": "Add",
+    "button.accept": "Accept",
+    "button.declineAndLogOut": "Decline and Log Out",
+    "button.acceptAll": "Accept All",
+    "button.declineAll": "Decline All"
 }

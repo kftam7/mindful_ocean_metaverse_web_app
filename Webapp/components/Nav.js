@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
 import { getPathname, getHeaders } from '../utils/utils';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
+import ModalFirstLogin from "./modalFirstLogin";
+import ModalCookies from "./modalCookies";
 
 // apple id login
 import { parse } from 'url';
@@ -47,6 +49,7 @@ const NavBar = ({onLocaleChange}) => {
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isFirstLogin, setIsFirstLogin] = useState(false);
   
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
@@ -57,6 +60,7 @@ const NavBar = ({onLocaleChange}) => {
   const currentUrl = router.asPath;
   const { query } = parse(currentUrl, true);
   const [isAppleIdLogin, setIsAppleIdLogin] = useState(false);
+  const [isCookies, setIsCookies] = useState(false);
 
   useEffect(() => {
     const pathname = getPathname();
@@ -69,9 +73,15 @@ const NavBar = ({onLocaleChange}) => {
     const appleId = sessionStorage.getItem("appleId");
     setIsAppleIdLogin(false);
     if(!appleId){
+      console.log(query)
       setIsAppleIdLogin(false);
       if(!query.appleId) return;
       getQuery();
+      // 第一次登录appleId
+      if(query.firstTime === '1'){
+        setIsFirstLogin(true);
+        setIsCookies(true);
+      }
     }else{
       setIsAppleIdLogin(true);
       const email = sessionStorage.getItem("email");
@@ -240,6 +250,23 @@ const NavBar = ({onLocaleChange}) => {
     }
   },[locale])
 
+  const handleAccept = (isShow) => {
+    setIsFirstLogin(isShow);
+  };
+
+  const handleLogout = () => {
+    setIsFirstLogin(false);
+    handleAppleSignOut();
+  };
+
+  const handleCookiesAcceptAll = () => {
+    setIsCookies(false);
+  };
+
+  const handleCookiesDeclineAll = () => {
+    setIsCookies(false);
+  };
+
   return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`p-3 ${styles.bg}`}>
     <Container fluid className={styles.container}>
@@ -346,6 +373,18 @@ const NavBar = ({onLocaleChange}) => {
             </Row>
         </Modal.Body>
       </Modal>
+      <ModalFirstLogin
+        t={t}
+        show={isFirstLogin}
+        setShow={handleAccept}
+        onCancel={handleLogout}
+      />
+      <ModalCookies
+        t={t}
+        show={isCookies}
+        setShow={handleCookiesAcceptAll}
+        onCancel={handleCookiesDeclineAll}
+      />
     </Nav>
     </Navbar.Collapse>
     </Container>

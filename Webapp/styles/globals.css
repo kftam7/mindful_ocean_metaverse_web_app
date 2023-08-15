@@ -545,6 +545,12 @@ option {
   background-color: var(--primary-text-color);
 }
 
+.modal_cookies{
+  height: auto;
+  top: auto;
+  bottom: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .connect_code{
     display: block !important;

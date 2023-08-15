@@ -59,6 +59,9 @@
     "main.text.clusterSize": "Cluster Size",
     "main.text.superClusterID": "Super Cluster ID",
     "main.text.superClusterSize": "Super Cluster Size",
+    "main.text.termsAndConditions": "Terms and Conditions",
+    "main.text.cookies": "Cookies",
+    "main.text.privacyPolices": "Privacy Polices",
 
     "page.create.createAndColor": "创建并为自己版本的鱼上色",
     "page.create.downloadTemplate": "下载模板",
@@ -188,5 +191,9 @@
     "button.changeAccount": "更改帐户",
     "button.edit": "编辑",
     "button.delete": "删除",
-    "button.add": "添加"
+    "button.add": "添加",
+    "button.accept": "Accept",
+    "button.declineAndLogOut": "Decline and Log Out",
+    "button.acceptAll": "Accept All",
+    "button.declineAll": "Decline All"
 }
