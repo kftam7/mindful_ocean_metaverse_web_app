@@ -92,7 +92,7 @@ const UserProfilePage = () => {
       // console.log('Joined Event', joinedEvent)
       setDataJoinedEvent(joinedEvent || []);
 
-      const wdList = walletAddress.slice(1);
+      const wdList = walletAddress;
       setWalletAddressList(wdList)
 
       setPersonalInfo(personInfo)
