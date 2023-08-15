@@ -339,7 +339,7 @@ const UserProfilePage = () => {
                   </div>
                   <div className={styles.card_txt1}>
                     <TextOverflowTips text={walletAddress} />
-                    {walletAddressList.length ? 
+                    {walletAddressList.length && walletAddressList.length > 1? 
                       <div style={{textAlign: 'right'}}>
                         <span className={styles.card_txt2} style={{fontWeight: 'normal'}}>{t('page.userProfile.viewAll')} ({walletAddressList.length})</span>
                         <Button
