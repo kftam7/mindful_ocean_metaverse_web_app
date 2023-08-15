@@ -15,7 +15,9 @@ const GalleryModel = (props) => {
             texture:metadata.URL,
             name:metadata.name,
             author:metadata.extraInfo,
-            description:metadata.description
+            description:metadata.description,
+            firstName:metadata.firstName,
+            lastName:metadata.lastName
         }
         setNft(nft);
         setLoaded(true); 
