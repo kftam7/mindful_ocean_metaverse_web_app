@@ -1,6 +1,6 @@
 import { erc20ABI } from 'wagmi'
 import { MintPassNFT } from "../utils/MintPassNFT";
-import { MindfulNFT } from "../utils/mindfulNFT";
+import { MindfulNFT } from "../utils/MindfulNFT";
 
 
 export const wagmiContractConfig = {

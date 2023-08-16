@@ -1,4 +1,4 @@
-export const mindfulNFT = [
+export const MindfulNFT = [
     {
       "inputs": [
         {

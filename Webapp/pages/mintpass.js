@@ -211,7 +211,7 @@ function Mintpass({ session,user }) {
 //智能合约2.0
 import { Web3Modal } from '@web3modal/react';
 import { WagmiConfig } from 'wagmi';
-import { projectId, wagmiConfig, ethereumClient } from './wagmi';
+import { projectId, wagmiConfig, ethereumClient } from '../components/wagmi';
 function App() {
   return (
     <WagmiConfig config={wagmiConfig}>

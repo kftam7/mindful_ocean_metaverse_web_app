@@ -78,11 +78,13 @@ async function auth(req){
             );
             console.log("Record updated successfully");
         // if appleId doesn't exist
+            body = body + "&firstTime=0";
         }else{
             const resultCreate = await db.query(
                 sqlCreate
             );
             console.log("Record created successfully")
+            body = body + "&firstTime=1";
         }
 
         // include email, firstname & lastname in the body
