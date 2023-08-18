@@ -64,12 +64,12 @@ const GalleryModel = (props) => {
                 <Card.Body>
                     <Card.Title>{nft.name}</Card.Title>
                     <Card.Text>
-                        {props.t('main.text.by')} {nft.author}
+                        {props.t('main.text.by')}
                         <span style={{float: 'right'}}>{nft.firstName} {nft.lastName}</span>
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={image} title={nft.name} text={`by ${nft.author}`} info={metadata} t={props.t} />
+            <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={image} title={nft.name} text={`${props.t('main.text.by')} ${nft.author}`} info={metadata} t={props.t} />
         </>
     )
 }

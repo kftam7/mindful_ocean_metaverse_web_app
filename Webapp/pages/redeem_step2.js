@@ -63,6 +63,14 @@ function RedeemStep2() {
       pathname: '/redeem_step4',
     });
   },[isSuccess])
+
+  useEffect(() => {
+    if(!data) return;
+    console.log('write success', data)
+    Router.push({
+      pathname: '/redeem_step4',
+    });
+  },[data])
   
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
