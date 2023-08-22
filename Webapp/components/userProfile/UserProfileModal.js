@@ -32,7 +32,7 @@ function UserProfileModal(props) {
             </Col>
             <Col sm={12}>
                 <div className='modal_title'>{t('main.text.authenticScarcity')}:</div>
-                <div className='modal_indent'>{modal?.eventId}</div>
+                <div className='modal_indent'>{modal?.authenticScarcity}</div>
             </Col>
             <Col sm={12}>
                 <div className='modal_title'>{t('main.text.scarcityRank')}:</div>
