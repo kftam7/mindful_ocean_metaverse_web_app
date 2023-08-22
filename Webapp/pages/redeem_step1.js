@@ -17,10 +17,12 @@ import { Web3Modal } from '@web3modal/react'
 //import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
 import { configureChains, createConfig, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
 //import { arbitrum, mainnet, polygon } from 'wagmi/chains'
-import { mainnet, optimism, polygon } from "wagmi/chains"
+//import { mainnet, optimism, polygon } from "wagmi/chains"
+import { polygonMumbai } from "wagmi/chains"
 import { Web3Provider } from "@ethersproject/providers";
 //const chains = [arbitrum, mainnet, polygon]
-const chains = [mainnet, optimism, polygon]
+//const chains = [mainnet, optimism, polygon]
+const chains = [polygonMumbai]
 const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
 
 //const { provider } = configureChains(chains, [w3mProvider({ projectId })])
