@@ -14,6 +14,7 @@ import EditPersonalInfoModel from '../components/userProfile/EditPersonalInfoMod
 import EditAppleIdNameModel from '../components/userProfile/EditAppleIdNameModel';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import { getWalletAddress, getAppleId, getAppleIdName, getEmail, getHeaders } from '../utils/utils';
+import { Cookies } from "react-cookie-consent";
 import axios from 'axios';
 import { useTranslation } from '../i18n';
 
@@ -97,7 +98,7 @@ const UserProfilePage = () => {
 
       setPersonalInfo(personInfo)
 
-      sessionStorage.setItem("appleIdName", firstName + ' ' + lastName);
+      Cookies.set("appleIdName", firstName + ' ' + lastName);
       setFirstName(firstName);
       setLastName(lastName);
     }

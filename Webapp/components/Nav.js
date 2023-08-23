@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col, Modal, Link } from 'react-bootstrap';
 import styles from '../styles/Nav.module.css';
 import { useTranslation } from '../i18n';
+import { Cookies } from "react-cookie-consent";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,11 +69,11 @@ const NavBar = ({onLocaleChange}) => {
     const pathname = getPathname();
     if(!pathname) return;
     window.location.href= pathname;
-    sessionStorage.removeItem("pathname");
+    Cookies.remove("pathname");
   }, []);
 
   useEffect(() => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = Cookies.get("appleId");
     setIsAppleIdLogin(false);
     if(!appleId){
       console.log(query)
@@ -86,8 +87,8 @@ const NavBar = ({onLocaleChange}) => {
       }
     }else{
       setIsAppleIdLogin(true);
-      const email = sessionStorage.getItem("email");
-      const appleIdName = sessionStorage.getItem("appleIdName");
+      const email = Cookies.get("email");
+      const appleIdName = Cookies.get("appleIdName");
       setAppleId(appleId);
       setAppleIdName(appleIdName);
       setEmail(email);
@@ -105,14 +106,14 @@ const NavBar = ({onLocaleChange}) => {
     setAppleId(query.appleId);
     setAppleIdName(query.firstName + ' ' + query.lastName)
     setEmail(query.email);
-    sessionStorage.setItem("access_token", query.access_token);
-    sessionStorage.setItem("expires_in", query.expires_in);
-    sessionStorage.setItem("email", query.email);
-    sessionStorage.setItem("refresh_token", query.refresh_token);
-    sessionStorage.setItem("appleId", query.appleId);
-    sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
-    sessionStorage.setItem("appleIdFristName", query.firstName);
-    sessionStorage.setItem("appleIdLastName", query.lastName);
+    Cookies.set('access_token', query.access_token, {path:'/'});
+    Cookies.set('expires_in', query.expires_in, {path:'/'});
+    Cookies.set('email', query.email, {path:'/'});
+    Cookies.set('refresh_token', query.refresh_token, {path:'/'});
+    Cookies.set('appleId', query.appleId, {path:'/'});
+    Cookies.set('appleIdName', query.firstName + ' ' + query.lastName, {path:'/'});
+    Cookies.set('appleappleIdFristNameId', query.firstName, {path:'/'});
+    Cookies.set('appleIdLastName', query.lastName, {path:'/'});
     setIsAppleIdLogin(true);
   }
 
@@ -125,14 +126,14 @@ const NavBar = ({onLocaleChange}) => {
   }
 
   const handleAppleSignOut = () => {
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("expires_in");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("appleId");
-    sessionStorage.removeItem("appleIdName");
-    sessionStorage.removeItem("appleIdFristName");
-    sessionStorage.removeItem("appleIdLastName");
+    Cookies.remove('access_token');
+    Cookies.remove('expires_in');
+    Cookies.remove('email');
+    Cookies.remove('refresh_token');
+    Cookies.remove('appleId');
+    Cookies.remove('appleIdName');
+    Cookies.remove('appleappleIdFristNameId');
+    Cookies.remove('appleIdLastName');
     router.push('/');
     setIsAppleIdLogin(false);
   }
@@ -148,7 +149,7 @@ const NavBar = ({onLocaleChange}) => {
 
   useEffect(async () => {
     if(!isConnected){
-      sessionStorage.removeItem("walletAddress");
+      Cookies.remove("walletAddress");
       return;
     }
     handleGetWalletInfo();
@@ -183,7 +184,7 @@ const NavBar = ({onLocaleChange}) => {
     //const signer = provider.getSigner();
     //const address = await signer.getAddress();
     setWalletAddress(address);
-    sessionStorage.setItem("walletAddress", address);
+    Cookies.set("walletAddress", address);
     setLoadingWallet(false);
     setIsConnectingWallet(true);
   };

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import {ethers, BigNumber}  from 'ethers';
 import {getMessageHashSignature} from '../utils/utils';
+import { Cookies } from "react-cookie-consent";
 import {FaSpinner } from 'react-icons/fa';
 
 //智能合约2.0
@@ -75,7 +76,7 @@ function RedeemStep2() {
   },[data])
   
   useEffect(async () => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = Cookies.get("appleId");
     if(!appleId) return;
     setLoading(true);
     // artwork

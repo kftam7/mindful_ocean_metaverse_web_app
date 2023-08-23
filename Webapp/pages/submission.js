@@ -7,6 +7,7 @@ import homeStyles from '../styles/Home.module.css';
 import styles from '../styles/SubmitPage.module.css';
 import { Row, Col, Image, Container, Button, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { sortByFieldAsc, sortByFieldDesc } from '../utils/utils';
+import { Cookies } from "react-cookie-consent";
 
 import axios from 'axios';
 import AppModal from '../components/submission/AppModal';
@@ -40,7 +41,7 @@ export default function SubmitPage({ session, user }) {
   const [count, setCount] = useState(0);
   
   useEffect(async () => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = Cookies.get("appleId");
     if(!appleId) return;
     // artwork
     const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, {headers: getHeaders()});

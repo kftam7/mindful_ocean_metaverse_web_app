@@ -9,6 +9,7 @@ import {Row, Col, Image, OverlayTrigger, Button, Tooltip, Container} from 'react
 import axios from 'axios';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
+import { Cookies } from "react-cookie-consent";
 
 // Web3Modal
 import { useWeb3Modal } from '@web3modal/react';
@@ -69,7 +70,7 @@ const AuthPage = ({ session }) => {
   
   useEffect(async () => {
     if(!isConnected){
-      sessionStorage.removeItem("walletAddress");
+      Cookies.remove("walletAddress");
       setWalletAddress('');
       return;
     }
@@ -95,7 +96,7 @@ const AuthPage = ({ session }) => {
     //const signer = provider.getSigner();
     //const address = await signer.getAddress();
     setWalletAddress(address);
-    sessionStorage.setItem("walletAddress", address);
+    Cookies.set("walletAddress", address);
     setIsConnectingWallet(true);
   };
 
@@ -124,7 +125,7 @@ const AuthPage = ({ session }) => {
   }, []);
 
   useEffect(() => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = Cookies.get("appleId");
     if(!appleId){
       setAppleId('');
     }else{
@@ -134,16 +135,16 @@ const AuthPage = ({ session }) => {
 
   const connectApple = () => {
     const pathname = window.location.pathname;
-    sessionStorage.setItem("pathname", pathname);
+    Cookies.set("pathname", pathname);
   }
 
   const disconnectApple = async() => {
     setAppleId('');
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("expires_in");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("appleId");
+    Cookies.remove("access_token");
+    Cookies.remove("expires_in");
+    Cookies.remove("email");
+    Cookies.remove("refresh_token");
+    Cookies.remove("appleId");
   }
 
   return(
