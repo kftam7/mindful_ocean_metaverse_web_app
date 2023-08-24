@@ -23,8 +23,8 @@ const AppModal = ({show, setShow}) => {
 };
 
  return(
-    <Modal show={show} className={styles.redeemModel}>
-        <Modal.Header>
+    <Modal show={show} className={styles.redeemModel} onHide={handleClose}>
+        <Modal.Header closeButton>
             <Modal.Title>{t('main.text.noMintpassregistered')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>

@@ -14,12 +14,12 @@ const Draw = ({t}) => {
           <div className={styles.container}>
             <Image className={styles.icon} src="icon.png" alt="top mindful ocean" fluid='true' />
             <Row className={`mt-3 ${styles.appBtnRow}`}>
-              <Col xs={12} sm={6} lg={6} className="mt-1 d-flex justify-content-center">
+              <Col xs={12} sm={6} lg={6} className="mt-1 d-flex justify-content-center offset-sm-3 offset-lg-3">
                 <Button href="/mobileapp" className={styles.appBtn} style={{backgroundImage:"url('apple_store.png')"}}></Button>
               </Col>
-              <Col xs={12} sm={6} lg={6} className="mt-1 d-flex justify-content-center">
+              {/* <Col xs={12} sm={6} lg={6} className="mt-1 d-flex justify-content-center">
                 <Button href="/mobileapp" className={styles.appBtn} style={{backgroundImage:"url('google_play_store.png')"}}></Button>
-              </Col>
+              </Col> */}
             </Row>
           </div>
         </Row>

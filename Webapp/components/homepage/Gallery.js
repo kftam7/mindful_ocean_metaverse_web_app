@@ -66,7 +66,7 @@ const Gallery = ({t}) => {
           <Row className={styles.galleryRow}>            
             {artworkhomepage.slice(0, 3).map((item, index) => {
               return <>
-                  <Col style={{position:'relative'}}>
+                  <Col xs={12} sm={6} md={4} style={{position:'relative'}}>
                     <GalleryModel metadata={item.metadata} image={item.image} index={index} t={t} />
                     {index === 0 ? 
                       <Image className={styles.bgpart6} src="/measuredBoxes/6.png" alt="Ocean6" />

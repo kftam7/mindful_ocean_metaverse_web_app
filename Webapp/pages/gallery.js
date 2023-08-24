@@ -318,7 +318,7 @@ const GalleryPage = () => {
         <Row className='mt-2'>
           {
             dataResult.map((d, i) => (
-              <Col xs={6} md={4} key={d.artworkId} style={{position:'relative'}}>
+              <Col xs={12} sm={6} md={4} key={d.artworkId} style={{position:'relative'}}>
                 <GalleryModel metadata={d} image={d.URL} index={dataResult.indexOf(d)} t={t} />
                 <Image src={d.URL} className={styles.GalleryPageImages} />
               </Col>
