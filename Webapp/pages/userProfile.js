@@ -98,6 +98,7 @@ const UserProfilePage = () => {
 
       setPersonalInfo(personInfo)
 
+      sessionStorage.setItem("appleIdName", firstName + ' ' + lastName);
       Cookies.set("appleIdName", firstName + ' ' + lastName);
       setFirstName(firstName);
       setLastName(lastName);

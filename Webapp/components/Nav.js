@@ -69,11 +69,12 @@ const NavBar = ({onLocaleChange}) => {
     const pathname = getPathname();
     if(!pathname) return;
     window.location.href= pathname;
-    Cookies.remove("pathname");
+    sessionStorage.removeItem("pathname");
   }, []);
 
   useEffect(() => {
-    const appleId = Cookies.get("appleId");
+    console.log(Cookies.get('session'));
+    const appleId = sessionStorage.getItem("appleId");
     setIsAppleIdLogin(false);
     if(!appleId){
       console.log(query)
@@ -87,8 +88,8 @@ const NavBar = ({onLocaleChange}) => {
       }
     }else{
       setIsAppleIdLogin(true);
-      const email = Cookies.get("email");
-      const appleIdName = Cookies.get("appleIdName");
+      const email = sessionStorage.getItem("email");
+      const appleIdName = sessionStorage.getItem("appleIdName");
       setAppleId(appleId);
       setAppleIdName(appleIdName);
       setEmail(email);
@@ -106,6 +107,15 @@ const NavBar = ({onLocaleChange}) => {
     setAppleId(query.appleId);
     setAppleIdName(query.firstName + ' ' + query.lastName)
     setEmail(query.email);
+    sessionStorage.setItem("access_token", query.access_token);
+    sessionStorage.setItem("expires_in", query.expires_in);
+    sessionStorage.setItem("email", query.email);
+    sessionStorage.setItem("refresh_token", query.refresh_token);
+    sessionStorage.setItem("appleId", query.appleId);
+    sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
+    sessionStorage.setItem("appleIdFristName", query.firstName);
+    sessionStorage.setItem("appleIdLastName", query.lastName);
+    
     Cookies.set('access_token', query.access_token, {path:'/'});
     Cookies.set('expires_in', query.expires_in, {path:'/'});
     Cookies.set('email', query.email, {path:'/'});
@@ -126,6 +136,15 @@ const NavBar = ({onLocaleChange}) => {
   }
 
   const handleAppleSignOut = () => {
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("expires_in");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("appleId");
+    sessionStorage.removeItem("appleIdName");
+    sessionStorage.removeItem("appleIdFristName");
+    sessionStorage.removeItem("appleIdLastName");
+    
     Cookies.remove('access_token');
     Cookies.remove('expires_in');
     Cookies.remove('email');
@@ -149,7 +168,7 @@ const NavBar = ({onLocaleChange}) => {
 
   useEffect(async () => {
     if(!isConnected){
-      Cookies.remove("walletAddress");
+      sessionStorage.removeItem("walletAddress");
       return;
     }
     handleGetWalletInfo();
@@ -184,7 +203,7 @@ const NavBar = ({onLocaleChange}) => {
     //const signer = provider.getSigner();
     //const address = await signer.getAddress();
     setWalletAddress(address);
-    Cookies.set("walletAddress", address);
+    sessionStorage.setItem("walletAddress", address);
     setLoadingWallet(false);
     setIsConnectingWallet(true);
   };
