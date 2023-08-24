@@ -62,6 +62,7 @@
     "main.text.termsAndConditions": "Terms and Conditions",
     "main.text.cookies": "Cookies",
     "main.text.privacyPolices": "Privacy Polices",
+    "main.text.cookieConsent": "Our website uses cookies to analyze how the site is used and to ensure your experience is consistent between visits.",
 
     "page.create.createAndColor": "创建并为自己版本的鱼上色",
     "page.create.downloadTemplate": "下载模板",
@@ -195,5 +196,6 @@
     "button.accept": "Accept",
     "button.declineAndLogOut": "Decline and Log Out",
     "button.acceptAll": "Accept All",
-    "button.declineAll": "Decline All"
+    "button.declineAll": "Decline All",
+    "button.decline": "Decline"
 }

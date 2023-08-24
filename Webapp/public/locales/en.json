@@ -64,6 +64,7 @@
     "main.text.termsAndConditions": "Terms and Conditions",
     "main.text.cookies": "Cookies",
     "main.text.privacyPolices": "Privacy Polices",
+    "main.text.cookieConsent": "Our website uses cookies to analyze how the site is used and to ensure your experience is consistent between visits.",
 
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
@@ -197,5 +198,6 @@
     "button.accept": "Accept",
     "button.declineAndLogOut": "Decline and Log Out",
     "button.acceptAll": "Accept All",
-    "button.declineAll": "Decline All"
+    "button.declineAll": "Decline All",
+    "button.decline": "Decline"
 }

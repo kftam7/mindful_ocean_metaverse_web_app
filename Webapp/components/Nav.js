@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Container, Navbar, Nav, Form, Button, Dropdown, InputGroup, FormControl, Row, Col, Modal, Link } from 'react-bootstrap';
 import styles from '../styles/Nav.module.css';
 import { useTranslation } from '../i18n';
-import { Cookies } from "react-cookie-consent";
+import { Cookies, getCookieConsentValue } from "react-cookie-consent";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { getPathname, getHeaders } from '../utils/utils';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import ModalFirstLogin from "./modalFirstLogin";
 import ModalCookies from "./modalCookies";
+import ComponentsCookieConsent from '../components/componentsCookieConsent';
 
 // apple id login
 import { parse } from 'url';
@@ -73,7 +74,6 @@ const NavBar = ({onLocaleChange}) => {
   }, []);
 
   useEffect(() => {
-    console.log(Cookies.get('session'));
     const appleId = sessionStorage.getItem("appleId");
     setIsAppleIdLogin(false);
     if(!appleId){
@@ -428,6 +428,7 @@ function App({onLocaleChange}) {
           '--w3m-z-index': '9999'
         }}
       />
+      <ComponentsCookieConsent />
     </>
   )
 }
