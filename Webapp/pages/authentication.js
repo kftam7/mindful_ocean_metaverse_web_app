@@ -97,7 +97,7 @@ const AuthPage = ({ session }) => {
     //const address = await signer.getAddress();
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
-    Cookies.set("walletAddress", address);
+    // Cookies.set("walletAddress", address);
     setIsConnectingWallet(true);
   };
 
@@ -137,7 +137,7 @@ const AuthPage = ({ session }) => {
   const connectApple = () => {
     const pathname = window.location.pathname;
     sessionStorage.setItem("pathname", pathname);
-    Cookies.set("pathname", pathname);
+    // Cookies.set("pathname", pathname);
   }
 
   const disconnectApple = async() => {
@@ -148,11 +148,11 @@ const AuthPage = ({ session }) => {
     sessionStorage.removeItem("refresh_token");
     sessionStorage.removeItem("appleId");
     
-    Cookies.remove("access_token");
-    Cookies.remove("expires_in");
-    Cookies.remove("email");
-    Cookies.remove("refresh_token");
-    Cookies.remove("appleId");
+    // Cookies.remove("access_token");
+    // Cookies.remove("expires_in");
+    // Cookies.remove("email");
+    // Cookies.remove("refresh_token");
+    // Cookies.remove("appleId");
   }
 
   return(

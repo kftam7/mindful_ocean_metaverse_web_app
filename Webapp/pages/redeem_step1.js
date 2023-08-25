@@ -75,7 +75,7 @@ const RedeemStep1 = ({ session }) => {
   useEffect(async () => {
     if(!isConnected){
       sessionStorage.removeItem("walletAddress");    
-      Cookies.remove("walletAddress");
+      // Cookies.remove("walletAddress");
       setWalletAddress('');
       return;
     }
@@ -102,7 +102,7 @@ const RedeemStep1 = ({ session }) => {
     //const address = await signer.getAddress();
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
-    Cookies.set("walletAddress", address);
+    // Cookies.set("walletAddress", address);
     setIsConnectingWallet(true);
   };
 
@@ -142,7 +142,7 @@ const RedeemStep1 = ({ session }) => {
   const connectApple = () => {
     const pathname = window.location.pathname;
     sessionStorage.setItem("pathname", pathname);
-    Cookies.set("pathname", pathname);
+    // Cookies.set("pathname", pathname);
   }
 
   const disconnectApple = async() => {
@@ -153,11 +153,11 @@ const RedeemStep1 = ({ session }) => {
     sessionStorage.removeItem("refresh_token");
     sessionStorage.removeItem("appleId");
     
-    Cookies.remove("access_token");
-    Cookies.remove("expires_in");
-    Cookies.remove("email");
-    Cookies.remove("refresh_token");
-    Cookies.remove("appleId");
+    // Cookies.remove("access_token");
+    // Cookies.remove("expires_in");
+    // Cookies.remove("email");
+    // Cookies.remove("refresh_token");
+    // Cookies.remove("appleId");
   }
 
   return(

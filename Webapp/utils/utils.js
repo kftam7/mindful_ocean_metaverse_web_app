@@ -1,5 +1,4 @@
 import {ethers, BigNumber}  from 'ethers';
-import { Cookies } from "react-cookie-consent";
 
 const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
 const PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9";
@@ -50,31 +49,31 @@ const getMessageHashSignature = async (contract) => {
 }
 
 const getWalletAddress = () => {
-  return Cookies.get("walletAddress");
+  return sessionStorage.getItem("walletAddress");
 };
 
 const getAppleId = () => {
-  return Cookies.get("appleId");
+  return sessionStorage.getItem("appleId");
 };
 
 const getAppleIdName = () => {
-  return Cookies.get("appleIdName");
+  return sessionStorage.getItem("appleIdName");
 };
 
 const getAppleIdFristName = () => {
-  return Cookies.get("appleIdFristName");
+  return sessionStorage.getItem("appleIdFristName");
 };
 
 const getAppleIdLastName = () => {
-  return Cookies.get("appleIdLastName");
+  return sessionStorage.getItem("appleIdLastName");
 };
 
 const getEmail = () => {
-  return Cookies.get("email");
+  return sessionStorage.getItem("email");
 };
 
 const getRefreshToken = () => {
-  return Cookies.get("refresh_token");
+  return sessionStorage.getItem("refresh_token");
 };
 
 const getHeaders = () => {
@@ -91,7 +90,7 @@ const getHeaders = () => {
 };
 
 const getPathname = () => {
-  return Cookies.get("pathname");
+  return sessionStorage.getItem("pathname");
 };
 
 // 字段升序排序

@@ -30,7 +30,7 @@ const AppModal = ({show, setShow}) => {
         <Modal.Body>
             <div className={styles.redeemLine1}>
                 <div className={styles.redeemText}><div className={styles.name}>{t('main.text.walletAddress')}：</div> <div className={styles.code}><TextOverflowTips text={walletAddress} /></div></div>
-                <div className={styles.redeemText}><div className={styles.name}>{t('main.text.appleID')}：</div> <div className={styles.code}><TextOverflowTips text={appleId} /></div></div>
+                {/* <div className={styles.redeemText}><div className={styles.name}>{t('main.text.appleID')}：</div> <div className={styles.code}><TextOverflowTips text={appleId} /></div></div> */}
                 <div className={styles.redeemBtn}><Button href="/redeem_step1" size="lg" className={styles.disactiveBtn}>{t('button.changeAccount')}</Button></div>
                 <div className={styles.redeemBtn}><Button href="/" size="lg" className={styles.disactiveBtn}>{t('button.returnToHomepage')}</Button></div>
             </div>

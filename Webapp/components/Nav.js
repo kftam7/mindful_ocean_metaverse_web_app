@@ -116,14 +116,14 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.setItem("appleIdFristName", query.firstName);
     sessionStorage.setItem("appleIdLastName", query.lastName);
     
-    Cookies.set('access_token', query.access_token, {path:'/'});
-    Cookies.set('expires_in', query.expires_in, {path:'/'});
-    Cookies.set('email', query.email, {path:'/'});
-    Cookies.set('refresh_token', query.refresh_token, {path:'/'});
-    Cookies.set('appleId', query.appleId, {path:'/'});
-    Cookies.set('appleIdName', query.firstName + ' ' + query.lastName, {path:'/'});
-    Cookies.set('appleappleIdFristNameId', query.firstName, {path:'/'});
-    Cookies.set('appleIdLastName', query.lastName, {path:'/'});
+    // Cookies.set('access_token', query.access_token, {path:'/'});
+    // Cookies.set('expires_in', query.expires_in, {path:'/'});
+    // Cookies.set('email', query.email, {path:'/'});
+    // Cookies.set('refresh_token', query.refresh_token, {path:'/'});
+    // Cookies.set('appleId', query.appleId, {path:'/'});
+    // Cookies.set('appleIdName', query.firstName + ' ' + query.lastName, {path:'/'});
+    // Cookies.set('appleappleIdFristNameId', query.firstName, {path:'/'});
+    // Cookies.set('appleIdLastName', query.lastName, {path:'/'});
     setIsAppleIdLogin(true);
   }
 
@@ -145,14 +145,14 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.removeItem("appleIdFristName");
     sessionStorage.removeItem("appleIdLastName");
     
-    Cookies.remove('access_token');
-    Cookies.remove('expires_in');
-    Cookies.remove('email');
-    Cookies.remove('refresh_token');
-    Cookies.remove('appleId');
-    Cookies.remove('appleIdName');
-    Cookies.remove('appleappleIdFristNameId');
-    Cookies.remove('appleIdLastName');
+    // Cookies.remove('access_token');
+    // Cookies.remove('expires_in');
+    // Cookies.remove('email');
+    // Cookies.remove('refresh_token');
+    // Cookies.remove('appleId');
+    // Cookies.remove('appleIdName');
+    // Cookies.remove('appleappleIdFristNameId');
+    // Cookies.remove('appleIdLastName');
     router.push('/');
     setIsAppleIdLogin(false);
   }
@@ -310,19 +310,19 @@ const NavBar = ({onLocaleChange}) => {
         <Nav.Link href="#mobileapp" className={styles.navlink}>{t('nav.create')}</Nav.Link>
         <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
         <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
-        <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link>
+        {/* <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link> */}
         {/* <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link> */}
     </Nav>
     <Nav>
-      <Col lg={3} xl={4} className='mt-1 me-1'>
+      {/* <Col lg={3} xl={4} className='mt-1 me-1'>
           <Form>
               <InputGroup className="">
                   <InputGroup.Text style={{color: '#005D6C', border: '1px solid #005D6C', backgroundColor: 'none'}} id="subscribe" type="submit"><i className="far fa-envelope"></i></InputGroup.Text>
                   <FormControl id="subscribe" placeholder={t('input.placeholder.email')} style={{border: '1px solid #005D6C'}} />
               </InputGroup>
           </Form>
-      </Col>
-      <Col lg={3} xl={4} className='mt-1 me-1'>
+      </Col> */}
+      <Col lg={6} xl={6} className='mt-1 me-1'>
           <Dropdown className="">
               <Dropdown.Toggle className={styles.dropdownBtn} id="language">
                   {lang}
@@ -334,7 +334,7 @@ const NavBar = ({onLocaleChange}) => {
               </Dropdown.Menu>
           </Dropdown>
       </Col>
-      <Col lg={3} xl={4} className='mt-1 me-1'>
+      <Col lg={6} xl={6} className='mt-1 me-1'>
         <Button onClick={signInOpenModal} className={styles.dropdownBtn}>{t('button.signIn')}</Button> 
       </Col>
       {/* <Col lg={4} className='mt-1 ms-2'>

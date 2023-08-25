@@ -24,9 +24,9 @@ export default function Home() {
       <Draw t={t} />
       <Mintpass t={t} />
       <Redeem1 t={t} />
-      <Donate t={t} />
-      <Redeem t={t} />
-      <Team t={t} />
+      {/* <Donate t={t} /> */}
+      {/* <Redeem t={t} /> */}
+      {/* <Team t={t} /> */}
     </div>
   )
 }
