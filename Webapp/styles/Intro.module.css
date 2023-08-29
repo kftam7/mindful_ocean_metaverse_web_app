@@ -4,6 +4,7 @@
 }
 
 .introText{
+    max-width: 100%;
     padding: 0 3rem;
     position: absolute;
     top: 40vh;
@@ -49,6 +50,11 @@
     left: calc((100vw - 28rem)/2);
 }
 
+.Intro_mintpass {
+    width: 25vw;
+    border-radius: 50%
+}
+
 @media only screen and (max-width: 600px){
     .btn {
         top: 65vh;
@@ -67,6 +73,10 @@
 
     .imgDiv {
         top: 80%;
+    }    
+
+    .Intro_mintpass {
+        width: 80%;
     }
 }
 

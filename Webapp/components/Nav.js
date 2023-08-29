@@ -47,14 +47,14 @@ const wagmiConfig = createConfig({
 //const ethereumClient = new EthereumClient(wagmiClient, chains)
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
-const NavBar = ({onLocaleChange}) => {
+const NavBar = ({ onLocaleChange }) => {
   const apiPort = process.env.API_PORT || '/';
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFirstLogin, setIsFirstLogin] = useState(false);
-  
+
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
   const [appleId, setAppleId] = useState('');
@@ -68,41 +68,41 @@ const NavBar = ({onLocaleChange}) => {
 
   useEffect(() => {
     const pathname = getPathname();
-    if(!pathname) return;
-    window.location.href= pathname;
+    if (!pathname) return;
+    window.location.href = pathname;
     sessionStorage.removeItem("pathname");
   }, []);
 
   useEffect(() => {
     const appleId = sessionStorage.getItem("appleId");
     setIsAppleIdLogin(false);
-    if(!appleId){
+    if (!appleId) {
       console.log(query)
       setIsAppleIdLogin(false);
-      if(!query.appleId) return;
+      if (!query.appleId) return;
       getQuery();
       // 第一次登录appleId
-      if(query.firstTime === '1'){
+      if (query.firstTime === '1') {
         setIsFirstLogin(true);
         setIsCookies(true);
       }
-    }else{
+    } else {
       setIsAppleIdLogin(true);
       const email = sessionStorage.getItem("email");
       const appleIdName = sessionStorage.getItem("appleIdName");
       setAppleId(appleId);
       setAppleIdName(appleIdName);
       setEmail(email);
-      if(!query.appleId) return;
+      if (!query.appleId) return;
       getQuery();
     }
   }, []);
 
   useEffect(() => {
-    if(isModalVisible) return;
+    if (isModalVisible) return;
     setLoadingWallet(false);
   }, [isModalVisible]);
-  
+
   const getQuery = () => {
     setAppleId(query.appleId);
     setAppleIdName(query.firstName + ' ' + query.lastName)
@@ -115,7 +115,7 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
     sessionStorage.setItem("appleIdFristName", query.firstName);
     sessionStorage.setItem("appleIdLastName", query.lastName);
-    
+
     // Cookies.set('access_token', query.access_token, {path:'/'});
     // Cookies.set('expires_in', query.expires_in, {path:'/'});
     // Cookies.set('email', query.email, {path:'/'});
@@ -144,7 +144,7 @@ const NavBar = ({onLocaleChange}) => {
     sessionStorage.removeItem("appleIdName");
     sessionStorage.removeItem("appleIdFristName");
     sessionStorage.removeItem("appleIdLastName");
-    
+
     // Cookies.remove('access_token');
     // Cookies.remove('expires_in');
     // Cookies.remove('email');
@@ -162,12 +162,12 @@ const NavBar = ({onLocaleChange}) => {
   const { open } = useWeb3Modal();
   //const { isConnected } = useAccount();
   const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect(); 
+  const { disconnect } = useDisconnect();
 
   //console.log("walletn address: ", address);
 
   useEffect(async () => {
-    if(!isConnected){
+    if (!isConnected) {
       sessionStorage.removeItem("walletAddress");
       return;
     }
@@ -193,7 +193,7 @@ const NavBar = ({onLocaleChange}) => {
   const handleGetWalletInfo = async () => {
     console.log("ethereumClient: ", ethereumClient);
     console.log("address: ", address)
-   
+
     //const { walletAddress, isConnecting, isDisconnected } = useAccount();
     //console.log("wallet address: ", walletAddress);
 
@@ -209,20 +209,20 @@ const NavBar = ({onLocaleChange}) => {
   };
 
   useEffect(async () => {
-    if(!appleId || !walletAddress) return;
-    if(!isConnectingWallet) return;
-    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()})
-    .then(res => {
-      if(!res.data.message){
-        if (confirm(res.data)) {
-          disconnect();
+    if (!appleId || !walletAddress) return;
+    if (!isConnectingWallet) return;
+    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, { headers: getHeaders() })
+      .then(res => {
+        if (!res.data.message) {
+          if (confirm(res.data)) {
+            disconnect();
+          }
         }
-      }
 
-    })
-    .catch(err => {
-      console.log(err)
-    });
+      })
+      .catch(err => {
+        console.log(err)
+      });
     setIsConnectingWallet(false);
   }, [appleId, walletAddress, isConnectingWallet]);
 
@@ -244,7 +244,7 @@ const NavBar = ({onLocaleChange}) => {
   //   await dispatch(grabAccount());
   //   await dispatch(grabBalance());
   // }
-  
+
   //didn't work
   // const disconnect = async() => {
   //   dispatch(disconnectAccount());
@@ -261,16 +261,16 @@ const NavBar = ({onLocaleChange}) => {
   };
 
   useEffect(() => {
-    if(locale === 'en'){
+    if (locale === 'en') {
       setLang(t('lang.en'))
     }
-    if(locale === 'ch'){
+    if (locale === 'ch') {
       setLang(t('lang.ch'))
     }
-    if(locale === 'tw'){
+    if (locale === 'tw') {
       setLang(t('lang.tw'))
     }
-  },[locale])
+  }, [locale])
 
   const handleAccept = (isShow) => {
     setIsFirstLogin(isShow);
@@ -291,30 +291,30 @@ const NavBar = ({onLocaleChange}) => {
 
   return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`p-3 ${styles.bg}`}>
-    <Container fluid className={styles.container}>
-    <Navbar.Brand href="/">
-        <Image
+      <Container fluid className={styles.container}>
+        <Navbar.Brand href="/">
+          <Image
             src='/logo.svg'
-            width="110"
-            height="30"
+            width="210"
+            height="80"
             className="d-inline-block align-top"
             alt="mindful ocean logo"
-        />
-    </Navbar.Brand>       
-    <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-    <Navbar.Collapse id='responsive-navbar-nav'>
-      
-    <Nav className="me-auto">
-        <Nav.Link href="#about" className={styles.navlink}>{t('nav.about')}</Nav.Link>
-        <Nav.Link href="#gallery" className={styles.navlink}>{t('nav.gallery')}</Nav.Link>
-        <Nav.Link href="#mobileapp" className={styles.navlink}>{t('nav.create')}</Nav.Link>
-        <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
-        <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
-        {/* <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link> */}
-        {/* <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link> */}
-    </Nav>
-    <Nav>
-      {/* <Col lg={3} xl={4} className='mt-1 me-1'>
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+
+          <Nav className="me-auto">
+            <Nav.Link href="#about" className={styles.navlink}>{t('nav.about')}</Nav.Link>
+            <Nav.Link href="#gallery" className={styles.navlink}>{t('nav.gallery')}</Nav.Link>
+            <Nav.Link href="#mobileapp" className={styles.navlink}>{t('nav.create')}</Nav.Link>
+            <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
+            <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
+            {/* <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link> */}
+            {/* <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link> */}
+          </Nav>
+          <Nav>
+            {/* <Col lg={3} xl={4} className='mt-1 me-1'>
           <Form>
               <InputGroup className="">
                   <InputGroup.Text style={{color: '#005D6C', border: '1px solid #005D6C', backgroundColor: 'none'}} id="subscribe" type="submit"><i className="far fa-envelope"></i></InputGroup.Text>
@@ -322,22 +322,28 @@ const NavBar = ({onLocaleChange}) => {
               </InputGroup>
           </Form>
       </Col> */}
-      <Col lg={6} xl={6} className='mt-1 me-1'>
-          <Dropdown className="">
-              <Dropdown.Toggle className={styles.dropdownBtn} id="language">
+            <Col lg={4} xl={4} className='mt-1 me-1'>
+              <Button onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyhW-B2Y7PSvIv_zfCw825HZANkugQuJqXCut413fp_WpnwQ/viewform?usp=pp_url&entry.835058185=I+would+like+to+participate+in+the+beta+tests+of+the+Mindful+Ocean+Metaverse+app&entry.1065046570=I+would+like+to+receive+emails+about+the+project')} className={styles.dropdownBtn}>{t('button.signUpNow')}</Button>
+            </Col>
+            <Col lg={4} xl={4} className='mt-1 me-1'>
+              <Dropdown className="">
+                <Dropdown.Toggle className={styles.dropdownBtn} id="language">
                   {lang}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
                   <Dropdown.Item onClick={() => changeLanguage('en')}>{t('lang.en')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeLanguage('ch')}>{t('lang.ch')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeLanguage('tw')}>{t('lang.tw')}</Dropdown.Item>
-              </Dropdown.Menu>
-          </Dropdown>
-      </Col>
-      <Col lg={6} xl={6} className='mt-1 me-1'>
-        <Button onClick={signInOpenModal} className={styles.dropdownBtn}>{t('button.signIn')}</Button> 
-      </Col>
-      {/* <Col lg={4} className='mt-1 ms-2'>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+            <Col lg={4} xl={4} className='mt-1 me-1'>
+              <Button onClick={signInOpenModal} className={styles.dropdownBtn}>{t('button.signIn')}</Button>
+            </Col>
+            <Col lg={4} className='mt-1 ms-2'>
+              <a href="https://twitter.com/MindfulOceanNFT" target="_blank" class="Nav_twiBtn btn btn-primary"></a>
+            </Col>
+            {/* <Col lg={4} className='mt-1 ms-2'>
           {(account) ?
               <Dropdown className="">
                   <Dropdown.Toggle className={styles.dropdownBtn} id="connect">
@@ -351,17 +357,17 @@ const NavBar = ({onLocaleChange}) => {
               <Button onClick={connect} className={homeStyles.btn} style={{borderRadius: '15px'}}><Image src="/metamask.png" width="15px" height="15px" alt="metamask icon" />&nbsp;Connect wallet</Button> 
           }  
       </Col> */}
-      <Modal
-        show={isModalVisible}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-            <Modal.Title>{t('main.text.signIn')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <Row className='mb-12'>
-                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
-                  {isAppleIdLogin ? 
+            <Modal
+              show={isModalVisible}
+              onHide={handleClose}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>{t('main.text.signIn')}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Row className='mb-12'>
+                  <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
+                    {isAppleIdLogin ?
                       <>
                         <div>{t('main.text.appleID')}</div>
                         <Button className={styles.signInBtn2} onClick={handleAppleSignOut}>
@@ -369,56 +375,56 @@ const NavBar = ({onLocaleChange}) => {
                           <TextOverflowTips text={appleIdName} />
                         </Button>
                       </>
-                    : 
-                    <Button className={styles.signInBtn}>
-                      <div dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></div>
-                    </Button>
-                  }
-                </Col>
-                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
-                  {isConnected ? 
-                    <>
-                      <div>{t('main.text.walletContect')}</div> 
-                      <Button className={styles.signInBtn2} onClick={connectWallet}>
-                        <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
-                        <TextOverflowTips text={walletAddress} />
+                      :
+                      <Button className={styles.signInBtn}>
+                        <div dangerouslySetInnerHTML={{ __html: appleIdLoginBtn }}></div>
                       </Button>
-                    </>
-                    : 
-                    <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet || !isAppleIdLogin}>{loadingWallet ? "Loading..." : 'Connect Wallet'}</Button>
-                  }
-                  {/* <Web3Button /> */}
-                </Col>
-                <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
+                    }
+                  </Col>
+                  <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
+                    {isConnected ?
+                      <>
+                        <div>{t('main.text.walletContect')}</div>
+                        <Button className={styles.signInBtn2} onClick={connectWallet}>
+                          <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
+                          <TextOverflowTips text={walletAddress} />
+                        </Button>
+                      </>
+                      :
+                      <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet || !isAppleIdLogin}>{loadingWallet ? "Loading..." : 'Connect Wallet'}</Button>
+                    }
+                    {/* <Web3Button /> */}
+                  </Col>
+                  <Col xs={12} md={10} className="offset-sm-0 offset-md-1">
                     <Button href="/userProfile" className={!isConnected || !isAppleIdLogin ? styles.signInBtnDisabled : styles.signInBtn} disabled={!isConnected || !isAppleIdLogin}>{t('button.viewMyProfile')}</Button>
-                </Col>
-            </Row>
-        </Modal.Body>
-      </Modal>
-      <ModalFirstLogin
-        t={t}
-        show={isFirstLogin}
-        setShow={handleAccept}
-        onCancel={handleLogout}
-      />
-      <ModalCookies
-        t={t}
-        show={isCookies}
-        setShow={handleCookiesAcceptAll}
-        onCancel={handleCookiesDeclineAll}
-      />
-    </Nav>
-    </Navbar.Collapse>
-    </Container>
+                  </Col>
+                </Row>
+              </Modal.Body>
+            </Modal>
+            <ModalFirstLogin
+              t={t}
+              show={isFirstLogin}
+              setShow={handleAccept}
+              onCancel={handleLogout}
+            />
+            <ModalCookies
+              t={t}
+              show={isCookies}
+              setShow={handleCookiesAcceptAll}
+              onCancel={handleCookiesDeclineAll}
+            />
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
-    )
+  )
 }
 
-function App({onLocaleChange}) {
+function App({ onLocaleChange }) {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-          <NavBar onLocaleChange={onLocaleChange} />
+        <NavBar onLocaleChange={onLocaleChange} />
       </WagmiConfig>
 
       <Web3Modal
