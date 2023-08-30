@@ -323,7 +323,7 @@ const NavBar = ({ onLocaleChange }) => {
           </Form>
       </Col> */}
             <Col lg={4} xl={4} className='mt-1 me-1'>
-              <Button onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyhW-B2Y7PSvIv_zfCw825HZANkugQuJqXCut413fp_WpnwQ/viewform?usp=pp_url&entry.835058185=I+would+like+to+participate+in+the+beta+tests+of+the+Mindful+Ocean+Metaverse+app&entry.1065046570=I+would+like+to+receive+emails+about+the+project')} className={styles.dropdownBtn}>{t('button.signUpNow')}</Button>
+              <Button onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyhW-B2Y7PSvIv_zfCw825HZANkugQuJqXCut413fp_WpnwQ/viewform?usp=pp_url&entry.835058185=I+would+like+to+participate+in+the+beta+tests+of+the+Mindful+Ocean+Metaverse+app&entry.1065046570=I+would+like+to+receive+emails+about+the+project')} className={`${styles.signInBtn2} ${styles.default}`}>{t('button.signUpNow')}</Button>
             </Col>
             <Col lg={4} xl={4} className='mt-1 me-1'>
               <Dropdown className="">

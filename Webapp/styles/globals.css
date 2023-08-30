@@ -557,7 +557,7 @@ option {
   background-size: 100%;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   border-style: none;
   box-shadow: inset 0 0 5px 2px #fff;
   transition: all .2s
@@ -565,11 +565,63 @@ option {
 
 .Nav_twiBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 1rem 2rem #f7f7f7
+  background-color: rgba(255,255,255,0);
+  /* box-shadow: 0 1rem 2rem #f7f7f7 */
 }
 
 .navbar-expand-xl .navbar-nav{
   flex: 1;
+}
+
+.Draw_draw{
+  height: 90vh;
+  position: relative;
+  padding-top: 10rem;
+}
+
+.Draw_draw .row{
+  display: flex;
+  align-items: center;
+}
+
+.btn_default {
+  width: 28rem;
+  border-color: var(--primary-text-color);
+  background-color: var(--primary-text-color);
+  border-radius:20px
+}
+
+.btn_default:hover {
+  background-color: var(--hovered-color);
+  border-color: var(--hovered-color);
+}
+.btn_default:focus {
+  background-color: var(--hovered-color) !important;
+  border-color: var(--hovered-color) !important;
+}
+
+.btn_default:active {
+  background-color: var(--hovered-color) !important;
+  border-color: var(--hovered-color) !important;
+}
+
+.Donate_donate_mid__hSbds {
+  background-image: url('/multiplayer.364df793.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-bottom: 0;
+  height: 80vh;
+  width: 35vw;
+  left: 0
+}
+
+.Donate_donate_left__mVvOY {
+  width: 150%;
+  transform: translateX(-20%)
+}
+
+.Donate_donate_right__hVwCC {
+  width: 150%
 }
 
 @media only screen and (max-width: 768px) {
@@ -582,10 +634,30 @@ option {
   .connect_txt{
     text-align: center;
   }
+
+  .Donate_donate_col_left__L18k5,.Donate_donate_col_right__dpZBZ {
+    display: none
+}
+
+.Donate_donate_mid__hSbds {
+    background-image: url('/verticalMultiplayer.a8e70acf.svg');
+    width: 80vw;
+    height: 100vh;
+    top: 10vh;
+    left: 0;
+}
 }
 
 @media only screen and (max-width: 575px) {
   .connect_code button{
     width: 100%;
   }
+
+  .Donate_donate_mid__hSbds {
+    background-image: url('/verticalMultiplayer.a8e70acf.svg');
+    width: 80vw;
+    height: 100vh;
+    top: 10vh;
+    left: 0;
+}
 }
