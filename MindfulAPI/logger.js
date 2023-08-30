@@ -27,6 +27,7 @@ const transport = new DailyRotateFile({
  maxSize: '20m',
  maxFiles: '14d',
  prepend: true,
+ level: config.logConfig.level
 });
 transport.on('rotate', function (oldFilename, newFilename) {
 // call function like upload to s3 or on cloud

@@ -16,19 +16,17 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
-////////////////// Sign In
-/* POST SignIn */
-/*
-router.post('/signin/:appleId', async function(req, res, next) {
+////////////////// Credential
+/* GET credential */
+router.get('/credential/:login/:credential', async function(req, res, next) {
   try {
-    res.json(await SignIn.signin(req));
+    res.json(await Credential.getCrendential(req.params.login,req.params.credential, req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
-*/
 
 
 ////////////////// User
@@ -53,20 +51,6 @@ router.get('/user/:appleId', async function(req, res, next) {
     next(err);
   }
 });
-
-
-/* POST user */
-/*
-router.post('/user', async function(req, res, next) {
-  try {
-    res.json(await User.createUser(req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-*/
 
 /* PUT user */
 router.put('/user/:appleId', async function(req, res, next) {  
@@ -114,6 +98,7 @@ router.put('/event/:id', async function(req, res, next) {
   }
 });
 
+
 ////////////////// NFT
 /* GET NFT Details */
 router.get('/nft/:type/:idtype/:id', async function(req, res, next) {  
@@ -137,6 +122,7 @@ router.get('/nfttotal/:type', async function(req, res, next) {
   }
 });
 
+
 ////////////////// Language File
 /* GET language file */
 router.get('/language', async function(req, res, next) {
@@ -159,6 +145,7 @@ router.put('/language/:lang', async function(req, res, next) {
     next(err);
   }
 });
+
 
 ////////////////// AppVersion
 /* GET AppVersion */
@@ -194,6 +181,7 @@ router.put('/appversion/:version', async function(req, res, next) {
   }
 });
 
+
 ////////////////// Artwork
 /* GET Artwork */
 router.get('/artwork', async function(req, res, next) {
@@ -216,19 +204,6 @@ router.get('/artwork/:appleId', async function(req, res, next) {
   }
 });
 
-/* POST Artwork */
-/*
-router.post('/artwork', async function(req, res, next) {
-  try {
-    res.json(await Artwork.createArtwork(req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-*/
-
 /* PUT Artwork */
 router.put('/artwork/:artworkId', async function(req, res, next) {  
   try {
@@ -239,6 +214,7 @@ router.put('/artwork/:artworkId', async function(req, res, next) {
     next(err);
   }
 });
+
 
 ////////////////// JoinedEvent
 /* GET JoinedEvent */
@@ -284,6 +260,7 @@ router.put('/joinedevent/:joinedEventId', async function(req, res, next) {
   }
 });
 
+
 ////////////////// PersonalWebsite
 /* GET PersonalWebsite */
 router.get('/personalwebsite', async function(req, res, next) {
@@ -306,19 +283,6 @@ router.get('/personalwebsite/:appleId', async function(req, res, next) {
   }
 });
 
-/* POST PersonalWebsite */
-/*
-router.post('/personalwebsite', async function(req, res, next) {
-  try {
-    res.json(await PersonalWebsite.createPersonalWebsite(req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-*/
-
 /* PUT PersonalWebsite */
 router.put('/personalwebsite/:websiteId', async function(req, res, next) {  
   try {
@@ -330,73 +294,4 @@ router.put('/personalwebsite/:websiteId', async function(req, res, next) {
   }
 });
 
-/* GET credential */
-router.get('/credential/:login/:credential', async function(req, res, next) {
-  try {
-    res.json(await Credential.getCrendential(req.params.login,req.params.credential, req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-
-/* GET Apple Login */
-/*
-router.get('/applelogin', async function(req, res, next) {
-  try {
-    res.send(await AppleAuth.login());
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-*/
-/* POST Apple Auth */
-/*
-router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
-  try {
-    //res.json(await AppleAuth.auth(req));
-    //const token = JSON.stringify((await AppleAuth.auth(req)));
-    //console.log(token);
-    //res.redirect(process.env.redirect_address);
-    //res.redirect(307, process.env.redirect_address);
-    //const param = "?state=1234&code=1243&id_token=1234";
-     const param = await AppleAuth.auth(req);
-     console.log(param);
-     res.redirect(process.env.redirect_address + param);
-
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-*/
-/* GET Apple Token */
-/*
-router.get('/appletoken', async function(req, res, next) {
-  try {
-    res.send(await AppleAuth.token());
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-*/
-
-/* GET Apple Refresh */
-/*
-router.get('/applerefresh', async function(req, res, next) {
-  try {
-    res.json(await AppleAuth.refresh(req));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-*/
 module.exports = router;

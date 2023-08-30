@@ -10,6 +10,8 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get AppVersion */
 async function getAppVersion(version){
 
+  logger.log('info', '%s %s', 'AppVersion', 'getAppVersion');
+
     if (version == "latest"){
         var rows = await db.query(
         `SELECT * FROM appVersion WHERE releaseDate <= now() AND expireDate > now() ORDER BY releaseDate DESC LIMIT 1;`
@@ -36,6 +38,8 @@ async function getAppVersion(version){
 /* create AppVersion */
 async function createAppVersion(appVersionRecord){
 
+  logger.log('info', '%s %s', 'AppVersion', 'createAppVersion');
+
   // construct the SQL statement
   var sql = 'INSERT INTO appVersion (versionNo, versionName, releaseDate, expireDate, description, isActive) VALUES ';
 
@@ -50,7 +54,8 @@ async function createAppVersion(appVersionRecord){
 
   }
   
-  console.log(sql);
+  logger.log('debug', '%s %s sql: %s', 'AppVersion', 'createAppVersion', sql);
+  //console.log(sql);
 
   // update results on DB
   const result = await db.query(
@@ -66,9 +71,12 @@ async function createAppVersion(appVersionRecord){
 /* update Event */
 async function updateAppVersion(version, appVersionRecord){
 
+  logger.log('info', '%s %s', 'AppVersion', 'updateAppVersion');
+
   sql = 'UPDATE appVersion SET versionName = "' + appVersionRecord.versionName + '", releaseDate = "' + appVersionRecord.releaseDate + '", expireDate = "' + appVersionRecord.expireDate + '", description = "' + appVersionRecord.description+ '", isActive = "' + appVersionRecord.isActive  + '" WHERE versionNo = "' + version + '";';
 
-  console.log(sql);
+  logger.log('debug', '%s %s sql: %s', 'AppVersion', 'updateAppVersion', sql);
+  //console.log(sql);
   
   const result = await db.query(
     sql

@@ -10,6 +10,8 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get JoinedEvent */
 async function getJoinedEvent(appleId){
 
+    logger.log('info', '%s %s %s', 'JoinedEvent', 'getJoinedEvent', appleId);
+
     if (appleId){
         var rows = await db.query(
         `SELECT a.eventId FROM joinedEvent a, user b WHERE a.userId=b.userId AND b.appleId = ? ORDER by a.eventId ASC;`, [appleId]
@@ -32,6 +34,8 @@ async function getJoinedEvent(appleId){
 /* create JoinedEvent */
 async function createJoinedEvent(joinedEventRecord){
 
+  logger.log('info', '%s %s', 'JoinedEvent', 'createJoinedEvent');
+
   // construct the SQL statement
   var sql = 'INSERT INTO joinedEvent (userId, eventId) VALUES ';
 
@@ -46,6 +50,8 @@ async function createJoinedEvent(joinedEventRecord){
 
   }
 
+  logger.log('debug', '%s %s sql: %s', 'JoinedEvent', 'createJoinedEvent', sql);
+
   // update results on DB
   const result = await db.query(
     sql
@@ -53,29 +59,32 @@ async function createJoinedEvent(joinedEventRecord){
 
   // will return SQL error if fails, otherwise return the following succesful msg
   let message = 'Records added susccessfully';
+  logger.log('info', '%s %s Records added susccessfully', 'JoinedEvent', 'createJoinedEvent');
   return {message};
   
 }
 
 /* update JoinedEvent */
-async function updateJoinedEvent(joinedEventId, joinedEventRecord){
+async function updateJoinedEvent(joinedEventId, updateJoinedEvent){
 
-  sql = 'UPDATE joinedEvent SET userId = "' + joinedEventRecord.userId + '", eventId = "' + joinedEventRecord.eventId + '" WHERE joinedEventId = "' + joinedEventId + '";';
+  logger.log('info', '%s %s %s', 'JoinedEvent', 'updateJoinedEvent', joinedEventId);
+  
+  sql = 'UPDATE joinedEvent SET userId = "' + updateJoinedEvent.userId + '", eventId = "' + updateJoinedEvent.eventId + '" WHERE joinedEventId = "' + joinedEventId + '";';
 
-  console.log(sql);
+  logger.log('debug', '%s %s sql: %s', 'JoinedEvent', 'updateJoinedEvent', sql);
   
   const result = await db.query(
     sql
   );
 
   if (result.affectedRows) {
+    logger.log('info', '%s %s %s Record updated successfully', 'JoinedEvent', 'updateJoinedEvent', joinedEventId);
     message = 'Record updated successfully';
   }
 
   return {message};
   
 }
-
 
 module.exports = {
   getJoinedEvent,

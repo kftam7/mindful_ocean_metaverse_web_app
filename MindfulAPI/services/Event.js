@@ -10,6 +10,8 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get Event */
 async function getEvent(eventId, title, startTime, endTime){
 
+    logger.log('info', '%s %s', 'Event', 'getEvent');
+
     if (eventId == null){
       eventId = "%";
     }
@@ -40,6 +42,8 @@ async function getEvent(eventId, title, startTime, endTime){
 /* create Event */
 async function createEvent(eventRecord){
 
+  logger.log('info', '%s %s', 'Event', 'createEvent');
+
   // construct the SQL statement
   var sql = 'INSERT INTO event (title, titleCN, titleTW, paragraphText, paragraphTextCN, paragraphTextTW, image, hyperlink, timerDescription, timerDescriptionCN, timerDescriptionTW, startTime, endTime, isActive) VALUES ';
 
@@ -54,6 +58,8 @@ async function createEvent(eventRecord){
 
   }
 
+  logger.log('debug', '%s %s sql: %s', 'Event', 'createEvent', sql);
+
   // update results on DB
   const result = await db.query(
     sql
@@ -61,6 +67,7 @@ async function createEvent(eventRecord){
 
   // will return SQL error if fails, otherwise return the following succesful msg
   let message = 'Records added susccessfully';
+  logger.log('info', '%s %s Records added susccessfully', 'Event', 'createEvent');
   return {message};
   
 }
@@ -69,16 +76,19 @@ async function createEvent(eventRecord){
 /* update Event */
 async function updateEvent(id, eventRecord){
 
+  logger.log('info', '%s %s id: %s', 'Event', 'updateEvent', id);
+
   sql = 'UPDATE event SET title= "' + eventRecord.title + '", titleCN = "' + eventRecord.titleCN + '", titleTW = "' + eventRecord.titleTW + '", paragraphText = "' + eventRecord.paragraphText + '", paragraphTextCN = "' + eventRecord.paragraphTextCN  + '", paragraphTextTW = "' + eventRecord.paragraphTextTW + '", image = "' + eventRecord.image + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", timerDescriptionCN = "' + eventRecord.timerDescriptionCN + '", timerDescriptionTW = "' + eventRecord.timerDescriptionTW + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '", isActive = ' + eventRecord.isActive + ' WHERE eventId = ' + id + ';';
 
+  logger.log('debug', '%s %s sql: %s', 'Event', 'updateEvent', sql);
   //console.log(sql);
   
   const result = await db.query(
     sql
   );
 
-
   if (result.affectedRows) {
+    logger.log('info', '%s %s Records updated successfully, id: %s', 'Event', 'updateEvent', id);
     message = 'Record updated successfully';
   }
 

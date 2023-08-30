@@ -14,20 +14,19 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get Artwork */
 async function getArtwork(appleId){
 
-    // calleed by end user, return ifMinted = 0 only
-    if (appleId){
-        var rows = await db.query(
-        //`SELECT b.userId, b.appleId, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
-        `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
-        //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
-      );
-    // called by admin, return ifMinted = 0 & 1     
-    }else{
-        var rows = await db.query(
-        `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
-        //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
-      );
-    }
+  logger.log('info', '%s %s %s', 'Artwork', 'getArtwork', appleId);
+
+  // calleed by end user, return ifMinted = 0 only
+  if (appleId){
+      var rows = await db.query(
+      `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND ifMinted = 0 AND b.appleId = ? ORDER by artworkId ASC;`, [appleId]
+    );
+  // called by admin, return ifMinted = 0 & 1     
+  }else{
+      var rows = await db.query(
+      `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId ORDER by artworkId ASC;`
+    );
+  }
   
   const data = helper.emptyOrRows(rows);
   const meta = "1";
@@ -41,9 +40,9 @@ async function getArtwork(appleId){
 /* get Artwork for the homepage (not need for authentication for this call) */
 async function getHomepageArtwork(){
 
+  logger.log('info', '%s %s', 'Artwork', 'getHomepageArtwork');
 
   var rows = await db.query(
-    //`SELECT b.userId, b.appleId, a.artworkId, a.name, a.URL, a.type, a.description, a.extraInfo, a.createTime, a.updateTime, a.ifHomepage FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
     `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND a.ifHomepage = 1 ORDER BY RAND() LIMIT 3;`
   );
   
@@ -59,55 +58,37 @@ async function getHomepageArtwork(){
 /* create Artwork */
 async function createArtwork(artworkRecord){
 
-  // censor contents (name, description, extraInfo )
-  /*
-  let validResult = await validate.validateContent(artworkRecord[0].name);
-  if (!validResult) {
-    return ("Input contains explicit contents");
-  }
-  validResult = await validate.validateContent(artworkRecord[0].description);
-  if (!validResult) {
-    return ("Input contains explicit contents");
-  }
-  validResult = await validate.validateContent(artworkRecord[0].extraInfo);
-  if (!validResult) {
-    return ("Input contains explicit contents");
-  }
-  */
+  logger.log('info', '%s %s %s', 'Artwork', 'createArtwork', artworkRecord[0].appleId);
 
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   validResult = await validate.validateContent(artworkRecord[0].artistMessage);
   if (!validResult) {
+    logger.log('error', '%s %s Artist Message contains explicit contents: %s', 'Artwork', 'createArtwork', artworkRecord[0].artistMessage);
     return ("Artist Message contains explicit contents");
   }
 
   // get the userId
-  var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord[0].appleId + '"'; 
+  var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord[0].appleId + '"';
+
+  logger.log('debug', '%s %s sqlUserId: %s', 'Artwork', 'createArtwork', sqlUserId);
 
   const userIdResult = await db.query(
     sqlUserId
   );
 
   if (!userIdResult.length){
+    logger.log('error', '%s %s %s appleId doesn\'t exist', 'Artwork', 'createArtwork', artworkRecord[0].appleId);
     let message = 'appleId doesn\'t exist';
     return {message};
   }else{
 
     var rows = await db.query(
-      //`INSERT INTO artwork (userId, name, URL, type, description, extraInfo, createTime, updateTime, ifHomepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [userIdResult[0].userId, artworkRecord[0].name, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].description, artworkRecord[0].extraInfo, artworkRecord[0].createTime, artworkRecord[0].updateTime, artworkRecord[0].ifHomepage]
       `INSERT INTO artwork (userId, eventId, URL, type, artistMessage, ifHomepage, ifMinted, ifRedeemed, isActive, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [userIdResult[0].userId, artworkRecord[0].eventId, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].artistMessage, artworkRecord[0].ifHomepage, artworkRecord[0].ifMinted, artworkRecord[0].ifRedeemed, artworkRecord[0].isActive, currentTimeSql, currentTimeSql]
     );
-  
-  /*
-    var queryResult = await db.query(
-      //`SELECT artworkId FROM artwork WHERE userId = ? AND name = ?`, [userIdResult[0].userId, artworkRecord[0].name]
-      `SELECT LAST_INSERT_ID() AS artworkId`
-    );
-    
-*/
-    //const artworkId = queryResult[0].artworkId;
+
     const artworkId = rows.insertId;
+    logger.log('info', '%s %s Artwork created successfully, artworkId: %s', 'Artwork', 'createArtwork', artworkId);
     return {artworkId};
 
   }
@@ -118,43 +99,29 @@ async function createArtwork(artworkRecord){
 /* update Artwork */
 async function updateArtwork(artworkId, artworkRecord){
 
-/*
-  // censor contents (name, description, extraInfo )
-  let validResult = await validate.validateContent(artworkRecord.name);
-  if (!validResult) {
-    return ("Input contains explicit contents");
-  }
-  validResult = await validate.validateContent(artworkRecord.description);
-  if (!validResult) {
-    return ("Input contains explicit contents");
-  }
-  validResult = await validate.validateContent(artworkRecord.extraInfo);
-  if (!validResult) {
-    return ("Input contains explicit contents");
-  }
-*/
+  logger.log('info', '%s %s %s', 'Artwork', 'updateArtwork', artworkId);
 
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   validResult = await validate.validateContent(artworkRecord.artistMessage);
   if (!validResult) {
+    logger.log('error', '%s %s Artist Message contains explicit contents: %s', 'Artwork', 'updateArtwork', artworkRecord.artistMessage);
     return ("Artist Message contains explicit contents");
   }
 
   // get the userId
   var sqlUserId = 'SELECT userId FROM user WHERE appleId LIKE "' + artworkRecord.appleId + '"'; 
-
+  logger.log('debug', '%s %s sqlUserId: %s', 'Artwork', 'updateArtwork', sqlUserId);
   const userIdResult = await db.query(
     sqlUserId
   );
 
   if (!userIdResult.length){
+    logger.log('error', '%s %s %s appleId doesn\'t exist', 'Artwork', 'updateArtwork', artworkRecord.appleId);
     let message = 'appleId doesn\'t exist';
     return {message};
   }else{  
 
-  //sql = 'UPDATE artwork SET userId = "' + userIdResult[0].userId + '", name = "' + artworkRecord.name + '", URL = "' + artworkRecord.URL + '", type = "' + artworkRecord.type + '", description = "' + artworkRecord.description + '", extraInfo = "' + artworkRecord.extraInfo + '", createTime = "' + artworkRecord.createTime + '", updateTime = "' + artworkRecord.updateTime + '", ifHomepage = ' + artworkRecord.ifHomepage + ' WHERE artworkId = "' + artworkId + '";';
-  
   sql = 'UPDATE artwork SET userId = ' + userIdResult[0].userId;
 
   if (!(artworkRecord.eventId == null)){
@@ -219,7 +186,7 @@ async function updateArtwork(artworkId, artworkRecord){
 
   sql = sql + ', updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';'; 
 
-    //console.log(sql);
+  logger.log('debug', '%s %s sql: %s', 'Artwork', 'updateArtwork', sql);
     
     const result = await db.query(
       sql
@@ -227,6 +194,7 @@ async function updateArtwork(artworkId, artworkRecord){
 
 
     if (result.affectedRows) {
+      logger.log('info', '%s %s %s Record updated successfully', 'Artwork', 'updateArtwork', artworkId);
       message = 'Record updated successfully';
     }
     
@@ -238,24 +206,31 @@ async function updateArtwork(artworkId, artworkRecord){
 /* set Minted */
 async function setMintedArtwork(artworkId){
 
+  logger.log('info', '%s %s %s', 'Artwork', 'setMintedArtwork', artworkId);
+
   // read data from artwork table
   var sqlSelect = 'SELECT count(*) AS count FROM artwork WHERE artworkId = ' + artworkId; 
   const resultSelect = await db.query(
     sqlSelect
   );
 
+  logger.log('debug', '%s %s sqlSelect: %s', 'Artwork', 'setMintedArtwork', sqlSelect);
+
   // if artworkId doesn't exist
   if (resultSelect[0].count == 0){
+    logger.log('error', '%s %s %s No record found for this artworkId', 'Artwork', 'setMintedArtwork', artworkId);
     return ("No record found for this artworkId");
   }
 
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
   sql = 'UPDATE artwork SET ifMinted = 1, updateTime = "' + currentTimeSql + '" WHERE artworkId = "' + artworkId + '";';
+  logger.log('debug', '%s %s sql: %s', 'Artwork', 'setMintedArtwork', sql);
   const result = await db.query(
     sql
   );
   
   if (result.affectedRows) {
+    logger.log('info', '%s %s %s Record updated successfully', 'Artwork', 'setMintedArtwork', artworkId);
     message = 'Record updated successfully';
   }
   
@@ -266,24 +241,31 @@ async function setMintedArtwork(artworkId){
 /* set Redeemed */
 async function setRedeemedArtwork(artworkId){
 
+  logger.log('info', '%s %s %s', 'Artwork', 'setRedeemedArtwork', artworkId);
+
   // read data from artwork table
   var sqlSelect = 'SELECT count(*) AS count FROM artwork WHERE artworkId = ' + artworkId; 
   const resultSelect = await db.query(
     sqlSelect
   );
 
+  logger.log('debug', '%s %s sqlSelect: %s', 'Artwork', 'setRedeemedArtwork', sqlSelect);
+
   // if artworkId doesn't exist
   if (resultSelect[0].count == 0){
+    logger.log('error', '%s %s %s No record found for this artworkId', 'Artwork', 'setRedeemedArtwork', artworkId);
     return ("No record found for this artworkId");
   }
 
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
   sql = 'UPDATE artwork SET ifRedeemed = 1, updateTime = "' + currentTimeSql + '" WHERE artworkId = "' + artworkId + '";';
+  logger.log('debug', '%s %s sql: %s', 'Artwork', 'setRedeemedArtwork', sql);
   const result = await db.query(
     sql
   );
   
   if (result.affectedRows) {
+    logger.log('info', '%s %s %s Record updated successfully', 'Artwork', 'setRedeemedArtwork', artworkId);
     message = 'Record updated successfully';
   }
   
@@ -294,19 +276,22 @@ async function setRedeemedArtwork(artworkId){
 /* NFT Storage, type=1 for mintpass, type=2 for mindfultoken */
 async function nftStorage(artworkId, type){
 
+  logger.log('info', '%s %s %s %s', 'Artwork', 'nftStorage', artworkId, type);
+
   const API_KEY = process.env.NFT_STORAGE_API_KEY;
   const client = new NFTStorage({ token: API_KEY });
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
-  // read data from artwork table
-  //var sqlSelect = 'SELECT name, URL, type, description, extraInfo, mintpassStorage, mindfultokenStorage FROM artwork WHERE artworkId = ' + artworkId; 
+  // read data from artwork table 
   var sqlSelect = 'SELECT eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId, superClusterSize FROM artwork WHERE artworkId = ' + artworkId; 
+  logger.log('debug', '%s %s sqlSelect: %s', 'Artwork', 'nftStorage', sqlSelect);
   const resultSelect = await db.query(
     sqlSelect
   );
 
   // if artworkId doesn't exist
   if (!resultSelect.length){
+    logger.log('error', '%s %s %s No record found for this artworkId', 'Artwork', 'nftStorage', artworkId);
     return ("No record found for this artworkId");
   }
 
@@ -316,6 +301,7 @@ async function nftStorage(artworkId, type){
     // if value already exists
     if (resultSelect[0].mintpassStorage){
       if (resultSelect[0].mintpassStorage.startsWith("ipfs")){
+        logger.log('info', '%s %s %s %s mintpassStorage already exists', 'Artwork', 'nftStorage', artworkId, type);
         return resultSelect[0].mintpassStorage;
       }
     }
@@ -340,10 +326,11 @@ async function nftStorage(artworkId, type){
     })
 
     const sqlUpdateMintpass = 'UPDATE artwork SET mintpassStorage = "' + mintpassMetadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+    logger.log('debug', '%s %s sqlUpdateMintpass: %s', 'Artwork', 'nftStorage', sqlUpdateMintpass);
     const resultUpdateMintpass = await db.query(
       sqlUpdateMintpass
     );
-
+    logger.log('info', '%s %s %s %s mintpassStorage successfully created: %s', 'Artwork', 'nftStorage', artworkId, type, mintpassMetadata.url);
     return mintpassMetadata.url;
 
   // for mindfultoken
@@ -352,6 +339,7 @@ async function nftStorage(artworkId, type){
     // if value already exists
     if (resultSelect[0].mindfultokenStorage){
       if (resultSelect[0].mindfultokenStorage.startsWith("ipfs")){
+        logger.log('info', '%s %s %s %s mindfultokenStorage already exists', 'Artwork', 'nftStorage', artworkId, type);
         return resultSelect[0].mindfultokenStorage;
       }
     }
@@ -382,59 +370,13 @@ async function nftStorage(artworkId, type){
     })
 
     const sqlUpdateMindfultoken = 'UPDATE artwork SET mindfultokenStorage = "' + mindfultokenMetadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+    logger.log('debug', '%s %s sqlUpdateMindfultoken: %s', 'Artwork', 'nftStorage', sqlUpdateMindfultoken);
     const resultUpdateMindfultoken = await db.query(
       sqlUpdateMindfultoken
     );
-
+    logger.log('info', '%s %s %s %s mindfultokenMetadata successfully created: %s', 'Artwork', 'nftStorage', artworkId, type, mindfultokenMetadata.url);
     return mindfultokenMetadata.url;
   }
-
-
-/*
-  // if nftStorage exists 
-  if (resultSelect[0].nftStorage){
-    if (resultSelect[0].nftStorage.startsWith("ipfs")){
-      return resultSelect[0].nftStorage;
-    }
-  }
-
-  const url = resultSelect[0].URL;
-  const filename = url.replace(process.env.artworkFileBaseURL, '');
-  const filepath = process.env.filepathPrefix + filename;
-
-  if (type == 1){
-    const mintpassMetadata = await client.store({
-         name: resultSelect[0].name,
-         type: resultSelect[0].type,
-         description: resultSelect[0].description,
-         extraInfo: resultSelect[0].extraInfo,
-    })
-  }else{
-    const mindfultokenMetadata = await client.store({
-      name: resultSelect[0].name,
-      type: resultSelect[0].type,
-      description: resultSelect[0].description,
-      extraInfo: resultSelect[0].extraInfo,
-      image: new File(
-          [await fs.promises.readFile(filepath)],
-          filename,
-          { type: 'image/jpeg' }
-      ),
-    })
-  }
-
-  // update data to artwork table
-  const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-  if (type == 1){
-    var sqlUpdate = 'UPDATE artwork SET mintpassStorage = "' + metadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
-  }else{
-    var sqlUpdate = 'UPDATE artwork SET mindfultokenStorage = "' + metadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
-  }
-  //console.log("sqlUpdate: ", sqlUpdate);
-  const resultUpdate = await db.query(
-    sqlUpdate
-  );
-*/
 
 }
 

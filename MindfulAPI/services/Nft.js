@@ -9,6 +9,8 @@ const axios = require('axios');
 /* get NFT */
 async function getNFT(type, idtype, id){
 
+  logger.log('info', '%s %s %s %s %s', 'Nft', 'getNFT', type, idtype, id);
+
   // create Alchemy object
   const settings = {
     apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
@@ -27,7 +29,6 @@ async function getNFT(type, idtype, id){
     contractAddress = process.env.mintPassContractAddress;
   }
 
-
   if(idtype == "appleid"){
     
     // find out how many walletaddress this appleId has
@@ -36,11 +37,12 @@ async function getNFT(type, idtype, id){
         sql
     );
 
+    logger.log('debug', '%s %s sql: %s', 'Nft', 'getNFT', sql);
+
     // If walletaddress found for this appleId
     if (result.length){
       
       for (const address of result) {
-        //console.log("address: ", address.walletAddress);
         
         for await (const nft of alchemy.nft.getNftsForOwnerIterator(address.walletAddress, {
           // Omit the NFT metadata for smaller payloads.
@@ -48,13 +50,10 @@ async function getNFT(type, idtype, id){
         })) {
           if(`${nft.contract.address}` == contractAddress.toLowerCase()){
 
-            //console.log("nftURL: ", nft.tokenUri.raw);
-
             if (nft.tokenUri.raw.startsWith("ipfs://")){
+
               // get the NFT info from the URI
               const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
-  
-              //console.log("nftURL: ", nftURL);
   
               const options = {
                 'proxy': {
@@ -73,9 +72,6 @@ async function getNFT(type, idtype, id){
   
               try {
                 const result = await axios(options);
-                //console.log("result: ",  result);
-                //console.log("result: ", result);
-                //data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
                 if (type == "mintPass"){
                   data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
                 }else if (type == "mindfulToken") {
@@ -83,6 +79,7 @@ async function getNFT(type, idtype, id){
                 }
                 
               }catch (e) {
+                logger.log('error', '%s %s %s Issue with NFT URI: %s', 'Nft', 'getNFT', id, nftURL);
                 return "Issue with NFT URI";
               }
             }
@@ -91,6 +88,7 @@ async function getNFT(type, idtype, id){
       }
     // If no walletaddress found for this appleId
     }else{
+      logger.log('info', '%s %s No walletAddress found for this appleID: %s', 'Nft', 'getNFT', id);
       return ("No walletAddress found for this appleID");
     }
 
@@ -104,8 +102,6 @@ async function getNFT(type, idtype, id){
         if (nft.tokenUri.raw.startsWith("ipfs://")){
           // get the NFT info from the URI
           const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
-  
-          //console.log("nftURL: ", nftURL);
   
           const options = {
             'proxy': {
@@ -124,15 +120,13 @@ async function getNFT(type, idtype, id){
   
           try {
             const result = await axios(options);
-            //console.log("result: ", result);
-            //data.push({tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
             if (type == "mintPass"){
-              //data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, type: `${result.data.type}`, description: `${result.data.description}`, extraInfo: `${result.data.extraInfo}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
               data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
             }else if (type == "mindfulToken") {
               data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, authenticScarcity: `${result.data.authenticScarcity}`, scarcityRank: `${result.data.scarcityRank}`, clusterId: `${result.data.clusterId}`, clusterSize: `${result.data.clusterSize}`, superClusterId: `${result.data.superClusterId}`, superClusterSize: `${result.data.superClusterSize}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
             }
           }catch (e) {
+            logger.log('error', '%s %s %s Issue with NFT URI: %s', 'Nft', 'getNFT', id, nftURL);
             return "Issue with NFT URI";
           }
         }
@@ -140,23 +134,8 @@ async function getNFT(type, idtype, id){
     }
   }
 
+  //logger.log('debug', '%s %s %s Data: %s', 'Nft', 'getNFT', id, data);
 
-  //let dataMintPass = [{"tokenId": "1", "description": "This is MintPass 1", "peronsalInfo": "Personal Information 1", "artistAppleId": "AppleID1", "eventId": "1", "URL": "https://123.abc.com"},{"tokenId": "2", "description": "This is MintPass 2", "peronsalInfo": "Personal Information 2", "artistAppleId": "AppleID2", "eventId": "2", "URL": "https://456.abc.com"},{"tokenId": "3", "description": "This is MintPass 3", "peronsalInfo": "Personal Information 3", "artistAppleId": "AppleID3", "eventId": "3", "URL": "https://789.abc.com"}];
-  //let dataMintPass = [];
-  //let dataMindfulToken = [{"tokenId": "20230420", "description": "This is MindfulToken 1", "peronsalInfo": "Personal Information 4", "artistAppleId": "AppleID4", "eventId": "4", "URL": "https://777.xyz.com"}, {"tokenId": "20230421", "description": "This is MindfulToken 2", "peronsalInfo": "Personal Information 5", "artistAppleId": "AppleID5", "eventId": "5", "URL": "https://888.xyz.com"}, {"tokenId": "20230422", "description": "This is MindfulToken 3", "peronsalInfo": "Personal Information 6", "artistAppleId": "AppleID6", "eventId": "6", "URL": "https://999.xyz.com"}];
-  //let dataMintPass = [{"tokenId":"6","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gif picture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"tokenId":"7","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gifpicture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"}];
-  //let dataMindfulToken = [{"tokenId":"0","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gif picture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"tokenId":"1","tokenUriRaw":"ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name":"artworkwhatisthis","type":"fish","description":"gif picture","extraInfo":"null","imageURL":"https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"}]; 
-  //let dataMintPass = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "2","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "3","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "4","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "6","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "16","tokenUriRaw": "ipfs://bafyreifhld4u4sy6osixubpebmc4grdi4y5ghjmyphkkfjyufipxrcivny/metadata.json","name": "testartwrok9","type": "fish","description": "desc9","extraInfo": "extra9","imageURL": "https://ipfs.io/ipfs/bafybeihay3wh6h26fr4zyxcvdpbsp33zia2i6c3kiet25tzttkicg3vflq/artwork_default.jpg"}];
-  //let dataMindfulToken = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "7","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "8","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "11","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "12","tokenUriRaw": "ipfs://bafyreierzjpzy576f2sqwr6yshf6wwlaan7qsh32bycmtb7l4fegi6srzm/metadata.json","name": "Sample artwork","type": "fish","description": "Sample test","extraInfo": "Sample test extra","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "13","tokenUriRaw": "ipfs://bafyreifuvv46cghiid222of4vlr35i6jz7zgbgscw2c2zfv53epulvrony/metadata.json","name": "Sample artwork2","type": "fish","description": "Sample test","extraInfo": "Sample test extra","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "14","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "15","tokenUriRaw": "ipfs://bafyreidaphppcdpnwtrbxy6g42uubwpcxgxo2przkocnqz4tuk7hlxe4g4/metadata.json","name": "testartwork2","type": "fish","description": "testartwork2 desc","extraInfo": "testartwork2 extra","imageURL": "https://ipfs.io/ipfs/bafybeifsrz7fidwdb3oensdbavkx3ka4cyqglandgbrpv6kcmzox7znzve/event_B.png"}]; 
-
-/*
-  
-  if(type == "mintPass"){
-    data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "2","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null","artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "3","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null","artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "4","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds","artworkId": "3","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "6","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds","artworkId": "4","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "16","tokenUriRaw": "ipfs://bafyreifhld4u4sy6osixubpebmc4grdi4y5ghjmyphkkfjyufipxrcivny/metadata.json","name": "testartwrok9","type": "fish","description": "desc9","extraInfo": "extra9","artworkId": "5","imageURL": "https://ipfs.io/ipfs/bafybeihay3wh6h26fr4zyxcvdpbsp33zia2i6c3kiet25tzttkicg3vflq/artwork_default.jpg"}];
-  }else{
-    data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "7","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds", "artworkId": "3","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "8","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "4","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "11","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "5","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "12","tokenUriRaw": "ipfs://bafyreierzjpzy576f2sqwr6yshf6wwlaan7qsh32bycmtb7l4fegi6srzm/metadata.json","name": "Sample artwork","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "6","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "13","tokenUriRaw": "ipfs://bafyreifuvv46cghiid222of4vlr35i6jz7zgbgscw2c2zfv53epulvrony/metadata.json","name": "Sample artwork2","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "7","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "14","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "8","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "15","tokenUriRaw": "ipfs://bafyreidaphppcdpnwtrbxy6g42uubwpcxgxo2przkocnqz4tuk7hlxe4g4/metadata.json","name": "testartwork2","type": "fish","description": "testartwork2 desc","extraInfo": "testartwork2 extra", "artworkId": "9","imageURL": "https://ipfs.io/ipfs/bafybeifsrz7fidwdb3oensdbavkx3ka4cyqglandgbrpv6kcmzox7znzve/event_B.png"}];
-  }
-*/
   return {
     data
   }
@@ -165,6 +144,8 @@ async function getNFT(type, idtype, id){
 
 /* get NFT Total */
 async function getNFTTotal(type){
+
+  logger.log('info', '%s %s %s', 'Nft', 'getNFTTotal', type);
 
   // Optional config object, but defaults to the API key 'demo' and Network 'eth-mainnet'.
   const settings = {
@@ -191,14 +172,11 @@ async function getNFTTotal(type){
     omitMetadata: true,
   });
 
-  //console.log(Object.keys(nfts).length);
-
-  //const data = helper.emptyOrRows(rows);
   const total = Object.keys(nfts).length;
-  //const total = 11;
+
+  logger.log('debug', '%s %s %s total: %s', 'Nft', 'getNFTTotal', type, total);
 
   return {
-    //data,
     total
   }
 }

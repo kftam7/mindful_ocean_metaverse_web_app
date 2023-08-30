@@ -18,6 +18,61 @@ const bodyParser = require('body-parser');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
+////////////////// Apple Login
+/* GET Apple Login */
+router.get('/applelogin', async function(req, res, next) {
+  try {
+    res.send(await AppleAuth.login());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* POST Apple Auth */
+router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
+  try {
+    //res.json(await AppleAuth.auth(req));
+    //const token = JSON.stringify((await AppleAuth.auth(req)));
+    //console.log(token);
+    //res.redirect(process.env.redirect_address);
+    //res.redirect(307, process.env.redirect_address);
+    //const param = "?state=1234&code=1243&id_token=1234";
+     const param = await AppleAuth.auth(req);
+     //console.log(param);
+     res.redirect(process.env.redirect_address + param);
+
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* GET Apple Token */
+router.get('/appletoken', async function(req, res, next) {
+  try {
+    res.send(await AppleAuth.token());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* GET Apple Refresh */
+router.get('/applerefresh', async function(req, res, next) {
+  try {
+    res.json(await AppleAuth.refresh(req));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+
 ////////////////// Sign In
 /* POST SignIn */
 router.post('/signin/:appleId', async function(req, res, next) {
@@ -54,7 +109,6 @@ router.get('/user/:appleId', async function(req, res, next) {
   }
 });
 
-
 /* POST user */
 router.post('/user', async function(req, res, next) {
   try {
@@ -65,7 +119,6 @@ router.post('/user', async function(req, res, next) {
     next(err);
   }
 });
-
 
 /* PUT user */
 router.put('/user/:appleId', async function(req, res, next) {  
@@ -88,6 +141,7 @@ router.put('/userpersonalinfo/:appleId', async function(req, res, next) {
     next(err);
   }
 });
+
 
 ////////////////// Event
 /* GET event */
@@ -123,6 +177,7 @@ router.put('/event/:id', async function(req, res, next) {
   }
 });
 
+
 ////////////////// NFT
 /* GET NFT Details */
 router.get('/nft/:type/:idtype/:id', async function(req, res, next) {  
@@ -146,28 +201,6 @@ router.get('/nfttotal/:type', async function(req, res, next) {
   }
 });
 
-////////////////// Language File
-/* GET language file */
-router.get('/language', async function(req, res, next) {
-  try {
-    res.json(await Language.getLang(req.params.lang));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-
-/* PUT langauge file */
-router.put('/language/:lang', async function(req, res, next) {
-  try {
-    res.json(await Language.updateLang(req.params.lang, req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
 
 ////////////////// AppVersion
 /* GET AppVersion */
@@ -202,6 +235,7 @@ router.put('/appversion/:version', async function(req, res, next) {
     next(err);
   }
 });
+
 
 ////////////////// Artwork
 /* GET all Artwork */
@@ -281,7 +315,6 @@ router.put('/setredeemedartwork/:artworkId', async function(req, res, next) {
   }
 });
 
-
 /* POST Artwork Files on NFT Storage for MintPass */
 router.post('/nftstorage/mintpass/:artworkId', async function(req, res, next) {
   try {
@@ -300,6 +333,97 @@ router.post('/nftstorage/mindfultoken/:artworkId', async function(req, res, next
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+
+////////////////// Artwork Files
+/* Upload Artwork Files */
+router.post('/artworkfile', async function(req, res, next) {
+  try {
+    await ArtworkFile.upload(req, res);
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* GET Artwork Files List */
+router.get('/artworkfile', async function(req, res, next) {
+  try {
+    await ArtworkFile.getListFiles(res);
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* Download Artwork Files */
+router.get('/artworkfile/:filename', async function(req, res, next) {
+  try {
+    await ArtworkFile.download(req, res);
+  } catch (err) {
+    logger.log('error', 'Error while downloading file', err.message);
+    console.error(`Error while downloading file`, err.message);
+    next(err);
+  }
+});
+
+/* DELETE Artwork Files */
+router.delete('/artworkfile/:filename', async function(req, res, next) {
+  try {
+    await ArtworkFile.remove(req, res);
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+
+////////////////// PersonalWebsite
+/* GET PersonalWebsite */
+router.get('/personalwebsite', async function(req, res, next) {
+  try {
+    res.json(await PersonalWebsite.getPersonalWebsite());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+router.get('/personalwebsite/:appleId', async function(req, res, next) {
+  try {
+    res.json(await PersonalWebsite.getPersonalWebsite(req.params.appleId));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* POST PersonalWebsite */
+router.post('/personalwebsite/:appleId', async function(req, res, next) {
+  try {
+    res.json(await PersonalWebsite.createPersonalWebsite(req.params.appleId, req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+/* PUT PersonalWebsite */
+router.put('/personalwebsite/:websiteId', async function(req, res, next) {  
+  try {
+    res.json(await PersonalWebsite.updatePersonalWebsite(req.params.websiteId, req.body));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while updating programming language`, err.message);
     next(err);
   }
 });
@@ -348,46 +472,14 @@ router.put('/joinedevent/:joinedEventId', async function(req, res, next) {
   }
 });
 
-////////////////// PersonalWebsite
-/* GET PersonalWebsite */
-router.get('/personalwebsite', async function(req, res, next) {
+////////////////// Crypto Wallet
+/* Update wallet address */
+router.post('/updatewallet/:appleId/:walletAddress', async function(req, res, next) {
   try {
-    res.json(await PersonalWebsite.getPersonalWebsite());
+    res.json(await Wallet.updateWallet(req.params.appleId, req.params.walletAddress));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-
-router.get('/personalwebsite/:appleId', async function(req, res, next) {
-  try {
-    res.json(await PersonalWebsite.getPersonalWebsite(req.params.appleId));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-
-/* POST PersonalWebsite */
-router.post('/personalwebsite/:appleId', async function(req, res, next) {
-  try {
-    res.json(await PersonalWebsite.createPersonalWebsite(req.params.appleId, req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-
-/* PUT PersonalWebsite */
-router.put('/personalwebsite/:websiteId', async function(req, res, next) {  
-  try {
-    res.json(await PersonalWebsite.updatePersonalWebsite(req.params.websiteId, req.body));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while updating programming language`, err.message);
     next(err);
   }
 });
@@ -404,11 +496,12 @@ router.get('/credential/:login/:credential', async function(req, res, next) {
   }
 });
 
-////////////////// Apple Login
-/* GET Apple Login */
-router.get('/applelogin', async function(req, res, next) {
+
+////////////////// Language File
+/* GET language file */
+router.get('/language', async function(req, res, next) {
   try {
-    res.send(await AppleAuth.login());
+    res.json(await Language.getLang(req.params.lang));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);
@@ -416,105 +509,15 @@ router.get('/applelogin', async function(req, res, next) {
   }
 });
 
-/* POST Apple Auth */
-router.post('/appleauth', bodyParser.urlencoded({ extended: false }), async function(req, res, next) {
+/* PUT langauge file */
+router.put('/language/:lang', async function(req, res, next) {
   try {
-    //res.json(await AppleAuth.auth(req));
-    //const token = JSON.stringify((await AppleAuth.auth(req)));
-    //console.log(token);
-    //res.redirect(process.env.redirect_address);
-    //res.redirect(307, process.env.redirect_address);
-    //const param = "?state=1234&code=1243&id_token=1234";
-     const param = await AppleAuth.auth(req);
-     //console.log(param);
-     res.redirect(process.env.redirect_address + param);
-
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-
-/* GET Apple Token */
-router.get('/appletoken', async function(req, res, next) {
-  try {
-    res.send(await AppleAuth.token());
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-
-/* GET Apple Refresh */
-router.get('/applerefresh', async function(req, res, next) {
-  try {
-    res.json(await AppleAuth.refresh(req));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while getting  `, err.message);
-    next(err);
-  }
-});
-
-////////////////// Artwork Files
-/* Upload Artwork Files */
-router.post('/artworkfile', async function(req, res, next) {
-  try {
-    await ArtworkFile.upload(req, res);
+    res.json(await Language.updateLang(req.params.lang, req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while creating programming language`, err.message);
     next(err);
   }
 });
-
-/* GET Artwork Files List */
-router.get('/artworkfile', async function(req, res, next) {
-  try {
-    await ArtworkFile.getListFiles(res);
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-
-/* Download Artwork Files */
-router.get('/artworkfile/:filename', async function(req, res, next) {
-  try {
-    await ArtworkFile.download(req, res);
-  } catch (err) {
-    logger.log('error', 'Error while downloading file', err.message);
-    console.error(`Error while downloading file`, err.message);
-    next(err);
-  }
-});
-
-/* DELETE Artwork Files */
-router.delete('/artworkfile/:filename', async function(req, res, next) {
-  try {
-    await ArtworkFile.remove(req, res);
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-
-
-////////////////// Crypto Wallet
-/* Update wallet address */
-router.post('/updatewallet/:appleId/:walletAddress', async function(req, res, next) {
-  try {
-    res.json(await Wallet.updateWallet(req.params.appleId, req.params.walletAddress));
-  } catch (err) {
-    logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
-    next(err);
-  }
-});
-
 
 module.exports = router;

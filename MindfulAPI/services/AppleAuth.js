@@ -14,6 +14,7 @@ const moment = require('moment');
 let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_8Y456M46UL.p8').toString(), 'text');
 
 async function login(){
+    logger.log('info', '%s %s', 'AppleAuth', 'login');
 	return(`<a href="${authInstance.loginURL()}">Sign in with Apple</a>`);
 }
 
@@ -30,18 +31,20 @@ async function auth(req){
 
         user.id = idToken.sub;
 
+        logger.log('info', '%s %s %s', 'AppleAuth', 'auth', user.id);
+
         let body = "?access_token=" + response.access_token + "&id_token=" + response.id_token + "&expires_in=" + response.expires_in + "&refresh_token=" + response.refresh_token + "&appleId=" + user.id;
 
+        // check if email exist
         if (idToken.email) {
             user.email = idToken.email;
-            //body = body + "&email=" + user.email;
             ifEmailExist = 1;
 	    }
 
+        // check if name exist
         if (req.body.user) {
             const { name } = JSON.parse(req.body.user);
             user.name = name;
-	        //body = body + "&firstName=" + user.name.firstName + "&lastName=" + user.name.lastName;
             ifNameExist = 1;
         }
 
@@ -64,26 +67,33 @@ async function auth(req){
         //console.log("sqlCreate: ", sqlCreate);
         //console.log("sqlUpdate: ", sqlUpdate);
 
+        logger.log('debug', '%s %s sqlCreate: %s', 'AppleAuth', 'auth', sqlCreate);
+        logger.log('debug', '%s %s sqlUpdate: %s' , 'AppleAuth', 'auth', sqlUpdate);
+
         // update database
+
         // check if user already exist
         let sqlCheck = 'SELECT COUNT(*) AS if_exist FROM user WHERE appleId = "' + user.id +'"';
         const resultCheck = await db.query(
             sqlCheck
         );
 
+        logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheck);
+
         // if appleId already exist
         if (resultCheck[0].if_exist){
             const resultUpdate = await db.query(
                 sqlUpdate
             );
-            console.log("Record updated successfully");
-        // if appleId doesn't exist
+            logger.log('info', '%s %s Record updated successfully', 'AppleAuth', 'auth');
+            //console.log("Record updated successfully");
             body = body + "&firstTime=0";
         }else{
             const resultCreate = await db.query(
                 sqlCreate
             );
-            console.log("Record created successfully")
+            logger.log('info', '%s %s Record created successfully', 'AppleAuth', 'auth');
+            //console.log("Record created successfully")
             body = body + "&firstTime=1";
         }
 
@@ -92,28 +102,35 @@ async function auth(req){
         const resultCheckInfo = await db.query(
             sqlCheckInfo
         );
+        logger.log('debug', '%s %s sqlCheckInfo: %s' , 'AppleAuth', 'auth', sqlCheckInfo);
+
         body = body + "&email=" + resultCheckInfo[0].email;
         body = body + "&firstName=" + resultCheckInfo[0].firstName + "&lastName=" + resultCheckInfo[0].lastName;
 
-        console.log("body:", body);
+        logger.log('info', '%s %s Redirect link: %s' , 'AppleAuth', 'auth', body);
+        //console.log("body:", body);
 
         return(body);
 
     } catch (ex) {
-        console.error(ex);
+        logger.log('error', '%s %s %s', 'AppleAuth', 'auth', ex);
+        //console.error(ex);
     }
 }
 
 async function token(){
+    logger.log('info', '%s %s', 'AppleAuth', 'token');
 	return(authInstance._tokenGenerator.generate());
 }
 
 async function refresh(req){
     try {
+        logger.log('info', '%s %s', 'AppleAuth', 'refresh');
         const accessToken = await authInstance.refreshToken(req.query.refreshToken);
         return(accessToken);
     } catch (ex) {
-        console.error(ex);
+        logger.log('error', '%s %s An error occurred!', 'AppleAuth', 'refresh');
+        //console.error(ex);
         res.send("An error occurred!");
     }
 }

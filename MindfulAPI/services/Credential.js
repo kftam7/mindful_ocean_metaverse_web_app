@@ -10,12 +10,14 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get crypto */
 async function getCrendential(login, credential){
 
+  logger.log('info', '%s %s %s', 'Credential', 'getCrendential', login);
+
   // check if login exist
   const ifExist = await db.query(
     'SELECT count(*) as ifExist FROM CMSUser WHERE name LIKE "' + login + '" AND credential LIKE "' + credential + '" AND isActive = 1'
   );
   if (!ifExist[0].ifExist){
-    logger.log('error', '%s %s Login doesn\'t exist', login, 'getCrypto');
+    logger.log('error', '%s %s %s Login doesn\'t exist or credential doesn\'t match or is not active', 'Credential', 'getCrendential', login);
     let message = 'Login doesn\'t exist or credential doesn\'t match or is not active';
     return {message};
   }else{
@@ -23,8 +25,6 @@ async function getCrendential(login, credential){
       'SELECT isAdmin FROM CMSUser WHERE name LIKE "' + login + '"'
     );
   }
-
-  logger.log('info', '%s %s %s', login, credential, 'getCrypto');
 
   const data = helper.emptyOrRows(rows);
   const meta = "1";

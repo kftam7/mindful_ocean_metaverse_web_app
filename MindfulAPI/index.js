@@ -25,7 +25,6 @@ app.use(
 
 // CORS only for local host
 var corsOptions = {
-  //origin: 'http://127.0.0.1:3000',
   origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://web-staging.mindfultoken.org', 'https://mindfulcms.agiisoft.com'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
@@ -40,7 +39,12 @@ app.use(async(req, res, next) => {
   }
 
   // skip for appleauth call (will remove when Apple update on their side)
-  if(req.url.startsWith("/mindfulapi/appleauth")){
+  //if(req.url.startsWith("/mindfulapi/appleauth")){
+  if(req.url.startsWith("/mindfulapi/apple")){
+          return next()
+  }
+
+  if(req.url.startsWith("/mindfulapi/app/apple")){
           return next()
   }
 
@@ -70,19 +74,19 @@ app.use(async(req, res, next) => {
   }
 
   // skip for getting artwork info for event
-  if(req.url.startsWith("/mindfulapi/app/event")){
-          return next()
-  }
+  //if(req.url.startsWith("/mindfulapi/app/event")){
+  //        return next()
+  //}
 
   // check authentication for app (mobile+desktop)
   if (req.url.startsWith("/mindfulapi/app")){
 
     // skip authentication if it's related to Apple login
-    if (!req.url.startsWith("/mindfulapi/app/apple")){
+    //if (!req.url.startsWith("/mindfulapi/app/apple")){
       // if time stamp is within range
       const current_time = Math.floor(Date.now() / 1000);
       if ((current_time - req.headers.time_stamp) > process.env.tolerance){
-          logger.log('error', 'API Authentication Failed: Timestamp expired');
+          logger.log('error', '%s API Authentication Failed: Timestamp expired', req.headers.appleid);
           res.set('WWW-Authenticate', 'Basic realm="401"')
           res.status(401).send('Authentication Failed: Timestamp expired')
           return;
@@ -91,7 +95,7 @@ app.use(async(req, res, next) => {
       // if secret is correct
       const secret = crypto.createHash('md5').update(req.headers.appleid+req.headers.time_stamp).digest("hex");
       if (!(secret === req.headers.secret)){
-          logger.log('error', 'API Authentication Failed: Wrong secret');
+          logger.log('error', '%s API Authentication Failed: Wrong secret', req.headers.appleid);
           res.set('WWW-Authenticate', 'Basic realm="401"')
           res.status(401).send('Authentication Failed: Wrong secret')
           return;
@@ -104,36 +108,16 @@ app.use(async(req, res, next) => {
             sql
         );
         if (!result[0].validToken){
-          logger.log('error', 'API Authentication Failed: Invalid Token');
+          logger.log('error', '%s API Authentication Failed: Invalid Token', req.headers.appleid);
           res.set('WWW-Authenticate', 'Basic realm="401"')
           res.status(401).send('Authentication Failed: Invalid Token')
           return;
         }
       }
-    }
+    //}
 
   // check authentication for admin
   }else if (req.url.startsWith("/mindfulapi/admin")){
-
-    // if time stamp is within range
-    const current_time = Math.floor(Date.now() / 1000);
-    if ((current_time - req.headers.time_stamp) > process.env.tolerance){
-        logger.log('error', 'API Authentication Failed: Timestamp expired');
-        res.set('WWW-Authenticate', 'Basic realm="401"')
-        res.status(401).send('Authentication Failed: Timestamp expired')
-        return;
-    }
-
-    // if secret is correct
-    const secret = crypto.createHash('md5').update(process.env.api_header_secret+req.headers.time_stamp).digest("hex");
-    //console.log("process.env.api_header_secret: ", process.env.api_header_secret);
-    //console.log("req.headers.time_stamp: ", req.headers.time_stamp);
-    if (!(secret === req.headers.secret)){
-        logger.log('error', 'API Authentication Failed: Wrong secret');
-        res.set('WWW-Authenticate', 'Basic realm="401"')
-        res.status(401).send('Authentication Failed: Wrong secret')
-        return;
-    }
 
     // check username & password
     const auth = {
@@ -143,10 +127,28 @@ app.use(async(req, res, next) => {
     const [, b64auth = ''] = (req.headers.authorization || '').split(' ')
     const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':')
     if (!(login && password && login === auth.login && password === auth.password)) {
-      logger.log('error', 'API Authentication Failed: Wrong username/password');
+      logger.log('error', 'Admin: API Authentication Failed: Wrong username/password, %s', login);
       res.set('WWW-Authenticate', 'Basic realm="401"')
       res.status(401).send('Authentication required: Wrong username/password')
       return;
+    }
+
+    // if time stamp is within range
+    const current_time = Math.floor(Date.now() / 1000);
+    if ((current_time - req.headers.time_stamp) > process.env.tolerance){
+        logger.log('error', 'Admin: API Authentication Failed: Timestamp expired, %s', login);
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Timestamp expired')
+        return;
+    }
+
+    // if secret is correct
+    const secret = crypto.createHash('md5').update(process.env.api_header_secret+req.headers.time_stamp).digest("hex");
+    if (!(secret === req.headers.secret)){
+        logger.log('error', 'Admin: API Authentication Failed: Wrong secret, %s', login);
+        res.set('WWW-Authenticate', 'Basic realm="401"')
+        res.status(401).send('Authentication Failed: Wrong secret')
+        return;
     }
 
   }

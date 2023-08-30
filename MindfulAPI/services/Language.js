@@ -8,6 +8,8 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 /* get Langauge */
 async function getLang(){
 
+  logger.log('info', '%s %s', 'Language', 'getLang');
+
   langFileEN = process.env.locale_path + "/" + process.env.locale_en;
   langFileCN = process.env.locale_path + "/" + process.env.locale_cn;
   langFileTW = process.env.locale_path + "/" + process.env.locale_tw;
@@ -28,6 +30,8 @@ async function getLang(){
 
 /* update Language */
 async function updateLang(lang, langRecord){
+
+  logger.log('info', '%s %s %s', 'Language', 'updateLang', lang);
 
   now = moment().format("YYYYMMDDHHmmss");
 
