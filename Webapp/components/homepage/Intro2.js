@@ -24,7 +24,7 @@ const Intro2 = ({ t }) => {
           <Image className={styles.bgpart5} src="/measuredBoxes/5.png" alt="Ocean5" />
         </div>
       </div>
-      <div class="Draw_draw" id="mobileapp">
+      <div class="Draw_draw">
         <div class="container">
           <Row>
             <Col lg={6} md={6} sm={12}>
