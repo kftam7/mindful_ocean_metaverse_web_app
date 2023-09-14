@@ -42,7 +42,7 @@ export default {
     // login页面credential接口错误回调
     'login.credential.api.error': 'Credential api error',
     // login页面credential接口成功回调 返回错误 账号或者密码错误
-    'login.credential.api.success.fail': 'User name or password is incorrect',
+    'login.credential.api.success.fail': 'Username/password is incorrect or account is disabled',
     
     // send tool crypto页面 Modal cancelText
     'sendToolCrypto.Modal.cancelText': 'Cancel',
