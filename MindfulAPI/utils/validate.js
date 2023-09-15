@@ -12,35 +12,56 @@ async function validateContent(content){
 
   const complete_content = "Does \'" + content + "\' contain dirty language or sensitive content? Yes or No."; 
   const messages_content = [{"role": "user", "content": complete_content}];
-  const options = {
+  let result;
+
+  // define option contents
+  const optionsNoProxy = {
+    'method': 'POST',
+    'url': process.env.chatgptUrl,
+    'headers': {
+      'Content-Type': 'application/json', 
+      'Authorization': process.env.chatgptAuthorization,
+      'Host': process.env.chatgptHost,
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive'
+    },
+    'data': {
+      'model': process.env.chatgptModel,
+      'messages': messages_content,
+      'temperature': process.env.chatgptTemperature
+    }
+  };
+
+  const optionsProxy = {
     'proxy': {
       'protocol': 'http',
       'host': '127.0.0.1',
       'port': 7890
     },
     'method': 'POST',
-    'url': 'https://api.openai.com/v1/chat/completions',
+    'url': process.env.chatgptUrl,
     'headers': {
       'Content-Type': 'application/json', 
-      'Authorization': 'Bearer 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',
-      'Host': 'api.openai.com',
+      'Authorization': process.env.chatgptAuthorization,
+      'Host': process.env.chatgptHost,
       'Accept-Encoding': 'gzip, deflate, br',
       'Connection': 'keep-alive'
     },
     'data': {
-      'model': 'gpt-3.5-turbo',
-      //'messages': [{"role": "user", "content": "Does 'fxxk you' contain dirty language or sensitive content? Yes or No."}],
+      'model': process.env.chatgptModel,
       'messages': messages_content,
-      'temperature': 0.7
+      'temperature': process.env.chatgptTemperature
     }
   };
 
-  //console.log("options.messages[0].content :" , options.data.messages[0].content);
-
   try {
-    const result = await axios(options);
+    if (process.env.chatgptIfProxy == "false"){
+      result = await axios(optionsNoProxy);
+    }else{
+      result = await axios(optionsProxy);
+    }
     let chatgptResult = result.data.choices[0].message.content;
-    console.log("Yes or No: ", chatgptResult);
+    console.log("chatgptResult: ", chatgptResult);
     if (chatgptResult.toLowerCase().includes("yes")){
       return 0;
     }else if (chatgptResult.toLowerCase().includes("no")){
@@ -49,6 +70,7 @@ async function validateContent(content){
       return -1;
     }
   } catch (e) {
+    //console.log(e);
     return -1;
   }
 

@@ -63,6 +63,7 @@ async function createArtwork(artworkRecord){
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   validResult = await validate.validateContent(artworkRecord[0].artistMessage);
+  logger.log('info', '%s %s %s validResult: %s', 'Artwork', 'createArtwork', artworkRecord[0].appleId, validResult);
   if (!validResult) {
     logger.log('error', '%s %s Artist Message contains explicit contents: %s', 'Artwork', 'createArtwork', artworkRecord[0].artistMessage);
     return ("Artist Message contains explicit contents");

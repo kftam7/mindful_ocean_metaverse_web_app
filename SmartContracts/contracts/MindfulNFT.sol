@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
-import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
+//import "operator-filter-registry/src/DefaultOperatorFilterer.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 // declare burn & tokenURI interface
@@ -16,7 +16,8 @@ interface burnMintPass{
   function tokenURI(uint256 tokenId) external view returns(string memory);
 }
 
-contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981, DefaultOperatorFilterer {
+//contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981, DefaultOperatorFilterer {
+contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981 {
     
     address private mintPass;
     //string private baseURILink;
@@ -98,6 +99,7 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
         return super.supportsInterface(interfaceId);
     }
 
+/*
     function setApprovalForAll(address operator, bool approved) public override onlyAllowedOperatorApproval(operator) {
         super.setApprovalForAll(operator, approved);
     }
@@ -121,5 +123,5 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
     {
         super.safeTransferFrom(from, to, tokenId, data);
     }
-
+*/
 }
