@@ -8,7 +8,8 @@ import axios from 'axios';
 
 function UserProfileModal(props) {
   const { t, locale } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const { show, modal, onOk } = props;
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);

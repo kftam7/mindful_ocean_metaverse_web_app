@@ -20,7 +20,8 @@ import { useTranslation } from '../i18n';
 
 const UserProfilePage = () => {
   const { t, locale } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const [loading, setLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState();
   const [appleId, setAppleId] = useState();
@@ -583,7 +584,7 @@ const UserProfilePage = () => {
                   <Card.Body className={styles.card_body}>
                     <Row className='mt-2'>
                       {dataOwnedMintpass.map((item, key) => {
-                        return <div key={key} className={styles.list_item}><a href={"https://testnets.opensea.io/assets/mumbai/0x91C25E22e131Ae298d291307116FDB054838dc5C/"+item.tokenId} target="_blank">{item.name} <Image src="/share.gif" /></a></div>
+                        return <div key={key} className={styles.list_item}><a href={process.env.openseaLink+process.env.MintPassContractAddress+"/"+item.tokenId} target="_blank">{item.name} <Image src="/share.gif" /></a></div>
                       })}
                     </Row>
                   </Card.Body>

@@ -8,7 +8,8 @@ import axios from 'axios';
 
 function EditAppleIdNameModel(props) {
   const { t, locale } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const { show, firstname, lastname, onOk } = props;
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({

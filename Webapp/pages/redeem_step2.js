@@ -26,7 +26,8 @@ import { mintpassContractConfig } from '../components/contracts';
 //just pass the setShow and setConShow as props to children components
 function RedeemStep2() {
   const { t, locale } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const [show, setShow] = useState(false);
   const [dataList, setDataList] = useState([]);
   const [obj, setObj] = useState({});
@@ -172,7 +173,8 @@ function RedeemStep2() {
 
       await write({
         //args: [account, "0xF07de37BB25395A5C0031a8c120e11B972c69eEa", selectedOption, ipfsHex]
-        args: [address, "0xF07de37BB25395A5C0031a8c120e11B972c69eEa", selectedOption, ipfsHex]
+        //args: [address, "0xF07de37BB25395A5C0031a8c120e11B972c69eEa", selectedOption, ipfsHex]
+        args: [address, process.env.MindfulTokenContractAdd, selectedOption, ipfsHex]
       })
     }
     catch(err){

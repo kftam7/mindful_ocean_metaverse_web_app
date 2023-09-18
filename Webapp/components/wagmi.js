@@ -5,7 +5,10 @@ import { configureChains, createConfig } from 'wagmi'
 import { polygonMumbai } from 'wagmi/chains'
 //const chains = [mainnet, optimism, polygon]
 const chains = [polygonMumbai]
-const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
+//const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
+//const chains = [process.env.BlockchainPlatform];
+const projectId = process.env.WalletconnectProjectId;
+
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiConfig = createConfig({
   autoConnect: true,

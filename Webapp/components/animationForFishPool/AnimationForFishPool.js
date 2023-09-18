@@ -3,7 +3,8 @@ import { Image } from 'react-bootstrap';
 import axios from 'axios';
 
 const AnimationForFishPool = () => {
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const [inits, setInits] = useState(0);
   const [listAll, setListAll] = useState([[0], [0], [0], [0], [0], [0]]);
   const [animationActive, setAnimationActive] = useState(false);

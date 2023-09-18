@@ -14,7 +14,9 @@ import { getAppleId, getHeaders } from '../utils/utils';
 import axios from 'axios';
 
 const GalleryPage = () => {
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.NEXT_PUBLIC_APIBASEURL || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const { t, locale } = useTranslation();
   const [isSort, setIsSort] = useState(false);
   const pageSize = 6;

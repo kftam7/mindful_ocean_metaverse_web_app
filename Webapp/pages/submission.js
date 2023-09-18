@@ -18,7 +18,8 @@ import { getHeaders } from '../utils/utils';
 //just pass the setShow and setConShow as props to children components
 export default function SubmitPage({ session, user }) {
   const { t } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const [show, setShow] = useState(false);
   const [submitShow, setSubmitShow] = useState(false);
   const [editShow, setEditShow] = useState(false);

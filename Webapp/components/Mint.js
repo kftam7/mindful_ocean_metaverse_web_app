@@ -11,7 +11,8 @@ const mnemonic = process.env.MNEMONIC
 const private_key = process.env.PRIVATE_KEY
 const matic_url = process.env.MATIC_RPC_URL
 const mumbai_url = process.env.MUMBAI_RPC_URL
-const NFT_CONTRACT_ADDRESS = "0xD5dfc36463bb0E6a303d13915C3eB76D3Ab2e245";
+//const NFT_CONTRACT_ADDRESS = "0xD5dfc36463bb0E6a303d13915C3eB76D3Ab2e245";
+const NFT_CONTRACT_ADDRESS = process.env.MintPassContractAddress;
 const OWNER_ADDRESS = account;
 const NUM_ITEMS = 5;//number of hft each user can mint
 

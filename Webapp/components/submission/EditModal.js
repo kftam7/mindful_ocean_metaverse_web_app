@@ -9,7 +9,8 @@ import { toast, ToastContainer } from "react-toastify";
 
 const EditModal = props => {
   const { t, locale } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const {data, editShow, setEditShow, onSuccess} = props;
 
   useEffect(() => {

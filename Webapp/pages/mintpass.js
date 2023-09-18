@@ -24,7 +24,8 @@ import { mintpassContractConfig } from '../components/contracts';
 
 function Mintpass({ session,user }) {
   const { t, locale } = useTranslation();
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
@@ -127,7 +128,7 @@ function Mintpass({ session,user }) {
 
       await write({
         args: [messageHash, signature, ipfs],
-        value: "100000000000000",
+        value: process.env.MintingFee,
       })
     }
     catch(err){

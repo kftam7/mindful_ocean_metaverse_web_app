@@ -43,7 +43,7 @@ export default function RedeemStep4() {
                                     {t('page.redeem.inReturn')}
                                 </div>
                                 <div className='mt-5'>
-                                    {t('page.redeem.viewYourNewFishNFTOn')} <a href="https://testnets.opensea.io/assets/mumbai/0xF07de37BB25395A5C0031a8c120e11B972c69eEa" style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.redeem.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a>
+                                    {t('page.redeem.viewYourNewFishNFTOn')} <a href={process.env.openseaLink+process.env.MindfulTokenContractAdd} style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.redeem.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a>
                                 </div>
                                 <div className={styles.mintedTitle}>
                                     {t('page.redeem.plop')}

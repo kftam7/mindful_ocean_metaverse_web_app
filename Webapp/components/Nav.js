@@ -32,7 +32,9 @@ import ConfirmModal from './submission/ConfirmModal';
 //const chains = [arbitrum, mainnet, polygon]
 //const chains = [mainnet, optimism, polygon]
 const chains = [polygonMumbai]
-const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
+//const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
+//const chains = [process.env.BlockchainPlatform];
+const projectId = process.env.WalletconnectProjectId;
 
 //const { provider } = configureChains(chains, [w3mProvider({ projectId })])
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
@@ -48,7 +50,8 @@ const wagmiConfig = createConfig({
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 const NavBar = ({ onLocaleChange }) => {
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);

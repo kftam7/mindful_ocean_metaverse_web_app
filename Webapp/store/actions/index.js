@@ -1,7 +1,8 @@
 import { FETCH_ACCOUNT, UPDATE_ACCOUNT, FETCH_BALANCE, FETCH_USER, FETCH_CONTRACT, FETCH_CONTRACT_NFT, FETCH_ARTWORKID} from "./types";
 import { fetchAccount, connectAccount, disconnect, fetchBalance, connectForBalance, fetchContract, fetchContractNFT } from "../web3Connections";
 import axios from 'axios';
-const apiPort = process.env.API_PORT || '/';
+//const apiPort = process.env.API_PORT || '/';
+const apiPort = process.env.APIBaseUrl || '/';
 
 //fetch data here, if fetch from server-side, use axios
 export const getAccount = () => async (dispatch) => {

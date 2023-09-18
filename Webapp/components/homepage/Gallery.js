@@ -13,7 +13,9 @@ import axios from 'axios';
 
 //gallery section at home page, currently models are hardcoded
 const Gallery = ({t}) => {
-  const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.API_PORT || '/';
+  //const apiPort = process.env.NEXT_PUBLIC_APIBASEURL || '/';
+  const apiPort = process.env.APIBaseUrl || '/';
   const [artworkhomepage, setArtworkhomepage] = useState([]);
 
   // 初始化数据
