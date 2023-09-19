@@ -107,8 +107,10 @@ const NavBar = ({ onLocaleChange }) => {
   }, [isModalVisible]);
 
   const getQuery = () => {
+    const firstName = query.firstName ? query.firstName : '-';
+    const lastName = query.lastName ? query.lastName : '-';
     setAppleId(query.appleId);
-    setAppleIdName(query.firstName + ' ' + query.lastName)
+    setAppleIdName(firstName + ' ' + lastName)
     setEmail(query.email);
     sessionStorage.setItem("access_token", query.access_token);
     sessionStorage.setItem("expires_in", query.expires_in);
@@ -205,7 +207,7 @@ const NavBar = ({ onLocaleChange }) => {
     //const provider = new Web3Provider(instance);
     //const signer = provider.getSigner();
     //const address = await signer.getAddress();
-    setWalletAddress(address);
+    setWalletAddress(address.substring(0, 5)+'.....'+address.substring(address.length-3, address.length));
     sessionStorage.setItem("walletAddress", address);
     setLoadingWallet(false);
     setIsConnectingWallet(true);
