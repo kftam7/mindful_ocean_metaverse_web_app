@@ -315,6 +315,7 @@ const NavBar = ({ onLocaleChange }) => {
             <Nav.Link href="#mobileapp" className={styles.navlink}>{t('nav.create')}</Nav.Link>
             <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
             <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
+            <Nav.Link href="/contactUs" className={styles.navlink}>{t('nav.contactUs')}</Nav.Link>
             {/* <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link> */}
             {/* <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link> */}
           </Nav>

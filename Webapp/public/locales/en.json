@@ -10,6 +10,7 @@
     "nav.redeem": "Redeem",
     "nav.donate": "Donate",
     "nav.mindfulToken": "Mindful Token",
+    "nav.contactUs": "Contact Us",
 
     "main.text.walletContect": "Wallet Contect",
     "main.text.signIn": "Sign ID",
@@ -73,6 +74,11 @@
     "main.text.uncoverScarcityWithAIDes": "95% of our ocean is unexplored. Scientists use AI to understand those areas, identifying many unique marine life hidden deeply in the sea. In the Mindful Ocean Metaverse, we use AI to analyze the scarcity of the artworks submitted by our users, uncovering their hidden creativity.",
     "main.text.raiseFundsforMarineConservation": "Raise Funds for Marine Conservation",
     "main.text.raiseFundsforMarineConservationDes": "By hosting inclusive, engaging, and meaningful community NFT art events in the Mindful Ocean Metaverse, our goal is to raise funds for marine conservation organizations, scientists, and artists to save our ocean.",
+    "main.text.email": "Email",
+    "main.text.twitter": "Twitter",
+    "main.text.facebook": "Facebook",
+    "main.text.instagram": "Instagram",
+    "main.text.copiedToClipboard": "Copied to clipboard!",
 
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
