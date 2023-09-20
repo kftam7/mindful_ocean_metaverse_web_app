@@ -4,7 +4,7 @@ import { DownOutlined, UpOutlined, } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import './index.css';
 
-import { getIsAdmin, getUserSession } from "../../utils/utils";
+import { getIsAdmin, getURLQueryParse } from "../../utils/utils";
 
 import { getEventList, editEvent } from "../../services/event";
 
@@ -58,6 +58,7 @@ const Event = (props) => {
     const [modalAddType, setModalAddType] = useState('add');
     // modal data
     const [modalData, setModalData] = useState();
+    const eventId = getURLQueryParse(window.location.href)?.eventId;
 
     const columns = [
         {
@@ -524,6 +525,12 @@ const Event = (props) => {
         setSelectedRowKeysLength(0);
     }
 
+    useEffect(() => {
+        if(!eventId && !dataSource.length) return;
+        form.setFieldValue('eventId', eventId);
+        handleSearch();
+    },[eventId, dataSource])
+
     // 搜索
     const handleSearch = () => {
         const undefinedItemArray = [];
@@ -536,7 +543,8 @@ const Event = (props) => {
             if (formValuesObj[key] !== undefined && formValuesObj[key] !== "") {
                 if (changedDataArray.length > 0) {
                     changedDataArray.forEach((item) => {
-                        if (key === "title" ||
+                        if (key === "eventId" ||
+                            key === "title" ||
                             key === "titleCN" ||
                             key === "titleTW" ||
                             key === "paragraphText" ||
@@ -566,7 +574,8 @@ const Event = (props) => {
                     });
                 } else {
                     dataSource.forEach((item) => {{
-                        if (key === "title" ||
+                        if (key === "eventId" ||
+                            key === "title" ||
                             key === "titleCN" ||
                             key === "titleTW" ||
                             key === "paragraphText" ||
@@ -771,12 +780,12 @@ const Event = (props) => {
                         <Col>{language["cryptoLog.col.content.SearchCriteria"]}</Col>
                         <Col>
                             {
-                                isShowForm ? <UpOutlined onClick={() => {handleIsShowForm(false)}} /> : <DownOutlined onClick={() => {handleIsShowForm(true)}} />
+                                isShowForm || eventId ? <UpOutlined onClick={() => {handleIsShowForm(false)}} /> : <DownOutlined onClick={() => {handleIsShowForm(true)}} />
                             }
                         </Col>
                     </Row>
                     {
-                        isShowForm ?
+                        isShowForm || eventId ?
                         <Form
                             style={{
                                 marginTop: 10,
@@ -785,6 +794,14 @@ const Event = (props) => {
                             name="search"
                         >
                             <Row gutter={[32, 0]}>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="eventId"
+                                        name="eventId"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
                                         label="title"

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, } from "react";
 import { Form, Input, Table, Select, Row, Col, Button, notification, DatePicker, Pagination, Space, Collapse } from 'antd';
-import { DownOutlined, UpOutlined  } from '@ant-design/icons';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import './index.css';
 
@@ -95,15 +95,16 @@ const User = (props) => {
             }
         },
         {
-            title: 'walletAddress',
-            dataIndex: 'walletAddress',
-            key: 'walletAddress',
+            title: 'firstName',
+            dataIndex: 'firstName',
+            key: 'firstName',
+            defaultSortOrder: 'descend',
             sorter: (a, b) => {
-                if (a['walletAddress']) {
-                    return a['walletAddress'].localeCompare(b['walletAddress']);
+                if (a['firstName']) {
+                    return a['firstName'].localeCompare(b['firstName']);
                 }
             },
-            sortOrder: sortedInfo.columnKey === 'walletAddress' ? sortedInfo.order : null,
+            sortOrder: sortedInfo.columnKey === 'firstName' ? sortedInfo.order : null,
             ellipsis: true,
             width: 150,
             render: (text, record, index) => {
@@ -114,6 +115,68 @@ const User = (props) => {
                 }
             }
         },
+        {
+            title: 'lastName',
+            dataIndex: 'lastName',
+            key: 'lastName',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => {
+                if (a['lastName']) {
+                    return a['lastName'].localeCompare(b['lastName']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'lastName' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
+            title: 'email',
+            dataIndex: 'email',
+            key: 'email',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => {
+                if (a['email']) {
+                    return a['email'].localeCompare(b['email']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'email' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        // {
+        //     title: 'walletAddress',
+        //     dataIndex: 'walletAddress',
+        //     key: 'walletAddress',
+        //     sorter: (a, b) => {
+        //         if (a['walletAddress']) {
+        //             return a['walletAddress'].localeCompare(b['walletAddress']);
+        //         }
+        //     },
+        //     sortOrder: sortedInfo.columnKey === 'walletAddress' ? sortedInfo.order : null,
+        //     ellipsis: true,
+        //     width: 150,
+        //     render: (text, record, index) => {
+        //         if (String(text) !== 'null' && String(text).length > 0) {
+        //             return text;
+        //         } else {
+        //             return "-";
+        //         }
+        //     }
+        // },
         {
             title: 'personInfo',
             dataIndex: 'personInfo',
@@ -138,7 +201,7 @@ const User = (props) => {
             title: 'createTime',
             dataIndex: 'createTime',
             key: 'createTime',
-            sorter: (a, b) =>  new Date(a['createTime']).getTime() - new Date(b['createTime']).getTime(),
+            sorter: (a, b) => new Date(a['createTime']).getTime() - new Date(b['createTime']).getTime(),
             sortOrder: sortedInfo.columnKey === 'createTime' ? sortedInfo.order : null,
             ellipsis: true,
             width: 200,
@@ -154,7 +217,7 @@ const User = (props) => {
             title: 'updateTime',
             dataIndex: 'updateTime',
             key: 'updateTime',
-            sorter: (a, b) =>  new Date(a['updateTime']).getTime() - new Date(b['updateTime']).getTime(),
+            sorter: (a, b) => new Date(a['updateTime']).getTime() - new Date(b['updateTime']).getTime(),
             sortOrder: sortedInfo.columnKey === 'updateTime' ? sortedInfo.order : null,
             ellipsis: true,
             width: 200,
@@ -174,7 +237,7 @@ const User = (props) => {
             width: 160,
             render: (text, record, index) => {
                 return <Space>
-                    <Button type="primary" onClick={() => {handleDEable(record)}}>{record.isActive === 1 ? language["button.disable"] : language["button.enable"]}</Button>
+                    <Button type="primary" onClick={() => { handleDEable(record) }}>{record.isActive === 1 ? language["button.disable"] : language["button.enable"]}</Button>
                 </Space>
             }
         },
@@ -182,27 +245,37 @@ const User = (props) => {
 
     const handleExpand = (expanded, record) => {
         if (expanded) {
-          setExpandedRowKeys([record.id]);          
+            setExpandedRowKeys([record.id]);
             // console.log(record)
             getUserDetail(record.appleId)
-            .then(response => response.json())
-            .then(response => {
-                setDataRow(response.data)
-            })
-            .catch(err => {
-                console.log(err);
-                // notification["error"]({
-                //     message: language["cryptoLog.crypto[GET].api.error"],
-                //     description: err.toString()
-                // });
-            })
+                .then(response => response.json())
+                .then(response => {
+                    setDataRow(response.data)
+                })
+                .catch(err => {
+                    console.log(err);
+                    // notification["error"]({
+                    //     message: language["cryptoLog.crypto[GET].api.error"],
+                    //     description: err.toString()
+                    // });
+                })
         } else {
-          setExpandedRowKeys([]);
+            setExpandedRowKeys([]);
         }
     };
 
     const expandedRowRender = useCallback((record) => {
-        if(!dataRow.appleId) return '';
+        if (!dataRow.appleId) return '';
+        const columnsWalletAddress = [
+            {
+                title: 'walletAddress',
+                dataIndex: 'walletAddress',
+                key: 'walletAddress',
+                render: (text, record) => {
+                    return <>{text}</>;
+                }
+            },
+        ];
         const columnsArtwork = [
             {
                 title: 'artworkId',
@@ -245,6 +318,9 @@ const User = (props) => {
                 title: 'eventId',
                 dataIndex: 'eventId',
                 key: 'eventId',
+                render: (text, record) => {
+                    return <Link to={`/event?eventId=${record.eventId}`}>{text}</Link>;
+                }
             },
             {
                 title: 'title',
@@ -273,43 +349,56 @@ const User = (props) => {
         ];
         return <Row>
             <Col xs={24}>
+                <div className="title2">walletAddress</div>
+                {dataRow.walletAddress && dataRow.walletAddress.length ?
+                    <Table
+                        columns={columnsWalletAddress}
+                        dataSource={dataRow.walletAddress}
+                        pagination={false}
+                    />
+                    : '-'}
+            </Col>
+            <Col xs={24}>
                 <div className="title2">Artwork</div>
-                {dataRow.artwork && dataRow.artwork.length ? 
+                {dataRow.artwork && dataRow.artwork.length ?
                     <Table
                         columns={columnsArtwork}
                         dataSource={dataRow.artwork}
                         pagination={false}
                     />
-                : '-'}
+                    : '-'}
             </Col>
             <Col xs={24}>
                 <div className="title2">Joined Event</div>
-                {dataRow.joinedEvent && dataRow.joinedEvent.length ? 
+                {dataRow.joinedEvent && dataRow.joinedEvent.length ?
                     <Table
                         columns={columnsJoinedEvent}
                         dataSource={dataRow.joinedEvent}
                         pagination={false}
                     />
-                : '-'}
+                    : '-'}
             </Col>
             <Col xs={24}>
                 <div className="title2">Personal Website</div>
-                {dataRow.personalWebsite && dataRow.personalWebsite.length ? 
+                {dataRow.personalWebsite && dataRow.personalWebsite.length ?
                     <Table
                         columns={columnsPersonalWebsite}
                         dataSource={dataRow.personalWebsite}
                         pagination={false}
                     />
-                : '-'}
+                    : '-'}
             </Col>
         </Row>;
-    },[dataRow]);
+    }, [dataRow]);
 
 
     const selectDefaultValue = [
         'userId',
         'appleId',
-        'walletAddress',
+        'firstName',
+        'lastName',
+        'email',
+        // 'walletAddress',
         'personInfo',
         'createTime',
         'updateTime',
@@ -323,38 +412,41 @@ const User = (props) => {
     useEffect(() => {
         setLoading(true);
         getUserList()
-        .then(response => response.json())
-        .then(response => {
-            let data = [];
-            response.data.forEach((item, key) => {
-                data.push({
-                    id: key+1,
-                    userId: String(item["userId"]),
-                    appleId: item["appleId"],
-                    walletAddress: item["walletAddress"],
-                    personInfo: item["personInfo"],
-                    createTime: item["createTime"] ? timeFormat(new Date(item["createTime"]).getTime()) : '-',
-                    updateTime: item["updateTime"] ? timeFormat(new Date(item["updateTime"]).getTime()) : '-',
-                    isActive: item["isActive"]
+            .then(response => response.json())
+            .then(response => {
+                let data = [];
+                response.data.forEach((item, key) => {
+                    data.push({
+                        id: key + 1,
+                        userId: String(item["userId"]),
+                        appleId: item["appleId"],
+                        firstName: item["firstName"] ?? '',
+                        lastName: item["lastName"] ?? '',
+                        email: item["email"] ?? '',
+                        walletAddress: item["walletAddress"] ?? '',
+                        personInfo: item["personInfo"] ?? '',
+                        createTime: item["createTime"] ? timeFormat(new Date(item["createTime"]).getTime()) : '-',
+                        updateTime: item["updateTime"] ? timeFormat(new Date(item["updateTime"]).getTime()) : '-',
+                        isActive: item["isActive"]
+                    });
                 });
-            });
-            console.log(data)
-            setSelectValue(selectDefaultValue);
-            setDataSource(data);
-            setDataSourceChanged(data);
-            setTotal(data.length);
-            setColumnsSource(columns);
-            setColumnsChanged(columns);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.log(err);
-            // notification["error"]({
-            //     message: language["cryptoLog.crypto[GET].api.error"],
-            //     description: err.toString()
-            // });
-        })
-    },[count]);
+                console.log(data)
+                setSelectValue(selectDefaultValue);
+                setDataSource(data);
+                setDataSourceChanged(data);
+                setTotal(data.length);
+                setColumnsSource(columns);
+                setColumnsChanged(columns);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                // notification["error"]({
+                //     message: language["cryptoLog.crypto[GET].api.error"],
+                //     description: err.toString()
+                // });
+            })
+    }, [count]);
 
     const timeFormat = (tiemstamp) => {
         var date = new Date(tiemstamp);
@@ -403,8 +495,8 @@ const User = (props) => {
     // 导出按钮点击事件
     const handleExport = () => {
         if (selectedRowKeys.length < 1) {
-           // 没有选择 导出全部
-           jsonToExcelConvertor(columnsChanged, dataSourceChanged, "user");
+            // 没有选择 导出全部
+            jsonToExcelConvertor(columnsChanged, dataSourceChanged, "user");
         } else {
             if (!isExporting) {
                 const selectedRowArray = [];
@@ -433,22 +525,22 @@ const User = (props) => {
         for (const item of exportTitle) {
             row += '"' + item.title + '"|';
         }
-        
+
         row = row.substring(0, row.length - 1);
-        
+
         titleCsv += row;
         csvData += row + "\r\n"; // 添加换行符号
-        for (const item of exportData ) {
+        for (const item of exportData) {
             row = "";
             for (let key in item) {
                 if (titleCsv.indexOf(key) !== -1) {
                     row += '"' + item[key] + '"|';
                 }
             }
-            row = row.slice(0,-1);
+            row = row.slice(0, -1);
             csvData += row + "\r\n"; // 添加换行符号
         }
-            
+
         if (csvData === '') {
             notification["error"]({
                 message: language["notification.error.message"],
@@ -459,15 +551,15 @@ const User = (props) => {
 
         // =========================去掉【"】符号=====================================
         csvData = csvData.replace(/\"/g, '') + "";
-        
-        var uri = new Blob(['\ufeff' + csvData], {type:"text/csv"});
-        
+
+        var uri = new Blob(['\ufeff' + csvData], { type: "text/csv" });
+
         if (window.navigator && window.navigator.msSaveOrOpenBlob) { // for IE
             window.navigator.msSaveOrOpenBlob(csvData, fileName + ".csv");
         } else { // for Non-IE（chrome、firefox etc.）
             var link = document.createElement("a");
             link.href = URL.createObjectURL(uri);
-        
+
             link.style = "visibility:hidden";
             link.download = fileName + ".csv";
             document.body.appendChild(link);
@@ -493,6 +585,9 @@ const User = (props) => {
                     changedDataArray.forEach((item) => {
                         if (key === "userId" ||
                             key === "appleId" ||
+                            key === "firstName" ||
+                            key === "lastName" ||
+                            key === "email" ||
                             key === "walletAddress" ||
                             key === "personInfo"
                         ) {
@@ -500,29 +595,6 @@ const User = (props) => {
                                 item.used = true;
                             } else {
                                 item.used = false;
-                            }
-                        }
-                        if (key === "createTime" ||
-                            key === "updateTime"
-                        ) {
-                            if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
-                            new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
-                                item.used = true;
-                            } else {
-                                item.used = false;
-                            }
-                        }
-                    });
-                } else {
-                    dataSource.forEach((item) => {{
-                        if (key === "userId" ||
-                            key === "appleId" ||
-                            key === "walletAddress" ||
-                            key === "personInfo"
-                        ) {
-                            if (item[key].indexOf(formValuesObj[key]) !== -1) {
-                                item.used = true;
-                                changedDataArray.push(item);
                             }
                         }
                         if (key === "createTime" ||
@@ -530,6 +602,33 @@ const User = (props) => {
                         ) {
                             if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
                                 new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
+                                item.used = true;
+                            } else {
+                                item.used = false;
+                            }
+                        }
+                    });
+                } else {
+                    dataSource.forEach((item) => {
+                        {
+                            if (key === "userId" ||
+                                key === "appleId" ||
+                                key === "firstName" ||
+                                key === "lastName" ||
+                                key === "email" ||
+                                key === "walletAddress" ||
+                                key === "personInfo"
+                            ) {
+                                if (item[key].indexOf(formValuesObj[key]) !== -1) {
+                                    item.used = true;
+                                    changedDataArray.push(item);
+                                }
+                            }
+                            if (key === "createTime" ||
+                                key === "updateTime"
+                            ) {
+                                if (new Date(item[key]).getTime() >= new Date(formValuesObj[key][0]).getTime() &&
+                                    new Date(item[key]).getTime() <= new Date(formValuesObj[key][1]).getTime()) {
                                     item.used = true;
                                     changedDataArray.push(item);
                                 }
@@ -554,7 +653,7 @@ const User = (props) => {
             setTotal(changedDataResultArray.length);
             setDataSourceChanged(changedDataResultArray);
         }
-        
+
     };
 
     // 重置
@@ -598,12 +697,12 @@ const User = (props) => {
         columnsChanged.forEach((changedColumnsItem) => {
             columns.forEach((columnsItem) => {
                 if (changedColumnsItem.dataIndex === columnsItem.dataIndex) {
-                    if(sorter.columnKey == columnsItem.dataIndex){
+                    if (sorter.columnKey == columnsItem.dataIndex) {
                         hubArray.push({
                             ...columnsItem,
                             sortOrder: sorter.order
                         });
-                    }else{
+                    } else {
                         hubArray.push(columnsItem);
                     }
                 }
@@ -615,7 +714,7 @@ const User = (props) => {
     // 禁用，启动
     const handleDEable = (record) => {
         setLoading(true);
-        const params = {            
+        const params = {
             userId: record.userId,
             appleId: record.appleId,
             walletAddress: record.walletAddress,
@@ -625,59 +724,59 @@ const User = (props) => {
             isActive: record.isActive === 0 ? 1 : 0
         };
         editUser(record.appleId, params)
-        .then(response => response.json())
-        .then(response => {
-            if(response.message === 'Record updated successfully'){
-                setLoading(false);
-                setCount(count + 1);
-                modalAddOk();
-                notification["success"]({
-                    message: response.message
-                });
-            }else{
-                setLoading(false);
-                notification["error"]({
-                    message: response.message
-                });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(response => response.json())
+            .then(response => {
+                if (response.message === 'Record updated successfully') {
+                    setLoading(false);
+                    setCount(count + 1);
+                    modalAddOk();
+                    notification["success"]({
+                        message: response.message
+                    });
+                } else {
+                    setLoading(false);
+                    notification["error"]({
+                        message: response.message
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
         <>
             <Row gutter={[16, 32]}>
                 <Col span={24}>
-                    <div style={{textAlign: 'center',fontSize: '28px',fontWeight: 'bold'}}>User Management</div>
+                    <div style={{ textAlign: 'center', fontSize: '28px', fontWeight: 'bold' }}>User Management</div>
                 </Col>
                 <Col span={24} className="cryptoLog-outterBox">
                     <Row justify="space-between">
                         <Col>{language["cryptoLog.col.content.SelectColumns"]}</Col>
                         <Col>
                             {
-                                isShowSelect ? <UpOutlined onClick={() => {handleIsShowSelect(false)}}  /> : <DownOutlined onClick={() => {handleIsShowSelect(true)}}  />
+                                isShowSelect ? <UpOutlined onClick={() => { handleIsShowSelect(false) }} /> : <DownOutlined onClick={() => { handleIsShowSelect(true) }} />
                             }
                         </Col>
                     </Row>
                     {
                         isShowSelect ?
-                        <Select
-                            mode="multiple"
-                            allowClear
-                            style={{
-                                width: '100%',
-                                marginTop: 10,
-                            }}
-                            placeholder="Please select"
-                            defaultValue={selectDefaultValue}
-                            value={selectValue}
-                            onChange={handleSelectChange}
+                            <Select
+                                mode="multiple"
+                                allowClear
+                                style={{
+                                    width: '100%',
+                                    marginTop: 10,
+                                }}
+                                placeholder="Please select"
+                                defaultValue={selectDefaultValue}
+                                value={selectValue}
+                                onChange={handleSelectChange}
                             >
-                            {selectChildren}
-                        </Select>
-                        : ""
+                                {selectChildren}
+                            </Select>
+                            : ""
                     }
                 </Col>
                 <Col span={24} className="cryptoLog-outterBox">
@@ -685,83 +784,107 @@ const User = (props) => {
                         <Col>{language["cryptoLog.col.content.SearchCriteria"]}</Col>
                         <Col>
                             {
-                                isShowForm ? <UpOutlined onClick={() => {handleIsShowForm(false)}} /> : <DownOutlined onClick={() => {handleIsShowForm(true)}} />
+                                isShowForm ? <UpOutlined onClick={() => { handleIsShowForm(false) }} /> : <DownOutlined onClick={() => { handleIsShowForm(true) }} />
                             }
                         </Col>
                     </Row>
                     {
                         isShowForm ?
-                        <Form
-                            style={{
-                                marginTop: 10,
-                            }}
-                            form={form}
-                            name="search"
-                        >
-                            <Row gutter={[32, 0]}>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
-                                    <Form.Item
-                                        label="userId"
-                                        name="userId"
-                                    >
-                                        <Input type="text" allowClear={true} />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
-                                    <Form.Item
-                                        label="appleId"
-                                        name="appleId"
-                                    >
-                                        <Input type="text" allowClear={true} />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                            <Form
+                                style={{
+                                    marginTop: 10,
+                                }}
+                                form={form}
+                                name="search"
+                            >
+                                <Row gutter={[32, 0]}>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="userId"
+                                            name="userId"
+                                        >
+                                            <Input type="text" allowClear={true} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="appleId"
+                                            name="appleId"
+                                        >
+                                            <Input type="text" allowClear={true} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="firstName"
+                                            name="firstName"
+                                        >
+                                            <Input type="text" allowClear={true} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="lastName"
+                                            name="lastName"
+                                        >
+                                            <Input type="text" allowClear={true} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="email"
+                                            name="email"
+                                        >
+                                            <Input type="text" allowClear={true} />
+                                        </Form.Item>
+                                    </Col>
+                                    {/* <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
                                         label="walletAddress"
                                         name="walletAddress"
                                     >
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
-                                    <Form.Item
-                                        label="personInfo"
-                                        name="personInfo"
-                                    >
-                                        <Input type="text" allowClear={true} />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
-                                    <Form.Item
-                                        label="createTime"
-                                        name="createTime"
-                                    >
-                                        <RangePicker style={{ width: '100%', }} />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
-                                    <Form.Item
-                                        label="updateTime"
-                                        name="updateTime"
-                                    >
-                                        <RangePicker style={{ width: '100%', }} />
-                                    </Form.Item>
-                                </Col>
-                                <Col span={24}>
-                                    <Button type="primary" onClick={() => {handleSearch()}} style={{ marginRight: 8, }}>{language["button.search"]}</Button>
-                                    <Button type="info" onClick={() => {handleReset()}} >{language["button.reset"]}</Button>
-                                </Col>
-                            </Row>
-                        </Form>
-                        : ""
+                                </Col> */}
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="personInfo"
+                                            name="personInfo"
+                                        >
+                                            <Input type="text" allowClear={true} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="createTime"
+                                            name="createTime"
+                                        >
+                                            <RangePicker style={{ width: '100%', }} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                        <Form.Item
+                                            label="updateTime"
+                                            name="updateTime"
+                                        >
+                                            <RangePicker style={{ width: '100%', }} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={24}>
+                                        <Button type="primary" onClick={() => { handleSearch() }} style={{ marginRight: 8, }}>{language["button.search"]}</Button>
+                                        <Button type="info" onClick={() => { handleReset() }} >{language["button.reset"]}</Button>
+                                    </Col>
+                                </Row>
+                            </Form>
+                            : ""
                     }
                 </Col>
-                    
+
                 <Col span={24}>
                     {
                         selectedRowKeysLength > 0 ?
-                        `${language["emailLog.table.selected"]}${selectedRowKeysLength}${language["emailLog.table.data"]}`
-                        : ""
+                            `${language["emailLog.table.selected"]}${selectedRowKeysLength}${language["emailLog.table.data"]}`
+                            : ""
                     }
                 </Col>
                 <Col span={24}>
@@ -776,7 +899,7 @@ const User = (props) => {
                         rowSelection={rowSelection}
                         onChange={tableDataChange}
                         pagination={{
-                            style: {display: "none"},
+                            style: { display: "none" },
                             current: current,
                             pageSize: pageSize,
                             total: total,
@@ -798,29 +921,29 @@ const User = (props) => {
                         }}
                         loading={loading}
                     />
-                
+
                 </Col>
                 <Col span={24}>
                     <Row justify="space-between">
                         <Col>
-                            <Button type="primary" onClick={() => {handleExport()}} >{language["cryptoLog.button.Export"]}</Button>
+                            <Button type="primary" onClick={() => { handleExport() }} >{language["cryptoLog.button.Export"]}</Button>
                         </Col>
                         <Col>
-                        <Pagination
-                            current={current}
-                            pageSize={pageSize}
-                            total={total}
-                            showTotal={showTotal}
-                            pageSizeOptions={["5", "50", "100"]}
-                            showSizeChanger={ true}
-                            onChange={ paginationCurrentChange}
-                        />
+                            <Pagination
+                                current={current}
+                                pageSize={pageSize}
+                                total={total}
+                                showTotal={showTotal}
+                                pageSizeOptions={["5", "50", "100"]}
+                                showSizeChanger={true}
+                                onChange={paginationCurrentChange}
+                            />
                         </Col>
                     </Row>
                 </Col>
             </Row>
         </>
-  );
+    );
 }
 
 export default User;
