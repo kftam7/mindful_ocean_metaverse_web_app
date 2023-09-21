@@ -9,7 +9,7 @@ const Footer = () => {
                 <Nav className="me-auto">
                     <Nav.Link href="/whitepaper" style={{color: '#fff'}}>{t('footer.nav.whitePaper')}</Nav.Link>
                     <Nav.Link href="/privatepolicy" style={{color: '#fff'}}>{t('footer.nav.privatePolicy')}</Nav.Link>
-                    <Nav.Link href="/contactus" style={{color: '#fff'}}>{t('footer.nav.contactUs')}</Nav.Link>
+                    <Nav.Link href="/contactUs" style={{color: '#fff'}}>{t('footer.nav.contactUs')}</Nav.Link>
                     <Nav.Link href="/testArtwork" style={{color: '#fff', display: 'none'}}>testArtwork</Nav.Link>
                 </Nav>
                 {/* <p className="text-dark mt-2">Copyright © 2021 Dalton Learning Lab Limited. All rights reserved.</p> */}

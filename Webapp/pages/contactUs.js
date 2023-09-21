@@ -37,7 +37,7 @@ const ContactUs = () => {
           </div>
           <Col lg={12}>
             <div className={styles.contact_box}>
-              <div className={styles.link_email}><a href="#">
+              <div className={styles.link_email}><a href="mailto:info@mindful-ocean.org">
                 <div className={styles.email_con}>
                   <div className={styles.email_title}>{t('main.text.email')}</div>
                   <div className={styles.email_img}></div>
@@ -52,7 +52,7 @@ const ContactUs = () => {
                 </div>
               </a></div>
               <div className={styles.link_item}>
-                <div className={styles.item_a}><a href="#"><span className={`${styles.item_icon} ${styles.icon1}`}></span>{t('main.text.twitter')}</a></div>
+                <div className={styles.item_a}><a href="https://twitter.com/MindfulOceanNFT"><span className={`${styles.item_icon} ${styles.icon1}`}></span>{t('main.text.twitter')}</a></div>
                 <div className={styles.item_a}><a href="#"><span className={`${styles.item_icon} ${styles.icon2}`}></span>{t('main.text.facebook')}</a></div>
                 <div className={styles.item_a}><a href="#"><span className={`${styles.item_icon} ${styles.icon3}`}></span>{t('main.text.instagram')}</a></div>
               </div>
