@@ -177,26 +177,26 @@ const User = (props) => {
         //         }
         //     }
         // },
-        {
-            title: 'personInfo',
-            dataIndex: 'personInfo',
-            key: 'personInfo',
-            sorter: (a, b) => {
-                if (a['personInfo']) {
-                    return a['personInfo'].localeCompare(b['personInfo']);
-                }
-            },
-            sortOrder: sortedInfo.columnKey === 'personInfo' ? sortedInfo.order : null,
-            ellipsis: true,
-            width: 150,
-            render: (text, record, index) => {
-                if (String(text) !== 'null' && String(text).length > 0) {
-                    return text;
-                } else {
-                    return "-";
-                }
-            }
-        },
+        // {
+        //     title: 'personInfo',
+        //     dataIndex: 'personInfo',
+        //     key: 'personInfo',
+        //     sorter: (a, b) => {
+        //         if (a['personInfo']) {
+        //             return a['personInfo'].localeCompare(b['personInfo']);
+        //         }
+        //     },
+        //     sortOrder: sortedInfo.columnKey === 'personInfo' ? sortedInfo.order : null,
+        //     ellipsis: true,
+        //     width: 150,
+        //     render: (text, record, index) => {
+        //         if (String(text) !== 'null' && String(text).length > 0) {
+        //             return text;
+        //         } else {
+        //             return "-";
+        //         }
+        //     }
+        // },
         {
             title: 'createTime',
             dataIndex: 'createTime',
@@ -272,7 +272,7 @@ const User = (props) => {
                 dataIndex: 'walletAddress',
                 key: 'walletAddress',
                 render: (text, record) => {
-                    return <>{text}</>;
+                    return <Link to={`https://mumbai.polygonscan.com/address/${text}`} target="_blank">{text}</Link>;
                 }
             },
         ];
@@ -378,7 +378,7 @@ const User = (props) => {
                     />
                     : '-'}
             </Col>
-            <Col xs={24}>
+            {/* <Col xs={24}>
                 <div className="title2">Personal Website</div>
                 {dataRow.personalWebsite && dataRow.personalWebsite.length ?
                     <Table
@@ -387,7 +387,7 @@ const User = (props) => {
                         pagination={false}
                     />
                     : '-'}
-            </Col>
+            </Col> */}
         </Row>;
     }, [dataRow]);
 
