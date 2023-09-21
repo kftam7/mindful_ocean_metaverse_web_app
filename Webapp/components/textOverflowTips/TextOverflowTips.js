@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const TextWithTooltip = ({ text, divWidth }) => {
@@ -14,17 +14,26 @@ const TextWithTooltip = ({ text, divWidth }) => {
   return (
     <div
       ref={textRef}
-      style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", width: '100%', cursor: "default", fontWeight: 'bolder', textAlign: 'left' }}
+      style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", width: '100%', cursor: "default", fontWeight: 'bolder', textAlign: 'left', position: 'relative' }}
     >
       {showTooltip ? (
         <OverlayTrigger
           placement="top-start"
           overlay={<Tooltip id="textOverflowTooltip">{text}</Tooltip>}
         >
-          <span>{text}</span>
+          <span>
+            {text}
+            <span
+              style={{ backgroundColor: '#fff', paddingRight: '6px', position: 'absolute', right: '0' }}
+            >
+              {'.....' + text.substring(text.length - 3, text.length)}
+            </span>
+          </span>
         </OverlayTrigger>
       ) : (
-        <span>{text}</span>
+        <span>
+          {text}
+        </span>
       )}
     </div>
   );

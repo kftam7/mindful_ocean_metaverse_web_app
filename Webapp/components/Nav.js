@@ -107,8 +107,8 @@ const NavBar = ({ onLocaleChange }) => {
   }, [isModalVisible]);
 
   const getQuery = () => {
-    const firstName = query.firstName ? query.firstName : '-';
-    const lastName = query.lastName ? query.lastName : '-';
+    const firstName = query.firstName && query.firstName !== 'null' ? query.firstName : '-';
+    const lastName = query.lastName && query.lastName !== 'null' ? query.lastName : '-';
     setAppleId(query.appleId);
     setAppleIdName(firstName + ' ' + lastName)
     setEmail(query.email);
@@ -194,7 +194,6 @@ const NavBar = ({ onLocaleChange }) => {
 
   // 获取钱包地址信息并记录在 session 中
   const [walletAddress, setWalletAddress] = useState(null);
-  const [walletAddressName, setWalletAddressName] = useState(null);
   const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const handleGetWalletInfo = async () => {
     console.log("ethereumClient: ", ethereumClient);
@@ -209,7 +208,6 @@ const NavBar = ({ onLocaleChange }) => {
     //const signer = provider.getSigner();
     //const address = await signer.getAddress();
     setWalletAddress(address);
-    setWalletAddressName(address.substring(0, 5)+'.....'+address.substring(address.length-3, address.length))
     sessionStorage.setItem("walletAddress", address);
     setLoadingWallet(false);
     setIsConnectingWallet(true);
@@ -395,7 +393,7 @@ const NavBar = ({ onLocaleChange }) => {
                         <div>{t('main.text.walletContect')}</div>
                         <Button className={styles.signInBtn2} onClick={connectWallet}>
                           <Image src="/close.png" width="15px" height="15px" />&nbsp;&nbsp;
-                          <TextOverflowTips text={walletAddressName} />
+                          <TextOverflowTips text={walletAddress} />
                         </Button>
                       </>
                       :
