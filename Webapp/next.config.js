@@ -22,6 +22,8 @@ module.exports = {
     MintingFee: 100000000000000,
     MintPassContractAddress: '0x695B093CEc34ebe7bD06f606e0764E90f3EF5D90',
     MindfulTokenContractAdd: '0xc5172c8f1De27AD00Cd1ac706C55806A471B79bc',
-    openseaLink: 'https://testnets.opensea.io/assets/mumbai/'
+    openseaLink: 'https://testnets.opensea.io/assets/mumbai/',
+    ModelSrc: 'http://127.0.0.1:3001/mindfulapi/app/artworkfile/butterflyfish.glb',
+    ModelPoster: 'http://127.0.0.1:3001/mindfulapi/app/artworkfile/butterflyfish.png'
   }
 };

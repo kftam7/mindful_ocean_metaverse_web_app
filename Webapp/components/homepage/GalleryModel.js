@@ -52,9 +52,8 @@ const GalleryModel = (props) => {
                 {/* src is the 3D model, poster is the texture */}
                 <model-viewer 
                     id={`model${index}`}
-                    src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone.glb?v=1636271548450"
-                    ios-src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone-tex.usdz?v=1636599386704"
-                    poster="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Funnamed.png?v=1636256018924"
+                    src={process.env.ModelSrc}
+                    poster={process.env.ModelPoster}
                     alt="A 3D model of an fish"
                     shadow-intensity="1"
                     camera-controls
