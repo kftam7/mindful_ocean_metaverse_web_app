@@ -272,8 +272,7 @@ export default function SubmitPage({ session, user }) {
                 <model-viewer
                   id="previewModel"
                   key={image}
-                  src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone.glb?v=1636271548450"
-                  ios-src="https://cdn.glitch.me/fba9d1c3-4e26-47cd-867f-19660ae37f80%2Ftest-whale-scale-root-bone-tex.usdz?v=1636599386704"
+                  src={process.env.ModelSrc}
                   poster=""
                   alt="A 3D model of an ocean animal"
                   shadow-intensity="1"
