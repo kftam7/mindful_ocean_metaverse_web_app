@@ -13,7 +13,8 @@ async function getNFT(type, idtype, id){
 
   // create Alchemy object
   const settings = {
-    apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
+    //apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
+    apiKey: process.env.alchemyApiKey,
     network: Network.MATIC_MUMBAI // Replace with your network.
   };
   const alchemy = new Alchemy(settings);
@@ -149,7 +150,8 @@ async function getNFTTotal(type){
 
   // Optional config object, but defaults to the API key 'demo' and Network 'eth-mainnet'.
   const settings = {
-    apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
+    //apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
+    apiKey: process.env.alchemyApiKey,
     network: Network.MATIC_MUMBAI // Replace with your network.
   };
 

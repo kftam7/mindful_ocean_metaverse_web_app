@@ -5,10 +5,13 @@ const path = require('path');
 //const moment = require('moment');
 //const sleep = require('sleep-promise');
 const logger = require("../logger");
+const moment = require('moment');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 /* get Event */
 async function getEvent(eventId, title, startTime, endTime){
+
+    const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
     logger.log('info', '%s %s', 'Event', 'getEvent');
 
@@ -18,17 +21,26 @@ async function getEvent(eventId, title, startTime, endTime){
     if (title == null){
       title = "%";
     }
+
+    /*
     if (startTime == null){
       startTime = "2000-01-01 00:00:00";
     }
     if (endTime == null){
       endTime = "2050-01-01 00:00:00";
     }
+    */
 
-    var rows = await db.query(
-      `SELECT * FROM event WHERE eventId LIKE ? AND title LIKE ? AND startTime >= ? AND endTime <= ?`, [eventId, title, startTime, endTime]
-      //sql
-    );
+    if (startTime == null && endTime == null){
+      var rows = await db.query(
+        `SELECT * FROM event WHERE eventId LIKE ? AND title LIKE ? AND startTime <= ? AND endTime >= ? AND isActive = 1`, [eventId, title, currentTimeSql, currentTimeSql]
+      );
+    }else{
+      var rows = await db.query(
+        `SELECT * FROM event WHERE eventId LIKE ? AND title LIKE ? AND startTime >= ? AND endTime <= ?`, [eventId, title, startTime, endTime]
+        //sql
+      );
+    }
 
   const data = helper.emptyOrRows(rows);
   const meta = "1";

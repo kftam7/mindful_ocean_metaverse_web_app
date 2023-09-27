@@ -2,7 +2,7 @@ import request from '../utils/request';
 
 export async function getEventList() {
     return request(
-        `/mindfulapi/admin/event`
+        `/mindfulapi/admin/event?startTime=2000-01-01%2000:00:00&endTime=2050-01-01%2000:00:00`
     )
 };
 
