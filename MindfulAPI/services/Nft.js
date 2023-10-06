@@ -47,9 +47,12 @@ async function getNFT(type, idtype, id){
         
         for await (const nft of alchemy.nft.getNftsForOwnerIterator(address.walletAddress, {
           // Omit the NFT metadata for smaller payloads.
-          omitMetadata: false
+          omitMetadata: false,
+          contractAddresses: [contractAddress]
         })) {
-          if(`${nft.contract.address}` == contractAddress.toLowerCase()){
+          //if(`${nft.contract.address}` == contractAddress.toLowerCase()){
+
+            //console.log("contract address: %s", nft.contract.address);
 
             if (nft.tokenUri.raw.startsWith("ipfs://")){
 
@@ -84,7 +87,8 @@ async function getNFT(type, idtype, id){
                 return "Issue with NFT URI";
               }
             }
-          }
+
+          //}
         }        
       }
     // If no walletaddress found for this appleId
@@ -96,10 +100,13 @@ async function getNFT(type, idtype, id){
   }else if(idtype == "walletaddress"){
     for await (const nft of alchemy.nft.getNftsForOwnerIterator(id, {
       // Omit the NFT metadata for smaller payloads.
-      omitMetadata: false
+      omitMetadata: false,
+      contractAddresses: [contractAddress]
     })) {
-      if(`${nft.contract.address}` == contractAddress.toLowerCase()){
+      //if(`${nft.contract.address}` == contractAddress.toLowerCase()){
   
+        //console.log("contract address: %s", nft.contract.address);
+
         if (nft.tokenUri.raw.startsWith("ipfs://")){
           // get the NFT info from the URI
           const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
@@ -131,7 +138,7 @@ async function getNFT(type, idtype, id){
             return "Issue with NFT URI";
           }
         }
-      }
+      //}
     }
   }
 
