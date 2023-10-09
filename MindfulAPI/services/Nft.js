@@ -19,6 +19,7 @@ async function getNFT(type, idtype, id){
   };
   const alchemy = new Alchemy(settings);
   let data = [];
+  let axiosResult;
 
   // NFT contract address
   contractAddress = "";
@@ -59,7 +60,17 @@ async function getNFT(type, idtype, id){
               // get the NFT info from the URI
               const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
   
-              const options = {
+              const optionsNoProxy = {
+                'method': 'GET',
+                'url': nftURL,
+                'headers': {
+                  'Content-Type': 'application/json',
+                  'Accept-Encoding': 'gzip, deflate, br',
+                  'Connection': 'keep-alive'
+                }
+              };
+              
+              const optionsProxy = {
                 'proxy': {
                   'protocol': 'http',
                   'host': '127.0.0.1',
@@ -75,15 +86,20 @@ async function getNFT(type, idtype, id){
               };
   
               try {
-                const result = await axios(options);
+                if (process.env.alchemyIfProxy == "false"){
+                  axiosResult = await axios(optionsNoProxy);
+                }else{
+                  axiosResult = await axios(optionsProxy);
+                }
                 if (type == "mintPass"){
-                  data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+                  data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, artworkId: `${axiosResult.data.artworkId}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
                 }else if (type == "mindfulToken") {
-                  data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, authenticScarcity: `${result.data.authenticScarcity}`, scarcityRank: `${result.data.scarcityRank}`, clusterId: `${result.data.clusterId}`, clusterSize: `${result.data.clusterSize}`, superClusterId: `${result.data.superClusterId}`, superClusterSize: `${result.data.superClusterSize}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+                  data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, authenticScarcity: `${axiosResult.data.authenticScarcity}`, scarcityRank: `${axiosResult.data.scarcityRank}`, clusterId: `${axiosResult.data.clusterId}`, clusterSize: `${axiosResult.data.clusterSize}`, superClusterId: `${axiosResult.data.superClusterId}`, superClusterSize: `${axiosResult.data.superClusterSize}`, artworkId: `${axiosResult.data.artworkId}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
                 }
                 
               }catch (e) {
                 logger.log('error', '%s %s %s Issue with NFT URI: %s', 'Nft', 'getNFT', id, nftURL);
+                console.log(e);
                 return "Issue with NFT URI";
               }
             }
@@ -111,7 +127,17 @@ async function getNFT(type, idtype, id){
           // get the NFT info from the URI
           const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
   
-          const options = {
+          const optionsNoProxy = {
+            'method': 'GET',
+            'url': nftURL,
+            'headers': {
+              'Content-Type': 'application/json',
+              'Accept-Encoding': 'gzip, deflate, br',
+              'Connection': 'keep-alive'
+            }
+          };
+  
+          const optionsProxy = {
             'proxy': {
               'protocol': 'http',
               'host': '127.0.0.1',
@@ -125,16 +151,21 @@ async function getNFT(type, idtype, id){
               'Connection': 'keep-alive'
             }
           };
-  
+
           try {
-            const result = await axios(options);
+            if (process.env.alchemyIfProxy == "false"){
+              axiosResult = await axios(optionsNoProxy);
+            }else{
+              axiosResult = await axios(optionsProxy);
+            }
             if (type == "mintPass"){
-              data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+              data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, artworkId: `${axiosResult.data.artworkId}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
             }else if (type == "mindfulToken") {
-              data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${result.data.name}`, description: `${result.data.description}`, eventId: `${result.data.eventId}`, type: `${result.data.type}`, artistMessage: `${result.data.artistMessage}`, authenticScarcity: `${result.data.authenticScarcity}`, scarcityRank: `${result.data.scarcityRank}`, clusterId: `${result.data.clusterId}`, clusterSize: `${result.data.clusterSize}`, superClusterId: `${result.data.superClusterId}`, superClusterSize: `${result.data.superClusterSize}`, artworkId: `${result.data.artworkId}`, imageURL: `${result.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
+              data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, authenticScarcity: `${axiosResult.data.authenticScarcity}`, scarcityRank: `${axiosResult.data.scarcityRank}`, clusterId: `${axiosResult.data.clusterId}`, clusterSize: `${axiosResult.data.clusterSize}`, superClusterId: `${axiosResult.data.superClusterId}`, superClusterSize: `${axiosResult.data.superClusterSize}`, artworkId: `${axiosResult.data.artworkId}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
             }
           }catch (e) {
             logger.log('error', '%s %s %s Issue with NFT URI: %s', 'Nft', 'getNFT', id, nftURL);
+            console.log(e);
             return "Issue with NFT URI";
           }
         }
