@@ -447,9 +447,145 @@
 							"header": null,
 							"cookie": [],
 							"body": null
+						}
+					]
+				}
+			],
+			"description": "## User sign in application\n\nNeed to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)"
+		},
+		{
+			"name": "T&C",
+			"item": [
+				{
+					"name": "GET T&C",
+					"request": {
+						"auth": {
+							"type": "noauth"
 						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tandc/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tandc",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get all event information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
 						{
-							"name": "Sign In Copy",
+							"name": "GET T&C",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tandc/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tandc",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Update T&C",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tandc/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tandc",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get all event information\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "Update T&C",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -464,28 +600,108 @@
 										"type": "text"
 									},
 									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
 										"key": "appleid",
 										"value": "{{appleId}}",
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Edward\",\n\t\t\"lastName\":\"Tam\"\n\t},\n\t\"email\": \"s8rrdfmfrc@privaterelay.appleid.com\",\n\t\"refresh_token\": \"r4e3ea17bac8b499783e5b118fee36f72.0.srzxs.l6s9ZLm91C2MhLuMkoICZQ\",\n\t\"id_token\": \"eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkFuaW1vY2FCcmFuZHMuTWluZGZ1bC1PY2Vhbi1EZXYtU2l3YSIsImV4cCI6MTY4Mzk5MTk1NywiaWF0IjoxNjgzOTA1NTU3LCJzdWIiOiIwMDE5NzIuNGQzZjMxNTQ1Y2M3NGYwOWFjZDBhNjc5OTU2OWE5NWUuMDMzMyIsImF0X2hhc2giOiJrcl9xeXowclVtcjdZSDZHSUJZWHNnIiwiZW1haWwiOiJzOHJyZGZtZnJjQHByaXZhdGVyZWxheS5hcHBsZWlkLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImlzX3ByaXZhdGVfZW1haWwiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjgzOTA1NTU2LCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.InkIhDTOvOMbiAwoGzTYR2Du-1utnvIV4cGQrrgG6x79HEYqKBKJAVX6v2Xsag9kabE9bGiu2d6MWPH_teCP-Y4amprXwmGOVv5A8G_rjl7DzVFKhOyUSWQ2qUWoiK0G7ac03e3Gc9vSRqxqdqRpUvK7zZcxw_S4n9DB9MXtw8HZaFYUQbehkGv_6Mclh45ML2ZWHES6KrXtMmyI2AmxeQMjenhaiL9fxV0_CMvjj4wO-b7aRxw0-un0aiOo_Sv34epJHKnTgxjoPDtSBFRpnIwh6f5Jb_9vHrcTR-G6YDhouWBXeeUva8Czvb6cYNarVd9jH7CWPES48GVIgAIUXA\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{baseUrl}}/signin/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
+									"raw": "{{baseUrl}}/tandc/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"signin",
-										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
+										"tandc",
+										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Create T&C",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tandc/001953.837897e29b434ebd81b3c9f13efb7bd3.0808",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tandc",
+										"001953.837897e29b434ebd81b3c9f13efb7bd3.0808"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "No appleId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tandc/abc",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tandc",
+										"abc"
 									]
 								}
 							},
@@ -497,7 +713,7 @@
 					]
 				}
 			],
-			"description": "## User sign in application\n\nNeed to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)"
+			"description": "## add/modify/inactivate/list event data"
 		},
 		{
 			"name": "user",
@@ -1504,7 +1720,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab",
+									"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/0x5248099D624063a83fa37f22f8243A80e56D5138",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1512,7 +1728,7 @@
 										"nft",
 										"mindfulToken",
 										"walletaddress",
-										"0x9b39710bd511bc14fcb0f64a9d8f8e6f630751ab"
+										"0x5248099D624063a83fa37f22f8243A80e56D5138"
 									],
 									"query": [
 										{
@@ -4437,206 +4653,6 @@
 				}
 			],
 			"description": "## add/modify/list joined event information"
-		},
-		{
-			"name": "s3media (obsolete)",
-			"item": [
-				{
-					"name": "PUT file",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "file",
-							"file": {
-								"src": "/Users/edwardtam/Downloads/sample3.png"
-							}
-						},
-						"url": {
-							"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample3.png",
-							"protocol": "https",
-							"host": [
-								"b5uu4aqly2",
-								"execute-api",
-								"ap-east-1",
-								"amazonaws",
-								"com"
-							],
-							"path": [
-								"v1",
-								"mindfulocean",
-								"sample3.png"
-							]
-						},
-						"description": "### API endpoint to upload image file to S3\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
-					},
-					"response": [
-						{
-							"name": "PUT file",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "file",
-									"file": {
-										"src": "/Users/edwardtam/Downloads/sample3.png"
-									}
-								},
-								"url": {
-									"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample3.png",
-									"protocol": "https",
-									"host": [
-										"b5uu4aqly2",
-										"execute-api",
-										"ap-east-1",
-										"amazonaws",
-										"com"
-									],
-									"path": [
-										"v1",
-										"mindfulocean",
-										"sample3.png"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Mon, 13 Mar 2023 14:16:32 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "0"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "x-amzn-RequestId",
-									"value": "cc6485b0-69f2-4a84-9782-a198667ef0c5"
-								},
-								{
-									"key": "x-amz-apigw-id",
-									"value": "BuR6KG_6HUYF7ig="
-								},
-								{
-									"key": "X-Amzn-Trace-Id",
-									"value": "Root=1-640f3040-7a15f099247b902e07ddb11f"
-								}
-							],
-							"cookie": [],
-							"body": null
-						}
-					]
-				},
-				{
-					"name": "GET file",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "x-api-key",
-								"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "file",
-							"file": {
-								"src": ""
-							}
-						},
-						"url": {
-							"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample2.png",
-							"protocol": "https",
-							"host": [
-								"b5uu4aqly2",
-								"execute-api",
-								"ap-east-1",
-								"amazonaws",
-								"com"
-							],
-							"path": [
-								"v1",
-								"mindfulocean",
-								"sample2.png"
-							]
-						},
-						"description": "### API endpoint to download image file from S3\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
-					},
-					"response": [
-						{
-							"name": "GET file",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "mnBDD68IOL3RBhwui5IKAg8SlRu6vTX4Tb6zK8Ge",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "file",
-									"file": {
-										"src": ""
-									}
-								},
-								"url": {
-									"raw": "https://b5uu4aqly2.execute-api.ap-east-1.amazonaws.com/v1/mindfulocean/sample2.png",
-									"protocol": "https",
-									"host": [
-										"b5uu4aqly2",
-										"execute-api",
-										"ap-east-1",
-										"amazonaws",
-										"com"
-									],
-									"path": [
-										"v1",
-										"mindfulocean",
-										"sample2.png"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
-				}
-			],
-			"description": "## upload/download images for AWS S3 stoage"
 		},
 		{
 			"name": "wallet",
