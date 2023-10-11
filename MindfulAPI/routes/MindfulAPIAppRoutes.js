@@ -11,6 +11,7 @@ const PersonalWebsite = require('../services/PersonalWebsite');
 const Credential = require('../services/Credential');
 const AppleAuth = require('../services/AppleAuth');
 const SignIn = require('../services/SignIn');
+const TandC = require('../services/TandC');
 const ArtworkFile = require('../services/ArtworkFile');
 const Wallet = require('../services/Wallet');
 const logger = require("../logger");
@@ -85,6 +86,27 @@ router.post('/signin/:appleId', async function(req, res, next) {
   }
 });
 
+////////////////// T&C
+/* GET T&C */
+router.get('/tandc/:appleId', async function(req, res, next) {
+  try {
+    res.json(await TandC.getTandC(req.params.appleId));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
+
+router.post('/tandc/:appleId', async function(req, res, next) {
+  try {
+    res.json(await TandC.updateTandC(req.params.appleId));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while creating programming language`, err.message);
+    next(err);
+  }
+});
 
 ////////////////// User
 /* GET user - ALL*/
