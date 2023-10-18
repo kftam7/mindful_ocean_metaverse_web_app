@@ -20,7 +20,7 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
     address private mintPass;
     uint96 private loyaltyFee;
 
-    constructor(address _mintPass, uint96 _loyaltyFee) ERC721("MindfulNFT", "MINDFUL") {
+    constructor(address _mintPass, uint96 _loyaltyFee) ERC721("Mindful Ocean NFT", "MINDFUL") {
         mintPass = _mintPass;
         loyaltyFee = _loyaltyFee;
     }

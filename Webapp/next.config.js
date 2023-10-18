@@ -20,8 +20,8 @@ module.exports = {
     BlockchainPlatform: 'polygonMumbai',
     WalletconnectProjectId: 'b66462653b390b41e66f8f03e25cfa0a',
     MintingFee: 100000000000000,
-    MintPassContractAddress: '0x695B093CEc34ebe7bD06f606e0764E90f3EF5D90',
-    MindfulTokenContractAdd: '0xc5172c8f1De27AD00Cd1ac706C55806A471B79bc',
+    MintPassContractAddress: '0x5bB9e97d8C9DD8C7fF02c056D7684Ff3956b9DbF',
+    MindfulTokenContractAdd: '0x00Fa6b9Ba9AF2F7acC0C17279D316E4f5E94C743',
     openseaLink: 'https://testnets.opensea.io/assets/mumbai/',
     ModelSrc: 'http://127.0.0.1:3001/mindfulapi/app/artworkfile/butterflyfish.glb',
     ModelPoster: 'http://127.0.0.1:3001/mindfulapi/app/artworkfile/butterflyfish.png'
