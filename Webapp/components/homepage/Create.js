@@ -21,7 +21,7 @@ const Create = () => {
                         <h2 className="align-self-center"><strong>Dolphin</strong></h2>
                         </Col>
                         <Col xs={7} className="d-flex">
-                            <p className='align-self-center mt-3'>Download template&ensp;<a href='/whale.png' target="_blank" download><Image src="/downTemBtn.png" className={styles.downloadBtn} /></a></p>
+                            <p className='align-self-center mt-3'>Download template&ensp;<a href='/tangfish.png' target="_blank" download><Image src="/downTemBtn.png" className={styles.downloadBtn} /></a></p>
                         </Col>
                     </Row>           
                 </Col>

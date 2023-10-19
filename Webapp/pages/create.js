@@ -21,7 +21,7 @@ function CreatePage() {
             <Row className='' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
             <Row className='mt-5 mb-3 text-center d-flex justify-content-center'>
                 <h6>{t('page.create.createAndColor')}</h6>
-                <a href='/whale.png' target="_blank" className={`${styles.downloadBtn}`} download>
+                <a href='/tangfish.png' target="_blank" className={`${styles.downloadBtn}`} download>
                     <h5 className={styles.downBtnText} >{t('page.create.downloadTemplate')} <Image src="/downloadIcon.png" style={{width: '10%'}} /></h5>
                 </a>
             </Row>
