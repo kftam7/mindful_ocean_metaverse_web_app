@@ -112,6 +112,8 @@ const AuthPage = ({ session }) => {
       if(!res.data.message){
         if (confirm(res.data)) {
           disconnect();
+        }else {
+          disconnect();
         }
       }
 
