@@ -13,7 +13,6 @@ async function getNFT(type, idtype, id){
 
   // create Alchemy object
   const settings = {
-    //apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
     apiKey: process.env.alchemyApiKey,
     network: Network.MATIC_MUMBAI // Replace with your network.
   };
@@ -51,9 +50,6 @@ async function getNFT(type, idtype, id){
           omitMetadata: false,
           contractAddresses: [contractAddress]
         })) {
-          //if(`${nft.contract.address}` == contractAddress.toLowerCase()){
-
-            //console.log("contract address: %s", nft.contract.address);
 
             if (nft.tokenUri.raw.startsWith("ipfs://")){
 
@@ -99,7 +95,6 @@ async function getNFT(type, idtype, id){
                 );
             
                 logger.log('debug', '%s %s sql: %s', 'Nft', 'getNFT', sqlArtworkURLAppleId);
-                logger.log('debug', '%s %s sql: %s', 'Nft', 'getNFT', resultArtworkURLAppleId[0].URL);
 
                 if (type == "mintPass"){
                   data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, artworkId: `${axiosResult.data.artworkId}`, artworkURL: `${resultArtworkURLAppleId[0].URL}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
@@ -129,9 +124,6 @@ async function getNFT(type, idtype, id){
       omitMetadata: false,
       contractAddresses: [contractAddress]
     })) {
-      //if(`${nft.contract.address}` == contractAddress.toLowerCase()){
-  
-        //console.log("contract address: %s", nft.contract.address);
 
         if (nft.tokenUri.raw.startsWith("ipfs://")){
           // get the NFT info from the URI
@@ -176,7 +168,6 @@ async function getNFT(type, idtype, id){
             );
             
             logger.log('debug', '%s %s sql: %s', 'Nft', 'getNFT', sqlArtworkURLWalletaddress);
-            logger.log('debug', '%s %s sql: %s', 'Nft', 'getNFT', resultArtworkURLWalletaddress[0].URL);
 
             if (type == "mintPass"){
               data.push({walletAddress: `${id}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, artworkId: `${axiosResult.data.artworkId}`, artworkURL: `${resultArtworkURLWalletaddress[0].URL}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
@@ -189,11 +180,8 @@ async function getNFT(type, idtype, id){
             return "Issue with NFT URI";
           }
         }
-      //}
     }
   }
-
-  //logger.log('debug', '%s %s %s Data: %s', 'Nft', 'getNFT', id, data);
 
   return {
     data
@@ -208,7 +196,6 @@ async function getNFTTotal(type){
 
   // Optional config object, but defaults to the API key 'demo' and Network 'eth-mainnet'.
   const settings = {
-    //apiKey: '3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ', // Replace with your Alchemy API key.
     apiKey: process.env.alchemyApiKey,
     network: Network.MATIC_MUMBAI // Replace with your network.
   };
@@ -216,13 +203,10 @@ async function getNFTTotal(type){
   // NFT contract address.
   contractAddress = "";
   if (type == "mintPass"){
-    //console.log("choice: 1");
     contractAddress = process.env.mintPassContractAddress;
   }else if (type == "mindfulToken"){
-    //console.log("choice: 2");
     contractAddress = process.env.mindfulTokenContractAddress;
   }else{
-    //console.log("choice: 3");
     contractAddress = process.env.mintPassContractAddress;
   }
 
