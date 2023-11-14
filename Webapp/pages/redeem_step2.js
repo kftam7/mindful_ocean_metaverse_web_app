@@ -39,6 +39,7 @@ function RedeemStep2() {
   const mintpassContract = useSelector((state) => state.contractState);
   const [loading, setLoading] = useState(false);
   const { address } = useAccount();
+  const [isRefChoose, setIsRefChoose] = useState(false);
 
   //智能合约2.0
   const { write, data, error, isLoading, isError } = useContractWrite({
@@ -86,11 +87,13 @@ function RedeemStep2() {
     const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/walletaddress/${walletAddress}`, {headers: getHeaders()});
     if(res.status === 200){
       const { data: { data } } = res;
-      // const data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9","tokenId": "7","tokenUriRaw": "ipfs://bafyreibmfsnqc55ziv7vck6b4f76ifixu67bxpwcsk5zg5o27lnesv6pqe/metadata.json","name": "artworktest3","type": "fish","description": "kkkk","extraInfo": "fdsfsfdsfds", "artworkId": "3","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "8","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "4","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "11","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "5","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "12","tokenUriRaw": "ipfs://bafyreierzjpzy576f2sqwr6yshf6wwlaan7qsh32bycmtb7l4fegi6srzm/metadata.json","name": "Sample artwork","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "6","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "13","tokenUriRaw": "ipfs://bafyreifuvv46cghiid222of4vlr35i6jz7zgbgscw2c2zfv53epulvrony/metadata.json","name": "Sample artwork2","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "7","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "14","tokenUriRaw": "ipfs://bafyreidosepy7vwqdeuceuz5xzzwj4amnfrhqttpr7e45c2jtt3dn45t5e/metadata.json","name": "sample-test","type": "fish","description": "Sample test","extraInfo": "Sample test extra", "artworkId": "8","imageURL": "https://ipfs.io/ipfs/bafybeidojtns2xuzldglmeutidznyuzmum4jtow4h7z3tbwzqwuskijtre/sample-test.jpeg"},{"walletAddress": "0x5248099D624063a83fa37f22f8243A80e56D5138","tokenId": "15","tokenUriRaw": "ipfs://bafyreidaphppcdpnwtrbxy6g42uubwpcxgxo2przkocnqz4tuk7hlxe4g4/metadata.json","name": "testartwork2","type": "fish","description": "testartwork2 desc","extraInfo": "testartwork2 extra", "artworkId": "9","imageURL": "https://ipfs.io/ipfs/bafybeifsrz7fidwdb3oensdbavkx3ka4cyqglandgbrpv6kcmzox7znzve/event_B.png"}];
+      // const data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: 'www.xxx.com', ifRedeemed: 0},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: 'www.xxx.com', ifRedeemed: 1}];
+      // console.log(data)
       if(data.length){
         setDataList(data);
         setSelectedOption(data[0].tokenId);
         setArtworkId(data[0].artworkId);
+        setIsRefChoose(data[0].ifRedeemed ? true : false)
       }else{
         setShow(true);
       }
@@ -105,9 +108,10 @@ function RedeemStep2() {
   },[dataList, selectedOption]);
 
   const handleOptionChange = (event) => {
-    const artworkId = dataList.find(item => item.tokenId === event.target.value).artworkId;
+    const item = dataList.find(item => item.tokenId === event.target.value);
     setSelectedOption(event.target.value);
-    setArtworkId(artworkId);
+    setArtworkId(item.artworkId);
+    setIsRefChoose(item.ifRedeemed ? true : false)
   };
 
   const optionMintpass = dataList.map((item, key) => {
@@ -119,8 +123,20 @@ function RedeemStep2() {
     await dispatch(fetchMintpassContract());
   },[dispatch])
 
-  const getIpfs = async () => {
+  const setredeemedartwork = async () => {
     setLoading(true);
+    await axios.post(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, {headers: getHeaders()})
+    .then(res => {
+      if(res.status === 200){
+        getIpfs();
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    });
+  }
+
+  const getIpfs = async () => {
     await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
       if(res.status === 200){
@@ -236,6 +252,10 @@ function RedeemStep2() {
                   <div className={styles.submitTxt3}>{t('page.redeem.theBelowInformation')}</div>
                 </Col>
                 <Col xs={12}>
+                  <div className={styles.submitTile}>{t('page.redeem.artwork')}:</div>
+                  <div className={styles.submitTxt3}>{obj.artworkURL}</div>
+                </Col>
+                <Col xs={12}>
                   <div className={styles.submitTile2}>{t('page.gallery.type')}:</div>
                   <div className={styles.submitTxt2}>{obj.type}</div>
                 </Col>
@@ -251,7 +271,7 @@ function RedeemStep2() {
               <Row className='justify-content-md-center mt-5'>
                 <Col xs={12}>
                   <div className='text-center'>
-                    <Button className={`${styles.burneBtn}`} onClick={getIpfs} disabled={isLoading || loading}>{t('button.burn')}</Button>
+                    <Button className={`${styles.burneBtn}`} onClick={setredeemedartwork} disabled={isLoading || loading || isRefChoose}>{t('button.burn')}</Button>
                   </div>
                 </Col>
               </Row>

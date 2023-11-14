@@ -180,6 +180,10 @@ option {
   fill: #005D6C;
 }
 
+.custom-toast-error .Toastify__toast-icon svg{
+  fill: red;
+}
+
 .modal_title{
   font-weight: bold;
 }
@@ -622,6 +626,47 @@ option {
 
 .Donate_donate_right__hVwCC {
   width: 150%
+}
+
+.card_item{
+  margin-top: 40px;
+}
+
+.card_item .item_qa{
+  border: 0;
+  border-top: 1px solid #dee2e6;
+}
+
+.card_item .item_qa.bg_gray{
+  background-color: #efefef;
+}
+
+.card_item .item_qa:last-child{
+  border-bottom: 1px solid #dee2e6;
+}
+
+.card_item .content{
+  padding: 0 1rem 1rem 1rem;
+}
+
+.card_item h4{
+  font-size: 1.2rem;
+}
+
+.card_body{
+  padding: 1rem 0;
+}
+
+.card_btn {
+  color: var(--primary-text-color);
+}
+
+.card_btn:hover {
+  color: var(--primary-text-color);
+}
+
+.card_btn:focus {
+  color: var(--primary-text-color);
 }
 
 @media only screen and (max-width: 768px) {

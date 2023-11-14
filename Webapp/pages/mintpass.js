@@ -9,20 +9,21 @@ import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
 import styles from '../styles/SubmitPage.module.css';
 import { Row, Col, Image, Button, Container } from 'react-bootstrap';
+import { toast, ToastContainer } from "react-toastify";
 
 import axios from 'axios';
 import fs from 'fs';
 import { NFTStorage, File } from 'nft.storage';
 import { useTranslation } from '../i18n';
-import {ethers, BigNumber}  from 'ethers';
-import {getMessageHashSignature, getHeaders} from '../utils/utils';
-import {FaSpinner } from 'react-icons/fa';
+import { ethers, BigNumber } from 'ethers';
+import { getMessageHashSignature, getHeaders } from '../utils/utils';
+import { FaSpinner } from 'react-icons/fa';
 
 //智能合约2.0
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { mintpassContractConfig } from '../components/contracts';
 
-function Mintpass({ session,user }) {
+function Mintpass({ session, user }) {
   const { t, locale } = useTranslation();
   //const apiPort = process.env.API_PORT || '/';
   const apiPort = process.env.APIBaseUrl || '/';
@@ -48,67 +49,96 @@ function Mintpass({ session,user }) {
   } = useWaitForTransaction({ hash: data?.hash })
 
   useEffect(() => {
-    if(!isError) return;
+    if (!isError) return;
     if (confirm(error?.shortMessage)) {
       setLoading(false)
-    }else{
+    } else {
       setLoading(false)
     }
-  },[isError])
+  }, [isError])
 
   useEffect(() => {
-    if(!isSuccess) return;
+    if (!isSuccess) return;
     setMinedArtwork();
-  },[isSuccess])
+  }, [isSuccess])
 
-  useEffect(async() => {
+  useEffect(async () => {
     await dispatch(getAccount());
     await dispatch(fetchMintpassContract());
-  },[dispatch])
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getArtworkId());
-  },[dispatch])
+  }, [dispatch])
 
   //https://nft.storage/docs/how-to/mint-erc-1155/; can think about write mintpass NFT as ERC1155
   async function generateMeta() {
-    const storage = new NFTStorage({ endpoint,token });
+    const storage = new NFTStorage({ endpoint, token });
     fs.readdir(assets, async function (err, file) {
       let metadata = await storage.store({
         name: `Mindful Ocean Mint Pass`,
         description:
           `created by ${username}`,
-          image: new File([await fs.promises.readFile(`./assets/${file}`)], file, {
-            type: 'image/jpg/png',
-          }),
-        });
-        console.log('IPFS URL for the metadata:', metadata.url)
-    console.log('metadata.json contents:\n', metadata.data)
-    console.log(
-      'metadata.json contents with IPFS gateway URLs:\n',
-    metadata.embed()    
-    );
+        image: new File([await fs.promises.readFile(`./assets/${file}`)], file, {
+          type: 'image/jpg/png',
+        }),
+      });
+      console.log('IPFS URL for the metadata:', metadata.url)
+      console.log('metadata.json contents:\n', metadata.data)
+      console.log(
+        'metadata.json contents with IPFS gateway URLs:\n',
+        metadata.embed()
+      );
     });
   } //after getting the metadata url, still need to set URL from smart contract
   //if mint success, duplicate & remove the image, update mint status and ID to DB
   //can fetch the tokenId here?
 
   const mintFront = async () => {
+    const appleId = sessionStorage.getItem("appleId");
     setLoading(true);
-    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mintpass/${artworkId}`, {}, {headers: getHeaders()})
-    .then(res => {
-      const {status, data} = res;
-      if(status === 200){
-        mint(data);
+    const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });
+    console.log(res)
+    if (res.status === 200) {
+      const ifMinted = res.data.data.find(item => item.artworkId === artworkId).ifMinted;
+      console.log(ifMinted)
+      if (ifMinted) {
+        mintPass();
+      } else {
+        toast.error('ifMinted 0', {
+          autoClose: 3000,
+          position: 'top-center',
+          className: 'custom-toast-error',
+          hideProgressBar: true,
+        });
+        setLoading(false);
       }
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    } else {
+      toast.error(res.statusText, {
+        autoClose: 3000,
+        position: 'top-center',
+        className: 'custom-toast-error',
+        hideProgressBar: true,
+      });
+      setLoading(false);
+    }
+  };
+
+  const mintPass = async () => {
+    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mintpass/${artworkId}`, {}, { headers: getHeaders() })
+      .then(res => {
+        const { status, data } = res;
+        if (status === 200) {
+          mint(data);
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   };
 
   async function mint(ipfs) {
-    try{
+    try {
       const contract = require("../utils/MintPassNFT.json");
       const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
         return res;
@@ -119,7 +149,7 @@ function Mintpass({ session,user }) {
       console.log("messageHash: ", messageHash);
       console.log("signature: ", signature);
       console.log("ipfs: ", ipfs);
-  
+
       //await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
       // await mintpassContract.methods.mintMintPass(messageHash, signature, ipfs).send({ from: account, value: 100000000000000 })
       // .then(async function(){
@@ -131,31 +161,32 @@ function Mintpass({ session,user }) {
         value: process.env.MintingFee,
       })
     }
-    catch(err){
+    catch (err) {
       console.log('error', err)
     }
   }
   async function setMinedArtwork() {
-    try{
+    try {
       const params = {
         artworkId,
       }
-      await axios.put(`${apiPort}/mindfulapi/app/setMintedArtwork/${artworkId}`, params, {headers: getHeaders()})
-      .then(res => {
-        Router.push({
-          pathname: '/mintedPage',
-        });
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      await axios.put(`${apiPort}/mindfulapi/app/setMintedArtwork/${artworkId}`, params, { headers: getHeaders() })
+        .then(res => {
+          Router.push({
+            pathname: '/mintedPage',
+          });
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-    catch(err){
+    catch (err) {
       console.log('error', err)
     }
   }
-  return(
+  return (
     <Container className='mt-5 mb-5'>
+      <ToastContainer />
       {loading || isLoading ?
         <div className="overly">
           {/* <FaSpinner /> */}
@@ -165,45 +196,45 @@ function Mintpass({ session,user }) {
       }
       <div className={styles.submitPage}>
         {/* <Button onClick={update}>Update</Button> */}
-        <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+        <Row><Link href="/"><h6 style={{ cursor: "pointer" }}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
         <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
-          <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
-              <Col xs={4} className={styles.item}>
-                  <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.mintpass.authentication')}</span></div>
-                  <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-              </Col>
-              <Col xs={4} className={styles.item}>
-                  <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.mintpass.submission')}</span></div>
-                  <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-              </Col>
-              <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
-                  <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-                  <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
-                  <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-              </Col>
-          </Row>
+        <Row className='mt-4' style={{ fontSize: "1.3rem", fontWeight: '800' }}>
+          <Col xs={4} className={styles.item}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-solid fa-circle-check" style={{ color: "#7FFF00" }}></i><span>{t('page.mintpass.authentication')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+          <Col xs={4} className={styles.item}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-solid fa-circle-check" style={{ color: "#7FFF00" }}></i><span>{t('page.mintpass.submission')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+          <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+        </Row>
 
-          <div className={styles.mintpassContent}>
-            <Row className='d-flex justify-content-center mt-5'>
-              <div className={styles.mintpassImg}>
-                <Image src="/mintPass_lower.gif" alt="mintpass"/>
-              </div>
-            </Row>
-            <Row className='d-flex justify-content-center mt-3'>
-              <Col>
-                <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={isLoading || loading}>{t('button.getMintPass')}</Button>
-              </Col>
-            </Row>
-            <Row className='text-center mt-1 mb-5' style={{color:"grey"}}>
-                <p className="m-0">
-                  {t('page.mintpass.aSmallGasFeeWillBeCharged')}<br />
-                  <span style={{textDecoration:"underline", cursor: 'pointer'}}>{t('page.mintpass.moreDetails')}</span>
-                </p>
-            </Row>
-          </div>
+        <div className={styles.mintpassContent}>
+          <Row className='d-flex justify-content-center mt-5'>
+            <div className={styles.mintpassImg}>
+              <Image src="/mintPass_lower.gif" alt="mintpass" />
+            </div>
+          </Row>
+          <Row className='d-flex justify-content-center mt-3'>
+            <Col>
+              <Button className={`${styles.mintPassBtn}`} onClick={mintFront} disabled={isLoading || loading}>{t('button.getMintPass')}</Button>
+            </Col>
+          </Row>
+          <Row className='text-center mt-1 mb-5' style={{ color: "grey" }}>
+            <p className="m-0">
+              {t('page.mintpass.aSmallGasFeeWillBeCharged')}<br />
+              <span style={{ textDecoration: "underline", cursor: 'pointer' }}>{t('page.mintpass.moreDetails')}</span>
+            </p>
+          </Row>
+        </div>
       </div>
     </Container>
   )
@@ -232,17 +263,18 @@ export default App;
 // export default Mintpass;
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context);  
+  const session = await getSession(context);
   const BASE_URL = process.env.NEXTAUTH_URL;
-  if(session) {
+  if (session) {
     const res = await axios.get(
       `${BASE_URL}/api/users`,
-        { params: 
-          { 
-            email: session.user.email, 
-          }
+      {
+        params:
+        {
+          email: session.user.email,
         }
-      )
+      }
+    )
     const user = res.data;
     return {
       props: {
