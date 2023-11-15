@@ -1,6 +1,7 @@
 import Head from "next/head";
 import NavBar from './Nav';
 import Footer from './Footer';
+import Foot from './Foot';
 import { useState } from "react";
 
 import {SSRProvider} from '@react-aria/ssr';
@@ -23,7 +24,8 @@ const Layout = ({children}) => {
                 <main key={locale}>
                     {children}
                 </main>
-            <Footer />
+            <Foot />
+            {/* <Footer /> */}
         </SSRProvider>
     )
 }

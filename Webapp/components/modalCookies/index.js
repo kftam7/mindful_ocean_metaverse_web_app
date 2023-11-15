@@ -21,7 +21,7 @@ const ModalCookies = props => {
         <Container>
           <Row>
             <Col span={6}>XXXXXXXXX</Col>
-            <Col span={6}><Nav.Link href="/privatepolicy" style={{textDecoration: 'underline', display: 'inline-block'}}>{t('main.text.privacyPolices')}</Nav.Link></Col>
+            <Col span={6}><Nav.Link href="https://www.iubenda.com/privacy-policy/43680858" target='_blank' style={{textDecoration: 'underline', display: 'inline-block'}}>{t('main.text.privacyPolices')}</Nav.Link></Col>
           </Row>
         </Container>
       </Modal.Body>

@@ -87,7 +87,7 @@ const NavBar = ({ onLocaleChange }) => {
       // 第一次登录appleId
       if (query.firstTime === '1') {
         setIsFirstLogin(true);
-        setIsCookies(true);
+        // setIsCookies(true);
       }
     } else {
       setIsAppleIdLogin(true);
@@ -120,15 +120,6 @@ const NavBar = ({ onLocaleChange }) => {
     sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
     sessionStorage.setItem("appleIdFristName", query.firstName);
     sessionStorage.setItem("appleIdLastName", query.lastName);
-
-    // Cookies.set('access_token', query.access_token, {path:'/'});
-    // Cookies.set('expires_in', query.expires_in, {path:'/'});
-    // Cookies.set('email', query.email, {path:'/'});
-    // Cookies.set('refresh_token', query.refresh_token, {path:'/'});
-    // Cookies.set('appleId', query.appleId, {path:'/'});
-    // Cookies.set('appleIdName', query.firstName + ' ' + query.lastName, {path:'/'});
-    // Cookies.set('appleappleIdFristNameId', query.firstName, {path:'/'});
-    // Cookies.set('appleIdLastName', query.lastName, {path:'/'});
     setIsAppleIdLogin(true);
   }
 
@@ -149,15 +140,6 @@ const NavBar = ({ onLocaleChange }) => {
     sessionStorage.removeItem("appleIdName");
     sessionStorage.removeItem("appleIdFristName");
     sessionStorage.removeItem("appleIdLastName");
-
-    // Cookies.remove('access_token');
-    // Cookies.remove('expires_in');
-    // Cookies.remove('email');
-    // Cookies.remove('refresh_token');
-    // Cookies.remove('appleId');
-    // Cookies.remove('appleIdName');
-    // Cookies.remove('appleappleIdFristNameId');
-    // Cookies.remove('appleIdLastName');
     router.push('/');
     setIsAppleIdLogin(false);
   }
@@ -221,7 +203,7 @@ const NavBar = ({ onLocaleChange }) => {
         if (!res.data.message) {
           if (confirm(res.data)) {
             disconnect();
-          }else {
+          } else {
             disconnect();
           }
         }
@@ -237,25 +219,6 @@ const NavBar = ({ onLocaleChange }) => {
     const res = await axios.get(`${apiPort}/mindfulapi/app/applelogin`);
     setAppleIdLoginBtn(res.data);
   }, []);
-
-  // useEffect(async() => {
-  //   await dispatch(getAccount());
-  //   await dispatch(getBalance());
-  //   window.ethereum.on("accountsChanged", (accounts) => {
-  //       dispatch(getAccount());
-  //       dispatch(getBalance());
-  //     });
-  // },[dispatch])
-
-  // const connect = async() => {
-  //   await dispatch(grabAccount());
-  //   await dispatch(grabBalance());
-  // }
-
-  //didn't work
-  // const disconnect = async() => {
-  //   dispatch(disconnectAccount());
-  // }
 
   const { t, locale } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState(locale);
@@ -297,43 +260,29 @@ const NavBar = ({ onLocaleChange }) => {
   };
 
   return (
-    <Navbar collapseOnSelect fixed="top" expand='xl' className={`p-3 ${styles.bg}`}>
+    <Navbar collapseOnSelect fixed="top" expand='xl' className={`${styles.bg}`}>
       <Container fluid className={styles.container}>
         <Navbar.Brand href="/">
           <Image
-            src='/logo.svg'
-            width="210"
-            height="80"
+            src='/logo.png'
+            width="226"
+            height="60"
             className="d-inline-block align-top"
             alt="mindful ocean logo"
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
-
           <Nav className="me-auto">
             <Nav.Link href="#about" className={styles.navlink}>{t('nav.about')}</Nav.Link>
             <Nav.Link href="#gallery" className={styles.navlink}>{t('nav.gallery')}</Nav.Link>
-            <Nav.Link href="#mobileapp" className={styles.navlink}>{t('nav.create')}</Nav.Link>
             <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
             <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
             <Nav.Link href="/contactUs" className={styles.navlink}>{t('nav.contactUs')}</Nav.Link>
-            {/* <Nav.Link href="#donate" className={styles.navlink}>{t('nav.donate')}</Nav.Link> */}
-            {/* <Nav.Link href="#mindfultoken" className={`text-nowrap ${styles.navlink}`}>{t('nav.mindfulToken')}</Nav.Link> */}
+            {/* <Nav.Link href="/faq" className={styles.navlink}>{t('nav.faq')}</Nav.Link> */}
           </Nav>
-          <Nav>
-            {/* <Col lg={3} xl={4} className='mt-1 me-1'>
-          <Form>
-              <InputGroup className="">
-                  <InputGroup.Text style={{color: '#005D6C', border: '1px solid #005D6C', backgroundColor: 'none'}} id="subscribe" type="submit"><i className="far fa-envelope"></i></InputGroup.Text>
-                  <FormControl id="subscribe" placeholder={t('input.placeholder.email')} style={{border: '1px solid #005D6C'}} />
-              </InputGroup>
-          </Form>
-      </Col> */}
-            <Col lg={4} xl={4} className='mt-1 me-1'>
-              <Button onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyhW-B2Y7PSvIv_zfCw825HZANkugQuJqXCut413fp_WpnwQ/viewform?usp=pp_url&entry.835058185=I+would+like+to+participate+in+the+beta+tests+of+the+Mindful+Ocean+Metaverse+app&entry.1065046570=I+would+like+to+receive+emails+about+the+project')} className={`${styles.signInBtn2} ${styles.default}`}>{t('button.signUpNow')}</Button>
-            </Col>
-            <Col lg={4} xl={4} className='mt-1 me-1'>
+          <Row className='nav_right'>
+            <Col lg={6} xl={6}>
               <Dropdown className="">
                 <Dropdown.Toggle className={styles.dropdownBtn} id="language">
                   {lang}
@@ -345,26 +294,9 @@ const NavBar = ({ onLocaleChange }) => {
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
-            <Col lg={4} xl={4} className='mt-1 me-1'>
-              <Button onClick={signInOpenModal} className={styles.dropdownBtn}>{t('button.signIn')}</Button>
+            <Col lg={6} xl={6}>
+              <Button onClick={signInOpenModal} className={styles.signId}>{t('button.signIn')}</Button>
             </Col>
-            <Col lg={4} className='mt-1 ms-2'>
-              <a href="https://twitter.com/MindfulOceanNFT" target="_blank" class="Nav_twiBtn btn btn-primary"></a>
-            </Col>
-            {/* <Col lg={4} className='mt-1 ms-2'>
-          {(account) ?
-              <Dropdown className="">
-                  <Dropdown.Toggle className={styles.dropdownBtn} id="connect">
-                      {account.slice(0,5).concat('...').concat(account.slice(-4))}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                      <Dropdown.Item href="#/balance">{balance} MATIC</Dropdown.Item>
-                      <Dropdown.Item href="#/disconnect" onClick={disconnect}>Disconnect</Dropdown.Item>
-                  </Dropdown.Menu>
-              </Dropdown> :
-              <Button onClick={connect} className={homeStyles.btn} style={{borderRadius: '15px'}}><Image src="/metamask.png" width="15px" height="15px" alt="metamask icon" />&nbsp;Connect wallet</Button> 
-          }  
-      </Col> */}
             <Modal
               show={isModalVisible}
               onHide={handleClose}
@@ -421,7 +353,7 @@ const NavBar = ({ onLocaleChange }) => {
               setShow={handleCookiesAcceptAll}
               onCancel={handleCookiesDeclineAll}
             />
-          </Nav>
+          </Row>
         </Navbar.Collapse>
       </Container>
     </Navbar>

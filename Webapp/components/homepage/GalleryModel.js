@@ -63,8 +63,8 @@ const GalleryModel = (props) => {
                 <Card.Body>
                     <Card.Title>{nft.name}</Card.Title>
                     <Card.Text>
-                        {props.t('main.text.by')}
-                        <span style={{float: 'right'}}>{nft.firstName} {nft.lastName}</span>
+                        <div>{props.t('main.text.by')}</div>
+                        <span>{nft.firstName} {nft.lastName}</span>
                     </Card.Text>
                 </Card.Body>
             </Card>
