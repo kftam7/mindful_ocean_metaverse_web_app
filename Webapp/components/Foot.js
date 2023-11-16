@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <div class="container">
             <div className='foot'>
-                &copy; Outblaze, Inc. 2023. Save our ocean.
+                &copy; {t('footer.copyright')}
             </div>
         </div>
     )

@@ -26,9 +26,9 @@ const Part8 = ({ t }) => {
               <Image src="/part8_img1.png" width="100%" />
             </Col>
             <Col lg={8} md={6} sm={12}>
-              <div className='part_title2'>Mint Pass</div>
+              <div className='part_title2'>{t('home.part8.title1')}</div>
               <div className='part_text'>
-                Submit artworks created by the Mindful Ocean app to collect Mint Pass. With a Mint Pass, you will be able to redeem your own artwork NFT when they are ready to be minted.
+                {t('home.part8.text1')}
               </div>
               <div className='part_btn'><Button variant="outline-primary" onClick={determine}>{t('button.submit')}</Button></div>
             </Col>

@@ -42,6 +42,13 @@ a:hover {
   touch-action: pan-y;
 }
 
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 model-viewer {
   width: 100%;
   height: 18rem;
@@ -595,6 +602,14 @@ option {
   flex: 1;
 }
 
+.navbar-nav {
+  font-size: 16px;
+}
+
+.navbar-nav a {
+  margin-left: 20px;
+}
+
 .nav_right {
   display: flex;
   align-items: center;
@@ -760,26 +775,25 @@ option {
   overflow: hidden;
 }
 
-.part_title{
+.part_title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.part_title2{
+.part_title2 {
   font-size: 48px;
   margin-bottom: 20px;
 }
 
-.part_title3{
+.part_title3 {
   font-size: 36px;
   margin-bottom: 20px;
 }
 
-.part_text{
-}
+.part_text {}
 
-.part_btn{
+.part_btn {
   margin-top: 20px;
 }
 
@@ -811,16 +825,16 @@ option {
   width: 50%;
 }
 
-.part4_item{
+.part4_item {
   position: relative;
 }
 
-.part4_item .part_title{
+.part4_item .part_title {
   margin-top: 20px;
 }
 
-.part4_item .item_content{
- position: relative;
+.part4_item .item_content {
+  position: relative;
   z-index: 9;
 }
 
@@ -895,48 +909,99 @@ option {
   width: 50%;
 }
 
-.part11_logo img{
+.part11_logo img {
   max-width: 100%;
 }
 
-.part11_link{
+.part11_link {
   color: #333;
   font-weight: bold;
 }
 
-.foot{
+.foot {
   text-align: center;
   padding: 50px 0;
   border-top: 1px solid #ccc;
 }
 
-.btn-primary{
+.overlay {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 999;
+  transform: translate(0, -50%);
+}
+
+.overlay ul {
+  background-color: var(--primary-text-color);
+  padding: 10px 20px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.overlay ul li {
+  margin: 15px 0;
+}
+
+.overlay ul li a {
+  display: block;
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+  transition: .5s;
+}
+
+.overlay ul li a:hover {
+  opacity: 1;
+}
+
+.overlay ul li.o1 a {
+  background: url(../public/icon_overlay.png) center top no-repeat;
+}
+
+.overlay ul li.o2 a {
+  background: url(../public/icon_overlay.png) center -55px no-repeat;
+}
+
+.overlay ul li.o3 a {
+  background: url(../public/icon_overlay.png) center -115px no-repeat;
+}
+
+.overlay ul li.o4 a {
+  background: url(../public/icon_overlay.png) center -170px no-repeat;
+}
+
+.overlay ul li.o5 a {
+  background: url(../public/icon_overlay.png) center bottom no-repeat;
+}
+
+.btn-primary {
   background-color: var(--primary-text-color);
   border-color: var(--primary-text-color);
 }
 
 .btn-primary:hover {
-    background-color: var(--hovered-color);
-    border-color: var(--hovered-color);
+  background-color: var(--hovered-color);
+  border-color: var(--hovered-color);
 }
 
 .btn-primary:focus {
-    background-color: var(--hovered-color) !important;
-    border-color: var(--hovered-color) !important;
+  background-color: var(--hovered-color) !important;
+  border-color: var(--hovered-color) !important;
 }
 
 .btn-primary:active {
-    background-color: var(--hovered-color) !important;
-    border-color: var(--hovered-color) !important;
+  background-color: var(--hovered-color) !important;
+  border-color: var(--hovered-color) !important;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
   color: var(--primary-text-color);
   background-color: #fff;
   border-color: var(--primary-text-color);
 }
 
-.btn-outline-primary:hover{
+.btn-outline-primary:hover {
   background-color: var(--primary-text-color);
   border-color: var(--primary-text-color);
 }
@@ -989,11 +1054,11 @@ option {
     font-size: 38px;
   }
 
-  .part_title2{
+  .part_title2 {
     font-size: 44px;
   }
-  
-  .part_title3{
+
+  .part_title3 {
     font-size: 32px;
   }
 
@@ -1011,17 +1076,17 @@ option {
     font-size: 28px;
   }
 
-  .part_title{
+  .part_title {
     font-size: 20px;
     line-height: 110%;
   }
 
-  .part_title2{
+  .part_title2 {
     font-size: 40px;
     line-height: 110%;
   }
-  
-  .part_title3{
+
+  .part_title3 {
     font-size: 28px;
   }
 }
@@ -1035,11 +1100,11 @@ option {
     font-size: 20px;
   }
 
-  .part_title2{
+  .part_title2 {
     font-size: 36px;
   }
-  
-  .part_title3{
+
+  .part_title3 {
     font-size: 24px;
   }
 }
@@ -1053,12 +1118,12 @@ option {
     font-size: 18px;
   }
 
-  .part_title2{
+  .part_title2 {
     font-size: 32px;
     margin-top: 20px;
   }
-  
-  .part_title3{
+
+  .part_title3 {
     font-size: 20px;
   }
 
@@ -1069,13 +1134,13 @@ option {
     right: -100px;
     z-index: -1;
   }
-  
+
   .part1_bg img {
     transform: translate(0, 0);
     width: 300px;
   }
 
-  .part_title{
+  .part_title {
     margin-top: 20px;
   }
 }

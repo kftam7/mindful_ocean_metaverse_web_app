@@ -2,6 +2,7 @@ import Head from "next/head";
 import NavBar from './Nav';
 import Footer from './Footer';
 import Foot from './Foot';
+import Overlay from './Overlay';
 import { useState } from "react";
 
 import {SSRProvider} from '@react-aria/ssr';
@@ -25,6 +26,7 @@ const Layout = ({children}) => {
                     {children}
                 </main>
             <Foot />
+            <Overlay />
             {/* <Footer /> */}
         </SSRProvider>
     )

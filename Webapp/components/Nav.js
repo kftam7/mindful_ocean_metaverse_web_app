@@ -279,7 +279,6 @@ const NavBar = ({ onLocaleChange }) => {
             <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
             <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
             <Nav.Link href="/contactUs" className={styles.navlink}>{t('nav.contactUs')}</Nav.Link>
-            {/* <Nav.Link href="/faq" className={styles.navlink}>{t('nav.faq')}</Nav.Link> */}
           </Nav>
           <Row className='nav_right'>
             <Col lg={6} xl={6}>

@@ -26,9 +26,9 @@ const Part9 = ({ t }) => {
               <Image src="/part9_img1.png" width="100%" />
             </Col>
             <Col lg={{ span: 6, order: 'first' }} md={{ span: 6, order: 'first' }} sm={{ span: 12, order: 'last' }} xs={{ span: 12, order: 'last' }}>
-              <div className='part_title2'>Redeem</div>
+              <div className='part_title2'>{t('home.part9.title1')}</div>
               <div className='part_text'>
-                Redeem and reveal your own artwork NFT if you own a Mint Pass. You can get a Mint Pass by submitting an artwork on Mindful Ocean App or purchase directly on OpenSea.
+                {t('home.part9.text1')}
               </div>
               <div className='part_btn'><Button variant="outline-primary" onClick={determine}>{t('button.redeem')}</Button></div>
             </Col>

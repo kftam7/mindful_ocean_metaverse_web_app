@@ -83,9 +83,11 @@ const Gallery = ({ t }) => {
                   </>
                 })}
               </Row>
-              {/* <Row className={styles.btnRow}>
-            <Button className={`${styles.btn} ${homeStyles.btn}`} onClick={onCinkToUrl}>{t('button.viewMore')} &rarr;</Button>
-          </Row> */}
+              <Row className={styles.btnRow}>
+                <Col className='text-center'>
+                  <Button variant="outline-primary" onClick={onCinkToUrl}>{t('button.viewMore')}</Button>
+                </Col>
+              </Row>
             </> : ''
           }
           <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
