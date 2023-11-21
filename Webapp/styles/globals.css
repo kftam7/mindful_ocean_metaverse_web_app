@@ -12,9 +12,15 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-family: 'Montserrat';
   color: var(--primary-text-color);
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Light-6.otf') format('opentype');
 }
 
 a {
@@ -922,6 +928,12 @@ option {
   text-align: center;
   padding: 50px 0;
   border-top: 1px solid #ccc;
+}
+
+.CookieConsent{
+  color: var(--primary-text-color) !important;
+  background-color: #fff !important;
+  box-shadow: 0 1px 10px #ddd;
 }
 
 .overlay {
