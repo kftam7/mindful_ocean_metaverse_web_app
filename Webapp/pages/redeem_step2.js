@@ -125,7 +125,7 @@ function RedeemStep2() {
 
   const setredeemedartwork = async () => {
     setLoading(true);
-    await axios.post(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, {headers: getHeaders()})
+    await axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, {headers: getHeaders()})
     .then(res => {
       if(res.status === 200){
         getIpfs();

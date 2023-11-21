@@ -102,10 +102,10 @@ function Mintpass({ session, user }) {
     if (res.status === 200) {
       const ifMinted = res.data.data.find(item => item.artworkId === artworkId).ifMinted;
       console.log(ifMinted)
-      if (ifMinted) {
+      if (!ifMinted) {
         mintPass();
       } else {
-        toast.error('ifMinted 0', {
+        toast.error('Artwork has been minted. Please choose another one', {
           autoClose: 3000,
           position: 'top-center',
           className: 'custom-toast-error',
