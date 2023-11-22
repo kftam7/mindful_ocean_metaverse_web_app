@@ -5,6 +5,7 @@ const logger = require("../logger");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const { Alchemy, Network } = require('alchemy-sdk');
 const axios = require('axios');
+const sleep = require('sleep-promise');
 
 /* get NFT */
 async function getNFT(type, idtype, id){
@@ -44,7 +45,7 @@ async function getNFT(type, idtype, id){
     if (result.length){
       
       for (const address of result) {
-        
+
         for await (const nft of alchemy.nft.getNftsForOwnerIterator(address.walletAddress, {
           // Omit the NFT metadata for smaller payloads.
           omitMetadata: false,
@@ -55,7 +56,7 @@ async function getNFT(type, idtype, id){
 
               // get the NFT info from the URI
               const nftURL = nft.tokenUri.raw.replace("ipfs://", "https://ipfs.io/ipfs/");
-  
+
               const optionsNoProxy = {
                 'method': 'GET',
                 'url': nftURL,
@@ -81,7 +82,9 @@ async function getNFT(type, idtype, id){
                 }
               };
   
+
               try {
+                
                 if (process.env.alchemyIfProxy == "false"){
                   axiosResult = await axios(optionsNoProxy);
                 }else{
@@ -101,15 +104,15 @@ async function getNFT(type, idtype, id){
                 }else if (type == "mindfulToken") {
                   data.push({walletAddress: `${address.walletAddress}`, tokenId: `${nft.tokenId}`, tokenUriRaw: `${nft.tokenUri.raw}`, name: `${axiosResult.data.name}`, description: `${axiosResult.data.description}`, eventId: `${axiosResult.data.eventId}`, type: `${axiosResult.data.type}`, artistMessage: `${axiosResult.data.artistMessage}`, authenticScarcity: `${axiosResult.data.authenticScarcity}`, scarcityRank: `${axiosResult.data.scarcityRank}`, clusterId: `${axiosResult.data.clusterId}`, clusterSize: `${axiosResult.data.clusterSize}`, superClusterId: `${axiosResult.data.superClusterId}`, superClusterSize: `${axiosResult.data.superClusterSize}`, artworkId: `${axiosResult.data.artworkId}`, artworkURL: `${resultArtworkURLAppleId[0].URL}`, imageURL: `${axiosResult.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")}`});
                 }
-                
+
               }catch (e) {
                 logger.log('error', '%s %s %s Issue with NFT URI: %s', 'Nft', 'getNFT', id, nftURL);
                 console.log(e);
                 return "Issue with NFT URI";
               }
-            }
 
-          //}
+            }
+            await sleep(500);
         }        
       }
     // If no walletaddress found for this appleId
@@ -180,6 +183,7 @@ async function getNFT(type, idtype, id){
             return "Issue with NFT URI";
           }
         }
+      await sleep(500);
     }
   }
 

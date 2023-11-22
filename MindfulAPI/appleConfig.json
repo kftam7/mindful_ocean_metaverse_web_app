@@ -1,7 +1,7 @@
 {
-    "client_id": "com.AnimocaBrands.Mindful-Ocean-Dev-Siwa",
-    "team_id": "DPHF2M37GJ",
-    "key_id": "8Y456M46UL",
+    "client_id": "com.outblaze.mindfuloceanmeta-siwa",
+    "team_id": "68FWJG5G8T",
+    "key_id": "UCD8U8J4M4",
     "redirect_uri": "https://api-staging.mindfultoken.org/mindfulapi/appleauth",
     "scope": "name email"
 }

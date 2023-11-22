@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
-let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_8Y456M46UL.p8').toString(), 'text');
+let authInstance = new AppleAuth(config, fs.readFileSync('./AuthKey_UCD8U8J4M4.p8').toString(), 'text');
 
 async function login(){
     logger.log('info', '%s %s', 'AppleAuth', 'login');
