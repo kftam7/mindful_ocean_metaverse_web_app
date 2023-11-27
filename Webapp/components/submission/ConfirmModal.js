@@ -18,6 +18,9 @@ const ConfirmModal = ({confirmShow, setConfirmShow, artworkId }) => {
       });
       Router.push({
         pathname: `/mintpass`,
+        query: {
+          artworkId,
+        },
       });
     };
 

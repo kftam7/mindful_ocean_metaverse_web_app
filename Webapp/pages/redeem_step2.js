@@ -87,7 +87,7 @@ function RedeemStep2() {
     const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/walletaddress/${walletAddress}`, {headers: getHeaders()});
     if(res.status === 200){
       const { data: { data } } = res;
-      // const data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: 'https:/api-staging.mindfu-ocean.org/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg', ifRedeemed: 0},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: 'https:/api-staging.mindfu-ocean.org/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg', ifRedeemed: 1}];
+      // const data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: 'https:/api-staging.mindfu-ocean.org/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg', ifRedeemed: 0},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: '/oceanImage_2_1.png', ifRedeemed: 1}];
       // console.log(data)
       if(data.length){
         setDataList(data);
@@ -111,7 +111,7 @@ function RedeemStep2() {
     const item = dataList.find(item => item.tokenId === event.target.value);
     setSelectedOption(event.target.value);
     setArtworkId(item.artworkId);
-    setIsRefChoose(item.ifRedeemed ? true : false)
+    setIsRefChoose(Number(item.ifRedeemed) === 1 ? true : false)
   };
 
   const optionMintpass = dataList.map((item, key) => {
@@ -253,7 +253,7 @@ function RedeemStep2() {
                 </Col>
                 <Col xs={12}>
                   <div className={styles.submitTile}>{t('page.redeem.artwork')}:</div>
-                  <div className={styles.submitTxt3}><Image src={obj.artworkURL} /></div>
+                  <div className={styles.submitTxt3}><Image src={obj.artworkURL} width='100%' /></div>
                 </Col>
                 <Col xs={12}>
                   <div className={styles.submitTile2}>{t('page.gallery.type')}:</div>

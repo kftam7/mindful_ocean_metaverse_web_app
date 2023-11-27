@@ -1155,4 +1155,44 @@ option {
   .part_title {
     margin-top: 20px;
   }
+
+  .overlay ul {
+    padding: 10px 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .overlay ul li {
+    margin: 10px 0;
+  }
+  
+  .overlay ul li a {
+    width: 22px;
+    height: 22px;
+  }
+
+  .overlay ul li.o1 a {
+    background: url(../public/icon_overlay.png) center top no-repeat;
+    background-size: 22px;
+  }
+
+  .overlay ul li.o2 a {
+    background: url(../public/icon_overlay.png) center -32px no-repeat;
+    background-size: 22px;
+  }
+
+  .overlay ul li.o3 a {
+    background: url(../public/icon_overlay.png) center -68px no-repeat;
+    background-size: 22px;
+  }
+
+  .overlay ul li.o4 a {
+    background: url(../public/icon_overlay.png) center -104px no-repeat;
+    background-size: 22px;
+  }
+
+  .overlay ul li.o5 a {
+    background: url(../public/icon_overlay.png) center bottom no-repeat;
+    background-size: 22px;
+  }
 }

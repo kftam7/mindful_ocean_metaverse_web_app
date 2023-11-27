@@ -4,7 +4,7 @@ import { fetchWeb3 } from '../store/web3Connections';
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import Router from 'next/router';
+import Router, {useRouter} from 'next/router';
 import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
 import styles from '../styles/SubmitPage.module.css';
@@ -25,13 +25,14 @@ import { mintpassContractConfig } from '../components/contracts';
 
 function Mintpass({ session, user }) {
   const { t, locale } = useTranslation();
+  const { query: { artworkId } } = useRouter();
   //const apiPort = process.env.API_PORT || '/';
   const apiPort = process.env.APIBaseUrl || '/';
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const mintpassContract = useSelector((state) => state.contractState);
-  const artworkId = useSelector((state) => state.artworkIdState);
+  // const artworkId = useSelector((state) => state.artworkIdState);
   const username = user?.name;
   const endpoint = 'https://api.nft.storage'; // the default
   const token = process.env.IPFS_TOKEN;
@@ -59,7 +60,11 @@ function Mintpass({ session, user }) {
 
   useEffect(() => {
     if (!isSuccess) return;
-    setMinedArtwork();
+    // setMinedArtwork();
+    
+    Router.push({
+      pathname: '/mintedPage',
+    });
   }, [isSuccess])
 
   useEffect(async () => {
@@ -98,12 +103,11 @@ function Mintpass({ session, user }) {
     const appleId = sessionStorage.getItem("appleId");
     setLoading(true);
     const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });
-    console.log(res)
     if (res.status === 200) {
-      const ifMinted = res.data.data.find(item => item.artworkId === artworkId).ifMinted;
-      console.log(ifMinted)
+      const ifMinted = res.data.data.find(item => item.artworkId === Number(artworkId)).ifMinted;
       if (!ifMinted) {
-        mintPass();
+        mintPass();        
+        setMinedArtwork();
       } else {
         toast.error('Artwork has been minted. Please choose another one', {
           autoClose: 3000,
@@ -172,9 +176,9 @@ function Mintpass({ session, user }) {
       }
       await axios.put(`${apiPort}/mindfulapi/app/setMintedArtwork/${artworkId}`, params, { headers: getHeaders() })
         .then(res => {
-          Router.push({
-            pathname: '/mintedPage',
-          });
+          // Router.push({
+          //   pathname: '/mintedPage',
+          // });
         })
         .catch(err => {
           console.log(err)
