@@ -312,8 +312,10 @@ async function nftStorage(artworkId, type){
     const filepathMintpass = process.env.filepathPrefix + filenameMintpass;
 
     const mintpassMetadata = await client.store({
-         name: "Mindful Ocean Mint Pass",
-         description: "Mint Pass for Mindful Ocean",
+         //name: "Mindful Ocean Mint Pass",
+         //description: "Mint Pass for Mindful Ocean",
+         name: process.env.mintPassName,
+         description: process.env.mintPassDescription,
          eventId: resultSelect[0].eventId,
          type: resultSelect[0].type,
          artistMessage: resultSelect[0].artistMessage,
@@ -350,8 +352,10 @@ async function nftStorage(artworkId, type){
     const filepathMindfultoken = process.env.filepathPrefix + filenameMindfultoken;
 
     const mindfultokenMetadata = await client.store({
-      name: "Mindful Ocean NFT",
-      description: "NFT for Mindful Ocean",
+      //name: "Mindful Ocean NFT",
+      //description: "NFT for Mindful Ocean",
+      name: process.env.mindfulTokenName,
+      description: process.env.mindfulTokenDescription,
       eventId: resultSelect[0].eventId,
       type: resultSelect[0].type,
       artistMessage: resultSelect[0].artistMessage,

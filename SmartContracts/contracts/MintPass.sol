@@ -23,7 +23,7 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     uint256 private mintingFee;
     uint96 private immutable loyaltyFee;
     address immutable contractOwner;
-    uint256 private _tokenIdCounter;
+    //uint256 private _tokenIdCounter;
     uint private lastMintingFeeChangeTime;
 
     // Mapping of addresses who has been used
@@ -90,7 +90,7 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     }
 
     // mint Metaverse NFT
-    function mintMintPass(bytes32 hash, bytes calldata signature, string calldata uri) public payable whenNotPaused nonReentrant returns(uint256){
+    function mintMintPass(bytes32 hash, bytes calldata signature, uint256 tokenId, string calldata uri) public payable whenNotPaused nonReentrant returns(uint256){
 
         // check if hash has been used
         require(!hashUsed[hash], "Hash has been used");
@@ -113,9 +113,10 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
         }
 
         // set tokeID & recipient        
-        uint256 tokenId = _tokenIdCounter;
+        //uint256 tokenId = _tokenIdCounter;
+        //_safeMint(msg.sender, tokenId);
+        //_tokenIdCounter += 1;
         _safeMint(msg.sender, tokenId);
-        _tokenIdCounter += 1;
 
         // set loyalty fee
         _setTokenRoyalty(tokenId, msg.sender, loyaltyFee);

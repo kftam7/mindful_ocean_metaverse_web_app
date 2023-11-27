@@ -152,6 +152,7 @@ function Mintpass({ session, user }) {
       console.log("Minting MintPass...");
       console.log("messageHash: ", messageHash);
       console.log("signature: ", signature);
+      console.log("artworkId: ", artworkId);
       console.log("ipfs: ", ipfs);
 
       //await mintpassContract.methods.mintMintPass('0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', 'https://www.google.com', '0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab', '100', messageHash, signature).send({ from: account, value: 100000000000000 })
@@ -161,7 +162,7 @@ function Mintpass({ session, user }) {
       // })
 
       await write({
-        args: [messageHash, signature, ipfs],
+        args: [messageHash, signature, artworkId, ipfs],
         value: process.env.MintingFee,
       })
     }

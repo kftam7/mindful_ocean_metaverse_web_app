@@ -8,7 +8,17 @@ export const MintPassNFT = [
         },
         {
           "internalType": "address",
-          "name": "_mintingFeeRecipient",
+          "name": "_mintingFeeRecipient1",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_mintingFeeRecipient2",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_mintingFeeRecipient3",
           "type": "address"
         },
         {
@@ -24,17 +34,6 @@ export const MintPassNFT = [
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        }
-      ],
-      "name": "OperatorNotAllowed",
-      "type": "error"
     },
     {
       "anonymous": false,
@@ -162,6 +161,19 @@ export const MintPassNFT = [
         {
           "indexed": true,
           "internalType": "uint256",
+          "name": "mintingFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "mintingFeeSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
         }
@@ -170,23 +182,10 @@ export const MintPassNFT = [
       "type": "event"
     },
     {
-      "inputs": [],
-      "name": "OPERATOR_FILTER_REGISTRY",
-      "outputs": [
-        {
-          "internalType": "contract IOperatorFilterRegistry",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
-          "name": "operator",
+          "name": "to",
           "type": "address"
         },
         {
@@ -252,6 +251,51 @@ export const MintPassNFT = [
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "getLastMintingFeeChangeTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMintingFee",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "hashUsed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -276,6 +320,19 @@ export const MintPassNFT = [
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "lockDuration",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "bytes32",
@@ -286,6 +343,11 @@ export const MintPassNFT = [
           "internalType": "bytes",
           "name": "signature",
           "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
         },
         {
           "internalType": "string",
@@ -447,6 +509,19 @@ export const MintPassNFT = [
         }
       ],
       "name": "setApprovalForAll",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_mintingFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMintingFee",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

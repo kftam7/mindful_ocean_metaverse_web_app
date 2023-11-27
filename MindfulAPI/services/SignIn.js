@@ -38,14 +38,18 @@ async function signin(req){
     // if appleId already exist
     if (resultCheck[0].if_exist){
 
-        // need to check if email, firstName, lastName exists
+        // if not 1st time login, don't update 1st & last names, just update email
         var sqlUpdate = 'UPDATE user SET updateTime = "'+ currentTimeSql + '"'; 
+
+        /*
         if (req.body.name.firstName){
             sqlUpdate = sqlUpdate + ', firstName = "' + req.body.name.firstName + '"';
         }
         if (req.body.name.lastName){
             sqlUpdate = sqlUpdate + ', lastName = "' + req.body.name.lastName + '"';
         }
+        */
+
         if (req.body.email){
             sqlUpdate = sqlUpdate + ', email = "' + req.body.email + '"';
         }
@@ -58,23 +62,51 @@ async function signin(req){
             sqlUpdate
         );
 
+        // check and return 1st & last name
+        var sqlCheck = 'SELECT firstName, lastName FROM user WHERE appleId = "' + req.params.appleId + '";'; 
+        const resultCheck = await db.query(
+            sqlCheck
+        );
+        logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'signin', sqlCheck);
+
+        const data = helper.emptyOrRows(resultCheck);
+
         let message = 'Record updated successfully';
-        logger.log('info', '%s %s %s Record updated successfully', 'AppVersion', 'createAppVersion', req.params.appleId);
-        return {message};
+        logger.log('info', '%s %s %s Record updated successfully', 'Signin', 'Signin', req.params.appleId);
+
+        return {
+            data,
+            message
+        }
         
     // if appleId doesn't exist
     }else{
+
+        // if 1st time login, insert a new record
         var sqlCreate = 'INSERT INTO user (appleId, firstName, lastName, email, refreshToken, createTime, updateTime, isActive) VALUES ("' + req.params.appleId + '", "' + req.body.name.firstName + '", "' + req.body.name.lastName + '", "' + req.body.email + '", "' + req.body.refresh_token + '", "' + currentTimeSql + '", "' + currentTimeSql + '", ' + '1)';
-        console.log(sqlCreate);
+        
+        logger.log('debug', '%s %s sqlCreate: %s', 'Signin', 'signin', sqlCreate);
+
         const resultCreate = await db.query(
             sqlCreate
         );
 
-        logger.log('debug', '%s %s sqlCreate: %s', 'Signin', 'signin', sqlCreate);
+        // check and return 1st & last name
+        var sqlCheck = 'SELECT firstName, lastName FROM user WHERE appleId = "' + req.params.appleId + '";'; 
+        const resultCheck = await db.query(
+            sqlCheck
+        );
+        logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'signin', sqlCheck);
+
+        const data = helper.emptyOrRows(resultCheck);
 
         let message = 'Record created successfully';
-        logger.log('info', '%s %s %s Record created successfully', 'AppVersion', 'createAppVersion', req.params.appleId);
-        return {message};
+        logger.log('info', '%s %s %s Record created successfully', 'Signin', 'Signin', req.params.appleId);
+
+        return {
+            data,
+            message
+        }
     }
 
 }
