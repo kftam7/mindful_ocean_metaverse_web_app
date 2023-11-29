@@ -21,7 +21,7 @@ const Banner = ({ t }) => {
               <div className='banner_text'>{t('home.banner.text1')}</div>
             </div>
           </div>
-          <Image src="/oceanImage_2_1.png" width="100%" />
+          <Image src="/oceanImage_2_2.jpg" width="100%" />
         </Carousel.Item>
         <Carousel.Item>
           <div className='banner_over'>
@@ -30,7 +30,7 @@ const Banner = ({ t }) => {
               <div className='banner_text'>{t('home.banner.text1')}</div>
             </div>
           </div>
-          <Image src="/oceanImage_2_1.png" width="100%" />
+          <Image src="/oceanImage_2_3.jpg" width="100%" />
         </Carousel.Item>
       </Carousel>
     </div>

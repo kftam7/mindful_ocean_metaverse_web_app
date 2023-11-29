@@ -86,8 +86,19 @@ async function auth(req){
                 sqlUpdate
             );
             logger.log('info', '%s %s Record updated successfully', 'AppleAuth', 'auth');
-            //console.log("Record updated successfully");
-            body = body + "&firstTime=0";
+
+            // check if agreed T&C
+            let sqlCheckTandC = 'SELECT COUNT(*) AS if_tandc FROM TandC a, user b WHERE a.userId=b.userId AND a.agreed = 1 AND b.appleId = "' + user.id +'"';
+            const resultCheckTandC = await db.query(
+                sqlCheckTandC
+            );
+            logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheckTandC);
+
+            if (resultCheckTandC[0].if_tandc){
+                body = body + "&firstTime=0";
+            }else{
+                body = body + "&firstTime=1";
+            }
         }else{
             const resultCreate = await db.query(
                 sqlCreate
