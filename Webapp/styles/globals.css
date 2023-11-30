@@ -924,13 +924,83 @@ option {
   font-weight: bold;
 }
 
+.event_page {
+  background-image: url("/measuredBoxes/19.png"), url("/measuredBoxes/20.png"), url("/measuredBoxes/21.png");
+  background-position: left 600px, right 140px, right 900px;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 20%, 20%, 20%;
+}
+
+.event_list {
+  width: 600px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event_list .list_item {
+  margin-bottom: 20px;
+}
+
+.event_list .list_item .item_pic img {
+  max-width: 100%;
+}
+
+.event_list .list_item .item_title {
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+.event_list .list_item .item_des {
+  margin-top: 20px;
+}
+
+.event_btn {
+  margin-top: 60px;
+}
+
+.event_step {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.event_step .step_item {
+  text-align: center;
+}
+
+.event_step .step_item .item_num {
+  color: #005D6C;
+  font-size: 24px;
+  line-height: 45px;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #005D6C;
+  border-radius: 100%;
+}
+
+.event_step .step_item .item_num.active {
+  color: #fff;
+  background-color: #005D6C;
+}
+
+.event_step .step_item .item_title {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.event_step .step_item .item_arrow {
+  padding-top: 10px;
+}
+
 .foot {
   text-align: center;
   padding: 50px 0;
   border-top: 1px solid #ccc;
 }
 
-.CookieConsent{
+.CookieConsent {
   color: var(--primary-text-color) !important;
   background-color: #fff !important;
   box-shadow: 0 1px 10px #ddd;
@@ -1040,6 +1110,28 @@ option {
     height: 100vh;
     top: 10vh;
     left: 0;
+  }
+
+  .event_list {
+    width: 100%;
+  }
+
+  .event_step {
+    display: block;
+  }
+
+  .event_step .step_item {
+    float: left;
+    display: inline-block;
+    width: 15%;
+    height: 150px;
+  }
+
+  .event_step .step_item .item_num{
+    font-size: 18px;
+    line-height: 36px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -1165,7 +1257,7 @@ option {
   .overlay ul li {
     margin: 10px 0;
   }
-  
+
   .overlay ul li a {
     width: 22px;
     height: 22px;
