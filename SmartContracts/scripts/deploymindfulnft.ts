@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 
-const mintPass = "0x9d7630b5f2ea06fc282ae21e3e3bbfc57ed5ece9";
+const mintPass = "0xfE04faFA55f77325bCaB50a07FDe395E90DA0131";
 const loyaltyFee = 100;
 
 async function main() {

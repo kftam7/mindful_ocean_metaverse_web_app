@@ -103,7 +103,7 @@ function Mintpass({ session, user }) {
     const appleId = sessionStorage.getItem("appleId");
     setLoading(true);
     const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });
-    if (res.status === 200) {
+    if ((res.status === 200) && (res.data.data.length > 0)) {
       const ifMinted = res.data.data.find(item => item.artworkId === Number(artworkId)).ifMinted;
       if (!ifMinted) {
         mintPass();        
@@ -118,7 +118,7 @@ function Mintpass({ session, user }) {
         setLoading(false);
       }
     } else {
-      toast.error(res.statusText, {
+      toast.error('Artwork has been minted. Please choose another one', {
         autoClose: 3000,
         position: 'top-center',
         className: 'custom-toast-error',
