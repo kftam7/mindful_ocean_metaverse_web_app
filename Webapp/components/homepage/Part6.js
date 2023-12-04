@@ -12,7 +12,7 @@ const Part6 = ({ t }) => {
               <Image src="/part6_img1.png" width="100%" />
             </Col>
             <Col lg={9} md={8} sm={12}>
-              <div className='part_title3'>{t('home.part6.title2')} <Button variant="outline-primary">{t('button.linkedin')}</Button> <Button variant="outline-primary">{t('button.tedTalk')}</Button></div>
+              <div className='part_title3'>{t('home.part6.title2')} <a href="https://www.linkedin.com/in/yatsiu/" target="_blank"> <Button variant="outline-primary">{t('button.linkedin')}</Button> </a> <a href="https://www.ted.com/speakers/yat_siu" target="_blank"> <Button variant="outline-primary">{t('button.tedTalk')}</Button> </a> </div>
               <div className='part_title'>{t('home.part6.subTitle1')}</div>
               <div className='part_text'>
                 {t('home.part6.subText1')}

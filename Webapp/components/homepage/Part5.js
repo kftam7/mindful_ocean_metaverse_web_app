@@ -25,9 +25,9 @@ const Part5 = ({ t }) => {
             </Col>
             <Col lg={4} md={4} sm={12}>
               <div className=''><Image src="/part5_img3.png" width="100%" /></div>
-              <div className='part_title'>{t('home.part5.subTitle2')}</div>
+              <div className='part_title'>{t('home.part5.subTitle3')}</div>
               <div className='part_text'>
-                {t('home.part5.subText2')}
+                {t('home.part5.subText3')}
               </div>
             </Col>
           </Row>
