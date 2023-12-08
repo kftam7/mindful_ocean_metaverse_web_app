@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <div class="container">
             <div className='foot'>
-                &copy; {t('footer.copyright')}
+                &copy; {t('footer.copyright')} {t('footer.version.no')}
             </div>
         </div>
     )
