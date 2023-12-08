@@ -26,7 +26,7 @@ const Mintpass = ({t}) => {
             <p className="mt-1">{t('main.text.redeemAndReveal')}</p>
             </Row>
             <Row className={styles.mintpassImg}>
-                <Image className="" src="/redeem1.jpg" fluid='true' alt="mint pass" />
+                <Image className="" src="/redeem1.jpg" fluid='true' alt="mintpass" />
             </Row>
             <Row className='d-flex justify-content-center'>
                 <Button onClick={determine} className={`${homeStyles.btn} ${styles.btnDefault}`} style={{fontWeight: '800', fontSize: '1.5rem'}}>{t('button.redeem')}</Button>

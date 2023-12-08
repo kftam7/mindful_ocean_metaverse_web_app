@@ -17,8 +17,8 @@ async function getCrendential(login, credential){
     'SELECT count(*) as ifExist FROM CMSUser WHERE name LIKE "' + login + '" AND credential LIKE "' + credential + '" AND isActive = 1'
   );
   if (!ifExist[0].ifExist){
-    logger.log('error', '%s %s %s Login doesn\'t exist or credential doesn\'t match or is not active', 'Credential', 'getCrendential', login);
-    let message = 'Login doesn\'t exist or credential doesn\'t match or is not active';
+    logger.log('error', '%s %s %s Login doesn\'t exist or credential doesn\'t match or is not active or doesn\'t have admin right', 'Credential', 'getCrendential', login);
+    let message = 'Login doesn\'t exist or credential doesn\'t match or is not active or doesn\'t have admin right';
     return {message};
   }else{
     var rows = await db.query(

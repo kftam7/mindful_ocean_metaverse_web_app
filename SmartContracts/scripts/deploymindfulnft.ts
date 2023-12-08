@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 
 const mintPass = "0xfE04faFA55f77325bCaB50a07FDe395E90DA0131";
-const loyaltyFee = 100;
+const loyaltyFee = 80;
 
 async function main() {
   const ContractFactory = await ethers.getContractFactory("contracts/MindfulNFT.sol:MindfulNFT");

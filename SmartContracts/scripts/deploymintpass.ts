@@ -6,7 +6,7 @@ const mintingFeeRecipient = "0xEb9aac7B6219a8aBAa4eb86cD1955c956442C201";
 //const mintingFeeRecipient2 = "0xe0602B33B6321d78D72EB899ac3906130c35f0D8";
 //const mintingFeeRecipient3 = "0x1D2c37fACD8f1237D580722696821C05bAF8F82F";
 const mintingFee = 100000000000000;
-const loyaltyFee = 100;
+const loyaltyFee = 80;
 
 async function main() {
   const ContractFactory = await ethers.getContractFactory("contracts/MintPass.sol:MintPassNFT");

@@ -17,8 +17,8 @@ const Banner = ({ t }) => {
         <Carousel.Item>
           <div className='banner_over'>
             <div className='banner_des'>
-              <div className='banner_title'>{t('home.banner.title1')}</div>
-              <div className='banner_text'>{t('home.banner.text1')}</div>
+              <div className='banner_title'>{t('home.banner.title2')}</div>
+              <div className='banner_text'>{t('home.banner.text2')}</div>
             </div>
           </div>
           <Image src="/oceanImage_2_2.jpg" width="100%" />
@@ -26,8 +26,8 @@ const Banner = ({ t }) => {
         <Carousel.Item>
           <div className='banner_over'>
             <div className='banner_des'>
-              <div className='banner_title'>{t('home.banner.title1')}</div>
-              <div className='banner_text'>{t('home.banner.text1')}</div>
+              <div className='banner_title'>{t('home.banner.title3')}</div>
+              <div className='banner_text'>{t('home.banner.text3')}</div>
             </div>
           </div>
           <Image src="/oceanImage_2_3.jpg" width="100%" />

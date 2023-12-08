@@ -81,7 +81,7 @@ function Mintpass({ session, user }) {
     const storage = new NFTStorage({ endpoint, token });
     fs.readdir(assets, async function (err, file) {
       let metadata = await storage.store({
-        name: `Mindful Ocean Mint Pass`,
+        name: `Mindful Ocean Mintpass`,
         description:
           `created by ${username}`,
         image: new File([await fs.promises.readFile(`./assets/${file}`)], file, {

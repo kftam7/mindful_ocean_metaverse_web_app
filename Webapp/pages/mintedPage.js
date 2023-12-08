@@ -45,9 +45,9 @@ export default function MintedPage() {
                                     {t('page.mintedPage.mintPassIsNowGeneratedInYourWallet')}
                                 </div>
                                 <p>{t('page.mintedPage.viewMintPassOn')} <span><a href={process.env.openseaLink+process.env.MintPassContractAddress} style={{textDecoration: "underline"}} target="_blank" rel='noreferrer'>{t('page.mintedPage.opensea')}</a> {t('page.mintedPage.or')} <a href="/userProfile" style={{textDecoration: "underline"}}>{t('page.mintedPage.viewMyProfile')}</a></span></p>
-                                {/* <p>View Mint Pass on your&nbsp; 
+                                {/* <p>View Mintpass on your&nbsp; 
                                     <span style={{textDecoration: "underline"}}><Link href="/dashboard">dashboard</Link></span>
-                                    &nbsp;or trade Mint Pass on&nbsp; 
+                                    &nbsp;or trade Mintpass on&nbsp; 
                                     <span style={{textDecoration: "underline"}}>
                                         <a href="https://testnets.opensea.io/collection/mindfulpass-v2" target="_blank" rel='noreferrer'>Opensea</a>
                                     </span>

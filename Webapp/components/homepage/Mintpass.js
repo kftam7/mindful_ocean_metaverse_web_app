@@ -29,7 +29,7 @@ const Mintpass = ({t}) => {
                 <p className="mt-1">{t('main.text.submitArtworksCreated')}</p>
                 </Row>
                 <Row className={styles.mintpassImg}>
-                    <Image className="" src="/mintpassSec.png" fluid='true' alt="mint pass" />
+                    <Image className="" src="/mintpassSec.png" fluid='true' alt="mintpass" />
                 </Row>
                 <Row className='d-flex justify-content-center'>
                     <Button onClick={determine} className={`${homeStyles.btn} ${styles.overlayBtn}`} style={{fontWeight: '800', fontSize: '1.5rem'}}>{t('button.submit')} &rarr;</Button>
