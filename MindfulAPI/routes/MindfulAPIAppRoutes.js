@@ -81,7 +81,30 @@ router.post('/signin/:appleId', async function(req, res, next) {
     res.json(await SignIn.signin(req));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+
+/* POST SignIn */
+router.post('/submitid/:appleId', async function(req, res, next) {
+  try {
+    res.json(await SignIn.submitid(req));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
+/* POST SignIn */
+router.get('/verifyemail/:verificationtoken', async function(req, res, next) {
+  try {
+    res.json(await SignIn.verifyemail(req.params.verificationtoken));
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -93,7 +116,7 @@ router.get('/tandc/:appleId', async function(req, res, next) {
     res.json(await TandC.getTandC(req.params.appleId));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -103,7 +126,7 @@ router.post('/tandc/:appleId', async function(req, res, next) {
     res.json(await TandC.updateTandC(req.params.appleId));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -137,7 +160,7 @@ router.post('/user', async function(req, res, next) {
     res.json(await User.createUser(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -183,7 +206,7 @@ router.post('/event', async function(req, res, next) {
     res.json(await Event.createEvent(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -231,7 +254,7 @@ router.get('/appversion/:version', async function(req, res, next) {
     res.json(await AppVersion.getAppVersion(req.params.version));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -242,7 +265,7 @@ router.post('/appversion', async function(req, res, next) {
     res.json(await AppVersion.createAppVersion(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -266,7 +289,7 @@ router.get('/artwork', async function(req, res, next) {
     res.json(await Artwork.getArtwork());
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -277,7 +300,7 @@ router.get('/artwork/:appleId', async function(req, res, next) {
     res.json(await Artwork.getArtwork(req.params.appleId));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -288,7 +311,7 @@ router.get('/artworkhomepage', async function(req, res, next) {
     res.json(await Artwork.getHomepageArtwork());
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -299,7 +322,7 @@ router.post('/artwork', async function(req, res, next) {
     res.json(await Artwork.createArtwork(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -343,7 +366,7 @@ router.post('/nftstorage/mintpass/:artworkId', async function(req, res, next) {
     res.json(await Artwork.nftStorage(req.params.artworkId, 1));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -354,7 +377,7 @@ router.post('/nftstorage/mindfultoken/:artworkId', async function(req, res, next
     res.json(await Artwork.nftStorage(req.params.artworkId, 2));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -367,7 +390,7 @@ router.post('/artworkfile', async function(req, res, next) {
     await ArtworkFile.upload(req, res);
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -378,7 +401,7 @@ router.get('/artworkfile', async function(req, res, next) {
     await ArtworkFile.getListFiles(res);
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -400,7 +423,7 @@ router.delete('/artworkfile/:filename', async function(req, res, next) {
     await ArtworkFile.remove(req, res);
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -413,7 +436,7 @@ router.get('/personalwebsite', async function(req, res, next) {
     res.json(await PersonalWebsite.getPersonalWebsite());
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -423,7 +446,7 @@ router.get('/personalwebsite/:appleId', async function(req, res, next) {
     res.json(await PersonalWebsite.getPersonalWebsite(req.params.appleId));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -434,7 +457,7 @@ router.post('/personalwebsite/:appleId', async function(req, res, next) {
     res.json(await PersonalWebsite.createPersonalWebsite(req.params.appleId, req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -457,7 +480,7 @@ router.get('/joinedevent', async function(req, res, next) {
     res.json(await JoinedEvent.getJoinedEvent());
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -467,7 +490,7 @@ router.get('/joinedevent/:appleId', async function(req, res, next) {
     res.json(await JoinedEvent.getJoinedEvent(req.params.appleId));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -478,7 +501,7 @@ router.post('/joinedevent', async function(req, res, next) {
     res.json(await JoinedEvent.createJoinedEvent(req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -501,7 +524,7 @@ router.post('/updatewallet/:appleId/:walletAddress', async function(req, res, ne
     res.json(await Wallet.updateWallet(req.params.appleId, req.params.walletAddress));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });
@@ -537,7 +560,7 @@ router.put('/language/:lang', async function(req, res, next) {
     res.json(await Language.updateLang(req.params.lang, req.body));
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
-    console.error(`Error while creating programming language`, err.message);
+    console.error(`Error while getting  `, err.message);
     next(err);
   }
 });

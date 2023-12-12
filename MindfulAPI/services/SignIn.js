@@ -111,6 +111,104 @@ async function signin(req){
 
 }
 
+async function submitid(req){
+
+    //console.log("appleId: %s", req.params.appleId);
+    //console.log("firstName: %s", req.body.name.firstName);
+    //console.log("lastName: %s", req.body.name.lastName);
+    //console.log("email: %s", req.body.email);
+
+    // check firstname, lastname & email format
+    var namePattern=/^[a-z ,.'-]{2,20}$/i
+    var emailPattern=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+
+    if (!namePattern.test(req.body.name.firstName)) {
+        return 'First Name invalid'
+    }
+    if (!namePattern.test(req.body.name.lastName)) {
+        return 'Last Name invalid'
+    }
+    if (!emailPattern.test(req.body.email)) {
+        return 'Email invalid'
+    }
+
+    // generate verificationToken
+    let verificationToken = generateToken();
+    //console.log("verificationToken: %s", verificationToken);
+
+    // update DB
+    var sqlUpdate = 'UPDATE user SET firstName = "' + req.body.name.firstName + '", lastName = "' + req.body.name.lastName + '", email = "' + req.body.email + '", verificationToken = "' + verificationToken + '" WHERE appleId = "' + req.params.appleId + '";';
+    const resultUpdate = await db.query(
+        sqlUpdate
+    );
+    //console.log("sqlUpdate: %s", sqlUpdate);
+    logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlUpdate);
+
+
+    // send verification email to user
+
+    return 'Record Updated'
+
+}
+
+async function verifyemail(verificationToken){
+
+    //console.log(verificationToken);
+
+    // check if verification token exist and doesn't expire (24 hr)
+    var sqlCheck = 'SELECT vtTime FROM user WHERE verificationToken = "' + verificationToken + '";'; 
+    const resultCheck = await db.query(
+        sqlCheck
+    );
+    logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlCheck);
+
+    // if record doesn't exist
+    if (resultCheck.length < 1){
+        return 'Record doesn\'t exist'
+    }
+
+    // if record already expired
+    var now =  new Date().getTime();
+    var then = new Date(resultCheck[0].vtTime).getTime();
+
+    //console.log("now: %s", now);
+    //console.log("then: %s", then);
+    //console.log("diff: %s", (now - then));
+    //console.log("value: %s", process.env.emailVerificationValidPeriod);
+
+    if ((now - then) > process.env.emailVerificationValidPeriod){
+        return 'Record already expired'
+    }
+
+    // if record exists and hasn't expired, update
+    var sqlUpdate = 'UPDATE user SET emailVerified = 1 WHERE verificationToken = "' + verificationToken + '";'; 
+    const resultUpdate = await db.query(
+        sqlUpdate
+    );
+    logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlUpdate);
+    return 'Record updated'
+
+}
+
+/* generate unique ID */
+function generateToken(){
+    // always start with a letter (for DOM friendlyness)
+    var idstr=String.fromCharCode(Math.floor((Math.random()*25)+65));
+    do {                
+        // between numbers and characters (48 is 0 and 90 is Z (42-48 = 90)
+        var ascicode=Math.floor((Math.random()*42)+48);
+        if (ascicode<58 || ascicode>64){
+            // exclude all chars between : (58) and @ (64)
+            idstr+=String.fromCharCode(ascicode);    
+        }                
+    } while (idstr.length<32);
+
+    return (idstr);
+}
+
 module.exports = {
-    signin
+    signin,
+    submitid,
+    verifyemail
 };
