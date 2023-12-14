@@ -24,14 +24,18 @@ const Event1 = () => {
         title: t('home.part4.subTitle1'),
         list: [
           {
-            title: t('home.part4.subTitle1'),
-            des: t('home.part4.subText1'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase1.subTitle1'),
+            des: t('home.part4.phase1.subText1'),
           },
           {
-            title: t('home.part4.subTitle1'),
-            des: t('home.part4.subText1'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase1.subTitle2'),
+            des: t('home.part4.phase1.subText2'),
+            imgUrl: '/P1a_credit-Stock Image Source by Freepik.jpg',
+          },
+          {
+            title: t('home.part4.phase1.subTitle2'),
+            des: t('home.part4.phase1.subText2'),
+            imgUrl: '/P1b.jpg',
           },
         ],
       },
@@ -39,49 +43,76 @@ const Event1 = () => {
         title: t('home.part4.subTitle2'),
         list: [
           {
-            title: t('home.part4.subTitle2'),
-            des: t('home.part4.subText2'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase2.subTitle1'),
+            des: t('home.part4.phase2.subText1'),
           },
+          {
+            title: t('home.part4.phase2.subTitle2'),
+            des: t('home.part4.phase2.subText2'),
+            imgUrl: '/P2.jpg',
+          },          
         ],
       },
       '3': {
         title: t('home.part4.subTitle3'),
         list: [
           {
-            title: t('home.part4.subTitle3'),
-            des: t('home.part4.subText3'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase3.subTitle1'),
+            des: t('home.part4.phase3.subText1'),
           },
+          {
+            title: t('home.part4.phase3.subTitle2'),
+            des: t('home.part4.phase3.subText2'),
+            imgUrl: '/P3a.jpg',
+          },
+          {
+            imgUrl: '/P3b.jpg',
+          },            
         ],
       },
       '4': {
         title: t('home.part4.subTitle4'),
         list: [
           {
-            title: t('home.part4.subTitle4'),
-            des: t('home.part4.subText4'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase4.subTitle1'),
+            des: t('home.part4.phase4.subText1'),
           },
+          {
+            title: t('home.part4.phase4.subTitle2'),
+            des: t('home.part4.phase4.subText2'),
+            imgUrl: '/P4.gif',
+          },          
         ],
       },
       '5': {
         title: t('home.part4.subTitle5'),
         list: [
           {
-            title: t('home.part4.subTitle5'),
-            des: t('home.part4.subText5'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase5.subTitle1'),
+            des: t('home.part4.phase5.subText1'),
           },
+          {
+            title: t('home.part4.phase5.subTitle2'),
+            des: t('home.part4.phase5.subText2'),
+            imgUrl: '/P5.jpg',
+          },
+          {
+            title: t('home.part4.phase5.subTitle3'),
+            des: t('home.part4.phase5.subText3'),
+          },                    
         ],
       },
       '6': {
         title: t('home.part4.subTitle6'),
         list: [
           {
-            title: t('home.part4.subTitle6'),
-            des: t('home.part4.subText6'),
-            imgUrl: '/Rectangle.png',
+            title: t('home.part4.phase6.subTitle1'),
+            des: t('home.part4.phase6.subText1'),
+          },
+          {
+            title: t('home.part4.phase6.subTitle2'),
+            des: t('home.part4.phase6.subText2'),
+            imgUrl: '/P6.gif',
           },
         ],
       },

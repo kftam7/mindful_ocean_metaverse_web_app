@@ -11,7 +11,7 @@ const Part2 = ({ t }) => {
               <Image src="/part2_img1.gif" width="100%" />
             </Col>
             <Col lg={{ span: 6, order: 'first' }} md={{ span: 6, order: 'first' }} sm={{ span: 12, order: 'last' }} xs={{ span: 12, order: 'last' }}>
-              <div className='part_title'>{t('home.part2.title1')} <Button variant="outline-primary">{t('button.whitePaper')}</Button></div>
+              <div className='part_title'>{t('home.part2.title1')} <a href = "./Mindful Ocean Metaverse - White Paper.pdf" Download = "whitepaper"><Button variant="outline-primary">{t('button.whitePaper')}</Button></a></div>
               <div className='part_text'>
                 {t('home.part2.text1')}
               </div>

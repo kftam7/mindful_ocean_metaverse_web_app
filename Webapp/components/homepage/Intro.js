@@ -11,7 +11,7 @@ const Intro = ({t}) => {
           <Container className={styles.introText}>
             <Row xs={12} md={8} lg={8}>
               <Col xs={12} md={4} lg={4} xl={4}><h3>{t('main.text.whatIsMindfulOcean')}</h3></Col>      
-              <Col xs={12} md={4} lg={4} xl={4}className="ms-1"><Button className={homeStyles.btn}>{t('button.whitePaper')}</Button></Col>
+              <Col xs={12} md={4} lg={4} xl={4}className="ms-1"><a href = "./Mindful Ocean Metaverse - White Paper.pdf" Download = "whitepaper"><Button className={homeStyles.btn}>{t('button.whitePaper')}</Button></a></Col>
             </Row>
             <p className="mt-2">{t('main.text.whatIsMindfulOceanDes')}</p>
           </Container>
