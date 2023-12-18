@@ -14,6 +14,8 @@ const AppleAuth = require('apple-auth');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const moment = require('moment');
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 async function signin(req){
 
@@ -145,8 +147,86 @@ async function submitid(req){
     //console.log("sqlUpdate: %s", sqlUpdate);
     logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlUpdate);
 
-
     // send verification email to user
+    // get the email settings from environmental variables
+    const CLIENT_EMAIL = process.env.clientEmail;
+    const CLIENT_ID = process.env.clientID;
+    const CLIENT_SECRET = process.env.clientSecret;
+    const REDIRECT_URI = process.env.redirectURI;
+    const REFRESH_TOKEN = process.env.refreshToken;
+
+    console.log("CLIENT_EMAIL: %s", CLIENT_EMAIL);
+    console.log("CLIENT_ID: %s", CLIENT_ID);
+    console.log("CLIENT_SECRET: %s", CLIENT_SECRET);
+    console.log("REDIRECT_URI: %s", REDIRECT_URI);
+    console.log("REFRESH_TOKEN: %s", REFRESH_TOKEN);
+
+    const OAuth2Client = new google.auth.OAuth2(
+      CLIENT_ID,
+      CLIENT_SECRET,
+      REDIRECT_URI,
+    );
+    // complete the email settings
+    OAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+    // try to create Transport
+    try {
+
+        // Generate the accessToken on the fly
+        const accessToken = await OAuth2Client.getAccessToken();
+    
+        // Create the email envelope (transport)
+        const transport = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            type: 'OAuth2',
+            user: CLIENT_EMAIL,
+            clientId: CLIENT_ID,
+            clientSecret: CLIENT_SECRET,
+            refreshToken: REFRESH_TOKEN,
+            accessToken: accessToken,
+          },
+          pool: true
+        });
+    
+        let emailBody = process.env.emailBody.replace("$host", process.env.verifyEmailHost).replace("$verificationToken", verificationToken);
+        
+        console.log("emailBody: %s", emailBody);
+
+        // create email content
+        const mailOptions = {
+            from: CLIENT_EMAIL,
+            to: req.body.email,
+            subject: process.env.emailSubject,
+            html: emailBody,
+        };
+    
+        console.log("mailOptions: %s", mailOptions);
+
+        // send the email out
+        try {
+            // Set up the email options and delivering it
+            //const sendMailResult = await transport.sendMail(mailOptions);
+            //// check the result and record on DB
+            //if(sendMailResult.response.includes("OK")){
+            //    logger.log('info', '%s %s Send Email Success: %s', 'Signin', 'submitid', req.params.appleId);
+            //}else{
+            //    logger.log('error', '%s %s Send Email Failed: %s', 'Signin', 'submitid', req.params.appleId);
+            //    return 'Failed to send email'
+            //}
+        
+        } catch(error){
+            logger.log('error', '%s %s Send Email Failed: %s. Error: %s', 'Signin', 'submitid', req.params.appleId, error);
+            return 'Failed to send email'
+        }
+    
+         transport.close();
+
+    } catch (error) {
+      logger.log('error', '%s %s Failed to create email transport: %s. Error: %s', 'Signin', 'submitid', req.params.appleId, error);
+      return 'Failed to create email transport'
+    
+    }    
 
     return 'Record Updated'
 
