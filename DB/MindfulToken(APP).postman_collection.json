@@ -449,6 +449,191 @@
 							"body": null
 						}
 					]
+				},
+				{
+					"name": "submitid",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Edward\",\n\t\t\"lastName\":\"Tam\"\n\t},\n\t\"email\": \"s8rrdfmfrc@privaterelay.appleid.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/signin/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"signin",
+								"{appleId}"
+							]
+						},
+						"description": "### Mobile app should call this API whenever user performs Apple sign in"
+					},
+					"response": [
+						{
+							"name": "submitid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": {\n\t\t\"firstName\": \"Edward\",\n\t\t\"lastName\":\"Tam\"\n\t},\n\t\"email\": \"edwardt@animocabrands.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/submitid/001972.c7c33c51e40d4c239a38cc22e4c1244f.0850",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"submitid",
+										"001972.c7c33c51e40d4c239a38cc22e4c1244f.0850"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "verifyemail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/verifyemail/{verificationTokenId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"verifyemail",
+								"{verificationTokenId}"
+							]
+						},
+						"description": "### Mobile app should call this API whenever user performs Apple sign in"
+					},
+					"response": [
+						{
+							"name": "verifyemail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/verifyemail/HWO5CV53W5M6M76R790OV81GOVVPPEOD",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"verifyemail",
+										"HWO5CV53W5M6M76R790OV81GOVVPPEOD"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			],
 			"description": "## User sign in application\n\nNeed to pass the following parameters for authentication/security checks:\n\nappleId - apple ID returned after apple sign in  \ncurrentTime - current time in Unix time format  \nsecret - md5(appleId+currentTime)"
@@ -1414,7 +1599,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/appleid/000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"raw": "{{baseUrl}}/nft/mintPass/appleid/001972.c7c33c51e40d4c239a38cc22e4c1244f.0850",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1422,7 +1607,7 @@
 										"nft",
 										"mintPass",
 										"appleid",
-										"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613"
+										"001972.c7c33c51e40d4c239a38cc22e4c1244f.0850"
 									]
 								}
 							},
@@ -1504,7 +1689,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x5248099D624063a83fa37f22f8243A80e56D5138",
+									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x1a4157D4129908EDF31aa34164aD01b1F0AAd016",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1512,7 +1697,7 @@
 										"nft",
 										"mintPass",
 										"walletaddress",
-										"0x5248099D624063a83fa37f22f8243A80e56D5138"
+										"0x1a4157D4129908EDF31aa34164aD01b1F0AAd016"
 									]
 								}
 							},
@@ -1606,7 +1791,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mindfulToken/appleid/001972.4d3f31545cc74f09acd0a6799569a95e.0333",
+									"raw": "{{baseUrl}}/nft/mindfulToken/appleid/001972.c7c33c51e40d4c239a38cc22e4c1244f.0850",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1614,7 +1799,7 @@
 										"nft",
 										"mindfulToken",
 										"appleid",
-										"001972.4d3f31545cc74f09acd0a6799569a95e.0333"
+										"001972.c7c33c51e40d4c239a38cc22e4c1244f.0850"
 									],
 									"query": [
 										{
@@ -1720,7 +1905,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/0x5248099D624063a83fa37f22f8243A80e56D5138",
+									"raw": "{{baseUrl}}/nft/mindfulToken/walletaddress/0x8fA44F16B416FEb7CAfbf81158Bd821D12b3f33E",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1728,7 +1913,7 @@
 										"nft",
 										"mindfulToken",
 										"walletaddress",
-										"0x5248099D624063a83fa37f22f8243A80e56D5138"
+										"0x8fA44F16B416FEb7CAfbf81158Bd821D12b3f33E"
 									],
 									"query": [
 										{
@@ -1970,6 +2155,50 @@
 							"body": null
 						}
 					]
+				},
+				{
+					"name": "{{baseUrl}}/nft/mintPass/walletaddress/000571.e15f99903e46420ba2f1e7ffa32e23fa.0721 ",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/nft/mintPass/walletaddress/000571.e15f99903e46420ba2f1e7ffa32e23fa.0721 ",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"nft",
+								"mintPass",
+								"walletaddress",
+								"000571.e15f99903e46420ba2f1e7ffa32e23fa.0721 "
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "## get MintPass & MindfulNFT NFT data"
@@ -4774,8 +5003,8 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"const Apple_Id = \"000984.272ea5bb414443a9b8f4c82b0dc5956e.1613\";",
-					"const Refresh_Token = \"r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw\";",
+					"const Apple_Id = \"001972.c7c33c51e40d4c239a38cc22e4c1244f.0850\";",
+					"const Refresh_Token = \"r7e3e40fd084842799476f00e67e93bd7.0.rrzxs.FTpP7E4ckULBt1mDgK72lw\";",
 					"const Current_time = Math.floor(Date.now() / 1000);",
 					"var hash = CryptoJS.MD5(Apple_Id+Current_time).toString();;",
 					"",
