@@ -33,8 +33,8 @@ const Event1 = () => {
             imgUrl: '/P1a_credit-Stock Image Source by Freepik.jpg',
           },
           {
-            title: t('home.part4.phase1.subTitle2'),
-            des: t('home.part4.phase1.subText2'),
+            title: t('home.part4.phase1.subTitle3'),
+            des: t('home.part4.phase1.subText3'),
             imgUrl: '/P1b.jpg',
           },
         ],
