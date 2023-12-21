@@ -13,6 +13,7 @@ import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
 import ModalFirstLogin from "./modalFirstLogin";
 import ModalCookies from "./modalCookies";
 import ComponentsCookieConsent from '../components/componentsCookieConsent';
+import ModalEmailVerification from "./modalEmailVerification";
 
 // apple id login
 import { parse } from 'url';
@@ -57,6 +58,7 @@ const NavBar = ({ onLocaleChange }) => {
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFirstLogin, setIsFirstLogin] = useState(false);
+  const [visibleEmail, setVisibleEmail] = useState(false);
 
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
@@ -244,6 +246,7 @@ const NavBar = ({ onLocaleChange }) => {
 
   const handleAccept = (isShow) => {
     setIsFirstLogin(isShow);
+    setVisibleEmail(true);
   };
 
   const handleLogout = () => {
@@ -258,6 +261,14 @@ const NavBar = ({ onLocaleChange }) => {
   const handleCookiesDeclineAll = () => {
     setIsCookies(false);
   };
+
+  const handleEmailOk = () => {
+    setVisibleEmail(false);
+  }
+
+  const handleEmailCancel = () => {
+    setVisibleEmail(false);
+  }
 
   return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`${styles.bg}`}>
@@ -351,6 +362,12 @@ const NavBar = ({ onLocaleChange }) => {
               show={isCookies}
               setShow={handleCookiesAcceptAll}
               onCancel={handleCookiesDeclineAll}
+            />
+            <ModalEmailVerification
+              t={t}
+              show={visibleEmail}
+              onOk={handleEmailOk}
+              onCancel={handleEmailCancel}
             />
           </Row>
         </Navbar.Collapse>

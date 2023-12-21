@@ -7,7 +7,7 @@ const ModalFirstLogin = props => {
   const { t, show, setShow, onCancel } = props;
   const apiPort = process.env.APIBaseUrl || '/';
 
-  const handleClose = async () => {
+  const handleAccept = async () => {
     const appleId = sessionStorage.getItem("appleId");
     await axios.post(`${apiPort}/mindfulapi/app/tandc/${appleId}`, {}, { headers: getHeaders() })
       .then(res => {
@@ -34,7 +34,6 @@ const ModalFirstLogin = props => {
         scrollable
         backdrop="static"
         show={show}
-        onHide={handleClose}
       >
         <Modal.Header style={{ padding: '30px 30px 0 30px', border: 0 }}>
           <Modal.Title>{t('main.text.termsAndConditions')}</Modal.Title>
@@ -46,7 +45,7 @@ const ModalFirstLogin = props => {
           />
         </Modal.Body>
         <Modal.Footer style={{ justifyContent: 'center', paddingBottom: '30px', border: 0 }}>
-          <Button onClick={handleClose}>{t('button.accept')}</Button>
+          <Button onClick={handleAccept}>{t('button.accept')}</Button>
           <Button variant="outline-primary" onClick={onCancel}>{t('button.declineAndLogOut')}</Button>
         </Modal.Footer>
       </Modal>

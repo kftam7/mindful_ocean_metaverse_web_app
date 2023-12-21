@@ -141,7 +141,7 @@ const Event1 = () => {
                 return <div className="list_item" key={key}>
                   <div className="item_pic"><Image src={obj.imgUrl} /></div>
                   <div className="item_title">{obj.title}</div>
-                  <div className="item_des">{obj.des}</div>
+                  <div className="item_des" dangerouslySetInnerHTML={{ __html: obj.des}} />
                 </div>
               })}
             </div>

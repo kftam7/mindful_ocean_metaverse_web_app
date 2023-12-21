@@ -14,6 +14,7 @@ import Banner from '../components/homepage/Banner';
 import Part1 from '../components/homepage/Part1';
 import Part2 from '../components/homepage/Part2';
 import Part3 from '../components/homepage/Part3';
+import Part3_1 from '../components/homepage/Part3_1';
 import Part4 from '../components/homepage/Part4';
 import Part5 from '../components/homepage/Part5';
 import Part6 from '../components/homepage/Part6';
@@ -33,6 +34,7 @@ export default function Home() {
       <Part1 t={t} />
       <Part2 t={t} />
       <Part3 t={t} />
+      <Part3_1 t={t} />
       <Part4 t={t} />
       <Part5 t={t} />
       <Part6 t={t} />
