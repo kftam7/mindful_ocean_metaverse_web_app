@@ -147,6 +147,7 @@ async function submitid(req){
     //console.log("sqlUpdate: %s", sqlUpdate);
     logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlUpdate);
 
+/*
     // send verification email to user
     // get the email settings from environmental variables
     const CLIENT_EMAIL = process.env.clientEmail;
@@ -227,7 +228,7 @@ async function submitid(req){
       return 'Failed to create email transport'
     
     }    
-
+*/
     return 'Record Updated'
 
 }
