@@ -4,7 +4,7 @@ const Part6 = ({ t }) => {
 
   return (
     <div class="part_box">
-      <div className='part_pannel bg_blue'>
+      <div className='part_pannel'>
         <div class="container">
           <div className='part_title2'>{t('home.part6.title1')}</div>
           <Row>

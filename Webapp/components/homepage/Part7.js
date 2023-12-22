@@ -58,7 +58,7 @@ const Gallery = ({ t }) => {
 
   return (
     <div class="part_box" id="gallery">
-      <div className='part_pannel'>
+      <div className='part_pannel bg_blue'>
         <ToastContainer />
         <div class="container">
           <div className='part_title2'>{t('main.text.gallery')}</div>

@@ -4,7 +4,7 @@ const Part8 = ({ t }) => {
 
   return (
     <div class="part_box">
-      <div className='part_pannel'>
+      <div className='part_pannel bg_blue'>
         <div class="container text-center">
           <Row>
             <Col lg={4} xs={4}><a href='/contactUs' className='part11_link'>{t('nav.contactUs')}</a></Col>

@@ -19,7 +19,7 @@ const Part8 = ({ t }) => {
 
   return (
     <div class="part_box" id="mintpass">
-      <div className='part_pannel bg_blue'>
+      <div className='part_pannel'>
         <div class="container">
           <Row>
             <Col lg={4} md={6} sm={12}>

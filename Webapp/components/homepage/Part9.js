@@ -19,7 +19,7 @@ const Part9 = ({ t }) => {
 
   return (
     <div class="part_box" id="redeem">
-      <div className='part_pannel'>
+      <div className='part_pannel bg_blue'>
         <div class="container">
           <Row>
             <Col lg={{ span: 6, order: 'last' }} md={{ span: 6, order: 'last' }} sm={{ span: 12, order: 'first' }} xs={{ span: 12, order: 'first' }}>
