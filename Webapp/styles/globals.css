@@ -899,6 +899,14 @@ option {
   width: 50%;
 }
 
+.part6_bg img {
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
 .part7_bg1 {
   text-align: right;
   width: 100%;
@@ -925,6 +933,14 @@ option {
 .part7_bg2 img {
   transform: translate(0, 0);
   width: 20%;
+}
+
+.part8_bg img {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .part9_bg {
@@ -1284,6 +1300,14 @@ option {
 
   .part3_1_list .list_item .item_step{
     font-size: 40px;
+  }
+
+  .part6_bg img {
+    height: 50%;
+  }
+
+  .part8_bg img {
+    display: none;
   }
 
   .part_title {

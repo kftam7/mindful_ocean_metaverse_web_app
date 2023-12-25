@@ -20,6 +20,9 @@ const Part6 = ({ t }) => {
             </Col>
           </Row>
         </div>
+        <div className='part6_bg'>
+          <Image src="/part6_bg1.png" />
+        </div>
       </div>
     </div>
   )

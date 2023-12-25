@@ -34,6 +34,9 @@ const Part8 = ({ t }) => {
             </Col>
           </Row>
         </div>
+        <div className='part8_bg'>
+          <Image src="/part8_bg1.png" />
+        </div>
       </div>
       <ModalIsMobile setShow={setShow} show={show} />
     </div>

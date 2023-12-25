@@ -82,9 +82,6 @@ const Part4 = ({ t }) => {
             </Col>
           </Row>
         </div>
-        <div className='part3_bg'>
-          <Image src="/measuredBoxes/1.png" />
-        </div>
       </div>
     </div>
   )
