@@ -33,7 +33,8 @@ async function getEvent(eventId, title, startTime, endTime){
 
     if (startTime == null && endTime == null){
       var rows = await db.query(
-        `SELECT * FROM event WHERE eventId LIKE ? AND title LIKE ? AND startTime <= ? AND endTime >= ? AND isActive = 1`, [eventId, title, currentTimeSql, currentTimeSql]
+        //`SELECT * FROM event WHERE eventId LIKE ? AND title LIKE ? AND startTime <= ? AND endTime >= ? AND isActive = 1`, [eventId, title, currentTimeSql, currentTimeSql]
+        `SELECT * FROM event WHERE eventId LIKE ? AND title LIKE ? AND isActive = 1`, [eventId, title, currentTimeSql, currentTimeSql]
       );
     }else{
       var rows = await db.query(
