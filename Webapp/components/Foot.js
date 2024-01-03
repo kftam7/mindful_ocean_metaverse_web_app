@@ -5,9 +5,11 @@ const Footer = () => {
     const { t, locale } = useTranslation();
 
     return (
-        <div class="container">
-            <div className='foot'>
-                &copy; {t('footer.copyright')} {t('footer.version.no')}
+        <div className='part_pannel bg_blue'>
+            <div class="container">
+                <div className='foot'>
+                  &copy; {t('footer.copyright')} {t('footer.version.no')}
+                </div>
             </div>
         </div>
     )
