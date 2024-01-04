@@ -264,6 +264,7 @@ const NavBar = ({ onLocaleChange }) => {
 
   const handleEmailOk = () => {
     setVisibleEmail(false);
+    signInOpenModal();
   }
 
   const handleEmailCancel = () => {
@@ -326,7 +327,7 @@ const NavBar = ({ onLocaleChange }) => {
                         </Button>
                       </>
                       :
-                      <Button className={styles.signInBtn}>
+                      <Button className="signInWithApple">
                         <div dangerouslySetInnerHTML={{ __html: appleIdLoginBtn }}></div>
                       </Button>
                     }

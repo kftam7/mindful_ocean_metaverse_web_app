@@ -963,6 +963,7 @@ option {
 .part11_link {
   color: #333;
   font-weight: bold;
+  margin: 0 15px;
 }
 
 .event_page {
@@ -1135,6 +1136,34 @@ option {
 .btn-outline-primary:hover {
   background-color: var(--primary-text-color);
   border-color: var(--primary-text-color);
+}
+
+.signInWithApple {
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  padding: 0;
+  margin: 10px 0 20px 0;
+  border: 0;
+  background-color: rgba(255,255,255,0);
+  background: url(../public/apple_logo.png) center center no-repeat;
+  background-size: 100%;
+}
+
+.signInWithApple a{
+  text-indent:-9999px;
+  display: block;
+  padding: 8px 10px;
+}
+
+.signInWithApple a:hover,.signInWithApple:hover{
+  background-color: rgba(255,255,255,0);
+}
+
+.modal_text1{
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 768px) {

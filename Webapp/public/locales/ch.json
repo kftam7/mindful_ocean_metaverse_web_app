@@ -11,6 +11,9 @@
     "nav.mindfulToken": "Mindful徽章",
     "nav.contactUs": "联系我们",
     "nav.faq": "常见问题",
+    "nav.privacyPolicy": "Privacy Policy",
+    "nav.appStore": "App Store",
+    "nav.termsConditions": "Terms & Conditions",
     "main.text.walletContect": "连接钱包",
     "main.text.signIn": "登录",
     "main.text.apple": "Apple",
@@ -79,6 +82,7 @@
     "main.text.facebook": "Facebook",
     "main.text.instagram": "Instagram",
     "main.text.copiedToClipboard": "已复制到剪贴板！",
+    "main.text.yourEmailIsVerified": "Your Email is verified.",
     "page.create.createAndColor": "创作并为自创的鱼上色",
     "page.create.downloadTemplate": "下载模板",
     "page.create.uploadYourArtwork": "上传您的艺术作品（不超过1MB）,在3D模型上预览！",
@@ -527,5 +531,6 @@
     "button.linkedin": "Linkedin",
     "button.tedTalk": "TED 演讲",
     "button.continueReading": "继续阅读 >>",
-    "button.joinDiscord": "加入Discord"
+    "button.joinDiscord": "加入Discord",
+    "button.sendVerification": "Send Verification"
 }

@@ -11,6 +11,9 @@
     "nav.mindfulToken": "Mindful Token",
     "nav.contactUs": "Contact Us",
     "nav.faq": "FAQ",
+    "nav.privacyPolicy": "Privacy Policy",
+    "nav.appStore": "App Store",
+    "nav.termsConditions": "Terms & Conditions",
     "main.text.walletContect": "Wallet Contect",
     "main.text.signIn": "Sign In",
     "main.text.apple": "Apple",
@@ -79,6 +82,7 @@
     "main.text.facebook": "Facebook",
     "main.text.instagram": "Instagram",
     "main.text.copiedToClipboard": "Copied to clipboard!",
+    "main.text.yourEmailIsVerified": "Your Email is verified.",
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
     "page.create.uploadYourArtwork": "upload your artwork (no bigger than 1MB) to preview it on 3D model!",
@@ -527,5 +531,6 @@
     "button.linkedin": "Linkedin",
     "button.tedTalk": "TED Talk",
     "button.continueReading": "Continue Reading >>",
-    "button.joinDiscord": "Join Discord"
+    "button.joinDiscord": "Join Discord",
+    "button.sendVerification": "Send Verification"
 }
