@@ -259,9 +259,9 @@ const RedeemStep1 = ({ session }) => {
             : 
             <Row className="mt-1">
               <Col xs={12} md={6}>
-                <Button size="lg" className={styles.disactiveBtn} onClick={connectApple}>
+                <Button size="lg" className="signInWithApple2" onClick={connectApple}>
                     <Image src="/apple_white.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>
+                    <span style={{ fontWeight:'800'}}>
                       <span dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></span>
                     </span>
                 </Button>

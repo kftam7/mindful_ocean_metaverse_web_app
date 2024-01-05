@@ -81,7 +81,7 @@ const ModalEmailVerification = props => {
         onHide={onCancel}
       >
         {!isSuccess ? <Modal.Header style={{ padding: '30px 30px 0 30px', border: 0 }}>
-          <Modal.Title>{t('Email Verification')}</Modal.Title>
+          <Modal.Title>{t('main.text.emailVerification')}</Modal.Title>
         </Modal.Header> : ''
         }
         <Modal.Body>

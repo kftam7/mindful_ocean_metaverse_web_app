@@ -14,6 +14,7 @@ import ModalFirstLogin from "./modalFirstLogin";
 import ModalCookies from "./modalCookies";
 import ComponentsCookieConsent from '../components/componentsCookieConsent';
 import ModalEmailVerification from "./modalEmailVerification";
+import ModalFormEmailverification from "./modalFormEmailverification";
 
 // apple id login
 import { parse } from 'url';
@@ -53,12 +54,13 @@ const ethereumClient = new EthereumClient(wagmiConfig, chains)
 const NavBar = ({ onLocaleChange }) => {
   //const apiPort = process.env.API_PORT || '/';
   const apiPort = process.env.APIBaseUrl || '/';
-  const dispatch = useDispatch();
+  const { query: { from } } = useRouter();
   const account = useSelector((state) => state.accountState);
   const balance = useSelector((state) => state.balanceState);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [visibleEmail, setVisibleEmail] = useState(false);
+  const [visibleFormEmailverification, setVisibleFormEmailverification] = useState(false);
 
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
@@ -70,6 +72,11 @@ const NavBar = ({ onLocaleChange }) => {
   const { query } = parse(currentUrl, true);
   const [isAppleIdLogin, setIsAppleIdLogin] = useState(false);
   const [isCookies, setIsCookies] = useState(false);
+
+  useEffect(() => {
+    if (!from || from !== 'emailverification') return
+    setVisibleFormEmailverification(true)
+  }, [from])
 
   useEffect(() => {
     const pathname = getPathname();
@@ -271,6 +278,15 @@ const NavBar = ({ onLocaleChange }) => {
     setVisibleEmail(false);
   }
 
+  const handleFormEmailverificationOk = () => {
+    setVisibleFormEmailverification(false);
+    signInOpenModal();
+  }
+
+  const handleFormEmailverificationCancel = () => {
+    setVisibleFormEmailverification(false);
+  }
+
   return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`${styles.bg}`}>
       <Container fluid className={styles.container}>
@@ -369,6 +385,12 @@ const NavBar = ({ onLocaleChange }) => {
               show={visibleEmail}
               onOk={handleEmailOk}
               onCancel={handleEmailCancel}
+            />
+            <ModalFormEmailverification
+              t={t}
+              show={visibleFormEmailverification}
+              onOk={handleFormEmailverificationOk}
+              onCancel={handleFormEmailverificationCancel}
             />
           </Row>
         </Navbar.Collapse>
