@@ -3,7 +3,6 @@ import { Row, Col, Button, Container, Collapse, Card } from 'react-bootstrap';
 import { FaChevronDown, FaChevronUp, FaSpinner } from 'react-icons/fa';
 import { toast, ToastContainer } from "react-toastify";
 import Link from 'next/link';
-
 import Layout from '../components/SubpageLayout';
 import { getHeaders } from '../utils/utils';
 import axios from 'axios';

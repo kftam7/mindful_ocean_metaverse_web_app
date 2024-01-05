@@ -1,15 +1,15 @@
 import { signIn, signOut, getSession } from 'next-auth/react';
 import { getAccount, grabAccount, disconnectAccount, postUser } from '../store/actions';
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Link from 'next/link';
 import styles from '../styles/SubmitPage.module.css';
-import {Row, Col, Image, OverlayTrigger, Button, Tooltip, Container} from 'react-bootstrap';
+import { Row, Col, Image, OverlayTrigger, Button, Tooltip, Container } from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
 import { Cookies } from "react-cookie-consent";
+import Layout from '../components/SubpageLayout';
 
 // Web3Modal
 import { useWeb3Modal } from '@web3modal/react';
@@ -50,7 +50,7 @@ const AuthPage = ({ session }) => {
   const [appleId, setAppleId] = useState('');
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
   const { t } = useTranslation();
-  
+
   useEffect(async () => {
     await dispatch(getAccount())
   }, [dispatch]);
@@ -59,7 +59,7 @@ const AuthPage = ({ session }) => {
     await dispatch(grabAccount());
     // await dispatch(postUser());
   }
-  
+
   // //didn't work
   const disconnectWallet = () => {
     dispatch(disconnectAccount());
@@ -70,9 +70,9 @@ const AuthPage = ({ session }) => {
   //const { isConnected } = useAccount();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  
+
   useEffect(async () => {
-    if(!isConnected){
+    if (!isConnected) {
       sessionStorage.removeItem("walletAddress");
       setWalletAddress('');
       return;
@@ -84,7 +84,7 @@ const AuthPage = ({ session }) => {
     await open();
   }
 
-  const connectWallet = async() => {
+  const connectWallet = async () => {
     if (isConnected) {
       disconnect();
     } else {
@@ -105,22 +105,22 @@ const AuthPage = ({ session }) => {
   };
 
   useEffect(async () => {
-    if(!appleId || !walletAddress) return;
-    if(!isConnectingWallet) return;
-    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, {headers: getHeaders()})
-    .then(res => {
-      if(!res.data.message){
-        if (confirm(res.data)) {
-          disconnect();
-        }else {
-          disconnect();
+    if (!appleId || !walletAddress) return;
+    if (!isConnectingWallet) return;
+    await axios.post(`${apiPort}/mindfulapi/app/updatewallet/${appleId}/${walletAddress}`, {}, { headers: getHeaders() })
+      .then(res => {
+        if (!res.data.message) {
+          if (confirm(res.data)) {
+            disconnect();
+          } else {
+            disconnect();
+          }
         }
-      }
 
-    })
-    .catch(err => {
-      console.log(err)
-    });
+      })
+      .catch(err => {
+        console.log(err)
+      });
     setIsConnectingWallet(false);
   }, [appleId, walletAddress, isConnectingWallet]);
 
@@ -132,9 +132,9 @@ const AuthPage = ({ session }) => {
 
   useEffect(() => {
     const appleId = sessionStorage.getItem("appleId");
-    if(!appleId){
+    if (!appleId) {
       setAppleId('');
-    }else{
+    } else {
       setAppleId(appleId);
     }
   }, []);
@@ -145,14 +145,14 @@ const AuthPage = ({ session }) => {
     // Cookies.set("pathname", pathname);
   }
 
-  const disconnectApple = async() => {
+  const disconnectApple = async () => {
     setAppleId('');
     sessionStorage.removeItem("access_token");
     sessionStorage.removeItem("expires_in");
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("refresh_token");
     sessionStorage.removeItem("appleId");
-    
+
     // Cookies.remove("access_token");
     // Cookies.remove("expires_in");
     // Cookies.remove("email");
@@ -160,30 +160,30 @@ const AuthPage = ({ session }) => {
     // Cookies.remove("appleId");
   }
 
-  return(
+  return (
     <Container className='mt-5 mb-5' style={{}}>
       {/* <Button onClick={connect}>connect</Button>
       <Button onClick={disconnectWallet}>disconnect Wallet</Button> */}
       <div className={styles.submitPage}>
-          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
-          <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
+        <Row><Link href="/"><h6 style={{ cursor: "pointer" }}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+        <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
-          <Row className='mt-4' style={{ fontWeight:'800'}} >
-            <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.authentication')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
-            <Col xs={4} className={styles.item}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.submission')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
-            <Col xs={4} className={styles.item}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
+        <Row className='mt-4' style={{ fontWeight: '800' }} >
+          <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.authentication')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+          <Col xs={4} className={styles.item}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.submission')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+          <Col xs={4} className={styles.item}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.mintpass.getMintpas')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
         </Row>
 
         {/* <Row className="mt-5 mb-5">
@@ -231,96 +231,96 @@ const AuthPage = ({ session }) => {
           </Row>
           <hr /> */}
 
-          <Row className='mt-5'>
-            <h5>1. {t('main.text.connectSocial')}</h5>
-            {(appleId) ?
+        <Row className='mt-5'>
+          <h5>1. {t('main.text.connectSocial')}</h5>
+          {(appleId) ?
             <Row>
               <Col xs={12} md={6}>
-                  <Button size="lg" className={styles.disactiveBtn}>
-                    <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.appleConnected')}</span>
-                  </Button>
+                <Button size="lg" className={styles.disactiveBtn}>
+                  <i className="fa-solid fa-circle-check" style={{ color: "#7FFF00" }}></i>
+                  <span style={{ fontWeight: '800', marginLeft: '8px' }}>{t('main.text.appleConnected')}</span>
+                </Button>
               </Col>
               <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
                 <OverlayTrigger overlay={<Tooltip>{t('main.text.disconnect')}</Tooltip>}>
-                      <Button className={styles.activeBtn} onClick={disconnectApple}>
-                      <i className="fa-solid fa-xmark"></i>
-                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{appleId.slice(0,5).concat('...').concat(appleId.slice(-4))}</span>
-                      </Button>
+                  <Button className={styles.activeBtn} onClick={disconnectApple}>
+                    <i className="fa-solid fa-xmark"></i>
+                    <span style={{ fontWeight: '800', marginLeft: '8px' }}>{appleId.slice(0, 5).concat('...').concat(appleId.slice(-4))}</span>
+                  </Button>
                 </OverlayTrigger>
               </Col>
             </Row>
-            : 
+            :
             <Row className="mt-1">
               <Col xs={12} md={6}>
                 <Button size="lg" className={styles.disactiveBtn} onClick={connectApple}>
-                    <Image src="/apple_white.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>
-                      <span dangerouslySetInnerHTML={{__html: appleIdLoginBtn}}></span>
-                    </span>
+                  <Image src="/apple_white.png" width="15px" height="15px" style={{ marginTop: '-3px' }} />
+                  <span style={{ fontWeight: '800', marginLeft: '8px' }}>
+                    <span dangerouslySetInnerHTML={{ __html: appleIdLoginBtn }}></span>
+                  </span>
                 </Button>
               </Col>
               <Col xs={12} md={6}>
-                  <h5 className="mt-2 connect_txt">{t('main.text.appleNotConnected')}</h5>
-                </Col>
-            </Row>
-            }
-            <Row className='mt-3'>
-              <Col xs={12}>
-                <span style={{ display: 'inline-block' }}>
-                <OverlayTrigger overlay={<Tooltip>{t('page.mintpass.youWillNeedToAccessImages')}</Tooltip>}>
-                  <h6 style={{textDecoration: "underline"}}>{t('page.mintpass.whyShouldILinkMyAppleAccount')}</h6>
-                </OverlayTrigger>
-                </span>
+                <h5 className="mt-2 connect_txt">{t('main.text.appleNotConnected')}</h5>
               </Col>
             </Row>
+          }
+          <Row className='mt-3'>
+            <Col xs={12}>
+              <span style={{ display: 'inline-block' }}>
+                <OverlayTrigger overlay={<Tooltip>{t('page.mintpass.youWillNeedToAccessImages')}</Tooltip>}>
+                  <h6 style={{ textDecoration: "underline" }}>{t('page.mintpass.whyShouldILinkMyAppleAccount')}</h6>
+                </OverlayTrigger>
+              </span>
+            </Col>
           </Row>
+        </Row>
 
-          <hr />
-          
-          <Row className='mt-5 mb-5'>
-            <h5>2. {t('main.text.connectWallet')}</h5>
-            {(walletAddress) ?
+        <hr />
+
+        <Row className='mt-5 mb-5'>
+          <h5>2. {t('main.text.connectWallet')}</h5>
+          {(walletAddress) ?
             <Row>
               <Col xs={12} md={6}>
-                  <Button size="lg" className={styles.disactiveBtn}>
-                    <i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i>
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.walletConnected')}</span>
-                  </Button>
+                <Button size="lg" className={styles.disactiveBtn}>
+                  <i className="fa-solid fa-circle-check" style={{ color: "#7FFF00" }}></i>
+                  <span style={{ fontWeight: '800', marginLeft: '8px' }}>{t('main.text.walletConnected')}</span>
+                </Button>
               </Col>
               <Col xs={12} md={6} className='d-flex justify-content-center connect_code'>
                 <OverlayTrigger overlay={<Tooltip>{t('main.text.disconnect')}</Tooltip>}>
-                      <Button className={styles.activeBtn} onClick={connectWallet}>
-                      <i className="fa-solid fa-xmark"></i>
-                      <span style={{ fontWeight:'800', marginLeft: '8px'}}>{walletAddress.slice(0,5).concat('...').concat(walletAddress.slice(-4))}</span>
-                      </Button>
+                  <Button className={styles.activeBtn} onClick={connectWallet}>
+                    <i className="fa-solid fa-xmark"></i>
+                    <span style={{ fontWeight: '800', marginLeft: '8px' }}>{walletAddress.slice(0, 5).concat('...').concat(walletAddress.slice(-4))}</span>
+                  </Button>
                 </OverlayTrigger>
               </Col>
             </Row>
-            : 
+            :
             <Row className="mt-1">
               <Col xs={12} md={6}>
                 <Button size="lg" className={styles.disactiveBtn} onClick={connectWallet} disabled={!appleId}>
-                    <Image src="/metamask.png" width="15px" height="15px" style={{marginTop: '-3px'}} />
-                    <span style={{ fontWeight:'800', marginLeft: '8px'}}>{t('main.text.connectWallet')}</span>
+                  <Image src="/metamask.png" width="15px" height="15px" style={{ marginTop: '-3px' }} />
+                  <span style={{ fontWeight: '800', marginLeft: '8px' }}>{t('main.text.connectWallet')}</span>
                 </Button>
               </Col>
               <Col xs={12} md={6}>
-                  <h5 className="mt-2 connect_txt">{t('main.text.walletNotConnected')}</h5>
-                </Col>
+                <h5 className="mt-2 connect_txt">{t('main.text.walletNotConnected')}</h5>
+              </Col>
             </Row>
-            }
-          </Row>
+          }
+        </Row>
 
-          <Row className='justify-content-md-center mt-5'>
-            <Col xs={12} className='text-center'>
-              {walletAddress && appleId ?
-              <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}}>{t('button.next')}&nbsp;&rarr;</Button>
+        <Row className='justify-content-md-center mt-5'>
+          <Col xs={12} className='text-center'>
+            {walletAddress && appleId ?
+              <Button href="/submission" size="lg" className={styles.disactiveBtn} style={{ width: "30%", borderRadius: "10px", fontWeight: '800' }}>{t('button.next')}&nbsp;&rarr;</Button>
               :
-              <Button size="lg" variant="secondary" className={styles.nextBtn} style={{width: "30%", borderRadius: "10px", fontWeight:'800'}} disabled>{t('button.next')}&nbsp;&rarr;</Button>
-              }
-            </Col>
-          </Row>
+              <Button size="lg" variant="secondary" className={styles.nextBtn} style={{ width: "30%", borderRadius: "10px", fontWeight: '800' }} disabled>{t('button.next')}&nbsp;&rarr;</Button>
+            }
+          </Col>
+        </Row>
       </div>
     </Container>
   )
@@ -328,9 +328,9 @@ const AuthPage = ({ session }) => {
 
 function App() {
   return (
-    <>
+    <Layout>
       <WagmiConfig config={wagmiConfig}>
-          <AuthPage />
+        <AuthPage />
       </WagmiConfig>
 
       <Web3Modal
@@ -340,7 +340,7 @@ function App() {
           '--w3m-z-index': '9999'
         }}
       />
-    </>
+    </Layout>
   )
 }
 

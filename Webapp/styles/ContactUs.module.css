@@ -158,12 +158,12 @@
 }
 
 .link_item .item_icon.icon2 {
-    background: url('/ContactUs-Idle_SMFB.png') center center no-repeat;
+    background: url('/ContactUs-Idle_Discord.png') center center no-repeat;
     background-size: 100%;
 }
 
 .link_item .item_a a:hover .item_icon.icon2 {
-    background: url('/ContactUs-Click_SMFB.png') center center no-repeat;
+    background: url('/ContactUs-Click_Discord.png') center center no-repeat;
     background-size: 100%;
 }
 

@@ -14,6 +14,7 @@ import SubmitModal from '../components/submission/SubmitModal';
 import EditModal from '../components/submission/EditModal';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
+import Layout from '../components/SubpageLayout';
 
 //just pass the setShow and setConShow as props to children components
 export default function SubmitPage({ session, user }) {
@@ -39,32 +40,32 @@ export default function SubmitPage({ session, user }) {
   const [dataArtworks, setDataArtworks] = useState([]);
   const [dataEdit, setDataEdit] = useState();
   const [count, setCount] = useState(0);
-  
+
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
-    if(!appleId) return;
+    if (!appleId) return;
     // artwork
-    const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, {headers: getHeaders()});
-    if(res.status === 200){
+    const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });
+    if (res.status === 200) {
       const { data: { data } } = res;
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));
       setNewest(true);
     }
-  },[count])
-  
+  }, [count])
+
   useEffect(() => {
-    if(!dataArtworks.length) return setDisabled(true);
+    if (!dataArtworks.length) return setDisabled(true);
     setDisabled(false);
-  },[dataArtworks]);
-  
+  }, [dataArtworks]);
+
   useEffect(() => {
-    if(!image) return setEditSubmit(true);
+    if (!image) return setEditSubmit(true);
     setEditSubmit(false);
-  },[image]);
+  }, [image]);
 
   const handleShow = () => setShow(true);
-  const handleSubmitShow = () => {    
-    if(!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
+  const handleSubmitShow = () => {
+    if (!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
       autoClose: 3000,
       position: 'top-center',
       className: 'custom-toast-success',
@@ -73,7 +74,7 @@ export default function SubmitPage({ session, user }) {
     setSubmitShow(true);
   }
   const handleEditShow = () => {
-    if(!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
+    if (!image) return toast.error(t('error.info.pleaseSelectAArtwork'), {
       autoClose: 3000,
       position: 'top-center',
       className: 'custom-toast-success',
@@ -84,8 +85,8 @@ export default function SubmitPage({ session, user }) {
     setDataEdit(...data);
   }
 
-  function refreshPage(){ 
-    window.location.reload(); 
+  function refreshPage() {
+    window.location.reload();
   }
 
   function sortOldest() {
@@ -108,7 +109,7 @@ export default function SubmitPage({ session, user }) {
   }
 
   useEffect(() => {
-    if(!image) return;
+    if (!image) return;
     const modelViewer = document.getElementById('previewModel');
     modelViewer.addEventListener("load", () => {
       let material = modelViewer.model.materials[0];
@@ -120,9 +121,9 @@ export default function SubmitPage({ session, user }) {
         material[attr][channel].setTexture(texture);
       }
       let source = image;
-      initTexture('pbrMetallicRoughness', 'baseColorTexture', source)            
+      initTexture('pbrMetallicRoughness', 'baseColorTexture', source)
     });
-  },[image]);
+  }, [image]);
 
   function startCountDown() {
     // const mintTime = new Date("06/09/2022 14:00:00"); //for testing only
@@ -132,7 +133,7 @@ export default function SubmitPage({ session, user }) {
       const difference = waitingTime - (now.getTime() - mintTime.getTime());
       //in millisec
       const h = Math.floor(
-        (difference % (1000 * 60 * 60 *24)) / (1000 * 60 * 60)
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
       setHours(h);
 
@@ -147,8 +148,7 @@ export default function SubmitPage({ session, user }) {
       setSecs(s);
     }, 1000);
 
-    return () => 
-    {
+    return () => {
       allowSubmission();
       clearInterval(interval);
     };
@@ -168,25 +168,27 @@ export default function SubmitPage({ session, user }) {
   async function allowSubmission() {
     await axios.get(
       `/api/users`,
-        { params: 
-          { 
-            allowSubmission: true, 
-          }
+      {
+        params:
+        {
+          allowSubmission: true,
         }
-      )
+      }
+    )
   }
 
-  return(
-    <Container className='mt-5 mb-5'>
-      <ToastContainer />
-      <div className={styles.submitPage}>
-          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+  return (
+    <Layout>
+      <Container className='mt-5 mb-5'>
+        <ToastContainer />
+        <div className={styles.submitPage}>
+          <Row><Link href="/"><h6 style={{ cursor: "pointer" }}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
           <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
-          <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
+          <Row className='mt-4' style={{ fontSize: "1.3rem", fontWeight: '800' }}>
             <Col xs={4} className={styles.item}>
               <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.mintpass.authentication')}</span></div>
+              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{ color: "#7FFF00" }}></i><span>{t('page.mintpass.authentication')}</span></div>
               <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
             </Col>
             <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
@@ -202,73 +204,73 @@ export default function SubmitPage({ session, user }) {
           </Row>
 
           <div className={styles.submitContent}>
-          <Row className="gx-5">
-            <Col xs={12} md={6}>
-              <Row>
-                <Col xs={10}>
-                  <div className={styles.submitTile}>{t('page.mintpass.submission.browseYourArtworks')}: </div>
-                </Col>
-                
-                {!disabled ?
-                  <Col xs={2}>
-                    {
-                      newest ? 
-                        <OverlayTrigger overlay={<Tooltip id="">{t('page.mintpass.submission.sortOldest')}</Tooltip>}>
-                          <span className="d-inline-block">
-                          <Button variant="light" className={styles.sortBtn} onClick={sortOldest}><i className="fa-solid fa-arrow-down-short-wide"></i></Button>
-                          </span>
-                        </OverlayTrigger>
-                      :
-                        <OverlayTrigger overlay={<Tooltip id="">{t('page.mintpass.submission.sortNewest')}</Tooltip>}>
-                          <span className="d-inline-block">
-                          <Button variant="light" className={styles.sortBtn} onClick={sortNewest}><i className="fa-solid fa-arrow-down-wide-short"></i></Button>
-                          </span>
-                        </OverlayTrigger>
-                    }  
+            <Row className="gx-5">
+              <Col xs={12} md={6}>
+                <Row>
+                  <Col xs={10}>
+                    <div className={styles.submitTile}>{t('page.mintpass.submission.browseYourArtworks')}: </div>
                   </Col>
-                  : ''
-                }
-              </Row>
 
-              {disabled ?
-                <Row  className={styles.submitLeft}>
-                  <p className={styles.submitTxt1}>{t('page.mintpass.submission.noArtworkIsCreatedInThisAccount')}</p>
-                  <h4 className={styles.submitAccount}>
-                    <Image src="/apple.png" width="30px" />
-                    <span>{t('page.mintpass.submission.appleAccount')}</span>
-                  </h4>
-                  <p className={styles.submitTxt1}>{t('page.mintpass.submission.download')} <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>{t('main.text.mindfulOcean')}</span> {t('page.mintpass.submission.toCreateAndSubmitArtworkOr')}</p>
-                  <Link href="/authentication" passHref><span style={{textDecoration: "underline", cursor: "pointer"}}>{t('page.mintpass.submission.switchToADifferentAccount')}</span></Link>
-                </Row>
-              :
-              <>
-                <div className={`mt-1 ${styles.scrollBox}`} key={count}>
-                  {dataArtworks.map((item, key) => (
-                      <Form.Check key={key} className='form_check_img' style={{position: "relative"}}>
-                        <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
-                          <Form.Check.Input
-                            defaultChecked={item.artworkId === dataEdit?.artworkId ? true : false}
-                            key={newest}
-                            name="imageGroup1"
-                            type="radio"
-                            id={`imageGroup${key}`}
-                            className={styles.imageRadio}
-                            onChange={() => selectImage(item)}
-                          />
-                          <Image src={item.URL} style={{cursor: "pointer", position: "relative"}} fluid />
-                        </Form.Check.Label>
-                      </Form.Check>
-                    ))
+                  {!disabled ?
+                    <Col xs={2}>
+                      {
+                        newest ?
+                          <OverlayTrigger overlay={<Tooltip id="">{t('page.mintpass.submission.sortOldest')}</Tooltip>}>
+                            <span className="d-inline-block">
+                              <Button variant="light" className={styles.sortBtn} onClick={sortOldest}><i className="fa-solid fa-arrow-down-short-wide"></i></Button>
+                            </span>
+                          </OverlayTrigger>
+                          :
+                          <OverlayTrigger overlay={<Tooltip id="">{t('page.mintpass.submission.sortNewest')}</Tooltip>}>
+                            <span className="d-inline-block">
+                              <Button variant="light" className={styles.sortBtn} onClick={sortNewest}><i className="fa-solid fa-arrow-down-wide-short"></i></Button>
+                            </span>
+                          </OverlayTrigger>
+                      }
+                    </Col>
+                    : ''
                   }
-                </div>
+                </Row>
 
-                <p>{t('page.mintpass.submission.createMoreIn')} <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={handleShow}>{t('page.mintpass.submission.mindfulOceanApp')}</span></p>
-              </>     
-              }
-              <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{width: '70%', borderRadius: '20px', fontWeight: 'bold'}} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;{t('button.refresh')}</Button>
-            </Col>
-          
-            <Col xs={12} md={6} className="mt-5">
+                {disabled ?
+                  <Row className={styles.submitLeft}>
+                    <p className={styles.submitTxt1}>{t('page.mintpass.submission.noArtworkIsCreatedInThisAccount')}</p>
+                    <h4 className={styles.submitAccount}>
+                      <Image src="/apple.png" width="30px" />
+                      <span>{t('page.mintpass.submission.appleAccount')}</span>
+                    </h4>
+                    <p className={styles.submitTxt1}>{t('page.mintpass.submission.download')} <span style={{ textDecoration: "underline", cursor: "pointer" }} onClick={handleShow}>{t('main.text.mindfulOcean')}</span> {t('page.mintpass.submission.toCreateAndSubmitArtworkOr')}</p>
+                    <Link href="/authentication" passHref><span style={{ textDecoration: "underline", cursor: "pointer" }}>{t('page.mintpass.submission.switchToADifferentAccount')}</span></Link>
+                  </Row>
+                  :
+                  <>
+                    <div className={`mt-1 ${styles.scrollBox}`} key={count}>
+                      {dataArtworks.map((item, key) => (
+                        <Form.Check key={key} className='form_check_img' style={{ position: "relative" }}>
+                          <Form.Check.Label htmlFor={`imageGroup${key}`} className='label_image'>
+                            <Form.Check.Input
+                              defaultChecked={item.artworkId === dataEdit?.artworkId ? true : false}
+                              key={newest}
+                              name="imageGroup1"
+                              type="radio"
+                              id={`imageGroup${key}`}
+                              className={styles.imageRadio}
+                              onChange={() => selectImage(item)}
+                            />
+                            <Image src={item.URL} style={{ cursor: "pointer", position: "relative" }} fluid />
+                          </Form.Check.Label>
+                        </Form.Check>
+                      ))
+                      }
+                    </div>
+
+                    <p>{t('page.mintpass.submission.createMoreIn')} <span style={{ textDecoration: "underline", cursor: "pointer" }} onClick={handleShow}>{t('page.mintpass.submission.mindfulOceanApp')}</span></p>
+                  </>
+                }
+                <Button className={`mt-3 p-0 ${styles.activeBtn}`} size="lg" style={{ width: '70%', borderRadius: '20px', fontWeight: 'bold' }} onClick={refreshPage}><i className="fa-solid fa-rotate"></i>&nbsp;{t('button.refresh')}</Button>
+              </Col>
+
+              <Col xs={12} md={6} className="mt-5">
                 <model-viewer
                   id="previewModel"
                   key={image}
@@ -279,7 +281,7 @@ export default function SubmitPage({ session, user }) {
                   camera-controls
                   auto-rotate autoplay ar
                   ar-modes="webxr scene-viewer quick-look"
-                  style={{height: '40vh', backgroundColor: disabled ? '#aaa' : ''}}
+                  style={{ height: '40vh', backgroundColor: disabled ? '#aaa' : '' }}
                 >
                 </model-viewer>
                 <Row className='d-flex justify-content-center mt-5'>
@@ -289,7 +291,7 @@ export default function SubmitPage({ session, user }) {
                   </Col>
                 </Row>
 
-                  {/* {
+                {/* {
                     (!mintAllow) ?
                     <Row className='mt-5 text-center'>
                         <h6>Please try again later in: </h6>
@@ -323,7 +325,7 @@ export default function SubmitPage({ session, user }) {
                   : 
                   <></>
                   } */}
-                        
+
               </Col>
 
             </Row>
@@ -337,24 +339,26 @@ export default function SubmitPage({ session, user }) {
           <Script type="text/javascript" charset="utf-8" src="/js/createPreview.js" />
           <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
           <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
-      </div>
-    </Container>
+        </div>
+      </Container>
+    </Layout>
   )
 }
 
 //getServerSideProps will get static data in building page process from server before the page render
 export async function getServerSideProps(context) {
-  const session = await getSession(context);  
+  const session = await getSession(context);
   const BASE_URL = process.env.NEXTAUTH_URL;
-  if(session) {
+  if (session) {
     const res = await axios.get(
       `${BASE_URL}/api/users`,
-        { params: 
-          { 
-            email: session.user.email, 
-          }
+      {
+        params:
+        {
+          email: session.user.email,
         }
-      )
+      }
+    )
     const user = res.data;
     return {
       props: {

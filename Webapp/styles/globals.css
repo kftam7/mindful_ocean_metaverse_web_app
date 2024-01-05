@@ -1050,6 +1050,21 @@ option {
   border-top: 1px solid #ccc;
 }
 
+.sub_foot {
+  background-color: #ffffff;
+  text-align: center;
+  width: 100%;
+  padding: 50px 0;
+  position: fixed;
+  bottom: 0;
+}
+
+.sub_foot .logo {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
 .CookieConsent {
   color: var(--primary-text-color) !important;
   background-color: #fff !important;

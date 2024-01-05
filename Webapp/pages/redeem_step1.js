@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
 import { Cookies } from "react-cookie-consent";
+import Layout from '../components/SubpageLayout';
 
 // Web3Modal
 import { useWeb3Modal } from '@web3modal/react';
@@ -333,7 +334,7 @@ const RedeemStep1 = ({ session }) => {
 
 function App() {
   return (
-    <>
+    <Layout>
       <WagmiConfig config={wagmiConfig}>
           {/* <...other component/>  */}
           <RedeemStep1 />
@@ -346,7 +347,7 @@ function App() {
           '--w3m-z-index': '9999'
         }}
       />
-    </>
+    </Layout>
   )
 }
 

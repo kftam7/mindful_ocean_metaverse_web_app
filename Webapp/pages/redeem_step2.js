@@ -13,9 +13,10 @@ import { getHeaders } from '../utils/utils';
 import { getAccount, fetchMintpassContract } from '../store/actions';
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
-import {ethers, BigNumber}  from 'ethers';
-import {getMessageHashSignature} from '../utils/utils';
-import {FaSpinner } from 'react-icons/fa';
+import { ethers, BigNumber } from 'ethers';
+import { getMessageHashSignature } from '../utils/utils';
+import { FaSpinner } from 'react-icons/fa';
+import Layout from '../components/SubpageLayout';
 
 //智能合约2.0
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
@@ -53,59 +54,59 @@ function RedeemStep2() {
   } = useWaitForTransaction({ hash: data?.hash })
 
   useEffect(() => {
-    if(!isError) return;
-    if (confirm(error?.shortMessage)){
+    if (!isError) return;
+    if (confirm(error?.shortMessage)) {
       setLoading(false);
-    }else{
+    } else {
       setLoading(false);
     }
-  },[isError])
+  }, [isError])
 
   useEffect(() => {
-    if(!isSuccess) return;
+    if (!isSuccess) return;
     Router.push({
       pathname: '/redeem_step4',
     });
-  },[isSuccess])
+  }, [isSuccess])
 
   useEffect(() => {
-    if(!data) return;
+    if (!data) return;
     console.log('write success', data)
     Router.push({
       pathname: '/redeem_step4',
     });
-  },[data])
-  
+  }, [data])
+
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
     const walletAddress = sessionStorage.getItem("walletAddress");
 
-    if(!appleId) return;
+    if (!appleId) return;
     setLoading(true);
     // artwork
     //const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/appleid/${appleId}`, {headers: getHeaders()});
-    const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/walletaddress/${walletAddress}`, {headers: getHeaders()});
-    if(res.status === 200){
+    const res = await axios.get(`${apiPort}/mindfulapi/app/nft/mintPass/walletaddress/${walletAddress}`, { headers: getHeaders() });
+    if (res.status === 200) {
       const { data: { data } } = res;
       //const data = [{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "0","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "1","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: 'https:/api-staging.mindfu-ocean.org/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg', ifRedeemed: 0},{"walletAddress": "0x9B39710bD511bc14Fcb0f64a9D8f8e6F630751Ab","tokenId": "1","tokenUriRaw": "ipfs://bafyreifm457a6j647vd4b7g6oqwkyxvgzegpfwsg3hvd6wf6rk2ukhk7gq/metadata.json","name": "artworkwhatisthis","type": "fish","description": "gif picture","extraInfo": "null", "artworkId": "2","imageURL": "https://ipfs.io/ipfs/bafybeih7lqtefza3fo4v2cwmo2hl7wjajqaddel2vy5q5ixhojn4f2hna4/sample_artwork.jpeg", artworkURL: '/oceanImage_2_1.png', ifRedeemed: 1}];
       // console.log(data)
-      if(data.length){
+      if (data.length) {
         setDataList(data);
         setSelectedOption(data[0].tokenId);
         setArtworkId(data[0].artworkId);
         setIsRefChoose(data[0].ifRedeemed ? true : false)
-      }else{
+      } else {
         setShow(true);
       }
       setLoading(false);
     }
-  },[]);
-  
+  }, []);
+
   useEffect(() => {
-    if(!selectedOption) return;
+    if (!selectedOption) return;
     const result = dataList.find(item => item.tokenId === selectedOption);
     setObj(result);
-  },[dataList, selectedOption]);
+  }, [dataList, selectedOption]);
 
   const handleOptionChange = (event) => {
     const item = dataList.find(item => item.tokenId === event.target.value);
@@ -117,39 +118,39 @@ function RedeemStep2() {
   const optionMintpass = dataList.map((item, key) => {
     return <option key={key} value={item.tokenId}>Mintpass {item.tokenId}</option>
   });
-  
-  useEffect(async() => {
+
+  useEffect(async () => {
     await dispatch(getAccount());
     await dispatch(fetchMintpassContract());
-  },[dispatch])
+  }, [dispatch])
 
   const setredeemedartwork = async () => {
     setLoading(true);
-    await axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, {headers: getHeaders()})
-    .then(res => {
-      if(res.status === 200){
-        getIpfs();
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    });
+    await axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, { headers: getHeaders() })
+      .then(res => {
+        if (res.status === 200) {
+          getIpfs();
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   const getIpfs = async () => {
-    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, {headers: getHeaders()})
-    .then(res => {
-      if(res.status === 200){
-        mint(res.data);
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    });
+    await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, { headers: getHeaders() })
+      .then(res => {
+        if (res.status === 200) {
+          mint(res.data);
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   async function mint(ipfs) {
-    try{
+    try {
       //const contract = require("../utils/MindfulNFT.json");
       //const { messageHash, signature } = await getMessageHashSignature(contract).then(res => {
       //  return res;
@@ -165,10 +166,10 @@ function RedeemStep2() {
 
       let ipfsHex = '0x';
       let tASCII, Hex;
-      ipfs.split('').map( i => {
-          tASCII = i.charCodeAt(0)
-          Hex = tASCII.toString(16);
-          ipfsHex = ipfsHex + Hex;
+      ipfs.split('').map(i => {
+        tASCII = i.charCodeAt(0)
+        Hex = tASCII.toString(16);
+        ipfsHex = ipfsHex + Hex;
       });
       ipfsHex = ipfsHex.trim();
       console.log("ipfs in hex: ", ipfsHex);
@@ -193,12 +194,12 @@ function RedeemStep2() {
         args: [address, process.env.MindfulTokenContractAdd, selectedOption, ipfsHex]
       })
     }
-    catch(err){
+    catch (err) {
       console.log('error', err)
     }
   }
 
-  return(
+  return (
     <Container className='mt-5 mb-5'>
       {isLoading || loading ?
         <div className="overly">
@@ -207,78 +208,78 @@ function RedeemStep2() {
         : ''
       }
       <div className={styles.submitPage}>
-          <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
-          <Row className="mt-4"><h4>{t('page.redeem.redeemArtworks')}</h4></Row>
+        <Row><Link href="/"><h6 style={{ cursor: "pointer" }}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+        <Row className="mt-4"><h4>{t('page.redeem.redeemArtworks')}</h4></Row>
 
-          <Row className='mt-4' style={{fontSize: "1.3rem",fontWeight:'800'}}>
-            <Col xs={4} className={styles.item}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-solid fa-circle-check" style={{color: "#7FFF00"}}></i><span>{t('page.redeem.authentication')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
-            <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.selectMintPass')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
-            <Col xs={4} className={styles.item}>
-              <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
-              <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.complete')}</span></div>
-              <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
-            </Col>
-          </Row>
+        <Row className='mt-4' style={{ fontSize: "1.3rem", fontWeight: '800' }}>
+          <Col xs={4} className={styles.item}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-solid fa-circle-check" style={{ color: "#7FFF00" }}></i><span>{t('page.redeem.authentication')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+          <Col xs={4} className={`${styles.item} ${styles.itemActive}`}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.selectMintPass')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+          <Col xs={4} className={styles.item}>
+            <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
+            <div className={styles.content}><i className="fa-regular fa-circle"></i><span>{t('page.redeem.complete')}</span></div>
+            <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
+          </Col>
+        </Row>
 
-          {dataList.length ? 
-            <div className={styles.submitContent}>
-              <Row className="gx-5">
-                <Col xs={12}>
-                  <div className={styles.submitTile}>{t('page.redeem.browseYourMintpass')}: </div>
-                  <div className={styles.submitTxt3}>
-                    <Row className="gx-5">
-                      <Col xs={12} sm={8} md={6}>
-                          <Form className={styles.form1}>
-                            <Form.Select
-                              onChange={handleOptionChange}
-                            >
-                              {optionMintpass}
-                            </Form.Select>
-                          </Form>
-                      </Col>
-                    </Row>
-                  </div>
-                </Col>
-                <Col xs={12}>
-                  <div className={styles.submitTile}>{t('page.redeem.information')}:</div>
-                  <div className={styles.submitTxt3}>{t('page.redeem.theBelowInformation')}</div>
-                </Col>
-                <Col xs={12}>
-                  <div className={styles.submitTile}>{t('page.redeem.artwork')}:</div>
-                  <div className={styles.submitTxt3}><Image src={obj.artworkURL} width='100%' /></div>
-                </Col>
-                <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('page.gallery.type')}:</div>
-                  <div className={styles.submitTxt2}>{obj.type}</div>
-                </Col>
-                <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('page.redeem.eventID')}:</div>
-                  <div className={styles.submitTxt2}>{obj.eventId}</div>
-                </Col>
-                <Col xs={12}>
-                  <div className={styles.submitTile2}>{t('main.text.artistMessage')}:</div>
-                  <div className={styles.submitTxt2}>{obj.artistMessage}</div>
-                </Col>
-              </Row>
-              <Row className='justify-content-md-center mt-5'>
-                <Col xs={12}>
-                  <div className='text-center'>
-                    <Button className={`${styles.burneBtn}`} onClick={setredeemedartwork} disabled={isLoading || loading || isRefChoose}>{t('button.burn')}</Button>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-           : ''}
-          {/* mobile app confirm modal */}
-          <AppModal setShow={setShow} show={show} />
+        {dataList.length ?
+          <div className={styles.submitContent}>
+            <Row className="gx-5">
+              <Col xs={12}>
+                <div className={styles.submitTile}>{t('page.redeem.browseYourMintpass')}: </div>
+                <div className={styles.submitTxt3}>
+                  <Row className="gx-5">
+                    <Col xs={12} sm={8} md={6}>
+                      <Form className={styles.form1}>
+                        <Form.Select
+                          onChange={handleOptionChange}
+                        >
+                          {optionMintpass}
+                        </Form.Select>
+                      </Form>
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+              <Col xs={12}>
+                <div className={styles.submitTile}>{t('page.redeem.information')}:</div>
+                <div className={styles.submitTxt3}>{t('page.redeem.theBelowInformation')}</div>
+              </Col>
+              <Col xs={12}>
+                <div className={styles.submitTile}>{t('page.redeem.artwork')}:</div>
+                <div className={styles.submitTxt3}><Image src={obj.artworkURL} width='100%' /></div>
+              </Col>
+              <Col xs={12}>
+                <div className={styles.submitTile2}>{t('page.gallery.type')}:</div>
+                <div className={styles.submitTxt2}>{obj.type}</div>
+              </Col>
+              <Col xs={12}>
+                <div className={styles.submitTile2}>{t('page.redeem.eventID')}:</div>
+                <div className={styles.submitTxt2}>{obj.eventId}</div>
+              </Col>
+              <Col xs={12}>
+                <div className={styles.submitTile2}>{t('main.text.artistMessage')}:</div>
+                <div className={styles.submitTxt2}>{obj.artistMessage}</div>
+              </Col>
+            </Row>
+            <Row className='justify-content-md-center mt-5'>
+              <Col xs={12}>
+                <div className='text-center'>
+                  <Button className={`${styles.burneBtn}`} onClick={setredeemedartwork} disabled={isLoading || loading || isRefChoose}>{t('button.burn')}</Button>
+                </div>
+              </Col>
+            </Row>
+          </div>
+          : ''}
+        {/* mobile app confirm modal */}
+        <AppModal setShow={setShow} show={show} />
       </div>
     </Container>
   )
@@ -290,16 +291,18 @@ import { WagmiConfig } from 'wagmi';
 import { projectId, wagmiConfig, ethereumClient } from '../components/wagmi';
 function App() {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RedeemStep2 />
-      <Web3Modal
-        projectId={projectId}
-        ethereumClient={ethereumClient}
-        themeVariables={{
-          '--w3m-z-index': '9999'
-        }}
-      />
-    </WagmiConfig>
+    <Layout>
+      <WagmiConfig config={wagmiConfig}>
+        <RedeemStep2 />
+        <Web3Modal
+          projectId={projectId}
+          ethereumClient={ethereumClient}
+          themeVariables={{
+            '--w3m-z-index': '9999'
+          }}
+        />
+      </WagmiConfig>
+    </Layout>
   )
 }
 
@@ -307,17 +310,18 @@ export default App;
 
 //getServerSideProps will get static data in building page process from server before the page render
 export async function getServerSideProps(context) {
-  const session = await getSession(context);  
+  const session = await getSession(context);
   const BASE_URL = process.env.NEXTAUTH_URL;
-  if(session) {
+  if (session) {
     const res = await axios.get(
       `${BASE_URL}/api/users`,
-        { params: 
-          { 
-            email: session.user.email, 
-          }
+      {
+        params:
+        {
+          email: session.user.email,
         }
-      )
+      }
+    )
     const user = res.data;
     return {
       props: {

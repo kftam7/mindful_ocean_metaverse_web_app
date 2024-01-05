@@ -15,7 +15,7 @@ const ContactUs = () => {
 
   return (
     <div className={styles.contact_us}>
-      <Container className='mt-5 mb-5'>
+      <Container>
         <ToastContainer />
         {loading ?
           <div className="overly">
@@ -52,9 +52,9 @@ const ContactUs = () => {
                 </div>
               </a></div>
               <div className={styles.link_item}>
-                <div className={styles.item_a}><a href="https://twitter.com/MindfulOceanNFT" target='_blank'><span className={`${styles.item_icon} ${styles.icon1}`}></span>{t('main.text.twitter')}</a></div>
-                <div className={styles.item_a}><a href="https://discord.com/channels/1176399280924266600/1176399281524068403"  target='_blank'><span className={`${styles.item_icon} ${styles.icon2}`}></span>{t('main.text.facebook')}</a></div>
                 <div className={styles.item_a}><a href="https://www.instagram.com/mindfuloceannft" target='_blank'><span className={`${styles.item_icon} ${styles.icon3}`}></span>{t('main.text.instagram')}</a></div>
+                <div className={styles.item_a}><a href="https://discord.com/channels/1176399280924266600/1176399281524068403"  target='_blank'><span className={`${styles.item_icon} ${styles.icon2}`}></span>{t('main.text.facebook')}</a></div>
+                <div className={styles.item_a}><a href="https://twitter.com/MindfulOceanNFT" target='_blank'><span className={`${styles.item_icon} ${styles.icon1}`}></span>{t('main.text.twitter')}</a></div>
               </div>
             </div>
           </Col>

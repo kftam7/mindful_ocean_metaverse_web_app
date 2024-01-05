@@ -4,7 +4,7 @@ import { fetchWeb3 } from '../store/web3Connections';
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import Router, {useRouter} from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import homeStyles from '../styles/Home.module.css';
 import styles from '../styles/SubmitPage.module.css';
@@ -18,6 +18,7 @@ import { useTranslation } from '../i18n';
 import { ethers, BigNumber } from 'ethers';
 import { getMessageHashSignature, getHeaders } from '../utils/utils';
 import { FaSpinner } from 'react-icons/fa';
+import Layout from '../components/SubpageLayout';
 
 //智能合约2.0
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
@@ -61,7 +62,7 @@ function Mintpass({ session, user }) {
   useEffect(() => {
     if (!isSuccess) return;
     // setMinedArtwork();
-    
+
     Router.push({
       pathname: '/mintedPage',
     });
@@ -106,7 +107,7 @@ function Mintpass({ session, user }) {
     if ((res.status === 200) && (res.data.data.length > 0)) {
       const ifMinted = res.data.data.find(item => item.artworkId === Number(artworkId)).ifMinted;
       if (!ifMinted) {
-        mintPass();        
+        mintPass();
         setMinedArtwork();
       } else {
         toast.error('Artwork has been minted. Please choose another one', {
@@ -251,16 +252,18 @@ import { WagmiConfig } from 'wagmi';
 import { projectId, wagmiConfig, ethereumClient } from '../components/wagmi';
 function App() {
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <Mintpass />
-      <Web3Modal
-        projectId={projectId}
-        ethereumClient={ethereumClient}
-        themeVariables={{
-          '--w3m-z-index': '9999'
-        }}
-      />
-    </WagmiConfig>
+    <Layout>
+      <WagmiConfig config={wagmiConfig}>
+        <Mintpass />
+        <Web3Modal
+          projectId={projectId}
+          ethereumClient={ethereumClient}
+          themeVariables={{
+            '--w3m-z-index': '9999'
+          }}
+        />
+      </WagmiConfig>
+    </Layout>
   )
 }
 
