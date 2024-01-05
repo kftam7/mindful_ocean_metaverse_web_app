@@ -207,14 +207,15 @@ async function submitid(req){
         // send the email out
         try {
             // Set up the email options and delivering it
-            //const sendMailResult = await transport.sendMail(mailOptions);
-            //// check the result and record on DB
-            //if(sendMailResult.response.includes("OK")){
-            //    logger.log('info', '%s %s Send Email Success: %s', 'Signin', 'submitid', req.params.appleId);
-            //}else{
-            //    logger.log('error', '%s %s Send Email Failed: %s', 'Signin', 'submitid', req.params.appleId);
-            //    return 'Failed to send email'
-            //}
+            const sendMailResult = await transport.sendMail(mailOptions);
+            
+            // check the result and record on DB
+            if(sendMailResult.response.includes("OK")){
+                logger.log('info', '%s %s Send Email Success: %s', 'Signin', 'submitid', req.params.appleId);
+            }else{
+                logger.log('error', '%s %s Send Email Failed: %s', 'Signin', 'submitid', req.params.appleId);
+                return 'Failed to send email'
+            }
         
         } catch(error){
             logger.log('error', '%s %s Send Email Failed: %s. Error: %s', 'Signin', 'submitid', req.params.appleId, error);

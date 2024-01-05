@@ -101,7 +101,11 @@ router.post('/submitid/:appleId', async function(req, res, next) {
 /* POST SignIn */
 router.get('/verifyemail/:verificationtoken', async function(req, res, next) {
   try {
-    res.json(await SignIn.verifyemail(req.params.verificationtoken));
+    //res.json(await SignIn.verifyemail(req.params.verificationtoken));
+    const result = await SignIn.verifyemail(req.params.verificationtoken);
+    if (result == "Record updated"){
+      res.redirect(process.env.redirect_address + "?from=emailverification");
+    }
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);
     console.error(`Error while getting  `, err.message);
