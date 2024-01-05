@@ -264,7 +264,7 @@ const NavBar = ({ onLocaleChange }) => {
 
   const handleEmailOk = () => {
     setVisibleEmail(false);
-    signInOpenModal();
+    handleAppleSignOut();
   }
 
   const handleEmailCancel = () => {

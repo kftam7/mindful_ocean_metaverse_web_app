@@ -80,14 +80,14 @@ const ModalEmailVerification = props => {
         show={show}
         onHide={onCancel}
       >
-        <Modal.Header closeButton style={{ padding: '30px 30px 0 30px', border: 0 }}>
+        {!isSuccess ? <Modal.Header style={{ padding: '30px 30px 0 30px', border: 0 }}>
           <Modal.Title>{t('Email Verification')}</Modal.Title>
-        </Modal.Header>
+        </Modal.Header> : ''
+        }
         <Modal.Body>
           {isSuccess ?
             <div style={{ textAlign: 'center' }}>
-              <Image src="/Vector.png" width='120px' />
-              <div className="modal_text1">{t('main.text.yourEmailIsVerified')}</div>
+              <div className="modal_text1" dangerouslySetInnerHTML={{ __html: (t('main.text.emailSent')) }} />
             </div>
             :
             <Container>
@@ -174,7 +174,6 @@ const ModalEmailVerification = props => {
           :
           <Modal.Footer style={{ flexDirection: 'column', justifyContent: 'center', paddingBottom: '30px', border: 0 }}>
             <Button onClick={handleSend}>{t('button.sendVerification')}</Button>
-            <div>{t('Don’t get a code? Resend')}</div>
           </Modal.Footer>
         }
       </Modal>

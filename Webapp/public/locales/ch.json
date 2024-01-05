@@ -82,7 +82,7 @@
     "main.text.facebook": "Facebook",
     "main.text.instagram": "Instagram",
     "main.text.copiedToClipboard": "已复制到剪贴板！",
-    "main.text.yourEmailIsVerified": "Your Email is verified.",
+    "main.text.emailSent": "Email Sent!<br />Please check your email to proceed login",
     "page.create.createAndColor": "创作并为自创的鱼上色",
     "page.create.downloadTemplate": "下载模板",
     "page.create.uploadYourArtwork": "上传您的艺术作品（不超过1MB）,在3D模型上预览！",

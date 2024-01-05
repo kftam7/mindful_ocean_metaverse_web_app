@@ -82,7 +82,7 @@
     "main.text.facebook": "Facebook",
     "main.text.instagram": "Instagram",
     "main.text.copiedToClipboard": "Copied to clipboard!",
-    "main.text.yourEmailIsVerified": "Your Email is verified.",
+    "main.text.emailSent": "Email Sent!<br />Please check your email to proceed login",
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
     "page.create.uploadYourArtwork": "upload your artwork (no bigger than 1MB) to preview it on 3D model!",
