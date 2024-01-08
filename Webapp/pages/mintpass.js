@@ -237,7 +237,6 @@ function Mintpass({ session, user }) {
           <Row className='text-center mt-1 mb-5' style={{ color: "grey" }}>
             <p className="m-0">
               {t('page.mintpass.aSmallGasFeeWillBeCharged')}<br />
-              <span style={{ textDecoration: "underline", cursor: 'pointer' }}>{t('page.mintpass.moreDetails')}</span>
             </p>
           </Row>
         </div>

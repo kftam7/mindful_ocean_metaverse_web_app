@@ -40,10 +40,20 @@ async function createAppVersion(appVersionRecord){
 
   logger.log('info', '%s %s', 'AppVersion', 'createAppVersion');
 
+
   // construct the SQL statement
   var sql = 'INSERT INTO appVersion (versionNo, versionName, releaseDate, expireDate, description, isActive) VALUES ';
 
   for (var i =0; i < appVersionRecord.length; i++){
+
+    // check if expireDate > releaseDate
+    var releaseDate = new Date(appVersionRecord[i].releaseDate);
+    var expireDate = new Date(appVersionRecord[i].expireDate);
+    if (expireDate.getTime() <= releaseDate.getTime()){
+      logger.log('error', '%s %s sql: %s', 'AppVersion', 'createAppVersion', 'Expire Date can\'t be ealier than Release Date');
+      let message = 'Expire Date can\'t be ealier than Release Date';
+      return {message};
+    }
 
     // combine into 1 single SQL
     if (i == (appVersionRecord.length-1)){
@@ -72,6 +82,15 @@ async function createAppVersion(appVersionRecord){
 async function updateAppVersion(version, appVersionRecord){
 
   logger.log('info', '%s %s', 'AppVersion', 'updateAppVersion');
+
+  // check if expireDate > releaseDate
+  var releaseDate = new Date(appVersionRecord.releaseDate);
+  var expireDate = new Date(appVersionRecord.expireDate);
+  if (expireDate.getTime() <= releaseDate.getTime()){
+    logger.log('error', '%s %s sql: %s', 'AppVersion', 'updateAppVersion', 'Expire Date can\'t be ealier than Release Date');
+    let message = 'Expire Date can\'t be ealier than Release Date';
+    return {message};
+  }
 
   sql = 'UPDATE appVersion SET versionName = "' + appVersionRecord.versionName + '", releaseDate = "' + appVersionRecord.releaseDate + '", expireDate = "' + appVersionRecord.expireDate + '", description = "' + appVersionRecord.description+ '", isActive = "' + appVersionRecord.isActive  + '" WHERE versionNo = "' + version + '";';
 

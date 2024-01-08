@@ -297,10 +297,10 @@ const ModalAdd = (props) => {
                 <Form.Item
                     label='titleCN'
                     name="titleCN"
-                    rules={formItemRules.titleTW}
+                    rules={formItemRules.titleCN}
                 >
                     <Input
-                        placeholder='titleTW'
+                        placeholder='titleCN'
                         allowClear
                     />
                 </Form.Item>
@@ -310,7 +310,7 @@ const ModalAdd = (props) => {
                     rules={formItemRules.titleTW}
                 >
                     <Input
-                        placeholder='titleCN'
+                        placeholder='titleTW'
                         allowClear
                     />
                 </Form.Item>
