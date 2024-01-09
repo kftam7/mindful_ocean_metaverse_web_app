@@ -50,9 +50,6 @@ export default function RedeemStep4() {
                                     <div className={styles.mintedTitle}>
                                         {t('page.redeem.plop')}
                                     </div>
-                                    <div>
-                                        {t('page.redeem.openTheApp')}
-                                    </div>
                                 </Col>
                             </Row>
                         </div>
