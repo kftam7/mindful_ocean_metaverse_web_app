@@ -155,7 +155,7 @@ const NavBar = ({ onLocaleChange }) => {
 
   // Web3Modal
   const [loadingWallet, setLoadingWallet] = useState(false);
-  const { open } = useWeb3Modal();
+  const { open, isOpen } = useWeb3Modal();
   //const { isConnected } = useAccount();
   const { address, isConnected } = useAccount()
   const { disconnect } = useDisconnect();
@@ -169,6 +169,11 @@ const NavBar = ({ onLocaleChange }) => {
     }
     handleGetWalletInfo();
   }, [isConnected]);
+
+  useEffect(async () => {
+    if (isOpen) return
+    setLoadingWallet(false);
+  }, [isOpen]);
 
   const onOpen = async () => {
     setLoadingWallet(true);
