@@ -58,6 +58,18 @@ const Appversion = (props) => {
             callback();
         }
     };
+
+    // ExpireDate should not earlier than releaseDate
+    const validateExpireDate = (rule, value, callback) => {
+        const { getFieldValue } = form;
+        const startTime = getFieldValue('releaseDate');
+        const endTime = value;
+        if (startTime && endTime && startTime > endTime) {
+          callback('expireDate cannot be earlier than releaseDate');
+        } else {
+          callback();
+        }
+    };
     
     // 定义验证规则
     const formItemRules = {
@@ -70,7 +82,10 @@ const Appversion = (props) => {
             { validator: validateInputLength }
         ],
         releaseDate: [{ required: true, message: 'Please select releaseDate!' }],
-        expireDate: [{ required: true, message: 'Please select expireDate!' }],
+        expireDate: [
+            { required: true, message: 'Please select expireDate!' },
+            { validator: validateExpireDate }
+        ],
         description: [
             { required: true, message: 'Please input description!' },
             { validator: validateInputLengthDescription }

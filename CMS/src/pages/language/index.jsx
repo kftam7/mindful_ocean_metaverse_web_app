@@ -66,7 +66,11 @@ const Language = (props) => {
             dataIndex: 'variable',
             key: 'variable',
             defaultSortOrder: 'descend',
-            sorter: (a, b) => a["variable"] - b["variable"],
+            sorter: (a, b) => {
+                if (a['variable']) {
+                    return a['variable'].localeCompare(b['variable']);
+                }
+            },
             sortOrder: sortedInfo.columnKey === 'variable' ? sortedInfo.order : null,
             ellipsis: true,
             width: 90,
