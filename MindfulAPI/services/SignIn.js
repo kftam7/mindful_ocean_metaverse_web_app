@@ -45,7 +45,7 @@ async function signin(req){
         const resultCheckIsActive = await db.query(
             sqlCheckIsActive
         );
-        logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'signin', sqlCheckIsActive);
+        logger.log('debug', '%s %s sqlCheckIsActive: %s', 'Signin', 'signin', sqlCheckIsActive);
         if (!resultCheckIsActive[0].isActive){
             logger.log('error', '%s %s %s Account Disabled', 'Signin', 'Signin', req.params.appleId);
             let message = "Account Disabled";

@@ -82,37 +82,49 @@ async function auth(req){
 
         // if appleId already exist
         if (resultCheck[0].if_exist){
-            /*
-            const resultUpdate = await db.query(
-                sqlUpdate
-            );
-            logger.log('info', '%s %s Record updated successfully', 'AppleAuth', 'auth');
-            */
 
-            let sqlCheckInfo = 'SELECT b.firstName, b.lastName, b.email, b.emailVerified AS firstName, lastName, email, emailVerified FROM TandC a, user b WHERE a.userId=b.userId AND a.agreed = 1 AND b.appleId = "' + user.id +'"';
-            const resultCheckInfo = await db.query(
-                sqlCheckInfo
+            // check if user is disabled
+            var sqlCheckIsActive = 'SELECT isActive FROM user WHERE appleId = "' + user.id +'"';
+            const resultCheckIsActive = await db.query(
+                sqlCheckIsActive
             );
-            logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheckInfo);
-
-            if (resultCheckInfo[0].firstName && resultCheckInfo[0].lastName && resultCheckInfo[0].email && (resultCheckInfo[0].emailVerified == 1)){
-                body = body + "&firstTime=0";
+            logger.log('debug', '%s %s sqlCheckIsActive: %s', 'AppleAuth', 'auth', sqlCheckIsActive);
+            if (resultCheckIsActive[0].isActive){
+                /*
+                const resultUpdate = await db.query(
+                    sqlUpdate
+                );
+                logger.log('info', '%s %s Record updated successfully', 'AppleAuth', 'auth');
+                */
+    
+                let sqlCheckInfo = 'SELECT b.firstName, b.lastName, b.email, b.emailVerified AS firstName, lastName, email, emailVerified FROM TandC a, user b WHERE a.userId=b.userId AND a.agreed = 1 AND b.appleId = "' + user.id +'"';
+                const resultCheckInfo = await db.query(
+                    sqlCheckInfo
+                );
+                logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheckInfo);
+    
+                if (resultCheckInfo[0].firstName && resultCheckInfo[0].lastName && resultCheckInfo[0].email && (resultCheckInfo[0].emailVerified == 1)){
+                    body = body + "&firstTime=0";
+                }else{
+                    body = body + "&firstTime=1";
+                }
+    
+                // check if agreed T&C
+                //let sqlCheckTandC = 'SELECT COUNT(*) AS if_tandc FROM TandC a, user b WHERE a.userId=b.userId AND a.agreed = 1 AND b.appleId = "' + user.id +'"';
+                //const resultCheckTandC = await db.query(
+                //    sqlCheckTandC
+                //);
+                //logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheckTandC);
+    
+                //if (resultCheckTandC[0].if_tandc){
+                //    body = body + "&firstTime=0";
+                //}else{
+                //    body = body + "&firstTime=1";
+                //}
             }else{
-                body = body + "&firstTime=1";
+                logger.log('error', '%s %s %s Account Disabled', 'AppleAuth', 'auth', user.id);
+                body = body + "&accountdisabled";
             }
-
-            // check if agreed T&C
-            //let sqlCheckTandC = 'SELECT COUNT(*) AS if_tandc FROM TandC a, user b WHERE a.userId=b.userId AND a.agreed = 1 AND b.appleId = "' + user.id +'"';
-            //const resultCheckTandC = await db.query(
-            //    sqlCheckTandC
-            //);
-            //logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheckTandC);
-
-            //if (resultCheckTandC[0].if_tandc){
-            //    body = body + "&firstTime=0";
-            //}else{
-            //    body = body + "&firstTime=1";
-            //}
         }else{
             const resultCreate = await db.query(
                 sqlCreate

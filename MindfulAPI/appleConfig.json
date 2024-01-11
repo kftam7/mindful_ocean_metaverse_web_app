@@ -2,6 +2,6 @@
     "client_id": "com.outblaze.mindfuloceanmeta-siwa",
     "team_id": "68FWJG5G8T",
     "key_id": "UCD8U8J4M4",
-    "redirect_uri": "https://api-staging.mindfultoken.org/mindfulapi/appleauth",
+    "redirect_uri": "https://api-staging.mindful-ocean.org/mindfulapi/app/appleauth",
     "scope": "name email"
 }
