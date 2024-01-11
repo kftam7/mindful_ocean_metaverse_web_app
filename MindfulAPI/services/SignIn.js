@@ -40,6 +40,19 @@ async function signin(req){
     // if appleId already exist
     if (resultCheck[0].if_exist){
 
+        // check if disabled
+        var sqlCheckIsActive = 'SELECT isActive FROM user WHERE appleId = "' + req.params.appleId +'"';
+        const resultCheckIsActive = await db.query(
+            sqlCheckIsActive
+        );
+        logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'signin', sqlCheckIsActive);
+        if (!resultCheckIsActive[0].isActive){
+            logger.log('error', '%s %s %s Account Disabled', 'Signin', 'Signin', req.params.appleId);
+            let message = "Account Disabled";
+            return {message}
+        }
+
+
         // if not 1st time login, don't update 1st & last names, just update email
         var sqlUpdate = 'UPDATE user SET updateTime = "'+ currentTimeSql + '"'; 
 

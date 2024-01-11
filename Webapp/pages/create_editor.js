@@ -21,7 +21,7 @@ function CreatePage() {
                     alt="A 3D model of an ocean animal"
                     shadow-intensity="1"
                     camera-controls
-                    auto-rotate autoplay ar
+                    auto-rotate autoplay
                     ar-modes="webxr scene-viewer quick-look"
                     style={{height: '60vh'}}>
                 </model-viewer>

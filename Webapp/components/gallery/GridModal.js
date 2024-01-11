@@ -46,7 +46,7 @@ function GridModel(props) {
                     alt="A 3D model of an astronaut"
                     shadow-intensity="1"
                     camera-controls
-                    auto-rotate autoplay ar
+                    auto-rotate autoplay
                     ar-modes="webxr scene-viewer quick-look">
                   </model-viewer>
                   <section className="attribution">
