@@ -15,6 +15,7 @@ import ModalCookies from "./modalCookies";
 import ComponentsCookieConsent from '../components/componentsCookieConsent';
 import ModalEmailVerification from "./modalEmailVerification";
 import ModalFormEmailverification from "./modalFormEmailverification";
+import ModalFormAccountDisabled from "./modalFormAccountDisabled";
 
 // apple id login
 import { parse } from 'url';
@@ -61,6 +62,7 @@ const NavBar = ({ onLocaleChange }) => {
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [visibleEmail, setVisibleEmail] = useState(false);
   const [visibleFormEmailverification, setVisibleFormEmailverification] = useState(false);
+  const [visibleFormAccountDisabled, setVisibleFormAccountDisabled] = useState(false);
 
   // apple id
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
@@ -77,6 +79,11 @@ const NavBar = ({ onLocaleChange }) => {
     if (!from || from !== 'emailverification') return
     setVisibleFormEmailverification(true)
   }, [from])
+
+  useEffect(() => {
+    if (!from || from !== 'accountdisabled') return
+    setVisibleFormAccountDisabled(true)
+  }, [from])  
 
   useEffect(() => {
     const pathname = getPathname();
@@ -175,6 +182,7 @@ const NavBar = ({ onLocaleChange }) => {
     if (isOpen) return
     setLoadingWallet(false);
   }, [isOpen]);
+
 
   const onOpen = async () => {
     setLoadingWallet(true);
@@ -293,6 +301,14 @@ const NavBar = ({ onLocaleChange }) => {
     setVisibleFormEmailverification(false);
   }
 
+  const handleFormAccountDisabledOk = () => {
+    setVisibleFormAccountDisabled(false);
+  }
+
+  const handleFormAccountDisabledCancel = () => {
+    setVisibleFormAccountDisabled(false);
+  }
+
   return (
     <Navbar collapseOnSelect fixed="top" expand='xl' className={`${styles.bg}`}>
       <Container fluid className={styles.container}>
@@ -407,6 +423,12 @@ const NavBar = ({ onLocaleChange }) => {
               show={visibleFormEmailverification}
               onOk={handleFormEmailverificationOk}
               onCancel={handleFormEmailverificationCancel}
+            />
+            <ModalFormAccountDisabled
+              t={t}
+              show={visibleFormAccountDisabled}
+              onOk={handleFormAccountDisabledOk}
+              onCancel={handleFormAccountDisabledCancel}
             />
           </Row>
         </Navbar.Collapse>

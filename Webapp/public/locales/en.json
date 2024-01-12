@@ -86,6 +86,8 @@
     "main.text.emailSent": "Email Sent!<br />Please check your email to proceed login",
     "main.text.emailVerification": "Email Verification",
     "main.text.yourEmailIsVerified": "Your Email is verified.",
+    "main.text.accountDisabled": "Account Disabled",
+    "main.text.youraccountDisabled": "Your account is disabled. Please contact the administrator",
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
     "page.create.uploadYourArtwork": "upload your artwork (no bigger than 1MB) to preview it on 3D model!",
