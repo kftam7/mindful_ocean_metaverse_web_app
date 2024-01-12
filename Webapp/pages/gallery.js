@@ -109,8 +109,8 @@ const GalleryPage = () => {
       const regexExtraInfo = new RegExp(extraInfo, 'i');
   
       result = result.filter(item => {
-        const nameMatch = regexName.test(item.name);
-        const descMatch = regexDesc.test(item.description);
+        const nameMatch = regexName.test(item.firstName);
+        const descMatch = regexDesc.test(item.artistMessage);
         const extraInfoMatch = regexExtraInfo.test(item.extraInfo);
         return nameMatch && descMatch && extraInfoMatch;
       });
@@ -278,7 +278,7 @@ const GalleryPage = () => {
               </Col>
             </Row>
             <Row className='me-auto'>
-              <Col md={12} lg={4}>
+              <Col md={12} lg={6}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeName}>
                       <FormControl placeholder={t('page.gallery.searchByName')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={name} />
@@ -290,7 +290,7 @@ const GalleryPage = () => {
                   </InputGroup>
                 </Form>
               </Col>
-              <Col md={12} lg={4}>
+              <Col md={12} lg={6}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeDescription}>
                       <FormControl placeholder={t('page.gallery.searchByDescription')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={description} />
@@ -302,7 +302,7 @@ const GalleryPage = () => {
                   </InputGroup>
                 </Form>
               </Col>
-              <Col md={12} lg={4}>
+              {/* <Col md={12} lg={4}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeExtralnfo}>
                       <FormControl placeholder={t('page.gallery.searchByExtralnfo')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={extraInfo} />
@@ -313,7 +313,7 @@ const GalleryPage = () => {
                       )}
                   </InputGroup>
                 </Form>
-              </Col>
+              </Col> */}
             </Row>
           </Col>
         </Row>

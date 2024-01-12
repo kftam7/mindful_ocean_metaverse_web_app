@@ -13,6 +13,26 @@ const ContactUs = () => {
   //const apiPort = process.env.API_PORT || '/';
   const [loading, setLoading] = useState(false);
 
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text)
+    .then(() => {
+      toast.success('已成功复制到剪贴板', {
+        autoClose: 3000,
+        position: 'top-center',
+        className: 'custom-toast-success',
+        hideProgressBar: true,
+      });
+    })
+    .catch((error) => {
+      toast.error('无法复制到剪贴板', {
+        autoClose: 3000,
+        position: 'top-center',
+        className: 'custom-toast-error',
+        hideProgressBar: true,
+      });
+    });
+  }
+
   return (
     <div className={styles.contact_us}>
       <Container>
@@ -37,7 +57,7 @@ const ContactUs = () => {
           </div>
           <Col lg={12}>
             <div className={styles.contact_box}>
-              <div className={styles.link_email}><a href="mailto:info@mindful-ocean.org">
+              <div className={styles.link_email}><a href="mailto:info@mindful-ocean.org" onClick={() => handleCopy('mailto:info@mindful-ocean.org')}>
                 <div className={styles.email_con}>
                   <div className={styles.email_title}>{t('main.text.email')}</div>
                   <div className={styles.email_img}></div>

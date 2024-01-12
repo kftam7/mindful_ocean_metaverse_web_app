@@ -151,6 +151,7 @@ const NavBar = ({ onLocaleChange }) => {
     sessionStorage.removeItem("appleIdLastName");
     router.push('/');
     setIsAppleIdLogin(false);
+    setAppleIdName('')
   }
 
   // Web3Modal
@@ -314,7 +315,7 @@ const NavBar = ({ onLocaleChange }) => {
             <Nav.Link href="/faq" className={styles.navlink}>{t('nav.faq')}</Nav.Link>
           </Nav>
           <Row className='nav_right'>
-            <Col lg={6} xl={6}>
+            <Col lg={5} md={6} style={{ textAlign: 'right' }}>
               <Dropdown className="">
                 <Dropdown.Toggle className={styles.dropdownBtn} id="language">
                   {lang}
@@ -326,8 +327,18 @@ const NavBar = ({ onLocaleChange }) => {
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
-            <Col lg={6} xl={6}>
-              <Button onClick={signInOpenModal} className={styles.signId}>{t('button.signIn')}</Button>
+            <Col lg={7} md={6}>
+              <Row>
+                <Col lg={appleIdName ? 8 : 12} md={appleIdName ? 8 : 12} className='text-center'>
+                  <Button onClick={signInOpenModal} className={styles.signId}>{t('button.signIn')}</Button>
+                </Col>
+                {appleIdName ?
+                  <Col lg={4} md={4}>
+                    {appleIdName}
+                  </Col>
+                  : ''
+                }
+              </Row>
             </Col>
             <Modal
               show={isModalVisible}

@@ -146,7 +146,7 @@ const Event1 = () => {
               })}
             </div>
             {eventId < 6 ? <div className="text-center event_btn"><Button variant="outline-primary" onClick={() => window.location.href = `/event?eventId=${Number(eventId) + 1}`}>{t('button.continueReading')}</Button></div>
-              : ''}
+              : <div className="text-center event_btn"><Button variant="outline-primary" onClick={() => window.location.href = `/`}>&larr; {t('button.returnToHomepage')}</Button></div>}
             <EventStep
               eventId={eventId}
             />

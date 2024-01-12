@@ -13,13 +13,13 @@ const Part8 = ({ t }) => {
       <div className='part_pannel bg_blue'>
         <div class="container text-center">
           <Row>
-            <Col lg={4} xs={4}>
+            <Col lg={4} xs={12} style={{ margin: '20px 0' }}>
               {/* <a href='/contactUs' className='part11_link'>{t('nav.contactUs')}</a> */}
               <a href='https://www.iubenda.com/privacy-policy/43680858/full-legal' target='_blank' className='part11_link'>{t('nav.privacyPolicy')}</a>
               <a href='javascript: void(0)' className='part11_link' onClick={() => setShow(true)}>{t('nav.appStore')}</a>
             </Col>
-            <Col lg={4} xs={4}><div className='part11_logo'><Image src="/logo.png" /></div></Col>
-            <Col lg={4} xs={4}>
+            <Col lg={4} xs={12} style={{ margin: '20px 0' }}><div className='part11_logo'><Image src="/logo.png" /></div></Col>
+            <Col lg={4} xs={12} style={{ margin: '20px 0' }}>
               <a href='/faq' className='part11_link'>{t('nav.faq')}</a>
               <a href='/Mindful Ocean Website TC.pdf' target='_blank' className='part11_link'>{t('nav.termsConditions')}</a>
             </Col>
@@ -29,7 +29,7 @@ const Part8 = ({ t }) => {
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton style={{ border: 0 }}>
         </Modal.Header>
-        <Modal.Body><Image src="/appStore.png" width="100%" style={{ padding: '10px' }} /></Modal.Body>
+        <Modal.Body><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'><Image src="/appStore.png" width="100%" style={{ padding: '10px' }} /></a></Modal.Body>
       </Modal>
     </div>
   )
