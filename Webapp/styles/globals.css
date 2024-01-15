@@ -1222,6 +1222,14 @@ option {
   margin-top: 20px;
 }
 
+.long-content-tooltip {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 @media only screen and (max-width: 768px) {
   .connect_code {
     display: block !important;

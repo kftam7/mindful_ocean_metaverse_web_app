@@ -29,6 +29,7 @@
 .signId {
     border-color: var(--primary-text-color);
     background-color: var(--primary-text-color);
+    max-width: 150px;
     padding: 8px 30px;
 }
 
@@ -168,5 +169,12 @@
     .signId {
         width: 100%;
         margin-bottom: 10px;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .signId {
+        max-width: inherit;
     }
 }

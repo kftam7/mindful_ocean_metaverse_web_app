@@ -1,4 +1,4 @@
-import {Row, Col, Form,InputGroup,FormControl, Button, Image, Container, Dropdown, Pagination} from 'react-bootstrap';
+import { Row, Col, Form, InputGroup, FormControl, Button, Image, Container, Dropdown, Pagination } from 'react-bootstrap';
 import { FaTimes } from 'react-icons/fa';
 import Script from 'next/script';
 import Link from 'next/link';
@@ -27,7 +27,7 @@ const GalleryPage = () => {
   const [dataArtwork, setDataArtwork] = useState([]);
   const [dataResult, setDataResult] = useState([]);
   const [orderBy, setOrderBy] = useState('');
-  const [orderByText, setOrderByText] = useState('');  
+  const [orderByText, setOrderByText] = useState('');
   const [type, setType] = useState('');
   const [typeTxt, setTypeText] = useState('');
   const [name, setName] = useState('');
@@ -38,40 +38,46 @@ const GalleryPage = () => {
   // 初始化数据
   useEffect(async () => {
     const appleid = getAppleId();
-    if(!appleid) return;
-    const des = await axios.get(`${apiPort}/mindfulapi/app/artwork`, {headers: getHeaders()});
-    if(des.status === 200){
+    if (!appleid) return;
+    const des = await axios.get(`${apiPort}/mindfulapi/app/artwork`, { headers: getHeaders() });
+    if (des.status === 200) {
       const { data: { data } } = des;
-      setDataSource(data);
-      setDataArtwork(data);
-      setTotalCount(data.length)
+      const result = data.map(item => {
+        return {
+          ...item,
+          fullName: item.firstName + ' ' + item.lastName
+        }
+      })
+      setDataSource(result);
+      setDataArtwork(result);
+      setTotalCount(result.length)
     }
   }, []);
 
   // 数据渲染
   useEffect(() => {
     const total = dataArtwork.length;
-    if(!total) return setDataResult([]);
-    if(total <= pageSize){
+    if (!total) return setDataResult([]);
+    if (total <= pageSize) {
       setTotalPages(1);
-    }else{
-      if(total % pageSize === 0){
+    } else {
+      if (total % pageSize === 0) {
         setTotalPages(total / pageSize);
-      }else{
+      } else {
         setTotalPages(parseInt(total / pageSize) + 1);
       }
     }
-    
+
     // 当前页数据范围
     let start = 0;
     let end = 0;
-    if(activePage === 1){
+    if (activePage === 1) {
       start = 0;
       end = pageSize;
-    }else if(totalPages > activePage){
+    } else if (totalPages > activePage) {
       start = (activePage - 1) * pageSize;
       end = activePage * pageSize;
-    }else{
+    } else {
       start = (activePage - 1) * pageSize;
       end = totalCount
     }
@@ -86,57 +92,57 @@ const GalleryPage = () => {
 
   // 条件检索，排序检索
   useEffect(() => {
-    if(!dataSource.length) return;
-    if(!orderBy && !type && !name && !description && !extraInfo) {
+    if (!dataSource.length) return;
+    if (!orderBy && !type && !name && !description && !extraInfo) {
       setDataArtwork(dataSource);
       setActivePage(1);
       return;
     }
-    
+
     let result = dataSource;
 
-    if(type){
-      if(type === 'all'){
-        result= result;
-      }else{
-        result= result.filter(item => item.type === type);
+    if (type) {
+      if (type === 'all') {
+        result = result;
+      } else {
+        result = result.filter(item => item.type === type);
       }
     }
 
-    if(name || description || extraInfo){
+    if (name || description || extraInfo) {
       const regexName = new RegExp(name, 'i');
       const regexDesc = new RegExp(description, 'i');
       const regexExtraInfo = new RegExp(extraInfo, 'i');
-  
+
       result = result.filter(item => {
-        const nameMatch = regexName.test(item.firstName);
+        const nameMatch = regexName.test(item.fullName);
         const descMatch = regexDesc.test(item.artistMessage);
         const extraInfoMatch = regexExtraInfo.test(item.extraInfo);
         return nameMatch && descMatch && extraInfoMatch;
       });
     }
 
-    if(orderBy){
+    if (orderBy) {
       setIsSort(!isSort);
       result = result.sort((a, b) => {
-        if(orderBy === 'creationTimeAscending'){
+        if (orderBy === 'creationTimeAscending') {
           return new Date(a.createTime) - new Date(b.createTime);
         }
-        if(orderBy === 'creationTimeDescending'){
+        if (orderBy === 'creationTimeDescending') {
           return new Date(b.createTime) - new Date(a.createTime);
         }
-        if(orderBy === 'updateTimeAscending'){
+        if (orderBy === 'updateTimeAscending') {
           return new Date(a.updateTime) - new Date(b.updateTime);
         }
-        if(orderBy === 'updateTimeDescending'){
+        if (orderBy === 'updateTimeDescending') {
           return new Date(b.updateTime) - new Date(a.updateTime);
         }
-        if(orderBy === 'random'){
+        if (orderBy === 'random') {
           return Math.random() - 0.5;
         }
       });
     }
-    
+
     setDataArtwork(result);
     setActivePage(1);
 
@@ -182,19 +188,19 @@ const GalleryPage = () => {
 
   const changeOrderBy = (orderBy) => {
     let text = '';
-    if(orderBy === 'creationTimeAscending'){
+    if (orderBy === 'creationTimeAscending') {
       text = t('page.gallery.creationTimeAscending');
     }
-    if(orderBy === 'creationTimeDescending'){
+    if (orderBy === 'creationTimeDescending') {
       text = t('page.gallery.creationTimeDescending');
     }
-    if(orderBy === 'updateTimeAscending'){
+    if (orderBy === 'updateTimeAscending') {
       text = t('page.gallery.updateTimeAscending');
     }
-    if(orderBy === 'updateTimeDescending'){
+    if (orderBy === 'updateTimeDescending') {
       text = t('page.gallery.updateTimeDescending');
     }
-    if(orderBy === 'random'){
+    if (orderBy === 'random') {
       text = t('page.gallery.random');
     }
     setOrderBy(orderBy);
@@ -207,8 +213,8 @@ const GalleryPage = () => {
   };
 
   const randomsort = () => {
-    return Math.random()>.5 ? -1 : 1;
-}
+    return Math.random() > .5 ? -1 : 1;
+  }
 
   const shuffle = () => {
     const dataShuffle = dataArtwork.sort(randomsort);
@@ -240,69 +246,69 @@ const GalleryPage = () => {
     setExtraInfo('');
   };
 
-  return(
+  return (
     <Container className='mt-5 mb-5' style={{}}>
-      <Row className='' ><Link href="/"><h6 style={{cursor: 'pointer'}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
+      <Row className='' ><Link href="/"><h6 style={{ cursor: 'pointer' }}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
       <Row className='mt-5'>
-          <Col md={12} lg={4}>
-            <h5>{t('main.text.gallery')}</h5>
-            <p>{t('page.gallery.artworksByOurCommunity')}</p>
-          </Col>
-          <Col md={12} lg={8}>
-            <Row className='me-auto'>
-              <Col md={12} lg={6}>
-                <Dropdown className="mb-3">
-                  <Dropdown.Toggle className={styles.dropdownBtn} id="types">
-                    {orderByText ? orderByText : t('page.gallery.orderBy')}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => changeOrderBy('creationTimeAscending')}>{t('page.gallery.creationTimeAscending')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => changeOrderBy('creationTimeDescending')}>{t('page.gallery.creationTimeDescending')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => changeOrderBy('updateTimeAscending')}>{t('page.gallery.updateTimeAscending')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => changeOrderBy('updateTimeDescending')}>{t('page.gallery.updateTimeDescending')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => changeOrderBy('random')}>{t('page.gallery.random')}</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Col>
-              <Col md={12} lg={6}>
-                <Dropdown className="mb-3">
-                  <Dropdown.Toggle className={styles.dropdownBtn} id="types">
-                    {typeTxt ? typeTxt : t('page.gallery.type')}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => changeType('whale')}>{t('page.gallery.whale')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => changeType('fish')}>{t('page.gallery.butterflyFish')}</Dropdown.Item>
-                      <Dropdown.Item onClick={() => changeType('all')}>{t('main.text.all')}</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Col>
-            </Row>
-            <Row className='me-auto'>
-              <Col md={12} lg={6}>
-                <Form className="mb-3">
-                  <InputGroup style={{width:'100%'}} onChange={changeName}>
-                      <FormControl placeholder={t('page.gallery.searchByName')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={name} />
-                      {name && (
-                        <div class="inputClear" onClick={handleClearName}>
-                          <FaTimes />
-                        </div>
-                      )}
-                  </InputGroup>
-                </Form>
-              </Col>
-              <Col md={12} lg={6}>
-                <Form className="mb-3">
-                  <InputGroup style={{width:'100%'}} onChange={changeDescription}>
-                      <FormControl placeholder={t('page.gallery.searchByDescription')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={description} />
-                      {description && (
-                        <div class="inputClear" onClick={handleClearDescription}>
-                          <FaTimes />
-                        </div>
-                      )}
-                  </InputGroup>
-                </Form>
-              </Col>
-              {/* <Col md={12} lg={4}>
+        <Col md={12} lg={4}>
+          <h5>{t('main.text.gallery')}</h5>
+          <p>{t('page.gallery.artworksByOurCommunity')}</p>
+        </Col>
+        <Col md={12} lg={8}>
+          <Row className='me-auto'>
+            <Col md={12} lg={6}>
+              <Dropdown className="mb-3">
+                <Dropdown.Toggle className={styles.dropdownBtn} id="types">
+                  {orderByText ? orderByText : t('page.gallery.orderBy')}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => changeOrderBy('creationTimeAscending')}>{t('page.gallery.creationTimeAscending')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeOrderBy('creationTimeDescending')}>{t('page.gallery.creationTimeDescending')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeOrderBy('updateTimeAscending')}>{t('page.gallery.updateTimeAscending')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeOrderBy('updateTimeDescending')}>{t('page.gallery.updateTimeDescending')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeOrderBy('random')}>{t('page.gallery.random')}</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+            <Col md={12} lg={6}>
+              <Dropdown className="mb-3">
+                <Dropdown.Toggle className={styles.dropdownBtn} id="types">
+                  {typeTxt ? typeTxt : t('page.gallery.type')}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => changeType('whale')}>{t('page.gallery.whale')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeType('fish')}>{t('page.gallery.butterflyFish')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeType('all')}>{t('main.text.all')}</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+          </Row>
+          <Row className='me-auto'>
+            <Col md={12} lg={6}>
+              <Form className="mb-3">
+                <InputGroup style={{ width: '100%' }} onChange={changeName}>
+                  <FormControl placeholder={t('page.gallery.searchByName')} style={{ border: '1px solid #005D6C', borderRadius: '15px' }} value={name} />
+                  {name && (
+                    <div class="inputClear" onClick={handleClearName}>
+                      <FaTimes />
+                    </div>
+                  )}
+                </InputGroup>
+              </Form>
+            </Col>
+            <Col md={12} lg={6}>
+              <Form className="mb-3">
+                <InputGroup style={{ width: '100%' }} onChange={changeDescription}>
+                  <FormControl placeholder={t('page.gallery.searchByDescription')} style={{ border: '1px solid #005D6C', borderRadius: '15px' }} value={description} />
+                  {description && (
+                    <div class="inputClear" onClick={handleClearDescription}>
+                      <FaTimes />
+                    </div>
+                  )}
+                </InputGroup>
+              </Form>
+            </Col>
+            {/* <Col md={12} lg={4}>
                 <Form className="mb-3">
                   <InputGroup style={{width:'100%'}} onChange={changeExtralnfo}>
                       <FormControl placeholder={t('page.gallery.searchByExtralnfo')} style={{border: '1px solid #005D6C', borderRadius: '15px'}} value={extraInfo} />
@@ -314,41 +320,41 @@ const GalleryPage = () => {
                   </InputGroup>
                 </Form>
               </Col> */}
-            </Row>
+          </Row>
+        </Col>
+      </Row>
+      <Row className='mt-2'>
+        {
+          dataResult.map((d, i) => (
+            <Col xs={12} sm={6} md={4} key={d.artworkId} style={{ position: 'relative' }}>
+              <GalleryModel metadata={d} image={d.URL} index={dataResult.indexOf(d)} t={t} />
+              <Image src={d.URL} className={styles.GalleryPageImages} />
+            </Col>
+          ))
+        }
+      </Row>
+      {dataResult.length ?
+        <Row>
+          <Col lg={12}>
+            <Pagination className='mt-3 pagination_basic'>
+              <Pagination.First onClick={handleFirstPage} />
+              <Pagination.Prev onClick={handlePrevPage} />
+              {renderPageNumbers()}
+              <Pagination.Next onClick={handleNextPage} />
+              <Pagination.Last onClick={handleLastPage} />
+            </Pagination>
           </Col>
         </Row>
-        <Row className='mt-2'>
-          {
-            dataResult.map((d, i) => (
-              <Col xs={12} sm={6} md={4} key={d.artworkId} style={{position:'relative'}}>
-                <GalleryModel metadata={d} image={d.URL} index={dataResult.indexOf(d)} t={t} />
-                <Image src={d.URL} className={styles.GalleryPageImages} />
-              </Col>
-            ))
-          }
+        : ''
+      }
+      {dataArtwork.length && dataArtwork.length !== 1 ?
+        <Row className={styles.btnRow}>
+          <Button onClick={shuffle} className={`${styles.btn} ${homeStyles.btn}`}>{t('button.shuffle')}</Button>
         </Row>
-        {dataResult.length ?
-          <Row>
-            <Col lg={12}>
-              <Pagination className='mt-3 pagination_basic'>
-                <Pagination.First onClick={handleFirstPage} />
-                <Pagination.Prev onClick={handlePrevPage} />
-                {renderPageNumbers()}
-                <Pagination.Next onClick={handleNextPage} />
-                <Pagination.Last onClick={handleLastPage} />
-              </Pagination>
-            </Col>
-          </Row>
-           : ''
-        }
-        {dataArtwork.length && dataArtwork.length !== 1 ?
-          <Row className={styles.btnRow}>
-              <Button onClick={shuffle} className={`${styles.btn} ${homeStyles.btn}`}>{t('button.shuffle')}</Button>
-          </Row>
-           : ''
-        }
-        <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
-        <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
+        : ''
+      }
+      <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
+      <Script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js" />
     </Container>
   )
 }

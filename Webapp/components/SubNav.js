@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAccount, getBalance, grabAccount, grabBalance, disconnectAccount } from '../store/actions';
 import { getPathname, getHeaders } from '../utils/utils';
 import TextOverflowTips from "../components/textOverflowTips/TextOverflowTips";
+import LongContentTooltip from "../components/longContentTooltip";
 import ModalFirstLogin from "./modalFirstLogin";
 import ModalCookies from "./modalCookies";
 import ComponentsCookieConsent from '../components/componentsCookieConsent';
@@ -144,6 +145,7 @@ const NavBar = ({ onLocaleChange }) => {
     sessionStorage.removeItem("appleIdLastName");
     router.push('/');
     setIsAppleIdLogin(false);
+    setAppleIdName('')
   }
 
   // Web3Modal
@@ -298,15 +300,15 @@ const NavBar = ({ onLocaleChange }) => {
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
-            <Col lg={6} xl={6}>
-              <Button onClick={signInOpenModal} className={styles.signId}>{t('button.signIn')}</Button>
+            <Col lg={6} md={6}>
+              <Button onClick={signInOpenModal} className={styles.signId}>{appleIdName ? <LongContentTooltip content={appleIdName} /> : (t('button.signIn'))}</Button>
             </Col>
             <Modal
               show={isModalVisible}
               onHide={handleClose}
             >
               <Modal.Header closeButton>
-                <Modal.Title>{t('main.text.signIn')}</Modal.Title>
+                <Modal.Title>{isAppleIdLogin ? '' : (t('main.text.signIn'))}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Row className='mb-12'>
