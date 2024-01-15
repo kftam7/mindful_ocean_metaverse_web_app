@@ -61,7 +61,7 @@ function Mintpass({ session, user }) {
 
   useEffect(() => {
     if (!isSuccess) return;
-    // setMinedArtwork();
+    setMinedArtwork();
 
     Router.push({
       pathname: '/mintedPage',
@@ -108,7 +108,7 @@ function Mintpass({ session, user }) {
       const ifMinted = res.data.data.find(item => item.artworkId === Number(artworkId)).ifMinted;
       if (!ifMinted) {
         mintPass();
-        setMinedArtwork();
+        //setMinedArtwork();
       } else {
         toast.error('Artwork has been minted. Please choose another one', {
           autoClose: 3000,

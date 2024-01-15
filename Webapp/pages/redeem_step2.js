@@ -64,18 +64,20 @@ function RedeemStep2() {
 
   useEffect(() => {
     if (!isSuccess) return;
+    setredeemedartwork();
+
     Router.push({
       pathname: '/redeem_step4',
     });
   }, [isSuccess])
 
-  useEffect(() => {
-    if (!data) return;
-    console.log('write success', data)
-    Router.push({
-      pathname: '/redeem_step4',
-    });
-  }, [data])
+  // useEffect(() => {
+  //   if (!data) return;
+  //   console.log('write success', data)
+  //   Router.push({
+  //     pathname: '/redeem_step4',
+  //   });
+  // }, [data])
 
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -124,20 +126,41 @@ function RedeemStep2() {
     await dispatch(fetchMintpassContract());
   }, [dispatch])
 
-  const setredeemedartwork = async () => {
-    setLoading(true);
-    await axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, { headers: getHeaders() })
-      .then(res => {
-        if (res.status === 200) {
-          getIpfs();
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      });
+  // const setredeemedartwork = async () => {
+  //   setLoading(true);
+  //   await axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, {}, { headers: getHeaders() })
+  //     .then(res => {
+  //       if (res.status === 200) {
+  //         getIpfs();
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     });
+  // }
+
+  async function setredeemedartwork() {
+    try {
+      const params = {
+        artworkId,
+      }
+      await axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${artworkId}`, params, { headers: getHeaders() })
+        .then(res => {
+          // Router.push({
+          //   pathname: '/mintedPage',
+          // });
+        })
+        .catch(err => {
+          console.log('API error: ', err)
+        })
+    }
+    catch (err) {
+      console.log('setredeemedartwork error: ', err)
+    }
   }
 
   const getIpfs = async () => {
+    setLoading(true);
     await axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${artworkId}`, {}, { headers: getHeaders() })
       .then(res => {
         if (res.status === 200) {
@@ -272,7 +295,7 @@ function RedeemStep2() {
             <Row className='justify-content-md-center mt-5'>
               <Col xs={12}>
                 <div className='text-center'>
-                  <Button className={`${styles.burneBtn}`} onClick={setredeemedartwork} disabled={isLoading || loading || isRefChoose}>{t('button.burn')}</Button>
+                  <Button className={`${styles.burneBtn}`} onClick={getIpfs} disabled={isLoading || loading || isRefChoose}>{t('button.burn')}</Button>
                 </div>
               </Col>
             </Row>

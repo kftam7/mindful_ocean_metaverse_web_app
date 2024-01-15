@@ -158,7 +158,7 @@ async function submitid(req){
         sqlUpdate
     );
     //console.log("sqlUpdate: %s", sqlUpdate);
-    logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlUpdate);
+    logger.log('debug', '%s %s sqlUpdate: %s', 'Signin', 'verifyemail', sqlUpdate);
 
 /*
     // send verification email to user

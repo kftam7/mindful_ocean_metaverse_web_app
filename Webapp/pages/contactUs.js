@@ -16,7 +16,7 @@ const ContactUs = () => {
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text)
     .then(() => {
-      toast.success('已成功复制到剪贴板', {
+      toast.success('Successfully copied email address to clipboard!', {
         autoClose: 3000,
         position: 'top-center',
         className: 'custom-toast-success',
@@ -24,7 +24,7 @@ const ContactUs = () => {
       });
     })
     .catch((error) => {
-      toast.error('无法复制到剪贴板', {
+      toast.error('Failed to copy email address to clipboard!', {
         autoClose: 3000,
         position: 'top-center',
         className: 'custom-toast-error',
@@ -57,7 +57,7 @@ const ContactUs = () => {
           </div>
           <Col lg={12}>
             <div className={styles.contact_box}>
-              <div className={styles.link_email}><a href="mailto:info@mindful-ocean.org" onClick={() => handleCopy('mailto:info@mindful-ocean.org')}>
+              <div className={styles.link_email}><a href="mailto:info@mindful-ocean.org" onClick={() => handleCopy('info@mindful-ocean.org')}>
                 <div className={styles.email_con}>
                   <div className={styles.email_title}>{t('main.text.email')}</div>
                   <div className={styles.email_img}></div>
