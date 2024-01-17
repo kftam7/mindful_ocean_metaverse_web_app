@@ -35,6 +35,7 @@ const ModalAdd = (props) => {
             paragraphText: modalData.paragraphText,
             paragraphTextCN: modalData.paragraphTextCN,
             paragraphTextTW: modalData.paragraphTextTW,
+            type: modalData.type,
             image: modalData.image,
             hyperlink: modalData.hyperlink,
             timerDescription: modalData.timerDescription,
@@ -48,6 +49,15 @@ const ModalAdd = (props) => {
         setEndTime(modalData.endTime);
             
     },[modalType, modalData])
+
+    // 自定义规则：检查输入字符是否超过最大长度 50
+    const validateInputLength0 = (rule, value, callback) => {
+        if (value && value.length > 50) {
+            callback('alphanumeric max 50 characters');
+        } else {
+            callback();
+        }
+    };
 
     // 自定义规则：检查输入字符是否超过最大长度 200
     const validateInputLength1 = (rule, value, callback) => {
@@ -125,6 +135,10 @@ const ModalAdd = (props) => {
             { required: true, message: 'Please input paragraphTextTW!' },
             { validator: validateInputLength3 }
         ],
+        type: [
+            { required: true, message: 'Please input type!' },
+            { validator: validateInputLength0 }
+        ],        
         image: [
             { required: true, message: 'Please input image!' },
             { validator: validateInputLength1 },
@@ -179,6 +193,7 @@ const ModalAdd = (props) => {
                     paragraphText: values.paragraphText,
                     paragraphTextCN: values.paragraphTextCN,
                     paragraphTextTW: values.paragraphTextTW,
+                    type: values.type,                    
                     image: values.image,
                     hyperlink: values.hyperlink,
                     timerDescription: values.timerDescription,
@@ -216,6 +231,7 @@ const ModalAdd = (props) => {
                     paragraphText: values.paragraphText,
                     paragraphTextCN: values.paragraphTextCN,
                     paragraphTextTW: values.paragraphTextTW,
+                    type: values.type,                    
                     image: values.image,
                     hyperlink: values.hyperlink,
                     timerDescription: values.timerDescription,
@@ -347,6 +363,17 @@ const ModalAdd = (props) => {
                         placeholder='paragraphTextTW'
                     />
                 </Form.Item>
+                <Form.Item
+                    label='type'
+                    name="type"
+                    rules={formItemRules.type}
+                >
+                    <TextArea
+                        rows={4}
+                        allowClear
+                        placeholder='fish'
+                    />
+                </Form.Item>                
                 <Form.Item
                     label='image'
                     name="image"

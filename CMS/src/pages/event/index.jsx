@@ -202,6 +202,26 @@ const Event = (props) => {
             }
         },
         {
+            title: 'type',
+            dataIndex: 'type',
+            key: 'type',
+            sorter: (a, b) => {
+                if (a['type']) {
+                    return a['type'].localeCompare(b['type']);
+                }
+            },
+            sortOrder: sortedInfo.columnKey === 'type' ? sortedInfo.order : null,
+            ellipsis: true,
+            width: 150,
+            render: (text, record, index) => {
+                if (String(text) !== 'null' && String(text).length > 0) {
+                    return text;
+                } else {
+                    return "-";
+                }
+            }
+        },
+        {
             title: 'image',
             dataIndex: 'image',
             key: 'image',
@@ -344,6 +364,7 @@ const Event = (props) => {
         'paragraphText',
         'paragraphTextCN',
         'paragraphTextTW',
+        'type',        
         'image',
         'hyperlink',
         'timerDescription',
@@ -374,6 +395,7 @@ const Event = (props) => {
                     paragraphText: item["paragraphText"],
                     paragraphTextCN: item["paragraphTextCN"] ?? '',
                     paragraphTextTW: item["paragraphTextTW"] ?? '',
+                    type: item["type"] ?? '',
                     image: item["image"],
                     hyperlink: item["hyperlink"],
                     timerDescription: item["timerDescription"],
@@ -550,6 +572,7 @@ const Event = (props) => {
                             key === "paragraphText" ||
                             key === "paragraphTextCM" ||
                             key === "paragraphTextTW" ||
+                            key === "type" ||
                             key === "hyperlink" ||
                             key === "timerDescription" ||
                             key === "timerDescriptionCN" ||
@@ -581,6 +604,7 @@ const Event = (props) => {
                             key === "paragraphText" ||
                             key === "paragraphTextCN" ||
                             key === "paragraphTextTW" ||
+                            key === "type" ||
                             key === "hyperlink" ||
                             key === "timerDescription" ||
                             key === "timerDescriptionCN" ||
@@ -700,6 +724,7 @@ const Event = (props) => {
             paragraphText: record.paragraphText,
             paragraphTextCN: record.paragraphTextCN,
             paragraphTextTW: record.paragraphTextTW,
+            type: record.type,
             image: record.image,
             hyperlink: record.hyperlink,
             timerDescription: record.timerDescription,
@@ -850,6 +875,14 @@ const Event = (props) => {
                                         <Input type="text" allowClear={true} />
                                     </Form.Item>
                                 </Col>
+                                <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+                                    <Form.Item
+                                        label="type"
+                                        name="type"
+                                    >
+                                        <Input type="text" allowClear={true} />
+                                    </Form.Item>
+                                </Col>                                
                                 <Col xs={24} sm={24} md={24} lg={12} xl={8}>
                                     <Form.Item
                                         label="hyperlink"

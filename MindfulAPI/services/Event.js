@@ -58,15 +58,15 @@ async function createEvent(eventRecord){
   logger.log('info', '%s %s', 'Event', 'createEvent');
 
   // construct the SQL statement
-  var sql = 'INSERT INTO event (title, titleCN, titleTW, paragraphText, paragraphTextCN, paragraphTextTW, image, hyperlink, timerDescription, timerDescriptionCN, timerDescriptionTW, startTime, endTime, isActive) VALUES ';
+  var sql = 'INSERT INTO event (title, titleCN, titleTW, paragraphText, paragraphTextCN, paragraphTextTW, type, image, hyperlink, timerDescription, timerDescriptionCN, timerDescriptionTW, startTime, endTime, isActive) VALUES ';
 
   for (var i =0; i < eventRecord.length; i++){
 
     // combine into 1 single SQL
     if (i == (eventRecord.length-1)){
-      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].titleCN + '", "' + eventRecord[i].titleTW + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].paragraphTextCN + '", "' + eventRecord[i].paragraphTextTW + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].timerDescriptionCN + '", "' + eventRecord[i].timerDescriptionTW + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '", ' + eventRecord[i].isActive  + ');';
+      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].titleCN + '", "' + eventRecord[i].titleTW + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].paragraphTextCN + '", "' + eventRecord[i].paragraphTextTW + '", "' + eventRecord[i].type + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].timerDescriptionCN + '", "' + eventRecord[i].timerDescriptionTW + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '", ' + eventRecord[i].isActive  + ');';
     }else{
-      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].titleCN + '", "' + eventRecord[i].titleTW + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].paragraphTextCN + '", "' + eventRecord[i].paragraphTextTW + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].timerDescriptionCN + '", "' + eventRecord[i].timerDescriptionTW + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '", ' + eventRecord[i].isActive  + '),';
+      sql = sql + '("' + eventRecord[i].title + '", "' + eventRecord[i].titleCN + '", "' + eventRecord[i].titleTW + '", "' + eventRecord[i].paragraphText + '", "' + eventRecord[i].paragraphTextCN + '", "' + eventRecord[i].paragraphTextTW + '", "' + eventRecord[i].type + '", "' + eventRecord[i].image + '", "' + eventRecord[i].hyperlink + '", "' + eventRecord[i].timerDescription + '", "' + eventRecord[i].timerDescriptionCN + '", "' + eventRecord[i].timerDescriptionTW + '", "' + eventRecord[i].startTime + '", "' + eventRecord[i].endTime + '", ' + eventRecord[i].isActive  + '),';
     }
 
   }
@@ -91,7 +91,7 @@ async function updateEvent(id, eventRecord){
 
   logger.log('info', '%s %s id: %s', 'Event', 'updateEvent', id);
 
-  sql = 'UPDATE event SET title= "' + eventRecord.title + '", titleCN = "' + eventRecord.titleCN + '", titleTW = "' + eventRecord.titleTW + '", paragraphText = "' + eventRecord.paragraphText + '", paragraphTextCN = "' + eventRecord.paragraphTextCN  + '", paragraphTextTW = "' + eventRecord.paragraphTextTW + '", image = "' + eventRecord.image + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", timerDescriptionCN = "' + eventRecord.timerDescriptionCN + '", timerDescriptionTW = "' + eventRecord.timerDescriptionTW + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '", isActive = ' + eventRecord.isActive + ' WHERE eventId = ' + id + ';';
+  sql = 'UPDATE event SET title= "' + eventRecord.title + '", titleCN = "' + eventRecord.titleCN + '", titleTW = "' + eventRecord.titleTW + '", paragraphText = "' + eventRecord.paragraphText + '", paragraphTextCN = "' + eventRecord.paragraphTextCN  + '", paragraphTextTW = "' + eventRecord.paragraphTextTW + '", type = "' + eventRecord.type + '", image = "' + eventRecord.image + '", hyperlink = "' + eventRecord.hyperlink + '", timerDescription = "' + eventRecord.timerDescription + '", timerDescriptionCN = "' + eventRecord.timerDescriptionCN + '", timerDescriptionTW = "' + eventRecord.timerDescriptionTW + '", startTime = "' + eventRecord.startTime + '", endTime = "' + eventRecord.endTime + '", isActive = ' + eventRecord.isActive + ' WHERE eventId = ' + id + ';';
 
   logger.log('debug', '%s %s sql: %s', 'Event', 'updateEvent', sql);
   //console.log(sql);
