@@ -1,4 +1,5 @@
 const db = require('../db');
+const emailTemplate = require('../emailTemplate');
 const helper = require('../helper');
 const path = require('path');
 const logger = require("../logger");
@@ -203,8 +204,9 @@ async function submitid(req){
           pool: true
         });
     
-        let emailBody = process.env.emailBody.replace("$host", process.env.verifyEmailHost).replace("$verificationToken", verificationToken);
-        
+        //let emailBody = process.env.emailBody.replaceAll("$websiteURL", process.env.websiteURL).replaceAll("$verifyEmailHost", process.env.verifyEmailHost).replaceAll("$verificationToken", verificationToken);
+        let emailBody = emailTemplate.emailBody.replaceAll("$websiteURL", emailTemplate.websiteURL).replaceAll("$verifyEmailHost", emailTemplate.verifyEmailHost).replaceAll("$verificationToken", verificationToken); 
+
         console.log("emailBody: %s", emailBody);
 
         // create email content

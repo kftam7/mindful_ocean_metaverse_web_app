@@ -78,10 +78,10 @@ app.use(async(req, res, next) => {
           return next()
   }
 
-  // skip for getting artwork info for event
-  //if(req.url.startsWith("/mindfulapi/app/event")){
-  //        return next()
-  //}
+  // skip for getting info for event
+  if(req.url.startsWith("/mindfulapi/app/event")){
+          return next()
+  }
 
   // check authentication for app (mobile+desktop)
   if (req.url.startsWith("/mindfulapi/app")){

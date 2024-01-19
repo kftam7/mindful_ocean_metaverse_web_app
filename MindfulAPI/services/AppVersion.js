@@ -14,7 +14,7 @@ async function getAppVersion(version){
 
     if (version == "latest"){
         var rows = await db.query(
-        `SELECT * FROM appVersion WHERE releaseDate <= now() AND expireDate > now() ORDER BY releaseDate DESC LIMIT 1;`
+          `SELECT * FROM appVersion WHERE releaseDate <= now() AND expireDate > now() AND isActive=1 ORDER BY releaseDate DESC LIMIT 1;`
       );
     }else if(version == "all"){
         var rows = await db.query(
