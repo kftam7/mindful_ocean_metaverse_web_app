@@ -25,10 +25,10 @@ const SubpageLayout = ({ children }) => {
                 <meta name="description" content="MindfulOcean" />
             </Head>
             <SubNavBar onLocaleChange={changeLocale} />
-            <main key={locale} style={pathname === '/faq' ? { marginTop: '120px', marginBottom: '207px' } : { marginTop: '120px' }}>
+            <main key={locale} style={pathname === '/fixfooter' ? { marginTop: '120px', marginBottom: '207px' } : { marginTop: '120px' }}>
                 {children}
             </main>
-            <SubFoot isFootFixed={pathname === '/faq' ? true : false} />
+            <SubFoot isFootFixed={pathname === '/fixfooter' ? true : false} />
         </SSRProvider>
     )
 }

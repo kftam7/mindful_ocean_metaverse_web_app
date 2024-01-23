@@ -75,7 +75,7 @@ const NavBar = ({ onLocaleChange }) => {
   const { query } = parse(currentUrl, true);
   const [isAppleIdLogin, setIsAppleIdLogin] = useState(false);
   const [isCookies, setIsCookies] = useState(false);
-
+  
   useEffect(() => {
     if (!from || from !== 'emailverification') return
     setVisibleFormEmailverification(true)
