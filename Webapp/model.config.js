@@ -1,6 +1,6 @@
 const ModelLocation = "http://127.0.0.1:3001/mindfulapi/app/artworkfile/";
 
-const ModelSrcFile = new Map([
+export const ModelSrcFile = new Map([
   ["ButterflyFish", ModelLocation + "tpl_outline_ButterflyFish_Cartoon.glb"],
   ["BlueMarlin", ModelLocation + "tpl_outline_BlueMarlin_Cartoon.glb"],
   ["BlueShark", ModelLocation + "tpl_outline_BlueShark_Cartoon.glb"],
@@ -16,7 +16,7 @@ const ModelSrcFile = new Map([
   ["Whale", ModelLocation + "tpl_outline_Whale_Cartoon.glb"]
 ]);
 
-const ModelPosterFile = new Map([
+export const ModelPosterFile = new Map([
   ["ButterflyFish", ModelLocation + "tpl_outline_ButterflyFish_Cartoon.png"],
   ["BlueMarlin", ModelLocation + "tpl_outline_BlueMarlin_Cartoon.png"],
   ["BlueShark", ModelLocation + "tpl_outline_BlueShark_Cartoon.png"],

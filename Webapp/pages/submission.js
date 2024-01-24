@@ -15,6 +15,7 @@ import EditModal from '../components/submission/EditModal';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
 import Layout from '../components/SubpageLayout';
+import { ModelSrcFile, ModelPosterFile } from '../model.config';
 
 //just pass the setShow and setConShow as props to children components
 export default function SubmitPage({ session, user }) {
@@ -39,6 +40,8 @@ export default function SubmitPage({ session, user }) {
   const [image, setImage] = useState('');
   const [dataArtworks, setDataArtworks] = useState([]);
   const [dataEdit, setDataEdit] = useState();
+  const [dataModelSrcFile, setDataModelSrcFile] = useState([]);
+  const [dataModelPosterFile, setDataModelPosterFile] = useState([]);
   const [count, setCount] = useState(0);
 
   useEffect(async () => {
@@ -48,8 +51,27 @@ export default function SubmitPage({ session, user }) {
     const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });
     if (res.status === 200) {
       const { data: { data } } = res;
+      // const data = [        
+      //   {
+      //     artworkId: 1,
+      //     URL: '/pic1.jpg',
+      //     updateTime: '',
+      //     type: 'whale',
+      //   }
+      // ]
       setDataArtworks(sortByFieldDesc(data, 'updateTime'));
       setNewest(true);
+      
+      let dataModelSrcFile = new Map()
+      ModelSrcFile.forEach((value, key) => {
+          dataModelSrcFile.set(key.toLowerCase(), value)
+      })
+      setDataModelSrcFile(dataModelSrcFile);
+      let dataModelPosterFile = new Map()
+      ModelPosterFile.forEach((value, key) => {
+          dataModelPosterFile.set(key.toLowerCase(), value)
+      })
+      setDataModelPosterFile(dataModelPosterFile);
     }
   }, [count])
 
@@ -105,7 +127,12 @@ export default function SubmitPage({ session, user }) {
 
   function selectImage(item) {
     setImage(item.URL);
-    setDataEdit(item)
+    const itemInfo = {
+      ...item,
+      ModelSrc: dataModelSrcFile.get(item.type),
+      ModelPoster: dataModelPosterFile.get(item.type),
+    }
+    setDataEdit(itemInfo)
   }
 
   useEffect(() => {
@@ -274,8 +301,8 @@ export default function SubmitPage({ session, user }) {
                 <model-viewer
                   id="previewModel"
                   key={image}
-                  src={process.env.ModelSrc}
-                  poster=""
+                  src={dataEdit?.ModelSrc}
+                  poster={dataEdit?.ModelPoster}
                   alt="A 3D model of an ocean animal"
                   shadow-intensity="1"
                   camera-controls

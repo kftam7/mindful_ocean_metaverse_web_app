@@ -1,59 +1,70 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import styles from '../../styles/Gallery.module.css';
 
 import GridModal from '../gallery/GridModal';
+import { ModelSrcFile, ModelPosterFile } from '../../model.config';
 
 const GalleryModel = (props) => {
-    const {metadata, image, index} = props;
+    const { metadata, image, index } = props;
     const [modalShow, setModalShow] = useState(false);
     const [loaded, setLoaded] = useState(false);
-    const [nft,setNft] = useState();
+    const [nft, setNft] = useState();
 
     useEffect(() => {
+        let dataModelSrcFile = new Map()
+        ModelSrcFile.forEach((value, key) => {
+            dataModelSrcFile.set(key.toLowerCase(), value)
+        })
+        let dataModelPosterFile = new Map()
+        ModelPosterFile.forEach((value, key) => {
+            dataModelPosterFile.set(key.toLowerCase(), value)
+        })
         let nft = {
-            texture:metadata.URL,
-            name:metadata.name,
-            author:metadata.extraInfo,
-            description:metadata.description,
-            firstName:metadata.firstName,
-            lastName:metadata.lastName
+            texture: metadata.URL,
+            name: metadata.name,
+            author: metadata.extraInfo,
+            description: metadata.description,
+            firstName: metadata.firstName,
+            lastName: metadata.lastName,
+            ModelSrc: dataModelSrcFile.get(metadata.type),
+            ModelPoster: dataModelPosterFile.get(metadata.type),
         }
         setNft(nft);
-        setLoaded(true); 
-    },[metadata]);
+        setLoaded(true);
+    }, [metadata]);
 
     useEffect(() => {
         const modelViewer = document.getElementById(`model${index}`);
-        if(modelViewer){
+        if (modelViewer) {
             modelViewer.addEventListener("load", () => {
                 let material = modelViewer.model.materials[0];
                 let newTexture = async (imageSource) => {
-                return await modelViewer.createTexture(imageSource)
+                    return await modelViewer.createTexture(imageSource)
                 }
                 let initTexture = async (attr, channel, imageSource) => {
-                const texture = await newTexture(imageSource);
-                material[attr][channel].setTexture(texture);
+                    const texture = await newTexture(imageSource);
+                    material[attr][channel].setTexture(texture);
                 }
                 let source = image;
                 initTexture('pbrMetallicRoughness', 'baseColorTexture', source)
             });
         }
-    },[loaded])
+    }, [loaded])
 
     if (loaded === false && !nft) return (
         <h1 className="px-20 py-10 text-3xl">
             <div className="loadingAnim"></div>
         </h1>
     )
-    return(
+    return (
         <>
             <Card className={styles.card} onClick={() => setModalShow(true)}>
                 {/* src is the 3D model, poster is the texture */}
-                <model-viewer 
+                <model-viewer
                     id={`model${index}`}
-                    src={process.env.ModelSrc}
-                    poster={process.env.ModelPoster}
+                    src={nft.ModelSrc}
+                    poster={nft.ModelPoster}
                     alt="A 3D model of an fish"
                     shadow-intensity="1"
                     camera-controls
@@ -68,7 +79,16 @@ const GalleryModel = (props) => {
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <GridModal show={modalShow} onHide={() => setModalShow(false)} texture={image} title={nft.name} text={`${props.t('main.text.by')} ${nft.author}`} info={metadata} t={props.t} />
+            <GridModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                texture={image}
+                title={nft.name}
+                text={`${props.t('main.text.by')} ${nft.author}`}
+                info={metadata}
+                t={props.t}
+                nft={nft}
+            />
         </>
     )
 }

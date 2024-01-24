@@ -41,8 +41,8 @@ function GridModel(props) {
                 <Col sm={12} md={6} className='mt-2'>
                   <model-viewer 
                     id="modelModal"
-                    src={process.env.ModelSrc}
-                    poster={process.env.ModelPoster}
+                    src={props.nft.ModelSrc}
+                    poster={props.nft.ModelPoster}
                     alt="A 3D model of an astronaut"
                     shadow-intensity="1"
                     camera-controls
