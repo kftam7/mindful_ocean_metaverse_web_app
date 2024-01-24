@@ -25,10 +25,11 @@ app.use(
 
 // CORS only for local host
 var corsOptions = {
-  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://web-staging.mindfultoken.org', 'https://mindfulcms.agiisoft.com', 'https://web-staging.mindful-ocean.org', 'https://webcms-staging.mindful-ocean.org', 'https://www.mindful-ocean.org', 'https://webcms.mindful-ocean.org'],
+  origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002', 'http://192.168.2.109:3000', 'http://192.168.2.109:3001', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'https://web-staging.mindfultoken.org', 'https://mindfulcms.agiisoft.com', 'https://web-staging.mindful-ocean.org', 'https://webcms-staging.mindful-ocean.org', 'https://www.mindful-ocean.org', 'https://webcms.mindful-ocean.org'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
+//app.use(cors())
 
 // API authentication
 app.use(async(req, res, next) => {
@@ -113,7 +114,7 @@ app.use(async(req, res, next) => {
         const result = await db.query(
             sql
         );
-        logger.log('debug', '%s result: %s', 'index', result);
+        logger.log('debug', '%s result: %s', 'index', result[0]);
         if (!result[0].validToken){
           logger.log('error', '%s API Authentication Failed: Invalid Token', req.headers.appleid);
           res.set('WWW-Authenticate', 'Basic realm="401"')

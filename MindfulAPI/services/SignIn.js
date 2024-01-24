@@ -64,11 +64,14 @@ async function signin(req){
         if (req.body.name.lastName){
             sqlUpdate = sqlUpdate + ', lastName = "' + req.body.name.lastName + '"';
         }
-        */
+
 
         if (req.body.email){
             sqlUpdate = sqlUpdate + ', email = "' + req.body.email + '"';
         }
+
+        */
+        
         sqlUpdate = sqlUpdate + ' WHERE appleId = "' + req.params.appleId + '";';
   
         logger.log('debug', '%s %s sqlUpdate: %s', 'Signin', 'signin', sqlUpdate);
@@ -213,7 +216,7 @@ async function submitid(req){
         const mailOptions = {
             from: CLIENT_EMAIL,
             to: req.body.email,
-            subject: process.env.emailSubject,
+            subject: emailTemplate.emailSubject,
             html: emailBody,
         };
     
