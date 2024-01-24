@@ -1176,7 +1176,7 @@ option {
 .signInWithApple a{
   text-indent:-9999px;
   display: block;
-  padding: 8px 10px;
+  padding: 16px 10px;
 }
 
 .signInWithApple a:hover,.signInWithApple:hover{
