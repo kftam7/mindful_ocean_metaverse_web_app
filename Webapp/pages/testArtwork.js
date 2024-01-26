@@ -294,9 +294,19 @@ const TestArtwork = () => {
             onChange={handleChange}
             required
           >
-            <option value='fish'>fish</option>
+            <option value='butterflyfish'>butterflyfish</option>
+            <option value='bluemarlin'>bluemarlin</option>
+            <option value='blueshark'>blueshark</option>
+            <option value='boxfish'>boxfish</option>
             <option value='dolphin'>dolphin</option>
+            <option value='mobularay'>mobularay</option>
+            <option value='orca'>orca</option>
+            <option value='pike'>pike</option>
+            <option value='rainbowcichlid'>rainbowcichlid</option>
             <option value='shark'>shark</option>
+            <option value='sunFish'>sunFish</option>
+            <option value='turtle'>turtle</option>
+            <option value='whale'>whale</option>
           </Form.Control>
           <Form.Control.Feedback
             className={styles.form_feedback}
