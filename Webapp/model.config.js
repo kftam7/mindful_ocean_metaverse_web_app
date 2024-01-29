@@ -1,4 +1,5 @@
-const ModelLocation = "http://127.0.0.1:3001/mindfulapi/app/artworkfile/";
+//const ModelLocation = "http://127.0.0.1:3001/mindfulapi/app/artworkfile/";
+const ModelLocation = "https://api-staging.mindful-ocean.org/mindfulapi/app/artworkfile/";
 
 export const ModelSrcFile = new Map([
   ["butterflyfish", ModelLocation + "tpl_outline_ButterflyFish_Cartoon.glb"],

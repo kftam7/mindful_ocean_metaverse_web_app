@@ -16,7 +16,7 @@ const TestArtwork = () => {
   const [appleId, setAppleId] = useState();
   const [formData, setFormData] = useState({
     eventId: '',
-    type: 'fish',
+    type: 'butterflyfish',
     artistMessage: '',
     extraInfo: '',
     ifHomepage: '0',
@@ -47,7 +47,7 @@ const TestArtwork = () => {
   const resetForm = () => {
     const data = {
       eventId: '',
-      type: 'fish',
+      type: 'butterflyfish',
       artistMessage: '',
       extraInfo: '',
       ifHomepage: '0',
@@ -304,7 +304,7 @@ const TestArtwork = () => {
             <option value='pike'>pike</option>
             <option value='rainbowcichlid'>rainbowcichlid</option>
             <option value='shark'>shark</option>
-            <option value='sunFish'>sunFish</option>
+            <option value='sunfish'>sunfish</option>
             <option value='turtle'>turtle</option>
             <option value='whale'>whale</option>
           </Form.Control>

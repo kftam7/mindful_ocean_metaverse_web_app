@@ -42,7 +42,7 @@ CREATE TABLE `appVersion` (
 
 LOCK TABLES `appVersion` WRITE;
 /*!40000 ALTER TABLE `appVersion` DISABLE KEYS */;
-INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version',1),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version',1),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version',1),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th',1),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th',1),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2024-01-01 00:00:01','edited version testing',0),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined',1),(19,'0.0.14','98th version','2023-08-17 05:05:09','2023-09-02 07:06:06','something here',1),(31,'0.0.99','99th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(33,'1','1','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(36,'0.0009','9thth','2023-04-06 02:25:23','2023-04-27 02:25:27','tests9',0),(37,'2','2','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(38,'3','3','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(39,'4','4','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(40,'5','5','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(42,'9','9','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(46,'13','13','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(47,'14','14','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(48,'15','15','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(49,'22','22','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(50,'23','23','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(52,'24','24','2023-04-04 08:02:13','2023-04-04 08:02:14','1',1);
+INSERT INTO `appVersion` VALUES (1,'0.0.1','initial version','2023-02-17 00:00:00','2023-03-10 00:00:00','1st version',1),(2,'0.0.3','MVP version','2023-04-01 00:00:00','2023-04-30 00:00:00','3rd version',1),(4,'0.0.2','2nd version','2023-03-02 00:00:00','2023-04-01 00:00:00','2nd version',1),(5,'0.0.4','4th version','2023-05-17 01:01:01','2023-06-17 02:02:02','4th',1),(6,'0.0.5','5th version','2023-06-17 03:03:03','2023-07-17 04:04:04','5th',1),(7,'0.0.6','6th edited version','2024-01-01 00:00:00','2024-01-01 00:00:01','edited version testing',0),(17,'0.0.12','12th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(18,'0.0.13','13th version','2023-06-17 03:03:03','2023-07-17 04:04:04','undefined',1),(19,'0.0.14','98th version','2023-08-17 05:05:09','2023-09-02 07:06:06','something here',1),(31,'0.0.99','99th version','2023-05-17 01:01:01','2023-06-17 02:02:02','undefined',1),(33,'1','1','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(36,'0.0009','9thth','2023-04-06 02:25:23','2023-04-27 02:25:27','tests9',0),(37,'2','2','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(38,'3','3','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(39,'4','4','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(40,'5','5','2023-04-04 08:02:06','2023-04-04 08:02:14','undefined',1),(42,'9','9','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(46,'13','13','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(47,'14','14','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(48,'15','15','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(49,'22','22','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(50,'23','23','2023-04-04 08:02:06','2023-04-04 08:02:14','1',1),(52,'24','24','2023-04-04 08:02:13','2024-02-01 08:02:21','1',1);
 /*!40000 ALTER TABLE `appVersion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +76,7 @@ CREATE TABLE `artwork` (
   `createTime` datetime NOT NULL DEFAULT '2020-01-01 00:00:00',
   `updateTime` datetime NOT NULL DEFAULT '2020-01-01 00:00:00',
   PRIMARY KEY (`artworkId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `artwork` (
 
 LOCK TABLES `artwork` WRITE;
 /*!40000 ALTER TABLE `artwork` DISABLE KEYS */;
-INSERT INTO `artwork` VALUES (1,59,0,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','fish','AM20240115-1',NULL,'ipfs://bafyreidrpl5gtcxdseoqojmtp7nsjspofchpeapmtyas23afwe72lixvi4/metadata.json','ipfs://bafyreidco5hci66h6wpcc2mchlnwni56yels6zdugoxffqqpf36lefbn7u/metadata.json',1,1,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 16:36:28','2024-01-15 16:38:55'),(2,59,0,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','fish','AM20240115-2',NULL,'ipfs://bafyreidhgnljib3sljjx75yj5exqmo6iooqpejndfdtnlnsdghae64uob4/metadata.json','ipfs://bafyreibsix7cuz2kk6leycf4lzxo2wfutxe3cbumqjrahdfxrnmdbqhjsm/metadata.json',1,1,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 16:53:57','2024-01-15 16:55:23'),(3,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','fish','AM20240115-4',NULL,'ipfs://bafyreidak2ho4gtnn5tdf6x34x2536xo7jvscplavpj6zf52hloudnpyqq/metadata.json','ipfs://bafyreienawj6kmfijovtowpryjpxqjvqrtxgtec6hjupoalv5e3ly2ntxa/metadata.json',1,1,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 17:19:36','2024-01-15 17:21:42'),(4,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2024-01-03 at 11.57.24 AM.jpg','fish','AM20240115-5',NULL,'ipfs://bafyreibtmpgpgmto4yv4ui6gx4urhccblvqgf77jtpwldrb3ch7n46i5ja/metadata.json','ipfs://bafyreiac5hjqlqg33vmc2oip4jlca5m4mfgqtfmgnvhjwopevdtiemtobi/metadata.json',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 17:35:27','2024-01-15 17:37:39');
+INSERT INTO `artwork` VALUES (1,59,0,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','butterflyfish','AM20240115-1',NULL,'ipfs://bafyreidrpl5gtcxdseoqojmtp7nsjspofchpeapmtyas23afwe72lixvi4/metadata.json','ipfs://bafyreidco5hci66h6wpcc2mchlnwni56yels6zdugoxffqqpf36lefbn7u/metadata.json',1,1,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 16:36:28','2024-01-15 16:38:55'),(2,59,0,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','bluemarlin','AM20240115-2',NULL,'ipfs://bafyreidhgnljib3sljjx75yj5exqmo6iooqpejndfdtnlnsdghae64uob4/metadata.json','ipfs://bafyreibsix7cuz2kk6leycf4lzxo2wfutxe3cbumqjrahdfxrnmdbqhjsm/metadata.json',1,1,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 16:53:57','2024-01-15 16:55:23'),(3,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','butterflyfish','AM20240115-4',NULL,'ipfs://bafyreidak2ho4gtnn5tdf6x34x2536xo7jvscplavpj6zf52hloudnpyqq/metadata.json','ipfs://bafyreienawj6kmfijovtowpryjpxqjvqrtxgtec6hjupoalv5e3ly2ntxa/metadata.json',1,1,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 17:19:36','2024-01-15 17:21:42'),(4,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2024-01-03 at 11.57.24 AM.jpg','bluemarlin','AM20240115-5',NULL,'ipfs://bafyreibtmpgpgmto4yv4ui6gx4urhccblvqgf77jtpwldrb3ch7n46i5ja/metadata.json','ipfs://bafyreiac5hjqlqg33vmc2oip4jlca5m4mfgqtfmgnvhjwopevdtiemtobi/metadata.json',1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-15 17:35:27','2024-01-15 17:37:39'),(5,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','butterflyfish','AM20240117-1',NULL,'ipfs://bafyreidwlvznpb57ab4dhmj6cxxz3iincoau63bdyyd7rrlo6f6sajfinq/metadata.json','ipfs://bafyreiecid26shxy7edun4txcjzflvpellpd4qga6tsymzqid6obj6k62q/metadata.json',0,1,1,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-17 18:00:46','2024-01-17 18:04:09'),(6,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2024-01-18 at 1.54.41 PM.jpg','butterflyfish','am',NULL,'ipfs://bafyreif4qfups33g42ulb2rbfpdmokih7yojf3heivoshpjcxi4ncvejy4/metadata.json',NULL,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-19 01:58:17','2024-01-19 01:58:46'),(7,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg','bluemarlin','bm01am',NULL,NULL,NULL,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-25 17:15:31','2024-01-25 17:15:31'),(8,59,1,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-10-17 at 11.36.00 AM.jpg','bluemarlin','AM20240126',NULL,NULL,NULL,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-26 11:53:22','2024-01-26 11:53:22'),(9,59,2,'http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2024-01-22 at 3.20.04 PM.jpg','butterflyfish','AM20240126-10',NULL,NULL,NULL,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-01-26 11:56:49','2024-01-26 11:56:49');
 /*!40000 ALTER TABLE `artwork` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +294,7 @@ CREATE TABLE `walletAddress` (
   PRIMARY KEY (`walletAddressId`),
   UNIQUE KEY `index2` (`walletAddressId`,`appleId`),
   UNIQUE KEY `walletAddress_UNIQUE` (`walletAddress`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,9 +303,17 @@ CREATE TABLE `walletAddress` (
 
 LOCK TABLES `walletAddress` WRITE;
 /*!40000 ALTER TABLE `walletAddress` DISABLE KEYS */;
-INSERT INTO `walletAddress` VALUES (28,'001972.c7c33c51e40d4c239a38cc22e4c1244f.0850','0x1a4157D4129908EDF31aa34164aD01b1F0AAd016','2023-11-27 17:00:43','2023-12-29 15:51:33'),(29,'001972.c7c33c51e40d4c239a38cc22e4c1244f.0850','0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9','2023-11-27 17:36:35','2024-01-16 09:31:04');
+INSERT INTO `walletAddress` VALUES (28,'001972.c7c33c51e40d4c239a38cc22e4c1244f.0850','0x1a4157D4129908EDF31aa34164aD01b1F0AAd016','2023-11-27 17:00:43','2023-12-29 15:51:33'),(29,'001972.c7c33c51e40d4c239a38cc22e4c1244f.0850','0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9','2023-11-27 17:36:35','2024-01-26 11:57:00'),(30,'001972.c7c33c51e40d4c239a38cc22e4c1244f.0850','0xeE3236c785378a1b384a47070BD8671bF9c7a937','2024-01-22 17:06:05','2024-01-24 11:36:25'),(31,'001972.c7c33c51e40d4c239a38cc22e4c1244f.0850','0xF52BF334A879Aae7D86Ce3a89b3Bf2c6A2d24946','2024-01-24 11:34:26','2024-01-24 11:34:33');
 /*!40000 ALTER TABLE `walletAddress` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'mindful'
+--
+
+--
+-- Dumping routines for database 'mindful'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -316,4 +324,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-17 15:56:50
+-- Dump completed on 2024-01-29 13:56:06
