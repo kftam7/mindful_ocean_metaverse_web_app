@@ -71,13 +71,13 @@ const UserProfilePage = () => {
 
   useEffect(async () => {
     if(!appleId) return;
-    setLoading(true);
+    //setLoading(true);
     
     const res = await axios.get(`${apiPort}/mindfulapi/app/personalwebsite/${appleId}`, {headers: getHeaders()});
     if(res.status === 200){
       const { data: { data } } = res;
       setDataPersonalwebsite(data);
-      setLoading(false);
+      //setLoading(false);
     }
   }, [appleId, count]);
 
@@ -324,7 +324,8 @@ const UserProfilePage = () => {
       <ToastContainer />
       {loading ?
         <div className="overly">
-          <FaSpinner />
+          {/* <FaSpinner /> */}
+          <Image src="/loading.gif" width="30px" height="30px" />
         </div>
         : ''
       }
