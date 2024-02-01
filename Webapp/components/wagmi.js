@@ -1,24 +1,20 @@
 import { useState } from 'react';
-import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { configureChains, createConfig } from 'wagmi'
-//import { mainnet, optimism, polygon } from "wagmi/chains"
-import { polygonMumbai } from 'wagmi/chains'
-//const chains = [mainnet, optimism, polygon]
+import {defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { polygonMumbai } from "viem/chains"
+
 const chains = [polygonMumbai]
-//const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
-//const chains = [process.env.BlockchainPlatform];
 const projectId = process.env.WalletconnectProjectId;
 
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({ version: 2, chains, projectId }),
-  publicClient,
-})
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
+const metadata = {
+  name: 'MindfulOcean',
+  description: 'MindfulOcean Metaverse',
+  url: 'www.walletconnect.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
 export {
   projectId,
-  wagmiConfig,
-  ethereumClient
+  wagmiConfig
 }

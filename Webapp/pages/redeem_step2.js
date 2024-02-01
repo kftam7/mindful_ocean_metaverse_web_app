@@ -9,7 +9,6 @@ import axios from 'axios';
 import AppModal from '../components/redeem/AppModal';
 import { useTranslation } from '../i18n';
 import { getHeaders } from '../utils/utils';
-//import { getAccount, fetchMintpassContractNFT } from '../store/actions';
 import { getAccount, fetchMintpassContract } from '../store/actions';
 import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
@@ -21,7 +20,6 @@ import Layout from '../components/SubpageLayout';
 //智能合约2.0
 import { useContractWrite, useWaitForTransaction } from 'wagmi';
 import { useAccount } from 'wagmi'
-//import { mindfulNFTContractConfig } from '../components/contracts';
 import { mintpassContractConfig } from '../components/contracts';
 
 //just pass the setShow and setConShow as props to children components
@@ -70,14 +68,6 @@ function RedeemStep2() {
       pathname: '/redeem_step4',
     });
   }, [isSuccess])
-
-  // useEffect(() => {
-  //   if (!data) return;
-  //   console.log('write success', data)
-  //   Router.push({
-  //     pathname: '/redeem_step4',
-  //   });
-  // }, [data])
 
   useEffect(async () => {
     const appleId = sessionStorage.getItem("appleId");
@@ -309,21 +299,13 @@ function RedeemStep2() {
 }
 
 //智能合约2.0
-import { Web3Modal } from '@web3modal/react';
 import { WagmiConfig } from 'wagmi';
-import { projectId, wagmiConfig, ethereumClient } from '../components/wagmi';
+import { projectId, wagmiConfig } from '../components/wagmi';
 function App() {
   return (
     <Layout>
       <WagmiConfig config={wagmiConfig}>
         <RedeemStep2 />
-        <Web3Modal
-          projectId={projectId}
-          ethereumClient={ethereumClient}
-          themeVariables={{
-            '--w3m-z-index': '9999'
-          }}
-        />
       </WagmiConfig>
     </Layout>
   )

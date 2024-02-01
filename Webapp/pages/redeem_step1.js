@@ -13,34 +13,24 @@ import { Cookies } from "react-cookie-consent";
 import Layout from '../components/SubpageLayout';
 
 // Web3Modal
-import { useWeb3Modal } from '@web3modal/react';
-import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { Web3Modal } from '@web3modal/react'
-//import { configureChains, createClient, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
+
+import { useWeb3Modal, createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 import { configureChains, createConfig, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
-//import { arbitrum, mainnet, polygon } from 'wagmi/chains'
-//import { mainnet, optimism, polygon } from "wagmi/chains"
-import { polygonMumbai } from "wagmi/chains"
-import { Web3Provider } from "@ethersproject/providers";
-//const chains = [arbitrum, mainnet, polygon]
-//const chains = [mainnet, optimism, polygon]
+import { polygonMumbai } from "viem/chains"
+
 const chains = [polygonMumbai]
-//const projectId = 'b66462653b390b41e66f8f03e25cfa0a'
-//const chains = [process.env.BlockchainPlatform];
 const projectId = process.env.WalletconnectProjectId;
 
-//const { provider } = configureChains(chains, [w3mProvider({ projectId })])
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
-//const wagmiClient = createClient({
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  //connectors: w3mConnectors({ projectId, version: 1, chains }),
-  connectors: w3mConnectors({ version: 2, chains, projectId }),
-  //provider
-  publicClient,
-})
-//const ethereumClient = new EthereumClient(wagmiClient, chains)
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
+const metadata = {
+  name: 'MindfulOcean',
+  description: 'MindfulOcean Metaverse',
+  url: 'www.walletconnect.com',
+  icons: ['https://avatars.githubusercontent.com/u/37784886']
+}
+
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+
+createWeb3Modal({ wagmiConfig, projectId, chains })
 
 const RedeemStep1 = ({ session }) => {
   const { t, locale } = useTranslation();
@@ -79,7 +69,6 @@ const RedeemStep1 = ({ session }) => {
   useEffect(async () => {
     if(!isConnected){
       sessionStorage.removeItem("walletAddress");    
-      // Cookies.remove("walletAddress");
       setWalletAddress('');
       return;
     }
@@ -101,12 +90,8 @@ const RedeemStep1 = ({ session }) => {
   // 获取钱包地址信息并记录在 session 中
   const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const handleGetWalletInfo = async () => {
-    //const provider = new Web3Provider(window.ethereum);
-    //const signer = provider.getSigner();
-    //const address = await signer.getAddress();
     setWalletAddress(address);
     sessionStorage.setItem("walletAddress", address);
-    // Cookies.set("walletAddress", address);
     setIsConnectingWallet(true);
   };
 
@@ -159,11 +144,6 @@ const RedeemStep1 = ({ session }) => {
     sessionStorage.removeItem("refresh_token");
     sessionStorage.removeItem("appleId");
     
-    // Cookies.remove("access_token");
-    // Cookies.remove("expires_in");
-    // Cookies.remove("email");
-    // Cookies.remove("refresh_token");
-    // Cookies.remove("appleId");
   }
 
   return(
@@ -339,14 +319,6 @@ function App() {
           {/* <...other component/>  */}
           <RedeemStep1 />
       </WagmiConfig>
-
-      <Web3Modal
-        projectId={projectId}
-        ethereumClient={ethereumClient}
-        themeVariables={{
-          '--w3m-z-index': '9999'
-        }}
-      />
     </Layout>
   )
 }
