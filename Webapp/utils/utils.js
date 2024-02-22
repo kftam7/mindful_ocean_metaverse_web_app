@@ -9,8 +9,8 @@ const PRIVATE_KEY = process.env.AuthPrivateKey;
 // const contract = require("../artifacts/contracts/MindfulNFT.sol/MindfulNFT.json");
 // provider - Alchemy
 const netObj = {
-    name: 'maticmum',
-    chainId: 80001  // hardwired bullshit
+    name: 'matic',
+    chainId: 137  // hardwired bullshit
 }
 
 const getMessageHashSignature = async (contract) => {

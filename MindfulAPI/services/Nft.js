@@ -13,7 +13,8 @@ async function getNFT(type, idtype, id){
   // create Alchemy object
   const settings = {
     apiKey: process.env.alchemyApiKey,
-    network: Network.MATIC_MUMBAI // Replace with your network.
+    //network: Network.MATIC_MUMBAI // Replace with your network.
+    network: Network.MATIC_MAINNET
   };
   const alchemy = new Alchemy(settings);
   let data = [];
@@ -115,7 +116,8 @@ async function getNFTTotal(type){
   // Optional config object, but defaults to the API key 'demo' and Network 'eth-mainnet'.
   const settings = {
     apiKey: process.env.alchemyApiKey,
-    network: Network.MATIC_MUMBAI // Replace with your network.
+    //network: Network.MATIC_MUMBAI // Replace with your network.
+    network: Network.MATIC_MAINNET
   };
 
   // NFT contract address.

@@ -90,7 +90,7 @@ async function auth(req){
                 );
                 logger.log('debug', '%s %s sqlCheck: %s' , 'AppleAuth', 'auth', sqlCheckInfo);
     
-                if (resultCheckInfo[0].firstName && resultCheckInfo[0].lastName && resultCheckInfo[0].email && (resultCheckInfo[0].emailVerified == 1)){
+                if (resultCheckInfo[0]?.firstName && resultCheckInfo[0]?.lastName && resultCheckInfo[0]?.email && (resultCheckInfo[0]?.emailVerified == 1)){
                     body = body + "&firstTime=0";
                 }else{
                     body = body + "&firstTime=1";

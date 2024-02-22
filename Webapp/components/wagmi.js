@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import {defaultWagmiConfig } from '@web3modal/wagmi/react'
-import { polygonMumbai } from "viem/chains"
+import { polygon } from "viem/chains"
 
-const chains = [polygonMumbai]
+const chains = [polygon]
 const projectId = process.env.WalletconnectProjectId;
 
 const metadata = {

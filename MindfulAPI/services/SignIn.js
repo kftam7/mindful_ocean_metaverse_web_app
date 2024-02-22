@@ -143,12 +143,15 @@ async function submitid(req){
 
 
     if (!namePattern.test(req.body.name.firstName)) {
+	logger.log('error', '%s %s: %s', 'Signin', 'verifyemail', 'First Name invalid'); 
         return 'First Name invalid'
     }
     if (!namePattern.test(req.body.name.lastName)) {
+        logger.log('error', '%s %s: %s', 'Signin', 'verifyemail', 'Last Name invalid');
         return 'Last Name invalid'
     }
     if (!emailPattern.test(req.body.email)) {
+	logger.log('error', '%s %s: %s', 'Signin', 'verifyemail', 'Email invalid');
         return 'Email invalid'
     }
 
@@ -164,7 +167,6 @@ async function submitid(req){
     //console.log("sqlUpdate: %s", sqlUpdate);
     logger.log('debug', '%s %s sqlUpdate: %s', 'Signin', 'verifyemail', sqlUpdate);
 
-/*
     // send verification email to user
     // get the email settings from environmental variables
     const CLIENT_EMAIL = process.env.clientEmail;
@@ -247,7 +249,6 @@ async function submitid(req){
       return 'Failed to create email transport'
     
     }    
-*/
     return 'Record Updated'
 
 }

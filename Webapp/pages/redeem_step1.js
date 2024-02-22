@@ -16,9 +16,9 @@ import Layout from '../components/SubpageLayout';
 
 import { useWeb3Modal, createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 import { configureChains, createConfig, WagmiConfig, useAccount, useDisconnect } from 'wagmi'
-import { polygonMumbai } from "viem/chains"
+import { polygon } from "viem/chains"
 
-const chains = [polygonMumbai]
+const chains = [polygon]
 const projectId = process.env.WalletconnectProjectId;
 
 const metadata = {

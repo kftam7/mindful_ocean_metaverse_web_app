@@ -14,19 +14,21 @@ const getWeb3Modal = async() => {
     walletconnect: {
         package: WalletConnectProvider,
         options: {
-          infuraId: "b66462653b390b41e66f8f03e25cfa0a",
+          infuraId: "aa032798744e5b170f17a9bdecc420b8",
           rpc: {
               //1: "https://mainnet.mycustomnode.com",
-              //137: "https://polygon-rpc.com",
-              80001: 'https://matic-mumbai.chainstacklabs.com',
+              137: "https://polygon-rpc.com",
+              //80001: 'https://matic-mumbai.chainstacklabs.com',
             },
           //supportedChainIds: [1, 137, 80001]
-            supportedChainIds: [80001]
+          //supportedChainIds: [80001]
+	  supportedChainIds: [137]
         }
     }
   };
   const web3Modal = new Web3Modal({
-      network: 'mumbai',
+      //network: 'mumbai',
+      network: 'polygon',
       cacheProvider: true, // optional
       providerOptions, // required
       disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
@@ -133,7 +135,7 @@ export const switchNetwork = async() => {
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: Web3.utils.toHex(80001) }], // chainId must be in hexadecimal numbers
+          params: [{ chainId: Web3.utils.toHex(137) }], // chainId must be in hexadecimal numbers
         })
         .catch(err => {
             console.log(err);
@@ -146,8 +148,8 @@ export const switchNetwork = async() => {
               method: 'wallet_addEthereumChain',
               params: [
                 {
-                  chainId: '80001',
-                  rpcUrl: 'https://matic-mumbai.chainstacklabs.com',
+                  chainId: '137',
+                  rpcUrl: 'https://polygon-rpc.com',
                 },
               ],
             });
