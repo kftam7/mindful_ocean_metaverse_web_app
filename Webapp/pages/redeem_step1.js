@@ -36,12 +36,13 @@ const RedeemStep1 = ({ session }) => {
   const { t, locale } = useTranslation();
   //const apiPort = process.env.API_PORT || '/';
   const apiPort = process.env.APIBaseUrl || '/';
+  const IfRedeemOpen = process.env.IfRedeemOpen;
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const [walletAddress, setWalletAddress] = useState('');
   const [appleId, setAppleId] = useState('');
   const [appleIdLoginBtn, setAppleIdLoginBtn] = useState('');
-  
+
   useEffect(async () => {
     await dispatch(getAccount())
   }, [dispatch]);
@@ -68,7 +69,7 @@ const RedeemStep1 = ({ session }) => {
   
   useEffect(async () => {
     if(!isConnected){
-      sessionStorage.removeItem("walletAddress");    
+      localStorage.removeItem("walletAddress");    
       setWalletAddress('');
       return;
     }
@@ -91,7 +92,7 @@ const RedeemStep1 = ({ session }) => {
   const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const handleGetWalletInfo = async () => {
     setWalletAddress(address);
-    sessionStorage.setItem("walletAddress", address);
+    localStorage.setItem("walletAddress", address);
     setIsConnectingWallet(true);
   };
 
@@ -122,7 +123,7 @@ const RedeemStep1 = ({ session }) => {
   }, []);
 
   useEffect(() => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     if(!appleId){
       setAppleId('');
     }else{
@@ -132,25 +133,24 @@ const RedeemStep1 = ({ session }) => {
 
   const connectApple = () => {
     const pathname = window.location.pathname;
-    sessionStorage.setItem("pathname", pathname);
+    localStorage.setItem("pathname", pathname);
     // Cookies.set("pathname", pathname);
   }
 
   const disconnectApple = async() => {
     setAppleId('');
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("expires_in");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("appleId");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("expires_in");
+    localStorage.removeItem("email");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("appleId");
     
   }
 
   return(
     <Container className='mt-5 mb-5' style={{}}>
-      {/* <Button onClick={connect}>connect</Button>
-      <Button onClick={disconnectWallet}>disconnect Wallet</Button> */}
-      <div className={styles.submitPage}>
+      {IfRedeemOpen ?
+        <div className={styles.submitPage}>
           <Row><Link href="/"><h6 style={{cursor: "pointer"}}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
           <Row className="mt-4"><h4>{t('page.redeem.redeemArtworks')}</h4></Row>
 
@@ -307,7 +307,9 @@ const RedeemStep1 = ({ session }) => {
               }
             </Col>
           </Row>
-      </div>
+        </div>
+        : ''
+      }
     </Container>
   )
 }

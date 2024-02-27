@@ -41,7 +41,7 @@ const ModalEmailVerification = props => {
       email,
     };
 
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     await axios.post(`${apiPort}/mindfulapi/app/submitid/${appleId}`, params, { headers: getHeaders() })
       .then(res => {
         if (res.status === 200) {

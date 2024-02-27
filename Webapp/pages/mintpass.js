@@ -101,7 +101,7 @@ function Mintpass({ session, user }) {
   //can fetch the tokenId here?
 
   const mintFront = async () => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     setLoading(true);
     const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });
     if ((res.status === 200) && (res.data.data.length > 0)) {

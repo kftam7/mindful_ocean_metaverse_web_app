@@ -105,6 +105,10 @@ router.get('/verifyemail/:verificationtoken', async function(req, res, next) {
     const result = await SignIn.verifyemail(req.params.verificationtoken);
     if (result == "Record updated"){
       res.redirect(process.env.redirect_address + "?from=emailverification");
+    }else if (result == "Record already expired"){
+      res.redirect(process.env.redirect_address + "?from=emailverificationexpired");
+    }else {
+      res.redirect(process.env.redirect_address + "?from=emailverificationnotfound");
     }
   } catch (err) {
     logger.log('error', 'Error while getting %s', err.message);

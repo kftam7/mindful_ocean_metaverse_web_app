@@ -52,31 +52,31 @@ const getMessageHashSignature = async (contract) => {
 }
 
 const getWalletAddress = () => {
-  return sessionStorage.getItem("walletAddress");
+  return localStorage.getItem("walletAddress");
 };
 
 const getAppleId = () => {
-  return sessionStorage.getItem("appleId");
+  return localStorage.getItem("appleId");
 };
 
 const getAppleIdName = () => {
-  return sessionStorage.getItem("appleIdName");
+  return localStorage.getItem("appleIdName");
 };
 
 const getAppleIdFristName = () => {
-  return sessionStorage.getItem("appleIdFristName");
+  return localStorage.getItem("appleIdFristName");
 };
 
 const getAppleIdLastName = () => {
-  return sessionStorage.getItem("appleIdLastName");
+  return localStorage.getItem("appleIdLastName");
 };
 
 const getEmail = () => {
-  return sessionStorage.getItem("email");
+  return localStorage.getItem("email");
 };
 
 const getRefreshToken = () => {
-  return sessionStorage.getItem("refresh_token");
+  return localStorage.getItem("refresh_token");
 };
 
 const getHeaders = () => {
@@ -93,7 +93,7 @@ const getHeaders = () => {
 };
 
 const getPathname = () => {
-  return sessionStorage.getItem("pathname");
+  return localStorage.getItem("pathname");
 };
 
 // 字段升序排序

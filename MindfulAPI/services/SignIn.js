@@ -266,7 +266,8 @@ async function verifyemail(verificationToken){
 
     // if record doesn't exist
     if (resultCheck.length < 1){
-        return 'Record doesn\'t exist'
+        logger.log('error', '%s %s %s', 'Signin', 'verifyemail', "Record does not exist");
+        return 'Record does not exist'
     }
 
     // if record already expired
@@ -279,6 +280,7 @@ async function verifyemail(verificationToken){
     //console.log("value: %s", process.env.emailVerificationValidPeriod);
 
     if ((now - then) > process.env.emailVerificationValidPeriod){
+        logger.log('error', '%s %s %s', 'Signin', 'verifyemail', "Record already expired");
         return 'Record already expired'
     }
 
@@ -288,6 +290,7 @@ async function verifyemail(verificationToken){
         sqlUpdate
     );
     logger.log('debug', '%s %s sqlCheck: %s', 'Signin', 'verifyemail', sqlUpdate);
+    logger.log('info', '%s %s %s', 'Signin', 'verifyemail', "Record updated");
     return 'Record updated'
 
 }

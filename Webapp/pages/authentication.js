@@ -62,7 +62,7 @@ const AuthPage = ({ session }) => {
 
   useEffect(async () => {
     if (!isConnected) {
-      sessionStorage.removeItem("walletAddress");
+      localStorage.removeItem("walletAddress");
       setWalletAddress('');
       return;
     }
@@ -85,7 +85,7 @@ const AuthPage = ({ session }) => {
   const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const handleGetWalletInfo = async () => {
     setWalletAddress(address);
-    sessionStorage.setItem("walletAddress", address);
+    localStorage.setItem("walletAddress", address);
     setIsConnectingWallet(true);
   };
 
@@ -116,7 +116,7 @@ const AuthPage = ({ session }) => {
   }, []);
 
   useEffect(() => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     if (!appleId) {
       setAppleId('');
     } else {
@@ -126,17 +126,17 @@ const AuthPage = ({ session }) => {
 
   const connectApple = () => {
     const pathname = window.location.pathname;
-    sessionStorage.setItem("pathname", pathname);
+    localStorage.setItem("pathname", pathname);
     // Cookies.set("pathname", pathname);
   }
 
   const disconnectApple = async () => {
     setAppleId('');
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("expires_in");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("appleId");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("expires_in");
+    localStorage.removeItem("email");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("appleId");
 
   }
 

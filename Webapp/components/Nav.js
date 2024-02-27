@@ -16,6 +16,8 @@ import ModalCookies from "./modalCookies";
 import ComponentsCookieConsent from '../components/componentsCookieConsent';
 import ModalEmailVerification from "./modalEmailVerification";
 import ModalFormEmailverification from "./modalFormEmailverification";
+import ModalFormEmailverificationExpired from "./modalFormEmailverificationExpired";
+import ModalFormEmailverificationNotfound from "./modalFormEmailverificationNotfound";
 import ModalFormAccountDisabled from "./modalFormAccountDisabled";
 
 // apple id login
@@ -51,6 +53,8 @@ const NavBar = ({ onLocaleChange }) => {
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [visibleEmail, setVisibleEmail] = useState(false);
   const [visibleFormEmailverification, setVisibleFormEmailverification] = useState(false);
+  const [visibleFormEmailverificationExpired, setVisibleFormEmailverificationExpired] = useState(false);
+  const [visibleFormEmailverificationNotfound, setVisibleFormEmailverificationNotfound] = useState(false);
   const [visibleFormAccountDisabled, setVisibleFormAccountDisabled] = useState(false);
 
   // apple id
@@ -70,6 +74,16 @@ const NavBar = ({ onLocaleChange }) => {
   }, [from])
 
   useEffect(() => {
+    if (!from || from !== 'emailverificationexpired') return
+    setVisibleFormEmailverificationExpired(true)
+  }, [from])
+
+  useEffect(() => {
+    if (!from || from !== 'emailverificationnotfound') return
+    setVisibleFormEmailverificationNotfound(true)
+  }, [from])
+
+  useEffect(() => {
     if (!from || from !== 'accountdisabled') return
     setVisibleFormAccountDisabled(true)
   }, [from])  
@@ -78,11 +92,11 @@ const NavBar = ({ onLocaleChange }) => {
     const pathname = getPathname();
     if (!pathname) return;
     window.location.href = pathname;
-    sessionStorage.removeItem("pathname");
+    localStorage.removeItem("pathname");
   }, []);
 
   useEffect(() => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     setIsAppleIdLogin(false);
     if (!appleId) {
       console.log(query)
@@ -96,8 +110,8 @@ const NavBar = ({ onLocaleChange }) => {
       }
     } else {
       setIsAppleIdLogin(true);
-      const email = sessionStorage.getItem("email");
-      const appleIdName = sessionStorage.getItem("appleIdName");
+      const email = localStorage.getItem("email");
+      const appleIdName = localStorage.getItem("appleIdName");
       setAppleId(appleId);
       setAppleIdName(appleIdName);
       setEmail(email);
@@ -117,14 +131,14 @@ const NavBar = ({ onLocaleChange }) => {
     setAppleId(query.appleId);
     setAppleIdName(firstName + ' ' + lastName)
     setEmail(query.email);
-    sessionStorage.setItem("access_token", query.access_token);
-    sessionStorage.setItem("expires_in", query.expires_in);
-    sessionStorage.setItem("email", query.email);
-    sessionStorage.setItem("refresh_token", query.refresh_token);
-    sessionStorage.setItem("appleId", query.appleId);
-    sessionStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
-    sessionStorage.setItem("appleIdFristName", query.firstName);
-    sessionStorage.setItem("appleIdLastName", query.lastName);
+    localStorage.setItem("access_token", query.access_token);
+    localStorage.setItem("expires_in", query.expires_in);
+    localStorage.setItem("email", query.email);
+    localStorage.setItem("refresh_token", query.refresh_token);
+    localStorage.setItem("appleId", query.appleId);
+    localStorage.setItem("appleIdName", query.firstName + ' ' + query.lastName);
+    localStorage.setItem("appleIdFristName", query.firstName);
+    localStorage.setItem("appleIdLastName", query.lastName);
     setIsAppleIdLogin(true);
   }
 
@@ -137,14 +151,14 @@ const NavBar = ({ onLocaleChange }) => {
   }
 
   const handleAppleSignOut = () => {
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("expires_in");
-    sessionStorage.removeItem("email");
-    sessionStorage.removeItem("refresh_token");
-    sessionStorage.removeItem("appleId");
-    sessionStorage.removeItem("appleIdName");
-    sessionStorage.removeItem("appleIdFristName");
-    sessionStorage.removeItem("appleIdLastName");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("expires_in");
+    localStorage.removeItem("email");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("appleId");
+    localStorage.removeItem("appleIdName");
+    localStorage.removeItem("appleIdFristName");
+    localStorage.removeItem("appleIdLastName");
     router.push('/');
     setIsAppleIdLogin(false);
     setAppleIdName('')
@@ -161,7 +175,7 @@ const NavBar = ({ onLocaleChange }) => {
 
   useEffect(async () => {
     if (!isConnected) {
-      sessionStorage.removeItem("walletAddress");
+      localStorage.removeItem("walletAddress");
       return;
     }
     handleGetWalletInfo();
@@ -193,7 +207,7 @@ const NavBar = ({ onLocaleChange }) => {
   const handleGetWalletInfo = async () => {
     console.log("address: ", address)
     setWalletAddress(address);
-    sessionStorage.setItem("walletAddress", address);
+    localStorage.setItem("walletAddress", address);
     setLoadingWallet(false);
     setIsConnectingWallet(true);
   };
@@ -279,6 +293,16 @@ const NavBar = ({ onLocaleChange }) => {
 
   const handleFormEmailverificationCancel = () => {
     setVisibleFormEmailverification(false);
+  }
+
+  const handleFormEmailverificationExpiredOk = () => {
+    setVisibleFormEmailverificationExpired(false);
+    signInOpenModal();
+  }
+
+  const handleFormEmailverificationNotfoundOk = () => {
+    setVisibleFormEmailverificationNotfound(false);
+    signInOpenModal();
   }
 
   const handleFormAccountDisabledOk = () => {
@@ -393,6 +417,16 @@ const NavBar = ({ onLocaleChange }) => {
               show={visibleFormEmailverification}
               onOk={handleFormEmailverificationOk}
               onCancel={handleFormEmailverificationCancel}
+            />
+            <ModalFormEmailverificationExpired
+              t={t}
+              show={visibleFormEmailverificationExpired}
+              onOk={handleFormEmailverificationExpiredOk}
+            />
+            <ModalFormEmailverificationNotfound
+              t={t}
+              show={visibleFormEmailverificationNotfound}
+              onOk={handleFormEmailverificationNotfoundOk}
             />
             <ModalFormAccountDisabled
               t={t}

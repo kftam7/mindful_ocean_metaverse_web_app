@@ -45,7 +45,7 @@ export default function SubmitPage({ session, user }) {
   const [count, setCount] = useState(0);
 
   useEffect(async () => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     if (!appleId) return;
     // artwork
     const res = await axios.get(`${apiPort}/mindfulapi/app/artwork/${appleId}`, { headers: getHeaders() });

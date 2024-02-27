@@ -70,8 +70,8 @@ function RedeemStep2() {
   }, [isSuccess])
 
   useEffect(async () => {
-    const appleId = sessionStorage.getItem("appleId");
-    const walletAddress = sessionStorage.getItem("walletAddress");
+    const appleId = localStorage.getItem("appleId");
+    const walletAddress = localStorage.getItem("walletAddress");
 
     if (!appleId) return;
     setLoading(true);

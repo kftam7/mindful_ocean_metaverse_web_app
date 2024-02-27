@@ -86,6 +86,8 @@
     "main.text.emailSent": "電子郵件已發送！<br />請檢查您的電子郵件以繼續登錄",
     "main.text.emailVerification": "電子郵件驗證",
     "main.text.yourEmailIsVerified": "您的電子郵件已驗證。",
+    "main.text.yourEmailTokenExpired": "您的驗證令牌已過期，請重新註冊",
+    "main.text.yourEmailTokenNotfound": "找不到您的驗證令牌，。請重新註冊",
     "main.text.accountDisabled": "帳戶已停用",
     "main.text.youraccountDisabled": "您的帳戶已被停用。請聯絡管理員",
     "page.create.createAndColor": "創建並為自創的魚上色",

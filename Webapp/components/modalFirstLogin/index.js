@@ -8,7 +8,7 @@ const ModalFirstLogin = props => {
   const apiPort = process.env.APIBaseUrl || '/';
 
   const handleAccept = async () => {
-    const appleId = sessionStorage.getItem("appleId");
+    const appleId = localStorage.getItem("appleId");
     await axios.post(`${apiPort}/mindfulapi/app/tandc/${appleId}`, {}, { headers: getHeaders() })
       .then(res => {
         if (res.status === 200) {
