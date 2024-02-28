@@ -18,13 +18,9 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
 
     address private immutable systemAddress;
     address private immutable mintingFeeRecipient;
-    //address private immutable mintingFeeRecipient1;
-    //address private immutable mintingFeeRecipient2;
-    //address private immutable mintingFeeRecipient3;
     uint256 private mintingFee;
     uint96 private immutable loyaltyFee;
     address immutable contractOwner;
-    //uint256 private _tokenIdCounter;
     uint private lastMintingFeeChangeTime;
 
     // Mapping of addresses who has been used
@@ -37,15 +33,11 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
     event tokenIdMinted(uint256 indexed tokenId);
     event mintingFeeSet(uint256 indexed mintingFee);
 
-    // constructor takes the systemAddress (for signature verification), minting fee recipients, base URI, minting fee & loyalty fee
-    //constructor(address _systemAddress, address _mintingFeeRecipient1, address _mintingFeeRecipient2, address _mintingFeeRecipient3 , uint256 _mintingFee,  uint96 _loyaltyFee) ERC721("Mindful Ocean Mint Pass", "MPASS") {
-        constructor(address _systemAddress, address _mintingFeeRecipient, uint256 _mintingFee,  uint96 _loyaltyFee) ERC721("Mindful Ocean Mint Pass", "MPASS") {
+    // constructor takes the systemAddress (for signature verification), minting fee recipients, minting fee & loyalty fee
+    constructor(address _systemAddress, address _mintingFeeRecipient, uint256 _mintingFee,  uint96 _loyaltyFee) ERC721("Mindful Ocean Mint Pass", "MPASS") {
         contractOwner = msg.sender;
         systemAddress = _systemAddress;
         mintingFeeRecipient = _mintingFeeRecipient;
-        //mintingFeeRecipient1 = _mintingFeeRecipient1;
-        //mintingFeeRecipient2 = _mintingFeeRecipient2;
-        //mintingFeeRecipient3 = _mintingFeeRecipient3;
         mintingFee = _mintingFee;
         loyaltyFee = _loyaltyFee;
         lastMintingFeeChangeTime = block.timestamp; 
@@ -107,19 +99,13 @@ contract MintPassNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burna
         // transfer minting fee to the defined wallet
         require(msg.value >= mintingFee, "Not enough MATIC sent; check price!");
         payable(address(mintingFeeRecipient)).sendValue(mintingFee);
-        //payable(address(mintingFeeRecipient1)).sendValue(mintingFee * 60 / 100);
-        //payable(address(mintingFeeRecipient2)).sendValue(mintingFee * 15 / 100);
-        //payable(address(mintingFeeRecipient3)).sendValue(mintingFee * 25 / 100);
 
         //refund any excess native tokens sent by the user
         if (msg.value > mintingFee){
             payable(address(msg.sender)).sendValue(msg.value-mintingFee);
         }
 
-        // set tokeID & recipient        
-        //uint256 tokenId = _tokenIdCounter;
-        //_safeMint(msg.sender, tokenId);
-        //_tokenIdCounter += 1;
+        // set tokeID & recipient
         _safeMint(msg.sender, tokenId);
 
         // set loyalty fee

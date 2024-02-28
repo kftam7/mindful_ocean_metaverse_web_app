@@ -18,12 +18,14 @@ interface burnMintPass{
 }
 
 contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnable, ERC2981, ReentrancyGuard {
+
+    using ECDSA for bytes32;
     
     address private immutable mintPass;
     uint96 private immutable loyaltyFee;
 
     address private immutable systemAddress;
-    address private immutable contractOwnerAddress;
+    address immutable contractOwner;
 
     // Mapping of addresses who has been used
     mapping(bytes32 => bool) public hashUsed;
@@ -31,11 +33,12 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
     // events
     event tokenIdMinted(uint256 indexed tokenId);
 
+    // constructor takes the systemAddress (for signature verification), mintPass contract address & loyalty fee
     constructor(address _systemAddress, address _mintPass, uint96 _loyaltyFee) ERC721("Mindful Ocean NFT", "MINDFUL") {
         systemAddress = _systemAddress;
         mintPass = _mintPass;
         loyaltyFee = _loyaltyFee;
-        contractOwnerAddress = msg.sender;
+        contractOwner = msg.sender;
     }
 
     // recover Signer from hash & signature
@@ -58,7 +61,7 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
     function mintMintfulNFT(bytes32 hash, bytes calldata signature, uint256 tokenId, string calldata uri, address to) public whenNotPaused nonReentrant returns(uint256){
 
         // only contract owner can mintMintfulNFT in this way
-        require(msg.sender == contractOwnerAddress, "Must be owner of the contract");
+        require(msg.sender == contractOwner, "Must be owner of the contract");
 
         // check if hash has been used
         require(!hashUsed[hash], "Hash has been used");
