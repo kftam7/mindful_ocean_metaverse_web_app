@@ -57,8 +57,8 @@ contract MindfulNFT is ERC721, ERC721URIStorage, Pausable, Ownable, ERC721Burnab
         _unpause();
     }
 
-    // mint Metaverse NFT
-    function mintMintfulNFT(bytes32 hash, bytes calldata signature, uint256 tokenId, string calldata uri, address to) public whenNotPaused nonReentrant returns(uint256){
+    // mint MindfulOcean NFT
+    function mintMindfulNFT(bytes32 hash, bytes calldata signature, uint256 tokenId, string calldata uri, address to) public whenNotPaused nonReentrant returns(uint256){
 
         // only contract owner can mintMintfulNFT in this way
         require(msg.sender == contractOwner, "Must be owner of the contract");
