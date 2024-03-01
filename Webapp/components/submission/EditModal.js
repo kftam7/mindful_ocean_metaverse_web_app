@@ -64,7 +64,7 @@ const EditModal = props => {
     if(!artistMessage) return;
 
     if(artistMessage.length > 5000){
-      alert('Cannot exceed 5000 words')
+      alert(t('main.text.cannotExceed5000Words'))
       return
     }
 

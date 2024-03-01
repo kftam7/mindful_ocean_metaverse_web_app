@@ -36,17 +36,17 @@ const ModalEmailVerification = props => {
     if (!firstName || !lastName || !email) return;
 
     if(!namePattern.test(firstName)){
-      alert('Please enter the correct format')
+      alert(t('main.text.pleaseEnterTheCorrectFormat'))
       return
     }
 
     if(!namePattern.test(lastName)){
-      alert('Please enter the correct format')
+      alert(t('main.text.pleaseEnterTheCorrectFormat'))
       return
     }
 
     if(!emailPattern.test(email)){
-      alert('Please enter the correct format')
+      alert(t('main.text.pleaseEnterTheCorrectFormat'))
       return
     }
 

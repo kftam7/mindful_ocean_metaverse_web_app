@@ -90,6 +90,8 @@
     "main.text.yourEmailTokenNotfound": "未找到您的驗證令牌，请重新注册",      
     "main.text.accountDisabled": "帐户已禁用",
     "main.text.youraccountDisabled": "您的帐户已被禁用。请联系管理员",
+    "main.text.pleaseEnterTheCorrectFormat": "Please enter the correct format",
+    "main.text.cannotExceed5000Words": "Cannot exceed 5000 words",
     "page.create.createAndColor": "创作并为自创的鱼上色",
     "page.create.downloadTemplate": "下载模板",
     "page.create.uploadYourArtwork": "上传您的艺术作品（不超过1MB）,在3D模型上预览！",

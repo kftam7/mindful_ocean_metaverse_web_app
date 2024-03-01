@@ -90,6 +90,8 @@
     "main.text.yourEmailTokenNotfound": "Your Verification Token is not found. Please register again",
     "main.text.accountDisabled": "Account Disabled",
     "main.text.youraccountDisabled": "Your account is disabled. Please contact the administrator",
+    "main.text.pleaseEnterTheCorrectFormat": "Please enter the correct format",
+    "main.text.cannotExceed5000Words": "Cannot exceed 5000 words",
     "page.create.createAndColor": "Create and color your own version of fish!",
     "page.create.downloadTemplate": "Download template",
     "page.create.uploadYourArtwork": "upload your artwork (no bigger than 1MB) to preview it on 3D model!",
