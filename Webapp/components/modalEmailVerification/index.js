@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, Container, Row, Col, Form, Image } from 'react-bootstrap';
+import { Button, Modal, Container, Row, Col, Form, Image, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
 import { getHeaders } from '../../utils/utils';
@@ -19,6 +19,8 @@ const ModalEmailVerification = props => {
     lastName: false,
     email: false,
   });
+  var namePattern = /^[a-z ,.'-]{2,20}$/i
+  var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const handleSend = async (event) => {
     event.preventDefault();
@@ -32,6 +34,21 @@ const ModalEmailVerification = props => {
     setFormErrors(newFormErrors);
 
     if (!firstName || !lastName || !email) return;
+
+    if(!namePattern.test(firstName)){
+      alert('Please enter the correct format')
+      return
+    }
+
+    if(!namePattern.test(lastName)){
+      alert('Please enter the correct format')
+      return
+    }
+
+    if(!emailPattern.test(email)){
+      alert('Please enter the correct format')
+      return
+    }
 
     const params = {
       name: {

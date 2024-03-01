@@ -23,7 +23,8 @@ function EditAppleIdNameModel(props) {
   });
   const [errorFirstNameType, setErrorFirstNameType] = useState(1); //1：空值
   const [errorLastNameType, setErrorLastNameType] = useState(1); //1：空值
-
+  var namePattern = /^[a-z ,.'-]{2,20}$/i
+  
   useEffect(() => {
     if(!show) return;
     setFormData({
@@ -88,7 +89,17 @@ function EditAppleIdNameModel(props) {
       lastName: crossLastName
     };
     setFormErrors(newFormErrors);
-    if(crossFirstName || crossLastName) return;
+    if(crossFirstName || crossLastName) return;    
+
+    if(!namePattern.test(firstName)){
+      alert('Please enter the correct format')
+      return
+    }
+
+    if(!namePattern.test(lastName)){
+      alert('Please enter the correct format')
+      return
+    }
 
     const params = {
       firstName,
