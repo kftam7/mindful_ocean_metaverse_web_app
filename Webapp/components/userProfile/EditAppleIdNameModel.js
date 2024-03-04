@@ -23,7 +23,7 @@ function EditAppleIdNameModel(props) {
   });
   const [errorFirstNameType, setErrorFirstNameType] = useState(1); //1：空值
   const [errorLastNameType, setErrorLastNameType] = useState(1); //1：空值
-  var namePattern = /^[a-z ,.'-]{2,20}$/i
+  var namePattern = /^[a-zA-Z0-9 ,.'-]{2,20}$/i
   
   useEffect(() => {
     if(!show) return;
@@ -92,12 +92,12 @@ function EditAppleIdNameModel(props) {
     if(crossFirstName || crossLastName) return;    
 
     if(!namePattern.test(firstName)){
-      alert(t('main.text.pleaseEnterTheCorrectFormat'))
+      alert(t('main.text.pleaseEnterTheCorrectFormatfirstname'))
       return
     }
 
     if(!namePattern.test(lastName)){
-      alert(t('main.text.pleaseEnterTheCorrectFormat'))
+      alert(t('main.text.pleaseEnterTheCorrectFormatlastname'))
       return
     }
 

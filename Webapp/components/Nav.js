@@ -384,7 +384,7 @@ const NavBar = ({ onLocaleChange }) => {
                         </Button>
                       </>
                       :
-                      <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet || !isAppleIdLogin}>{loadingWallet ? "Loading..." : 'Connect Wallet'}</Button>
+                      <Button className={styles.signInBtn} onClick={connectWallet} disabled={loadingWallet || !isAppleIdLogin}>{loadingWallet ? "Loading..." : t('main.text.connectWallet')}</Button>
                     }
                     {/* <Web3Button /> */}
                   </Col>

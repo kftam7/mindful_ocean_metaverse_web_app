@@ -19,7 +19,8 @@ const ModalEmailVerification = props => {
     lastName: false,
     email: false,
   });
-  var namePattern = /^[a-z ,.'-]{2,20}$/i
+  //var namePattern = /^[a-z ,.'-]{2,20}$/i
+  var namePattern = /^[a-zA-Z0-9 ,.'-]{2,20}$/i
   var emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   const handleSend = async (event) => {
@@ -36,17 +37,17 @@ const ModalEmailVerification = props => {
     if (!firstName || !lastName || !email) return;
 
     if(!namePattern.test(firstName)){
-      alert(t('main.text.pleaseEnterTheCorrectFormat'))
+      alert(t('main.text.pleaseEnterTheCorrectFormatfirstname'))
       return
     }
 
     if(!namePattern.test(lastName)){
-      alert(t('main.text.pleaseEnterTheCorrectFormat'))
+      alert(t('main.text.pleaseEnterTheCorrectFormatlastname'))
       return
     }
 
     if(!emailPattern.test(email)){
-      alert(t('main.text.pleaseEnterTheCorrectFormat'))
+      alert(t('main.text.pleaseEnterTheCorrectFormatemail'))
       return
     }
 
@@ -112,11 +113,11 @@ const ModalEmailVerification = props => {
                 <Col span={12}>
                   <Form onSubmit={handleSend}>
                     <Form.Group className="align-items-center form_group" controlId="firstName">
-                      <Form.Label className='form_label'>{t('First name')}:</Form.Label>
+                      <Form.Label className='form_label'>{t('main.text.firstName')}:</Form.Label>
                       <Form.Control
                         className={styles.form_control}
                         type="text"
-                        placeholder="First name"
+                        placeholder={t('main.text.firstName')}
                         name="firstName"
                         value={formData.firstName}
                         isInvalid={formErrors.firstName}
@@ -127,7 +128,7 @@ const ModalEmailVerification = props => {
                         className={styles.form_feedback}
                         type="invalid"
                       >
-                        {t('First name Can not Be Empty')}
+                        {t('error.info.firstNameCannotBeEmpty')}
                       </Form.Control.Feedback>
                     </Form.Group>
                   </Form>
@@ -135,11 +136,11 @@ const ModalEmailVerification = props => {
                 <Col span={12}>
                   <Form onSubmit={handleSend}>
                     <Form.Group className="align-items-center form_group" controlId="lastName">
-                      <Form.Label className='form_label'>{t('Last name')}:</Form.Label>
+                      <Form.Label className='form_label'>{t('main.text.lastName')}:</Form.Label>
                       <Form.Control
                         className={styles.form_control}
                         type="text"
-                        placeholder="Last name"
+                        placeholder={t('main.text.lastName')}
                         name="lastName"
                         value={formData.lastName}
                         isInvalid={formErrors.lastName}
@@ -150,7 +151,7 @@ const ModalEmailVerification = props => {
                         className={styles.form_feedback}
                         type="invalid"
                       >
-                        {t('Last name Can not Be Empty')}
+                        {t('error.info.lastNameCannotBeEmpty')}
                       </Form.Control.Feedback>
                     </Form.Group>
                   </Form>
@@ -160,11 +161,11 @@ const ModalEmailVerification = props => {
                 <Col span={24}>
                   <Form onSubmit={handleSend}>
                     <Form.Group className="align-items-center form_group" controlId="email">
-                      <Form.Label className='form_label'>{t('Email')}:</Form.Label>
+                      <Form.Label className='form_label'>{t('main.text.email')}:</Form.Label>
                       <Form.Control
                         className={styles.form_control}
                         type="text"
-                        placeholder="Email"
+                        placeholder={t('main.text.email')}
                         name="email"
                         value={formData.email}
                         isInvalid={formErrors.email}
