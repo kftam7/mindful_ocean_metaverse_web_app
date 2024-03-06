@@ -13,6 +13,8 @@ module.exports = {
     return config;
   },
   env: {
+    chain: 'MumbaiTestnet',
+    //chain = 'PolygonMainnet'
     //API_PORT: 'http://127.0.0.1:3001',
     //APIBaseUrl: 'https://api-staging.mindful-ocean.org',
     APIBaseUrl: 'http://127.0.0.1:3001',

@@ -8,14 +8,25 @@ const { Alchemy, Network } = require('alchemy-sdk');
 /* get NFT */
 async function getNFT(type, idtype, id){
 
+  var settings;
+
   logger.log('info', '%s %s %s %s %s', 'Nft', 'getNFT', type, idtype, id);
 
   // create Alchemy object
-  const settings = {
-    apiKey: process.env.alchemyApiKey,
-    //network: Network.MATIC_MUMBAI // Replace with your network.
-    network: Network.MATIC_MAINNET
-  };
+  if (process.env.chain == "PolygonMainnet"){
+     settings = {
+      apiKey: process.env.alchemyApiKey,
+      //network: Network.MATIC_MUMBAI // Replace with your network.
+      network: Network.MATIC_MAINNET
+    };
+  } else if (process.env.chain == "MumbaiTestnet") {
+     settings = {
+      apiKey: process.env.alchemyApiKey,
+      network: Network.MATIC_MUMBAI // Replace with your network.
+      //network: Network.MATIC_MAINNET
+    };
+  }
+
   const alchemy = new Alchemy(settings);
   let data = [];
   let query_string = "";

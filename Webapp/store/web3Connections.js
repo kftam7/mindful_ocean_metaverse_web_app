@@ -10,29 +10,50 @@ import mintMindfulNFT from "../utils/MindfulNFT.json";
 
 //start a connection to the web3 provider positively
 const getWeb3Modal = async() => {
-  const providerOptions = {
-    walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          infuraId: "aa032798744e5b170f17a9bdecc420b8",
-          rpc: {
-              //1: "https://mainnet.mycustomnode.com",
-              137: "https://polygon-rpc.com",
-              //80001: 'https://matic-mumbai.chainstacklabs.com',
+
+  var providerOptions;
+  var web3Modal;
+
+  if (process.env.chain == "PolygonMainnet"){
+    providerOptions = {
+      walletconnect: {
+          package: WalletConnectProvider,
+          options: {
+            infuraId: "aa032798744e5b170f17a9bdecc420b8",
+            rpc: {
+                137: "https://polygon-rpc.com",
             },
-          //supportedChainIds: [1, 137, 80001]
-          //supportedChainIds: [80001]
-	  supportedChainIds: [137]
-        }
-    }
-  };
-  const web3Modal = new Web3Modal({
-      //network: 'mumbai',
-      network: 'polygon',
-      cacheProvider: true, // optional
-      providerOptions, // required
-      disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
-  });
+	          supportedChainIds: [137]
+          }
+      }
+    };
+    web3Modal = new Web3Modal({
+        network: 'polygon',
+        cacheProvider: true, // optional
+        providerOptions, // required
+        disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+    });
+  } else if (process.env.chain == "MumbaiTestnet"){
+    providerOptions = {
+      walletconnect: {
+          package: WalletConnectProvider,
+          options: {
+            infuraId: "aa032798744e5b170f17a9bdecc420b8",
+            rpc: {
+                80001: 'https://matic-mumbai.chainstacklabs.com',
+            },
+            supportedChainIds: [80001]
+          }
+      }
+    };
+    web3Modal = new Web3Modal({
+        network: 'mumbai',
+        cacheProvider: true, // optional
+        providerOptions, // required
+        disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+    });
+  }
+
   return web3Modal;
 }
 
@@ -133,26 +154,41 @@ export const connectionChanges = async() => {
 export const switchNetwork = async() => {
   if (window.ethereum) {
       try {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: Web3.utils.toHex(137) }], // chainId must be in hexadecimal numbers
-        })
-        .catch(err => {
-            console.log(err);
-          }
-        );
+        if (process.env.chain == "PolygonMainnet"){  
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: Web3.utils.toHex(137) }], // chainId must be in hexadecimal numbers
+          })
+        } else if (process.env.chain == "MumbaiTestnet"){
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: Web3.utils.toHex(80001) }], // chainId must be in hexadecimal numbers
+          })
+        }
       } catch (error) {
         if (error.code === 4902) {
           try {
-            await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
-              params: [
-                {
-                  chainId: '137',
-                  rpcUrl: 'https://polygon-rpc.com',
-                },
-              ],
-            });
+            if (process.env.chain == "PolygonMainnet"){
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '137',
+                    rpcUrl: 'https://polygon-rpc.com',
+                  },
+                ],
+              });
+            } else if (process.env.chain == "MumbaiTestnet"){
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '80001',
+                    rpcUrl: 'https://matic-mumbai.chainstacklabs.com',
+                  },
+                ],
+              });
+            }
           } catch (addError) {
             console.error(addError);
           }

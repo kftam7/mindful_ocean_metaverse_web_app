@@ -8,9 +8,18 @@ const PRIVATE_KEY = process.env.AuthPrivateKey;
 //const CONTRACT_ADDRESS = "0x3Cd660AB23B44Ae7E99DC5e7d9a7dC38a341c30a";
 // const contract = require("../artifacts/contracts/MindfulNFT.sol/MindfulNFT.json");
 // provider - Alchemy
-const netObj = {
-    name: 'matic',
-    chainId: 137  // hardwired bullshit
+var netObj;
+
+if (process.env.chain == "PolygonMainnet"){
+  netObj = {
+      name: 'matic',
+      chainId: 137  // hardwired bullshit
+  };
+} else if (process.env.chain == "MumbaiTestnet"){
+  netObj = {
+      name: 'maticmum',
+      chainId: 80001  // hardwired bullshit
+  };
 }
 
 const getMessageHashSignature = async (contract) => {
