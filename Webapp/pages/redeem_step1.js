@@ -315,7 +315,7 @@ const RedeemStep1 = ({ session }) => {
             </Col>
           </Row>
         </div>
-        : ''
+        : <div className={styles.announcement}>{t('main.text.noRedeem')}</div>
       }
     </Container>
   )

@@ -25,6 +25,7 @@ module.exports = {
     WalletconnectProjectId: 'b66462653b390b41e66f8f03e25cfa0a',
     MintingFee: 100000000000000,
     IfRedeemOpen: 1,
+    IfMintpassOpen: 1,
     MintPassContractAddress: '0x32E7A4B42d11826F890c6Da05Ec015E97dFFaDC6',
     MindfulTokenContractAdd: '0x870488b36145bc9936b10ECF1F1AEdbAC1b1c25A',
     openseaLink: 'https://testnets.opensea.io/assets/mumbai/',

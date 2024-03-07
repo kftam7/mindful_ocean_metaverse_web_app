@@ -40,6 +40,7 @@ createWeb3Modal({ wagmiConfig, projectId, chains })
 const AuthPage = ({ session }) => {
   //const apiPort = process.env.API_PORT || '/';
   const apiPort = process.env.APIBaseUrl || '/';
+  const IfMintpassOpen = process.env.IfMintpassOpen;
   const dispatch = useDispatch();
   const account = useSelector((state) => state.accountState);
   const [walletAddress, setWalletAddress] = useState('');
@@ -149,9 +150,8 @@ const AuthPage = ({ session }) => {
 
   return (
     <Container className='mt-5 mb-5' style={{}}>
-      {/* <Button onClick={connect}>connect</Button>
-      <Button onClick={disconnectWallet}>disconnect Wallet</Button> */}
-      <div className={styles.submitPage}>
+      {IfMintpassOpen ?
+        <div className={styles.submitPage}>
         <Row><Link href="/"><h6 style={{ cursor: "pointer" }}>&larr; {t('button.returnToHomepage')}</h6></Link></Row>
         <Row className="mt-4"><h4>{t('page.mintpass.submitArtwork')}</h4></Row>
 
@@ -308,7 +308,9 @@ const AuthPage = ({ session }) => {
             }
           </Col>
         </Row>
-      </div>
+        </div>
+        : <div className={styles.announcement}>{t('main.text.noMintpass')}</div>
+      }
     </Container>
   )
 }
