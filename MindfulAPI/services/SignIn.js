@@ -138,9 +138,10 @@ async function submitid(req){
     //console.log("email: %s", req.body.email);
 
     // check firstname, lastname & email format
-    var namePattern=/^[a-z ,.'-]{2,20}$/i
+    var namePattern=/^[a-zA-Z0-9 ,.'-]{2,20}$/i
     var emailPattern=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
+    const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
     if (!namePattern.test(req.body.name.firstName)) {
 	logger.log('error', '%s %s: %s', 'Signin', 'verifyemail', 'First Name invalid'); 
@@ -160,7 +161,7 @@ async function submitid(req){
     //console.log("verificationToken: %s", verificationToken);
 
     // update DB
-    var sqlUpdate = 'UPDATE user SET firstName = "' + req.body.name.firstName + '", lastName = "' + req.body.name.lastName + '", email = "' + req.body.email + '", verificationToken = "' + verificationToken + '" WHERE appleId = "' + req.params.appleId + '";';
+    var sqlUpdate = 'UPDATE user SET firstName = "' + req.body.name.firstName + '", lastName = "' + req.body.name.lastName + '", email = "' + req.body.email + '", verificationToken = "' + verificationToken + '", vtTime = "' + currentTimeSql + '" WHERE appleId = "' + req.params.appleId + '";';
     const resultUpdate = await db.query(
         sqlUpdate
     );
