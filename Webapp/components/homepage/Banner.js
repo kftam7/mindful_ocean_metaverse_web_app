@@ -5,6 +5,17 @@ const Banner = ({ t }) => {
   return (
     <div className='banner'>
       <Carousel pauseOnHover={false}>
+        <Carousel.Item>        
+          <a href="/event?eventId=10"> 
+            <div className='banner_over'>
+              <div className='banner_des'>
+                <div className='banner_title'>{t('home.banner.title0')}</div>
+                <div className='banner_text'>{t('home.banner.text0')}</div>
+              </div>
+            </div>
+            <Image src="/oceanImage_4.jpg"  width="100%" />
+          </a>
+        </Carousel.Item>      
         <Carousel.Item>
           <div className='banner_over'>
             <div className='banner_des'>

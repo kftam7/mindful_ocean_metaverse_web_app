@@ -84,10 +84,17 @@ async function createArtwork(artworkRecord){
     return {message};
   }else{
 
-    var rows = await db.query(
-      `INSERT INTO artwork (userId, eventId, URL, type, artistMessage, extraInfo, ifHomepage, ifMinted, ifRedeemed, isActive, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [userIdResult[0].userId, artworkRecord[0].eventId, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].artistMessage, artworkRecord[0].extraInfo, artworkRecord[0].ifHomepage, artworkRecord[0].ifMinted, artworkRecord[0].ifRedeemed, artworkRecord[0].isActive, currentTimeSql, currentTimeSql]
-    );
-
+    // if extraInfo is defined
+    if (artworkRecord[0].extraInfo){
+      var rows = await db.query(
+        `INSERT INTO artwork (userId, eventId, URL, type, artistMessage, extraInfo, ifHomepage, ifMinted, ifRedeemed, isActive, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [userIdResult[0].userId, artworkRecord[0].eventId, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].artistMessage, artworkRecord[0].extraInfo, artworkRecord[0].ifHomepage, artworkRecord[0].ifMinted, artworkRecord[0].ifRedeemed, artworkRecord[0].isActive, currentTimeSql, currentTimeSql]
+      );
+    }else{
+      var rows = await db.query(
+        `INSERT INTO artwork (userId, eventId, URL, type, artistMessage, ifHomepage, ifMinted, ifRedeemed, isActive, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [userIdResult[0].userId, artworkRecord[0].eventId, artworkRecord[0].URL, artworkRecord[0].type, artworkRecord[0].artistMessage, artworkRecord[0].ifHomepage, artworkRecord[0].ifMinted, artworkRecord[0].ifRedeemed, artworkRecord[0].isActive, currentTimeSql, currentTimeSql]
+      );
+    }
+  
     const artworkId = rows.insertId;
     logger.log('info', '%s %s Artwork created successfully, artworkId: %s', 'Artwork', 'createArtwork', artworkId);
     return {artworkId};

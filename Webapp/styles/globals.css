@@ -49,10 +49,33 @@ a:hover {
 }
 
 ul,
+
+ul.a {
+  text-align: -webkit-match-parent;
+}
+
 li {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+li.a {
+  padding: 0;
+  margin: 0;
+  list-style-type: disc;
+}
+
+li.b {
+  padding: 0;
+  margin: 0;
+  list-style-type: square;
+}
+
+li.c {
+  padding: 0;
+  margin: 0;
+  list-style-type: decimal;
 }
 
 model-viewer {

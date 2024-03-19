@@ -116,6 +116,67 @@ const Event1 = () => {
           },
         ],
       },
+      '10': {
+        title: t('home.event1.title'),
+        list: [
+          {
+            title: t('home.event1.subTitle1'),
+            des: t('home.event1.subText1'),
+          },
+          {
+            title: t('home.event1.subTitle2'),
+            des: t('home.event1.subText2'),
+          },
+          {
+            title: t('home.event1.subTitle3'),
+            des: t('home.event1.subText3'),
+          },
+          {
+            title: t('home.event1.subTitle4'),
+            des: t('home.event1.subText4'),
+          },
+          {
+            title: t('home.event1.subTitle5'),
+            des: t('home.event1.subText5'),
+          },
+          {
+            title: t('home.event1.subTitle6'),
+            des: t('home.event1.subText6'),
+          },
+          {
+            title: t('home.event1.subTitle7'),
+            des: t('home.event1.subText7'),
+          },
+          {
+            title: t('home.event1.subTitle8'),
+            des: t('home.event1.subText8'),
+          },
+          {
+            title: t('home.event1.subTitle9'),
+            des: t('home.event1.subText9'),
+          },
+          {
+            title: t('home.event1.subTitle10'),
+            des: t('home.event1.subText10'),
+          },
+          {
+            title: t('home.event1.subTitle11'),
+            des: t('home.event1.subText11'),
+          },
+          {
+            title: t('home.event1.subTitle12'),
+            des: t('home.event1.subText12'),
+          },
+          {
+            title: t('home.event1.subTitle13'),
+            des: t('home.event1.subText13'),
+          },
+          {
+            title: t('home.event1.subTitle14'),
+            des: t('home.event1.subText14'),
+          },                                        
+        ],
+      },
     };
     setItem(list[eventId]);
   }, [eventId]);
@@ -147,9 +208,9 @@ const Event1 = () => {
             </div>
             {eventId < 6 ? <div className="text-center event_btn"><Button variant="outline-primary" onClick={() => window.location.href = `/event?eventId=${Number(eventId) + 1}`}>{t('button.continueReading')}</Button></div>
               : <div className="text-center event_btn"><Button variant="outline-primary" onClick={() => window.location.href = `/`}>&larr; {t('button.returnToHomepage')}</Button></div>}
-            <EventStep
+            {eventId < 10 ? <EventStep
               eventId={eventId}
-            />
+            /> : ''}
           </Col>
         </Row>
       </Container>

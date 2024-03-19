@@ -14,7 +14,7 @@ const Mindfultoken = ({ t }) => {
               <p class="mt-3">{t('main.text.raiseFundsforMarineConservationDes')}</p>
             </Col>
             <Col lg={6} md={6} sm={12}>
-              <Carousel pauseOnHover={false}>
+              <Carousel pauseOnHover={false}>           
                 <Carousel.Item>
                     <Image src="/oceanImage_1.jpg" width="100%" />
                 </Carousel.Item>
