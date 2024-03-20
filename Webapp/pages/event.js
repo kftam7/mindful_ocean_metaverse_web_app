@@ -116,7 +116,7 @@ const Event1 = () => {
           },
         ],
       },
-      '10': {
+      '18': {
         title: t('home.event1.title'),
         list: [
           {
