@@ -174,7 +174,11 @@ const Event1 = () => {
           {
             title: t('home.event1.subTitle14'),
             des: t('home.event1.subText14'),
-          },                                        
+          },
+          {
+            title: t('home.event1.subTitle15'),
+            des: t('home.event1.subText15'),
+          },                                               
         ],
       },
     };

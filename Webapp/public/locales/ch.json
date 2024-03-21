@@ -94,8 +94,8 @@
     "main.text.pleaseEnterTheCorrectFormatlastname": "请输入正确的姓氏（2-20 个字符）",
     "main.text.pleaseEnterTheCorrectFormatemail": "请输入正确的电子邮件格式",
     "main.text.cannotExceed5000Words": "不能超过5000字",
-    "main.text.noRedeem": "兑换将于 2024年4月11日 14:00:00（香港时间）开放",
-    "main.text.noMintpass": "铸造通行证将于艺术比赛开始后开放 YYYY MM DD HH MM SS",
+    "main.text.noRedeem": "兑换将于2024年4月23日 14:00:00（香港时间）开放",
+    "main.text.noMintpass": "铸造通行证将于2024年4月10日 12:00:00 中午（香港时间）开放",
     "page.create.createAndColor": "创作并为自创的鱼上色",
     "page.create.downloadTemplate": "下载模板",
     "page.create.uploadYourArtwork": "上传您的艺术作品（不超过1MB）,在3D模型上预览！",
@@ -574,7 +574,7 @@
     "home.event1.subTitle4": "Extra Prize & Donation",
     "home.event1.subText4": "If the number of participants exceeds 500, and in average every participant has submitted more than 3 artworks, the following extra prize, donation, and community event will be unlocked:<br/><ul><li class='a'>A total of US$100 in Amazon.com eGift Card will be awarded to 1 additional winner.</li><li class='a'>A total of US$100 in crypto will be donated to an ocean conservation NGO.</li><li class='a'>A dedicated Discord channel will be created to allow our Discord community members to discuss how to allocate the extra prize and donation.</li></ul>",
     "home.event1.subTitle5": "Event Schedule",
-    "home.event1.subText5": "<img src='event1_schedule.jpg' alt='event1_schedule' width='690' height='331'>",
+    "home.event1.subText5": "<img src='event1_schedule.jpg' alt='event1_schedule' width='646' height='377'>",
     "home.event1.subTitle6": "Who Can Participate in the Art Contest",
     "home.event1.subText6": "<ul><li class='a'>You need to have an iOS device that can install our iOS beta app through TestFlight (An iOS app that you need to install first, which allows you to install our beta app).<li class='a'>You need to have a crypto wallet. We recommend you to use a computer with MetaMask installed in Google Chrome.<li class='a'>You need to have some MATICS to pay for the gas fee involved.</ul>",
     "home.event1.subTitle7": "Important Information for Participants",
@@ -592,5 +592,7 @@
     "home.event1.subTitle13": "Disqualification",
     "home.event1.subText13": "<ul><li class='a'>Submissions with an intellectual property breach will be disqualified.</li><li class='a'>Submissions with inappropriate content such as sexually explicit material, profanity, or violence will be disqualified</li><li class='a'>Creators of the disqualified artworks will receive an email, in which the reasons for the disqualification will be provided.</li></ul></a>",
     "home.event1.subTitle14": "Links",
-    "home.event1.subText14": "<br/><b><i>iOS Beta App</i></b><br/><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'>https://testflight.apple.com/join/ypNDxHmZ</a><br/><br/><img src='event1_QRcode.png' alt='event1_QRcode' width='377' height='227'><br/><br/><br/><b><i>TestFlight App</i></b><br/><a href='https://apps.apple.com/us/app/testflight/id899247664' target='_blank'>https://apps.apple.com/us/app/testflight/id899247664</a><br/><br/><br/><b><i>Website</i></b><br/><a href='https://www.mindful-ocean.org' target='_blank'>https://www.mindful-ocean.org</a>"
+    "home.event1.subText14": "<br/><b><i>iOS Beta App</i></b><br/><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'>https://testflight.apple.com/join/ypNDxHmZ</a><br/><br/><img src='event1_QRcode.png' alt='event1_QRcode' width='377' height='227'><br/><br/><br/><b><i>TestFlight App</i></b><br/><a href='https://apps.apple.com/us/app/testflight/id899247664' target='_blank'>https://apps.apple.com/us/app/testflight/id899247664</a><br/><br/><br/><b><i>Website</i></b><br/><a href='https://www.mindful-ocean.org' target='_blank'>https://www.mindful-ocean.org</a>",
+    "home.event1.subTitle15": "Technical Support Office Hours & Response Time (Hong Kong Time)",
+    "home.event1.subText15": "<b><i>Discord Server Live Chat</i></b><br/><b>Monday - Friday:</b> 10:30 am - 12:30 pm<br/><br/><b>Remark:</b><br/>Live chat is not available for the following Hong Kong public holidays<br/>Mar 29 (Fri) - Good Friday<br/>Mar 30 (Sat) - The day following Good Friday<br/>Apr 1 (Mon) - Easter Monday<br/>Apr 4 (Thu) - Ching Ming Festival<br/>May 1 (Wed) - Labour Day<br/><br/><b><i>Email</i></b><br/>Please email us at support@mindful-ocean.org<br/>We will answer your email inquiries within 1 to 2 business days"
 }
