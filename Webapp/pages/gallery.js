@@ -39,7 +39,7 @@ const GalleryPage = () => {
   useEffect(async () => {
     const appleid = getAppleId();
     if (!appleid) return;
-    const des = await axios.get(`${apiPort}/mindfulapi/app/artwork`, { headers: getHeaders() });
+    const des = await axios.get(`${apiPort}/mindfulapi/app/artworkredeemed`, { headers: getHeaders() });
     if (des.status === 200) {
       const { data: { data } } = des;
       const result = data.map(item => {

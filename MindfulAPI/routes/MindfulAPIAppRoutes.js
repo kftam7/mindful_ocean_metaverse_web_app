@@ -324,6 +324,17 @@ router.get('/artworkhomepage', async function(req, res, next) {
   }
 });
 
+/* GET Artwork for redeemed */
+router.get('/artworkredeemed', async function(req, res, next) {
+  try {
+    res.json(await Artwork.getRedeemedArtwork());
+  } catch (err) {
+    logger.log('error', 'Error while getting %s', err.message);
+    console.error(`Error while getting  `, err.message);
+    next(err);
+  }
+});
+
 /* POST Artwork */
 router.post('/artwork', async function(req, res, next) {
   try {

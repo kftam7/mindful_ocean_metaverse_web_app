@@ -55,6 +55,24 @@ async function getHomepageArtwork(){
   }
 }
 
+/* get Artwork for the Redeemed  */
+async function getRedeemedArtwork(){
+
+  logger.log('info', '%s %s', 'Artwork', 'getRedeemedArtwork');
+
+  var rows = await db.query(
+    `SELECT b.userId, b.appleId, b.firstName, b.lastName, a.artworkId, a.eventId, a.URL, a.type, a.artistMessage, a.extraInfo, a.mintpassStorage, a.mindfultokenStorage, a.ifHomepage, a.ifMinted, a.ifRedeemed, a.authenticScarcity, a.scarcityRank, a.clusterId, a.clusterSize, a.superClusterId, a.superClusterSize, a.isActive, a.createTime, a.updateTime FROM artwork a, user b WHERE a.userId=b.userId AND a.ifRedeemed = 1 ORDER BY a.artworkId desc;`
+  );
+  
+  const data = helper.emptyOrRows(rows);
+  const meta = "1";
+
+  return {
+    data,
+    meta
+  }
+}
+
 /* create Artwork */
 async function createArtwork(artworkRecord){
 
@@ -395,6 +413,7 @@ async function nftStorage(artworkId, type){
 module.exports = {
   getArtwork,
   getHomepageArtwork,
+  getRedeemedArtwork,
   createArtwork,
   updateArtwork,
   setMintedArtwork,
