@@ -515,7 +515,7 @@
     "footer.nav.contactUs": "Contact Us",
     "footer.nav.versionNo": "version no.",
     "footer.copyright": "Outblaze Limited 2024.",
-    "footer.version.no": "Ver 0.2.7",
+    "footer.version.no": "",
     "input.placeholder.email": "Subscribe here",
     "error.info.descriptionCannotBeEmpty": "Description cannot be empty",
     "error.info.artistMessageCannotBeEmpty": "ArtistMessage cannot be empty",
