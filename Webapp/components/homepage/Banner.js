@@ -4,7 +4,7 @@ const Banner = ({ t }) => {
 
   return (
     <div className='banner'>
-      <Carousel pauseOnHover={false}>
+      <Carousel interval={null} pauseOnHover={false}>
         <Carousel.Item>        
           <a href="/event?eventId=18"> 
             <div className='banner_over'>

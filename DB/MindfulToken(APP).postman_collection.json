@@ -1689,7 +1689,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x1a4157D4129908EDF31aa34164aD01b1F0AAd016",
+									"raw": "{{baseUrl}}/nft/mintPass/walletaddress/0x8fA44F16B416FEb7CAfbf81158Bd821D12b3f33E",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1697,7 +1697,7 @@
 										"nft",
 										"mintPass",
 										"walletaddress",
-										"0x1a4157D4129908EDF31aa34164aD01b1F0AAd016"
+										"0x8fA44F16B416FEb7CAfbf81158Bd821D12b3f33E"
 									]
 								}
 							},
@@ -2155,50 +2155,6 @@
 							"body": null
 						}
 					]
-				},
-				{
-					"name": "{{baseUrl}}/nft/mintPass/walletaddress/000571.e15f99903e46420ba2f1e7ffa32e23fa.0721 ",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "time_stamp",
-								"value": "{{currentTime}}",
-								"type": "text"
-							},
-							{
-								"key": "secret",
-								"value": "{{secret}}",
-								"type": "text"
-							},
-							{
-								"key": "refresh_token",
-								"value": "{{refreshToken}}",
-								"type": "text"
-							},
-							{
-								"key": "appleid",
-								"value": "{{appleId}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/nft/mintPass/walletaddress/000571.e15f99903e46420ba2f1e7ffa32e23fa.0721 ",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"nft",
-								"mintPass",
-								"walletaddress",
-								"000571.e15f99903e46420ba2f1e7ffa32e23fa.0721 "
-							]
-						}
-					},
-					"response": []
 				}
 			],
 			"description": "## get MintPass & MindfulNFT NFT data"
@@ -2412,6 +2368,136 @@
 									"path": [
 										"appversion",
 										"0.0.2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET appversion Request (ALL)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appversion/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appversion",
+								"all"
+							],
+							"query": [
+								{
+									"key": "time_stamp",
+									"value": "1683865565",
+									"disabled": true
+								},
+								{
+									"key": "secret",
+									"value": "d6b2d347109f72aff68ddd9de9daf6dc",
+									"disabled": true
+								},
+								{
+									"key": "refresh_token",
+									"value": "r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw",
+									"disabled": true
+								},
+								{
+									"key": "appleId",
+									"value": "000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### API endpoint to get the latest app version info\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET appversion Request (ALL)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/appversion/latest",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appversion",
+										"latest"
+									],
+									"query": [
+										{
+											"key": "time_stamp",
+											"value": "1683865565",
+											"disabled": true
+										},
+										{
+											"key": "secret",
+											"value": "d6b2d347109f72aff68ddd9de9daf6dc",
+											"disabled": true
+										},
+										{
+											"key": "refresh_token",
+											"value": "r9ef10454db71489dabf003202a42de1c.0.szyu.xFPH6UMhZk-tnSs0ib_wWw",
+											"disabled": true
+										},
+										{
+											"key": "appleId",
+											"value": "000984.272ea5bb414443a9b8f4c82b0dc5956e.1613",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -2700,6 +2786,91 @@
 									],
 									"path": [
 										"artworkhomepage"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "GET artwork redeemed Request",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "time_stamp",
+								"value": "{{currentTime}}",
+								"type": "text"
+							},
+							{
+								"key": "secret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refreshToken}}",
+								"type": "text"
+							},
+							{
+								"key": "appleid",
+								"value": "{{appleId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/artwork/{appleId}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"artwork",
+								"{appleId}"
+							]
+						},
+						"description": "### API endpoint to get artwork information by appleId\n\n> A succesful call will result in a \\*HTTP 200\\* Status Code"
+					},
+					"response": [
+						{
+							"name": "GET artwork Redeemed Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "time_stamp",
+										"value": "{{currentTime}}",
+										"type": "text"
+									},
+									{
+										"key": "secret",
+										"value": "{{secret}}",
+										"type": "text"
+									},
+									{
+										"key": "refresh_token",
+										"value": "{{refreshToken}}",
+										"type": "text"
+									},
+									{
+										"key": "appleid",
+										"value": "{{appleId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/artworkredeemed",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"artworkredeemed"
 									]
 								}
 							},
