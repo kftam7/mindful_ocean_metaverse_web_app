@@ -187,7 +187,7 @@ async function updateArtwork(artworkId, artworkRecord){
   }
 
   if (!(artworkRecord.scarcityRank == null)){
-    sql = sql + ', scarcityRank = ' + artworkRecord.scarcityRank; 
+    sql = sql + ', scarcityRank = "' + artworkRecord.scarcityRank + '"'; 
   }
 
   if (!(artworkRecord.clusterId == null)){
