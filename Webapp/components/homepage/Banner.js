@@ -6,7 +6,7 @@ const Banner = ({ t }) => {
     <div className='banner'>
       <Carousel interval={null} pauseOnHover={false}>
         <Carousel.Item>        
-          <a href="/event?eventId=18"> 
+          <a href="/event?eventId=19"> 
             <div className='banner_over'>
               <div className='banner_des'>
                 <div className='banner_title'>{t('home.banner.title0')}</div>
