@@ -2262,12 +2262,12 @@ const Faq = () => {
           </div> 
 
           <div className="card_item">
-            <h4 style={{ marginBottom: '20px' }}>{t('page.faq.others')}</h4>
+            <h4 style={{ marginBottom: '20px' }}>{t('page.faq.carbon')}</h4>
             <Card className={activeIndex === 88 ? 'item_qa bg_gray' : 'item_qa'}>
               <Card.Body>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <div>{t('page.faq.others.q1')}</div>
+                    <div>{t('page.faq.carbon.q1')}</div>
                   </div>
                   <div>
                     <Button
@@ -2284,7 +2284,7 @@ const Faq = () => {
               </Card.Body>
               <Collapse in={activeIndex === 88}>
                 <div className="content">
-                  {t('page.faq.others.a1')}
+                  {t('page.faq.carbon.a1')}
                 </div>
               </Collapse>
             </Card>
@@ -2292,7 +2292,7 @@ const Faq = () => {
               <Card.Body>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <div>{t('page.faq.others.q2')}</div>
+                    <div>{t('page.faq.carbon.q2')}</div>
                   </div>
                   <div>
                     <Button
@@ -2308,6 +2308,260 @@ const Faq = () => {
                 </div>
               </Card.Body>
               <Collapse in={activeIndex === 89}>
+                <div className="content">
+                  <p>{t('page.faq.carbon.a2-1')}</p><p>{t('page.faq.carbon.a2-2')}</p><p>{t('page.faq.carbon.a2-3')}</p><p>{t('page.faq.carbon.a2-4')}</p>
+                </div>
+              </Collapse>
+            </Card>                
+            <Card className={activeIndex === 90 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q3')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(90)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 90}
+                    >
+                      {activeIndex === 90 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 90}>
+                <div className="content">
+                  {t('page.faq.carbon.a3')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 91 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q4')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(91)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 91}
+                    >
+                      {activeIndex === 91 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 91}>
+                <div className="content">
+                  {t('page.faq.carbon.a4')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 92 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q5')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(92)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 92}
+                    >
+                      {activeIndex === 92 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 92}>
+                <div className="content">
+                  <p>{t('page.faq.carbon.a5-1')}</p><p>{t('page.faq.carbon.a5-2')}</p><p>{t('page.faq.carbon.a5-3')}</p>
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 93 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q6')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(93)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 93}
+                    >
+                      {activeIndex === 93 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 93}>
+                <div className="content">
+                  {t('page.faq.carbon.a6')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 94 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q7')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(94)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 94}
+                    >
+                      {activeIndex === 94 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 94}>
+                <div className="content">
+                  {t('page.faq.carbon.a7')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 95 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q8')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(95)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 95}
+                    >
+                      {activeIndex === 95 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 95}>
+                <div className="content">
+                  {t('page.faq.carbon.a8')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 96 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q9')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(96)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 96}
+                    >
+                      {activeIndex === 96 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 96}>
+                <div className="content">
+                  {t('page.faq.carbon.a9')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 97 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.carbon.q10')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(97)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 97}
+                    >
+                      {activeIndex === 97 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 97}>
+                <div className="content">
+                  {t('page.faq.carbon.a10')}
+                </div>
+              </Collapse>
+            </Card>                                    
+          </div>
+
+          <div className="card_item">
+            <h4 style={{ marginBottom: '20px' }}>{t('page.faq.others')}</h4>
+            <Card className={activeIndex === 98 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.others.q1')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(98)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 98}
+                    >
+                      {activeIndex === 98 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 98}>
+                <div className="content">
+                  {t('page.faq.others.a1')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 99 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.others.q2')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(99)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 99}
+                    >
+                      {activeIndex === 99 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 99}>
                 <div className="content">
                   {t('page.faq.others.a2')}
                 </div>
