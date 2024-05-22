@@ -134,9 +134,6 @@ const Banner = ({ t }) => {
     <div className='banner'>
       <Carousel interval={null} pauseOnHover={false}>
         <Carousel.Item>
-          <div dangerouslySetInnerHTML={{ __html: svg_banner1 }} />
-        </Carousel.Item>
-        <Carousel.Item>
           <div dangerouslySetInnerHTML={{ __html: svg_banner2 }} />
         </Carousel.Item>      
         <Carousel.Item>
