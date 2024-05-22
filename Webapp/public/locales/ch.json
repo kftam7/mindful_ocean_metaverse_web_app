@@ -645,5 +645,11 @@
     "home.event2.subTitle11": "Disqualification",
     "home.event2.subText11": "<ul><li class='a'>Submissions with an intellectual property breach will be disqualified.</li><li class='a'>Submissions with inappropriate content such as sexually explicit material, profanity, or violence will be disqualified.</li><li class='a'>Creators of the disqualified posts will be contacted, in which the reasons for the disqualification will be provided.</li></ul>",
     "home.event2.subTitle12": "Links",
-    "home.event2.subText12": "Before our official launch, you can try our app using TestFlight.<br/><br/><b><i>TestFlight App</i></b><br/><a href='https://apps.apple.com/us/app/testflight/id899247664' target='_blank'>https://apps.apple.com/us/app/testflight/id899247664</a><br/><br/><b><i>iOS Beta App</i></b><br/><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'>https://testflight.apple.com/join/ypNDxHmZ</a><br/><br/><img src='event1_QRcode.png' alt='event1_QRcode' width='377' height='227'><br/>Please visit our website to learn more<br/><br/><b><i>Website</i></b><br/><a href='https://www.mindful-ocean.org' target='_blank'>https://www.mindful-ocean.org</a>"    
+    "home.event2.subText12": "Before our official launch, you can try our app using TestFlight.<br/><br/><b><i>TestFlight App</i></b><br/><a href='https://apps.apple.com/us/app/testflight/id899247664' target='_blank'>https://apps.apple.com/us/app/testflight/id899247664</a><br/><br/><b><i>iOS Beta App</i></b><br/><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'>https://testflight.apple.com/join/ypNDxHmZ</a><br/><br/><img src='event1_QRcode.png' alt='event1_QRcode' width='377' height='227'><br/>Please visit our website to learn more<br/><br/><b><i>Website</i></b><br/><a href='https://www.mindful-ocean.org' target='_blank'>https://www.mindful-ocean.org</a>",
+    "home.event3.title": "Current Event",    
+    "home.event3.subTitle1": "Current Event",
+    "home.event3.subText1": "Coming Soon",
+    "home.event4.title": "Upcoming Event",    
+    "home.event4.subTitle1": "Upcoming Event",
+    "home.event4.subText1": "Coming Soon"    
 }

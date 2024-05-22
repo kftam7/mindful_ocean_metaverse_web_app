@@ -234,6 +234,24 @@ const Event1 = () => {
           },                                              
         ],
       },
+      '20': {
+        title: t('home.event3.title'),
+        list: [
+          {
+            title: t('home.event3.subTitle1'),
+            des: t('home.event3.subText1'),
+          },                                           
+        ],
+      },
+      '21': {
+        title: t('home.event4.title'),
+        list: [
+          {
+            title: t('home.event4.subTitle1'),
+            des: t('home.event4.subText1'),
+          },                                           
+        ],
+      },         
     };
     setItem(list[eventId]);
   }, [eventId]);
