@@ -164,7 +164,8 @@ function Mintpass({ session, user }) {
 
       await write({
         args: [messageHash, signature, artworkId, ipfs],
-        value: process.env.MintingFee,
+        //value: process.env.MintingFee,
+        value: ethers.utils.parseEther(process.env.MintingFee),
       })
     }
     catch (err) {

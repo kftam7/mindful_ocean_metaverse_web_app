@@ -23,7 +23,7 @@ module.exports = {
     AuthPrivateKey: '78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9',
     BlockchainPlatform: 'polygonMumbai',
     WalletconnectProjectId: 'b66462653b390b41e66f8f03e25cfa0a',
-    MintingFee: 100000000000000,
+    MintingFee: '14',
     IfRedeemOpen: 1,
     IfMintpassOpen: 1,
     MintPassContractAddress: '0x32E7A4B42d11826F890c6Da05Ec015E97dFFaDC6',
