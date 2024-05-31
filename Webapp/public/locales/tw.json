@@ -647,6 +647,8 @@
     "home.event2.subTitle12": "Links",
     "home.event2.subText12": "Before our official launch, you can try our app using TestFlight.<br/><br/><b><i>TestFlight App</i></b><br/><a href='https://apps.apple.com/us/app/testflight/id899247664' target='_blank'>https://apps.apple.com/us/app/testflight/id899247664</a><br/><br/><b><i>iOS Beta App</i></b><br/><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'>https://testflight.apple.com/join/ypNDxHmZ</a><br/><br/><img src='event1_QRcode.png' alt='event1_QRcode' width='377' height='227'><br/>Please visit our website to learn more<br/><br/><b><i>Website</i></b><br/><a href='https://www.mindful-ocean.org' target='_blank'>https://www.mindful-ocean.org</a>",
     "home.event3.title": "Upcoming Event",    
+    "home.event2.subTitle13": "Winners of this Event are having wallet addresses:",
+    "home.event2.subText13": "0x7716E47cdcB7E381634F891850b0dd35A02e3E6b<br/>0x6029C7D2A4cF055dac0e96D661FCfe74bCf7aEF3<br/>0xD6d5DC63009E3416EfFEfdF7df7e2575FD74373d<br/>0x54a20793a7Ad10aD8a63a8AB0FE5814c15051582<br/>0x711E174F24081FB371BF7E81628eBCaE3939D050<br/>",
     "home.event3.subTitle1": "Upcoming Event",
     "home.event3.subText1": "Coming Soon",
     "home.event4.title": "Upcoming Event",    
