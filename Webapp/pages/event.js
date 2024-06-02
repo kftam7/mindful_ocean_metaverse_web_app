@@ -244,7 +244,63 @@ const Event1 = () => {
           {
             title: t('home.event3.subTitle1'),
             des: t('home.event3.subText1'),
-          },                                           
+          }, 
+          {
+            title: t('home.event3.subTitle2'),
+            des: t('home.event3.subText2'),
+          }, 
+          {
+            title: t('home.event3.subTitle3'),
+            des: t('home.event3.subText3'),
+          }, 
+          {
+            title: t('home.event3.subTitle4'),
+            des: t('home.event3.subText4'),
+          }, 
+          {
+            title: t('home.event3.subTitle5'),
+            des: t('home.event3.subText5'),
+          },
+          {
+            title: t('home.event3.subTitle6'),
+            des: t('home.event3.subText6'),
+          }, 
+          {
+            title: t('home.event3.subTitle7'),
+            des: t('home.event3.subText7'),
+          }, 
+          {
+            title: t('home.event3.subTitle8'),
+            des: t('home.event3.subText8'),
+          }, 
+          {
+            title: t('home.event3.subTitle9'),
+            des: t('home.event3.subText9'),
+          }, 
+          {
+            title: t('home.event3.subTitle10'),
+            des: t('home.event3.subText10'),
+          },
+          {
+            title: t('home.event3.subTitle11'),
+            des: t('home.event3.subText11'),
+          }, 
+          {
+            title: t('home.event3.subTitle12'),
+            des: t('home.event3.subText12'),
+          }, 
+          {
+            title: t('home.event3.subTitle13'),
+            des: t('home.event3.subText13'),
+          }, 
+          {
+            title: t('home.event3.subTitle14'),
+            des: t('home.event3.subText14'),
+          }, 
+          {
+            title: t('home.event3.subTitle15'),
+            des: t('home.event3.subText15'),
+          },                                                                                                       
         ],
       },
       '21': {
