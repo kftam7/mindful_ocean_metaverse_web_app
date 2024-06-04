@@ -2512,16 +2512,12 @@ const Faq = () => {
                   {t('page.faq.carbon.a10')}
                 </div>
               </Collapse>
-            </Card>                                    
-          </div>
-
-          <div className="card_item">
-            <h4 style={{ marginBottom: '20px' }}>{t('page.faq.others')}</h4>
+            </Card>
             <Card className={activeIndex === 98 ? 'item_qa bg_gray' : 'item_qa'}>
               <Card.Body>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <div>{t('page.faq.others.q1')}</div>
+                    <div>{t('page.faq.carbon.q11')}</div>
                   </div>
                   <div>
                     <Button
@@ -2538,15 +2534,20 @@ const Faq = () => {
               </Card.Body>
               <Collapse in={activeIndex === 98}>
                 <div className="content">
-                  {t('page.faq.others.a1')}
+                  {t('page.faq.carbon.a11-1')}<br/><br/>{t('page.faq.carbon.a11-2')}<br/><br/><a href="https://transparency.standfortrees.org/retirement/3257b978-b1ab-470a-85b5-5b7341d20297?tab=parent" target="_blank"><u>{t('page.faq.carbon.a11-3')}</u></a><br/><a href="https://transparency.standfortrees.org/retirement/39d20801-9fc6-f60d-2b02-3b2626954bd0?tab=details" target="_blank"><u>{t('page.faq.carbon.a11-4')}</u></a><br/><br/>{t('page.faq.carbon.a11-5')}<a href="https://x.com/MindfulOceanNFT" target="_blank"><u>{t('page.faq.carbon.a11-6')}</u></a>{t('page.faq.carbon.a11-7')}
                 </div>
               </Collapse>
-            </Card>
+            </Card> 
+
+          </div>
+
+          <div className="card_item">
+            <h4 style={{ marginBottom: '20px' }}>{t('page.faq.others')}</h4>
             <Card className={activeIndex === 99 ? 'item_qa bg_gray' : 'item_qa'}>
               <Card.Body>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <div>{t('page.faq.others.q2')}</div>
+                    <div>{t('page.faq.others.q1')}</div>
                   </div>
                   <div>
                     <Button
@@ -2562,6 +2563,31 @@ const Faq = () => {
                 </div>
               </Card.Body>
               <Collapse in={activeIndex === 99}>
+                <div className="content">
+                  {t('page.faq.others.a1')}
+                </div>
+              </Collapse>
+            </Card>
+            <Card className={activeIndex === 100 ? 'item_qa bg_gray' : 'item_qa'}>
+              <Card.Body>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div>{t('page.faq.others.q2')}</div>
+                  </div>
+                  <div>
+                    <Button
+                      className='card_btn'
+                      variant="link"
+                      onClick={() => handleToggle(100)}
+                      aria-controls="collapseExample4"
+                      aria-expanded={activeIndex === 100}
+                    >
+                      {activeIndex === 100 ? <FaChevronUp /> : <FaChevronDown />}
+                    </Button>
+                  </div>
+                </div>
+              </Card.Body>
+              <Collapse in={activeIndex === 100}>
                 <div className="content">
                   {t('page.faq.others.a2')}
                 </div>
