@@ -15,17 +15,17 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="new_banner1.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=20" target="_self" xlink:title="upcoming">
+<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
 <g>
 <rect x="201.02564102564102" y="81.36752136752136" width="295.15669515669515" height="165.92592592592592" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=19" target="_self" xlink:title="current">
+<a xlink:href="event?eventId=20" target="_self" xlink:title="current">
 <g>
 <rect x="678.0626780626781" y="86.15384615384616" width="295.15669515669515" height="161.13960113960113" class="image-mapper-shape" data-index="3"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=18" target="_self" xlink:title="past">
+<a xlink:href="event?eventId=22" target="_self" xlink:title="past">
 <g>
 <rect x="1147.1225071225072" y="87.74928774928775" width="290.37037037037044" height="161.13960113960115" class="image-mapper-shape" data-index="4"></rect>
 </g>
@@ -47,17 +47,17 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="new_banner2.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=20" target="_self" xlink:title="upcoming">
+<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
 <g>
 <rect x="210.5982905982906" y="87.74928774928775" width="293.5612535612536" height="161.13960113960115" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=19" target="_self" xlink:title="current">
+<a xlink:href="event?eventId=20" target="_self" xlink:title="current">
 <g>
 <rect x="681.2535612535612" y="87.74928774928775" width="291.965811965812" height="162.73504273504273" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=18" target="_self" xlink:title="past">
+<a xlink:href="event?eventId=22" target="_self" xlink:title="past">
 <g>
 <rect x="1156.6951566951566" y="87.74928774928775" width="290.37037037037044" height="161.13960113960115" class="image-mapper-shape" data-index="3"></rect>
 </g>
@@ -79,17 +79,17 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="new_banner3.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=20" target="_self" xlink:title="upcoming">
+<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
 <g>
 <rect x="207.40740740740742" y="86.15384615384616" width="296.7521367521367" height="167.52136752136752" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=19" target="_self" xlink:title="current">
+<a xlink:href="event?eventId=20" target="_self" xlink:title="current">
 <g>
 <rect x="679.6581196581196" y="90.94017094017094" width="291.965811965812" height="157.94871794871796" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=18" target="_self" xlink:title="past">
+<a xlink:href="event?eventId=22" target="_self" xlink:title="past">
 <g>
 <rect x="1155.099715099715" y="84.55840455840456" width="293.5612535612536" height="164.33048433048432" class="image-mapper-shape" data-index="3"></rect>
 </g>
@@ -111,17 +111,17 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="new_banner4.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=20" target="_self" xlink:title="upcoming">
+<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
 <g>
 <rect x="207.40740740740742" y="81.36752136752136" width="295.15669515669515" height="164.33048433048432" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=19" target="_self" xlink:title="current">
+<a xlink:href="event?eventId=20" target="_self" xlink:title="current">
 <g>
 <rect x="681.2535612535612" y="89.34472934472934" width="288.77492877492887" height="162.73504273504273" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="event?eventId=18" target="_self" xlink:title="past">
+<a xlink:href="event?eventId=22" target="_self" xlink:title="past">
 <g>
 <rect x="1155.099715099715" y="87.74928774928775" width="295.15669515669515" height="162.73504273504273" class="image-mapper-shape" data-index="3"></rect>
 </g>

@@ -120,10 +120,6 @@ const Event1 = () => {
         title: t('home.event1.title'),
         list: [
           {
-            title: t('home.event1.subTitle1'),
-            des: t('home.event1.subText1'),
-          },
-          {
             title: t('home.event1.subTitle2'),
             des: t('home.event1.subText2'),
           },
@@ -189,10 +185,6 @@ const Event1 = () => {
             des: t('home.event2.subText13'),
           },                                  
           {
-            title: t('home.event2.subTitle1'),
-            des: t('home.event2.subText1'),
-          },
-          {
             title: t('home.event2.subTitle2'),
             des: t('home.event2.subText2'),
           },
@@ -240,11 +232,7 @@ const Event1 = () => {
       },
       '20': {
         title: t('home.event3.title'),
-        list: [
-          {
-            title: t('home.event3.subTitle1'),
-            des: t('home.event3.subText1'),
-          }, 
+        list: [ 
           {
             title: t('home.event3.subTitle2'),
             des: t('home.event3.subText2'),
@@ -311,7 +299,18 @@ const Event1 = () => {
             des: t('home.event4.subText1'),
           },                                           
         ],
-      },         
+      },  
+      '22': {
+        title: t('home.pastdirectory.title'),
+        list: [
+          {
+            des: t('home.pastdirectory.subTitle1'),
+          }, 
+          {
+            des: t('home.pastdirectory.subTitle2'),
+          },                                                      
+        ],
+      },               
     };
     setItem(list[eventId]);
   }, [eventId]);
