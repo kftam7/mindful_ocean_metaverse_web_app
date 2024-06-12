@@ -29,7 +29,7 @@ const Part8 = ({ t }) => {
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton style={{ border: 0 }}>
         </Modal.Header>
-        <Modal.Body><a href='https://testflight.apple.com/join/ypNDxHmZ' target='_blank'><Image src="/appStore.png" width="100%" style={{ padding: '10px' }} /></a></Modal.Body>
+        <Modal.Body><a href='https://apps.apple.com/app/mindful-ocean-metaverse/id6464570212?l=en-GB' target='_blank'><Image src="/appStore_new.png" width="100%" style={{ padding: '10px' }} /></a></Modal.Body>
       </Modal>
     </div>
   )
