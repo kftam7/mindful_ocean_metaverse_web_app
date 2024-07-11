@@ -11,6 +11,9 @@ const moment = require('moment');
 const { NFTStorage, File } = require('nft.storage');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
+const pinataSDK = require('@pinata/sdk');
+
+
 /* get Artwork */
 async function getArtwork(appleId){
 
@@ -304,8 +307,15 @@ async function nftStorage(artworkId, type){
 
   logger.log('info', '%s %s %s %s', 'Artwork', 'nftStorage', artworkId, type);
 
+  const pinata = new pinataSDK({ pinataJWTKey: process.env.PinataJWTKey});
+  //const res = await pinata.testAuthentication();
+  //console.log(res);
+
+  /*
   const API_KEY = process.env.NFT_STORAGE_API_KEY;
   const client = new NFTStorage({ token: API_KEY });
+  */
+
   const currentTimeSql = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   // read data from artwork table 
@@ -332,10 +342,11 @@ async function nftStorage(artworkId, type){
       }
     }
 
-    const urlMintpass = resultSelect[0].URL;
+    //const urlMintpass = resultSelect[0].URL;
     const filenameMintpass = process.env.defaultImage;
     const filepathMintpass = process.env.filepathPrefix + filenameMintpass;
 
+    /*
     const mintpassMetadata = await client.store({
          name: process.env.mintPassName,
          description: process.env.mintPassDescription,
@@ -350,14 +361,46 @@ async function nftStorage(artworkId, type){
             { type: 'image/gif' }
       ),
     })
+    */
 
-    const sqlUpdateMintpass = 'UPDATE artwork SET mintpassStorage = "' + mintpassMetadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+    // upload file to IPFS
+    const readableStreamForFile = fs.createReadStream(filepathMintpass);
+    const options = {
+        pinataMetadata: {
+            name: process.env.mintPassName,
+        },
+        pinataOptions: {
+            cidVersion: 0
+        }
+    };
+    const res_file = await pinata.pinFileToIPFS(readableStreamForFile, options);
+    const image_url = 'ipfs://' + res_file.IpfsHash;
+    //console.log(res_file.IpfsHash);
+    //console.log("image_url: ", image_url);
+
+    // upload metadata
+    const body = {
+      name: process.env.mintPassName,
+      description: process.env.mintPassDescription,
+      eventId: resultSelect[0].eventId,
+      type: resultSelect[0].type,
+      artistMessage: resultSelect[0].artistMessage,
+      extraInfo: resultSelect[0].extraInfo,
+      artworkId: artworkId,      
+      image: image_url
+    }
+    const res_metadata = await pinata.pinJSONToIPFS(body, options);
+    const metadata_url = 'ipfs://' + res_metadata.IpfsHash;
+    //console.log("metadata_url: ", metadata_url);
+
+    const sqlUpdateMintpass = 'UPDATE artwork SET mintpassStorage = "' + metadata_url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
     logger.log('debug', '%s %s sqlUpdateMintpass: %s', 'Artwork', 'nftStorage', sqlUpdateMintpass);
     const resultUpdateMintpass = await db.query(
       sqlUpdateMintpass
     );
-    logger.log('info', '%s %s %s %s mintpassStorage successfully created: %s', 'Artwork', 'nftStorage', artworkId, type, mintpassMetadata.url);
-    return mintpassMetadata.url;
+    logger.log('info', '%s %s %s %s mintpassStorage successfully created: %s', 'Artwork', 'nftStorage', artworkId, type, metadata_url);
+
+    return metadata_url;
 
   // for mindfultoken
   }else{
@@ -374,6 +417,43 @@ async function nftStorage(artworkId, type){
     const filenameMindfultoken = urlMindfultoken.replace(process.env.artworkFileBaseURL, '');
     const filepathMindfultoken = process.env.filepathPrefix + filenameMindfultoken;
 
+    // upload file to IPFS
+    const readableStreamForFile = fs.createReadStream(filepathMindfultoken);
+    const options = {
+        pinataMetadata: {
+            name: process.env.mindfulTokenName,
+        },
+        pinataOptions: {
+            cidVersion: 0
+        }
+    };
+    const res_file = await pinata.pinFileToIPFS(readableStreamForFile, options);
+    const image_url = 'ipfs://' + res_file.IpfsHash;
+    //console.log(res_file.IpfsHash);
+    //console.log("image_url: ", image_url);
+
+    // upload metadata
+    const body = {
+      name: process.env.mindfulTokenName,
+      description: process.env.mindfulTokenDescription,
+      eventId: resultSelect[0].eventId,
+      type: resultSelect[0].type,
+      artistMessage: resultSelect[0].artistMessage,
+      authenticScarcity: resultSelect[0].authenticScarcity,
+      scarcityRank: resultSelect[0].scarcityRank,
+      clusterId: resultSelect[0].clusterId,
+      clusterSize: resultSelect[0].clusterSize,
+      superClusterId: resultSelect[0].superClusterId,
+      superClusterSize: resultSelect[0].superClusterSize,
+      extraInfo: resultSelect[0].extraInfo,
+      artworkId: artworkId,    
+      image: image_url
+    }
+    const res_metadata = await pinata.pinJSONToIPFS(body, options);
+    const metadata_url = 'ipfs://' + res_metadata.IpfsHash;
+    //console.log("metadata_url: ", metadata_url);
+
+/*
     const mindfultokenMetadata = await client.store({
       name: process.env.mindfulTokenName,
       description: process.env.mindfulTokenDescription,
@@ -394,14 +474,15 @@ async function nftStorage(artworkId, type){
           { type: 'image/jpeg' }
       ),
     })
+*/
 
-    const sqlUpdateMindfultoken = 'UPDATE artwork SET mindfultokenStorage = "' + mindfultokenMetadata.url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
+    const sqlUpdateMindfultoken = 'UPDATE artwork SET mindfultokenStorage = "' + metadata_url + '", updateTime = "' + currentTimeSql + '" WHERE artworkId = ' + artworkId + ';';
     logger.log('debug', '%s %s sqlUpdateMindfultoken: %s', 'Artwork', 'nftStorage', sqlUpdateMindfultoken);
     const resultUpdateMindfultoken = await db.query(
       sqlUpdateMindfultoken
     );
-    logger.log('info', '%s %s %s %s mindfultokenMetadata successfully created: %s', 'Artwork', 'nftStorage', artworkId, type, mindfultokenMetadata.url);
-    return mindfultokenMetadata.url;
+    logger.log('info', '%s %s %s %s mindfultokenMetadata successfully created: %s', 'Artwork', 'nftStorage', artworkId, type, metadata_url);
+    return metadata_url;
   }
 
 }
