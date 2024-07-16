@@ -65,7 +65,7 @@ const Gallery = ({ t }) => {
           {artworkhomepage.length ?
             <>
               <Row>
-                {artworkhomepage.slice(0, 3).map((item, index) => {
+                {artworkhomepage.slice(0, 6).map((item, index) => {
                   return <>
                     <Col sm={12} md={4} style={{ position: 'relative' }}>
                       <GalleryModel metadata={item.metadata} image={item.image} index={index} t={t} />
