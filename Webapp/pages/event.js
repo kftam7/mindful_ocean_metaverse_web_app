@@ -236,7 +236,11 @@ const Event1 = () => {
       },
       '20': {
         title: t('home.event3.title'),
-        list: [ 
+        list: [
+          {
+            title: t('home.event3.subTitle16'),
+            des: t('home.event3.subText16'),
+          },          
           {
             title: t('home.event3.subTitle2'),
             des: t('home.event3.subText2'),
