@@ -1,0 +1,253 @@
+const fs = require('fs');
+const Papa = require('papaparse');
+const db = require('../db');
+
+const toAddress = "0x6D3b5F1191Da580f88D40B911D471991199836FE"; 
+
+// Function to read and parse CSV file
+function readCsv(filePath) {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading the file:', err);
+            return;
+        }
+        // Parse the CSV data using PapaParse
+        Papa.parse(data, {
+            header: true,
+            dynamicTyping: true,
+            complete: async function(results) {
+               await processRows(results.data);
+            },
+            error: function(error) {
+                console.error('Error parsing the CSV:', error);
+            }
+        });
+    });
+}
+
+// Function to simulate a delay
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Function to process each row of the CSV data
+async function processRows(rows) {
+    rows.forEach((row, index) => {
+        // Perform operations on each row
+        //console.log(`Processing row ${index + 1}:`, row);
+        //console.log(`Processing row ${index + 1}:`);
+
+        // Example operation: Extract and log specific fields
+        //const name = row.name;
+        //const age = row.age;
+        //const city = row.city;
+
+        //const artworkId = row.artworkId;
+
+        const userId = row.userId;
+        const eventId = row.eventId;
+        const URL = row.URL;
+        const type = row.type;
+        const artistMessage = row.artistMessage;
+        const extraInfo = row.extraInfo;
+        const mintpassStorage = row.mintpassStorage;
+        const mindfultokenStorage = row.mindfultokenStorage;
+        const ifHomepage = row.ifHomepage;
+        const ifMinted = row.ifMinted;
+        const ifRedeemed = row.ifRedeemed;
+        const authenticScarcity = row.authenticScarcity;
+        const scarcityRank = row.scarcityRank;
+        const clusterId = row.clusterId;
+        const clusterSize = row.clusterSize;
+        const superClusterId = row.superClusterId;
+        const superClusterSize = row.superClusterSize;
+        const isActive = row.isActive;
+        const createTime = row.createTime;
+        const updateTime = row.updateTime;
+
+        //console.log(`authenticScarcity: ${authenticScarcity}, scarcityRank: ${scarcityRank}, clusterId: ${clusterId}`);
+
+
+        // insert into DB
+       // var sql = "INSERT INTO artwork (userId, eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, ifHomepage, ifMinted, ifRedeemed, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId , superClusterSize, isActive, createTime, updateTime) VALUES (" + ");";
+        //var sql = "INSERT INTO artwork (userId, eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, ifHomepage, ifMinted, ifRedeemed, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId , superClusterSize, isActive, createTime, updateTime) VALUES (" + userId + ", " + eventId + ", " + "'" + URL + "', " + "'" + type + "', " + "'" + artistMessage + "', " + "'" + extraInfo + "', " + "'" + mintpassStorage + "', "  + "'" + mindfultokenStorage + "', " + ifHomepage + ", " + ifMinted + ", " + ifRedeemed + ", " + authenticScarcity + ", " + scarcityRank + ", " + clusterId + ", " + clusterSize + ", " + superClusterId + ", " + superClusterSize + ", " + isActive + ", " + "'" + createTime + "', " + "'" + updateTime + "' " + ");";
+        //console.log("sql %s", sql);
+
+        /*
+        var rows = db.query(
+          `INSERT INTO artwork (userId, eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, ifHomepage, ifMinted, ifRedeemed, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId , superClusterSize, isActive, createTime, updateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [userId, eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, ifHomepage, ifMinted, ifRedeemed, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId , superClusterSize, isActive, createTime, updateTime]
+        );
+        const artworkId = rows.insertId;
+        
+        console.log("artworkId: %s", artworkId);
+        */
+        
+        /*
+        // mint mintPass
+        const mintResult = mintMintPass(artworkId);
+        if (mintResult){
+            //update DB
+            updateMintResult(artworkId);
+            console.log(MintPass minted, tokenID: %s, artworkId);
+        }
+        */
+        var sql = "INSERT INTO artwork (userId, eventId, URL, type, artistMessage, extraInfo, mintpassStorage, mindfultokenStorage, ifHomepage, ifMinted, ifRedeemed, authenticScarcity, scarcityRank, clusterId, clusterSize, superClusterId , superClusterSize, isActive, createTime, updateTime) VALUES (";
+        //sql = sql + "userId = ";
+        if (userId != "NULL"){
+            sql = sql + userId;
+        }
+        sql = sql + ", ";
+        if ( eventId != "NULL"){
+            sql = sql + eventId;
+        }
+        sql = sql + ", '";
+        if ( URL != "NULL"){
+            sql = sql + URL;
+        } 
+        sql = sql + "', '";
+        if ( type != "NULL"){
+            sql = sql + type;
+        }
+        sql = sql + "', '";
+        if ( artistMessage != "NULL"){
+            sql = sql + artistMessage;
+        } 
+        sql = sql + "', '";
+        if ( extraInfo != "NULL"){
+            sql = sql + extraInfo;
+        }
+        sql = sql + "', '";
+        if ( mintpassStorage != "NULL"){
+            sql = sql + mintpassStorage;
+        } 
+        sql = sql + "', '";
+        if ( mindfultokenStorage != "NULL"){
+            sql = sql + mindfultokenStorage;
+        }
+        sql = sql + "', ";
+        if ( ifHomepage != "NULL"){
+            sql = sql + ifHomepage;
+        } 
+        sql = sql + ", ";
+        if (ifMinted  != "NULL"){
+            sql = sql + ifMinted;
+        }
+         sql = sql + ", ";
+        if ( ifRedeemed != "NULL"){
+            sql = sql + ifRedeemed;
+        } 
+        sql = sql + ", ";
+        if ( authenticScarcity != "NULL"){
+            sql = sql + authenticScarcity;
+        }
+        sql = sql + ", ";
+        if ( scarcityRank != "NULL"){
+            sql = sql + scarcityRank;
+        } 
+        sql = sql + ", ";
+        if ( clusterId != "NULL"){
+            sql = sql + clusterId;
+        }
+        sql = sql + ", ";
+        if ( clusterSize != "NULL"){
+            sql = sql + clusterSize;
+        } 
+        sql = sql + ", ";
+        if ( superClusterId != "NULL"){
+            sql = sql + superClusterId;
+        }
+        sql = sql + ", ";
+        if ( superClusterSize != "NULL"){
+            sql = sql + superClusterSize;
+        } 
+        sql = sql + ", ";
+        if ( isActive != "NULL"){
+            sql = sql + isActive;
+        }
+        sql = sql + ", '";
+        if ( createTime != "NULL"){
+            sql = sql + createTime;
+        } 
+        sql = sql + "', '";
+        if ( updateTime != "NULL"){
+            sql = sql + updateTime;
+        }
+        sql = sql + "');";
+        console.log("sql %s", sql);   
+        // var sql_result = await db.query(
+        //   sql
+        // );
+
+        await delay(1000);
+
+        //const artworkId = sql_result.insertId;
+        console.log("sql_result: %s", sql_result);
+        console.log("artworkId: %s", artworkId);
+
+    });
+}
+/*
+function mintMintPass(tokenID) {
+
+        // mint mintPass
+        const getHeaders = () => {
+          const appleid = "001972.c7c33c51e40d4c239a38cc22e4c1244f.0850";
+          const refresh_token = "r7e3e40fd084842799476f00e67e93bd7.0.rrzxs.FTpP7E4ckULBt1mDgK72lw";
+          const time_stamp = Math.floor(Date.now() / 1000);
+          const secret = md5(appleid + time_stamp);
+          return {
+            appleid,
+            refresh_token,
+            time_stamp,
+            secret
+          }
+        };
+
+        const getMetaData = 
+          wait axios.post(`${apiPort}/mindfulapi/app/nftstorage/mindfultoken/${tokenId}`, {}, { headers: getHeaders() })
+            .then(res => {
+              const { status, data } = res;
+              metaData = data;
+              if (status === 200) {
+                //console.log("metadta: ", data);
+                }else{
+                    console.log("Can't get Metadata. Stataus error: %s", status);
+                    throw new Error("Can't get Metadata");
+                }
+            })
+            .catch(err => {
+              console.log("Can't get Metadata. Error: %s", err);
+              throw new Error("Can't get Metadata");
+            })
+
+        const ethAddress = signer.getAddress();
+        const timestamp = Date.now();    
+        let message = ethAddress + timestamp;
+        let messageHash = ethers.id(message);
+        let messageBytes = ethers.getBytes(messageHash);
+        let signature =  signer.signMessage(messageBytes);
+        const tx = MindfulNFTContract.mintMindfulNFT(messageHash, signature, artworkId, metaData, toAddress); 
+        return tx;
+}
+
+function updateMintResult(){
+
+    const updateResult = 
+        wait axios.put(`${apiPort}/mindfulapi/app/setredeemedartwork/${tokenId}`, {}, { headers: getHeaders() })
+        .then(res => {
+            const { status, data } = res;
+            if (status === 200) {
+                console.log("Result: ", data);
+            }else{
+                console.log("Can't update result: %s", status);
+                throw new Error("Can't update result");
+            }
+        })
+        .catch(err => {
+            console.log("Can't update result. Error: %s", err);
+            throw new Error("Can't update result");
+        })
+}
+*/
+
+readCsv('../CSV/test.csv');

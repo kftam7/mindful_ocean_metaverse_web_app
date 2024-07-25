@@ -1,0 +1,3 @@
+userId,eventId,URL,type,artistMessage,extraInfo,mintpassStorage,mindfultokenStorage,ifHomepage,ifMinted,ifRedeemed,authenticScarcity,scarcityRank,clusterId,clusterSize,superClusterId,superClusterSize,isActive
+59,0,"http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2023-11-01 at 5.26.33 PM.jpg",butterflyfish,AM20240115-1,extra,null,null,0,0,0,null,null,null,null,null,null,1
+59,0,"http://127.0.0.1:3001/mindfulapi/app/artworkfile/Screenshot 2024-07-10 at 10.54.58 PM.jpg",bluemarlin,AM20240115-2,null,null,null,0,0,0,null,null,null,null,null,null,1
