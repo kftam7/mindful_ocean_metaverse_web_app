@@ -12,7 +12,8 @@ const { ethers } = require('ethers');
 
 const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
 //const SYSTEM_PRIVATE_KEY = "51476301944acfc0470650171472e4824dbe89d10a460bb7224eb53837d0560a";
-const SYSTEM_PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9"; // test account
+const SYSTEM_PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9"; // system test account
+const MINTER_PRIVATE_KEY = "35322f3d9f56cf2f84592411ffacb71cf8d39ef3c7918a0358d4aebfec562989"; // minter test account
 // const MINTPASS_CONTRACT_ADDRESS = "0x4d41e08738b2c73cd70ad55917ebc185fcec52ba";
 const MINTPASS_CONTRACT_ADDRESS = "0xd6996ddc5213c0726288e6254f0d10bdc91b9521"; // amoy testnet
 
@@ -23,7 +24,8 @@ const netObj = {
 }
 const alchemyProvider = new ethers.AlchemyProvider(netObj, API_KEY);
 const signer = new ethers.Wallet(SYSTEM_PRIVATE_KEY, alchemyProvider);
-const MintPassContract = new ethers.Contract(MINTPASS_CONTRACT_ADDRESS, contract.abi, signer);
+const minter = new ethers.Wallet(MINTER_PRIVATE_KEY, alchemyProvider);
+const MintPassContract = new ethers.Contract(MINTPASS_CONTRACT_ADDRESS, contract.abi, minter);
 const ethAddress = signer.getAddress();
 //const timestamp = Date.now();
 //let message = ethAddress + timestamp;
