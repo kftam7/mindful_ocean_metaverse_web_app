@@ -318,7 +318,28 @@ const Event1 = () => {
             des: t('home.pastdirectory.subTitle2'),
           },                                                      
         ],
-      },               
+      },
+      '23': {
+        title: t('home.event5.title'),
+        list: [
+          {
+            title: t('home.event5.subTitle1'),
+            des: t('home.event5.subText1'),
+          }, 
+          {
+            title: t('home.event5.subTitle2'),
+            des: t('home.event5.subText2'),
+          },
+          {
+            title: t('home.event5.subTitle3'),
+            des: t('home.event5.subText3'),
+          }, 
+          {
+            title: t('home.event5.subTitle4'),
+            des: t('home.event5.subText4'),
+          },                                                            
+        ],
+      },                      
     };
     setItem(list[eventId]);
   }, [eventId]);
