@@ -316,7 +316,10 @@ const Event1 = () => {
           }, 
           {
             des: t('home.pastdirectory.subTitle2'),
-          },                                                      
+          },
+          {
+            des: t('home.pastdirectory.subTitle3'),
+          },                                                                   
         ],
       },
       '23': {
@@ -337,7 +340,27 @@ const Event1 = () => {
           {
             title: t('home.event5.subTitle4'),
             des: t('home.event5.subText4'),
-          },                                                            
+          },
+          {
+            title: t('home.event5.subTitle5'),
+            des: t('home.event5.subText5'),
+          },   
+          {
+            title: t('home.event5.subTitle6'),
+            des: t('home.event5.subText6'),
+          },   
+          {
+            title: t('home.event5.subTitle7'),
+            des: t('home.event5.subText7'),
+          },   
+          {
+            title: t('home.event5.subTitle8'),
+            des: t('home.event5.subText8'),
+          },     
+          {
+            title: t('home.event5.subTitle9'),
+            des: t('home.event5.subText9'),
+          },                                                                                                               
         ],
       },                      
     };
