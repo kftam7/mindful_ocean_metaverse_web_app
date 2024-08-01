@@ -312,14 +312,14 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle3'),
+          },   
+          {
             des: t('home.pastdirectory.subTitle1'),
           }, 
           {
             des: t('home.pastdirectory.subTitle2'),
-          },
-          {
-            des: t('home.pastdirectory.subTitle3'),
-          },                                                                   
+          },                                                                
         ],
       },
       '23': {
