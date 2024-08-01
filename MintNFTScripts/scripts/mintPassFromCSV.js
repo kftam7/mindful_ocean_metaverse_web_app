@@ -5,23 +5,43 @@ const moment = require('moment');
 const axios = require("axios");
 const md5 = require("blueimp-md5");
 const contract = require("./MintPassNFT.json");
-const apiPort = "http://127.0.0.1:3001";
-//const apiPort = "https://api.mindful-ocean.org";
 let metaData;
 const { ethers } = require('ethers');
 
 const API_KEY = "3iqNgDWSBHMkWq9vVT5GwGNuIJ_4vlbQ";
-//const SYSTEM_PRIVATE_KEY = "51476301944acfc0470650171472e4824dbe89d10a460bb7224eb53837d0560a";
-const SYSTEM_PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9"; // system test account
-const MINTER_PRIVATE_KEY = "35322f3d9f56cf2f84592411ffacb71cf8d39ef3c7918a0358d4aebfec562989"; // minter test account
-// const MINTPASS_CONTRACT_ADDRESS = "0x4d41e08738b2c73cd70ad55917ebc185fcec52ba";
-const MINTPASS_CONTRACT_ADDRESS = "0xd6996ddc5213c0726288e6254f0d10bdc91b9521"; // amoy testnet
 
-// Prepare the chain info
+// local URL
+//const apiPort = "http://127.0.0.1:3001";
+
+// Production URL
+const apiPort = "https://api.mindful-ocean.org";
+
+// amoy testnet
+/*
+const SYSTEM_PRIVATE_KEY = "78501fb8da333ed1c8312a2a4138bde909e280519157d5cac7e627222f2886b9"; 
+const MINTER_PRIVATE_KEY = "35322f3d9f56cf2f84592411ffacb71cf8d39ef3c7918a0358d4aebfec562989"; 
+const MINTPASS_CONTRACT_ADDRESS = "0xd6996ddc5213c0726288e6254f0d10bdc91b9521"; 
+*/
+
+// Production Mainnet
+const SYSTEM_PRIVATE_KEY = "51476301944acfc0470650171472e4824dbe89d10a460bb7224eb53837d0560a"; 
+const MINTER_PRIVATE_KEY = "0986e0c031637c13b8df24da24b2a07e47bac4134062ec2eedde4603543557b5"; 
+const MINTPASS_CONTRACT_ADDRESS = "0x491A502f2A3004d31D525B2628384995142445ec"; 
+
+/*
+// Prepare the chain info (amoy testnet)
 const netObj = {
     name: 'matic-amoy',
     chainId: 80002 
 }
+*/
+
+// Production Mainnet
+const netObj = {
+    name: 'matic',
+    chainId: 137 
+}
+
 const alchemyProvider = new ethers.AlchemyProvider(netObj, API_KEY);
 const signer = new ethers.Wallet(SYSTEM_PRIVATE_KEY, alchemyProvider);
 const minter = new ethers.Wallet(MINTER_PRIVATE_KEY, alchemyProvider);
@@ -160,4 +180,4 @@ async function processRows(rows) {
 }
 
 // Replace 'your-file.csv' with the path to your CSV file
-readCsv('../CSV/test.csv');
+readCsv('../CSV/production_test.csv');
