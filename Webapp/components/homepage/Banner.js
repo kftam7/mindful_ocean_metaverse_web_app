@@ -14,8 +14,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="new_banner1.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
+<image xlink:href="event23_banner_1.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_self" xlink:title="Mintpass">
 <g>
 <rect x="201.02564102564102" y="81.36752136752136" width="295.15669515669515" height="165.92592592592592" class="image-mapper-shape" data-index="2"></rect>
 </g>
@@ -46,8 +46,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="new_banner2.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
+<image xlink:href="event23_banner_2.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_self" xlink:title="Mintpass">
 <g>
 <rect x="210.5982905982906" y="87.74928774928775" width="293.5612535612536" height="161.13960113960115" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -78,8 +78,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="new_banner3.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
+<image xlink:href="event23_banner_3.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_self" xlink:title="Mintpass">
 <g>
 <rect x="207.40740740740742" y="86.15384615384616" width="296.7521367521367" height="167.52136752136752" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -110,8 +110,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="new_banner4.png" style="width: 1680px;"></image>
-<a xlink:href="event?eventId=21" target="_self" xlink:title="upcoming">
+<image xlink:href="event23_banner_4.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_self" xlink:title="Mintpass">
 <g>
 <rect x="207.40740740740742" y="81.36752136752136" width="295.15669515669515" height="164.33048433048432" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -134,13 +134,13 @@ const Banner = ({ t }) => {
     <div className='banner'>
       <Carousel interval={null} pauseOnHover={false}>
         <Carousel.Item>
-          <div dangerouslySetInnerHTML={{ __html: svg_banner2 }} />
+          <div dangerouslySetInnerHTML={{ __html: svg_banner1 }} />
         </Carousel.Item>      
         <Carousel.Item>
-          <div dangerouslySetInnerHTML={{ __html: svg_banner3 }} />
+          <div dangerouslySetInnerHTML={{ __html: svg_banner2 }} />
         </Carousel.Item>
         <Carousel.Item>
-          <div dangerouslySetInnerHTML={{ __html: svg_banner4 }} />
+          <div dangerouslySetInnerHTML={{ __html: svg_banner3 }} />
         </Carousel.Item>
       </Carousel>
     </div>
