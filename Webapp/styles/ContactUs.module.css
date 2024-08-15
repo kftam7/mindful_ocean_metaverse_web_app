@@ -177,6 +177,16 @@
     background-size: 100%;
 }
 
+.link_item .item_icon.icon4 {
+    background: url('/ContactUs-Idle_SMFB.png') center center no-repeat;
+    background-size: 100%;
+}
+
+.link_item .item_a a:hover .item_icon.icon4 {
+    background: url('/ContactUs-Click_SMFB.png') center center no-repeat;
+    background-size: 100%;
+}
+
 @media only screen and (max-width: 1400px) {
     .contact_box {
         margin: 100px auto 0 auto;

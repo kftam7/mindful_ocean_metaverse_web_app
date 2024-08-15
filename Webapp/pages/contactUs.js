@@ -75,6 +75,7 @@ const ContactUs = () => {
                 <div className={styles.item_a}><a href="https://www.instagram.com/mindfuloceannft" target='_blank'><span className={`${styles.item_icon} ${styles.icon3}`}></span>{t('main.text.instagram')}</a></div>
                 <div className={styles.item_a}><a href="https://discord.gg/8v72Zdrt32"  target='_blank'><span className={`${styles.item_icon} ${styles.icon2}`}></span>{t('main.text.discord')}</a></div>
                 <div className={styles.item_a}><a href="https://twitter.com/MindfulOceanNFT" target='_blank'><span className={`${styles.item_icon} ${styles.icon1}`}></span>{t('main.text.twitter')}</a></div>
+                <div className={styles.item_a}><a href="https://www.facebook.com/mindfuloceanmetaverse" target='_blank'><span className={`${styles.item_icon} ${styles.icon4}`}></span>{t('main.text.facebook')}</a></div>
               </div>
             </div>
           </Col>
