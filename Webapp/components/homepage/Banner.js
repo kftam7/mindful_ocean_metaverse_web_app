@@ -14,40 +14,40 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event23_banner_1.jpg" style="width: 1680px;"></image>
+<image xlink:href="Coral Guard Initiative Banner.jpg" style="width: 1680px;"></image>
 <a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
 <g>
-<rect x="215.3846153846154" y="78.17663817663818" width="311.1111111111111" height="180.2849002849003" class="image-mapper-shape" data-index="1"></rect>
+<rect x="229.74358974358975" y="92.53561253561253" width="288.77492877492875" height="156.35327635327636" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=23" target="_self" xlink:title="Current Event">
 <g>
-<rect x="690.8262108262109" y="81.36752136752136" width="301.53846153846155" height="172.30769230769232" class="image-mapper-shape" data-index="3"></rect>
+<rect x="694.017094017094" y="86.15384615384616" width="291.965811965812" height="161.13960113960113" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=22" target="_self" xlink:title="Past Event">
 <g>
-<rect x="1158.2905982905984" y="81.36752136752136" width="299.94301994301986" height="173.90313390313392" class="image-mapper-shape" data-index="4"></rect>
+<rect x="1166.2678062678062" y="89.34472934472934" width="285.5840455840457" height="159.54415954415953" class="image-mapper-shape" data-index="3"></rect>
 </g>
 </a>
 <a xlink:href="http://www.aplasticocean.foundation/" target="_blank" xlink:title="A Plastic Ocean">
 <g>
-<rect x="379.7150997150997" y="418.005698005698" width="213.78917378917384" height="145.18518518518516" class="image-mapper-shape" data-index="7"></rect>
+<rect x="378.11965811965814" y="414.81481481481484" width="223.36182336182338" height="138.80341880341877" class="image-mapper-shape" data-index="4"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=23" target="_self" xlink:title="Current Event">
 <g>
-<rect x="67.00854700854701" y="564.7863247863248" width="930.1424501424501" height="180.28490028490023" class="image-mapper-shape" data-index="8"></rect>
+<rect x="60.62678062678063" y="566.3817663817664" width="1017.8917378917379" height="285.5840455840456" class="image-mapper-shape" data-index="5"></rect>
 </g>
 </a>
 <a xlink:href="https://www.illustrator.org.hk/en/member/detail/wai-shuk-chong" target="_blank" xlink:title="Peanut">
 <g>
-<rect x="1073.7321937321938" y="496.1823361823362" width="250.48433048433048" height="248.88888888888886" class="image-mapper-shape" data-index="9"></rect>
+<rect x="1094.4729344729344" y="571.1680911680912" width="164.3304843304843" height="164.3304843304843" class="image-mapper-shape" data-index="6"></rect>
 </g>
 </a>
 <a xlink:href="https://www.illustrator.org.hk/en/member/detail/li-man-fai-gabriel" target="_blank" xlink:title="Gabriel">
 <g>
-<rect x="1351.3390313390314" y="513.7321937321938" width="231.33903133903118" height="223.36182336182333" class="image-mapper-shape" data-index="10"></rect>
+<rect x="1289.116809116809" y="571.1680911680912" width="162.73504273504295" height="162.73504273504273" class="image-mapper-shape" data-index="7"></rect>
 </g>
 </a>
 </svg>`;
