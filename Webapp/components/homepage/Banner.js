@@ -14,7 +14,7 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="Coral Guard Initiative Banner.jpg" style="width: 1680px;"></image>
+<image xlink:href="event23_banner_1.jpg" style="width: 1680px;"></image>
 <a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
 <g>
 <rect x="229.74358974358975" y="92.53561253561253" width="288.77492877492875" height="156.35327635327636" class="image-mapper-shape" data-index="1"></rect>
