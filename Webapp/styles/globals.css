@@ -1483,3 +1483,8 @@ option {
     background-size: 22px;
   }
 }
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 10%;
+}
