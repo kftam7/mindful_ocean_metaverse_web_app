@@ -14,8 +14,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event23_banner_4.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
+<image xlink:href="event24_banner_4.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_blank" xlink:title="Upcoming Event">
 <g>
 <rect x="229.74358974358975" y="92.53561253561253" width="288.77492877492875" height="156.35327635327636" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -66,8 +66,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event23_banner_3.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
+<image xlink:href="event24_banner_3.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_blank" xlink:title="Upcoming Event">
 <g>
 <rect x="224.95726495726495" y="79.77207977207978" width="298.34757834757835" height="175.49857549857552" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -108,8 +108,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event23_banner_5.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
+<image xlink:href="event24_banner_5.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_blank" xlink:title="Upcoming Event">
 <g>
 <rect x="223.36182336182335" y="82.96296296296296" width="291.965811965812" height="165.92592592592592" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -150,8 +150,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event23_banner_1.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
+<image xlink:href="event24_banner_1.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_blank" xlink:title="Upcoming Event">
 <g>
 <rect x="223.36182336182335" y="86.15384615384616" width="295.15669515669515" height="159.54415954415953" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -192,8 +192,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event23_banner_2.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://opensea.io/collection/mindful-ocean-mint-pass-2?search[toggles][0]=IS_LISTED" target="_blank" xlink:title="Buy MintPass">
+<image xlink:href="event24_banner_2.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_blank" xlink:title="Upcoming Event">
 <g>
 <rect x="231.33903133903135" y="92.53561253561253" width="283.988603988604" height="151.5669515669516" class="image-mapper-shape" data-index="1"></rect>
 </g>
