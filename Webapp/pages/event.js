@@ -312,6 +312,9 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle4'),
+          },          
+          {
             des: t('home.pastdirectory.subTitle3'),
           },   
           {
@@ -327,11 +330,7 @@ const Event1 = () => {
         list: [
           {
             des: t('home.event5.subText0'),
-          },
-          {
-            title: t('home.event5.subTitle10'),
-            des: t('home.event5.subText10'),
-          },            
+          },        
           {
             title: t('home.event5.subTitle1'),
             des: t('home.event5.subText1'),
