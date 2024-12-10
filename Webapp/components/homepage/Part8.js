@@ -23,7 +23,7 @@ const Part8 = ({ t }) => {
         <div class="container">
           <Row>
             <Col lg={4} md={6} sm={12}>
-              <Image src="/mintpass_512_CircularBG.gif" width="100%" />
+              <Image src="/mintpass_compressed.gif" width="100%" />
             </Col>
             <Col lg={8} md={6} sm={12}>
               <div className='part_title2'>{t('home.part8.title1')}</div>
