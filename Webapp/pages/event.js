@@ -310,6 +310,9 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle5'),
+          },  
+          {
             des: t('home.pastdirectory.subTitle4'),
           },          
           {
@@ -429,7 +432,70 @@ const Event1 = () => {
             des: t('home.event6.subText14'),
           },                                                                                                                                                                          
         ],
-      },                              
+      },
+      '25': {
+        title: t('home.event7.title'),
+        list: [
+          {
+            des: t('home.event7.subText0'),
+          },            
+          {
+            des: t('home.event7.subText1'),
+          }, 
+          {
+            title: t('home.event7.subTitle2'),
+            des: t('home.event7.subText2'),
+          },
+          {
+            title: t('home.event7.subTitle3'),
+            des: t('home.event7.subText3'),
+          }, 
+          {
+            title: t('home.event7.subTitle4'),
+            des: t('home.event7.subText4'),
+          },
+          {
+            title: t('home.event7.subTitle5'),
+            des: t('home.event7.subText5'),
+          },   
+          {
+            title: t('home.event7.subTitle6'),
+            des: t('home.event7.subText6'),
+          },   
+          {
+            title: t('home.event7.subTitle7'),
+            des: t('home.event7.subText7'),
+          },   
+          {
+            title: t('home.event7.subTitle8'),
+            des: t('home.event7.subText8'),
+          },     
+          {
+            title: t('home.event7.subTitle9'),
+            des: t('home.event7.subText9'),
+          },
+          {
+            title: t('home.event7.subTitle10'),
+            des: t('home.event7.subText10'),
+          },
+          {
+            title: t('home.event7.subTitle11'),
+            des: t('home.event7.subText11'),
+          },
+          {
+            title: t('home.event7.subTitle12'),
+            des: t('home.event7.subText12'),
+          },
+          {
+            title: t('home.event7.subTitle13'),
+            des: t('home.event7.subText13'),
+          },
+          {
+            title: t('home.event7.subTitle14'),
+            des: t('home.event7.subText14'),
+          },                                                                                                                                                                          
+        ],
+      },                                     
     };
     setItem(list[eventId]);
   }, [eventId]);

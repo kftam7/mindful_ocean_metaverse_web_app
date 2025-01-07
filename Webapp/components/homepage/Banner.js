@@ -14,44 +14,17 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event24_banner_4.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=21" target="_blank" xlink:title="Upcoming Event">
+<image xlink:href="event25_banner_1.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
 <g>
-<rect x="229.74358974358975" y="92.53561253561253" width="288.77492877492875" height="156.35327635327636" class="image-mapper-shape" data-index="1"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="694.017094017094" y="86.15384615384616" width="291.965811965812" height="161.13960113960113" class="image-mapper-shape" data-index="2"></rect>
+<rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=22" target="_self" xlink:title="Past Event">
 <g>
-<rect x="1166.2678062678062" y="89.34472934472934" width="285.5840455840457" height="159.54415954415953" class="image-mapper-shape" data-index="3"></rect>
+<rect x="923.7606837606837" y="81.36752136752136" width="303.1339031339031" height="178.68945868945872" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<!--
-<a xlink:href="http://www.aplasticocean.foundation/" target="_blank" xlink:title="A Plastic Ocean">
-<g>
-<rect x="378.11965811965814" y="414.81481481481484" width="223.36182336182338" height="138.80341880341877" class="image-mapper-shape" data-index="4"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="60.62678062678063" y="566.3817663817664" width="1017.8917378917379" height="285.5840455840456" class="image-mapper-shape" data-index="5"></rect>
-</g>
-</a>
-<a xlink:href="https://www.illustrator.org.hk/en/member/detail/wai-shuk-chong" target="_blank" xlink:title="Peanut">
-<g>
-<rect x="1094.4729344729344" y="571.1680911680912" width="164.3304843304843" height="164.3304843304843" class="image-mapper-shape" data-index="6"></rect>
-</g>
-</a>
-<a xlink:href="https://www.illustrator.org.hk/en/member/detail/li-man-fai-gabriel" target="_blank" xlink:title="Gabriel">
-<g>
-<rect x="1289.116809116809" y="571.1680911680912" width="162.73504273504295" height="162.73504273504273" class="image-mapper-shape" data-index="7"></rect>
-</g>
-</a>
--->
 </svg>`;
 
 const svg_banner2 = 
@@ -68,34 +41,17 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event24_banner_3.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=21" target="_blank" xlink:title="Upcoming Event">
+<image xlink:href="event25_banner_2.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
 <g>
-<rect x="224.95726495726495" y="79.77207977207978" width="298.34757834757835" height="175.49857549857552" class="image-mapper-shape" data-index="1"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="692.4216524216524" y="81.36752136752136" width="293.5612535612536" height="165.92592592592592" class="image-mapper-shape" data-index="2"></rect>
+<rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=22" target="_self" xlink:title="Past Event">
 <g>
-<rect x="1164.6723646723647" y="90.94017094017094" width="288.77492877492887" height="154.75783475783476" class="image-mapper-shape" data-index="3"></rect>
+<rect x="923.7606837606837" y="81.36752136752136" width="303.1339031339031" height="178.68945868945872" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<!--
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="74.98575498575498" y="567.977207977208" width="949.2877492877494" height="188.2621082621083" class="image-mapper-shape" data-index="4"></rect>
-</g>
-</a>
-<a xlink:href="http://www.aplasticocean.foundation/" target="_blank" xlink:title="A Plastic Ocean">
-<g>
-<rect x="392.4786324786325" y="419.6011396011396" width="173.9031339031339" height="126.03988603988603" class="image-mapper-shape" data-index="5"></rect>
-</g>
-</a>
--->
 </svg>`;
 
 const svg_banner3 = 
@@ -112,34 +68,17 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event24_banner_5.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=21" target="_blank" xlink:title="Upcoming Event">
+<image xlink:href="event25_banner_3.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
 <g>
-<rect x="223.36182336182335" y="82.96296296296296" width="291.965811965812" height="165.92592592592592" class="image-mapper-shape" data-index="1"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="698.8034188034188" y="92.53561253561253" width="287.1794871794872" height="154.75783475783476" class="image-mapper-shape" data-index="2"></rect>
+<rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=22" target="_self" xlink:title="Past Event">
 <g>
-<rect x="1161.4814814814815" y="89.34472934472934" width="290.37037037037044" height="161.13960113960115" class="image-mapper-shape" data-index="3"></rect>
+<rect x="923.7606837606837" y="81.36752136752136" width="303.1339031339031" height="178.68945868945872" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<!--
-<a xlink:href="http://www.aplasticocean.foundation/" target="_blank" xlink:title="A Plastic Ocean">
-<g>
-<rect x="382.9059829059829" y="430.7692307692308" width="210.59829059829065" height="127.63532763532766" class="image-mapper-shape" data-index="4"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="86.15384615384616" y="567.977207977208" width="909.4017094017094" height="215.38461538461536" class="image-mapper-shape" data-index="5"></rect>
-</g>
-</a>
--->
 </svg>`;
 
 const svg_banner4 =
@@ -156,34 +95,17 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event24_banner_1.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=21" target="_blank" xlink:title="Upcoming Event">
+<image xlink:href="event25_banner_4.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
 <g>
-<rect x="223.36182336182335" y="86.15384615384616" width="295.15669515669515" height="159.54415954415953" class="image-mapper-shape" data-index="1"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="694.017094017094" y="86.15384615384616" width="291.965811965812" height="162.73504273504273" class="image-mapper-shape" data-index="2"></rect>
+<rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=22" target="_self" xlink:title="Past Event">
 <g>
-<rect x="1164.6723646723647" y="90.94017094017094" width="287.1794871794873" height="156.35327635327633" class="image-mapper-shape" data-index="3"></rect>
+<rect x="923.7606837606837" y="81.36752136752136" width="303.1339031339031" height="178.68945868945872" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<!--
-<a xlink:href="http://www.aplasticocean.foundation/" target="_blank" xlink:title="A Plastic Ocean">
-<g>
-<rect x="379.7150997150997" y="433.960113960114" width="201.02564102564105" height="113.27635327635323" class="image-mapper-shape" data-index="4"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="65.41310541310541" y="569.5726495726495" width="866.3247863247863" height="224.957264957265" class="image-mapper-shape" data-index="5"></rect>
-</g>
-</a>
--->
 </svg>`;
 
 const svg_banner5 =
@@ -200,34 +122,17 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event24_banner_2.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=21" target="_blank" xlink:title="Upcoming Event">
+<image xlink:href="event25_banner_5.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
 <g>
-<rect x="231.33903133903135" y="92.53561253561253" width="283.988603988604" height="151.5669515669516" class="image-mapper-shape" data-index="1"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="697.2079772079773" y="92.53561253561253" width="287.1794871794872" height="156.35327635327636" class="image-mapper-shape" data-index="2"></rect>
+<rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
 </g>
 </a>
 <a xlink:href="https://www.mindful-ocean.org/event?eventId=22" target="_self" xlink:title="Past Event">
 <g>
-<rect x="1163.076923076923" y="90.94017094017094" width="287.17948717948707" height="156.35327635327633" class="image-mapper-shape" data-index="3"></rect>
+<rect x="923.7606837606837" y="81.36752136752136" width="303.1339031339031" height="178.68945868945872" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<!--
-<a xlink:href="http://www.aplasticocean.foundation/" target="_blank" xlink:title="A Plastic Ocean">
-<g>
-<rect x="370.1424501424501" y="424.3874643874644" width="224.957264957265" height="129.23076923076923" class="image-mapper-shape" data-index="4"></rect>
-</g>
-</a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=24" target="_self" xlink:title="Current Event">
-<g>
-<rect x="82.96296296296296" y="567.977207977208" width="1317.8347578347577" height="240.91168091168095" class="image-mapper-shape" data-index="7"></rect>
-</g>
-</a>
--->
 </svg>`;
 
 const Banner = ({ t }) => {
