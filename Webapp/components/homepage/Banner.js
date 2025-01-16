@@ -1,4 +1,5 @@
 import { Image, Carousel } from'react-bootstrap';
+import { useState, useEffect } from'react';
 
 // Utility function to get a random number within a range
 const getRandomIndex = (max) => Math.floor(Math.random() * max);
@@ -133,19 +134,25 @@ const svgBanners = [
 ];
 
 const Banner = ({ t }) => {
-    // Array to store the randomly selected banners
-    const selectedBanners = [];
-    const bannerCount = 5;
-    const bannerIndices = [];
+    // State to store the randomly selected banners
+    const [selectedBanners, setSelectedBanners] = useState([]);
 
-    // Select 5 unique random banners
-    while (selectedBanners.length < bannerCount) {
-        const randomIndex = getRandomIndex(svgBanners.length);
-        if (!bannerIndices.includes(randomIndex)) {
-            bannerIndices.push(randomIndex);
-            selectedBanners.push(svgBanners[randomIndex]);
-        }
-    }
+    useEffect(() => {
+        const getRandomBanners = () => {
+            const selected = [];
+            const bannerCount = 5;
+            const bannerIndices = [];
+            while (selected.length < bannerCount) {
+                const randomIndex = Math.floor(Math.random() * svgBanners.length);
+                if (!bannerIndices.includes(randomIndex)) {
+                    bannerIndices.push(randomIndex);
+                    selected.push(svgBanners[randomIndex]);
+                }
+            }
+            return selected;
+        };
+        setSelectedBanners(getRandomBanners());
+    }, []);
 
     return (
         <div className='banner'>
@@ -159,5 +166,6 @@ const Banner = ({ t }) => {
         </div>
     );
 };
+
 
 export default Banner;
