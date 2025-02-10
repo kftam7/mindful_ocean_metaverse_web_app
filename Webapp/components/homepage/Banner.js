@@ -19,7 +19,7 @@ const svgBanners = [
     }
     </style>
         
-    <image xlink:href="event25_banner_1.jpg" style="width: 1680px;"></image>
+    <image xlink:href="event25_banner_6.jpg" style="width: 1680px;"></image>
     <a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
@@ -44,7 +44,7 @@ const svgBanners = [
     }
     </style>
         
-    <image xlink:href="event25_banner_2.jpg" style="width: 1680px;"></image>
+    <image xlink:href="event25_banner_7.jpg" style="width: 1680px;"></image>
     <a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
@@ -69,7 +69,7 @@ const svgBanners = [
     }
     </style>
         
-    <image xlink:href="event25_banner_3.jpg" style="width: 1680px;"></image>
+    <image xlink:href="event25_banner_8.jpg" style="width: 1680px;"></image>
     <a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
@@ -94,7 +94,7 @@ const svgBanners = [
     }
     </style>
         
-    <image xlink:href="event25_banner_4.jpg" style="width: 1680px;"></image>
+    <image xlink:href="event25_banner_9.jpg" style="width: 1680px;"></image>
     <a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
@@ -119,7 +119,7 @@ const svgBanners = [
     }
     </style>
         
-    <image xlink:href="event25_banner_5.jpg" style="width: 1680px;"></image>
+    <image xlink:href="event25_banner_10.jpg" style="width: 1680px;"></image>
     <a xlink:href="https://www.mindful-ocean.org/event?eventId=25" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
