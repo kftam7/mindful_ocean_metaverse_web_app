@@ -570,7 +570,67 @@ const Event1 = () => {
             des: t('home.event8.subText14'),
           },                                                                                                                                                                          
         ],
-      },                                            
+      },
+      '27': {
+        title: t('home.event9.title'),
+        list: [       
+          {
+            des: t('home.event9.subText1'),
+          }, 
+          {
+            title: t('home.event9.subTitle2'),
+            des: t('home.event9.subText2'),
+          },
+          {
+            title: t('home.event9.subTitle3'),
+            des: t('home.event9.subText3'),
+          }, 
+          {
+            title: t('home.event9.subTitle4'),
+            des: t('home.event9.subText4'),
+          },
+          {
+            title: t('home.event9.subTitle5'),
+            des: t('home.event9.subText5'),
+          },   
+          {
+            title: t('home.event9.subTitle6'),
+            des: t('home.event9.subText6'),
+          },   
+          {
+            title: t('home.event9.subTitle7'),
+            des: t('home.event9.subText7'),
+          },   
+          {
+            title: t('home.event9.subTitle8'),
+            des: t('home.event9.subText8'),
+          },     
+          {
+            title: t('home.event9.subTitle9'),
+            des: t('home.event9.subText9'),
+          },
+          {
+            title: t('home.event9.subTitle10'),
+            des: t('home.event9.subText10'),
+          },
+          {
+            title: t('home.event9.subTitle11'),
+            des: t('home.event9.subText11'),
+          },
+          {
+            title: t('home.event9.subTitle12'),
+            des: t('home.event9.subText12'),
+          },
+          {
+            title: t('home.event9.subTitle13'),
+            des: t('home.event9.subText13'),
+          },
+          {
+            title: t('home.event9.subTitle14'),
+            des: t('home.event9.subText14'),
+          },                                                                                                                                                                          
+        ],
+      },                                                  
     };
     setItem(list[eventId]);
   }, [eventId]);

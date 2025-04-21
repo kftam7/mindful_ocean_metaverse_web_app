@@ -20,7 +20,7 @@ const svgBanners = [
     </style>
         
     <image xlink:href="event26_banner_11.jpg" style="width: 1680px;"></image>
-    <a xlink:href="https://www.mindful-ocean.org/event?eventId=26" target="_self" xlink:title="Current Event">
+    <a xlink:href="https://www.mindful-ocean.org/event?eventId=27" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
     </g>
@@ -45,7 +45,7 @@ const svgBanners = [
     </style>
         
     <image xlink:href="event26_banner_12.jpg" style="width: 1680px;"></image>
-    <a xlink:href="https://www.mindful-ocean.org/event?eventId=26" target="_self" xlink:title="Current Event">
+    <a xlink:href="https://www.mindful-ocean.org/event?eventId=27" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
     </g>
@@ -70,7 +70,7 @@ const svgBanners = [
     </style>
         
     <image xlink:href="event26_banner_13.jpg" style="width: 1680px;"></image>
-    <a xlink:href="https://www.mindful-ocean.org/event?eventId=26" target="_self" xlink:title="Current Event">
+    <a xlink:href="https://www.mindful-ocean.org/event?eventId=27" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
     </g>
@@ -95,7 +95,7 @@ const svgBanners = [
     </style>
         
     <image xlink:href="event26_banner_14.jpg" style="width: 1680px;"></image>
-    <a xlink:href="https://www.mindful-ocean.org/event?eventId=26" target="_self" xlink:title="Current Event">
+    <a xlink:href="https://www.mindful-ocean.org/event?eventId=27" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
     </g>
@@ -120,7 +120,7 @@ const svgBanners = [
     </style>
         
     <image xlink:href="event26_banner_15.jpg" style="width: 1680px;"></image>
-    <a xlink:href="https://www.mindful-ocean.org/event?eventId=26" target="_self" xlink:title="Current Event">
+    <a xlink:href="https://www.mindful-ocean.org/event?eventId=27" target="_self" xlink:title="Current Event">
     <g>
     <rect x="448.3190883190884" y="82.96296296296296" width="312.7065527065526" height="172.30769230769232" class="image-mapper-shape" data-index="1"></rect>
     </g>
