@@ -279,17 +279,9 @@ const GalleryPage = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={() => changeType('butterflyfish')}>{t('page.gallery.butterflyfish')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('bluemarlin')}>{t('page.gallery.bluemarlin')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('blueshark')}>{t('page.gallery.blueshark')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('boxfish')}>{t('page.gallery.boxfish')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('dolphin')}>{t('page.gallery.dolphin')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('mobularay')}>{t('page.gallery.mobularay')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('orca')}>{t('page.gallery.orca')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('pike')}>{t('page.gallery.pike')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('rainbowcichlid')}>{t('page.gallery.rainbowcichlid')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('shark')}>{t('page.gallery.shark')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('sunFish')}>{t('page.gallery.sunFish')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('turtle')}>{t('page.gallery.turtle')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('whale')}>{t('page.gallery.whale')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('all')}>{t('main.text.all')}</Dropdown.Item>
                 </Dropdown.Menu>
