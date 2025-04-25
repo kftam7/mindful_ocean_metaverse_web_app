@@ -283,7 +283,7 @@ const GalleryPage = () => {
                   <Dropdown.Item onClick={() => changeType('dolphin')}>{t('page.gallery.dolphin')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('mobularay')}>{t('page.gallery.mobularay')}</Dropdown.Item>
                   <Dropdown.Item onClick={() => changeType('whale')}>{t('page.gallery.whale')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => changeType('all')}>{t('main.text.all')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeType('all')}>{t('main.text.all')}</Dropdown.Item> 
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
