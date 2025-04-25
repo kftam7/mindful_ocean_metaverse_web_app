@@ -210,7 +210,8 @@ const GalleryPage = () => {
   const changeType = (type) => {
     setType(type);
     //setTypeText(type === 'butterflyfish' ? t('page.gallery.butterflyfish') : (type === 'bluemarlin' ? t('page.gallery.bluemarlin') : t('main.text.all')));
-    setTypeText((type === 'butterflyfish' ? t('page.gallery.butterflyfish') : : (type === 'blueshark' ? t('page.gallery.blueshark') : (type === 'dolphin' ? t('page.gallery.dolphin') : (type === 'mobularay' ? t('page.gallery.mobularay') : (type === 'whale' ? t('page.gallery.whale') : t('main.text.all')))))));
+    //setTypeText((type === 'butterflyfish' ? t('page.gallery.butterflyfish') : (type === 'bluemarlin' ? t('page.gallery.bluemarlin') : (type === 'blueshark' ? t('page.gallery.blueshark') : (type === 'boxfish' ? t('page.gallery.boxfish') : (type === 'dolphin' ? t('page.gallery.dolphin') : (type === 'mobularay' ? t('page.gallery.mobularay') : (type === 'orca' ? t('page.gallery.orca') : (type === 'pike' ? t('page.gallery.pike') : (type === 'rainbowcichlid' ? t('page.gallery.rainbowcichlid') : (type === 'shark' ? t('page.gallery.shark') : (type === 'sunFish' ? t('page.gallery.sunFish') : (type === 'turtle' ? t('page.gallery.turtle') : (type === 'whale' ? t('page.gallery.whale') : t('main.text.all')))))))))))))));
+    setTypeText((type === 'butterflyfish' ? t('page.gallery.butterflyfish') : (type === 'blueshark' ? t('page.gallery.blueshark') : (type === 'boxfish' ? t('page.gallery.boxfish') : (type === 'dolphin' ? t('page.gallery.dolphin') : (type === 'mobularay' ? t('page.gallery.mobularay') : (type === 'whale' ? t('page.gallery.whale') : t('main.text.all'))))))));
   };
 
   const randomsort = () => {
