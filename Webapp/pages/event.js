@@ -630,7 +630,34 @@ const Event1 = () => {
             des: t('home.event9.subText14'),
           },                                                                                                                                                                          
         ],
-      },                                                  
+      },
+      '28': {
+        title: t('home.event10.title'),
+        list: [       
+          {
+            des: t('home.event10.subText1'),
+          }, 
+          {
+            title: t('home.event10.subTitle2'),
+          },
+          {
+            title: t('home.event10.subTitle3'),
+            des: t('home.event10.subText3'),
+          }, 
+          {
+            title: t('home.event10.subTitle4'),
+            des: t('home.event10.subText4'),
+          },
+          {
+            title: t('home.event10.subTitle5'),
+            des: t('home.event10.subText5'),
+          },   
+          {
+            title: t('home.event10.subTitle6'),
+            des: t('home.event10.subText6'),
+          },                                                                                                                                                                          
+        ],
+      },                                                         
     };
     setItem(list[eventId]);
   }, [eventId]);
