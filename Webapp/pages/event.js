@@ -310,6 +310,12 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle8'),
+          }, 
+          {
+            des: t('home.pastdirectory.subTitle7'),
+          },           
+          {
             des: t('home.pastdirectory.subTitle6'),
           },            
           {
