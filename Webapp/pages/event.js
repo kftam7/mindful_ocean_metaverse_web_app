@@ -639,7 +639,10 @@ const Event1 = () => {
       },
       '28': {
         title: t('home.event10.title'),
-        list: [       
+        list: [
+          {
+            des: t('home.even10.subText0'),
+          },                  
           {
             des: t('home.event10.subText1'),
           }, 
@@ -663,7 +666,7 @@ const Event1 = () => {
             des: t('home.event10.subText6'),
           },                                                                                                                                                                          
         ],
-      },                                                         
+      },
     };
     setItem(list[eventId]);
   }, [eventId]);
