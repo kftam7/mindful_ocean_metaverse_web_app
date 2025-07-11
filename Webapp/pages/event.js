@@ -670,7 +670,7 @@ const Event1 = () => {
           },                                                                                                                                                                          
         ],
       },
-      '29': {
+      '30': {
         title: t('home.event11.title'),
         list: [       
           {
