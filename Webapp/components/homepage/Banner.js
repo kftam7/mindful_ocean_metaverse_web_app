@@ -19,8 +19,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event28_banner_1.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="current_event">
+<image xlink:href="event30_banner_1.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="current_event">
 <g>
 <rect x="453.1054131054131" y="78.17663817663818" width="317.49287749287754" height="186.66666666666669" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -30,7 +30,7 @@ g:hover .image-mapper-shape {
 <rect x="918.974358974359" y="82.96296296296296" width="311.111111111111" height="172.30769230769232" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="anniversary_event">
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="anniversary_event">
 <g>
 <rect x="33.504273504273506" y="280.7977207977208" width="1628.945868945869" height="660.5128205128206" class="image-mapper-shape" data-index="3"></rect>
 </g>
@@ -49,8 +49,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event28_banner_2.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="current_event">
+<image xlink:href="event30_banner_2.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="current_event">
 <g>
 <rect x="453.1054131054131" y="78.17663817663818" width="317.49287749287754" height="186.66666666666669" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -60,7 +60,7 @@ g:hover .image-mapper-shape {
 <rect x="918.974358974359" y="82.96296296296296" width="311.111111111111" height="172.30769230769232" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="anniversary_event">
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="anniversary_event">
 <g>
 <rect x="33.504273504273506" y="280.7977207977208" width="1628.945868945869" height="660.5128205128206" class="image-mapper-shape" data-index="3"></rect>
 </g>
@@ -79,8 +79,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event28_banner_3.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="current_event">
+<image xlink:href="event30_banner_3.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="current_event">
 <g>
 <rect x="453.1054131054131" y="78.17663817663818" width="317.49287749287754" height="186.66666666666669" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -90,7 +90,7 @@ g:hover .image-mapper-shape {
 <rect x="918.974358974359" y="82.96296296296296" width="311.111111111111" height="172.30769230769232" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="anniversary_event">
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="anniversary_event">
 <g>
 <rect x="33.504273504273506" y="280.7977207977208" width="1628.945868945869" height="660.5128205128206" class="image-mapper-shape" data-index="3"></rect>
 </g>
@@ -109,8 +109,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event28_banner_4.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="current_event">
+<image xlink:href="event30_banner_4.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="current_event">
 <g>
 <rect x="453.1054131054131" y="78.17663817663818" width="317.49287749287754" height="186.66666666666669" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -120,7 +120,7 @@ g:hover .image-mapper-shape {
 <rect x="918.974358974359" y="82.96296296296296" width="311.111111111111" height="172.30769230769232" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="anniversary_event">
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="anniversary_event">
 <g>
 <rect x="33.504273504273506" y="280.7977207977208" width="1628.945868945869" height="660.5128205128206" class="image-mapper-shape" data-index="3"></rect>
 </g>
@@ -139,8 +139,8 @@ g:hover .image-mapper-shape {
 }
 </style>
         
-<image xlink:href="event28_banner_5.jpg" style="width: 1680px;"></image>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="current_event">
+<image xlink:href="event30_banner_5.jpg" style="width: 1680px;"></image>
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="current_event">
 <g>
 <rect x="453.1054131054131" y="78.17663817663818" width="317.49287749287754" height="186.66666666666669" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -150,7 +150,7 @@ g:hover .image-mapper-shape {
 <rect x="918.974358974359" y="82.96296296296296" width="311.111111111111" height="172.30769230769232" class="image-mapper-shape" data-index="2"></rect>
 </g>
 </a>
-<a xlink:href="https://www.mindful-ocean.org/event?eventId=28" target="_self" xlink:title="anniversary_event">
+<a xlink:href="https://www.mindful-ocean.org/event?eventId=30" target="_self" xlink:title="anniversary_event">
 <g>
 <rect x="33.504273504273506" y="280.7977207977208" width="1628.945868945869" height="660.5128205128206" class="image-mapper-shape" data-index="3"></rect>
 </g>

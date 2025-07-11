@@ -310,6 +310,9 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle9'),
+          },           
+          {
             des: t('home.pastdirectory.subTitle8'),
           }, 
           {
@@ -667,6 +670,50 @@ const Event1 = () => {
           },                                                                                                                                                                          
         ],
       },
+      '29': {
+        title: t('home.event11.title'),
+        list: [       
+          {
+            des: t('home.event11.subText1'),
+          }, 
+          {
+            title: t('home.event11.subTitle2'),
+            des: t('home.event11.subText2'),
+          },
+          {
+            title: t('home.event11.subTitle3'),
+            des: t('home.event11.subText3'),
+          }, 
+          {
+            title: t('home.event11.subTitle4'),
+            des: t('home.event11.subText4'),
+          },
+          {
+            title: t('home.event11.subTitle5'),
+            des: t('home.event11.subText5'),
+          },   
+          {
+            title: t('home.event11.subTitle6'),
+            des: t('home.event11.subText6'),
+          },   
+          {
+            title: t('home.event11.subTitle7'),
+            des: t('home.event11.subText7'),
+          },   
+          {
+            title: t('home.event11.subTitle8'),
+            des: t('home.event11.subText8'),
+          },     
+          {
+            title: t('home.event11.subTitle9'),
+            des: t('home.event11.subText9'),
+          },
+          {
+            title: t('home.event11.subTitle10'),
+            des: t('home.event11.subText10'),
+          },                                                                                                                                                                                   
+        ],
+      },    
     };
     setItem(list[eventId]);
   }, [eventId]);
