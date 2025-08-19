@@ -310,6 +310,9 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle10'),
+          },          
+          {
             des: t('home.pastdirectory.subTitle9'),
           },           
           {
@@ -716,7 +719,54 @@ const Event1 = () => {
             des: t('home.event11.subText10'),
           },                                                                                                                                                                                   
         ],
-      },    
+      },
+      '31': {
+        title: t('home.event12.title'),
+        list: [       
+          {
+            des: t('home.event12.subText0'),
+          },  
+          {
+            des: t('home.event12.subText1'),
+          }, 
+          {
+            title: t('home.event12.subTitle2'),
+            des: t('home.event12.subText2'),
+          },
+          {
+            title: t('home.event12.subTitle3'),
+            des: t('home.event12.subText3'),
+          }, 
+          {
+            title: t('home.event12.subTitle4'),
+            des: t('home.event12.subText4'),
+          },
+          {
+            title: t('home.event12.subTitle5'),
+            des: t('home.event12.subText5'),
+          },   
+          {
+            title: t('home.event12.subTitle6'),
+            des: t('home.event12.subText6'),
+          },   
+          {
+            title: t('home.event12subTitle7'),
+            des: t('home.event12.subText7'),
+          },   
+          {
+            title: t('home.event12.subTitle8'),
+            des: t('home.event12.subText8'),
+          },     
+          {
+            title: t('home.event12.subTitle9'),
+            des: t('home.event12.subText9'),
+          },
+          {
+            title: t('home.event12.subTitle10'),
+            des: t('home.event12.subText10'),
+          },                                                                                                                                                                                   
+        ],
+      },            
     };
     setItem(list[eventId]);
   }, [eventId]);
