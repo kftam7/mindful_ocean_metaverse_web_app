@@ -750,7 +750,7 @@ const Event1 = () => {
             des: t('home.event12.subText6'),
           },   
           {
-            title: t('home.event12subTitle7'),
+            title: t('home.event12.subTitle7'),
             des: t('home.event12.subText7'),
           },   
           {
