@@ -310,6 +310,9 @@ const Event1 = () => {
         title: t('home.pastdirectory.title'),
         list: [
           {
+            des: t('home.pastdirectory.subTitle11'),
+          },  
+          {
             des: t('home.pastdirectory.subTitle10'),
           },          
           {
@@ -764,6 +767,53 @@ const Event1 = () => {
           {
             title: t('home.event12.subTitle10'),
             des: t('home.event12.subText10'),
+          },                                                                                                                                                                                   
+        ],
+      },
+      '32': {
+        title: t('home.event13.title'),
+        list: [       
+          {
+            des: t('home.event13.subText0'),
+          },  
+          {
+            des: t('home.event13.subText1'),
+          }, 
+          {
+            title: t('home.event13.subTitle2'),
+            des: t('home.event13.subText2'),
+          },
+          {
+            title: t('home.event13.subTitle3'),
+            des: t('home.event13.subText3'),
+          }, 
+          {
+            title: t('home.event13.subTitle4'),
+            des: t('home.event13.subText4'),
+          },
+          {
+            title: t('home.event13.subTitle5'),
+            des: t('home.event13.subText5'),
+          },   
+          {
+            title: t('home.event13.subTitle6'),
+            des: t('home.event13.subText6'),
+          },   
+          {
+            title: t('home.event13.subTitle7'),
+            des: t('home.event13.subText7'),
+          },   
+          {
+            title: t('home.event13.subTitle8'),
+            des: t('home.event13.subText8'),
+          },     
+          {
+            title: t('home.event13.subTitle9'),
+            des: t('home.event13.subText9'),
+          },
+          {
+            title: t('home.event13.subTitle10'),
+            des: t('home.event13.subText10'),
           },                                                                                                                                                                                   
         ],
       },            
