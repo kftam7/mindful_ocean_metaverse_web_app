@@ -816,7 +816,35 @@ const Event1 = () => {
             des: t('home.event13.subText10'),
           },                                                                                                                                                                                   
         ],
-      },            
+      },
+      '33': {
+        title: t('home.featurefaq.title'),
+        list: [       
+          {
+            des: t('home.featurefaq.subText0'),
+          },  
+          {
+            title: t('home.featurefaq.subTitle1'),
+            des: t('home.featurefaq.subText1'),
+          }, 
+          {
+            title: t('home.featurefaq.subTitle2'),
+            des: t('home.featurefaq.subText2'),
+          },
+          {
+            title: t('home.featurefaq.subTitle3'),
+            des: t('home.featurefaq.subText3'),
+          }, 
+          {
+            title: t('home.featurefaq.subTitle4'),
+            des: t('home.featurefaq.subText4'),
+          },
+          {
+            title: t('home.featurefaq.subTitle5'),
+            des: t('home.featurefaq.subText5'),
+          },                                                                                                                                                                                     
+        ],
+      },                  
     };
     setItem(list[eventId]);
   }, [eventId]);
