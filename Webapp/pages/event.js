@@ -818,11 +818,36 @@ const Event1 = () => {
         ],
       },
       '33': {
-        title: t('home.featurefaq.title'),
+        title: t('home.feature.title'),
         list: [       
           {
-            des: t('home.featurefaq.subText0'),
+            des: t('home.feature.subText0'),
           },  
+          {
+            title: t('home.feature.subTitle1'),
+            des: t('home.feature.subText1'),
+          }, 
+          {
+            title: t('home.feature.subTitle2'),
+            des: t('home.feature.subText2'),
+          },
+          {
+            title: t('home.feature.subTitle3'),
+            des: t('home.feature.subText3'),
+          }, 
+          {
+            title: t('home.feature.subTitle4'),
+            des: t('home.feature.subText4'),
+          },
+          {
+            title: t('home.feature.subTitle5'),
+            des: t('home.feature.subText5'),
+          },                                                                                                                                                                                     
+        ],
+      },
+      '34': {
+        title: t('home.featurefaq.title'),
+        list: [        
           {
             title: t('home.featurefaq.subTitle1'),
             des: t('home.featurefaq.subText1'),
@@ -842,9 +867,17 @@ const Event1 = () => {
           {
             title: t('home.featurefaq.subTitle5'),
             des: t('home.featurefaq.subText5'),
-          },                                                                                                                                                                                     
+          },  
+          {
+            title: t('home.featurefaq.subTitle6'),
+            des: t('home.featurefaq.subText6'),
+          },
+          {
+            title: t('home.featurefaq.subTitle7'),
+            des: t('home.featurefaq.subText7'),
+          },                                                                                                                                                                                              
         ],
-      },                  
+      },                         
     };
     setItem(list[eventId]);
   }, [eventId]);
