@@ -105,7 +105,7 @@ const Banner = ({ t }) => {
     useEffect(() => {
         const getRandomBanners = () => {
             const selected = [];
-            const bannerCount = 5;
+            const bannerCount = 3;
             const bannerIndices = [];
             while (selected.length < bannerCount) {
                 const randomIndex = Math.floor(Math.random() * svgBanners.length);
