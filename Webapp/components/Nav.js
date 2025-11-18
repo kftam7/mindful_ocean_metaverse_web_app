@@ -344,7 +344,7 @@ const NavBar = ({ onLocaleChange }) => {
           </Nav>
           <Row className='nav_right'>
             <Col lg={6} md={6} style={{ textAlign: 'right' }}>
-            /*
+            <!--
               <Dropdown className="">
                 <Dropdown.Toggle className={styles.dropdownBtn} id="language">
                   {lang}
@@ -355,7 +355,7 @@ const NavBar = ({ onLocaleChange }) => {
                   <Dropdown.Item onClick={() => changeLanguage('tw')}>{t('lang.tw')}</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            */
+            -->
             </Col>
             <Col lg={6} md={6}>
               <Button onClick={signInOpenModal} className={styles.signId}>{appleIdName ? <LongContentTooltip content={appleIdName} /> : (t('button.signIn'))}</Button>
