@@ -11,7 +11,7 @@ const Part13 = ({ t }) => {
               <Image src="/part13_img.png" width="100%" />
             </Col>
             <Col lg={6} md={6} sm={12}>
-              <div className='part_title'><a href='https://youtu.be/s0-hbokoUk4' target='_blank'>{t('home.part13.title')}</a></div>
+              <div className='part_title'>{t('home.part13.title')}</div>
               <div className='part_text'>
                 {t('home.part13.text')}
               </div>
