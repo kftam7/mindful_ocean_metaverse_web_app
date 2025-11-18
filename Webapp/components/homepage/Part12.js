@@ -11,7 +11,7 @@ const Part12 = ({ t }) => {
               <Image src="/part12_img.png" width="100%" />
             </Col>
             <Col lg={{ span: 6, order: 'first' }} md={{ span: 6, order: 'first' }} sm={{ span: 12, order: 'last' }} xs={{ span: 12, order: 'last' }}>
-              <div className='part_title'>{t('home.part12.title')}</div>
+              <div className='part_title'><a href='https://youtu.be/L6gCqW7a2Vo' target='_blank'>{t('home.part12.title')}</a></div>
               <div className='part_text'>
                 {t('home.part12.text')}
               </div>
