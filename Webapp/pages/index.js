@@ -23,6 +23,8 @@ import Part8 from '../components/homepage/Part8';
 import Part9 from '../components/homepage/Part9';
 import Part10 from '../components/homepage/Part10';
 import Part11 from '../components/homepage/Part11';
+import Part12 from '../components/homepage/Part12';
+import Part13 from '../components/homepage/Part13';
 import { useTranslation } from '../i18n';
 
 export default function Home() {
