@@ -34,6 +34,8 @@ export default function Home() {
       <Part1 t={t} />
       <Part2 t={t} />
       <Part3 t={t} />
+      <Part12 t={t} />
+      <Part13 t={t} />
       <Part3_1 t={t} />
       <Part4 t={t} />
       <Part5 t={t} />
