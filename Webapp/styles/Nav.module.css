@@ -1,5 +1,7 @@
 .navlink {
     color: var(--primary-text-color) !important;
+    position: relative; /* Critical for anchoring the badge */
+    padding: 12px 18px !important; /* Slightly more padding to prevent clipping */
 }
 
 .dropdownBtn {
@@ -154,6 +156,20 @@
 
 .w3m-overlay {
     z-index: 9999 !important;
+}
+
+.newBadge {
+  position: absolute;
+  /* Use a POSITIVE top value to move the badge DOWN into the link */
+  top: 6px; /* Adjust this value (e.g., 4px-8px) to control overlap */
+  right: 5px; /* Keep it right-aligned but inside the link's padding */
+  font-size: 9px; /* Small font as before */
+  padding: 1px 3px;
+  background-color: #ff4757; /* Red background for visibility */
+  color: white;
+  border-radius: 2px;
+  font-weight: bold;
+  z-index: 2; /* Ensure it sits above the link text */
 }
 
 @media only screen and (max-width: 1230px) {
