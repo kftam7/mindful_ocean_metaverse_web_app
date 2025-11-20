@@ -20,9 +20,14 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner1.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_blank" xlink:title="New App Features">
+<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
 <g>
-<rect x="22.349477682811017" y="17.560303893637226" width="1645.8793922127254" height="935.4852801519469" class="image-mapper-shape" data-index="1"></rect>
+<rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
+</g>
+</a>
+<a xlink:href="https://rb.gy/gwcc9g" target="_blank" xlink:title="app store">
+<g>
+<rect x="1398.769000737171" y="711.7702943538615" width="239.45868371533606" height="97.43491268417131" class="image-mapper-shape selected" data-index="2"></rect>
 </g>
 </a>
 </svg>`,
@@ -40,9 +45,14 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner2.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_blank" xlink:title="New App Features">
+<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
 <g>
-<rect x="22.349477682811017" y="17.560303893637226" width="1645.8793922127254" height="935.4852801519469" class="image-mapper-shape" data-index="1"></rect>
+<rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
+</g>
+</a>
+<a xlink:href="https://rb.gy/gwcc9g" target="_blank" xlink:title="app store">
+<g>
+<rect x="1398.769000737171" y="711.7702943538615" width="239.45868371533606" height="97.43491268417131" class="image-mapper-shape selected" data-index="2"></rect>
 </g>
 </a>
 </svg>`,
@@ -60,9 +70,14 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner3.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_blank" xlink:title="New App Features">
+<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
 <g>
-<rect x="22.349477682811017" y="17.560303893637226" width="1645.8793922127254" height="935.4852801519469" class="image-mapper-shape" data-index="1"></rect>
+<rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
+</g>
+</a>
+<a xlink:href="https://rb.gy/gwcc9g" target="_blank" xlink:title="app store">
+<g>
+<rect x="1398.769000737171" y="711.7702943538615" width="239.45868371533606" height="97.43491268417131" class="image-mapper-shape selected" data-index="2"></rect>
 </g>
 </a>
 </svg>`,
@@ -80,9 +95,14 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner4.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_blank" xlink:title="New App Features">
+<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
 <g>
-<rect x="22.349477682811017" y="17.560303893637226" width="1645.8793922127254" height="935.4852801519469" class="image-mapper-shape" data-index="1"></rect>
+<rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
+</g>
+</a>
+<a xlink:href="https://rb.gy/gwcc9g" target="_blank" xlink:title="app store">
+<g>
+<rect x="1398.769000737171" y="711.7702943538615" width="239.45868371533606" height="97.43491268417131" class="image-mapper-shape selected" data-index="2"></rect>
 </g>
 </a>
 </svg>`
