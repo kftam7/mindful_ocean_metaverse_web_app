@@ -15,6 +15,9 @@ const Part12 = ({ t }) => {
               <div className='part_text'>
                 {t('home.part12.text')}
               </div>
+              <div className='part_text'>
+                Learn more in our <a href='https://www.mindful-ocean.org/event?eventId=34' target='_self'>Game Info</a> and <a href='https://www.mindful-ocean.org/event?eventId=33 target='_self'>FAQ pages</a>
+              </div>              
             </Col>
           </Row>
         </div>
