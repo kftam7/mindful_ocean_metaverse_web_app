@@ -16,7 +16,7 @@ const Part12 = ({ t }) => {
                 {t('home.part12.text1')}
               </div>
               <div className='part_text'>
-              {t('home.part12.text1')}{t('home.part12.text2')}<a href='https://www.mindful-ocean.org/event?eventId=34' target='_self'>{t('home.part12.text3')}</a>{t('home.part12.text4')}<a href='https://www.mindful-ocean.org/event?eventId=33' target='_self'>{t('home.part12.text5')}</a>{t('home.part12.text6')}
+              {t('home.part12.text2')}<u><a href='https://www.mindful-ocean.org/event?eventId=34' target='_self'>{t('home.part12.text3')}</a></u>{t('home.part12.text4')}<u><a href='https://www.mindful-ocean.org/event?eventId=33' target='_self'>{t('home.part12.text5')}</a></u>{t('home.part12.text6')}
               </div>              
             </Col>
           </Row>
