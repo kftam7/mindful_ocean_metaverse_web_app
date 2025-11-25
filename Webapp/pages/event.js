@@ -880,7 +880,35 @@ const Event1 = () => {
             des: t('home.featurefaq.subText7'),
           },                                                                                                                                                                                              
         ],
-      },                         
+      },
+      '38': {
+        title: t('home.event14.title'),
+        list: [        
+          {
+            des: t('home.event14.subText1'),
+          }, 
+          {
+            title: t('home.event14.subTitle2'),
+            des: t('home.event14.subText2'),
+          },
+          {
+            title: t('home.event14.subTitle3'),
+            des: t('home.event14.subText3'),
+          }, 
+          {
+            title: t('home.event14.subTitle4'),
+            des: t('home.event14.subText4'),
+          },
+          {
+            title: t('home.event14.subTitle5'),
+            des: t('home.event14.subText5'),
+          },  
+          {
+            title: t('home.event14.subTitle6'),
+            des: t('home.event14.subText6'),
+          },                                                                                                                                                                                             
+        ],
+      },                                
     };
     setItem(list[eventId]);
   }, [eventId]);

@@ -20,7 +20,7 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner1.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
+<a xlink:href="event?eventId=38" target="_self" xlink:title="New App Features">
 <g>
 <rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -45,7 +45,7 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner2.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
+<a xlink:href="event?eventId=38" target="_self" xlink:title="New App Features">
 <g>
 <rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -70,7 +70,7 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner3.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
+<a xlink:href="event?eventId=38" target="_self" xlink:title="New App Features">
 <g>
 <rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
 </g>
@@ -95,7 +95,7 @@ g:hover .image-mapper-shape {
 </style>
         
 <image xlink:href="app_feature_banner4.png" style="width: 1681px;"></image>
-<a xlink:href="https://web-staging.mindful-ocean.org/#game" target="_self" xlink:title="New App Features">
+<a xlink:href="event?eventId=38" target="_self" xlink:title="New App Features">
 <g>
 <rect x="35.56099126710539" y="24.166060685784416" width="1356.8775325562851" height="927.2280841617628" class="image-mapper-shape" data-index="1"></rect>
 </g>
