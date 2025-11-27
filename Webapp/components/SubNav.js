@@ -276,6 +276,7 @@ const NavBar = ({ onLocaleChange }) => {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Row className='nav_right'>
+          {/*
             <Col lg={6} xl={6}>
               <Dropdown className="">
                 <Dropdown.Toggle className={styles.dropdownBtn} id="language">
@@ -288,6 +289,7 @@ const NavBar = ({ onLocaleChange }) => {
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
+          */}
             <Col lg={6} md={6}>
               <Button onClick={signInOpenModal} className={styles.signId}>{appleIdName ? <LongContentTooltip content={appleIdName} /> : (t('button.signIn'))}</Button>
             </Col>
