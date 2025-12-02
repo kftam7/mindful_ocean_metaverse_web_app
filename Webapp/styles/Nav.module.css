@@ -29,6 +29,7 @@
 }
 
 .signId {
+    white-space: nowrap;
     border-color: var(--primary-text-color);
     background-color: var(--primary-text-color);
     max-width: 150px;
@@ -51,7 +52,6 @@
 }
 
 .signInBtn {
-    white-space: nowrap;
     font-size: 20px;
     font-weight: bold;
     border-color: var(--primary-text-color);
@@ -92,7 +92,6 @@
 }
 
 .signInBtn2 {
-    white-space: nowrap;
     color: var(--primary-text-color);
     font-size: 20px;
     font-weight: bold;
