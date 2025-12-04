@@ -338,6 +338,7 @@ const NavBar = ({ onLocaleChange }) => {
             <Nav.Link href="#about" className={styles.navlink}>{t('nav.about')}</Nav.Link>
             <Nav.Link href="#gallery" className={styles.navlink}>{t('nav.gallery')}</Nav.Link>
             <Nav.Link href="#game" className={styles.navlink} style={{ position: 'relative' }}> {t('nav.game')} <span className={styles.newBadge}>NEW</span> </Nav.Link>
+            <Nav.Link href="/event?eventId=38" className={styles.navlink}>{t('nav.events')}</Nav.Link>
             <Nav.Link href="#mintpass" className={styles.navlink}>{t('nav.mintpass')}</Nav.Link>
             <Nav.Link href="#redeem" className={styles.navlink}>{t('nav.redeem')}</Nav.Link>
             <Nav.Link href="/faq" className={styles.navlink}>{t('nav.faq')}</Nav.Link>
