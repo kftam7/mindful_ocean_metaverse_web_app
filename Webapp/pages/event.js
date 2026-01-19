@@ -911,7 +911,42 @@ const Event1 = () => {
             des: t('home.event14.subText6'),
           },                                                                                                                                                                                             
         ],
-      },                                
+      },
+      '39': {
+        title: t('home.event15.title'),
+        list: [        
+          {
+            des: t('home.event15.subText0'),
+          },           
+          {
+            des: t('home.event15.subText1'),
+          }, 
+          {
+            title: t('home.event15.subTitle2'),
+            des: t('home.event15.subText2'),
+          },
+          {
+            title: t('home.event15.subTitle3'),
+            des: t('home.event15.subText3'),
+          }, 
+          {
+            title: t('home.event15.subTitle4'),
+            des: t('home.event15.subText4'),
+          },
+          {
+            title: t('home.event15.subTitle5'),
+            des: t('home.event15.subText5'),
+          },  
+          {
+            title: t('home.event15.subTitle6'),
+            des: t('home.event15.subText6'),
+          },
+          {
+            title: t('home.event15.subTitle7'),
+            des: t('home.event15.subText7'),
+          },                                                                                                                                                                                                           
+        ],
+      },                                        
     };
     setItem(list[eventId]);
   }, [eventId]);
