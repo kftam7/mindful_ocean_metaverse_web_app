@@ -912,7 +912,7 @@ const Event1 = () => {
           },                                                                                                                                                                                             
         ],
       },
-      '39': {
+      '41': {
         title: t('home.event15.title'),
         list: [        
           {
