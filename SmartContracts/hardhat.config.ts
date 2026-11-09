@@ -11,22 +11,23 @@ module.exports = {
     polytestnet: {
       url: `https://rpc-mumbai.maticvigil.com`,
       accounts: [polytestnet_PRIVATE_KEY]
-    }
+    },
+    amoytestnet: {
+      url: `https://80002.rpc.thirdweb.com`,
+      accounts: [polytestnet_PRIVATE_KEY]
+    }    
   },
   etherscan: {
-    //apiKey: "IYMSWKVVCMDEKEXUBV4NRXEBN8BZ7GZB4E",
-    apiKey: {
-      polygonMumbai: "IYMSWKVVCMDEKEXUBV4NRXEBN8BZ7GZB4E"
-    },
+    apiKey: "b882cb5d-a8d8-454d-b54b-38cb50811315",
     customChains: [
       {
-        network: "polygonMumbai",
-        chainId: 80001,
+        network: "amoytestnet",
+        chainId: 80002,
         urls: {
-          apiURL: "https://api-testnet.polygonscan.com",  // https => http
-          browserURL: "https://mumbai.polygonscan.com/"
+          apiURL: "https://www.oklink.com/api/explorer/v1/contract/verify/async/api/polygonAmoy",
+          browserURL: "https://www.oklink.com/amoy"
         }
       }
     ]
-  }
+  },
 };

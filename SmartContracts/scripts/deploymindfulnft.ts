@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 
 const systemAddress = "0x4BCC679c78E2C6D724E49B2F59f0F3B0565854D9";
-const mintPass = "0xaa250f5d3a78518cd1A077391682388DA650963A";
+const mintPass = "0xd6996Ddc5213C0726288E6254f0d10bdC91B9521";
 const loyaltyFee = 800;
 
 async function main() {

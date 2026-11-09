@@ -1,0 +1,95 @@
+# ==========================================
+# Web3 / Crypto Secrets & Keys (CRITICAL)
+# ==========================================
+.env
+.env.*
+!.env.example
+.secret
+secrets.json
+mnemonic.txt
+*mnemonic*
+*private_key*
+*.key
+*.pem
+*.keystore
+keystore/
+
+# ==========================================
+# Database & Server Credentials
+# ==========================================
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.dump
+dump.rdb
+*.crt
+*.cert
+*.csr
+
+# ==========================================
+# Node.js & Dependencies (API, CMS, Webapp)
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnp
+.pnp.js
+
+# ==========================================
+# Smart Contracts Artifacts & Build Caches
+# ==========================================
+# Hardhat / Truffle
+artifacts/
+cache/
+typechain/
+typechain-types/
+coverage/
+coverage.json
+slither_*.txt
+
+# Foundry
+out/
+broadcast/
+cache_forge/
+
+# ==========================================
+# Frontend & Build Artifacts (Webapp, CMS)
+# ==========================================
+dist/
+build/
+.next/
+out-dapp/
+.nuxt/
+.cache/
+.parcel-cache/
+.turbo/
+
+# ==========================================
+# Server Logs & Runtime Data
+# ==========================================
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ==========================================
+# Operating System & IDE Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

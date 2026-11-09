@@ -54,7 +54,7 @@ async function main() {
 	// mint the mintPass
     console.log("Minting MintPass...");
     //const tx = await MintPassNFTContract.mintMintPass(messageHash, signature, tokenId, url, {value: 100000000000000});
-	const tx = await MintPassNFTContract.mintMintPass(messageHash, signature, url, {value: 200000000000000});
+	//const tx = await MintPassNFTContract.mintMintPass(messageHash, signature, url, {value: 200000000000000});
     console.log("tx: ", tx);
 
 }

@@ -46,3 +46,4 @@ npx hardhat verify --network polytestnet 0xD483d0DE39b3BA9F0cc0D41E853b67a0cc99C
 
 npx hardhat run scripts/mintMintPass.js --network polytestnet
 npx hardhat run scripts/mintMindfulNFT.js --network polytestnet
+npx hardhat run scripts/mintAloneMindfulNFT.js --network amoytestnet
